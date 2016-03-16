@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RisLib_CS", "RisLib_CS\RisL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CS", "Test_CS\Test_CS.csproj", "{146EB71D-EFD5-46E9-8523-80FF0CFBC5DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound", "Sound\Sound.csproj", "{4100071B-B023-4227-9C54-CA83AC469793}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound_CS", "Sound_CS\Sound_CS.csproj", "{4100071B-B023-4227-9C54-CA83AC469793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
