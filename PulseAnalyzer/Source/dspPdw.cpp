@@ -10,8 +10,6 @@ Description:
 
 #include "dspPdw.h"
 
-// Global instance of the block pool
-
 namespace Dsp
 {
 
@@ -21,10 +19,15 @@ namespace Dsp
 //******************************************************************************
 Pdw::Pdw()
 {
+   reset();
+}
+
+void Pdw::reset()
+{
    mSeqNum = 0;
    mToa = 0;
    mAmplitude = 0.0;
-   mPulseWidth = 0.0;
+   mPulseWidth = 0;
 }
 
    

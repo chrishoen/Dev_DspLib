@@ -23,14 +23,15 @@ public:
    // Members
 
    int    mSeqNum;
-   double mToa;
+   int    mToa;
    double mAmplitude;
-   double mPulseWidth;
+   int    mPulseWidth;
 
    //--------------------------------------------------------------------------
    // Constructors
 
    Pdw();
+   void reset();
 };
 
 //******************************************************************************
