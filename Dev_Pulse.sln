@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RisLib_CS", "RisLib_CS\RisL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CS", "Test_CS\Test_CS.csproj", "{146EB71D-EFD5-46E9-8523-80FF0CFBC5DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound", "Sound\Sound.csproj", "{4100071B-B023-4227-9C54-CA83AC469793}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{146EB71D-EFD5-46E9-8523-80FF0CFBC5DB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{146EB71D-EFD5-46E9-8523-80FF0CFBC5DB}.Release|Win32.ActiveCfg = Release|Any CPU
 		{146EB71D-EFD5-46E9-8523-80FF0CFBC5DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4100071B-B023-4227-9C54-CA83AC469793}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
