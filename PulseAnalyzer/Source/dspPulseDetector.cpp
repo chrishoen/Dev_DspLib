@@ -7,6 +7,7 @@ Description:
 //******************************************************************************
 
 #include <stdio.h>
+#include "prnPrint.h"
 
 #include "dspPulseDetector.h"
 
@@ -30,6 +31,7 @@ void PulseDetector::initialize()
 
    mDetectYesThreshold = 0.10;
    mDetectNoThreshold = 0.10;
+   mSampleDeltaTime = 0.0001;
 }
 
 //******************************************************************************
@@ -112,6 +114,9 @@ void PulseDetector::putSample(Sample* aSample)
          // If the amplitude is above the threshold
          if (aSample->mAmplitude >= mDetectNoThreshold)
          {
+            // Store the pulse end time.
+            mPulseEndTime = aSample->mTime;
+
             // Update the sample statistics.
             updateSampleStatistics(aSample->mAmplitude);
          }
@@ -122,9 +127,6 @@ void PulseDetector::putSample(Sample* aSample)
             // Detection logic
             mDetectCount = 1;
             mDetectState = cDetectMaybeNo;
-
-            // Store the pulse end time.
-            mPulseEndTime = aSample->mTime;
          }
       }
       break;
@@ -150,8 +152,16 @@ void PulseDetector::putSample(Sample* aSample)
                mDetectPdw.mSeqNum++;
                mDetectPdw.mToa        = mPulseStartTime;
                mDetectPdw.mAmplitude  = mPulseAmplitudeMean;
-               mDetectPdw.mPulseWidth = mPulseEndTime - mPulseStartTime;
+               mDetectPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSampleDeltaTime;
                mDetectFlag = true;
+
+#if 1
+               Prn::print(0, "DETECT %d %d %10.4f %10.4f",
+                  mDetectPdw.mSeqNum,
+                  mPulseSampleCount,
+                  mPulseStartTime,
+                  mPulseEndTime);
+#endif
             }
          }
          // If the amplitude is above the threshold then the end of pulse
@@ -159,6 +169,9 @@ void PulseDetector::putSample(Sample* aSample)
          else
          {
             mDetectState = cDetectYes;
+
+            // Store the pulse end time.
+            mPulseEndTime = aSample->mTime;
 
             // Update the sample statistics.
             updateSampleStatistics(aSample->mAmplitude);
