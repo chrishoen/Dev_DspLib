@@ -17,7 +17,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-class PulseDetector
+
+   class PulseDetector
 {
 public:
    //--------------------------------------------------------------------------
@@ -28,10 +29,10 @@ public:
    // Constructor.
    PulseDetector();
 
-   // Initialize detection logic.
+   // Initialize the detection logic.
    void initialize();
 
-   // Put new a sample to the detector, called at the sampling rate.
+   // Put a new sample to the detector, called at the sampling rate.
    // Detection results are contained in the following two variables.
    void putSample(Sample* aSample);
 
@@ -39,7 +40,7 @@ public:
    bool mDetectFlag;
 
    // This is the Pdw for the last detected pulse.
-   Pdw  mDetectPdw;
+   Pdw  mDetectedPdw;
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------

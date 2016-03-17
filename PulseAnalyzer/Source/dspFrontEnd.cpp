@@ -63,9 +63,9 @@ void FrontEnd::detect1()
          tPdwCount++;
          // Write the detected pdw to the output file
          mPdwWriter.write(
-            mPulseDetector.mDetectPdw.mToa,
-            mPulseDetector.mDetectPdw.mAmplitude,
-            mPulseDetector.mDetectPdw.mPulseWidth);
+            mPulseDetector.mDetectedPdw.mToa,
+            mPulseDetector.mDetectedPdw.mAmplitude,
+            mPulseDetector.mDetectedPdw.mPulseWidth);
       }
    }
 

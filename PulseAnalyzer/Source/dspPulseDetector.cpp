@@ -27,7 +27,7 @@ void PulseDetector::initialize()
 {
    mDetectState = 0;
    mDetectFlag = false;
-   mDetectPdw.reset();
+   mDetectedPdw.reset();
 
    mDetectYesThreshold = 0.01;
    mDetectNoThreshold = 0.01;
@@ -152,15 +152,15 @@ void PulseDetector::putSample(Sample* aSample)
                finishSampleStatistics();
 
                // Update values for the detected pdw.
-               mDetectPdw.mSeqNum++;
-               mDetectPdw.mToa        = mPulseStartTime;
-               mDetectPdw.mAmplitude  = mPulseAmplitudeMean;
-               mDetectPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
+               mDetectedPdw.mSeqNum++;
+               mDetectedPdw.mToa        = mPulseStartTime;
+               mDetectedPdw.mAmplitude  = mPulseAmplitudeMean;
+               mDetectedPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
                mDetectFlag = true;
 
 #if 1
                Prn::print(0, "DETECT %d %d %10.4f %10.4f",
-                  mDetectPdw.mSeqNum,
+                  mDetectedPdw.mSeqNum,
                   mPulseSampleYesCount,
                   mPulseStartTime,
                   mPulseEndTime);
