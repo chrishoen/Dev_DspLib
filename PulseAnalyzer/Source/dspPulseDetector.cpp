@@ -29,9 +29,9 @@ void PulseDetector::initialize()
    mDetectFlag = false;
    mDetectPdw.reset();
 
-   mDetectYesThreshold = 0.10;
-   mDetectNoThreshold = 0.10;
-   mSampleDeltaTime = 0.0001;
+   mDetectYesThreshold = 0.01;
+   mDetectNoThreshold = 0.01;
+   mSamplePeriod = 0.0001;
 }
 
 //******************************************************************************
@@ -40,8 +40,8 @@ void PulseDetector::initialize()
 
 void PulseDetector::putSample(Sample* aSample)
 {
-   // Initially no detection for this sample false
-   // If there is a detection, this will get set in what follows.
+   // Initially no detection for this sample. If there is a detection, this 
+   // will get set in what follows.
 
    mDetectFlag = false;
 
@@ -152,7 +152,7 @@ void PulseDetector::putSample(Sample* aSample)
                mDetectPdw.mSeqNum++;
                mDetectPdw.mToa        = mPulseStartTime;
                mDetectPdw.mAmplitude  = mPulseAmplitudeMean;
-               mDetectPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSampleDeltaTime;
+               mDetectPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
                mDetectFlag = true;
 
 #if 1

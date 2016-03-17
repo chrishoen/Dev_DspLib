@@ -66,7 +66,7 @@ public:
 
    double mDetectYesThreshold;
    double mDetectNoThreshold;
-   double mSampleDeltaTime;
+   double mSamplePeriod;
 
    //---------------------------------------------------------------------------
    // Intrapulse sample variables
