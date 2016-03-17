@@ -37,10 +37,10 @@ void FrontEnd::detect1()
    mPulseDetector.initialize();
 
    // Read from input samples file.
-   mSampleReader.read("C:\\MyLib\\Data\\Test41.csv");
+   mSampleReader.read("C:\\MyLib\\Data\\Sample31.csv");
 
    // Open output pdw file.
-   mPdwWriter.open("C:\\MyLib\\Data\\Pdw41.csv");
+   mPdwWriter.open("C:\\MyLib\\Data\\Pdw31.csv");
 
    // Local
    int tSampleCount=mSampleReader.mRows;

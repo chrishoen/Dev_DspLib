@@ -28,8 +28,8 @@ void PulseDetector::initialize()
    mDetectFlag = false;
    mDetectPdw.reset();
 
-   mDetectYesThreshold = 0.50;
-   mDetectNoThreshold = 0.60;
+   mDetectYesThreshold = 0.10;
+   mDetectNoThreshold = 0.10;
 }
 
 //******************************************************************************
