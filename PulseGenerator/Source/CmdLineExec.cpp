@@ -7,7 +7,11 @@
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 
-using namespace std;
+#include "dspSignalGen.h"
+#include "dspSignal.h"
+
+
+using namespace Dsp;
 
 //******************************************************************************
 CmdLineExec::CmdLineExec()
@@ -23,9 +27,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("RESET"  ))  reset();
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3(aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4(aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5(aCmd);
+
+   if(aCmd->isCmd("T11"    ))  executeT11(aCmd);
+   if(aCmd->isCmd("T21"    ))  executeT21(aCmd);
+   if(aCmd->isCmd("T31"    ))  executeT31(aCmd);
+   if(aCmd->isCmd("T41"    ))  executeT41(aCmd);
+   if(aCmd->isCmd("T42"    ))  executeT42(aCmd);
 }
 
 //******************************************************************************
@@ -38,21 +45,6 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.99);
-   aCmd->setArgDefault(2,100);
-
-   Prn::print(0, "TEST GO1");
-
-   double tC = aCmd->argDouble(1);
-   int tN = aCmd->argInt(2);
-   double tD = 0.01;
-   double tX = 0.0;
-
-   for (int i = 0; i < tN; i++)
-   {
-      tX = 1.0 - abs(tC - tX);
-      Prn::print(0, "%d %8.7f %8.7f",i,tC,tX);
-   }
 }
 
 //******************************************************************************
@@ -61,29 +53,44 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.99);
-
-   double tC = aCmd->argDouble(1);
-   double tX = (1.0 + tC)/2.0;
-
-   Prn::print(0, "%8.7f %8.7f",tC,tX);
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeT11(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs = 10000.0;
+   tSS->mFp =   100.0;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen1(tSS);
+   tSS->normalize();
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample11.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeT21(Ris::CmdLineCmd* aCmd)
 {
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
 {
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeT41(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeT42(Ris::CmdLineCmd* aCmd)
 {
 }
 

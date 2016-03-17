@@ -170,6 +170,7 @@
     <ClCompile Include="..\Common\dspSample.cpp" />
     <ClCompile Include="..\Common\dspSignal.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspSignalGen.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="..\Common\dspSample.h" />
     <ClInclude Include="..\Common\dspSignal.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
+    <ClInclude Include="Source\dspSignalGen.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

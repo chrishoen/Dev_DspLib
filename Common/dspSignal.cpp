@@ -25,7 +25,6 @@ namespace Dsp
 
 Signal::Signal()
 {
-   strcpy(mName,"Default");
    mFs = 8000.0;
    mTs = 1.0 / mFs;
    mFp = 1.0;
@@ -39,6 +38,8 @@ Signal::Signal()
             
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
+
+   mM1=0.0;
 }
 
 //******************************************************************************
@@ -110,7 +111,6 @@ void Signal::normalize()
 
 void Signal::show()
 {
-   Prn::print(0,"mName        %10s",  mName);
    Prn::print(0,"mFs          %10.4f",mFs);
    Prn::print(0,"mTs          %10.4f",mTs);
    Prn::print(0,"mFp          %10.4f",mFp);
@@ -143,7 +143,7 @@ void Signal::writeToTextFile(char* aFileName)
 {
    // Open output file.
    Ris::CsvFileWriter tWriter;
-   tWriter.open("C:\\MyLib\\Data\\Pdw41.csv");
+   tWriter.open(aFileName);
 
    // Loop through all of the samples in the signal.
    for (int i = 0; i < mNumSamples; i++)
@@ -154,6 +154,7 @@ void Signal::writeToTextFile(char* aFileName)
 
    // Done
    tWriter.close();
+   Prn::print(0, "Wrote Samples %s %d",aFileName,mNumSamples);
 }
 
 }//namespace
