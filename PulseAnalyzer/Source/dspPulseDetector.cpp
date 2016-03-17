@@ -31,7 +31,7 @@ PulseDetector::PulseDetector()
 //******************************************************************************
 //******************************************************************************
 
-void PulseDetector::putSample(int aTime, double aAmplitude)
+void PulseDetector::putSample(Sample* aSample)
 {
    // Initially no detection for this sample false
    // If there is a detection, this will get set in what follows.
@@ -51,17 +51,17 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
       case cDetectNo:
       {
          // If the amplitude is above the threshold
-         if (aAmplitude >= mDetectYesThreshold)
+         if (aSample->mAmplitude >= mDetectYesThreshold)
          {
             // Maybe the start of a pulse has been detected.
             mDetectCount = 1;
             mDetectState = cDetectMaybeYes;
 
             // Store the start time.
-            mPulseStartTime = aTime;
+            mPulseStartTime = aSample->mTime;
 
             // Start new sample statistics.
-            startSampleStatistics(aAmplitude);
+            startSampleStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold
          else
@@ -77,7 +77,7 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
       case cDetectMaybeYes:
       {
          // If the amplitude is above the threshold
-         if (aAmplitude >= mDetectYesThreshold)
+         if (aSample->mAmplitude >= mDetectYesThreshold)
          {
             // If the amplitude has been above the threshold for the last 
             // three samples then the start of a pulse has been detected.
@@ -87,7 +87,7 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
             }
 
             // Update the sample statistics.
-            updateSampleStatistics(aAmplitude);
+            updateSampleStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold then the start of
          // a pulse has not been detected.
@@ -105,10 +105,10 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
       case cDetectYes:
       {
          // If the amplitude is above the threshold
-         if (aAmplitude >= mDetectNoThreshold)
+         if (aSample->mAmplitude >= mDetectNoThreshold)
          {
             // Update the sample statistics.
-            updateSampleStatistics(aAmplitude);
+            updateSampleStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold then maybe the end of 
          // a pulse has been detected.
@@ -119,7 +119,7 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
             mDetectState = cDetectMaybeNo;
 
             // Store the pulse end time.
-            mPulseEndTime = aTime;
+            mPulseEndTime = aSample->mTime;
          }
       }
       break;
@@ -130,7 +130,7 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
       case cDetectMaybeNo:
       {
          // If the amplitude is not above the threshold
-         if (aAmplitude < mDetectNoThreshold)
+         if (aSample->mAmplitude < mDetectNoThreshold)
          {
             // If the amplitude has not been above the threshold for the last 
             // three samples then the end of a pulse has been detected.
@@ -156,7 +156,7 @@ void PulseDetector::putSample(int aTime, double aAmplitude)
             mDetectState = cDetectYes;
 
             // Update the sample statistics.
-            updateSampleStatistics(aAmplitude);
+            updateSampleStatistics(aSample->mAmplitude);
          }
       }
       break;

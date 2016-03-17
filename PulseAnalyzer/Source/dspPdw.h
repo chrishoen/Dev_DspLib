@@ -23,9 +23,9 @@ public:
    // Members
 
    int    mSeqNum;
-   int    mToa;
+   double mToa;
    double mAmplitude;
-   int    mPulseWidth;
+   double mPulseWidth;
 
    //--------------------------------------------------------------------------
    // Constructors

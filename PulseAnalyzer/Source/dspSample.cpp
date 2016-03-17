@@ -7,8 +7,9 @@ Description:
 //******************************************************************************
 
 #include <stdio.h>
+#include <math.h>
 
-#include "dspPdw.h"
+#include "dspSample.h"
 
 namespace Dsp
 {
@@ -17,18 +18,18 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-Pdw::Pdw()
-{
-   reset();
-}
+// Convert and store
 
-void Pdw::reset()
+Sample::Sample()
 {
-   mSeqNum = 0;
-   mToa = 0.0;
+   mTime = 0.0;
    mAmplitude = 0.0;
-   mPulseWidth = 0.0;
 }
 
+void Sample::put(double aTime, double aVolts)
+{
+   mTime = aTime;
+   mAmplitude = abs(aVolts);
+}
    
 }//namespace

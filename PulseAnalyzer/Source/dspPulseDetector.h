@@ -9,6 +9,7 @@
 //******************************************************************************
 
 #include "dspPdw.h"
+#include "dspSample.h"
 
 namespace Dsp
 {
@@ -32,7 +33,7 @@ public:
 
    // Put new a sample to the detector, called at the sampling rate.
    // Detection results are contained in the following two variables.
-   void putSample(int aTime,double aAmplitude);
+   void putSample(Sample* aSample);
 
    // This is true if a pulse was detected by the last call to PutSample.
    bool mDetectFlag;
@@ -69,8 +70,8 @@ public:
    //---------------------------------------------------------------------------
    // Intrapulse sample variables
 
-   int    mPulseStartTime;
-   int    mPulseEndTime;
+   double mPulseStartTime;
+   double mPulseEndTime;
    double mPulseAmplitudeSum;
    double mPulseAmplitudeMean;
    int    mPulseSampleCount;
