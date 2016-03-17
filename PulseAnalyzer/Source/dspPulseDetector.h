@@ -71,22 +71,37 @@ public:
    //---------------------------------------------------------------------------
    // Intrapulse sample variables
 
+   // This is the time of the sample that causes a state change from No
+   // to MaybeYes.
    double mPulseStartTime;
+
+   // This is the time of the last sample for which the state was Yes.
    double mPulseEndTime;
+
+   // This is the calculated mean amplitude.
    double mPulseAmplitudeMean;
 
-   double mPulseAmplitudeYesSum;
+   // Statistics for Yes state. These are started when the state changes from
+   // No to MaybeYes and updated for states MaybeYes and Yes.
    int    mPulseSampleYesCount;
-   double mPulseAmplitudeMaybeNoSum;
-   int    mPulseSampleMaybeNoCount;
+   double mPulseAmplitudeYesSum;
 
    void startSampleYesStatistics      (double aAmplitude);
    void updateSampleYesStatistics     (double aAmplitude);
+
+   // Statistics for MaybeNo state. These are started when the state changes
+   // from Yes to MaybeNo and updated for state MaybeNo. If the state changes
+   // from MaybeNo back to Yes (a false alarm for end of pulse detection) then
+   // the MaybeNo statistics are added to the Yes statistics.
+   int    mPulseSampleMaybeNoCount;
+   double mPulseAmplitudeMaybeNoSum;
 
    void startSampleMaybeNoStatistics  (double aAmplitude);
    void updateSampleMaybeNoStatistics (double aAmplitude);
    void mergeSampleMaybeNoStatistics ();
 
+   // This calulates the means from the sums and counts. It is called when 
+   // the state changes from MaybeNo to No and the end of a pulse is detected.
    void finishSampleStatistics ();
 };
 
