@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6e716a6f-792d-4891-bff7-d5f9934c0751}</ProjectGuid>
+    <ProjectGuid>{bc5b49af-014e-4329-98f3-105bda16b934}</ProjectGuid>
     <RootNamespace>Test</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -169,8 +169,6 @@
     <ClCompile Include="..\Common\dspPdw.cpp" />
     <ClCompile Include="..\Common\dspSample.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\dspFrontEnd.cpp" />
-    <ClCompile Include="Source\dspPulseDetector.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
@@ -178,8 +176,6 @@
     <ClInclude Include="..\Common\dspPdw.h" />
     <ClInclude Include="..\Common\dspSample.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
-    <ClInclude Include="Source\dspFrontEnd.h" />
-    <ClInclude Include="Source\dspPulseDetector.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

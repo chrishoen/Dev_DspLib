@@ -16,12 +16,6 @@
     <ClCompile Include="Source\MainInit.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspPulseDetector.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspFrontEnd.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\dspPdw.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -36,17 +30,7 @@
     <ClInclude Include="Source\MainInit.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspPulseDetector.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspFrontEnd.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\dspPdw.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\dspSample.h">
-      <Filter>Source</Filter>
-    </ClInclude>
+    <ClInclude Include="..\Common\dspPdw.h" />
+    <ClInclude Include="..\Common\dspSample.h" />
   </ItemGroup>
 </Project>
