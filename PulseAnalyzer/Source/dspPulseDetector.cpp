@@ -68,7 +68,7 @@ void PulseDetector::putSample(Sample* aSample)
             mPulseStartTime = aSample->mTime;
 
             // Start new sample statistics.
-            startSampleStatistics(aSample->mAmplitude);
+            startSampleYesStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold
          else
@@ -94,7 +94,7 @@ void PulseDetector::putSample(Sample* aSample)
             }
 
             // Update the sample statistics.
-            updateSampleStatistics(aSample->mAmplitude);
+            updateSampleYesStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold then the start of
          // a pulse has not been detected.
@@ -118,7 +118,7 @@ void PulseDetector::putSample(Sample* aSample)
             mPulseEndTime = aSample->mTime;
 
             // Update the sample statistics.
-            updateSampleStatistics(aSample->mAmplitude);
+            updateSampleYesStatistics(aSample->mAmplitude);
          }
          // If the amplitude is not above the threshold then maybe the end of 
          // a pulse has been detected.
@@ -127,6 +127,9 @@ void PulseDetector::putSample(Sample* aSample)
             // Detection logic
             mDetectCount = 1;
             mDetectState = cDetectMaybeNo;
+
+            // Start new sample statistics.
+            startSampleMaybeNoStatistics(aSample->mAmplitude);
          }
       }
       break;
@@ -158,10 +161,18 @@ void PulseDetector::putSample(Sample* aSample)
 #if 1
                Prn::print(0, "DETECT %d %d %10.4f %10.4f",
                   mDetectPdw.mSeqNum,
-                  mPulseSampleCount,
+                  mPulseSampleYesCount,
                   mPulseStartTime,
                   mPulseEndTime);
 #endif
+            }
+            // If the amplitude has not been above the threshold for less than
+            // the last three samples then the end of a pulse has not been
+            // detected yet.
+            else
+            {
+               // Update the sample statistics.
+               updateSampleMaybeNoStatistics(aSample->mAmplitude);
             }
          }
          // If the amplitude is above the threshold then the end of pulse
@@ -173,8 +184,10 @@ void PulseDetector::putSample(Sample* aSample)
             // Store the pulse end time.
             mPulseEndTime = aSample->mTime;
 
+            // Merge the sample statistics for the two states.
+            mergeSampleMaybeNoStatistics();
             // Update the sample statistics.
-            updateSampleStatistics(aSample->mAmplitude);
+            updateSampleYesStatistics(aSample->mAmplitude);
          }
       }
       break;
@@ -184,20 +197,40 @@ void PulseDetector::putSample(Sample* aSample)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-void PulseDetector::startSampleStatistics  (double aAmplitude)
+
+void PulseDetector::startSampleYesStatistics  (double aAmplitude)
 {
-   mPulseAmplitudeSum = aAmplitude;
-   mPulseSampleCount  = 1;
+   mPulseAmplitudeYesSum = aAmplitude;
+   mPulseSampleYesCount  = 1;
 }
 
-void PulseDetector::updateSampleStatistics(double aAmplitude)
+void PulseDetector::updateSampleYesStatistics(double aAmplitude)
 {
-   mPulseAmplitudeSum += aAmplitude;
-   mPulseSampleCount++;
+   mPulseAmplitudeYesSum += aAmplitude;
+   mPulseSampleYesCount++;
 }
+
+void PulseDetector::startSampleMaybeNoStatistics  (double aAmplitude)
+{
+   mPulseAmplitudeMaybeNoSum = aAmplitude;
+   mPulseSampleMaybeNoCount  = 1;
+}
+
+void PulseDetector::updateSampleMaybeNoStatistics(double aAmplitude)
+{
+   mPulseAmplitudeMaybeNoSum += aAmplitude;
+   mPulseSampleMaybeNoCount++;
+}
+
+void PulseDetector::mergeSampleMaybeNoStatistics()
+{
+   mPulseAmplitudeYesSum += mPulseAmplitudeMaybeNoSum;
+   mPulseSampleYesCount  += mPulseSampleMaybeNoCount;
+}
+
 void PulseDetector::finishSampleStatistics()
 {
-   mPulseAmplitudeMean = mPulseAmplitudeSum/mPulseSampleCount;
+   mPulseAmplitudeMean = mPulseAmplitudeYesSum/mPulseSampleYesCount;
 }
 
 }//namespace

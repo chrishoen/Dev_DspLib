@@ -73,15 +73,21 @@ public:
 
    double mPulseStartTime;
    double mPulseEndTime;
-   double mPulseAmplitudeSum;
    double mPulseAmplitudeMean;
-   int    mPulseSampleCount;
 
-   void startSampleStatistics  (double aAmplitude);
-   void updateSampleStatistics (double aAmplitude);
+   double mPulseAmplitudeYesSum;
+   int    mPulseSampleYesCount;
+   double mPulseAmplitudeMaybeNoSum;
+   int    mPulseSampleMaybeNoCount;
+
+   void startSampleYesStatistics      (double aAmplitude);
+   void updateSampleYesStatistics     (double aAmplitude);
+
+   void startSampleMaybeNoStatistics  (double aAmplitude);
+   void updateSampleMaybeNoStatistics (double aAmplitude);
+   void mergeSampleMaybeNoStatistics ();
+
    void finishSampleStatistics ();
-
-
 };
 
 //******************************************************************************
