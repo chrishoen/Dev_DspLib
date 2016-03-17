@@ -66,7 +66,7 @@ void CmdLineExec::executeT11(Ris::CmdLineCmd* aCmd)
    tSS->mDuration = 10.0;
    tSS->initialize();
    tSS->show();
-   SignalGen::gen1(tSS);
+   SignalGen::gen11(tSS);
    tSS->normalize();
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample11.csv");
 }
@@ -119,6 +119,16 @@ void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeT41(Ris::CmdLineCmd* aCmd)
 {
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mFp  =    1000.0;
+   tSS->mFm  =      10.0;
+   tSS->mDCm =       0.2;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen41(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample41.csv");
 }
 
 //******************************************************************************
