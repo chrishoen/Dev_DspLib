@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{27735E
 		Common\dspPdw.h = Common\dspPdw.h
 		Common\dspSample.cpp = Common\dspSample.cpp
 		Common\dspSample.h = Common\dspSample.h
+		Common\dspSignal.cpp = Common\dspSignal.cpp
+		Common\dspSignal.h = Common\dspSignal.h
 	EndProjectSection
 EndProject
 Global

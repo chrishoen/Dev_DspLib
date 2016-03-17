@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="..\Common\dspPdw.cpp" />
     <ClCompile Include="..\Common\dspSample.cpp" />
+    <ClCompile Include="..\Common\dspSignal.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="..\Common\dspPdw.h" />
     <ClInclude Include="..\Common\dspSample.h" />
+    <ClInclude Include="..\Common\dspSignal.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>

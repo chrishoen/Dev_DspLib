@@ -22,6 +22,9 @@
     <ClCompile Include="..\Common\dspSample.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\dspSignal.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -30,7 +33,14 @@
     <ClInclude Include="Source\MainInit.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\dspPdw.h" />
-    <ClInclude Include="..\Common\dspSample.h" />
+    <ClInclude Include="..\Common\dspPdw.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\dspSample.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\dspSignal.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
