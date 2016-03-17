@@ -30,6 +30,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("T11"    ))  executeT11(aCmd);
    if(aCmd->isCmd("T21"    ))  executeT21(aCmd);
+   if(aCmd->isCmd("T22"    ))  executeT22(aCmd);
    if(aCmd->isCmd("T31"    ))  executeT31(aCmd);
    if(aCmd->isCmd("T41"    ))  executeT41(aCmd);
    if(aCmd->isCmd("T42"    ))  executeT42(aCmd);
@@ -74,6 +75,28 @@ void CmdLineExec::executeT11(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeT21(Ris::CmdLineCmd* aCmd)
 {
+   Signal* tSS = new Signal();
+   tSS->mFs = 10000.0;
+   tSS->mFp =   100.0;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen21(tSS);
+   tSS->normalize();
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample21.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeT22(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs = 10000.0;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen22(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample22.csv");
 }
 
 //******************************************************************************
