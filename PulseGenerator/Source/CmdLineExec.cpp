@@ -32,6 +32,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("T21"    ))  executeT21(aCmd);
    if(aCmd->isCmd("T22"    ))  executeT22(aCmd);
    if(aCmd->isCmd("T31"    ))  executeT31(aCmd);
+   if(aCmd->isCmd("T32"    ))  executeT32(aCmd);
+   if(aCmd->isCmd("T33"    ))  executeT33(aCmd);
    if(aCmd->isCmd("T41"    ))  executeT41(aCmd);
    if(aCmd->isCmd("T42"    ))  executeT42(aCmd);
 }
@@ -113,6 +115,34 @@ void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen31(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample31.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeT32(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mFp  =     100.0;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen32(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample32.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeT33(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mFp  =     100.0;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen33(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample33.csv");
 }
 
 //******************************************************************************

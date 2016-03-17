@@ -23,6 +23,8 @@ namespace SignalGen
    void gen21 (Signal* aS);
    void gen22 (Signal* aS);
    void gen31 (Signal* aS);
+   void gen32 (Signal* aS);
+   void gen33 (Signal* aS);
    void gen41 (Signal* aS);
 
 //******************************************************************************

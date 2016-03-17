@@ -72,13 +72,66 @@ void gen22(Signal* aS)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Generate square wave
+// Generate discrete pulses, constant
 
 void gen31(Signal* aS)
 {
    for (int k = 0; k < aS->mNs; k++)
    {
-      aS->mX[k] = (k % aS->mNm <= aS->mNm1) ? 1.0 : 0.0;
+      aS->mX[k] = (k % aS->mNp <= aS->mNp1) ? 1.0 : 0.0;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Generate discrete pulses, poisson distribution
+
+void gen32(Signal* aS)
+{
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::poisson_distribution<> tRandomDistribution(aS->mNp);
+
+   int kevent = tRandomDistribution(tRandomGenerator);
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      if (k == kevent)
+      {
+         aS->mX[k] = 1.0;
+         kevent += tRandomDistribution(tRandomGenerator);
+      }
+      else
+      {
+         aS->mX[k] = 0.0;
+      }
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Generate discrete pulses, expoential distribution interarrival times
+
+void gen33(Signal* aS)
+{
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::exponential_distribution<> tRandomDistribution(aS->mFp);
+
+   double tToa = tRandomDistribution(tRandomGenerator);
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      double tTime = k * aS->mTs;
+      if (tTime >= tToa)
+      {
+         aS->mX[k] = 1.0;
+         tToa += tRandomDistribution(tRandomGenerator);
+      }
+      else
+      {
+         aS->mX[k] = 0.0;
+      }
    }
 }
 
