@@ -111,7 +111,7 @@ void gen32(Signal* aS)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Generate discrete pulses, expoential distribution interarrival times
+// Generate discrete pulses, exponetial distribution for interarrival times
 
 void gen33(Signal* aS)
 {
