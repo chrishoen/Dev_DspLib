@@ -11,6 +11,7 @@ Description:
 #include <math.h>
 
 #include "prnPrint.h"
+#include "risTextFile.h"
 #include "dspSignal.h"
 
 namespace Dsp
@@ -131,6 +132,28 @@ void Signal::show()
    Prn::print(0,"mDCm         %10.4f",mDCm);
    Prn::print(0,"mM1          %10.4f",mM1);
    Prn::print(0,"mAlpha       %10.4f",mAlpha);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Write
+
+void Signal::writeToTextFile(char* aFileName)
+{
+   // Open output file.
+   Ris::CsvFileWriter tWriter;
+   tWriter.open("C:\\MyLib\\Data\\Pdw41.csv");
+
+   // Loop through all of the samples in the signal.
+   for (int i = 0; i < mNumSamples; i++)
+   {
+      // Write the signal time and sample to the file.
+      tWriter.write((double)i*mTs, mX[i]);
+   }
+
+   // Done
+   tWriter.close();
 }
 
 }//namespace

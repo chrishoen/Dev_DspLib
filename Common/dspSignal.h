@@ -62,6 +62,8 @@ public:
 
    void show();
 
+   void writeToTextFile(char* aFileName);
+
 };
 
 //******************************************************************************
