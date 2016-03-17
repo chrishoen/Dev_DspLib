@@ -24,12 +24,12 @@ static const double cPI = 3.14159265358979323846264338327950288419716939937510;
 //******************************************************************************
 // Generate sin wave
 
-void gen1(Signal* aSS)
+void gen1(Signal* aS)
 {
-   for (int k = 0; k < aSS->mNs; k++)
+   for (int k = 0; k < aS->mNs; k++)
    {
-         double t = k * aSS->mTs;
-         aSS->mX[k] = sin(2.0 * cPI * aSS->mFp * t);
+         double t = k * aS->mTs;
+         aS->mX[k] = sin(2.0 * cPI * aS->mFp * t);
    }
 }
 
@@ -38,16 +38,16 @@ void gen1(Signal* aSS)
 //******************************************************************************
 // Generate random, uniform
 
-void gen21(Signal* aSS)
+void gen21(Signal* aS)
 {
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
    std::uniform_real_distribution<> tRandomDistribution(-1.0, 1.0);
 
-   for (int k = 0; k < aSS->mNs; k++)
+   for (int k = 0; k < aS->mNs; k++)
    {
-         double t = k * aSS->mTs;
-         aSS->mX[k] = tRandomDistribution(tRandomGenerator);
+         double t = k * aS->mTs;
+         aS->mX[k] = tRandomDistribution(tRandomGenerator);
    }
 }
 
@@ -56,16 +56,29 @@ void gen21(Signal* aSS)
 //******************************************************************************
 // Generate random, normal
 
-void gen22(Signal* aSS)
+void gen22(Signal* aS)
 {
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
    std::normal_distribution<> tRandomDistribution(0.0, 1.0);
 
-   for (int k = 0; k < aSS->mNs; k++)
+   for (int k = 0; k < aS->mNs; k++)
    {
-         double t = k * aSS->mTs;
-         aSS->mX[k] = tRandomDistribution(tRandomGenerator);
+         double t = k * aS->mTs;
+         aS->mX[k] = tRandomDistribution(tRandomGenerator);
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Generate square wave
+
+void gen31(Signal* aS)
+{
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      aS->mX[k] = (k % aS->mNm <= aS->mNm1) ? 1.0 : 0.0;
    }
 }
 

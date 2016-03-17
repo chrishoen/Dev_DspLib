@@ -103,6 +103,16 @@ void CmdLineExec::executeT22(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
 {
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mFp  =    1000.0;
+   tSS->mFm  =      10.0;
+   tSS->mDCm =       0.2;
+   tSS->mDuration = 10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen31(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample31.csv");
 }
 
 //******************************************************************************
