@@ -19,6 +19,11 @@ namespace Dsp
 
 PulseDetector::PulseDetector()
 {
+   initialize();
+}
+
+void PulseDetector::initialize()
+{
    mDetectState = 0;
    mDetectFlag = false;
    mDetectPdw.reset();

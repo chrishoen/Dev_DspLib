@@ -167,6 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspFrontEnd.cpp" />
     <ClCompile Include="Source\dspPdw.cpp" />
     <ClCompile Include="Source\dspPulseDetector.cpp" />
     <ClCompile Include="Source\dspSample.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
+    <ClInclude Include="Source\dspFrontEnd.h" />
     <ClInclude Include="Source\dspPdw.h" />
     <ClInclude Include="Source\dspPulseDetector.h" />
     <ClInclude Include="Source\dspSample.h" />
