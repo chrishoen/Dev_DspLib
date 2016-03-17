@@ -138,6 +138,32 @@ void gen33(Signal* aS)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Generate discrete pulses, geometric distribution
+
+void gen34(Signal* aS)
+{
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::geometric_distribution<int> tRandomDistribution(aS->mTp);
+
+   int kevent = tRandomDistribution(tRandomGenerator);
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      if (k >= kevent)
+      {
+         aS->mX[k] = 1.0;
+         kevent += tRandomDistribution(tRandomGenerator);
+      }
+      else
+      {
+         aS->mX[k] = 0.0;
+      }
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Generate pulse train
 
 void gen41(Signal* aS)

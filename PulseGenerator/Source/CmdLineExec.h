@@ -25,6 +25,7 @@ public:
   void executeT31 (Ris::CmdLineCmd* aCmd);
   void executeT32 (Ris::CmdLineCmd* aCmd);
   void executeT33 (Ris::CmdLineCmd* aCmd);
+  void executeT34 (Ris::CmdLineCmd* aCmd);
   void executeT41 (Ris::CmdLineCmd* aCmd);
   void executeT42 (Ris::CmdLineCmd* aCmd);
 };
