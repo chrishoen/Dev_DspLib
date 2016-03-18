@@ -35,12 +35,9 @@ Signal::Signal()
 
    mDCp = 1.0;
    mDCm = 1.0;
-   mAlpha = 0.0;
             
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
-
-   mM1=0.0;
 }
 
 Signal::~Signal()
@@ -139,8 +136,6 @@ void Signal::show()
 
    Prn::print(0,"mDCp         %10.4f",mDCp);
    Prn::print(0,"mDCm         %10.4f",mDCm);
-   Prn::print(0,"mM1          %10.4f",mM1);
-   Prn::print(0,"mAlpha       %10.4f",mAlpha);
 }
 
 //******************************************************************************
