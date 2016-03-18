@@ -30,6 +30,8 @@ public:
   void executeS42 (Ris::CmdLineCmd* aCmd);
 
   void executeP11 (Ris::CmdLineCmd* aCmd);
+  void executeP21 (Ris::CmdLineCmd* aCmd);
+  void executeP22 (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

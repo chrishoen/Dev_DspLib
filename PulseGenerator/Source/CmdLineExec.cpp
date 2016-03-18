@@ -42,6 +42,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("S42"    ))  executeS42(aCmd);
 
    if(aCmd->isCmd("P11"    ))  executeP11(aCmd);
+   if(aCmd->isCmd("P21"    ))  executeP21(aCmd);
+   if(aCmd->isCmd("P22"    ))  executeP22(aCmd);
 }
 
 //******************************************************************************
@@ -65,14 +67,12 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    }
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 
 void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
@@ -85,6 +85,26 @@ void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
    tPS->show();
    PulseGen::gen11(tPS);
    tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse11.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeP21(Ris::CmdLineCmd* aCmd)
+{
+   PdwSequence* tPS = new PdwSequence();
+   tPS->mFs       = 10000.0;
+   tPS->mFm       =   100.0;
+   tPS->mDuration =    10.0;
+   tPS->initialize();
+   tPS->show();
+   PulseGen::gen21(tPS);
+   tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse21.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeP22(Ris::CmdLineCmd* aCmd)
+{
 }
 
 //******************************************************************************
