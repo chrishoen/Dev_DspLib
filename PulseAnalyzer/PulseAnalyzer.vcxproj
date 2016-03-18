@@ -105,7 +105,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\MyLib\RisLib\include;..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\MyLib\RisLib\include;..\DspLib\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -166,8 +166,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\dspPdw.cpp" />
-    <ClCompile Include="..\Common\dspSample.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspFrontEnd.cpp" />
     <ClCompile Include="Source\dspPulseDetector.cpp" />
@@ -175,12 +173,15 @@
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\dspPdw.h" />
-    <ClInclude Include="..\Common\dspSample.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspFrontEnd.h" />
     <ClInclude Include="Source\dspPulseDetector.h" />
     <ClInclude Include="Source\MainInit.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DspLib\DspLib.vcxproj">
+      <Project>{3c982fd1-5abe-4c1f-b7e6-114f3a7617f2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,17 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PulseAnalyzer", "PulseAnaly
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PulseGenerator", "PulseGenerator\PulseGenerator.vcxproj", "{BC5B49AF-014E-4329-98F3-105BDA16B934}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{27735EC7-C681-40AE-A1B0-4E9A74DF7C07}"
-	ProjectSection(SolutionItems) = preProject
-		Common\dspPdw.cpp = Common\dspPdw.cpp
-		Common\dspPdw.h = Common\dspPdw.h
-		Common\dspPdwSequence.cpp = Common\dspPdwSequence.cpp
-		Common\dspPdwSequence.h = Common\dspPdwSequence.h
-		Common\dspSample.cpp = Common\dspSample.cpp
-		Common\dspSample.h = Common\dspSample.h
-		Common\dspSignal.cpp = Common\dspSignal.cpp
-		Common\dspSignal.h = Common\dspSignal.h
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DspLib", "DspLib\DspLib.vcxproj", "{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +65,19 @@ Global
 		{BC5B49AF-014E-4329-98F3-105BDA16B934}.Release|Win32.Build.0 = Release|Win32
 		{BC5B49AF-014E-4329-98F3-105BDA16B934}.Release|x64.ActiveCfg = Release|x64
 		{BC5B49AF-014E-4329-98F3-105BDA16B934}.Release|x64.Build.0 = Release|x64
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|Win32.Build.0 = Debug|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|x64.ActiveCfg = Debug|x64
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Debug|x64.Build.0 = Debug|x64
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|Win32.ActiveCfg = Release|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|Win32.Build.0 = Release|Win32
+		{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

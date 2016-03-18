@@ -16,22 +16,10 @@
     <ClCompile Include="Source\MainInit.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\dspPdw.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\dspSample.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\dspSignal.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspSignalGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspPulseGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\dspPdwSequence.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,22 +30,10 @@
     <ClInclude Include="Source\MainInit.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\dspPdw.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\dspSample.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\dspSignal.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspSignalGen.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspPulseGen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\dspPdwSequence.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

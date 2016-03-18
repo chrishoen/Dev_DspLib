@@ -7,33 +7,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\CmdLineExec.cpp">
+    <ClCompile Include="Source\dspPdw.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Main.cpp">
+    <ClCompile Include="Source\dspPdwSequence.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MainInit.cpp">
+    <ClCompile Include="Source\dspSample.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspPulseDetector.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspFrontEnd.cpp">
+    <ClCompile Include="Source\dspSignal.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\CmdLineExec.h">
+    <ClInclude Include="Source\dspPdw.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MainInit.h">
+    <ClInclude Include="Source\dspPdwSequence.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspPulseDetector.h">
+    <ClInclude Include="Source\dspSample.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspFrontEnd.h">
+    <ClInclude Include="Source\dspSignal.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
