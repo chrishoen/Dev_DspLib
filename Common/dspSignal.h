@@ -14,7 +14,7 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class encapsulates a signal, which is a time series of samples.
+// This class encapsulates a signal as a time series of samples.
 
 class Signal
 {
