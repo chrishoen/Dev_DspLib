@@ -157,14 +157,6 @@ void PulseDetector::putSample(Sample* aSample)
                mDetectedPdw.mAmplitude  = mPulseAmplitudeMean;
                mDetectedPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
                mDetectFlag = true;
-
-#if 1
-               Prn::print(0, "DETECT %d %d %10.4f %10.4f",
-                  mDetectedPdw.mSeqNum,
-                  mPulseSampleYesCount,
-                  mPulseStartTime,
-                  mPulseEndTime);
-#endif
             }
             // If the amplitude has not been above the threshold for less than
             // the last three samples then the end of a pulse has not been
