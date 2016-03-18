@@ -2,8 +2,7 @@
 
 #include "prnPrint.h"
 #include "risThreadsProcess.h"
-#include "risCmdLineConsole.h"
-#include "CmdLineExec.h"
+#include "dspPdwFreeList.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -55,6 +54,8 @@ void main_initialize(int argc,char** argv)
 
    Prn::print(0,"Test*******************************************BEGIN");
 
+   // Initialize memory
+   Dsp::initializePdwFreeList();
 }
 
 //******************************************************************************
