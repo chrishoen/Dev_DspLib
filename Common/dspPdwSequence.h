@@ -1,5 +1,5 @@
-#ifndef _DSPSIGNAL_H_
-#define _DSPSIGNAL_H_
+#ifndef _DSPPDWSEQUENCE_H_
+#define _DSPPDWSEQUENCE_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -8,6 +8,8 @@
 //******************************************************************************
 //******************************************************************************
 
+#include "dspPdw.h"
+
 namespace Dsp
 {
 
@@ -15,47 +17,43 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 
-class Signal
+class PdwSequence
 {
 public:
 
    //--------------------------------------------------------------------------
    // Members
 
-   double* mX;
    double  mFs;
    double  mTs;
-   double  mFp;
-   double  mTp;
    double  mFm;
    double  mTm;
    double  mDuration;
    int     mNumSamples;
    int     mNs;
-   int     mNp;
-   int     mNp1;
-   int     mNp2;
    int     mNm;
    int     mNm1;
    int     mNm2;
-   double  mDCp;
    double  mDCm;
-   double  mM1;
-   double  mAlpha;
+
+   //--------------------------------------------------------------------------
+   // Members
+
+   static const int cMaxNumOfPdws=10000;
+   Pdw* mPdwArray;
+   int mPdwCount;
 
    //--------------------------------------------------------------------------
    // Constructor and initialization.
-   // Create an new Signal, set some of the members, call initialize to 
-   // set other members and allocate memory.
 
-   Signal();
-  ~Signal();
+   PdwSequence();
+  ~PdwSequence();
    void initialize();
 
    //--------------------------------------------------------------------------
-   // Normalize the X value series.
+   // Put a Pdw to the PdwArray.
 
-   void normalize();
+   void putPdw(Pdw* aPdw);
 
    //--------------------------------------------------------------------------
    // Write signal to a csv file.

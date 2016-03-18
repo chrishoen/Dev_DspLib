@@ -10,6 +10,8 @@
 
 #include "dspSignalGen.h"
 #include "dspSignal.h"
+#include "dspPulseGen.h"
+#include "dspPdwSequence.h"
 
 
 using namespace Dsp;
@@ -29,15 +31,17 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
-   if(aCmd->isCmd("T11"    ))  executeT11(aCmd);
-   if(aCmd->isCmd("T21"    ))  executeT21(aCmd);
-   if(aCmd->isCmd("T22"    ))  executeT22(aCmd);
-   if(aCmd->isCmd("T31"    ))  executeT31(aCmd);
-   if(aCmd->isCmd("T32"    ))  executeT32(aCmd);
-   if(aCmd->isCmd("T33"    ))  executeT33(aCmd);
-   if(aCmd->isCmd("T34"    ))  executeT34(aCmd);
-   if(aCmd->isCmd("T41"    ))  executeT41(aCmd);
-   if(aCmd->isCmd("T42"    ))  executeT42(aCmd);
+   if(aCmd->isCmd("S11"    ))  executeS11(aCmd);
+   if(aCmd->isCmd("S21"    ))  executeS21(aCmd);
+   if(aCmd->isCmd("S22"    ))  executeS22(aCmd);
+   if(aCmd->isCmd("S31"    ))  executeS31(aCmd);
+   if(aCmd->isCmd("S32"    ))  executeS32(aCmd);
+   if(aCmd->isCmd("S33"    ))  executeS33(aCmd);
+   if(aCmd->isCmd("S34"    ))  executeS34(aCmd);
+   if(aCmd->isCmd("S41"    ))  executeS41(aCmd);
+   if(aCmd->isCmd("S42"    ))  executeS42(aCmd);
+
+   if(aCmd->isCmd("P11"    ))  executeP11(aCmd);
 }
 
 //******************************************************************************
@@ -71,7 +75,21 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT11(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
+{
+   PdwSequence* tPS = new PdwSequence();
+   tPS->mFs       = 10000.0;
+   tPS->mFm       =   100.0;
+   tPS->mDuration =    10.0;
+   tPS->initialize();
+   tPS->show();
+   PulseGen::gen11(tPS);
+   tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse11.csv");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeS11(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs = 10000.0;
@@ -86,7 +104,7 @@ void CmdLineExec::executeT11(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT21(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS21(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs = 10000.0;
@@ -101,7 +119,7 @@ void CmdLineExec::executeT21(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT22(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS22(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs = 10000.0;
@@ -114,7 +132,7 @@ void CmdLineExec::executeT22(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS31(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
@@ -130,7 +148,7 @@ void CmdLineExec::executeT31(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT32(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS32(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
@@ -144,7 +162,7 @@ void CmdLineExec::executeT32(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT33(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS33(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
@@ -158,7 +176,7 @@ void CmdLineExec::executeT33(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT34(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS34(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
@@ -172,7 +190,7 @@ void CmdLineExec::executeT34(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT41(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS41(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
@@ -188,7 +206,7 @@ void CmdLineExec::executeT41(Ris::CmdLineCmd* aCmd)
 
 //******************************************************************************
 
-void CmdLineExec::executeT42(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeS42(Ris::CmdLineCmd* aCmd)
 {
 }
 

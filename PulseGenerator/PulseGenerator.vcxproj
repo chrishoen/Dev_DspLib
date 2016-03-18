@@ -167,18 +167,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\dspPdw.cpp" />
+    <ClCompile Include="..\Common\dspPdwSequence.cpp" />
     <ClCompile Include="..\Common\dspSample.cpp" />
     <ClCompile Include="..\Common\dspSignal.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspPulseGen.cpp" />
     <ClCompile Include="Source\dspSignalGen.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\dspPdw.h" />
+    <ClInclude Include="..\Common\dspPdwSequence.h" />
     <ClInclude Include="..\Common\dspSample.h" />
     <ClInclude Include="..\Common\dspSignal.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
+    <ClInclude Include="Source\dspPulseGen.h" />
     <ClInclude Include="Source\dspSignalGen.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>

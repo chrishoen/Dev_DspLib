@@ -28,6 +28,12 @@
     <ClCompile Include="Source\dspSignalGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspPulseGen.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\dspPdwSequence.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -46,6 +52,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspSignalGen.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspPulseGen.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\dspPdwSequence.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
