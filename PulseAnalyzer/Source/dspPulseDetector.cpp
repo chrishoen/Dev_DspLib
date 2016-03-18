@@ -9,6 +9,7 @@ Description:
 #include <stdio.h>
 #include "prnPrint.h"
 
+#include "dspPdwFreeList.h"
 #include "dspPulseDetector.h"
 
 namespace Dsp
@@ -26,24 +27,27 @@ PulseDetector::PulseDetector()
 void PulseDetector::initialize()
 {
    mDetectState = 0;
-   mDetectFlag = false;
-   mDetectedPdw.reset();
 
    mDetectYesThreshold = 0.01;
    mDetectNoThreshold = 0.01;
    mSamplePeriod = 0.0001;
+   mSeqNum = 0;
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Put a new sample to the detector, this is called at the sampling rate.
+// If a pulse is detected then this returns a pointer to a pdw.
+// if not then it returns null.
 
-void PulseDetector::putSample(Sample* aSample)
+
+Pdw* PulseDetector::putSample(Sample* aSample)
 {
    // Initially no detection for this sample. If there is a detection, this 
    // will get set in what follows.
 
-   mDetectFlag = false;
+   Pdw* tDetectedPdw = 0;
 
    // Implement a state machine on the detection state. The amplitude is tested
    // against thresholds to change the state. If a pulse is detected then the
@@ -151,12 +155,13 @@ void PulseDetector::putSample(Sample* aSample)
                // Finish the sample statistics.
                finishSampleStatistics();
 
-               // Update values for the detected pdw.
-               mDetectedPdw.mSeqNum++;
-               mDetectedPdw.mToa        = mPulseStartTime;
-               mDetectedPdw.mAmplitude  = mPulseAmplitudeMean;
-               mDetectedPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
-               mDetectFlag = true;
+               // Allocate a new pdw and set its values.
+               // This will be returned by this call.
+               tDetectedPdw = allocatePdw();
+               tDetectedPdw->mSeqNum = mSeqNum++;
+               tDetectedPdw->mToa        = mPulseStartTime;
+               tDetectedPdw->mAmplitude  = mPulseAmplitudeMean;
+               tDetectedPdw->mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
             }
             // If the amplitude has not been above the threshold for less than
             // the last three samples then the end of a pulse has not been
@@ -184,6 +189,11 @@ void PulseDetector::putSample(Sample* aSample)
       }
       break;
    }
+
+   //---------------------------------------------------------------------------
+   // Done
+
+   return tDetectedPdw;
 }
    
 //******************************************************************************

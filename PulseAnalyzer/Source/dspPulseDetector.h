@@ -32,15 +32,11 @@ public:
    // Initialize the detection logic.
    void initialize();
 
-   // Put a new sample to the detector, called at the sampling rate.
-   // Detection results are contained in the following two variables.
-   void putSample(Sample* aSample);
+   // Put a new sample to the detector, this is called at the sampling rate.
+   // If a pulse is detected then this returns a pointer to a pdw.
+   // if not then it returns null.
 
-   // This is true if a pulse was detected by the last call to PutSample.
-   bool mDetectFlag;
-
-   // This is the Pdw for the last detected pulse.
-   Pdw  mDetectedPdw;
+   Pdw* putSample(Sample* aSample);
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
@@ -67,7 +63,12 @@ public:
 
    double mDetectYesThreshold;
    double mDetectNoThreshold;
+
+   //---------------------------------------------------------------------------
+   // Logic variables
+
    double mSamplePeriod;
+   int    mSeqNum;
 
    //---------------------------------------------------------------------------
    // Intrapulse sample variables

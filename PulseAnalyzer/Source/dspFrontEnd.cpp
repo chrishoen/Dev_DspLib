@@ -8,6 +8,8 @@ Description:
 #include "my_functions.h"
 #include "prnPrint.h"
 
+#include "dspPdwFreeList.h"
+
 #define  _DSPFRONTEND_CPP_
 #include "dspFrontEnd.h"
 
@@ -54,18 +56,21 @@ void FrontEnd::detect1()
       tSample.put(mSampleReader(i,0),mSampleReader(i,1));
 
       // Put the sample to the pulse detector.
-      mPulseDetector.putSample(&tSample);
+      // It returns a pdw if it detects a pulse.
+      Pdw* tPdw = mPulseDetector.putSample(&tSample);
 
       // If a pulse was detected
-      if (mPulseDetector.mDetectFlag)
+      if (tPdw)
       {
          // Update
          tPdwCount++;
          // Write the detected pdw to the output file
          mPdwWriter.write(
-            mPulseDetector.mDetectedPdw.mToa,
-            mPulseDetector.mDetectedPdw.mAmplitude,
-            mPulseDetector.mDetectedPdw.mPulseWidth);
+            tPdw->mToa,
+            tPdw->mAmplitude,
+            tPdw->mPulseWidth);
+         // Free the pdw.
+         freePdw(tPdw);
       }
    }
 
