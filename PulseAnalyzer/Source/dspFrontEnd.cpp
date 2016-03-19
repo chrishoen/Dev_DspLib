@@ -46,6 +46,7 @@ void FrontEnd::detect1()
 
    // Local
    int tSampleCount = 0;
+   int tRowIndex = 0;
    int tPdwCount = 0;
    Sample tSample;
 
@@ -54,6 +55,7 @@ void FrontEnd::detect1()
    {
       // Read sample row from input file
       if(!mFileReader.readRow()) break;
+      tRowIndex = mFileReader.mRowIndex;
       tSampleCount++;
 
       // Convert input and store in sample temp.
@@ -70,6 +72,7 @@ void FrontEnd::detect1()
          tPdwCount++;
          // Write the detected pdw to the output file
          mFileWriter.writeRow(
+            tRowIndex,
             tPdw->mToa,
             tPdw->mAmplitude,
             tPdw->mPulseWidth);
@@ -164,6 +167,7 @@ void FrontEnd::analyze1()
 
       // Write statistics to the output file.
       mFileWriter.writeRow(
+         tSampleCount,
          tSample.mTime,
          mPulseStatistics.mCount,
          mPulseStatistics.mAmplitude.mMean,
