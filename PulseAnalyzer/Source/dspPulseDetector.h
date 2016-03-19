@@ -29,7 +29,15 @@ public:
    // Constructor.
    PulseDetector();
 
-   // Initialize the detection logic.
+   // Reset paramters to defaults.
+   void reset();
+
+   // Parameters
+   double mDetectYesThreshold;
+   double mDetectNoThreshold;
+   double mSamplePeriod;
+
+   // Initialize, using the parameters.
    void initialize();
 
    // Put a new sample to the detector, this is called at the sampling rate.
@@ -57,18 +65,7 @@ public:
    static const int cDetectCountNoLimit   = 3;
 
    int mDetectCount;
-
-   //---------------------------------------------------------------------------
-   // Detection thresholds
-
-   double mDetectYesThreshold;
-   double mDetectNoThreshold;
-
-   //---------------------------------------------------------------------------
-   // Logic variables
-
-   double mSamplePeriod;
-   int    mSeqNum;
+   int mSeqNum;
 
    //---------------------------------------------------------------------------
    // Intrapulse sample variables

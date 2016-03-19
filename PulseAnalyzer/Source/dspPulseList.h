@@ -31,6 +31,15 @@ public:
    PulseList();
   ~PulseList();
 
+   // Reset paramters to defaults.
+   void reset();
+
+   // Parameters
+   int mMaxNumOfElements;
+
+   // Initialize, using the parameters.
+   void initialize();
+
    // Allocate and initialize the queue memory.
    void initialize(int aMaxNumOfElements);
    // Deallocate the queue memory.

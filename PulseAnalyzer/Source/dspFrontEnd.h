@@ -18,6 +18,39 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 
+class FrontEndParms
+{
+public:
+
+   //--------------------------------------------------------------------------
+   // Members
+
+   static const int cMaxStringSize=400;
+
+   char mInputFileName  [cMaxStringSize];
+   char mOutputFileName [cMaxStringSize];
+
+   void setInputFileName  (char* aFileName);
+   void setOutputFileName (char* aFileName);
+   
+   double mDetectYesThreshold;
+   double mDetectNoThreshold;
+   double mSamplePeriod;
+
+   int    mListMaxNumOfElements;
+   double mListWindowTimeSize;
+
+   //--------------------------------------------------------------------------
+   // Constructors
+
+   FrontEndParms();
+   void reset();
+};
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 class FrontEnd
 {
 public:
@@ -34,10 +67,10 @@ public:
    Ris::CsvFileWriter mFileWriter;
 
    // Read from sample file, detect pulses, write to pdw file
-   void detect1();
+   void detect1  (FrontEndParms* aParms);
 
    // Read from sample file, analyze, write to sample file
-   void analyze1();
+   void analyze1 (FrontEndParms* aParms);
 
 };
 

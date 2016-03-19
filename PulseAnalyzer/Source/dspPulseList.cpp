@@ -25,6 +25,12 @@ namespace Dsp
 
 PulseList::PulseList()
 {
+   reset();
+}
+
+void PulseList::reset()
+{
+   mMaxNumOfElements = 10000;
 }
 
 //******************************************************************************
@@ -41,13 +47,13 @@ PulseList::~PulseList()
 // maximum number of elements and it allocates memory for the maximum number
 // of elements plus one, there is an extra element allocated.
 
-void PulseList::initialize(int aMaxNumOfElements)
+void PulseList::initialize()
 {
    // If memory is already allocated then deallocate it.
    finalize();
 
    // Initialize queue
-   mQueue.initialize(aMaxNumOfElements);
+   mQueue.initialize(mMaxNumOfElements);
 
    // Window limits
    mWindowTimeLowerLimit = 0.0;

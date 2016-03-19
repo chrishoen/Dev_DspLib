@@ -39,7 +39,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   gFrontEnd.detect1();
+   FrontEndParms* tParms = new FrontEndParms;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample41.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Pdw41.csv");
+
+   gFrontEnd.detect1(tParms);
+   delete tParms;
 }
 
 //******************************************************************************
@@ -48,6 +53,12 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
+   FrontEndParms* tParms = new FrontEndParms;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample41.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze1.csv");
+
+   gFrontEnd.analyze1(tParms);
+   delete tParms;
 }
 
 //******************************************************************************

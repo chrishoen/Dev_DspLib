@@ -20,6 +20,31 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 
+FrontEndParms::FrontEndParms()
+{
+   reset();
+}
+
+void FrontEndParms::reset()
+{
+   mInputFileName[0]=0;
+   mOutputFileName [0]=0;
+
+   mDetectYesThreshold = 0.01;
+   mDetectNoThreshold = 0.01;
+   mSamplePeriod = 0.0001;
+
+   mListMaxNumOfElements = 10000;
+   mListWindowTimeSize = 0.100;
+}
+
+void FrontEndParms::setInputFileName  (char* aFileName) { strcpy(mInputFileName,  aFileName); }
+void FrontEndParms::setOutputFileName (char* aFileName) { strcpy(mOutputFileName, aFileName); }
+   
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 FrontEnd::FrontEnd()
 {
    initialize();
@@ -33,16 +58,20 @@ void FrontEnd::initialize()
 //******************************************************************************
 //******************************************************************************
 
-void FrontEnd::detect1()
+void FrontEnd::detect1(FrontEndParms* aParms)
 {
    // Initialize.
+   mPulseDetector.reset();
+   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
+   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
+   mPulseDetector.mSamplePeriod       = aParms->mSamplePeriod;
    mPulseDetector.initialize();
 
    // Open input samples file.
-   mFileReader.open("C:\\MyLib\\Data\\Sample41.csv");
+   mFileReader.open(aParms->mInputFileName);
 
    // Open output pdw file.
-   mFileWriter.open("C:\\MyLib\\Data\\Pdw41.csv");
+   mFileWriter.open(aParms->mOutputFileName);
 
    // Local
    int tSampleCount = 0;
@@ -91,18 +120,28 @@ void FrontEnd::detect1()
 //******************************************************************************
 //******************************************************************************
 
-void FrontEnd::analyze1()
+void FrontEnd::analyze1(FrontEndParms* aParms)
 {
-   // Initialize.
+   // Initialize pulse detector
+   mPulseDetector.reset();
+   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
+   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
+   mPulseDetector.mSamplePeriod       = aParms->mSamplePeriod;
    mPulseDetector.initialize();
-   mPulseList.initialize(1000);
+
+   // Initialize pulse list
+   mPulseList.reset();
+   mPulseList.mWindowTimeSize = aParms->mListWindowTimeSize;
+   mPulseList.initialize();
+
+   // Initialize pulse statistics
    mPulseStatistics.initialize();
 
    // Open the input file.
-   mFileReader.open("C:\\MyLib\\Data\\Sample41.csv");
+   mFileReader.open(aParms->mInputFileName);
 
    // Open the output file.
-   mFileWriter.open("C:\\MyLib\\Data\\Analyze41.csv");
+   mFileWriter.open(aParms->mOutputFileName);
 
    // Local
    int    tSampleCount = 0;

@@ -21,16 +21,22 @@ namespace Dsp
 
 PulseDetector::PulseDetector()
 {
-   initialize();
+   reset();
 }
 
-void PulseDetector::initialize()
+void PulseDetector::reset()
 {
    mDetectState = 0;
 
    mDetectYesThreshold = 0.01;
    mDetectNoThreshold = 0.01;
    mSamplePeriod = 0.0001;
+   mSeqNum = 0;
+}
+
+void PulseDetector::initialize()
+{
+   mDetectState = 0;
    mSeqNum = 0;
 }
 

@@ -85,6 +85,7 @@ void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
    tPS->show();
    PulseGen::gen11(tPS);
    tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse11.csv");
+   delete tPS;
 }
 
 //******************************************************************************
@@ -99,6 +100,7 @@ void CmdLineExec::executeP21(Ris::CmdLineCmd* aCmd)
    tPS->show();
    PulseGen::gen21(tPS);
    tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse21.csv");
+   delete tPS;
 }
 
 //******************************************************************************
@@ -120,6 +122,7 @@ void CmdLineExec::executeS11(Ris::CmdLineCmd* aCmd)
    SignalGen::gen11(tSS);
    tSS->normalize();
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample11.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -135,6 +138,7 @@ void CmdLineExec::executeS21(Ris::CmdLineCmd* aCmd)
    SignalGen::gen21(tSS);
    tSS->normalize();
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample21.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -148,6 +152,7 @@ void CmdLineExec::executeS22(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen22(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample22.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -164,6 +169,7 @@ void CmdLineExec::executeS31(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen31(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample31.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -178,6 +184,7 @@ void CmdLineExec::executeS32(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen32(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample32.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -192,6 +199,7 @@ void CmdLineExec::executeS33(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen33(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample33.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -206,6 +214,7 @@ void CmdLineExec::executeS34(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen34(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample34.csv");
+   delete tSS;
 }
 
 //******************************************************************************
@@ -222,6 +231,7 @@ void CmdLineExec::executeS41(Ris::CmdLineCmd* aCmd)
    tSS->show();
    SignalGen::gen41(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample41.csv");
+   delete tSS;
 }
 
 //******************************************************************************
