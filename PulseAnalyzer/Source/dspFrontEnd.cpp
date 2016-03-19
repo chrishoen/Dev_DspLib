@@ -38,22 +38,26 @@ void FrontEnd::detect1()
    // Initialize.
    mPulseDetector.initialize();
 
-   // Read from input samples file.
-   mFileReader.read("C:\\MyLib\\Data\\Sample41.csv");
+   // Open input samples file.
+   mFileReader.open("C:\\MyLib\\Data\\Sample41.csv");
 
    // Open output pdw file.
    mFileWriter.open("C:\\MyLib\\Data\\Pdw41.csv");
 
    // Local
-   int tSampleCount = mFileReader.mRows;
+   int tSampleCount = 0;
    int tPdwCount = 0;
    Sample tSample;
 
    // Loop through all of the samples in the input file.
-   for (int i = 0; i < tSampleCount; i++)
+   while (true)
    {
-      // Convert and store input in sample temp.
-      tSample.put(mFileReader(i,0),mFileReader(i,1));
+      // Read sample row from input file
+      if(!mFileReader.readRow()) break;
+      tSampleCount++;
+
+      // Convert input and store in sample temp.
+      tSample.put(mFileReader(0),mFileReader(1));
 
       // Put the sample to the pulse detector.
       // It returns a pdw if it detects a pulse.
@@ -65,7 +69,7 @@ void FrontEnd::detect1()
          // Update
          tPdwCount++;
          // Write the detected pdw to the output file
-         mFileWriter.write(
+         mFileWriter.writeRow(
             tPdw->mToa,
             tPdw->mAmplitude,
             tPdw->mPulseWidth);
@@ -75,7 +79,8 @@ void FrontEnd::detect1()
    }
 
    Prn::print(0, "Detect1 %d %d",tSampleCount,tPdwCount);
-   // Close output pdw file.
+   // Close files.
+   mFileReader.close();
    mFileWriter.close();
 }
 
@@ -90,24 +95,28 @@ void FrontEnd::analyze1()
    mPulseList.initialize(1000);
    mPulseStatistics.initialize();
 
-   // Read all of the samples from the input file.
-   mFileReader.read("C:\\MyLib\\Data\\Sample41.csv");
+   // Open the input file.
+   mFileReader.open("C:\\MyLib\\Data\\Sample41.csv");
 
    // Open the output file.
    mFileWriter.open("C:\\MyLib\\Data\\Analyze41.csv");
 
    // Local
-   int    tSampleCount = mFileReader.mRows;
+   int    tSampleCount = 0;
    Sample tSample;
    int    tDetectedPdwCount = 0;
    Pdw*   tDetectedPdw = 0;
    Pdw*   tRemovedPdw = 0;
 
    // Loop through all of the samples in the input file.
-   for (int i = 0; i < tSampleCount; i++)
+   while (true)
    {
-      // Store inputs in sample variable.
-      tSample.put(mFileReader(i,0),mFileReader(i,1));
+      // Read sample row from input file
+      if(!mFileReader.readRow()) break;
+      tSampleCount++;
+
+      // Convert input and store in sample temp.
+      tSample.put(mFileReader(0),mFileReader(1));
 
       // Put the sample to the pulse detector.
       // It returns a pdw if it detects a pulse.
@@ -154,7 +163,7 @@ void FrontEnd::analyze1()
       }
 
       // Write statistics to the output file.
-      mFileWriter.write(
+      mFileWriter.writeRow(
          tSample.mTime,
          mPulseStatistics.mCount,
          mPulseStatistics.mAmplitude.mMean,
@@ -162,7 +171,8 @@ void FrontEnd::analyze1()
    }
 
    Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
-   // Close output file.
+   // Close files.
+   mFileReader.close();
    mFileWriter.close();
 }
 

@@ -121,7 +121,7 @@ void PdwSequence::writeToTextFile(char* aFileName)
    {
       // Write the pdw values to the file.
       Pdw* tPdw = &mPdwArray[i];
-      tWriter.write(tPdw->mToa,tPdw->mAmplitude);
+      tWriter.writeRow(tPdw->mToa,tPdw->mAmplitude);
    }
 
    // Done

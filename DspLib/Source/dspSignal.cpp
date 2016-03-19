@@ -153,7 +153,7 @@ void Signal::writeToTextFile(char* aFileName)
    for (int i = 0; i < mNumSamples; i++)
    {
       // Write the signal time and sample to the file.
-      tWriter.write((double)i*mTs, mX[i]);
+      tWriter.writeRow((double)i*mTs, mX[i]);
    }
 
    // Done
