@@ -8,6 +8,7 @@
 //******************************************************************************
 //******************************************************************************
 
+#include "risContainers2.h"
 #include "dspPdw.h"
 #include "dspSample.h"
 
@@ -40,39 +41,23 @@ public:
    // not full, then return null.
    Pdw* addNewPdw(Pdw* aPdw);
 
+   // Remove the oldest pdw from the top of the list.
+   Pdw* removeOldestPdw();
+
    // Update the list window lower and upper limits. If the oldest pdw in the
    // list is older than the window lower limit then it has fallen outside of
    // the window. In that case, remove and return it.
    Pdw* updateTime(double aTime);
 
-   // Returns the current number of pdws in the list.
+   // Returns the current number of pdws in the list, which is the queue size.
    int size();
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
-   // Queue methods
+   // Queue of pdw pointers
 
-   // Remove the oldest pdw from the top of the list.
-   Pdw* removeOldestPdw();
-
-   // Return true if put operations are enabled, not full.
-   bool isPut();
-   // Advance the put state..
-   void PulseList::nextPut ();
-   // Put an element.
-   void PulseList::put (Pdw* aPdw);
-   // Element to put to.
-   Pdw*& PulseList::elementToPut ();
-
-   // Return true if get operations are enabled, not empty.
-   bool isGet();
-   // Advance the get state.
-   void PulseList::nextGet();
-   // Get an element.
-   void PulseList::get(Pdw*& aPdw);
-   // Element to get from.
-   Pdw*& PulseList::elementToGet();
+   Ris::Containers::Queue2<Pdw*> mQueue;
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
@@ -80,20 +65,11 @@ public:
    // Members
 
    //---------------------------------------------------------------------------
-   // Queue variables and pointer array
-
-   int   mAllocate;
-   int   mPutIndex;
-   int   mGetIndex;
-   Pdw** mElement;
-   
-   //---------------------------------------------------------------------------
    // Window time limits
 
    double mWindowTimeLowerLimit;
    double mWindowTimeUpperLimit;
    double mWindowTimeSize;
-
 };
 
 //******************************************************************************
