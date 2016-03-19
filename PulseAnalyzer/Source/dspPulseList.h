@@ -28,82 +28,54 @@ public:
 
    // Constructor.
    PulseList();
+  ~PulseList();
 
-   // Initialize the detection logic.
-   void initialize();
+   // Allocate and initialize the queue memory.
+   void initialize(int aMaxNumOfElements);
+   // Deallocate the queue memory.
+   void finalize();
 
-   // Put a new sample to the detector, called at the sampling rate.
-   // Detection results are contained in the following two variables.
-   void putSample(Sample* aSample);
+   // Put a new pdw to the bottom of the list. If the list is full, then
+   // remove the oldest pdw from the top of  the list and return it. If it
+   // is not full, then it return null.
+   Pdw* addNewPdw(Pdw* aPdw);
 
-   // This is true if a pulse was detected by the last call to PutSample.
-   bool mDetectFlag;
+   // Remove the oldest pdw from the top of the list.
+   Pdw* removeOldestPdw();
 
-   // This is the Pdw for the last detected pulse.
-   Pdw  mDetectedPdw;
+   // Update the list window lower and upper limits. If the oldest pdw in the
+   // list is older than the window lower limit then it has fallen outside of
+   // the window. In that case, remove and return it.
+   Pdw* updateTime(double aTime);
+
+   //--------------------------------------------------------------------------
+   //--------------------------------------------------------------------------
+   //--------------------------------------------------------------------------
+   // Queue methods
+
+   // Return true if put operations are enabled, not full.
+   bool isPut();
+   // Return true if get operations are enabled, not empty.
+   bool isGet();
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    // Members
 
+   int mAllocate;
+   int mPutIndex;
+   int mGetIndex;
+
+   Pdw** mArray;
+   
    //---------------------------------------------------------------------------
-   // Detection state
+   // Window time limits
 
-   static const int cDetectNo       = 0;
-   static const int cDetectMaybeYes = 1;
-   static const int cDetectYes      = 2;
-   static const int cDetectMaybeNo  = 3;
+   double mWindowTimeLowerLimit;
+   double mWindowTimeUpperLimit;
+   double mWindowTimeSize;
 
-   int mDetectState;
-
-   static const int cDetectCountYesLimit  = 3;
-   static const int cDetectCountNoLimit   = 3;
-
-   int mDetectCount;
-
-   //---------------------------------------------------------------------------
-   // Detection thresholds
-
-   double mDetectYesThreshold;
-   double mDetectNoThreshold;
-   double mSamplePeriod;
-
-   //---------------------------------------------------------------------------
-   // Intrapulse sample variables
-
-   // This is the time of the sample that causes a state change from No
-   // to MaybeYes.
-   double mPulseStartTime;
-
-   // This is the time of the last sample for which the state was Yes.
-   double mPulseEndTime;
-
-   // This is the calculated mean amplitude.
-   double mPulseAmplitudeMean;
-
-   // Statistics for Yes state. These are started when the state changes from
-   // No to MaybeYes and updated for states MaybeYes and Yes.
-   int    mPulseSampleYesCount;
-   double mPulseAmplitudeYesSum;
-
-   void startSampleYesStatistics      (double aAmplitude);
-   void updateSampleYesStatistics     (double aAmplitude);
-
-   // Statistics for MaybeNo state. These are started when the state changes
-   // from Yes to MaybeNo and updated for state MaybeNo. If the state changes
-   // from MaybeNo back to Yes (a false alarm for end of pulse detection) then
-   // the MaybeNo statistics are added to the Yes statistics.
-   int    mPulseSampleMaybeNoCount;
-   double mPulseAmplitudeMaybeNoSum;
-
-   void startSampleMaybeNoStatistics  (double aAmplitude);
-   void updateSampleMaybeNoStatistics (double aAmplitude);
-   void mergeSampleMaybeNoStatistics ();
-
-   // This calulates the means from the sums and counts. It is called when 
-   // the state changes from MaybeNo to No and the end of a pulse is detected.
-   void finishSampleStatistics ();
 };
 
 //******************************************************************************
@@ -111,3 +83,32 @@ public:
 
 #endif
 
+#if 0
+
+  999
+         +---+
+ 1000    | 0 |     oldest, get, remove, head, top
+         +---+
+ 1001    | 1 |
+         +---+
+ 1002    | 2 |
+         +---+
+ 1003    | 3 |     before
+         +---+
+ 1004    | 4 |     after
+         +---+
+ 1005    | 5 |
+         +---+
+ 1006    | 6 |
+         +---+
+ 1007    | 7 |     newest, put, add, tail, bottom
+         +---+
+ 1008
+
+ time
+  |
+  |
+  v
+ 
+
+#endif

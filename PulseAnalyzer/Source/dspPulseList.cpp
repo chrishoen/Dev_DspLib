@@ -7,8 +7,9 @@ Description:
 //******************************************************************************
 
 #include <stdio.h>
+#include "my_functions.h"
 #include "prnPrint.h"
-
+#include "dspPdwFreeList.h"
 #include "dspPulseList.h"
 
 namespace Dsp
@@ -17,212 +18,174 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// This initializes the queue to a fixed size. It initializes member variables
+// and allocates heap storage for the queue array. The queue has a specified 
+// maximum number of elements and it allocates memory for the maximum number
+// of elements plus one, there is an extra element allocated.
 
 PulseList::PulseList()
 {
-   initialize();
-}
-
-void PulseList::initialize()
-{
-   mDetectState = 0;
-   mDetectFlag = false;
-   mDetectedPdw.reset();
-
-   mDetectYesThreshold = 0.01;
-   mDetectNoThreshold = 0.01;
-   mSamplePeriod = 0.0001;
+   // All null
+   mAllocate = 0;
+   mPutIndex = 0;
+   mGetIndex = 0;
+   mArray  = 0;
 }
 
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
+// Destructor, deallocate the queue array
 
-void PulseList::putSample(Sample* aSample)
+PulseList::~PulseList()
 {
-   // Initially no detection for this sample. If there is a detection, this 
-   // will get set in what follows.
+   finalize();
+}
 
-   mDetectFlag = false;
+//******************************************************************************
+// Initialize the queue to a fixed size. Initializes member variables
+// and allocate heap storage for the queue array. The queue has a specified 
+// maximum number of elements and it allocates memory for the maximum number
+// of elements plus one, there is an extra element allocated.
 
-   // Implement a state machine on the detection state. The amplitude is tested
-   // against thresholds to change the state. If a pulse is detected then the
-   // pdw member variable and flag are set. This also calculates intrapulse
-   // sample statistics that are recorded in the pdw.
+void PulseList::initialize(int aMaxNumOfElements)
+{
+   // If memory is already allocated then deallocate it.
+   finalize();
 
-   switch (mDetectState)
+   // Initialize variables
+   mPutIndex = 0;
+   mGetIndex = 0;
+   // Allocate memory for the array to have an extra element
+   mAllocate = aMaxNumOfElements + 1;
+
+   // Allocate memory for the array
+   mArray = new Pdw*[mAllocate];
+
+   // Window limits
+   mWindowTimeLowerLimit = 0.0;
+   mWindowTimeUpperLimit = 0.0;
+   mWindowTimeSize       = 1.0;
+
+}
+
+//******************************************************************************
+// Deallocate the queue memory.
+
+void PulseList::finalize()
+{
+   if (mArray)
    {
-      //------------------------------------------------------------------------
-      // The start of a pulse has not been detected.
-
-      case cDetectNo:
-      {
-         // If the amplitude is above the threshold
-         if (aSample->mAmplitude >= mDetectYesThreshold)
-         {
-            // Maybe the start of a pulse has been detected.
-            mDetectCount = 1;
-            mDetectState = cDetectMaybeYes;
-
-            // Store the start time.
-            mPulseStartTime = aSample->mTime;
-
-            // Start new sample statistics.
-            startSampleYesStatistics(aSample->mAmplitude);
-         }
-         // If the amplitude is not above the threshold
-         else
-         {
-            // No change
-         }
-      }
-      break;
-
-      //------------------------------------------------------------------------
-      // Maybe the start of a pulse has been detected.
-
-      case cDetectMaybeYes:
-      {
-         // If the amplitude is above the threshold
-         if (aSample->mAmplitude >= mDetectYesThreshold)
-         {
-            // If the amplitude has been above the threshold for the last 
-            // three samples then the start of a pulse has been detected.
-            if (++mDetectCount == cDetectCountYesLimit)
-            {
-               mDetectState = cDetectYes;
-            }
-
-            // Update the sample statistics.
-            updateSampleYesStatistics(aSample->mAmplitude);
-         }
-         // If the amplitude is not above the threshold then the start of
-         // a pulse has not been detected.
-         else
-         {
-            mDetectState = cDetectNo;
-         }
-      }
-      break;
-
-      //------------------------------------------------------------------------
-      // The start of a pulse has been detected but the end of the pulse
-      // has not been detected.
-
-      case cDetectYes:
-      {
-         // If the amplitude is above the threshold
-         if (aSample->mAmplitude >= mDetectNoThreshold)
-         {
-            // Store the pulse end time.
-            mPulseEndTime = aSample->mTime;
-
-            // Update the sample statistics.
-            updateSampleYesStatistics(aSample->mAmplitude);
-         }
-         // If the amplitude is not above the threshold then maybe the end of 
-         // a pulse has been detected.
-         else
-         {
-            // Detection logic
-            mDetectCount = 1;
-            mDetectState = cDetectMaybeNo;
-
-            // Start new sample statistics.
-            startSampleMaybeNoStatistics(aSample->mAmplitude);
-         }
-      }
-      break;
-
-      //------------------------------------------------------------------------
-      // Maybe the end of a pulse has been detected.
-
-      case cDetectMaybeNo:
-      {
-         // If the amplitude is not above the threshold
-         if (aSample->mAmplitude < mDetectNoThreshold)
-         {
-            // If the amplitude has not been above the threshold for the last 
-            // three samples then the end of a pulse has been detected.
-            if (++mDetectCount == cDetectCountNoLimit)
-            {
-               mDetectState = cDetectNo;
-
-               // Finish the sample statistics.
-               finishSampleStatistics();
-
-               // Update values for the detected pdw.
-               mDetectedPdw.mSeqNum++;
-               mDetectedPdw.mToa        = mPulseStartTime;
-               mDetectedPdw.mAmplitude  = mPulseAmplitudeMean;
-               mDetectedPdw.mPulseWidth = mPulseEndTime - mPulseStartTime + mSamplePeriod;
-               mDetectFlag = true;
-            }
-            // If the amplitude has not been above the threshold for less than
-            // the last three samples then the end of a pulse has not been
-            // detected yet.
-            else
-            {
-               // Update the sample statistics.
-               updateSampleMaybeNoStatistics(aSample->mAmplitude);
-            }
-         }
-         // If the amplitude is above the threshold then the end of pulse
-         // has not been detected.
-         else
-         {
-            mDetectState = cDetectYes;
-
-            // Store the pulse end time.
-            mPulseEndTime = aSample->mTime;
-
-            // Merge the sample statistics for the two states.
-            mergeSampleMaybeNoStatistics();
-            // Update the sample statistics.
-            updateSampleYesStatistics(aSample->mAmplitude);
-         }
-      }
-      break;
+      delete mArray;
+      mArray = 0;
    }
+}
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This returns true if put operations are allowed. Puts are allowed if the 
+// current size is less than or equal to Allocate - 2. If the size is equal to 
+// Allocate - 2 then the next put operation would put the size to Allocate - 1, 
+// which is the max number of elements. This is the same as "is not full".
+
+bool PulseList::isPut ()
+{
+   int tSize = mPutIndex - mGetIndex;
+   if (tSize < 0) tSize = mAllocate + tSize;
+   return tSize <= mAllocate - 2;
+}
+   
+//******************************************************************************
+// This returns true if get operations are allowed. Gets are allowed if the 
+// current size is greater than zero. This is the same as "is not empty".
+
+bool PulseList::isGet ()
+{
+   int tSize = mPutIndex - mGetIndex;
+   if (tSize < 0) tSize = mAllocate + tSize;
+   return tSize > 0;
 }
    
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Put a new pdw to the bottom of the list. If the list is full, then
+// remove the oldest pdw from the top of the list and return it. If it
+// is not full, then it return null.
 
-void PulseList::startSampleYesStatistics  (double aAmplitude)
+Pdw* PulseList::addNewPdw(Pdw* aPdw)
 {
-   mPulseAmplitudeYesSum = aAmplitude;
-   mPulseSampleYesCount  = 1;
+   // If the list is full then remove the oldest pdw from the top.
+   Pdw* tPdw=0;
+   if (!isPut())
+   {
+      tPdw = removeOldestPdw();
+   }
+
+   // Update the window limits.
+   mWindowTimeUpperLimit = aPdw->mToa;
+   mWindowTimeLowerLimit = mWindowTimeUpperLimit - mWindowTimeSize;
+
+   // Local put index.
+   int tPutIndex = mPutIndex;
+   // Copy the source element into the element at the queue put index.
+   mArray[tPutIndex] = aPdw;
+   // Advance the put index.
+   if(++tPutIndex == mAllocate) tPutIndex = 0;
+   mPutIndex = tPutIndex;
+
+   // Done
+   return tPdw;
 }
 
-void PulseList::updateSampleYesStatistics(double aAmplitude)
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Remove the oldest pdw from the top of the list.
+
+Pdw* PulseList::removeOldestPdw()
 {
-   mPulseAmplitudeYesSum += aAmplitude;
-   mPulseSampleYesCount++;
+   // If the list is empty then return null.
+   if (!isGet())
+   {
+      return 0;
+   }
+
+   // Local element.
+   Pdw* tPdw;
+   // Local index.
+   int tGetIndex = mGetIndex;
+   // Copy the queue array element at the get index into the destination element.
+   tPdw = mArray[tGetIndex];
+   // Advance the get index.
+   if(++tGetIndex == mAllocate) tGetIndex = 0;
+   mGetIndex = tGetIndex;
+   // Done
+   return tPdw;
 }
 
-void PulseList::startSampleMaybeNoStatistics  (double aAmplitude)
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Update the list window lower and upper limits. If the oldest pdw in the
+// list is older than the window lower limit then it has fallen outside of
+// the window. In that case, remove and return it.
+
+Pdw* PulseList::updateTime(double aTime)
 {
-   mPulseAmplitudeMaybeNoSum = aAmplitude;
-   mPulseSampleMaybeNoCount  = 1;
+   // The oldest element in the array, the top of the list, the element at 
+   // the GetIndex.
+   Pdw* tPdw = mArray[mGetIndex];
+
+   // If the toa of the pdw is earlier than the window lower limit then it
+   // has fallen outside of the window, so remove it.
+   if (tPdw->mToa < mWindowTimeLowerLimit)
+   {
+      return removeOldestPdw();
+   }
+   // Else return null.
+   return 0;
 }
 
-void PulseList::updateSampleMaybeNoStatistics(double aAmplitude)
-{
-   mPulseAmplitudeMaybeNoSum += aAmplitude;
-   mPulseSampleMaybeNoCount++;
-}
-
-void PulseList::mergeSampleMaybeNoStatistics()
-{
-   mPulseAmplitudeYesSum += mPulseAmplitudeMaybeNoSum;
-   mPulseSampleYesCount  += mPulseSampleMaybeNoCount;
-}
-
-void PulseList::finishSampleStatistics()
-{
-   mPulseAmplitudeMean = mPulseAmplitudeYesSum/mPulseSampleYesCount;
-}
-
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace
