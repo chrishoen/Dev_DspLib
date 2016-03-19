@@ -170,6 +170,7 @@
     <ClCompile Include="Source\dspFrontEnd.cpp" />
     <ClCompile Include="Source\dspPulseDetector.cpp" />
     <ClCompile Include="Source\dspPulseList.cpp" />
+    <ClCompile Include="Source\dspPulseStatistics.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="Source\dspFrontEnd.h" />
     <ClInclude Include="Source\dspPulseDetector.h" />
     <ClInclude Include="Source\dspPulseList.h" />
+    <ClInclude Include="Source\dspPulseStatistics.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>
   <ItemGroup>

@@ -79,10 +79,12 @@ public:
    //--------------------------------------------------------------------------
    // Members
 
-   int mAllocate;
-   int mPutIndex;
-   int mGetIndex;
+   //---------------------------------------------------------------------------
+   // Queue variables and pointer array
 
+   int   mAllocate;
+   int   mPutIndex;
+   int   mGetIndex;
    Pdw** mElement;
    
    //---------------------------------------------------------------------------

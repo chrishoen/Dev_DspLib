@@ -25,6 +25,9 @@
     <ClCompile Include="Source\dspPulseList.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspPulseStatistics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -40,6 +43,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspPulseList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspPulseStatistics.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
