@@ -35,28 +35,44 @@ public:
    // Deallocate the queue memory.
    void finalize();
 
-   // Put a new pdw to the bottom of the list. If the list is full, then
-   // remove the oldest pdw from the top of  the list and return it. If it
-   // is not full, then it return null.
+   // Put a new pdw to the bottom of the list. If the list is full, then 
+   // remove the oldest pdw from the top of  the list and return it. If it is 
+   // not full, then return null.
    Pdw* addNewPdw(Pdw* aPdw);
-
-   // Remove the oldest pdw from the top of the list.
-   Pdw* removeOldestPdw();
 
    // Update the list window lower and upper limits. If the oldest pdw in the
    // list is older than the window lower limit then it has fallen outside of
    // the window. In that case, remove and return it.
    Pdw* updateTime(double aTime);
 
+   // Returns the current number of pdws in the list.
+   int size();
+
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    // Queue methods
 
+   // Remove the oldest pdw from the top of the list.
+   Pdw* removeOldestPdw();
+
    // Return true if put operations are enabled, not full.
    bool isPut();
+   // Advance the put state..
+   void PulseList::nextPut ();
+   // Put an element.
+   void PulseList::put (Pdw* aPdw);
+   // Element to put to.
+   Pdw*& PulseList::elementToPut ();
+
    // Return true if get operations are enabled, not empty.
    bool isGet();
+   // Advance the get state.
+   void PulseList::nextGet();
+   // Get an element.
+   void PulseList::get(Pdw*& aPdw);
+   // Element to get from.
+   Pdw*& PulseList::elementToGet();
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
@@ -67,7 +83,7 @@ public:
    int mPutIndex;
    int mGetIndex;
 
-   Pdw** mArray;
+   Pdw** mElement;
    
    //---------------------------------------------------------------------------
    // Window time limits
