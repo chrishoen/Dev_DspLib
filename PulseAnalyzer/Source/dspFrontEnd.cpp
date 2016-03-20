@@ -83,7 +83,7 @@ void FrontEnd::detect1(FrontEndParms* aParms)
 
    // Input and output files.
    Ris::CsvFileReader tSampleReader;
-   Ris::CsvFileWriter tPdwWriter;
+   PdwCsvFileWriter   tPdwWriter;
 
    tSampleReader.open(aParms->mInputFileName);
    tPdwWriter.open(aParms->mOutputFileName);
@@ -114,12 +114,11 @@ void FrontEnd::detect1(FrontEndParms* aParms)
       {
          // Update
          tPdwCount++;
+
          // Write the detected pdw to the output file
-         tPdwWriter.writeRow(
-            tRowIndex,
-            tPdw->mToa,
-            tPdw->mAmplitude,
-            tPdw->mPulseWidth);
+         tPdw->mIndex = tRowIndex;
+         tPdwWriter.writePdw(tPdw);
+
          // Free the pdw.
          freePdw(tPdw);
       }
