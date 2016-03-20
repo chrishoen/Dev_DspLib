@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <atomic>
 
+#include "risContainers2.h"
+
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 
@@ -38,21 +40,21 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.99);
-   aCmd->setArgDefault(2,100);
+   Ris::Containers::Queue2<int> tQueue;
+   tQueue.initialize(4);
+   
+   int tX,tY;
+   tX=101; tQueue.put(tX);
+   tX=102; tQueue.put(tX);
+   tX=103; tQueue.put(tX);
+   tX=104; tQueue.put(tX);
 
-   Prn::print(0, "TEST GO1");
+   Prn::print(0, "Queue %d  %d  %d", tQueue.size(), tQueue.isGet(), tQueue.elementToGet());
 
-   double tC = aCmd->argDouble(1);
-   int tN = aCmd->argInt(2);
-   double tD = 0.01;
-   double tX = 0.0;
+   tQueue.get(tY);
 
-   for (int i = 0; i < tN; i++)
-   {
-      tX = 1.0 - abs(tC - tX);
-      Prn::print(0, "%d %8.7f %8.7f",i,tC,tX);
-   }
+   Prn::print(0, "Get   %d", tY);
+   Prn::print(0, "Queue %d  %d  %d", tQueue.size(), tQueue.isGet(), tQueue.elementToGet());
 }
 
 //******************************************************************************

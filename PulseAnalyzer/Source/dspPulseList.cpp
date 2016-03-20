@@ -31,6 +31,16 @@ PulseList::PulseList()
 void PulseList::reset()
 {
    mMaxNumOfElements = 10000;
+   mPutCount=0;
+   mGetCount=0;
+   mTestCount1=0;
+   mTestCount2=0;
+
+   // Window limits
+   mWindowTimeLowerLimit = 0.0;
+   mWindowTimeUpperLimit = 0.0;
+   mWindowTimeSize       = 1.0;
+
 }
 
 //******************************************************************************
@@ -54,11 +64,6 @@ void PulseList::initialize()
 
    // Initialize queue
    mQueue.initialize(mMaxNumOfElements);
-
-   // Window limits
-   mWindowTimeLowerLimit = 0.0;
-   mWindowTimeUpperLimit = 0.0;
-   mWindowTimeSize       = 1.0;
 
 }
 
@@ -87,6 +92,7 @@ Pdw* PulseList::addNewPdw(Pdw* aPdw)
 
    // Put the pdw to the queue to add it to the list
    mQueue.put(aPdw);
+   mPutCount++;
 
    // Done
    return tRemovedPdw;
@@ -108,6 +114,7 @@ Pdw* PulseList::removeOldestPdw()
    // Get queue element to remove the pdw from the list.
    Pdw* tRemovedPdw;
    mQueue.get(tRemovedPdw);
+   mGetCount++;
 
    // Done
    return tRemovedPdw;
@@ -122,17 +129,30 @@ Pdw* PulseList::removeOldestPdw()
 
 Pdw* PulseList::updateTime(double aTime)
 {
+   // Update the window limits with the current.
+   mWindowTimeUpperLimit = aTime;
+   mWindowTimeLowerLimit = aTime - mWindowTimeSize;
+
    // if the queue is empty then return.
    if (!mQueue.isGet()) return 0;
 
    // Peek at the oldest element in the array, the top of the list, the element at 
    // the GetIndex.
    Pdw* tPdw = mQueue.elementToGet();
+   mTestCount1++;
+
+   printf("PDW %5d %5d  %10.5f $$ %10.5f %10.5f\n",
+      mQueue.size(),
+      tPdw->mIndex,
+      tPdw->mToa,
+      mWindowTimeUpperLimit,
+      mWindowTimeLowerLimit);
 
    // If the toa of the pdw is earlier than the window lower limit then it
    // has fallen outside of the window, so remove it.
    if (tPdw->mToa < mWindowTimeLowerLimit)
    {
+      mTestCount2++;
       return removeOldestPdw();
    }
    // Else return null.
