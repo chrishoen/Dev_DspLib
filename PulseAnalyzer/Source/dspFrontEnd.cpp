@@ -313,6 +313,8 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
          mPulseStatistics.mCount,
          mPulseStatistics.mAmplitude.mMean,
          mPulseStatistics.mPulseWidth.mMean);
+
+      // Update counter.
       tSampleCount++;
    }
 
@@ -330,8 +332,6 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    Prn::print(0, "mPulseList.mWindowTimeSize        %10.5f",mPulseList.mWindowTimeSize);
    Prn::print(0, "mPulseList.mWindowTimeUpperLimit  %10.5f",mPulseList.mWindowTimeUpperLimit),
    Prn::print(0, "mPulseList.mWindowTimeLowerLimit  %10.5f",mPulseList.mWindowTimeLowerLimit);
-// Log::write(1, "DETECTED PDW %5d %10.5f  %10.5f",k,tSampleTime,tDetectedPdw->mToa);
-
 }
 
 //******************************************************************************
