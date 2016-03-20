@@ -65,6 +65,8 @@ void PulseList::initialize()
    // Initialize queue
    mQueue.initialize(mMaxNumOfElements);
 
+   mLogWriter.open("C:\\MyLib\\Data\\LogFile101.txt");
+
 }
 
 //******************************************************************************
@@ -72,6 +74,7 @@ void PulseList::initialize()
 
 void PulseList::finalize()
 {
+   mLogWriter.close();
 }
 
 //******************************************************************************
@@ -134,14 +137,23 @@ Pdw* PulseList::updateTime(double aTime)
    mWindowTimeLowerLimit = aTime - mWindowTimeSize;
 
    // if the queue is empty then return.
-   if (!mQueue.isGet()) return 0;
+   if (!mQueue.isGet())
+   {
+      mLogWriter.write("PDW %5d %5d  %10.5f $$ %10.5f %10.5f",
+         mQueue.size(),
+         0,
+         0.0,
+         mWindowTimeUpperLimit,
+         mWindowTimeLowerLimit);
+      return 0;
+   }
 
    // Peek at the oldest element in the array, the top of the list, the element at 
    // the GetIndex.
    Pdw* tPdw = mQueue.elementToGet();
    mTestCount1++;
 
-   printf("PDW %5d %5d  %10.5f $$ %10.5f %10.5f\n",
+   mLogWriter.write("PDW %5d %5d  %10.5f $$ %10.5f %10.5f",
       mQueue.size(),
       tPdw->mIndex,
       tPdw->mToa,

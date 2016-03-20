@@ -268,6 +268,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
             tDetectedPdwCount++;
 
             // Add the detected pdw to the pdw statistics.
+            Prn::print(0, "DETECTED PDW %10.5f  %10.5f",tSampleTime,tDetectedPdw->mToa);
             mPulseStatistics.addPdw(tDetectedPdw);
 
             // Add the detected pdw to the pdw list.
@@ -321,6 +322,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    // Close files.
    mPdwReader.close();
    mFileWriter.close();
+   mPulseList.finalize();
 
    Prn::print(0, "mPulseList.mPutCount    %10d",mPulseList.mPutCount);
    Prn::print(0, "mPulseList.mGetCount    %10d",mPulseList.mGetCount);

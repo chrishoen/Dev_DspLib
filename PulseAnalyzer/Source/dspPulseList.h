@@ -8,6 +8,7 @@
 //******************************************************************************
 //******************************************************************************
 
+#include "risTextFile.h"
 #include "risContainers2.h"
 #include "dspPdw.h"
 #include "dspSample.h"
@@ -84,6 +85,8 @@ public:
    double mWindowTimeLowerLimit;
    double mWindowTimeUpperLimit;
    double mWindowTimeSize;
+
+   Ris::LogFileWriter mLogWriter;
 };
 
 //******************************************************************************
