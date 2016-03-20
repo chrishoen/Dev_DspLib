@@ -71,11 +71,6 @@ public:
    PulseList        mPulseList;
    PulseStatistics  mPulseStatistics;
 
-   // Input and output files
-   Ris::CsvFileReader mFileReader;
-   Ris::CsvFileWriter mFileWriter;
-   PdwCsvFileReader   mPdwReader;
-
    // Read from sample file, detect pulses, write to pdw file
    void detect1  (FrontEndParms* aParms);
 

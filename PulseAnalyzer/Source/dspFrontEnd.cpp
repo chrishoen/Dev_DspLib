@@ -81,11 +81,12 @@ void FrontEnd::detect1(FrontEndParms* aParms)
    mPulseDetector.mSamplePeriod       = aParms->mTs;
    mPulseDetector.initialize();
 
-   // Open input samples file.
-   mFileReader.open(aParms->mInputFileName);
+   // Input and output files.
+   Ris::CsvFileReader tSampleReader;
+   Ris::CsvFileWriter tPdwWriter;
 
-   // Open output pdw file.
-   mFileWriter.open(aParms->mOutputFileName);
+   tSampleReader.open(aParms->mInputFileName);
+   tPdwWriter.open(aParms->mOutputFileName);
 
    // Local
    int tSampleCount = 0;
@@ -97,12 +98,12 @@ void FrontEnd::detect1(FrontEndParms* aParms)
    while (true)
    {
       // Read sample row from input file
-      if(!mFileReader.readRow()) break;
-      tRowIndex = mFileReader.mRowIndex;
+      if(!tSampleReader.readRow()) break;
+      tRowIndex = tSampleReader.mRowIndex;
       tSampleCount++;
 
       // Convert input and store in sample temp.
-      tSample.put(mFileReader(0),mFileReader(1));
+      tSample.put(tSampleReader(0),tSampleReader(1));
 
       // Put the sample to the pulse detector.
       // It returns a pdw if it detects a pulse.
@@ -114,7 +115,7 @@ void FrontEnd::detect1(FrontEndParms* aParms)
          // Update
          tPdwCount++;
          // Write the detected pdw to the output file
-         mFileWriter.writeRow(
+         tPdwWriter.writeRow(
             tRowIndex,
             tPdw->mToa,
             tPdw->mAmplitude,
@@ -126,8 +127,8 @@ void FrontEnd::detect1(FrontEndParms* aParms)
 
    Prn::print(0, "Detect1 %d %d",tSampleCount,tPdwCount);
    // Close files.
-   mFileReader.close();
-   mFileWriter.close();
+   tSampleReader.close();
+   tPdwWriter.close();
 }
 
 //******************************************************************************
@@ -154,11 +155,12 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
    // Initialize pulse statistics.
    mPulseStatistics.initialize();
 
-   // Open the input file.
-   mPdwReader.open(aParms->mInputFileName);
+   // Input and output files.
+   PdwCsvFileReader   tPdwReader;
+   Ris::CsvFileWriter tSampleWriter;
 
-   // Open the output file.
-   mFileWriter.open(aParms->mOutputFileName);
+   tPdwReader.open(aParms->mInputFileName);
+   tSampleWriter.open(aParms->mOutputFileName);
 
    // Local
    int    tSampleCount = 0;
@@ -169,7 +171,7 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
    Pdw*   tRemovedPdw = 0;
 
    // Read the first pdw.
-   tDetectedPdw = mPdwReader.readPdw();
+   tDetectedPdw = tPdwReader.readPdw();
    tDetectedPdwCount = 1;
 
    // Loop through all of the samples in the duration.
@@ -189,13 +191,13 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
             // Free the detected pdw.
             freePdw(tDetectedPdw);
             // Read the next pdw.
-            tDetectedPdw = mPdwReader.readPdw();
+            tDetectedPdw = tPdwReader.readPdw();
             tDetectedPdwCount++;
          }
       }
 
       // Write the sample to the output file.
-      mFileWriter.writeRow(
+      tSampleWriter.writeRow(
          tSampleCount,
          tSample.mTime,
          tSample.mAmplitude);
@@ -204,8 +206,8 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
 
    Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
    // Close files.
-   mPdwReader.close();
-   mFileWriter.close();
+   tPdwReader.close();
+   tSampleWriter.close();
 }
 
 //******************************************************************************
@@ -232,11 +234,12 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    // Initialize pulse statistics.
    mPulseStatistics.initialize();
 
-   // Open the input file.
-   mPdwReader.open(aParms->mInputFileName);
+   // Input and output files.
+   PdwCsvFileReader   tPdwReader;
+   Ris::CsvFileWriter tSampleWriter;
 
-   // Open the output file.
-   mFileWriter.open(aParms->mOutputFileName);
+   tPdwReader.open(aParms->mInputFileName);
+   tSampleWriter.open(aParms->mOutputFileName);
 
    // Local
    int    tSampleCount = 0;
@@ -247,7 +250,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    Pdw*   tRemovedPdw = 0;
 
    // Read the first pdw.
-   tDetectedPdw = mPdwReader.readPdw();
+   tDetectedPdw = tPdwReader.readPdw();
    tDetectedPdwCount = 1;
 
    // Loop through all of the samples in the duration.
@@ -282,7 +285,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
             }
 
             // Read the next pdw.
-            tDetectedPdw = mPdwReader.readPdw();
+            tDetectedPdw = tPdwReader.readPdw();
 
             // Update the count.
             tDetectedPdwCount++;
@@ -304,7 +307,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
       }
 
       // Write statistics to the output file.
-      mFileWriter.writeRow(
+      tSampleWriter.writeRow(
          tSampleCount,
          tSample.mTime,
          tSample.mAmplitude,
@@ -317,9 +320,8 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
 
    // Close files.
-   mPdwReader.close();
-   mFileWriter.close();
-   mPulseList.finalize();
+   tPdwReader.close();
+   tSampleWriter.close();
 
    Prn::print(0, "mPulseList.mPutCount    %10d",mPulseList.mPutCount);
    Prn::print(0, "mPulseList.mGetCount    %10d",mPulseList.mGetCount);
@@ -357,11 +359,12 @@ void FrontEnd::analyze2(FrontEndParms* aParms)
    // Initialize pulse statistics.
    mPulseStatistics.initialize();
 
-   // Open the input file.
-   mFileReader.open(aParms->mInputFileName);
+   // Input and output files.
+   Ris::CsvFileReader tSampleReader;
+   Ris::CsvFileWriter tSampleWriter;
 
-   // Open the output file.
-   mFileWriter.open(aParms->mOutputFileName);
+   tSampleReader.open(aParms->mInputFileName);
+   tSampleWriter.open(aParms->mOutputFileName);
 
    // Local
    int    tSampleCount = 0;
@@ -374,11 +377,11 @@ void FrontEnd::analyze2(FrontEndParms* aParms)
    while (true)
    {
       // Read sample row from input file
-      if(!mFileReader.readRow()) break;
+      if(!tSampleReader.readRow()) break;
       tSampleCount++;
 
       // Convert input and store in sample temp.
-      tSample.put(mFileReader(0),mFileReader(1));
+      tSample.put(tSampleReader(0),tSampleReader(1));
 
       // Put the sample to the pulse detector.
       // It returns a pdw if it detects a pulse.
@@ -425,7 +428,7 @@ void FrontEnd::analyze2(FrontEndParms* aParms)
       }
 
       // Write statistics to the output file.
-      mFileWriter.writeRow(
+      tSampleWriter.writeRow(
          tSampleCount,
          tSample.mTime,
          mPulseStatistics.mCount,
@@ -435,8 +438,8 @@ void FrontEnd::analyze2(FrontEndParms* aParms)
 
    Prn::print(0, "Analyze2 %d %d",tSampleCount,tDetectedPdwCount);
    // Close files.
-   mFileReader.close();
-   mFileWriter.close();
+   tSampleReader.close();
+   tSampleWriter.close();
 }
 
    

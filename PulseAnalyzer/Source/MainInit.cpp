@@ -57,9 +57,9 @@ void main_initialize(int argc,char** argv)
 
    // Open log files
    Log::reset();
-   Log::openFile(1,"C:\\MyLib\\Data\\LogFile_FrontEnd.txt");
-   Log::openFile(2,"C:\\MyLib\\Data\\LogFile_PulseList_Put.txt");
-   Log::openFile(3,"C:\\MyLib\\Data\\LogFile_PulseList_Time.txt");
+// Log::openFile(1,"C:\\MyLib\\Data\\LogFile_FrontEnd.txt");
+// Log::openFile(2,"C:\\MyLib\\Data\\LogFile_PulseList_Put.txt");
+// Log::openFile(3,"C:\\MyLib\\Data\\LogFile_PulseList_Time.txt");
       
       // Initialize memory
    Dsp::initializePdwFreeList();
