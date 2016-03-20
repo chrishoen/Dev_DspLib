@@ -9,6 +9,8 @@ Description:
 #include <stdio.h>
 #include "my_functions.h"
 #include "prnPrint.h"
+#include "logFiles.h"
+
 #include "dspPdwFreeList.h"
 #include "dspPulseList.h"
 
@@ -64,9 +66,6 @@ void PulseList::initialize()
 
    // Initialize queue
    mQueue.initialize(mMaxNumOfElements);
-
-   mLogWriter.open("C:\\MyLib\\Data\\LogFile101.txt");
-
 }
 
 //******************************************************************************
@@ -74,7 +73,6 @@ void PulseList::initialize()
 
 void PulseList::finalize()
 {
-   mLogWriter.close();
 }
 
 //******************************************************************************
@@ -97,6 +95,7 @@ Pdw* PulseList::addNewPdw(Pdw* aPdw)
    mQueue.put(aPdw);
    mPutCount++;
 
+   Log::write(2, "ADD PDW %5d %5d %10.5f",mQueue.size(),aPdw->mIndex,aPdw->mToa);
    // Done
    return tRemovedPdw;
 }
@@ -139,7 +138,7 @@ Pdw* PulseList::updateTime(double aTime)
    // if the queue is empty then return.
    if (!mQueue.isGet())
    {
-      mLogWriter.write("PDW %5d %5d  %10.5f $$ %10.5f %10.5f",
+      Log::write(3,"TIME %5d %5d  %10.5f $$ %10.5f %10.5f",
          mQueue.size(),
          0,
          0.0,
@@ -153,7 +152,7 @@ Pdw* PulseList::updateTime(double aTime)
    Pdw* tPdw = mQueue.elementToGet();
    mTestCount1++;
 
-   mLogWriter.write("PDW %5d %5d  %10.5f $$ %10.5f %10.5f",
+   Log::write(3,"TIME %5d %5d  %10.5f $$ %10.5f %10.5f",
       mQueue.size(),
       tPdw->mIndex,
       tPdw->mToa,

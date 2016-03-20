@@ -1,6 +1,7 @@
 #include <windows.h>
 
 #include "prnPrint.h"
+#include "logFiles.h"
 #include "risThreadsProcess.h"
 #include "dspPdwFreeList.h"
 
@@ -54,7 +55,13 @@ void main_initialize(int argc,char** argv)
 
    Prn::print(0,"Test*******************************************BEGIN");
 
-   // Initialize memory
+   // Open log files
+   Log::reset();
+   Log::openFile(1,"C:\\MyLib\\Data\\LogFile_FrontEnd.txt");
+   Log::openFile(2,"C:\\MyLib\\Data\\LogFile_PulseList_Put.txt");
+   Log::openFile(3,"C:\\MyLib\\Data\\LogFile_PulseList_Time.txt");
+      
+      // Initialize memory
    Dsp::initializePdwFreeList();
 }
 
@@ -67,8 +74,12 @@ void main_finalize()
 {
    Prn::print(0,"Test*******************************************END");
 
+   // Close log files
+   Log::closeAllFiles();
+
    // Close print
    Prn::finalizePrint();
+
 
    // Exit process
    Ris::Threads::exitProcess();

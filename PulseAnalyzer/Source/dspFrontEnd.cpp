@@ -8,6 +8,7 @@ Description:
 #include <math.h>
 #include "my_functions.h"
 #include "prnPrint.h"
+#include "logFiles.h"
 
 #include "dspPdwFreeList.h"
 
@@ -264,24 +265,17 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
             // Set the sample to mark it.
             tSample.put(tSampleTime, 1.0);
 
-            // Update the count.
-            tDetectedPdwCount++;
-
             // Add the detected pdw to the pdw statistics.
-            Prn::print(0, "DETECTED PDW %10.5f  %10.5f",tSampleTime,tDetectedPdw->mToa);
             mPulseStatistics.addPdw(tDetectedPdw);
 
             // Add the detected pdw to the pdw list.
             tRemovedPdw = mPulseList.addNewPdw(tDetectedPdw);
 
-            // Free the detected pdw.
-            freePdw(tDetectedPdw);
-
             // If a pdw was removed from the pdw list
             if (tRemovedPdw)
             {
                // Subtract the removed pdw from the pdw statistics.
-               mPulseStatistics.addPdw(tDetectedPdw);
+               mPulseStatistics.subtractPdw(tRemovedPdw);
 
                // Free the removed pdw.
                freePdw(tRemovedPdw);
@@ -289,6 +283,9 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
 
             // Read the next pdw.
             tDetectedPdw = mPdwReader.readPdw();
+
+            // Update the count.
+            tDetectedPdwCount++;
          }
       }
 
@@ -300,7 +297,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
       if (tRemovedPdw)
       {
          // Subtract the removed pdw from the pdw statistics.
-         mPulseStatistics.addPdw(tDetectedPdw);
+         mPulseStatistics.subtractPdw(tRemovedPdw);
 
          // Free the removed pdw.
          freePdw(tRemovedPdw);
@@ -332,6 +329,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    Prn::print(0, "mPulseList.mWindowTimeSize        %10.5f",mPulseList.mWindowTimeSize);
    Prn::print(0, "mPulseList.mWindowTimeUpperLimit  %10.5f",mPulseList.mWindowTimeUpperLimit),
    Prn::print(0, "mPulseList.mWindowTimeLowerLimit  %10.5f",mPulseList.mWindowTimeLowerLimit);
+// Log::write(1, "DETECTED PDW %5d %10.5f  %10.5f",k,tSampleTime,tDetectedPdw->mToa);
 
 }
 
