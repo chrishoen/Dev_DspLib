@@ -75,7 +75,7 @@ void CmdLineExec::executeA12(Ris::CmdLineCmd* aCmd)
    tParms->mFs       = 10000.0;
    tParms->mDuration =    10.0;
    tParms->mListMaxNumOfElements = 10000;
-   tParms->mListWindowTimeSize   = 0.100;
+   tParms->mListWindowTimeSize   = 0.100 + 0.00001;
    tParms->setInputFileName  ("C:\\MyLib\\Data\\PulsePdw11.csv");
    tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze12.csv");
    tParms->initialize();
