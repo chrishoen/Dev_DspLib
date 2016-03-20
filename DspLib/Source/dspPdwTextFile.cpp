@@ -51,7 +51,7 @@ Pdw* PdwCsvFileReader::readPdw()
    tPdw->mSeqNum = 0;
    tPdw->mToa        = mValues[0];
    tPdw->mAmplitude  = mValues[1];
-   tPdw->mPulseWidth = 0.0;
+   tPdw->mPulseWidth = mValues[2];
 
    // Done
    return tPdw;

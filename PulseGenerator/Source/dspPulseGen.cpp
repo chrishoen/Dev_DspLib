@@ -29,9 +29,10 @@ void gen11(PdwSequence* aS)
    for (int k = 1; k < aS->mNs; k++)
    {
       Pdw tPdw;
-      tPdw.mIndex     = k;
-      tPdw.mToa       = k * aS->mTs;
-      tPdw.mAmplitude = 1.0;
+      tPdw.mIndex      = k;
+      tPdw.mToa        = k * aS->mTs;
+      tPdw.mAmplitude  = 1.0;
+      tPdw.mPulseWidth = 0.001;
 
       if (k % aS->mNm == 0)
       {

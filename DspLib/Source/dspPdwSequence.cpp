@@ -12,6 +12,7 @@ Description:
 
 #include "prnPrint.h"
 #include "risTextFile.h"
+#include "dspPdwTextFile.h"
 #include "dspPdwSequence.h"
 
 namespace Dsp
@@ -121,8 +122,9 @@ void PdwSequence::show()
 void PdwSequence::writeToTextFile()
 {
    // Open output files.
-   Ris::CsvFileWriter tPdwWriter;
+   PdwCsvFileWriter   tPdwWriter;
    Ris::CsvFileWriter tPlotWriter;
+
    tPdwWriter.open  (mPdwFileName);
    tPlotWriter.open (mPlotFileName);
 
@@ -133,7 +135,7 @@ void PdwSequence::writeToTextFile()
    {
       // Write the pdw values to the output files.
       Pdw* tPdw = &mPdwArray[i];
-      tPdwWriter.writeRow  (tPdw->mIndex,   tPdw->mToa,       tPdw->mAmplitude);
+      tPdwWriter.writePdw(tPdw);
 
       tPlotWriter.writeRow (tPdw->mIndex-1, tPdw->mToa - mTs, 0.0);
       tPlotWriter.writeRow (tPdw->mIndex,   tPdw->mToa,       tPdw->mAmplitude);

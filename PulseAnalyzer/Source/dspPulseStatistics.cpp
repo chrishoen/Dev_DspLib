@@ -42,6 +42,9 @@ void PulseStatistics::addPdw(Pdw* aPdw)
    mCount++;
    mAmplitude.add  (aPdw->mAmplitude);
    mPulseWidth.add (aPdw->mPulseWidth);
+
+   mAmplitude.calculate ();
+   mPulseWidth.calculate ();
 }
 
 //******************************************************************************
@@ -54,6 +57,9 @@ void PulseStatistics::subtractPdw(Pdw* aPdw)
    mCount--;
    mAmplitude.subtract  (aPdw->mAmplitude);
    mPulseWidth.subtract (aPdw->mPulseWidth);
+
+   mAmplitude.calculate ();
+   mPulseWidth.calculate ();
 }
 
 //******************************************************************************
