@@ -23,6 +23,7 @@ public:
    // Members
 
    int    mSeqNum;
+   int    mIndex;
    double mToa;
    double mAmplitude;
    double mPulseWidth;

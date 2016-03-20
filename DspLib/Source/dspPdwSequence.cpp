@@ -25,6 +25,11 @@ namespace Dsp
 
 PdwSequence::PdwSequence()
 {
+   reset();
+}
+
+void PdwSequence::reset()
+{
    mFs = 8000.0;
    mTs = 1.0 / mFs;
    mFm = 1.0;
@@ -48,6 +53,9 @@ PdwSequence::~PdwSequence()
    }
 }
 
+void PdwSequence::setPdwFileName  (char* aFileName) { strcpy(mPdwFileName,  aFileName); }
+void PdwSequence::setPlotFileName (char* aFileName) { strcpy(mPlotFileName, aFileName); }
+   
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -110,23 +118,31 @@ void PdwSequence::show()
 //******************************************************************************
 // Write
 
-void PdwSequence::writeToTextFile(char* aFileName)
+void PdwSequence::writeToTextFile()
 {
-   // Open output file.
-   Ris::CsvFileWriter tWriter;
-   tWriter.open(aFileName);
+   // Open output files.
+   Ris::CsvFileWriter tPdwWriter;
+   Ris::CsvFileWriter tPlotWriter;
+   tPdwWriter.open  (mPdwFileName);
+   tPlotWriter.open (mPlotFileName);
 
-   // Loop through all of the samples in the signal.
+   // Write first row
+   tPlotWriter.writeRow (0, 0.0, 0.0);
+   // Loop through all of the pdws in the sequence.
    for (int i = 0; i < mPdwCount; i++)
    {
-      // Write the pdw values to the file.
+      // Write the pdw values to the output files.
       Pdw* tPdw = &mPdwArray[i];
-      tWriter.writeRow(i,tPdw->mToa,tPdw->mAmplitude);
+      tPdwWriter.writeRow  (tPdw->mIndex,   tPdw->mToa,       tPdw->mAmplitude);
+
+      tPlotWriter.writeRow (tPdw->mIndex-1, tPdw->mToa - mTs, 0.0);
+      tPlotWriter.writeRow (tPdw->mIndex,   tPdw->mToa,       tPdw->mAmplitude);
+      tPlotWriter.writeRow (tPdw->mIndex+1, tPdw->mToa + mTs, 0.0);
    }
 
    // Done
-   tWriter.close();
-   Prn::print(0, "Wrote Pdws    %s %d",aFileName,mPdwCount);
+   tPdwWriter.close();
+   Prn::print(0, "Wrote Pdws    %s %d",mPdwFileName,mPdwCount);
 }
 
 }//namespace

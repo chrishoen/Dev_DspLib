@@ -26,9 +26,10 @@ static const double cPI = 3.14159265358979323846264338327950288419716939937510;
 
 void gen11(PdwSequence* aS)
 {
-   for (int k = 0; k < aS->mNs; k++)
+   for (int k = 1; k < aS->mNs; k++)
    {
       Pdw tPdw;
+      tPdw.mIndex     = k;
       tPdw.mToa       = k * aS->mTs;
       tPdw.mAmplitude = 1.0;
 
@@ -54,6 +55,7 @@ void gen21(PdwSequence* aS)
    for (int k = 0; k < aS->mNs; k++)
    {
       Pdw tPdw;
+      tPdw.mIndex     = k;
       tPdw.mToa       = k * aS->mTs;
       tPdw.mAmplitude = 1.0;
 

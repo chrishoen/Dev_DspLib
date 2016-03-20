@@ -81,10 +81,12 @@ void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
    tPS->mFs       = 10000.0;
    tPS->mFm       =   100.0;
    tPS->mDuration =    10.0;
+   tPS->setPdwFileName ("C:\\MyLib\\Data\\PulsePdw11.csv");
+   tPS->setPlotFileName("C:\\MyLib\\Data\\PulsePlot11.csv");
    tPS->initialize();
    tPS->show();
    PulseGen::gen11(tPS);
-   tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse11.csv");
+   tPS->writeToTextFile();
    delete tPS;
 }
 
@@ -96,10 +98,12 @@ void CmdLineExec::executeP21(Ris::CmdLineCmd* aCmd)
    tPS->mFs       = 10000.0;
    tPS->mFm       =   100.0;
    tPS->mDuration =    10.0;
+   tPS->setPdwFileName ("C:\\MyLib\\Data\\PulsePdw21.csv");
+   tPS->setPlotFileName("C:\\MyLib\\Data\\PulsePlo21.csv");
    tPS->initialize();
    tPS->show();
    PulseGen::gen21(tPS);
-   tPS->writeToTextFile("C:\\MyLib\\Data\\Pulse21.csv");
+   tPS->writeToTextFile();
    delete tPS;
 }
 

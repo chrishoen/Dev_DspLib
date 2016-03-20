@@ -22,7 +22,18 @@ class PdwSequence
 public:
 
    //--------------------------------------------------------------------------
-   // Members
+   // Constructor
+
+   PdwSequence();
+  ~PdwSequence();
+
+   //--------------------------------------------------------------------------
+   // Reset paramters to defaults.
+
+   void reset();
+
+   //--------------------------------------------------------------------------
+   // Parameters
 
    double  mFs;
    double  mTs;
@@ -36,19 +47,25 @@ public:
    int     mNm2;
    double  mDCm;
 
+   static const int cMaxStringSize=400;
+
+   char mPdwFileName  [cMaxStringSize];
+   char mPlotFileName [cMaxStringSize];
+
+   void setPdwFileName  (char* aFileName);
+   void setPlotFileName (char* aFileName);
+   
+   //--------------------------------------------------------------------------
+   // Initialize, using parameters.
+
+   void initialize();
+
    //--------------------------------------------------------------------------
    // Members
 
    static const int cMaxNumOfPdws=10000;
    Pdw* mPdwArray;
    int mPdwCount;
-
-   //--------------------------------------------------------------------------
-   // Constructor and initialization.
-
-   PdwSequence();
-  ~PdwSequence();
-   void initialize();
 
    //--------------------------------------------------------------------------
    // Put a Pdw to the PdwArray.
@@ -58,7 +75,7 @@ public:
    //--------------------------------------------------------------------------
    // Write signal to a csv file.
 
-   void writeToTextFile(char* aFileName);
+   void writeToTextFile();
 
    //--------------------------------------------------------------------------
    // Support.
