@@ -58,8 +58,12 @@ public:
    // the window. In that case, remove and return it.
    Pdw* updateTime(double aTime);
 
-   // Returns the current number of pdws in the list, which is the queue size.
+   // Return the current number of pdws in the list, which is the queue size.
    int size();
+
+   // Return the current pulse density, which is the queue size divided by
+   // the window size.
+   double density();
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
