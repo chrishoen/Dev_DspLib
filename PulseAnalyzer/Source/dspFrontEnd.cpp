@@ -203,7 +203,7 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
 
    Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
    // Close files.
-   mFileReader.close();
+   mPdwReader.close();
    mFileWriter.close();
 }
 
@@ -261,27 +261,64 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
       {
          if (k == tDetectedPdw->mIndex)
          {
-            // Process the detected pdw.
+            // Set the sample to mark it.
             tSample.put(tSampleTime, 1.0);
+
+            // Update the count.
+            tDetectedPdwCount++;
+
+            // Add the detected pdw to the pdw statistics.
+            mPulseStatistics.addPdw(tDetectedPdw);
+
+            // Add the detected pdw to the pdw list.
+            tRemovedPdw = mPulseList.addNewPdw(tDetectedPdw);
+
             // Free the detected pdw.
             freePdw(tDetectedPdw);
+
+            // If a pdw was removed from the pdw list
+            if (tRemovedPdw)
+            {
+               // Subtract the removed pdw from the pdw statistics.
+               mPulseStatistics.addPdw(tDetectedPdw);
+
+               // Free the removed pdw.
+               freePdw(tRemovedPdw);
+            }
+
             // Read the next pdw.
             tDetectedPdw = mPdwReader.readPdw();
-            tDetectedPdwCount++;
          }
       }
 
-      // Write the sample to the output file.
+      // Update the pulse list time. This removes the oldest pdw from the
+      // list, if it has fallen ouside of the list sliding window.
+      tRemovedPdw = mPulseList.updateTime(tSample.mTime);
+
+      // If a pdw was removed from the pdw list
+      if (tRemovedPdw)
+      {
+         // Subtract the removed pdw from the pdw statistics.
+         mPulseStatistics.addPdw(tDetectedPdw);
+
+         // Free the removed pdw.
+         freePdw(tRemovedPdw);
+      }
+
+      // Write statistics to the output file.
       mFileWriter.writeRow(
          tSampleCount,
          tSample.mTime,
-         tSample.mAmplitude);
+         tSample.mAmplitude,
+         mPulseStatistics.mCount,
+         mPulseStatistics.mAmplitude.mMean,
+         mPulseStatistics.mPulseWidth.mMean);
       tSampleCount++;
    }
 
    Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
    // Close files.
-   mFileReader.close();
+   mPdwReader.close();
    mFileWriter.close();
 }
 

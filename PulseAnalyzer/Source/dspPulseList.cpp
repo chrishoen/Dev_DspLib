@@ -122,6 +122,9 @@ Pdw* PulseList::removeOldestPdw()
 
 Pdw* PulseList::updateTime(double aTime)
 {
+   // if the queue is empty then return.
+   if (!mQueue.isGet()) return 0;
+
    // Peek at the oldest element in the array, the top of the list, the element at 
    // the GetIndex.
    Pdw* tPdw = mQueue.elementToGet();
