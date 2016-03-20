@@ -5,6 +5,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+#include <math.h>
 #include "my_functions.h"
 #include "prnPrint.h"
 
@@ -27,15 +28,25 @@ FrontEndParms::FrontEndParms()
 
 void FrontEndParms::reset()
 {
-   mInputFileName[0]=0;
-   mOutputFileName [0]=0;
+   mFs = 10000.0;
+   mTs = 1.0 / mFs;
+   mDuration = 10.0;
+   mNumSamples = (int)(mDuration * mFs);
 
    mDetectYesThreshold = 0.01;
    mDetectNoThreshold = 0.01;
-   mSamplePeriod = 0.0001;
 
    mListMaxNumOfElements = 10000;
    mListWindowTimeSize = 0.100;
+
+   mInputFileName[0]=0;
+   mOutputFileName [0]=0;
+}
+
+void FrontEndParms::initialize()
+{
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(round(mDuration) * mFs);
 }
 
 void FrontEndParms::setInputFileName  (char* aFileName) { strcpy(mInputFileName,  aFileName); }
@@ -60,11 +71,13 @@ void FrontEnd::initialize()
 
 void FrontEnd::detect1(FrontEndParms* aParms)
 {
-   // Initialize.
+   // Initialize parameters.
+   aParms->initialize();
+   // Initialize detector.
    mPulseDetector.reset();
    mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
    mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
-   mPulseDetector.mSamplePeriod       = aParms->mSamplePeriod;
+   mPulseDetector.mSamplePeriod       = aParms->mTs;
    mPulseDetector.initialize();
 
    // Open input samples file.
@@ -120,21 +133,180 @@ void FrontEnd::detect1(FrontEndParms* aParms)
 //******************************************************************************
 //******************************************************************************
 
-void FrontEnd::analyze1(FrontEndParms* aParms)
+void FrontEnd::analyze11(FrontEndParms* aParms)
 {
-   // Initialize pulse detector
+   // Initialize parameters.
+   aParms->initialize();
+
+   // Initialize pulse detector.
    mPulseDetector.reset();
    mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
    mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
-   mPulseDetector.mSamplePeriod       = aParms->mSamplePeriod;
+   mPulseDetector.mSamplePeriod       = aParms->mTs;
    mPulseDetector.initialize();
 
-   // Initialize pulse list
+   // Initialize pulse list.
    mPulseList.reset();
    mPulseList.mWindowTimeSize = aParms->mListWindowTimeSize;
    mPulseList.initialize();
 
-   // Initialize pulse statistics
+   // Initialize pulse statistics.
+   mPulseStatistics.initialize();
+
+   // Open the input file.
+   mPdwReader.open(aParms->mInputFileName);
+
+   // Open the output file.
+   mFileWriter.open(aParms->mOutputFileName);
+
+   // Local
+   int    tSampleCount = 0;
+   double tSampleTime = 0.0;
+   Sample tSample;
+   int    tDetectedPdwCount = 0;
+   Pdw*   tDetectedPdw = 0;
+   Pdw*   tRemovedPdw = 0;
+
+   // Read the first pdw.
+   tDetectedPdw = mPdwReader.readPdw();
+   tDetectedPdwCount = 1;
+
+   // Loop through all of the samples in the duration.
+   for (int k = 0; k < aParms->mNumSamples; k++)
+   {
+      // Set the sample.
+      tSampleTime = k*aParms->mTs;
+      tSample.put(tSampleTime,0.0);
+
+      // If the next detected pdw is in this sample period
+      if (tDetectedPdw)
+      {
+         if (k == tDetectedPdw->mIndex)
+         {
+            // Process the detected pdw.
+            tSample.put(tSampleTime, 1.0);
+            // Free the detected pdw.
+            freePdw(tDetectedPdw);
+            // Read the next pdw.
+            tDetectedPdw = mPdwReader.readPdw();
+            tDetectedPdwCount++;
+         }
+      }
+
+      // Write the sample to the output file.
+      mFileWriter.writeRow(
+         tSampleCount,
+         tSample.mTime,
+         tSample.mAmplitude);
+      tSampleCount++;
+   }
+
+   Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
+   // Close files.
+   mFileReader.close();
+   mFileWriter.close();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void FrontEnd::analyze12(FrontEndParms* aParms)
+{
+   // Initialize parameters.
+   aParms->initialize();
+
+   // Initialize pulse detector.
+   mPulseDetector.reset();
+   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
+   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
+   mPulseDetector.mSamplePeriod       = aParms->mTs;
+   mPulseDetector.initialize();
+
+   // Initialize pulse list.
+   mPulseList.reset();
+   mPulseList.mWindowTimeSize = aParms->mListWindowTimeSize;
+   mPulseList.initialize();
+
+   // Initialize pulse statistics.
+   mPulseStatistics.initialize();
+
+   // Open the input file.
+   mPdwReader.open(aParms->mInputFileName);
+
+   // Open the output file.
+   mFileWriter.open(aParms->mOutputFileName);
+
+   // Local
+   int    tSampleCount = 0;
+   double tSampleTime = 0.0;
+   Sample tSample;
+   int    tDetectedPdwCount = 0;
+   Pdw*   tDetectedPdw = 0;
+   Pdw*   tRemovedPdw = 0;
+
+   // Read the first pdw.
+   tDetectedPdw = mPdwReader.readPdw();
+   tDetectedPdwCount = 1;
+
+   // Loop through all of the samples in the duration.
+   for (int k = 0; k < aParms->mNumSamples; k++)
+   {
+      // Set the sample.
+      tSampleTime = k*aParms->mTs;
+      tSample.put(tSampleTime,0.0);
+
+      // If the next detected pdw is in this sample period
+      if (tDetectedPdw)
+      {
+         if (k == tDetectedPdw->mIndex)
+         {
+            // Process the detected pdw.
+            tSample.put(tSampleTime, 1.0);
+            // Free the detected pdw.
+            freePdw(tDetectedPdw);
+            // Read the next pdw.
+            tDetectedPdw = mPdwReader.readPdw();
+            tDetectedPdwCount++;
+         }
+      }
+
+      // Write the sample to the output file.
+      mFileWriter.writeRow(
+         tSampleCount,
+         tSample.mTime,
+         tSample.mAmplitude);
+      tSampleCount++;
+   }
+
+   Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
+   // Close files.
+   mFileReader.close();
+   mFileWriter.close();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void FrontEnd::analyze2(FrontEndParms* aParms)
+{
+   // Initialize parameters.
+   aParms->initialize();
+
+   // Initialize pulse detector.
+   mPulseDetector.reset();
+   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
+   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
+   mPulseDetector.mSamplePeriod       = aParms->mTs;
+   mPulseDetector.initialize();
+
+   // Initialize pulse list.
+   mPulseList.reset();
+   mPulseList.mWindowTimeSize = aParms->mListWindowTimeSize;
+   mPulseList.initialize();
+
+   // Initialize pulse statistics.
    mPulseStatistics.initialize();
 
    // Open the input file.
@@ -213,7 +385,7 @@ void FrontEnd::analyze1(FrontEndParms* aParms)
          mPulseStatistics.mPulseWidth.mMean);
    }
 
-   Prn::print(0, "Analyze1 %d %d",tSampleCount,tDetectedPdwCount);
+   Prn::print(0, "Analyze2 %d %d",tSampleCount,tDetectedPdwCount);
    // Close files.
    mFileReader.close();
    mFileWriter.close();

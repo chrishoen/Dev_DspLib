@@ -24,9 +24,10 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("RESET"  ))  reset();
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3(aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4(aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5(aCmd);
+
+   if(aCmd->isCmd("A11"    ))  executeA11(aCmd);
+   if(aCmd->isCmd("A12"    ))  executeA12(aCmd);
+   if(aCmd->isCmd("D11"    ))  executeD11(aCmd);
 }
 
 //******************************************************************************
@@ -37,7 +38,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeD11(Ris::CmdLineCmd* aCmd)
 {
    FrontEndParms* tParms = new FrontEndParms;
    tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample41.csv");
@@ -51,31 +52,47 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeA11(Ris::CmdLineCmd* aCmd)
 {
    FrontEndParms* tParms = new FrontEndParms;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample41.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze1.csv");
+   tParms->mFs       = 10000.0;
+   tParms->mDuration =    10.0;
+   tParms->mListMaxNumOfElements = 10000;
+   tParms->mListWindowTimeSize   = 0.100;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\PulsePdw11.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze11.csv");
+   tParms->initialize();
 
-   gFrontEnd.analyze1(tParms);
+   gFrontEnd.analyze11(tParms);
    delete tParms;
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeA12(Ris::CmdLineCmd* aCmd)
+{
+   FrontEndParms* tParms = new FrontEndParms;
+   tParms->mFs       = 10000.0;
+   tParms->mDuration =    10.0;
+   tParms->mListMaxNumOfElements = 10000;
+   tParms->mListWindowTimeSize   = 0.100;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample41.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze12.csv");
+   tParms->initialize();
+
+   gFrontEnd.analyze12(tParms);
+   delete tParms;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
-{
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
 }
 

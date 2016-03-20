@@ -22,6 +22,7 @@
     <ClCompile Include="Source\dspPdw.cpp" />
     <ClCompile Include="Source\dspPdwFreeList.cpp" />
     <ClCompile Include="Source\dspPdwSequence.cpp" />
+    <ClCompile Include="Source\dspPdwTextFile.cpp" />
     <ClCompile Include="Source\dspSample.cpp" />
     <ClCompile Include="Source\dspSignal.cpp" />
     <ClCompile Include="Source\dspStatistics.cpp" />
@@ -30,6 +31,7 @@
     <ClInclude Include="Source\dspPdw.h" />
     <ClInclude Include="Source\dspPdwFreeList.h" />
     <ClInclude Include="Source\dspPdwSequence.h" />
+    <ClInclude Include="Source\dspPdwTextFile.h" />
     <ClInclude Include="Source\dspSample.h" />
     <ClInclude Include="Source\dspSignal.h" />
     <ClInclude Include="Source\dspStatistics.h" />
