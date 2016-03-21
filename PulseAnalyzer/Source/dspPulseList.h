@@ -8,7 +8,7 @@
 //******************************************************************************
 //******************************************************************************
 
-#include "ccContainers2.h"
+#include "ccValueQueue.h"
 #include "dspPdw.h"
 #include "dspSample.h"
 
@@ -68,7 +68,7 @@ public:
    //--------------------------------------------------------------------------
    // Queue of pdw pointers
 
-   CC::Containers::Queue2<Pdw*> mQueue;
+   CC::ValueQueue<Pdw*> mQueue;
 
    int mPutCount;
    int mGetCount;

@@ -115,7 +115,7 @@ Pdw* PulseList::removeOldestPdw()
 
    // Get queue element to remove the pdw from the list.
    Pdw* tRemovedPdw;
-   mQueue.get(tRemovedPdw);
+   tRemovedPdw = mQueue.get();
    mGetCount++;
 
    // Done
