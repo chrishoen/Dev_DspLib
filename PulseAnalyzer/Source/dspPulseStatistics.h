@@ -54,6 +54,9 @@ public:
    SumStatistics mPulseWidth;
    int mCount;
 
+   // Put pulse density to the statistics.
+   void putPulseDensity(double aX);
+
    // Pulse statistics
    Filter::MovingAverage mPulseDensity;
 };

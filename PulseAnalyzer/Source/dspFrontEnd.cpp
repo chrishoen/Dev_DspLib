@@ -308,12 +308,16 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
          freePdw(tRemovedPdw);
       }
 
+      // Update the pulse statistics
+      mPulseStatistics.putPulseDensity(mPulseList.density());
+
       // Write statistics to the output file.
       tSampleWriter.writeRow(
          tSampleCount,
          tSample.mTime,
          tSample.mAmplitude,
          mPulseStatistics.mCount,
+         mPulseStatistics.mPulseDensity.mMean,
          mPulseStatistics.mAmplitude.mMean,
          mPulseStatistics.mPulseWidth.mMean);
 
