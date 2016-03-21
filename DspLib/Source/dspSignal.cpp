@@ -10,8 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "prnPrint.h"
-#include "risTextFile.h"
+#include "dspTextFile.h"
 #include "dspSignal.h"
 
 namespace Dsp
@@ -117,25 +116,25 @@ void Signal::normalize()
 
 void Signal::show()
 {
-   Prn::print(0,"mFs          %10.4f",mFs);
-   Prn::print(0,"mTs          %10.4f",mTs);
-   Prn::print(0,"mFp          %10.4f",mFp);
-   Prn::print(0,"mTp          %10.4f",mTp);
-   Prn::print(0,"mFm          %10.4f",mFm);
-   Prn::print(0,"mTm          %10.4f",mTm);
-   Prn::print(0,"mDuration    %10.4f",mDuration);
+   printf("mFs          %10.4f\n",mFs);
+   printf("mTs          %10.4f\n",mTs);
+   printf("mFp          %10.4f\n",mFp);
+   printf("mTp          %10.4f\n",mTp);
+   printf("mFm          %10.4f\n",mFm);
+   printf("mTm          %10.4f\n",mTm);
+   printf("mDuration    %10.4f\n",mDuration);
 
-   Prn::print(0,"mNumSamples  %10d",  mNumSamples);
-   Prn::print(0,"mNs          %10d",  mNs);
-   Prn::print(0,"mNp          %10d",  mNp);
-   Prn::print(0,"mNp1         %10d",  mNp1);
-   Prn::print(0,"mNp2         %10d",  mNp2);
-   Prn::print(0,"mNm          %10d",  mNm);
-   Prn::print(0,"mNm1         %10d",  mNm1);
-   Prn::print(0,"mNm2         %10d",  mNm2);
+   printf("mNumSamples  %10d\n",  mNumSamples);
+   printf("mNs          %10d\n",  mNs);
+   printf("mNp          %10d\n",  mNp);
+   printf("mNp1         %10d\n",  mNp1);
+   printf("mNp2         %10d\n",  mNp2);
+   printf("mNm          %10d\n",  mNm);
+   printf("mNm1         %10d\n",  mNm1);
+   printf("mNm2         %10d\n",  mNm2);
 
-   Prn::print(0,"mDCp         %10.4f",mDCp);
-   Prn::print(0,"mDCm         %10.4f",mDCm);
+   printf("mDCp         %10.4f\n",mDCp);
+   printf("mDCm         %10.4f\n",mDCm);
 }
 
 //******************************************************************************
@@ -146,7 +145,7 @@ void Signal::show()
 void Signal::writeToTextFile(char* aFileName)
 {
    // Open output file.
-   Ris::CsvFileWriter tWriter;
+   CsvFileWriter tWriter;
    tWriter.open(aFileName);
 
    // Loop through all of the samples in the signal.
@@ -158,7 +157,7 @@ void Signal::writeToTextFile(char* aFileName)
 
    // Done
    tWriter.close();
-   Prn::print(0, "Wrote Samples %s %d",aFileName,mNumSamples);
+   printf( "Wrote Samples %s %d",aFileName,mNumSamples);
 }
 
 }//namespace

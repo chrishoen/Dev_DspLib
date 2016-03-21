@@ -82,7 +82,7 @@ void FrontEnd::detect1(FrontEndParms* aParms)
    mPulseDetector.initialize();
 
    // Input and output files.
-   Ris::CsvFileReader tSampleReader;
+   CsvFileReader      tSampleReader;
    PdwCsvFileWriter   tPdwWriter;
 
    tSampleReader.open(aParms->mInputFileName);
@@ -156,7 +156,7 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
 
    // Input and output files.
    PdwCsvFileReader   tPdwReader;
-   Ris::CsvFileWriter tSampleWriter;
+   CsvFileWriter      tSampleWriter;
 
    tPdwReader.open(aParms->mInputFileName);
    tSampleWriter.open(aParms->mOutputFileName);
@@ -238,7 +238,7 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
 
    // Input and output files.
    PdwCsvFileReader   tPdwReader;
-   Ris::CsvFileWriter tSampleWriter;
+   CsvFileWriter      tSampleWriter;
 
    tPdwReader.open(aParms->mInputFileName);
    tSampleWriter.open(aParms->mOutputFileName);
@@ -366,8 +366,8 @@ void FrontEnd::analyze2(FrontEndParms* aParms)
    mPulseStatistics.initialize();
 
    // Input and output files.
-   Ris::CsvFileReader tSampleReader;
-   Ris::CsvFileWriter tSampleWriter;
+   CsvFileReader tSampleReader;
+   CsvFileWriter tSampleWriter;
 
    tSampleReader.open(aParms->mInputFileName);
    tSampleWriter.open(aParms->mOutputFileName);

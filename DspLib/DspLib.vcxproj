@@ -32,6 +32,7 @@
     <ClCompile Include="Source\dspSignal.cpp" />
     <ClCompile Include="Source\dspStatistics.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
+    <ClCompile Include="Source\dsp_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspFilterStatistics.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Source\dspSignal.h" />
     <ClInclude Include="Source\dspStatistics.h" />
     <ClInclude Include="Source\dspTextFile.h" />
+    <ClInclude Include="Source\dsp_functions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}</ProjectGuid>
@@ -153,7 +155,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\MyLib\RisLib\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>

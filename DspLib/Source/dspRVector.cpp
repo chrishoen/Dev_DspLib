@@ -10,7 +10,6 @@ Description:
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include "my_functions.h"
 
 #include "dspRVector.h"
 

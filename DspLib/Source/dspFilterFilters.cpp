@@ -8,7 +8,7 @@ Description:
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "my_functions.h"
+#include "dsp_functions.h"
 #include "dspDefs.h"
 
 #include <math.h>
@@ -196,7 +196,7 @@ void ShiftRegister::reset()
 void ShiftRegister::shiftRight(double aX)
 {
    // Adjust index to the right
-   mIndex = my_index_add(mIndex, 1, mSize);
+   mIndex = dsp_index_add(mIndex, 1, mSize);
 
    // Add new value to array
    mX=aX;
@@ -233,7 +233,7 @@ double ShiftRegister::get(int aOffset)
    if (!mValid) return 0.0;
 
    // Get index
-   int tGetIndex = my_index_sub(mIndex, aOffset, mSize);
+   int tGetIndex = dsp_index_sub(mIndex, aOffset, mSize);
 
    // Return array value at index
    return mArray[tGetIndex];
@@ -258,7 +258,7 @@ double ShiftRegister::getRight()
    if (!mValid) return 0.0;
 
    // Get index of right end
-   int tGetIndex = my_index_sub(mIndex, (mSize - 1), mSize);
+   int tGetIndex = dsp_index_sub(mIndex, (mSize - 1), mSize);
 
    // Return array value at index
    return mArray[tGetIndex];

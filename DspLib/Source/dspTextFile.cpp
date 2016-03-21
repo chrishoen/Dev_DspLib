@@ -12,8 +12,6 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "my_functions.h"
-
 #include "dspTextFile.h"
 
 

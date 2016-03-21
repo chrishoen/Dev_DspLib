@@ -8,7 +8,6 @@ Description:
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "my_functions.h"
 
 #include <math.h>
 #include <string.h>
