@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LutTest", "LutTest\LutTest.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RVectorTest", "RVectorTest\RVectorTest.vcxproj", "{B9C26569-D4B6-4CB6-8B04-81E3CFC562F3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileTest", "FileTest\FileTest.vcxproj", "{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,20 @@ Global
 		{B9C26569-D4B6-4CB6-8B04-81E3CFC562F3}.Release|Win32.Build.0 = Release|Win32
 		{B9C26569-D4B6-4CB6-8B04-81E3CFC562F3}.Release|x64.ActiveCfg = Release|x64
 		{B9C26569-D4B6-4CB6-8B04-81E3CFC562F3}.Release|x64.Build.0 = Release|x64
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|Win32.Build.0 = Debug|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|x64.ActiveCfg = Debug|x64
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Debug|x64.Build.0 = Debug|x64
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|Any CPU.ActiveCfg = Release|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|Win32.ActiveCfg = Release|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|Win32.Build.0 = Release|Win32
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|x64.ActiveCfg = Release|x64
+		{D2FAE3CA-0CB3-4EE7-856D-649FF9C32648}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
