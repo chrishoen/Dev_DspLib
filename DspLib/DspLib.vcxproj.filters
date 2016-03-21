@@ -40,6 +40,9 @@
     <ClCompile Include="Source\dspFilterStatistics.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspLut.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -76,6 +79,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspFilterStatistics.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspLut.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
