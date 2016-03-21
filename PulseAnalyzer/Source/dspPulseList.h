@@ -8,7 +8,7 @@
 //******************************************************************************
 //******************************************************************************
 
-#include "risContainers2.h"
+#include "ccContainers2.h"
 #include "dspPdw.h"
 #include "dspSample.h"
 
@@ -68,7 +68,7 @@ public:
    //--------------------------------------------------------------------------
    // Queue of pdw pointers
 
-   Ris::Containers::Queue2<Pdw*> mQueue;
+   CC::Containers::Queue2<Pdw*> mQueue;
 
    int mPutCount;
    int mGetCount;
