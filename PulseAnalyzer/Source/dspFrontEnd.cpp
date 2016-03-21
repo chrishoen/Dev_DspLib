@@ -231,6 +231,9 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    mPulseList.initialize();
 
    // Initialize pulse statistics.
+   mPulseStatistics.reset();
+   mPulseStatistics.mFs = aParms->mFs;
+   mPulseStatistics.mWindowTimeSize = aParms->mListWindowTimeSize;
    mPulseStatistics.initialize();
 
    // Input and output files.

@@ -37,11 +37,9 @@ public:
    // Parameters
    int mMaxNumOfElements;
 
-   // Initialize, using the parameters.
+   // Initialize, using the parameters. Allocate queue memory.
    void initialize();
 
-   // Allocate and initialize the queue memory.
-   void initialize(int aMaxNumOfElements);
    // Deallocate the queue memory.
    void finalize();
 

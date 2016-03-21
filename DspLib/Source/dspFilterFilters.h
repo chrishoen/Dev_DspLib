@@ -28,8 +28,13 @@ namespace Filter
 class MovingAverage
 {
 public:
+   // Constructor
+   MovingAverage();
+  ~MovingAverage();
+
    // Initialize
    void initialize(int aSize); 
+   void finalize(); 
    void reset(); 
    void show();
    // Valid
@@ -37,24 +42,23 @@ public:
 
    // Put input value
    void put(double aX);
-
-   // Input value
-   double mX;
-   // Output expectation (mean)
-   double mE;
-   // Output uncertainty (standard deviation)
-   double mU;
+   
+   double  mX;         // Input value
+   double  mEX;        // Expectation (mean)
+   double  mUX;        // Uncertainty (standard deviation)
+   double  mMean;      // Expectation (mean)
+   double  mStdDev;    // Uncertainty (standard deviation)
 
    // Members
-   int mSize;
-   int mCount;
-   int mIndex;
-   int mK;
+   int  mSize;
+   int  mCount;
+   int  mIndex;
+   int  mK;
 
-   double mEArray[MaxFilterSize];
-   double mESum;
-   double mUArray[MaxFilterSize];
-   double mUSum;
+   double* mEArray;
+   double  mESum;
+   double* mUArray;
+   double  mUSum;
 };
 
 //******************************************************************************

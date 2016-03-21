@@ -9,6 +9,7 @@
 //******************************************************************************
 
 #include "dspPdw.h"
+#include "dspFilterFilters.h"
 #include "dspStatistics.h"
 
 namespace Dsp
@@ -27,7 +28,21 @@ public:
 
    // Constructor.
    PulseStatistics();
+
+   // Reset paramters to defaults.
+   void reset();
+
+   // Parameters
+   double  mFs;               // Sampling frequency
+   double  mTs;               // Sampling period
+   double  mWindowTimeSize;   // Moving average time size
+   int     mWindowNumSample;  // Moving average sample size
+
+   // Initialize, using the parameters.
    void initialize();
+
+   // Finalize
+   void finalize();
 
    // Add/subtract a pdw to/from the statistics. Pdw values are extracted
    // and added or subtracted to the following sum statistics.
@@ -38,6 +53,9 @@ public:
    SumStatistics mAmplitude;
    SumStatistics mPulseWidth;
    int mCount;
+
+   // Pulse statistics
+   Filter::MovingAverage mPulseDensity;
 };
 
 //******************************************************************************

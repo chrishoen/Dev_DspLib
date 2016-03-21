@@ -7,6 +7,7 @@ Description:
 //******************************************************************************
 
 #include <stdio.h>
+#include <math.h>
 #include "my_functions.h"
 #include "prnPrint.h"
 #include "dspPdwFreeList.h"
@@ -22,14 +23,31 @@ namespace Dsp
 
 PulseStatistics::PulseStatistics()
 {
-   initialize();
+   reset();
+}
+
+void PulseStatistics::reset()
+{
+   mFs = 10000.0;
+   mTs = 1.0 / mFs;
+   mWindowTimeSize  = 0.100;
+   mWindowNumSample = (int)(round(mFs * mWindowTimeSize));
 }
 
 void PulseStatistics::initialize()
 {
+   mTs = 1.0 / mFs;
+   mWindowNumSample = (int)(round(mFs * mWindowTimeSize));
+
    mCount = 0;
    mAmplitude.reset();
    mPulseWidth.reset();
+   mPulseDensity.initialize(mWindowNumSample);
+}
+
+void PulseStatistics::finalize()
+{
+   mPulseDensity.finalize();
 }
 
 //******************************************************************************

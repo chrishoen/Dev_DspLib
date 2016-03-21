@@ -29,19 +29,63 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 
+MovingAverage::MovingAverage()
+{
+   mEArray = 0;
+   mUArray = 0;
+   finalize();
+}
+
+MovingAverage::~MovingAverage()
+{
+   finalize();
+}
+
 void MovingAverage::initialize(int aSize)
 {
+   finalize();
    mSize=aSize;
-   reset();
+   mEArray = new double[aSize];
+   mUArray = new double[aSize];
+
+   mX=0.0;
+   mEX=0.0;
+   mUX=0.0;
+   mCount=0;
+   mK=0;
+   mIndex=mSize-1;
+   for(int i=0;i<mSize;i++)
+   {
+      mEArray[i]=0.0;
+      mUArray[i]=0.0;
+   }
+   mESum=0;
+   mUSum=0;
+   mValid=false;
 }
 
 //******************************************************************************
 
-void MovingAverage::reset() 
+void MovingAverage::finalize() 
 {
-   mE=0.0;
-   mU=0.0;
+   if (mEArray)
+   {
+      delete[] mEArray;
+      mEArray=0;
+   }
+   if (mUArray)
+   {
+      delete[] mUArray;
+      mUArray=0;
+   }
+}
+
+//******************************************************************************
+void MovingAverage::reset()
+{
    mX=0.0;
+   mEX=0.0;
+   mUX=0.0;
    mCount=0;
    mK=0;
    mIndex=mSize-1;
@@ -80,10 +124,10 @@ void MovingAverage::put(double aX)
    // Calculate uncertainty from sum
    if (mCount==mSize)
    {
-      mE = mESum/double(mSize);
+      mEX = mESum/double(mSize);
 
       double tEU = mUSum/double(mSize);
-      mU = sqrt(fabs(tEU*tEU - mE*mE));
+      mUX = sqrt(fabs(tEU*tEU - mEX*mEX));
       mValid=true;
    }
    else
@@ -92,6 +136,10 @@ void MovingAverage::put(double aX)
       mValid=false;
    }
    
+   // Nicknames
+   mMean   = mEX;
+   mStdDev = mUX;
+
    // Update
    mK++;
 }
@@ -107,8 +155,8 @@ void MovingAverage::show()
       mX,
       mESum,
       mUSum,
-      mE,
-      mU);
+      mEX,
+      mUX);
 }
 
 //******************************************************************************
@@ -486,10 +534,10 @@ void CharacterFilter1::put(double aX)
    // Update output values
    mX  = aX;
    mV  = mXMD.mY;
-   mEX = mXMA.mE;
-   mUX = mXMA.mU;
-   mEV = mVMA.mE;
-   mUV = mVMA.mU;
+   mEX = mXMA.mEX;
+   mUX = mXMA.mUX;
+   mEV = mVMA.mEX;
+   mUV = mVMA.mUX;
 
    // Update
    mK++;
