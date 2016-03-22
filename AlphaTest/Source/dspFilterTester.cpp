@@ -160,7 +160,7 @@ void FilterTester::filter12(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "Filter12 %d",tSampleCount);
+   Prn::print(0, "Filter12 %d %s",tSampleCount,aParms->mInputFileName);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();
@@ -208,7 +208,7 @@ void FilterTester::trial11(FilterParms* aParms)
    // Finish statistics.
    mTrialStatistics.finishTrial();
 
-   Prn::print(0, "Trial11 %d",tSampleCount);
+   Prn::print(0, "Trial11 %d %s",tSampleCount,aParms->mInputFileName);
    mTrialStatistics.show();
    // Close files.
    tSampleReader.close();
