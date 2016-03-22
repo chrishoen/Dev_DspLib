@@ -44,8 +44,16 @@ public:
 
    int     mKev1;         // Sample event 1
    int     mKev2;         // Sample event 2
+
    double  mSigma;        // Sigma
    double  mOffset;       // Offset
+
+   double  mTime1;        // Time
+   double  mTime2;        // Time
+   double  mDeltaT;       // Delta
+   double  mDeltaX;       // Delta
+   int     mDeltaK;       // Delta
+
 
    //--------------------------------------------------------------------------
    // Constructor and initialization.

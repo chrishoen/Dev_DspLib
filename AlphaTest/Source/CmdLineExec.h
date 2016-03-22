@@ -26,6 +26,7 @@ public:
 
 
   void executeStep (Ris::CmdLineCmd* aCmd);
+  void executeRamp (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

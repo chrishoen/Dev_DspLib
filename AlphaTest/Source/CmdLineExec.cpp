@@ -32,6 +32,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("TRIAL"     ))  executeTrialStatistics(aCmd);
 
    if(aCmd->isCmd("STEP"     ))  executeStep(aCmd);
+   if(aCmd->isCmd("RAMP"     ))  executeRamp(aCmd);
 }
 
 //******************************************************************************
@@ -120,14 +121,32 @@ void CmdLineExec::executeStep(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =       10000.0;
-   tSS->mKev1 =         1000;
-   tSS->mSigma    =      1.0;
+   tSS->mTime1 =       0.100;
+   tSS->mSigma    =      0.0;
    tSS->mOffset   =      0.0;
    tSS->mDuration =      1.0;
    tSS->initialize();
    tSS->show();
    SignalGen::step(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\SampleStep.csv");
+   delete tSS;
+}
+
+
+//******************************************************************************
+
+void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =       10000.0;
+   tSS->mTime1 =       0.100;
+   tSS->mSigma    =      0.0;
+   tSS->mOffset   =      0.0;
+   tSS->mDuration =      1.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::step(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleRamp.csv");
    delete tSS;
 }
 

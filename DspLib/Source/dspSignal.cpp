@@ -42,6 +42,8 @@ Signal::Signal()
    mKev2 = 0;
    mSigma = 0.0;
    mOffset = 0.0;
+   mTime1 = 0.0;
+   mTime2 = 0.0;
 }
 
 Signal::~Signal()
@@ -59,7 +61,14 @@ Signal::~Signal()
 
 void Signal::initialize()
 {
-   mTs = 1.0 / mFs;
+   if (mFs != 0.0)
+   {
+      mTs = 1.0 / mFs;
+   }
+   else if (mTs != 0.0)
+   {
+      mFs = 1.0 / mTs;
+   }
 
    mNp = (int)round(mFs / mFp);
    mNp1 = (int)round(mDCp * mNp);
@@ -78,6 +87,21 @@ void Signal::initialize()
    mDuration = mNs * mTs;
    mNumSamples = mNs;
    mX = new double[mNumSamples];
+
+   mKev1 = (int)round(mTime1 / mTs);
+   mKev2 = (int)round(mTime2 / mTs);
+
+   if (mTime2 != 0)
+   {
+      mDeltaT = mTime2 - mTime1;
+      mDeltaK = mKev2 - mKev2;
+   }
+   else
+   {
+      mDeltaT = mTs;
+   }
+
+
 }
    
 //******************************************************************************
