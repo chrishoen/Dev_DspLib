@@ -44,6 +44,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("P11"    ))  executeP11(aCmd);
    if(aCmd->isCmd("P21"    ))  executeP21(aCmd);
    if(aCmd->isCmd("P22"    ))  executeP22(aCmd);
+
+   if(aCmd->isCmd("F51"    ))  executeF51(aCmd);
 }
 
 //******************************************************************************
@@ -242,5 +244,20 @@ void CmdLineExec::executeS41(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeS42(Ris::CmdLineCmd* aCmd)
 {
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeF51(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mKev1 =     1000;
+   tSS->mDuration =  1.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen51(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample51.csv");
+   delete tSS;
 }
 

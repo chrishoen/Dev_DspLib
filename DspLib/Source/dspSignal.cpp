@@ -37,6 +37,9 @@ Signal::Signal()
             
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
+
+   mKev1 = 0;
+   mKev2 = 0;
 }
 
 Signal::~Signal()
@@ -157,7 +160,7 @@ void Signal::writeToTextFile(char* aFileName)
 
    // Done
    tWriter.close();
-   printf( "Wrote Samples %s %d",aFileName,mNumSamples);
+   printf( "Wrote Samples %s %d\n",aFileName,mNumSamples);
 }
 
 }//namespace
