@@ -46,7 +46,7 @@ void CmdLineExec::executeF11(Ris::CmdLineCmd* aCmd)
    tParms->mFs       = 10000.0;
    tParms->mDuration =     1.0;
    tParms->mAp1 = 0.01;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample51.csv");
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
    tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter11.csv");
    tParms->initialize();
 

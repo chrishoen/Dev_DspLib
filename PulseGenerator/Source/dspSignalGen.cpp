@@ -189,5 +189,24 @@ void gen51(Signal* aS)
    }
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Generate random, normal
+
+void gen52(Signal* aS)
+{
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::normal_distribution<> tRandomDistribution(0.0, 1.0);
+
+   for (int k = 0; k < aS->mNs; k++)
+   {
+         double tNoise  = tRandomDistribution(tRandomGenerator);
+         double tSignal = (k <= aS->mKev1) ? 0.0 : aS->mOffset;
+         aS->mX[k] = tSignal + tNoise;
+   }
+}
+
 }//namespace
 }//namespace

@@ -97,13 +97,13 @@ void FilterTester::filter11(FilterParms* aParms)
       tSample.put(tSampleReader(0),tSampleReader(1));
 
       // Put sample to filter
-      mAlphaOne.put(tSample.mAmplitude);
+      mAlphaOne.put(tSample.mVolts);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
          tSampleCount,
          tSample.mTime,
-         tSample.mAmplitude,
+         tSample.mVolts,
          mAlphaOne.mXX);
       tSampleCount++;
    }

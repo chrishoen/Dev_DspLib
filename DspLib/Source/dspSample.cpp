@@ -29,6 +29,7 @@ Sample::Sample()
 void Sample::put(double aTime, double aVolts)
 {
    mTime = aTime;
+   mVolts = aVolts;
    mAmplitude = abs(aVolts);
 }
    

@@ -34,6 +34,9 @@ public:
   void executeP22 (Ris::CmdLineCmd* aCmd);
 
   void executeF51 (Ris::CmdLineCmd* aCmd);
+  void executeF52 (Ris::CmdLineCmd* aCmd);
+  void executeF53 (Ris::CmdLineCmd* aCmd);
+  void executeF54 (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

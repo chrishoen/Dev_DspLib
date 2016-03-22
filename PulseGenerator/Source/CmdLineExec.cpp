@@ -46,6 +46,9 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("P22"    ))  executeP22(aCmd);
 
    if(aCmd->isCmd("F51"    ))  executeF51(aCmd);
+   if(aCmd->isCmd("F52"    ))  executeF52(aCmd);
+   if(aCmd->isCmd("F53"    ))  executeF53(aCmd);
+   if(aCmd->isCmd("F54"    ))  executeF54(aCmd);
 }
 
 //******************************************************************************
@@ -259,5 +262,34 @@ void CmdLineExec::executeF51(Ris::CmdLineCmd* aCmd)
    SignalGen::gen51(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\Sample51.csv");
    delete tSS;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeF52(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =   10000.0;
+   tSS->mKev1 =     1000;
+   tSS->mSigma    =  1.0;
+   tSS->mOffset   = 10.0;
+   tSS->mDuration =  1.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::gen52(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample52.csv");
+   delete tSS;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeF53(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeF54(Ris::CmdLineCmd* aCmd)
+{
 }
 

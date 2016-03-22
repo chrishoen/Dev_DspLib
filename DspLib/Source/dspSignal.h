@@ -41,8 +41,11 @@ public:
    int     mNm2;          // Number of samples in a modulation period sub interval 2
    double  mDCp;          // Carrier    index = Np1/Np
    double  mDCm;          // Modulation index = Nm1/Nm
+
    int     mKev1;         // Sample event 1
    int     mKev2;         // Sample event 2
+   double  mSigma;        // Sigma
+   double  mOffset;       // Offset
 
    //--------------------------------------------------------------------------
    // Constructor and initialization.

@@ -33,6 +33,7 @@ public:
    // Sample time and amplitude
 
    double  mTime;
+   double  mVolts;
    double  mAmplitude;
    
 };

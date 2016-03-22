@@ -40,6 +40,8 @@ Signal::Signal()
 
    mKev1 = 0;
    mKev2 = 0;
+   mSigma = 0.0;
+   mOffset = 0.0;
 }
 
 Signal::~Signal()
