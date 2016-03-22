@@ -168,12 +168,14 @@
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspFilterTester.cpp" />
+    <ClCompile Include="Source\dspSignalGen.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspFilterTester.h" />
+    <ClInclude Include="Source\dspSignalGen.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>
   <ItemGroup>

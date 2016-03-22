@@ -21,6 +21,12 @@ public:
 
   void executeF11(Ris::CmdLineCmd* aCmd);
   void executeF12(Ris::CmdLineCmd* aCmd);
+
+
+  void executeS51 (Ris::CmdLineCmd* aCmd);
+  void executeS52 (Ris::CmdLineCmd* aCmd);
+  void executeS53 (Ris::CmdLineCmd* aCmd);
+  void executeS54 (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************
