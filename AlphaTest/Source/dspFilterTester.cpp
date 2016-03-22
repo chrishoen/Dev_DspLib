@@ -69,7 +69,7 @@ void FilterTester::initialize()
 //******************************************************************************
 //******************************************************************************
 
-void FilterTester::filter11(FilterParms* aParms)
+void FilterTester::testAlphaOne(FilterParms* aParms)
 {
    // Initialize parameters.
    aParms->initialize();
@@ -118,7 +118,7 @@ void FilterTester::filter11(FilterParms* aParms)
 //******************************************************************************
 //******************************************************************************
 
-void FilterTester::filter12(FilterParms* aParms)
+void FilterTester::testAlphaStatistics(FilterParms* aParms)
 {
    // Initialize parameters.
    aParms->initialize();
@@ -168,7 +168,7 @@ void FilterTester::filter12(FilterParms* aParms)
 //******************************************************************************
 //******************************************************************************
 
-void FilterTester::filter13(FilterParms* aParms)
+void FilterTester::testMovingAverage(FilterParms* aParms)
 {
    // Initialize parameters.
    aParms->initialize();

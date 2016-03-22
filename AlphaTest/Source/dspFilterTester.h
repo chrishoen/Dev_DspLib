@@ -73,10 +73,10 @@ public:
    // Statistics
    TrialStatistics         mTrialStatistics;
 
-   // Read from sample file, filter, write to sample file
-   void filter11  (FilterParms* aParms);
-   void filter12  (FilterParms* aParms);
-   void filter13  (FilterParms* aParms);
+   // Tests
+   void testAlphaOne         (FilterParms* aParms);
+   void testAlphaStatistics  (FilterParms* aParms);
+   void testMovingAverage    (FilterParms* aParms);
 
    // Read from sample file, run trial statistics
    void trial11  (FilterParms* aParms);

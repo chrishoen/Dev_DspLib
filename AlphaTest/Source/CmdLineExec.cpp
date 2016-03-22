@@ -26,15 +26,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
-   if(aCmd->isCmd("FILTER11" ))  executeFilter11(aCmd);
-   if(aCmd->isCmd("FILTER12" ))  executeFilter12(aCmd);
-   if(aCmd->isCmd("FILTER13" ))  executeFilter13(aCmd);
-   if(aCmd->isCmd("TRIAL11"  ))  executeTrial11(aCmd);
+   if(aCmd->isCmd("ALPHAONE"  ))  executeTestAlphaOne(aCmd);
+   if(aCmd->isCmd("ALPHASTAT" ))  executeTestAlphaStatistics(aCmd);
+   if(aCmd->isCmd("MOVAVG"    ))  executeTestMovingAverage(aCmd);
+   if(aCmd->isCmd("TRIAL"     ))  executeTrialStatistics(aCmd);
 
-   if(aCmd->isCmd("GEN51"    ))  executeGen51(aCmd);
-   if(aCmd->isCmd("GEN52"    ))  executeGen52(aCmd);
-   if(aCmd->isCmd("GEN53"    ))  executeGen53(aCmd);
-   if(aCmd->isCmd("GEN54"    ))  executeGen54(aCmd);
+   if(aCmd->isCmd("STEP"     ))  executeStep(aCmd);
 }
 
 //******************************************************************************
@@ -49,55 +46,55 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeFilter11(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
    tParms->mAp1 = 0.01;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter11.csv");
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleStep.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaOne.csv");
    tParms->initialize();
 
-   gFilterTester.filter11(tParms);
+   gFilterTester.testAlphaOne(tParms);
    delete tParms;
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeFilter12(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeTestAlphaStatistics(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
    tParms->mAp1      =    0.01;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter12.csv");
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleStep.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaStatistics.csv");
    tParms->initialize();
 
-   gFilterTester.filter12(tParms);
+   gFilterTester.testAlphaStatistics(tParms);
    delete tParms;
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeFilter13(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeTestMovingAverage(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs              = 10000.0;
    tParms->mWindowSampleSize   = 1000;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter13.csv");
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleStep.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterMovingAverage.csv");
    tParms->initialize();
 
-   gFilterTester.filter13(tParms);
+   gFilterTester.testMovingAverage(tParms);
    delete tParms;
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeTrial11(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeTrialStatistics(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleStep.csv");
    tParms->initialize();
 
    gFilterTester.trial11(tParms);
@@ -116,24 +113,10 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
 }
-//******************************************************************************
-
-void CmdLineExec::executeGen51(Ris::CmdLineCmd* aCmd)
-{
-   Signal* tSS = new Signal();
-   tSS->mFs  =   10000.0;
-   tSS->mKev1 =     1000;
-   tSS->mDuration =  1.0;
-   tSS->initialize();
-   tSS->show();
-   SignalGen::gen51(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample51.csv");
-   delete tSS;
-}
 
 //******************************************************************************
 
-void CmdLineExec::executeGen52(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeStep(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
    tSS->mFs  =       10000.0;
@@ -143,21 +126,9 @@ void CmdLineExec::executeGen52(Ris::CmdLineCmd* aCmd)
    tSS->mDuration =      1.0;
    tSS->initialize();
    tSS->show();
-   SignalGen::gen52(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample52.csv");
+   SignalGen::step(tSS);
+   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleStep.csv");
    delete tSS;
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGen53(Ris::CmdLineCmd* aCmd)
-{
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGen54(Ris::CmdLineCmd* aCmd)
-{
 }
 
 
