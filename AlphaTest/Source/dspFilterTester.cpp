@@ -92,11 +92,11 @@ void FilterTester::filter11(FilterParms* aParms)
       // Read sample row from input file
       if(!tSampleReader.readRow()) break;
       tRowIndex = tSampleReader.mRowIndex;
-      tSampleCount++;
 
       // Convert input and store in sample temp.
       tSample.put(tSampleReader(0),tSampleReader(1));
 
+      // Put sample to filter
       mAlphaOne.put(tSample.mAmplitude);
 
       // Write the sample to the output file.
