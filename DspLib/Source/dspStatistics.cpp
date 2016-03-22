@@ -366,19 +366,10 @@ void TrialStatistics::finishTrial()
 }
 
 //******************************************************************************
+
 void TrialStatistics::show()
 {
-   printf("%3d $$ %8.3f %8.3f %8.3f  %8.3f\n",
-      mPutCount,
-      mEX,
-      mUX,
-      mMinX,
-      mMaxX);
-}
-
-void TrialStatistics::show2()
-{
-   printf("%3d $$ %8.6f %8.6f %8.6f  %8.6f\n",
+   printf("%5d $$ %12.6f %12.6f %12.6f  %12.6f\n",
       mPutCount,
       mEX,
       mUX,

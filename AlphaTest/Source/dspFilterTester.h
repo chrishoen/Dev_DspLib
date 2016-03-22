@@ -8,6 +8,7 @@
 //******************************************************************************
 //******************************************************************************
 #include "dspTextFile.h"
+#include "dspStatistics.h"
 #include "dspFilterAlpha.h"
 #include "dspFilterStatistics.h"
 
@@ -65,9 +66,15 @@ public:
    Filter::AlphaOne        mAlphaOne;
    Filter::AlphaStatistics mAlphaStatistics;
 
-   // Read from sample file, detect pulses, write to pdw file
+   // Statistics
+   TrialStatistics         mTrialStatistics;
+
+   // Read from sample file, filter, write to sample file
    void filter11  (FilterParms* aParms);
    void filter12  (FilterParms* aParms);
+
+   // Read from sample file, run trial statistics
+   void trial11  (FilterParms* aParms);
 };
 
 //******************************************************************************

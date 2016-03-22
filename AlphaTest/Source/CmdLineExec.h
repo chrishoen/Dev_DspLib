@@ -19,14 +19,15 @@ public:
   void executeGo1(Ris::CmdLineCmd* aCmd);
   void executeGo2(Ris::CmdLineCmd* aCmd);
 
-  void executeF11(Ris::CmdLineCmd* aCmd);
-  void executeF12(Ris::CmdLineCmd* aCmd);
+  void executeFilter11(Ris::CmdLineCmd* aCmd);
+  void executeFilter12(Ris::CmdLineCmd* aCmd);
+  void executeTrial11 (Ris::CmdLineCmd* aCmd);
 
 
-  void executeS51 (Ris::CmdLineCmd* aCmd);
-  void executeS52 (Ris::CmdLineCmd* aCmd);
-  void executeS53 (Ris::CmdLineCmd* aCmd);
-  void executeS54 (Ris::CmdLineCmd* aCmd);
+  void executeGen51 (Ris::CmdLineCmd* aCmd);
+  void executeGen52 (Ris::CmdLineCmd* aCmd);
+  void executeGen53 (Ris::CmdLineCmd* aCmd);
+  void executeGen54 (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

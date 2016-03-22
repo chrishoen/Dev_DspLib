@@ -166,5 +166,53 @@ void FilterTester::filter12(FilterParms* aParms)
    tSampleWriter.close();
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void FilterTester::trial11(FilterParms* aParms)
+{
+   // Initialize parameters.
+   aParms->initialize();
+
+   // Start statistics.
+   mTrialStatistics.startTrial();
+
+   // Input file.
+   CsvFileReader  tSampleReader;
+
+   tSampleReader.open(aParms->mInputFileName);
+
+   // Local
+   int tSampleCount = 0;
+   int tRowIndex = 0;
+   Sample tSample;
+
+   // Loop through all of the samples in the input file.
+   while (true)
+   {
+      // Read sample row from input file
+      if(!tSampleReader.readRow()) break;
+      tRowIndex = tSampleReader.mRowIndex;
+
+      // Convert input and store in sample temp.
+      tSample.put(tSampleReader(0),tSampleReader(1));
+
+      // Put sample to statistics.
+      mTrialStatistics.put(tSample.mVolts);
+
+      // Update.
+      tSampleCount++;
+   }
+
+   // Finish statistics.
+   mTrialStatistics.finishTrial();
+
+   Prn::print(0, "Trial11 %d",tSampleCount);
+   mTrialStatistics.show();
+   // Close files.
+   tSampleReader.close();
+}
+
 //******************************************************************************   
 }//namespace
