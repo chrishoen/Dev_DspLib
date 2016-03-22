@@ -28,6 +28,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("FILTER11" ))  executeFilter11(aCmd);
    if(aCmd->isCmd("FILTER12" ))  executeFilter12(aCmd);
+   if(aCmd->isCmd("FILTER13" ))  executeFilter13(aCmd);
    if(aCmd->isCmd("TRIAL11"  ))  executeTrial11(aCmd);
 
    if(aCmd->isCmd("GEN51"    ))  executeGen51(aCmd);
@@ -73,6 +74,21 @@ void CmdLineExec::executeFilter12(Ris::CmdLineCmd* aCmd)
    tParms->initialize();
 
    gFilterTester.filter12(tParms);
+   delete tParms;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeFilter13(Ris::CmdLineCmd* aCmd)
+{
+   FilterParms* tParms = new FilterParms;
+   tParms->mFs              = 10000.0;
+   tParms->mWindowSampleSize   = 1000;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter13.csv");
+   tParms->initialize();
+
+   gFilterTester.filter13(tParms);
    delete tParms;
 }
 

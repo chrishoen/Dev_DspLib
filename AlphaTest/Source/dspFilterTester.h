@@ -10,6 +10,7 @@
 #include "dspTextFile.h"
 #include "dspStatistics.h"
 #include "dspFilterAlpha.h"
+#include "dspFilterFilters.h"
 #include "dspFilterStatistics.h"
 
 namespace Dsp
@@ -29,9 +30,11 @@ public:
    double  mTs;           // Sampling period
    double  mDuration;     // Time duration of signal
    int     mNumSamples;   // Number of samples in array
-
+   
    double mAp1;
    double mAp2;
+
+   int mWindowSampleSize;
 
    //--------------------------------------------------------------------------
    // File names
@@ -65,6 +68,7 @@ public:
    // Filters
    Filter::AlphaOne        mAlphaOne;
    Filter::AlphaStatistics mAlphaStatistics;
+   Filter::MovingAverage   mMovingAverage;
 
    // Statistics
    TrialStatistics         mTrialStatistics;
@@ -72,6 +76,7 @@ public:
    // Read from sample file, filter, write to sample file
    void filter11  (FilterParms* aParms);
    void filter12  (FilterParms* aParms);
+   void filter13  (FilterParms* aParms);
 
    // Read from sample file, run trial statistics
    void trial11  (FilterParms* aParms);

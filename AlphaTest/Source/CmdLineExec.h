@@ -21,6 +21,7 @@ public:
 
   void executeFilter11(Ris::CmdLineCmd* aCmd);
   void executeFilter12(Ris::CmdLineCmd* aCmd);
+  void executeFilter13(Ris::CmdLineCmd* aCmd);
   void executeTrial11 (Ris::CmdLineCmd* aCmd);
 
 
