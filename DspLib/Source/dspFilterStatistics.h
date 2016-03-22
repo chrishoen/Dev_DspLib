@@ -26,29 +26,30 @@ namespace Filter
    class AlphaStatistics
    {
    public:
+      // Constructor
+      AlphaStatistics();
+
       // Initialize
       void initialize(double aAlpha);
-      void reset();
-      void show();
-      // Valid
-      bool mValid;
 
       // Put input value
       void put(double aX);
 
       // Output values
-      double mX;       // Input value
-      double mEX;      // expectation (mean)
-      double mUX;      // uncertainty (standard deviation)
-      double mMean;    // expectation (mean)
-      double mStdDev;  // uncertainty (standard deviation)
+      double mX;          // Input value
+      double mEX;         // Expectation (mean)
+      double mUX;         // Uncertainty (standard deviation)
+      double mVariance;   // Variance
+      double mMean;       // Expectation (mean)
+      double mStdDev;     // Uncertainty (standard deviation)
 
       // Alpha filters for expectation and uncertainty
-      AlphaOne    mEXAlpha;    // Alpha filter for expectation (mean)
-      AlphaOne    mUXAlpha;    // Alpha filter for uncertainty (standard deviation)
+      AlphaOne    mXAlpha;        // Alpha filter for input X
+      AlphaOne    mXSquareAlpha;  // Alpha filter for input X squared
 
-      // Members
-      int mK;
+      // Helpers
+      int  mK;
+      void show();
    };
 
    //******************************************************************************

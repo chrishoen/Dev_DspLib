@@ -92,7 +92,7 @@ public:
    // Sums for expectation and uncertainty
    double  mXSum;         // Sum of X
    double  mXSquareSum;   // Sum of X squared
-   int    mPutCount;      // Put count
+   int     mPutCount;     // Put count
 
    // Current min and max
    double  mCurrentMinX;  // minimum

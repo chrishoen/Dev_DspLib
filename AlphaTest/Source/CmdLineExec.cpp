@@ -67,7 +67,7 @@ void CmdLineExec::executeFilter12(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
-   tParms->mAp1      =   0.001;
+   tParms->mAp1      =    0.01;
    tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
    tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter12.csv");
    tParms->initialize();
@@ -124,7 +124,7 @@ void CmdLineExec::executeGen52(Ris::CmdLineCmd* aCmd)
    tSS->mKev1 =         1000;
    tSS->mSigma    =      1.0;
    tSS->mOffset   =      0.0;
-   tSS->mDuration =     10.0;
+   tSS->mDuration =      1.0;
    tSS->initialize();
    tSS->show();
    SignalGen::gen52(tSS);
