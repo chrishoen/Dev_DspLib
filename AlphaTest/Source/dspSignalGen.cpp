@@ -56,7 +56,7 @@ void step(Signal* aS)
       {
       }
 
-      aS->mX[k] = tX + tNoise + aS->mOffset;
+      aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
    }
 }
 
@@ -97,7 +97,7 @@ void ramp(Signal* aS)
       {
       }
 
-      aS->mX[k] = tX;
+      aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
    }
 }
 

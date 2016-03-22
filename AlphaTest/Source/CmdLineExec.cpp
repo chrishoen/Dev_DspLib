@@ -142,6 +142,7 @@ void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
    tSS->mTime1 =       0.100;
    tSS->mTime2 =       0.200;
    tSS->mSigma    =      0.0;
+   tSS->mScale    =      1.0;
    tSS->mOffset   =      0.0;
    tSS->mDuration =      1.0;
    tSS->initialize();

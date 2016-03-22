@@ -48,6 +48,7 @@ public:
    double  mSigma;        // Sigma
    double  mOffset;       // Offset
 
+   double  mScale;        // Scale
    double  mTime1;        // Time
    double  mTime2;        // Time
    double  mDeltaT;       // Delta

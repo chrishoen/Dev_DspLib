@@ -38,6 +38,7 @@ Signal::Signal()
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
 
+   mScale = 1.0;
    mKev1 = 0;
    mKev2 = 0;
    mSigma = 0.0;
