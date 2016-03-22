@@ -271,8 +271,8 @@ void CmdLineExec::executeF52(Ris::CmdLineCmd* aCmd)
    Signal* tSS = new Signal();
    tSS->mFs  =   10000.0;
    tSS->mKev1 =     1000;
-   tSS->mSigma    =  1.0;
-   tSS->mOffset   = 10.0;
+   tSS->mSigma    =  4.0;
+   tSS->mOffset   =  0.0;
    tSS->mDuration =  1.0;
    tSS->initialize();
    tSS->show();

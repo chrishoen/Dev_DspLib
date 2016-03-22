@@ -26,6 +26,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
    if(aCmd->isCmd("F11"    ))  executeF11(aCmd);
+   if(aCmd->isCmd("F12"    ))  executeF12(aCmd);
 }
 
 //******************************************************************************
@@ -58,6 +59,16 @@ void CmdLineExec::executeF11(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeF12(Ris::CmdLineCmd* aCmd)
 {
+   FilterParms* tParms = new FilterParms;
+   tParms->mFs       = 10000.0;
+   tParms->mDuration =     1.0;
+   tParms->mAp1      =   0.001;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\Sample52.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\Filter12.csv");
+   tParms->initialize();
+
+   gFilterTester.filter12(tParms);
+   delete tParms;
 }
 
 

@@ -9,6 +9,7 @@
 //******************************************************************************
 #include "dspTextFile.h"
 #include "dspFilterAlpha.h"
+#include "dspFilterStatistics.h"
 
 namespace Dsp
 {
@@ -61,10 +62,12 @@ public:
    void initialize();
 
    // Filters
-   Filter::AlphaOne mAlphaOne;
+   Filter::AlphaOne        mAlphaOne;
+   Filter::AlphaStatistics mAlphaStatistics;
 
    // Read from sample file, detect pulses, write to pdw file
    void filter11  (FilterParms* aParms);
+   void filter12  (FilterParms* aParms);
 };
 
 //******************************************************************************

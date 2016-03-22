@@ -108,7 +108,59 @@ void FilterTester::filter11(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "Filter1 %d",tSampleCount);
+   Prn::print(0, "Filter11 %d",tSampleCount);
+   // Close files.
+   tSampleReader.close();
+   tSampleWriter.close();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void FilterTester::filter12(FilterParms* aParms)
+{
+   // Initialize parameters.
+   aParms->initialize();
+   // Initialize filter.
+   mAlphaStatistics.initialize(aParms->mAp1);
+
+   // Input and output files.
+   CsvFileReader  tSampleReader;
+   CsvFileWriter  tSampleWriter;
+
+   tSampleReader.open(aParms->mInputFileName);
+   tSampleWriter.open(aParms->mOutputFileName);
+
+   // Local
+   int tSampleCount = 0;
+   int tRowIndex = 0;
+   Sample tSample;
+
+   // Loop through all of the samples in the input file.
+   while (true)
+   {
+      // Read sample row from input file
+      if(!tSampleReader.readRow()) break;
+      tRowIndex = tSampleReader.mRowIndex;
+
+      // Convert input and store in sample temp.
+      tSample.put(tSampleReader(0),tSampleReader(1));
+
+      // Put sample to filter
+      mAlphaStatistics.put(tSample.mVolts);
+
+      // Write the sample to the output file.
+      tSampleWriter.writeRow(
+         tSampleCount,
+         tSample.mTime,
+         tSample.mVolts,
+         mAlphaStatistics.mEX,
+         mAlphaStatistics.mUX);
+      tSampleCount++;
+   }
+
+   Prn::print(0, "Filter12 %d",tSampleCount);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();

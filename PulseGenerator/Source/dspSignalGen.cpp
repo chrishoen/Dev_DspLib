@@ -198,7 +198,7 @@ void gen52(Signal* aS)
 {
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<> tRandomDistribution(0.0, 1.0);
+   std::normal_distribution<> tRandomDistribution(0.0, aS->mSigma);
 
    for (int k = 0; k < aS->mNs; k++)
    {
