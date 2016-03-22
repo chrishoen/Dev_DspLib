@@ -140,12 +140,13 @@ void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
    Signal* tSS = new Signal();
    tSS->mFs  =       10000.0;
    tSS->mTime1 =       0.100;
+   tSS->mTime2 =       0.200;
    tSS->mSigma    =      0.0;
    tSS->mOffset   =      0.0;
    tSS->mDuration =      1.0;
    tSS->initialize();
    tSS->show();
-   SignalGen::step(tSS);
+   SignalGen::ramp(tSS);
    tSS->writeToTextFile("C:\\MyLib\\Data\\SampleRamp.csv");
    delete tSS;
 }

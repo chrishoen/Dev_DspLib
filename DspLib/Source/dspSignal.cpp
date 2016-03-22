@@ -94,7 +94,8 @@ void Signal::initialize()
    if (mTime2 != 0)
    {
       mDeltaT = mTime2 - mTime1;
-      mDeltaK = mKev2 - mKev2;
+      mDeltaK = mKev2 - mKev1;
+      mDeltaX = 1.0 / double(mDeltaK);
    }
    else
    {
@@ -164,6 +165,14 @@ void Signal::show()
 
    printf("mDCp         %10.4f\n",mDCp);
    printf("mDCm         %10.4f\n",mDCm);
+
+   printf("mTime1       %10.4f\n", mTime1);
+   printf("mTime2       %10.4f\n", mTime2);
+   printf("mKev1        %10d\n",   mKev1);
+   printf("mKev2        %10d\n",   mKev2);
+   printf("mDeltaK      %10d\n",   mDeltaK);
+   printf("mDeltaT      %10.4f\n", mDeltaT);
+   printf("mDeltaX      %10.4f\n", mDeltaX);
 }
 
 //******************************************************************************
