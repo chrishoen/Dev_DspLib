@@ -26,14 +26,17 @@ static bool mSigmaFlag = false;
 static std::mt19937 mRandomGenerator;
 static std::normal_distribution<double> mRandomDistribution;
 
+// Initialize random distribution.
 static void initializeNoise(Signal* aS)
 {
-   // Random
+   // Set flag.
    mSigmaFlag = aS->mSigma != 0.0;
 
+   // Seed generator.
    std::random_device tRandomDevice;
    mRandomGenerator.seed(tRandomDevice());
 
+   // Set distribution parameters.
    std::normal_distribution<double>::param_type parm;
    if (mSigmaFlag) parm._Init(0.0, aS->mSigma);
    else            parm._Init(0.0, 1.0);
@@ -41,6 +44,7 @@ static void initializeNoise(Signal* aS)
    mRandomDistribution.param(parm);
 }
 
+// Get noise from random distribution.
 static double getNoise()
 {
    double tNoise;
