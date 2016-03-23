@@ -34,7 +34,8 @@ public:
    double mAp1;
    double mAp2;
 
-   int mWindowSampleSize;
+   double mWindowTimeSize;
+   int    mWindowSampleSize;
 
    //--------------------------------------------------------------------------
    // File names

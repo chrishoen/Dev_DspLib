@@ -19,8 +19,10 @@ namespace SignalGen
 //******************************************************************************
 //******************************************************************************
 
-   void step (Signal* aS);
-   void ramp (Signal* aS);
+   void constant (Signal* aS);
+   void impulse  (Signal* aS);
+   void step     (Signal* aS);
+   void ramp     (Signal* aS);
 
 //******************************************************************************
 }//namespace

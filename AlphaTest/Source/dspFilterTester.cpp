@@ -38,6 +38,7 @@ void FilterParms::reset()
    mAp2 = 1.0 - mAp1;
 
    mWindowSampleSize = 100;
+   mWindowTimeSize = 0.100;
 
    mInputFileName[0]=0;
    mOutputFileName [0]=0;
@@ -47,6 +48,8 @@ void FilterParms::initialize()
 {
    mTs = 1.0 / mFs;
    mNumSamples = (int)(round(mDuration) * mFs);
+
+   mWindowSampleSize = (int)(round(mWindowTimeSize) * mFs);;
 }
 
 void FilterParms::setInputFileName  (char* aFileName) { strcpy(mInputFileName,  aFileName); }
@@ -108,7 +111,7 @@ void FilterTester::testAlphaOne(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "Filter11 %d",tSampleCount);
+   Prn::print(0, "TestAlphaOne %d",tSampleCount);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();
@@ -158,7 +161,7 @@ void FilterTester::testAlphaStatistics(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "Filter12 %d %s",tSampleCount,aParms->mInputFileName);
+   Prn::print(0, "TestAlphaStatistics %d %s",tSampleCount,aParms->mInputFileName);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();
@@ -208,7 +211,7 @@ void FilterTester::testMovingAverage(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "Filter13 %d %s",tSampleCount,aParms->mInputFileName);
+   Prn::print(0, "TestMovingAverage %d %s",tSampleCount,aParms->mInputFileName);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();

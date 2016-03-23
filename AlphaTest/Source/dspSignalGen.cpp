@@ -17,7 +17,83 @@ namespace Dsp
 namespace SignalGen
 {
 
-static const double cPI = 3.14159265358979323846264338327950288419716939937510;
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void constant(Signal* aS)
+{
+   // Random
+   bool tSigmaFlag = aS->mSigma != 0.0;
+
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::normal_distribution<double>::param_type parm;
+
+   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
+   else            parm._Init(0.0, 1.0);
+
+   std::normal_distribution<double> tRandomDistribution(parm);
+
+   double tNoise  = 0.0;
+   double tX = 0.0;
+
+   // Signal
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      if (tSigmaFlag)
+      {
+         tNoise = tRandomDistribution(tRandomGenerator);
+      }
+
+      tX = 0.0;
+
+      aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void impulse(Signal* aS)
+{
+   // Random
+   bool tSigmaFlag = aS->mSigma != 0.0;
+
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::normal_distribution<double>::param_type parm;
+
+   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
+   else            parm._Init(0.0, 1.0);
+
+   std::normal_distribution<double> tRandomDistribution(parm);
+
+   double tNoise  = 0.0;
+   double tX = 0.0;
+
+   // Signal
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      if (tSigmaFlag)
+      {
+         tNoise = tRandomDistribution(tRandomGenerator);
+      }
+
+      if (k != aS->mKev1)
+      {
+         tX = 0.0;
+      }
+      else
+      {
+         tX = aS->mFs;
+         tX = 1.0;
+      }
+
+      aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;
+   }
+}
 
 //******************************************************************************
 //******************************************************************************
@@ -26,17 +102,22 @@ static const double cPI = 3.14159265358979323846264338327950288419716939937510;
 
 void step(Signal* aS)
 {
+   // Random
    bool tSigmaFlag = aS->mSigma != 0.0;
-   double tSigma = aS->mSigma;
-   if (tSigma==0.0) tSigma=1.0;
 
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<> tRandomDistribution(0.0, tSigma);
+   std::normal_distribution<double>::param_type parm;
+
+   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
+   else            parm._Init(0.0, 1.0);
+
+   std::normal_distribution<double> tRandomDistribution(parm);
 
    double tNoise  = 0.0;
    double tX = 0.0;
 
+   // Signal
    for (int k = 0; k < aS->mNs; k++)
    {
       if (tSigmaFlag)
@@ -67,17 +148,22 @@ void step(Signal* aS)
 
 void ramp(Signal* aS)
 {
+   // Random
    bool tSigmaFlag = aS->mSigma != 0.0;
-   double tSigma = aS->mSigma;
-   if (tSigma==0.0) tSigma=1.0;
 
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<> tRandomDistribution(0.0, tSigma);
+   std::normal_distribution<double>::param_type parm;
+
+   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
+   else            parm._Init(0.0, 1.0);
+
+   std::normal_distribution<double> tRandomDistribution(parm);
 
    double tNoise  = 0.0;
    double tX = 0.0;
 
+   // Signal
    for (int k = 0; k < aS->mNs; k++)
    {
       if (tSigmaFlag)

@@ -25,8 +25,10 @@ public:
    void executeTrialStatistics     (Ris::CmdLineCmd* aCmd);
 
 
-  void executeStep (Ris::CmdLineCmd* aCmd);
-  void executeRamp (Ris::CmdLineCmd* aCmd);
+  void executeConstant (Ris::CmdLineCmd* aCmd);
+  void executeImpulse  (Ris::CmdLineCmd* aCmd);
+  void executeStep     (Ris::CmdLineCmd* aCmd);
+  void executeRamp     (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

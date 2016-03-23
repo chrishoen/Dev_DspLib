@@ -45,6 +45,10 @@ Signal::Signal()
    mOffset = 0.0;
    mTime1 = 0.0;
    mTime2 = 0.0;
+
+   mDeltaT = mTs;
+   mDeltaK = 1;
+   mDeltaX = 1.0 / double(mDeltaK);
 }
 
 Signal::~Signal()
