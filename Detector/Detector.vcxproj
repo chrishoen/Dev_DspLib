@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CAE77CCE-F1ED-4596-913A-975EA3C7BCB8}</ProjectGuid>
+    <ProjectGuid>{6BA504DC-B798-467E-B787-B9AC45244EE2}</ProjectGuid>
     <RootNamespace>Test</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -169,10 +169,12 @@
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
+    <ClCompile Include="Source\someDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
+    <ClInclude Include="Source\someDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DspLib\DspLib.vcxproj">
