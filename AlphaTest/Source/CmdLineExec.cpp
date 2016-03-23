@@ -27,6 +27,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
    if(aCmd->isCmd("ALPHAONE"  ))  executeTestAlphaOne(aCmd);
+   if(aCmd->isCmd("ALPHATWO"  ))  executeTestAlphaTwo(aCmd);
    if(aCmd->isCmd("ALPHASTAT" ))  executeTestAlphaStatistics(aCmd);
    if(aCmd->isCmd("MOVAVG"    ))  executeTestMovingAverage(aCmd);
    if(aCmd->isCmd("TRIAL"     ))  executeTrialStatistics(aCmd);
@@ -53,12 +54,28 @@ void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
-   tParms->mAp1  = 0.00459229;
+   tParms->mAp1   = 0.00459229;
    tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaOne.csv");
    tParms->initialize();
 
    gFilterTester.testAlphaOne(tParms);
+   delete tParms;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeTestAlphaTwo(Ris::CmdLineCmd* aCmd)
+{
+   FilterParms* tParms = new FilterParms;
+   tParms->mFs       = 10000.0;
+   tParms->mAp1   = 0.00459229;
+   tParms->mAp2   = 0.0000105688;
+   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaTwo.csv");
+   tParms->initialize();
+
+   gFilterTester.testAlphaTwo(tParms);
    delete tParms;
 }
 

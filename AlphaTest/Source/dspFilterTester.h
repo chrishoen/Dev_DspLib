@@ -68,6 +68,7 @@ public:
 
    // Filters
    Filter::AlphaOne        mAlphaOne;
+   Filter::AlphaTwo        mAlphaTwo;
    Filter::AlphaStatistics mAlphaStatistics;
    Filter::MovingAverage   mMovingAverage;
 
@@ -76,6 +77,7 @@ public:
 
    // Tests
    void testAlphaOne         (FilterParms* aParms);
+   void testAlphaTwo         (FilterParms* aParms);
    void testAlphaStatistics  (FilterParms* aParms);
    void testMovingAverage    (FilterParms* aParms);
 

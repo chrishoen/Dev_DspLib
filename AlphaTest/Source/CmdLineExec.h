@@ -20,6 +20,7 @@ public:
    void executeGo2(Ris::CmdLineCmd* aCmd);
 
    void executeTestAlphaOne        (Ris::CmdLineCmd* aCmd);
+   void executeTestAlphaTwo        (Ris::CmdLineCmd* aCmd);
    void executeTestAlphaStatistics (Ris::CmdLineCmd* aCmd);
    void executeTestMovingAverage   (Ris::CmdLineCmd* aCmd);
    void executeTrialStatistics     (Ris::CmdLineCmd* aCmd);
