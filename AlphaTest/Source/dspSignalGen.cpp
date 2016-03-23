@@ -20,34 +20,63 @@ namespace SignalGen
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Guassian noise
+
+static bool mSigmaFlag = false;
+static std::mt19937 mRandomGenerator;
+static std::normal_distribution<double> mRandomDistribution;
+
+static void initializeNoise(Signal* aS)
+{
+   // Random
+   mSigmaFlag = aS->mSigma != 0.0;
+
+   std::random_device tRandomDevice;
+   mRandomGenerator.seed(tRandomDevice());
+
+   std::normal_distribution<double>::param_type parm;
+   if (mSigmaFlag) parm._Init(0.0, aS->mSigma);
+   else            parm._Init(0.0, 1.0);
+
+   mRandomDistribution.param(parm);
+}
+
+static double getNoise()
+{
+   double tNoise;
+   if (mSigmaFlag)
+   {
+      tNoise = mRandomDistribution(mRandomGenerator);
+   }
+   else
+   {
+      tNoise = 0.0;
+   }
+   return tNoise;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void constant(Signal* aS)
 {
-   // Random
-   bool tSigmaFlag = aS->mSigma != 0.0;
+   // Initialize
+   initializeNoise(aS);
 
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double>::param_type parm;
-
-   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
-   else            parm._Init(0.0, 1.0);
-
-   std::normal_distribution<double> tRandomDistribution(parm);
-
-   double tNoise  = 0.0;
+   double tNoise = 0.0;
    double tX = 0.0;
 
-   // Signal
+   // For all samples
    for (int k = 0; k < aS->mNs; k++)
    {
-      if (tSigmaFlag)
-      {
-         tNoise = tRandomDistribution(tRandomGenerator);
-      }
+      // Noise
+      tNoise = getNoise();
 
+      // Signal
       tX = 0.0;
 
+      // Sample
       aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
    }
 }
@@ -58,29 +87,19 @@ void constant(Signal* aS)
 
 void impulse(Signal* aS)
 {
-   // Random
-   bool tSigmaFlag = aS->mSigma != 0.0;
-
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double>::param_type parm;
-
-   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
-   else            parm._Init(0.0, 1.0);
-
-   std::normal_distribution<double> tRandomDistribution(parm);
+   // Initialize
+   initializeNoise(aS);
 
    double tNoise  = 0.0;
    double tX = 0.0;
 
-   // Signal
+   // For all samples
    for (int k = 0; k < aS->mNs; k++)
    {
-      if (tSigmaFlag)
-      {
-         tNoise = tRandomDistribution(tRandomGenerator);
-      }
+      // Noise
+      tNoise = getNoise();
 
+      // Signal
       if (k != aS->mKev1)
       {
          tX = 0.0;
@@ -91,6 +110,7 @@ void impulse(Signal* aS)
          tX = 1.0;
       }
 
+      // Sample
       aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;
    }
 }
@@ -102,29 +122,19 @@ void impulse(Signal* aS)
 
 void step(Signal* aS)
 {
-   // Random
-   bool tSigmaFlag = aS->mSigma != 0.0;
-
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double>::param_type parm;
-
-   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
-   else            parm._Init(0.0, 1.0);
-
-   std::normal_distribution<double> tRandomDistribution(parm);
+   // Initialize
+   initializeNoise(aS);
 
    double tNoise  = 0.0;
    double tX = 0.0;
 
-   // Signal
+   // For all samples
    for (int k = 0; k < aS->mNs; k++)
    {
-      if (tSigmaFlag)
-      {
-         tNoise = tRandomDistribution(tRandomGenerator);
-      }
+      // Noise
+      tNoise = getNoise();
 
+      // Signal
       if (k < aS->mKev1)
       {
          tX = 0.0;
@@ -137,6 +147,7 @@ void step(Signal* aS)
       {
       }
 
+      // Sample
       aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
    }
 }
@@ -148,29 +159,19 @@ void step(Signal* aS)
 
 void ramp(Signal* aS)
 {
-   // Random
-   bool tSigmaFlag = aS->mSigma != 0.0;
-
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double>::param_type parm;
-
-   if (tSigmaFlag) parm._Init(0.0, aS->mSigma);
-   else            parm._Init(0.0, 1.0);
-
-   std::normal_distribution<double> tRandomDistribution(parm);
+   // Initialize
+   initializeNoise(aS);
 
    double tNoise  = 0.0;
    double tX = 0.0;
 
-   // Signal
+   // For all samples
    for (int k = 0; k < aS->mNs; k++)
    {
-      if (tSigmaFlag)
-      {
-         tNoise = tRandomDistribution(tRandomGenerator);
-      }
+      // Noise
+      tNoise = getNoise();
 
+      // Signal
       if (k < aS->mKev1)
       {
          tX = 0.0;
@@ -183,6 +184,7 @@ void ramp(Signal* aS)
       {
       }
 
+      // Sample
       aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
    }
 }
