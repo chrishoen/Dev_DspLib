@@ -86,7 +86,6 @@ void CmdLineExec::executeTestMovingAverage(Ris::CmdLineCmd* aCmd)
    tParms->mWindowTimeSize    = 0.100;
    tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterMovingAverage.csv");
-   tParms->initialize();
 
    gFilterTester.testMovingAverage(tParms);
    delete tParms;
