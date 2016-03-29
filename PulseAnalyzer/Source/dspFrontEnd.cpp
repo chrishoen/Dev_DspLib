@@ -69,6 +69,7 @@ void FrontEnd::initialize()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Read from sample file, detect pulses, write to pdw file
 
 void FrontEnd::detect1(FrontEndParms* aParms)
 {
@@ -133,18 +134,12 @@ void FrontEnd::detect1(FrontEndParms* aParms)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Read from pdw file, analyze, write to sample file
 
 void FrontEnd::analyze11(FrontEndParms* aParms)
 {
    // Initialize parameters.
    aParms->initialize();
-
-   // Initialize pulse detector.
-   mPulseDetector.reset();
-   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
-   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
-   mPulseDetector.mSamplePeriod       = aParms->mTs;
-   mPulseDetector.initialize();
 
    // Initialize pulse list.
    mPulseList.reset();
@@ -212,18 +207,12 @@ void FrontEnd::analyze11(FrontEndParms* aParms)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Read from pdw file, analyze, write to sample file
 
 void FrontEnd::analyze12(FrontEndParms* aParms)
 {
    // Initialize parameters.
    aParms->initialize();
-
-   // Initialize pulse detector.
-   mPulseDetector.reset();
-   mPulseDetector.mDetectYesThreshold = aParms->mDetectYesThreshold;
-   mPulseDetector.mDetectNoThreshold  = aParms->mDetectNoThreshold;
-   mPulseDetector.mSamplePeriod       = aParms->mTs;
-   mPulseDetector.initialize();
 
    // Initialize pulse list.
    mPulseList.reset();

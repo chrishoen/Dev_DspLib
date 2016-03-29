@@ -239,7 +239,7 @@ void CmdLineExec::executeS41(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::gen41(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\Sample41.csv");
+   tSS->writeToTextFile("C:\\MyLib\\Data\\PulseSample41.csv");
    delete tSS;
 }
 

@@ -17,6 +17,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// This is a threshold pulse detector. It inputs samples and outputs pdws,
+// which are pulse descriptor words.
 
 class PulseDetector
 {
@@ -24,7 +26,7 @@ public:
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
-   // Interface
+   // Constructor and parameters.
 
    // Constructor.
    PulseDetector();
@@ -40,6 +42,9 @@ public:
    // Initialize, using the parameters.
    void initialize();
 
+   //--------------------------------------------------------------------------
+   //--------------------------------------------------------------------------
+   //--------------------------------------------------------------------------
    // Put a new sample to the detector, this is called at the sampling rate.
    // If a pulse is detected then this returns a pointer to a pdw.
    // if not then it returns null.
