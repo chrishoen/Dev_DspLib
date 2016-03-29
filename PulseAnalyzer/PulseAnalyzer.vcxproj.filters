@@ -49,4 +49,7 @@
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
 </Project>
