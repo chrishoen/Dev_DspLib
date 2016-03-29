@@ -23,7 +23,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileTest", "FileTest\FileTe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlphaTest", "AlphaTest\AlphaTest.vcxproj", "{E3E51A5D-B5D3-4E7F-BD6D-DF80B288C942}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Detector", "Detector\Detector.vcxproj", "{6BA504DC-B798-467E-B787-B9AC45244EE2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreqDetector", "FreqDetector\FreqDetector.vcxproj", "{6BA504DC-B798-467E-B787-B9AC45244EE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
