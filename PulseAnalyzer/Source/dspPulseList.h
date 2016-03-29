@@ -18,6 +18,11 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// This maintains a list of pdws (pulse descriptor words) for pulses that have
+// recently arrived, typically during the last 100 milliseconds. It establishes
+// a sliding window of pdws. The list is updated at the sample rate. If a pulse
+// has arrived then it is added to the list. If the oldest pdw in the list
+// falls outside of the window then it is removed from the list.
 
 class PulseList
 {
@@ -40,12 +45,13 @@ public:
    // Initialize, using the parameters. Allocate queue memory.
    void initialize();
 
-   // Deallocate the queue memory.
+   // Deallocate queue memory.
    void finalize();
 
    // Put a new pdw to the bottom of the list. If the list is full, then 
    // remove the oldest pdw from the top of  the list and return it. If it is 
-   // not full, then return null.
+   // not full, then return null. This is called by the pulse analyzer at the
+   // sample rate, if a new pulse has been detected by the pulse detector.
    Pdw* addNewPdw(Pdw* aPdw);
 
    // Remove the oldest pdw from the top of the list.
@@ -53,7 +59,8 @@ public:
 
    // Update the list window lower and upper limits. If the oldest pdw in the
    // list is older than the window lower limit then it has fallen outside of
-   // the window. In that case, remove and return it.
+   // the window. In that case, remove and return it. This is called at the
+   // sample rate by the pulse analyzer front end.
    Pdw* updateTime(double aTime);
 
    // Return the current number of pdws in the list, which is the queue size.
@@ -69,11 +76,6 @@ public:
    // Queue of pdw pointers
 
    CC::ValueQueue<Pdw*> mQueue;
-
-   int mPutCount;
-   int mGetCount;
-   int mTestCount1;
-   int mTestCount2;
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------

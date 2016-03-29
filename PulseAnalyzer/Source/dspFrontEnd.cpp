@@ -320,11 +320,6 @@ void FrontEnd::analyze12(FrontEndParms* aParms)
    tPdwReader.close();
    tSampleWriter.close();
 
-   Prn::print(0, "mPulseList.mPutCount    %10d",mPulseList.mPutCount);
-   Prn::print(0, "mPulseList.mGetCount    %10d",mPulseList.mGetCount);
-   Prn::print(0, "mPulseList.mTestCount1  %10d",mPulseList.mTestCount1);
-   Prn::print(0, "mPulseList.mTestCount2  %10d",mPulseList.mTestCount2);
-
    Prn::print(0, "mPulseList.mWindowTimeSize        %10.5f",mPulseList.mWindowTimeSize);
    Prn::print(0, "mPulseList.mWindowTimeUpperLimit  %10.5f",mPulseList.mWindowTimeUpperLimit),
    Prn::print(0, "mPulseList.mWindowTimeLowerLimit  %10.5f",mPulseList.mWindowTimeLowerLimit);
