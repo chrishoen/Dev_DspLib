@@ -18,6 +18,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// This is used to store statistics on pulses that have arrived during the
+// recent past, typically the last 100 milliseconds.
 
 class PulseStatistics
 {
@@ -45,19 +47,21 @@ public:
    void finalize();
 
    // Add/subtract a pdw to/from the statistics. Pdw values are extracted
-   // and added or subtracted to the following sum statistics.
+   // and added or subtracted to the following sum statistics. These are 
+   // called at the sample rate by the pulse analyzer front end when a pulse
+   // arrives or when a pulse is removed from the sliding window pulse list.
    void addPdw      (Pdw* aPdw);
    void subtractPdw (Pdw* aPdw);
 
-   // Pdw statistics
+   // Pdw statistics, these are aperiodic.
    SumStatistics mAmplitude;
    SumStatistics mPulseWidth;
    int mCount;
 
-   // Put pulse density to the statistics.
+   // Put pulse density to the statistics. This is called at the sample rate.
    void putPulseDensity(double aX);
 
-   // Pulse statistics
+   // Pulse statistics. These are periodic.
    Filter::MovingAverage mPulseDensity;
 };
 
