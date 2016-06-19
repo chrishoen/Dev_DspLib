@@ -41,8 +41,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeD11(Ris::CmdLineCmd* aCmd)
 {
    FrontEndParms* tParms = new FrontEndParms;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\PulseSample41.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\DetectedPdw41.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\PulseSample41.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\DetectedPdw41.csv");
 
    gFrontEnd.detect1(tParms);
    delete tParms;
@@ -59,8 +59,8 @@ void CmdLineExec::executeA12(Ris::CmdLineCmd* aCmd)
    tParms->mDuration =    10.0;
    tParms->mListMaxNumOfElements = 10000;
    tParms->mListWindowTimeSize   = 0.100 + 0.00001;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\PulsePdw11.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze12.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\PulsePdw11.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\Analyze12.csv");
    tParms->initialize();
 
    gFrontEnd.analyze12(tParms);
@@ -76,8 +76,8 @@ void CmdLineExec::executeA11(Ris::CmdLineCmd* aCmd)
    tParms->mDuration =    10.0;
    tParms->mListMaxNumOfElements = 10000;
    tParms->mListWindowTimeSize   = 0.100;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\PulsePdw11.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\Analyze11.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\PulsePdw11.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\Analyze11.csv");
    tParms->initialize();
 
    gFrontEnd.analyze11(tParms);

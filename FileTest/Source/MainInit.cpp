@@ -47,7 +47,7 @@ void main_initialize(int argc,char** argv)
    Prn::print(0,"FileTest*******************************************BEGIN");
 
    Log::reset();
-   Log::openFile(1,"C:\\MyLib\\Data\\logfile_101.txt");
+   Log::openFile(1,"C:\\Alpha\\Data\\logfile_101.txt");
 }
 
 //******************************************************************************

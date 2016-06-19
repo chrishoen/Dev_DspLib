@@ -55,8 +55,8 @@ void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
    tParms->mAp1   = 0.00459229;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaOne.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaOne.csv");
    tParms->initialize();
 
    gFilterTester.testAlphaOne(tParms);
@@ -71,8 +71,8 @@ void CmdLineExec::executeTestAlphaTwo(Ris::CmdLineCmd* aCmd)
    tParms->mFs       = 10000.0;
    tParms->mAp1   = 0.00459229;
    tParms->mAp2   = 0.0000105688;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaTwo.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaTwo.csv");
    tParms->initialize();
 
    gFilterTester.testAlphaTwo(tParms);
@@ -86,8 +86,8 @@ void CmdLineExec::executeTestAlphaStatistics(Ris::CmdLineCmd* aCmd)
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 10000.0;
    tParms->mAp1  = 0.00459229;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterAlphaStatistics.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaStatistics.csv");
    tParms->initialize();
 
    gFilterTester.testAlphaStatistics(tParms);
@@ -101,8 +101,8 @@ void CmdLineExec::executeTestMovingAverage(Ris::CmdLineCmd* aCmd)
    FilterParms* tParms = new FilterParms;
    tParms->mFs              = 10000.0;
    tParms->mWindowTimeSize    = 0.100;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
-   tParms->setOutputFileName ("C:\\MyLib\\Data\\FilterMovingAverage.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterMovingAverage.csv");
 
    gFilterTester.testMovingAverage(tParms);
    delete tParms;
@@ -113,7 +113,7 @@ void CmdLineExec::executeTestMovingAverage(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeTrialStatistics(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
-   tParms->setInputFileName  ("C:\\MyLib\\Data\\SampleTest.csv");
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->initialize();
 
    gFilterTester.trial11(tParms);
@@ -162,7 +162,7 @@ void CmdLineExec::executeConstant(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::constant(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleTest.csv");
+   tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
    delete tSS;
 }
 
@@ -180,7 +180,7 @@ void CmdLineExec::executeImpulse(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::impulse(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleTest.csv");
+   tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
    delete tSS;
 }
 
@@ -198,7 +198,7 @@ void CmdLineExec::executeStep(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::step(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleTest.csv");
+   tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
    delete tSS;
 }
 
@@ -218,7 +218,7 @@ void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::ramp(tSS);
-   tSS->writeToTextFile("C:\\MyLib\\Data\\SampleTest.csv");
+   tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
    delete tSS;
 }
 
