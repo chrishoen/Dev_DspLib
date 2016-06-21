@@ -73,7 +73,7 @@ void Detector::put(double aInput)
 
    // Get mean and standard deviation on the 
    // absolute value of the filter output
-   mAlphaStats.put(abs(tY));
+   mAlphaStats.put(fabs(tY));
 
    // Store mean and standard deviation
    mEX = mAlphaStats.mEX;
