@@ -111,7 +111,7 @@ void SumStatistics::calculate()
 
 void SumStatistics::show()
 {
-   printf("%3d $$ %8.6f %8.6f %8.6f  %8.6f\n",
+   printf("%3d $$ %8.6f %8.6f\n",
       mCount,
       mEX,
       mUX);
@@ -369,7 +369,7 @@ void TrialStatistics::finishTrial()
 
 void TrialStatistics::show()
 {
-   printf("%5d $$ %12.6f %12.6f %12.6f  %12.6f\n",
+   printf("%5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
       mPutCount,
       mEX,
       mUX,
