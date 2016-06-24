@@ -74,7 +74,7 @@ public:
    bool open (char* aFilename);
 
    //---------------------------------------------------------------------------
-   // Close the text file
+
 
    void close ();
 
@@ -91,6 +91,8 @@ public:
    void writeRow  (int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6);
    void writeRow  (int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7);
    void writeRow  (int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8);
+   void writeRow  (int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9);
+   void writeRow  (int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10);
 
    //---------------------------------------------------------------------------
    // Members
