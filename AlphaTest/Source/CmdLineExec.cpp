@@ -21,7 +21,7 @@ void CmdLineExec::reset()
   mAlphaOneAP1 = 0.022706663;
   mAlphaTwoAP1 = 0.022706663;
   mAlphaTwoAP2 = 0.000260765;
-
+  
   Prn::print(0,"mAlphaOneAP1  %10.8f",mAlphaOneAP1);
   Prn::print(0,"mAlphaTwoAP1  %10.8f",mAlphaTwoAP1);
   Prn::print(0,"mAlphaTwoAP2  %10.8f",mAlphaTwoAP2);
@@ -216,13 +216,13 @@ void CmdLineExec::executeStep(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
-   tSS->mFs  =       10000.0;
-   tSS->mTime1 =       0.100;
-   tSS->mTime2 =       0.900;
+   tSS->mFs  =          20.0;
+   tSS->mTime1 =         1.0;
+   tSS->mTime2 =         6.0;
    tSS->mSigma    =      0.0;
    tSS->mScale    =      1.0;
    tSS->mOffset   =      0.0;
-   tSS->mDuration =      1.0;
+   tSS->mDuration =     10.0;
    tSS->initialize();
    tSS->show();
    SignalGen::ramp(tSS);
