@@ -18,7 +18,15 @@ CmdLineExec::CmdLineExec()
 //******************************************************************************
 void CmdLineExec::reset()
 {
+  mAlphaOneAP1 = 0.022706663;
+  mAlphaTwoAP1 = 0.022706663;
+  mAlphaTwoAP2 = 0.000260765;
+
+  Prn::print(0,"mAlphaOneAP1  %10.8f",mAlphaOneAP1);
+  Prn::print(0,"mAlphaTwoAP1  %10.8f",mAlphaTwoAP1);
+  Prn::print(0,"mAlphaTwoAP2  %10.8f",mAlphaTwoAP2);
 }
+
 //******************************************************************************
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
@@ -54,7 +62,7 @@ void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 20.0;
-   tParms->mAp1      = 0.0227067;
+   tParms->mAp1      = mAlphaOneAP1;
    tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaOne.csv");
    tParms->initialize();
@@ -69,8 +77,8 @@ void CmdLineExec::executeTestAlphaTwo(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
    tParms->mFs       = 20.0;
-   tParms->mAp1   = 0.022706663;
-   tParms->mAp2   = 0.000260765;
+   tParms->mAp1      = mAlphaTwoAP1;
+   tParms->mAp2      = mAlphaTwoAP2;
    tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaTwo.csv");
    tParms->initialize();

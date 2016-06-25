@@ -50,8 +50,8 @@ void FilterParms::initialize()
    mNumSamples = (int)(round(mDuration) * mFs);
 
    mWindowSampleSize = (int)(mWindowTimeSize * mFs);
-   Prn::print(0,"FilterParms.mWindowTimeSize   %10.5f",mWindowTimeSize);
-   Prn::print(0,"FilterParms.mWindowSampleSize %10d",  mWindowSampleSize);
+// Prn::print(0,"FilterParms.mWindowTimeSize   %10.5f",mWindowTimeSize);
+// Prn::print(0,"FilterParms.mWindowSampleSize %10d",  mWindowSampleSize);
 }
 
 void FilterParms::setInputFileName  (char* aFileName) { strcpy(mInputFileName,  aFileName); }
