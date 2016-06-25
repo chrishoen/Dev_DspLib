@@ -53,8 +53,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
-   tParms->mFs       = 10000.0;
-   tParms->mAp1   = 0.00459229;
+   tParms->mFs       = 20.0;
+   tParms->mAp1      = 0.0227067;
    tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaOne.csv");
    tParms->initialize();
@@ -171,12 +171,12 @@ void CmdLineExec::executeConstant(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeImpulse(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
-   tSS->mFs  =       10000.0;
-   tSS->mTime1 =       0.100;
+   tSS->mFs  =          20.0;
+   tSS->mTime1 =        10.0;
    tSS->mSigma    =      0.0;
    tSS->mScale    =      1.0;
    tSS->mOffset   =      0.0;
-   tSS->mDuration =      1.0;
+   tSS->mDuration =    100.0;
    tSS->initialize();
    tSS->show();
    SignalGen::impulse(tSS);
@@ -189,12 +189,12 @@ void CmdLineExec::executeImpulse(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeStep(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
-   tSS->mFs  =       10000.0;
-   tSS->mTime1 =       0.100;
+   tSS->mFs  =          20.0;
+   tSS->mTime1 =        10.0;
    tSS->mSigma    =      0.0;
    tSS->mScale    =      1.0;
    tSS->mOffset   =      0.0;
-   tSS->mDuration =      1.0;
+   tSS->mDuration =    100.0;
    tSS->initialize();
    tSS->show();
    SignalGen::step(tSS);
