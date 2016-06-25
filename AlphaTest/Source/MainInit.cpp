@@ -52,7 +52,7 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
-   Prn::print(0,"PulseAnalyzer**********************************BEGIN");
+   Prn::print(0,"AlphaTest********************************************BEGIN");
 
    // Open log files
    Log::reset();
@@ -69,7 +69,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"PulseAnalyzer**********************************END");
+   Prn::print(0,"AlphaTest********************************************END");
 
    // Close log files
    Log::closeAllFiles();

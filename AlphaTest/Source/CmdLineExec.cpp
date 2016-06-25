@@ -68,9 +68,9 @@ void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeTestAlphaTwo(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
-   tParms->mFs       = 10000.0;
-   tParms->mAp1   = 0.00459229;
-   tParms->mAp2   = 0.0000105688;
+   tParms->mFs       = 20.0;
+   tParms->mAp1   = 0.022706663;
+   tParms->mAp2   = 0.000260765;
    tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaTwo.csv");
    tParms->initialize();
