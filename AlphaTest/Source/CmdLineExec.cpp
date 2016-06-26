@@ -19,8 +19,8 @@ CmdLineExec::CmdLineExec()
 void CmdLineExec::reset()
 {
   mAlphaOneAP1 = 0.022706663;
-  mAlphaTwoAP1 = 0.022706663;
-  mAlphaTwoAP2 = 0.000260765;
+  mAlphaTwoAP1 = 0.20119821919842973;
+  mAlphaTwoAP2 = 0.022575101181443902;
   
   Prn::print(0,"mAlphaOneAP1  %10.8f",mAlphaOneAP1);
   Prn::print(0,"mAlphaTwoAP1  %10.8f",mAlphaTwoAP1);
@@ -220,7 +220,7 @@ void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
    tSS->mTime1 =         1.0;
    tSS->mTime2 =         6.0;
    tSS->mSigma    =      0.0;
-   tSS->mScale    =      1.0;
+   tSS->mScale    =      5.0;
    tSS->mOffset   =      0.0;
    tSS->mDuration =     10.0;
    tSS->initialize();
