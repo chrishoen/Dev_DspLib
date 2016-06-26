@@ -38,6 +38,7 @@ public:
   double mAlphaThreeAP1;
   double mAlphaThreeAP2;
   double mAlphaThreeAP3;
+
 };
 
 //******************************************************************************

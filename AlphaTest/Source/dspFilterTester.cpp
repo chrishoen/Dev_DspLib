@@ -264,7 +264,7 @@ void FilterTester::testAlphaStatistics(FilterParms* aParms)
       tSampleCount++;
    }
 
-   Prn::print(0, "TestAlphaStatistics %d %s",tSampleCount,aParms->mInputFileName);
+   Prn::print(0, "TestAlphaStatistics %d",tSampleCount);
    // Close files.
    tSampleReader.close();
    tSampleWriter.close();

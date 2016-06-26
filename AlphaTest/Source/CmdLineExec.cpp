@@ -18,7 +18,7 @@ CmdLineExec::CmdLineExec()
 //******************************************************************************
 void CmdLineExec::reset()
 {
-  mAlphaOneAP1   = 0.022706663;
+  mAlphaOneAP1   = 0.022706663421691253;
 
   mAlphaTwoAP1   = 0.20119821919842973;
   mAlphaTwoAP2   = 0.022575101181443902;
@@ -119,8 +119,8 @@ void CmdLineExec::executeTestAlphaThree(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeTestAlphaStatistics(Ris::CmdLineCmd* aCmd)
 {
    FilterParms* tParms = new FilterParms;
-   tParms->mFs       = 10000.0;
-   tParms->mAp1  = 0.00459229;
+   tParms->mFs       = 20.0;
+   tParms->mAp1      = mAlphaOneAP1;
    tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
    tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaStatistics.csv");
    tParms->initialize();
@@ -190,10 +190,10 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeConstant(Ris::CmdLineCmd* aCmd)
 {
    Signal* tSS = new Signal();
-   tSS->mFs  =       10000.0;
+   tSS->mFs  =          20.0;
    tSS->mSigma    =      1.0;
    tSS->mOffset   =      0.0;
-   tSS->mDuration =      1.0;
+   tSS->mDuration =    100.0;
    tSS->initialize();
    tSS->show();
    SignalGen::constant(tSS);
