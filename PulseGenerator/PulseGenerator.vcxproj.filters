@@ -16,10 +16,10 @@
     <ClCompile Include="Source\MainInit.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalGen.cpp">
+    <ClCompile Include="Source\dspPulseGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspPulseGen.cpp">
+    <ClCompile Include="Source\dspPulseSignalGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,10 +30,10 @@
     <ClInclude Include="Source\MainInit.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspSignalGen.h">
+    <ClInclude Include="Source\dspPulseGen.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspPulseGen.h">
+    <ClInclude Include="Source\dspPulseSignalGen.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,11 +10,11 @@ Description:
 #include <math.h>
 #include <random>
 
-#include "dspSignalGen.h"
+#include "dspPulseSignalGen.h"
 
 namespace Dsp
 {
-namespace SignalGen
+namespace PulseSignalGen
 {
 
 static const double cPI = 3.14159265358979323846264338327950288419716939937510;

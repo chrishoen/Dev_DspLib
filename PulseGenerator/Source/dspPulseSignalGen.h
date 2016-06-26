@@ -1,5 +1,5 @@
-#ifndef _DSPSIGNALGEN_H_
-#define _DSPSIGNALGEN_H_
+#ifndef _DSPPULSESIGNALGEN_H_
+#define _DSPPULSESIGNALGEN_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -12,7 +12,7 @@
 
 namespace Dsp
 {
-namespace SignalGen
+namespace PulseSignalGen
 {
 
 //******************************************************************************
