@@ -30,6 +30,7 @@
     <ClCompile Include="Source\dspRVector.cpp" />
     <ClCompile Include="Source\dspSample.cpp" />
     <ClCompile Include="Source\dspSignal.cpp" />
+    <ClCompile Include="Source\dspSignalGen.cpp" />
     <ClCompile Include="Source\dspStatistics.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dsp_functions.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Source\dspRVector.h" />
     <ClInclude Include="Source\dspSample.h" />
     <ClInclude Include="Source\dspSignal.h" />
+    <ClInclude Include="Source\dspSignalGen.h" />
     <ClInclude Include="Source\dspStatistics.h" />
     <ClInclude Include="Source\dspTextFile.h" />
     <ClInclude Include="Source\dsp_functions.h" />

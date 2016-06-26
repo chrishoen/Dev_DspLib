@@ -19,9 +19,6 @@
     <ClCompile Include="Source\dspFilterTester.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -31,9 +28,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspFilterTester.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspSignalGen.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
