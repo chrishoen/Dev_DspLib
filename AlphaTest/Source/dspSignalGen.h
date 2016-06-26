@@ -23,6 +23,7 @@ namespace SignalGen
    void impulse  (Signal* aS);
    void step     (Signal* aS);
    void ramp     (Signal* aS);
+   void sinusoid (Signal* aS);
 
 //******************************************************************************
 }//namespace

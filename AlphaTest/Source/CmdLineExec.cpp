@@ -54,6 +54,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("IMPULSE"  ))  executeImpulse(aCmd);
    if(aCmd->isCmd("STEP"     ))  executeStep(aCmd);
    if(aCmd->isCmd("RAMP"     ))  executeRamp(aCmd);
+   if(aCmd->isCmd("SIN"      ))  executeSinusoid(aCmd);
 }
 
 //******************************************************************************
@@ -253,6 +254,24 @@ void CmdLineExec::executeRamp(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    SignalGen::ramp(tSS);
+   tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
+   delete tSS;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeSinusoid(Ris::CmdLineCmd* aCmd)
+{
+   Signal* tSS = new Signal();
+   tSS->mFs  =          20.0;
+   tSS->mFp  =           0.2;
+   tSS->mSigma    =      1.0;
+   tSS->mScale    =      5.0;
+   tSS->mOffset   =      0.0;
+   tSS->mDuration =     10.0;
+   tSS->initialize();
+   tSS->show();
+   SignalGen::sinusoid(tSS);
    tSS->writeToTextFile("C:\\Alpha\\Data\\SampleTest.csv");
    delete tSS;
 }

@@ -31,6 +31,7 @@ public:
   void executeImpulse  (Ris::CmdLineCmd* aCmd);
   void executeStep     (Ris::CmdLineCmd* aCmd);
   void executeRamp     (Ris::CmdLineCmd* aCmd);
+  void executeSinusoid (Ris::CmdLineCmd* aCmd);
 
   double mAlphaOneAP1;
   double mAlphaTwoAP1;

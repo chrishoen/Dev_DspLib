@@ -10,6 +10,7 @@ Description:
 #include <math.h>
 #include <random>
 
+#include "dspDefs.h"
 #include "dspSignalGen.h"
 
 namespace Dsp
@@ -187,6 +188,37 @@ void ramp(Signal* aS)
       else
       {
       }
+
+      // Sample
+      aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Generate sinusoid random, normal
+
+void sinusoid(Signal* aS)
+{
+   // Initialize
+   initializeNoise(aS);
+
+   double tNoise  = 0.0;
+   double tX = 0.0;
+   double tT = 0.0;
+
+   // For all samples
+   for (int k = 0; k < aS->mNs; k++)
+   {
+      // Noise
+      tNoise = getNoise();
+
+      // Time
+      tT = k*aS->mTs;
+
+      // Signal
+      tX = sin(DSP_2PI*aS->mFp*tT);
 
       // Sample
       aS->mX[k] = aS->mScale*tX +tNoise + aS->mOffset;;
