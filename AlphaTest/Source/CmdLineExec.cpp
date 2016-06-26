@@ -26,6 +26,7 @@ void CmdLineExec::reset()
   mAlphaThreeAP1 = 0.20119821919842973;
   mAlphaThreeAP2 = 0.022575101181443902;
   mAlphaThreeAP3 = 0.0012665002587567815;
+
   
   Prn::print(0,"mAlphaOneAP1    %10.8f",mAlphaOneAP1);
   Prn::print(0,"mAlphaTwoAP1    %10.8f",mAlphaTwoAP1);
