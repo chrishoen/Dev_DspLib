@@ -18,13 +18,21 @@ CmdLineExec::CmdLineExec()
 //******************************************************************************
 void CmdLineExec::reset()
 {
-  mAlphaOneAP1 = 0.022706663;
-  mAlphaTwoAP1 = 0.20119821919842973;
-  mAlphaTwoAP2 = 0.022575101181443902;
+  mAlphaOneAP1   = 0.022706663;
+
+  mAlphaTwoAP1   = 0.20119821919842973;
+  mAlphaTwoAP2   = 0.022575101181443902;
+
+  mAlphaThreeAP1 = 0.20119821919842973;
+  mAlphaThreeAP2 = 0.022575101181443902;
+  mAlphaThreeAP3 = 0.0012665002587567815;
   
-  Prn::print(0,"mAlphaOneAP1  %10.8f",mAlphaOneAP1);
-  Prn::print(0,"mAlphaTwoAP1  %10.8f",mAlphaTwoAP1);
-  Prn::print(0,"mAlphaTwoAP2  %10.8f",mAlphaTwoAP2);
+  Prn::print(0,"mAlphaOneAP1    %10.8f",mAlphaOneAP1);
+  Prn::print(0,"mAlphaTwoAP1    %10.8f",mAlphaTwoAP1);
+  Prn::print(0,"mAlphaTwoAP2    %10.8f",mAlphaTwoAP2);
+  Prn::print(0,"mAlphaThreeAP1  %10.8f",mAlphaThreeAP1);
+  Prn::print(0,"mAlphaThreeAP2  %10.8f",mAlphaThreeAP2);
+  Prn::print(0,"mAlphaThreeAP3  %10.8f",mAlphaThreeAP3);
 }
 
 //******************************************************************************
@@ -36,6 +44,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("ALPHAONE"  ))  executeTestAlphaOne(aCmd);
    if(aCmd->isCmd("ALPHATWO"  ))  executeTestAlphaTwo(aCmd);
+   if(aCmd->isCmd("ALPHATHREE"))  executeTestAlphaThree(aCmd);
    if(aCmd->isCmd("ALPHASTAT" ))  executeTestAlphaStatistics(aCmd);
    if(aCmd->isCmd("MOVAVG"    ))  executeTestMovingAverage(aCmd);
    if(aCmd->isCmd("TRIAL"     ))  executeTrialStatistics(aCmd);
@@ -84,6 +93,23 @@ void CmdLineExec::executeTestAlphaTwo(Ris::CmdLineCmd* aCmd)
    tParms->initialize();
 
    gFilterTester.testAlphaTwo(tParms);
+   delete tParms;
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeTestAlphaThree(Ris::CmdLineCmd* aCmd)
+{
+   FilterParms* tParms = new FilterParms;
+   tParms->mFs       = 20.0;
+   tParms->mAp1      = mAlphaThreeAP1;
+   tParms->mAp2      = mAlphaThreeAP2;
+   tParms->mAp3      = mAlphaThreeAP3;
+   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaThree.csv");
+   tParms->initialize();
+
+   gFilterTester.testAlphaThree(tParms);
    delete tParms;
 }
 

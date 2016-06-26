@@ -33,6 +33,7 @@ public:
    
    double mAp1;
    double mAp2;
+   double mAp3;
 
    double mWindowTimeSize;
    int    mWindowSampleSize;
@@ -69,6 +70,7 @@ public:
    // Filters
    Filter::AlphaOne        mAlphaOne;
    Filter::AlphaTwo        mAlphaTwo;
+   Filter::AlphaThree      mAlphaThree;
    Filter::AlphaStatistics mAlphaStatistics;
    Filter::MovingAverage   mMovingAverage;
 
@@ -78,6 +80,7 @@ public:
    // Tests
    void testAlphaOne         (FilterParms* aParms);
    void testAlphaTwo         (FilterParms* aParms);
+   void testAlphaThree       (FilterParms* aParms);
    void testAlphaStatistics  (FilterParms* aParms);
    void testMovingAverage    (FilterParms* aParms);
 
