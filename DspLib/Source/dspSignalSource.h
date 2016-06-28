@@ -64,7 +64,7 @@ public:
    //--------------------------------------------------------------------------
    // Advance the signal for one time step, return the signal value.
 
-   double advance();
+   double advance(double tTime = -1.0);
 
    //--------------------------------------------------------------------------
    // Support.

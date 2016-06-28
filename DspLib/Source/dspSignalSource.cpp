@@ -128,13 +128,20 @@ void SignalSource::show()
 //******************************************************************************
 //******************************************************************************
 
-double SignalSource::advance()
+double SignalSource::advance(double tTime)
 {
    double tNoise = 0.0;
    double tX = 0.0;
 
    //Time
-   mT += mTs;
+   if (tTime != -1.0)
+   {
+      mT = tTime;
+   }
+   else
+   {
+      mT += mTs;
+   }
 
    // Noise
    tNoise = getNoise();
