@@ -53,6 +53,7 @@ public:
    // set other members.
 
    SignalSource();
+   void reset();
    void initialize();
 
     // Initialize random distribution.

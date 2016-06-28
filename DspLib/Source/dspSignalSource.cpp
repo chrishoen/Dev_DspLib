@@ -24,6 +24,11 @@ namespace Dsp
 
 SignalSource::SignalSource()
 {
+   reset();
+}
+
+void SignalSource::reset()
+{
    mT  = 0.0;
    mX  = 0.0;
    mFs = 1.0;
