@@ -52,6 +52,9 @@
     <ClCompile Include="Source\dspSignalGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspSignalSource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -100,6 +103,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspSignalGen.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspSignalSource.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
