@@ -118,6 +118,7 @@ public:
    void startTrial(double aXLimit=0.0);
    void finishTrial();
    void show();
+   void show2();
 
    // Put input value
    void put(double aX);
