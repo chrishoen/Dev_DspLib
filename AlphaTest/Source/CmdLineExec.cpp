@@ -18,7 +18,7 @@ CmdLineExec::CmdLineExec()
 //******************************************************************************
 void CmdLineExec::reset()
 {
-  mAlphaOneAP1   = 0.022706663421691253;
+  mAlphaOneAP1   = 0.010866739550600640559;
 
   mAlphaTwoAP1   = 0.20119821919842973;
   mAlphaTwoAP2   = 0.022575101181443902;
