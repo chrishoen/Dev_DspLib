@@ -35,6 +35,7 @@
     <ClCompile Include="Source\dspStatistics.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dsp_functions.cpp" />
+    <ClCompile Include="Source\dsp_trig_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspFilterStatistics.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Source\dspStatistics.h" />
     <ClInclude Include="Source\dspTextFile.h" />
     <ClInclude Include="Source\dsp_functions.h" />
+    <ClInclude Include="Source\dsp_trig_functions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}</ProjectGuid>

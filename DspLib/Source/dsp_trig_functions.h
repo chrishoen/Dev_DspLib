@@ -1,22 +1,23 @@
-#ifndef _DSP_DEFS_H_
-#define _DSP_DEFS_H_
+#ifndef _DSP_TRIG_FUNCTIONS_H_
+#define _DSP_TRIG_FUNCTIONS_H_
 
 /*==============================================================================
 Description:
-Definitions for physical and mathematical constants
+Trigonometric functions
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-#define DSP_C   299,792,458 
+   double dsp_cos_deg   (double x);
+   double dsp_sin_deg   (double x);
+   double dsp_tan_deg   (double x);
 
-#define DSP_PI    3.14159265358979323846264338327950288419716939937510
-#define DSP_2PI   2.0*DSP_PI
+   double dsp_acos_deg  (double x);
+   double dsp_asin_deg  (double x);
+   double dsp_atan_deg  (double x);
 
-#define DSP_RAD   DSP_PI/180.0
-#define DSP_DEG   180.0/DSP_PI
-
+   double dsp_atan2_deg (double y,double x);
 #endif
 
