@@ -9,6 +9,8 @@
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 
+#include "dsp_trig_functions.h"
+
 using namespace std;
 
 //******************************************************************************
@@ -41,21 +43,13 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Ris::Containers::Queue2<int> tQueue;
-   tQueue.initialize(4);
-   
-   int tX,tY;
-   tX=101; tQueue.put(tX);
-   tX=102; tQueue.put(tX);
-   tX=103; tQueue.put(tX);
-   tX=104; tQueue.put(tX);
+   aCmd->setArgDefault(1,0.0);
 
-   Prn::print(0, "Queue %d  %d  %d", tQueue.size(), tQueue.isGet(), tQueue.elementToGet());
+   double tA = aCmd->argDouble(1);
 
-   tQueue.get(tY);
+   dsp_format_180_deg(&tA);
 
-   Prn::print(0, "Get   %d", tY);
-   Prn::print(0, "Queue %d  %d  %d", tQueue.size(), tQueue.isGet(), tQueue.elementToGet());
+   Prn::print(0, "%10.6f",tA);
 }
 
 //******************************************************************************

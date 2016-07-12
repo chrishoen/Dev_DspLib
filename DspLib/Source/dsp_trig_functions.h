@@ -19,5 +19,9 @@ Trigonometric functions
    double dsp_atan_deg  (double x);
 
    double dsp_atan2_deg (double y,double x);
+
+   void dsp_format_180_deg (double* x);
+   void dsp_format_360_deg (double* x);
+
 #endif
 

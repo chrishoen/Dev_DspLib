@@ -29,6 +29,18 @@ double dsp_acos_deg  (double x) { return DSP_DEG*acos(x); }
 double dsp_asin_deg  (double x) { return DSP_DEG*asin(x); }
 double dsp_atan_deg  (double x) { return DSP_DEG*atan(x); }
 
-double dsp_atan2_deg (double y,double x) { return DSP_DEG*atan2(y,x); }
+double dsp_atan2_deg(double y, double x) { return DSP_DEG*atan2(y, x); }
 
+
+void dsp_format_180_deg (double* x)
+{ 
+   if (*x >=  180.0) *x -= 360.0;
+   if (*x <  -180.0) *x += 360.0;
+}
+
+void dsp_format_360_deg (double* x)
+{ 
+   if (*x >=  360.0) *x -= 360.0;
+   if (*x <     0.0) *x += 360.0;
+}
 
