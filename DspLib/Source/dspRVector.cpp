@@ -65,12 +65,11 @@ RVector::~RVector()
 
 void RVector::initialize(
       int     aRows)
-
 {
    mRows   = aRows;
    int tAlloc = mRows;
    mValues = new double[tAlloc];
-   for (int i=1;i<=mRows;i++) mValues[i-1]=0.0;
+   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
 }
 
 void RVector::initialize(
@@ -80,12 +79,20 @@ void RVector::initialize(
    mRows   = aRows;
    int tAlloc = mRows;
    mValues = new double[tAlloc];
-   for (int i=1;i<=mRows;i++) mValues[i-1]=aValues[i-1];
+   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
 }
 
 void RVector::reset()
 {
-   for (int i=1;i<=mRows;i++) mValues[i-1]=0.0;
+   int tAlloc = mRows;
+   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
+}
+
+void RVector::setValues(
+      double* aValues)
+{
+   int tAlloc = mRows;
+   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
 }
 
 //******************************************************************************
@@ -238,6 +245,17 @@ RMatrix::~RMatrix()
 
 void RMatrix::initialize(
       int     aRows,
+      int     aCols)
+{
+   mRows   = aRows;
+   mCols   = aCols;
+   int tAlloc = mRows*mCols;
+   mValues = new double[tAlloc];
+   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
+}
+
+void RMatrix::initialize(
+      int     aRows,
       int     aCols,
       double* aValues)
 {
@@ -245,32 +263,20 @@ void RMatrix::initialize(
    mCols   = aCols;
    int tAlloc = mRows*mCols;
    mValues = new double[tAlloc];
-   if (aValues)
-   {
-      for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
-   }
-   else
-   {
-      for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
-   }
+   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
+void RMatrix::reset()
+{
+   int tAlloc = mRows*mCols;
+   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
+}
 
 void RMatrix::setValues(
       double* aValues)
 {
    int tAlloc = mRows*mCols;
-   if (aValues)
-   {
-      for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
-   }
-   else
-   {
-      for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
-   }
+   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
 }
 
 //******************************************************************************

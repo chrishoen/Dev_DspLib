@@ -231,7 +231,7 @@ void CmdLineExec::executeGo8(Ris::CmdLineCmd* aCmd)
    double tAngle = aCmd->argDouble(1);
 
    Dsp::RMatrix tL;
-   tL.initialize(3,3,0);
+   tL.initialize(3,3);
    tL.setRotateX(tAngle);
    
    tL.show("tL");
@@ -247,23 +247,23 @@ void CmdLineExec::executeGo9(Ris::CmdLineCmd* aCmd)
    double tPitchAngle = aCmd->argDouble(2);
 
    Dsp::RMatrix tRy;
-   tRy.initialize(3,3,0);
+   tRy.initialize(3,3);
    tRy.setRotateY(tRollAngle);
    
    Dsp::RMatrix tRx;
-   tRx.initialize(3,3,0);
+   tRx.initialize(3,3);
    tRx.setRotateX(tPitchAngle);
    
    Dsp::RMatrix tL01;
-   tL01.initialize(3,3,0);
+   tL01.initialize(3,3);
    multiply(tL01,tRx,tRy);
    
    Dsp::RMatrix tL10;
-   tL10.initialize(3,3,0);
+   tL10.initialize(3,3);
    transpose(tL10,tL01);
 
    Dsp::RMatrix tLI;
-   tLI.initialize(3,3,0);
+   tLI.initialize(3,3);
    multiply(tLI,tL01,tL10);
 
    tL01.show("tL01");

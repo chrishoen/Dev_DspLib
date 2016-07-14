@@ -37,6 +37,10 @@ public:
       int     aRows,
       double* aValues);
 
+   // Assign values
+   void setValues(
+      double* aValues);
+
    void reset();
 
    // Access components
@@ -90,12 +94,19 @@ public:
    // Initialize
    void initialize(
       int     aRows,
+      int     aCols);
+
+   // Initialize
+   void initialize(
+      int     aRows,
       int     aCols,
       double* aValues);
 
    // Assign values
    void setValues(
       double* aValues);
+
+   void reset();
 
    // Access components
    double& e(int aRow,int aCol);
