@@ -11,6 +11,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
+#include "dsp_trig_functions.h"
 #include "dspRVector.h"
 
 namespace Dsp
@@ -109,11 +110,11 @@ void RVector::show(char* aLabel)
 {
    if (aLabel==0)
    {
-      for (int i=1;i<=mRows;i++) printf("%10.8f\n",e(i));
+      for (int i=1;i<=mRows;i++) printf("%11.6f\n",e(i));
    }
    else
    {
-      for (int i=1;i<=mRows;i++) printf("%s %10.8f\n", aLabel,e(i));
+      for (int i=1;i<=mRows;i++) printf("%s %11.6f\n", aLabel,e(i));
    }
    printf("\n");
 }
@@ -244,7 +245,32 @@ void RMatrix::initialize(
    mCols   = aCols;
    int tAlloc = mRows*mCols;
    mValues = new double[tAlloc];
-   for (int i=0;i<tAlloc;i++) mValues[i]=aValues[i];
+   if (aValues)
+   {
+      for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
+   }
+   else
+   {
+      for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void RMatrix::setValues(
+      double* aValues)
+{
+   int tAlloc = mRows*mCols;
+   if (aValues)
+   {
+      for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
+   }
+   else
+   {
+      for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
+   }
 }
 
 //******************************************************************************
@@ -275,7 +301,7 @@ void RMatrix::show(char* aLabel)
       {
          for (int j=1;j<=mCols;j++)
          {
-            printf("%10.8f ",e(i,j));
+            printf("%11.6f ",e(i,j));
          }
          printf("\n");
       }
@@ -287,7 +313,7 @@ void RMatrix::show(char* aLabel)
          printf("%s ",aLabel);
          for (int j=1;j<=mCols;j++)
          {
-            printf("%10.8f ",e(i,j));
+            printf("%11.6f ",e(i,j));
          }
          printf("\n");
       }
@@ -317,6 +343,54 @@ RVector RMatrix::operator*(RVector& aRight)
    return tVector;
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void RMatrix::setRotateX(double aAngle)
+{
+   if (mRows != 3) return;
+   if (mCols != 3) return;
+
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   double tV[3][3] = {{ 1.0, 0.0, 0.0},
+                      { 0.0,  tC, -tS},
+                      { 0.0,  tS,  tC}};
+
+   setValues(&tV[0][0]);
+}
+
+void RMatrix::setRotateY(double aAngle)
+{
+   if (mRows != 3) return;
+   if (mCols != 3) return;
+
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   double tV[3][3] = {{  tC, 0.0,  tS},
+                      { 0.0, 1.0, 0.0},
+                      { -tS, 0.0,  tC}};
+
+   setValues(&tV[0][0]);
+}
+
+void RMatrix::setRotateZ(double aAngle)
+{
+   if (mRows != 3) return;
+   if (mCols != 3) return;
+
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   double tV[3][3] = {{  tC, -tS, 0.0},
+                      {  tS,  tC, 0.0},
+                      { 0.0, 0.0, 1.0}};
+
+   setValues(&tV[0][0]);
+}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -379,6 +453,72 @@ void multiply (RVector& aY, RMatrix& aA, RVector& aX)
       aY.e(i) = tSum;
    }
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+// Matrix Matrix add
+void add (RMatrix& aC, RMatrix& aA, RMatrix& aB)
+{
+   if (aA.mRows != aA.mCols) return;
+   if (aB.mRows != aB.mCols) return;
+   if (aC.mRows != aC.mCols) return;
+   if (aA.mRows != aB.mRows) return;
+   if (aA.mRows != aC.mRows) return;
+
+   int tN = aA.mRows;
+   for (int i = 1; i <= tN; i++)
+   {
+      for (int j = 1; j <= tN; j++)
+      {
+         aC.e(i, j) = aA.e(i, j) * aB.e(i, j);
+      }
+   }
+}
+
+// Matrix Matrix multiply
+void multiply (RMatrix& aC, RMatrix& aA, RMatrix& aB)
+{
+   if (aA.mRows != aA.mCols) return;
+   if (aB.mRows != aB.mCols) return;
+   if (aC.mRows != aC.mCols) return;
+   if (aA.mRows != aB.mRows) return;
+   if (aA.mRows != aC.mRows) return;
+
+   int tN = aA.mRows;
+   for (int i = 1; i <= tN; i++)
+   {
+      for (int j = 1; j <= tN; j++)
+      {
+         double tSum = 0.0;
+         for (int k = 1; k <= tN; k++)
+         {
+            tSum += aA.e(i, k) * aB.e(k, j);
+         }
+         aC.e(i, j) = tSum;
+      }
+   }
+}
+
+// Matrix Transpose 
+void transpose (RMatrix& aC, RMatrix& aA)
+{
+   if (aA.mRows != aA.mCols) return;
+   if (aC.mRows != aC.mCols) return;
+   if (aA.mRows != aC.mRows) return;
+
+   int tN = aA.mRows;
+   for (int i = 1; i <= tN; i++)
+   {
+      for (int j = 1; j <= tN; j++)
+      {
+         aC.e(i, j) = aA.e(j, i);
+      }
+   }
+}
+
+
 
 }//namespace
 

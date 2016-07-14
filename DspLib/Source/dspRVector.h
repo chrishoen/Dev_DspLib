@@ -93,6 +93,10 @@ public:
       int     aCols,
       double* aValues);
 
+   // Assign values
+   void setValues(
+      double* aValues);
+
    // Access components
    double& e(int aRow,int aCol);
    double& operator()(int aRow,int aCol);
@@ -100,6 +104,11 @@ public:
 
    // Operator
    RVector operator*(RVector& aRight);
+
+   // Set matrix to a rotation matrix
+   void setRotateX   (double aAngle);
+   void setRotateY   (double aAngle);
+   void setRotateZ   (double aAngle);
 };
 
 //******************************************************************************
@@ -112,6 +121,10 @@ void subtract     (RVector& aY, RVector& aX1, RVector& aX2);  // Y  = X1 - X2
 void subtractFrom (RVector& aY, RVector& aX);                 // Y -= X
 void multiply     (RVector& aY, RVector& aX,  double   aA);   // Y  = X*a 
 void multiply     (RVector& aY, RMatrix& aA,  RVector& aX);   // Y  = A*X
+
+void add          (RMatrix& aC, RMatrix& aA,  RMatrix& aB);   // C  = A + B
+void multiply     (RMatrix& aC, RMatrix& aA,  RMatrix& aB);   // C  = A*B
+void transpose    (RMatrix& aC, RMatrix& aA);                 // C  = Transpose[A]
 
 //******************************************************************************
 
