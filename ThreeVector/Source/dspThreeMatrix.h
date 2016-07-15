@@ -9,6 +9,8 @@ Matrixs and matrices on R3.
 //******************************************************************************
 //******************************************************************************
 
+#include "dspThreeVector.h"
+
 namespace Dsp
 {
 //******************************************************************************
@@ -58,6 +60,15 @@ ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight);
 // Matrix sum, difference
 ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
 ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Operators
+
+// Matrix multiply
+ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight);
+ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
 
 //******************************************************************************
 

@@ -16,6 +16,7 @@ Description:
 
 namespace Dsp
 {
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -163,7 +164,9 @@ void ThreeMatrix::show(char* aLabel)
    printf("\n");
 }
 
-
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -257,5 +260,46 @@ ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Matrix multiply
+
+// Multiply a matrix and a vector
+ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight)
+{
+   ThreeVector tVector;
+
+   for (int i=1; i<=3; i++)
+   {
+      double tSum = 0.0;
+      for (int j = 1; j <= 3; j++)
+      {
+          tSum += aLeft.get(i, j) + aRight.get(j);
+      }
+      tVector.e(i) = tSum;
+   }
+
+   return tVector;
+}
+
+// Multiply a matrix and a matrix
+ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
+{
+   ThreeMatrix tMatrix;
+
+   for (int i=1; i<=3; i++)
+   {
+      double tSum = 0.0;
+      for (int j = 1; j <= 3; j++)
+      {
+         for (int k = 1; k <= 3; k++)
+         {
+            tSum += aLeft.get(i, k) + aRight.get(k, j);
+         }
+         tMatrix.e(i,j) = tSum;
+      }
+   }
+
+   return tMatrix;
+}
+
 }//namespace
 
