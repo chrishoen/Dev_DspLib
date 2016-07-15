@@ -18,30 +18,18 @@ namespace Dsp
 class ThreeVector
 {
 public:
+   // Dimension
+   static const int cDim = 3;
+
    // Vector components
-   double* mValues;
-   int mRows;
+   double mValues[3];
 
    // Constructor
    ThreeVector();
-   ThreeVector(int aRows);
-   ThreeVector(const ThreeVector& aOther);
-   ThreeVector& operator=( const ThreeVector& aOther );
-   ~ThreeVector();
-
-   // Initialize
-   void initialize(
-      int     aRows);
-
-   void initialize(
-      int     aRows,
-      double* aValues);
+   ThreeVector(const double* aValues);
 
    // Assign values
-   void setValues(
-      double* aValues);
-
-   void reset();
+   void setValues(const double* aValues);
 
    // Access components
    double& e(int aRow);
@@ -68,10 +56,6 @@ public:
 
    // Return a normalized vector
    ThreeVector normalize();
-
-   // Return true if two vectors are close
-   bool     isCloseTo(ThreeVector& aRight,double aThreshold);
-   
 
 };
 

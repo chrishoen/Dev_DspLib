@@ -22,77 +22,28 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-
+// 
 ThreeVector::ThreeVector()
 {
-   mRows   = 0;
-   mValues = 0;
+   mValues[0] = 0.0;
+   mValues[1] = 0.0;
+   mValues[2] = 0.0;
 }
 
-ThreeVector::ThreeVector(int aRows)
+
+ThreeVector::ThreeVector(const double* aValues)
 {
-   initialize(aRows);
+   for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
 
-ThreeVector::ThreeVector(const ThreeVector& aOther)
-{
-   mRows   = aOther.mRows;
-   int tAlloc = mRows;
-   mValues = new double[tAlloc];
-   for (int i=1;i<=mRows;i++) mValues[i-1]=aOther.mValues[i-1];
-}
-
-ThreeVector& ThreeVector::operator=(const ThreeVector& aOther)
-{
-   mRows   = aOther.mRows;
-   int tAlloc = mRows;
-   if (mValues==0)
-   {
-      mValues = new double[tAlloc];
-   }
-   for (int i=1;i<=mRows;i++) mValues[i-1]=aOther.mValues[i-1];
-   return *this;
-}
-
-ThreeVector::~ThreeVector()
-{
-   if (mValues) delete mValues;
-}
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void ThreeVector::initialize(
-      int     aRows)
+void ThreeVector::setValues(const double* aValues)
 {
-   mRows   = aRows;
-   int tAlloc = mRows;
-   mValues = new double[tAlloc];
-   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
-}
-
-void ThreeVector::initialize(
-      int     aRows,
-      double* aValues)
-{
-   mRows   = aRows;
-   int tAlloc = mRows;
-   mValues = new double[tAlloc];
-   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
-}
-
-void ThreeVector::reset()
-{
-   int tAlloc = mRows;
-   for (int i = 0; i < tAlloc; i++) mValues[i] = 0.0;
-}
-
-void ThreeVector::setValues(
-      double* aValues)
-{
-   int tAlloc = mRows;
-   for (int i = 0; i < tAlloc; i++) mValues[i] = aValues[i];
+   for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
 
 //******************************************************************************
@@ -117,11 +68,11 @@ void ThreeVector::show(char* aLabel)
 {
    if (aLabel==0)
    {
-      for (int i=1;i<=mRows;i++) printf("%11.6f\n",e(i));
+      for (int i = 1; i <= 3; i++) printf("%11.6f\n",e(i));
    }
    else
    {
-      for (int i=1;i<=mRows;i++) printf("%s %11.6f\n", aLabel,e(i));
+      for (int i=1 ; i <= 3; i++) printf("%s %11.6f\n", aLabel,e(i));
    }
    printf("\n");
 }
@@ -133,9 +84,9 @@ void ThreeVector::show(char* aLabel)
 // Add two vectors
 ThreeVector ThreeVector::operator+(ThreeVector& aRight)
 {
-   ThreeVector tVector(mRows);
+   ThreeVector tVector;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tVector.e(i) = e(i) + aRight.e(i);
    }
@@ -146,9 +97,9 @@ ThreeVector ThreeVector::operator+(ThreeVector& aRight)
 // Subtract two vectors
 ThreeVector ThreeVector::operator-(ThreeVector& aRight)
 {
-   ThreeVector tVector(mRows);
+   ThreeVector tVector;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tVector.e(i) = e(i) - aRight.e(i);
    }
@@ -159,9 +110,9 @@ ThreeVector ThreeVector::operator-(ThreeVector& aRight)
 // Multiply a vector by a scalar
 ThreeVector ThreeVector::operator*(double aRight)
 {
-   ThreeVector tVector(mRows);
+   ThreeVector tVector;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tVector.e(i) = e(i) * aRight;
    }
@@ -172,9 +123,9 @@ ThreeVector ThreeVector::operator*(double aRight)
 // Divide a vector by a scalar
 ThreeVector ThreeVector::operator/(double aRight)
 {
-   ThreeVector tVector(mRows);
+   ThreeVector tVector;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tVector.e(i) = e(i) / aRight;
    }
@@ -187,7 +138,7 @@ double ThreeVector::operator*(ThreeVector& aRight)
 {
    double tSum=0.0;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tSum += e(i) * aRight.e(i);
    }
@@ -200,7 +151,7 @@ double ThreeVector::length()
 {
    double tSum=0.0;
 
-   for (int i=1;i<=mRows;i++)
+   for (int i = 1; i <= 3; i++)
    {
       tSum += e(i) * e(i);
    }
@@ -211,13 +162,9 @@ double ThreeVector::length()
 // Return a normalized vector
 ThreeVector ThreeVector::normalize()
 {
-   return *this/this->length();
-}
-
-// Compare two vectors for equality
-bool ThreeVector::isCloseTo(ThreeVector& aRight,double aThreshold)
-{
-   return (*this-aRight).length() < aThreshold;
+   double tLength = this->length();
+   if (tLength==0.0) return *this;
+   return *this/tLength;
 }
 
 //******************************************************************************

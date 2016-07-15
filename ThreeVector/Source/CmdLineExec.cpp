@@ -37,12 +37,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   double tT[3] = {201.0,
-                   202.0,
-                   203.0};
-
-   Dsp::ThreeVector tX;
-   tX.initialize(3,&tT[0]);
+   double tAV[3] = { 201.0,202.0,203.0 };
+   Dsp::ThreeVector tX(tAV);
 
    tX.show("tX");
 }
