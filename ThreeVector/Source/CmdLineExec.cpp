@@ -89,16 +89,20 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
    Dsp::ThreeVector tX1(101.0,102.0,103.0);
    Dsp::ThreeVector tX2 = tX1*2.0;
    tX2.show("tX2");
+
+   Dsp::ThreeVector tX3 = 2.0*tX1;
+   tX3.show("tX3");
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo6(Ris::CmdLineCmd* aCmd)
 {
-   double tS=2.0;
    Dsp::ThreeVector tX1(101.0,102.0,103.0);
-   Dsp::ThreeVector tX2 = 2.0*tX1;
-   tX2.show("tX2");
+   Dsp::ThreeVector tX2(201.0,202.0,203.0);
+   Dsp::ThreeVector tX3(301.0,302.0,303.0);
+   Dsp::ThreeVector tX4 = 2.0*(tX1 + tX2 + tX3);
+   tX4.show("tX4");
 }
 
 //******************************************************************************
