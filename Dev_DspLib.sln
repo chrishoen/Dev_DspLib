@@ -31,6 +31,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SignalSourceTest", "SignalS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreeVector", "ThreeVector\ThreeVector.vcxproj", "{BE6EB81D-2C58-45DC-9F4F-F908291FA1FC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stash", "Stash", "{B7DE8852-EDC0-4853-AE76-ECCF4D13EFAF}"
+	ProjectSection(SolutionItems) = preProject
+		Stash\CmdLineExec.cpp = Stash\CmdLineExec.cpp
+		Stash\CmdLineExec.h = Stash\CmdLineExec.h
+		Stash\dspThreeVector.cpp = Stash\dspThreeVector.cpp
+		Stash\dspThreeVector.h = Stash\dspThreeVector.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
