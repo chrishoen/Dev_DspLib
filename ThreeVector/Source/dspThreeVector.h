@@ -29,6 +29,7 @@ public:
    // Assign values
    void set(double aV1,double aV2,double aV3);
    void set(const double* aValues);
+   void setZero();
 
    // Access components
    double& e(int aRow);
@@ -43,7 +44,6 @@ public:
    ThreeVector normalize();
 
    // Set
-   void setZero();
    void setNormalize();
 };
 

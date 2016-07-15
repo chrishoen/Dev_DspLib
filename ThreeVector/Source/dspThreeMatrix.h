@@ -29,22 +29,14 @@ public:
    // Assign values
    void set(double aV1,double aV2,double aV3);
    void set(const double* aValues);
+   void setZero();
+   void setIdentity();
 
    // Access components
    double& e(int aRow);
    double& operator()(int aRow);
    double get(int aRow) const;
    void show(char* aLabel=0);
-
-   // Length of a matrix
-   double length();
-
-   // Return a normalized matrix
-   ThreeMatrix normalize();
-
-   // Set
-   void setZero();
-   void setNormalize();
 };
 
 //******************************************************************************
@@ -60,9 +52,6 @@ ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight);
 // Matrix sum, difference
 ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
 ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
-
-// Inner product
-double operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight);
 
 //******************************************************************************
 

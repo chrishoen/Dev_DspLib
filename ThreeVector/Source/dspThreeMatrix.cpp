@@ -64,6 +64,11 @@ void ThreeMatrix::setZero()
    for (int i=0;i<3;i++) mValues[i] = 0.0;
 }
 
+void ThreeMatrix::setIdentity()
+{
+   for (int i=0;i<3;i++) mValues[i] = 0.0;
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -101,38 +106,6 @@ void ThreeMatrix::show(char* aLabel)
    }
    printf("\n");
 }
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-// Length of a matrix
-double ThreeMatrix::length()
-{
-   double tSum=0.0;
-
-   for (int i=1; i<=3; i++)
-   {
-      tSum += e(i) * e(i);
-   }
-
-   return sqrt(tSum);
-}
-
-// Return a normalized matrix
-ThreeMatrix ThreeMatrix::normalize()
-{
-   double tLength = this->length();
-   if (tLength==0.0) return *this;
-   return *this/tLength;
-}
-
-void ThreeMatrix::setNormalize()
-{
-   double tLength = length();
-   for (int i=0; i<3; i++) mValues[i] /= tLength;
-}
-
 
 //******************************************************************************
 //******************************************************************************
@@ -204,23 +177,6 @@ ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
    }
 
    return tMatrix;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Inner product
-
-double operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
-{
-   double tSum=0.0;
-
-   for (int i=1; i<=3; i++)
-   {
-      tSum += aLeft.get(i) * aRight.get(i);
-   }
-
-   return tSum;
 }
 
 //******************************************************************************
