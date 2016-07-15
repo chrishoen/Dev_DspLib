@@ -2,7 +2,7 @@
 #define _DSPTHREEVECTOR_H_
 /*==============================================================================
 
-real vector space
+Vectors and matrices on R3.
 ==============================================================================*/
 
 //******************************************************************************
@@ -36,33 +36,33 @@ public:
    double get(int aRow) const;
    void show(char* aLabel=0);
 
-   // Add two vectors
-   ThreeVector operator+(ThreeVector& aRight);
-
-   // Subtract two vectors
-   ThreeVector operator-(ThreeVector& aRight);
-
-   // Multiply a vector by a scalar
-   ThreeVector operator*(double aRight);
-
-   // Divide a vector by a scalar
-   ThreeVector operator/(double aRight);
-
-   // Inner product of two vectors
-   double   operator*(ThreeVector& aRight);
-
    // Length of a vector
-   double   length();
+   double length();
 
    // Return a normalized vector
    ThreeVector normalize();
 
+   // Set
+   void setZero();
+   void setNormalize();
 };
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-ThreeVector operator * ( double aLeft, const ThreeVector& aRight );
+// Operators
+
+// Scalar multilply, divide
+ThreeVector operator*(double aLeft, const ThreeVector& aRight);
+ThreeVector operator*(const ThreeVector& aLeft,double aRight);
+ThreeVector operator/(const ThreeVector& aLeft,double aRight);
+
+// Vector sum, difference
+ThreeVector operator+(const ThreeVector& aLeft,const ThreeVector& aRight);
+ThreeVector operator-(const ThreeVector& aLeft,const ThreeVector& aRight);
+
+// Inner product
+double operator*(const ThreeVector& aLeft,const ThreeVector& aRight);
 
 //******************************************************************************
 
