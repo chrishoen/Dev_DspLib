@@ -18,22 +18,22 @@ namespace Dsp
 class ThreeVector
 {
 public:
-   // Dimension
-   static const int cDim = 3;
-
    // Vector components
    double mValues[3];
 
    // Constructor
    ThreeVector();
+   ThreeVector(double aV1,double aV2,double aV3);
    ThreeVector(const double* aValues);
 
    // Assign values
-   void setValues(const double* aValues);
+   void set(double aV1,double aV2,double aV3);
+   void set(const double* aValues);
 
    // Access components
    double& e(int aRow);
    double& operator()(int aRow);
+   double get(int aRow) const;
    void show(char* aLabel=0);
 
    // Add two vectors
@@ -58,6 +58,11 @@ public:
    ThreeVector normalize();
 
 };
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+ThreeVector operator * ( double aLeft, const ThreeVector& aRight );
 
 //******************************************************************************
 

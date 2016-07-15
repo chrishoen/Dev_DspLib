@@ -30,6 +30,12 @@ ThreeVector::ThreeVector()
    mValues[2] = 0.0;
 }
 
+ThreeVector::ThreeVector(double aV1,double aV2,double aV3)
+{
+   mValues[0] = aV1;
+   mValues[1] = aV2;
+   mValues[2] = aV3;
+}
 
 ThreeVector::ThreeVector(const double* aValues)
 {
@@ -41,7 +47,14 @@ ThreeVector::ThreeVector(const double* aValues)
 //******************************************************************************
 //******************************************************************************
 
-void ThreeVector::setValues(const double* aValues)
+void ThreeVector::set(double aV1,double aV2,double aV3)
+{
+   mValues[0] = aV1;
+   mValues[1] = aV2;
+   mValues[2] = aV3;
+}
+
+void ThreeVector::set(const double* aValues)
 {
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
@@ -56,6 +69,11 @@ double& ThreeVector::e (int aRow)
 }
 
 double& ThreeVector::operator() (int aRow)
+{
+   return mValues[aRow-1];
+}
+
+double ThreeVector::get(int aRow) const
 {
    return mValues[aRow-1];
 }
@@ -119,6 +137,20 @@ ThreeVector ThreeVector::operator*(double aRight)
 
    return tVector;
 }
+
+ThreeVector operator*(double aLeft, const ThreeVector& aRight)
+{
+   ThreeVector tVector;
+
+   for (int i = 1; i <= 3; i++)
+   {
+      tVector.e(i) = aLeft*aRight.get(i);
+   }
+
+   return tVector;
+}
+
+
 
 // Divide a vector by a scalar
 ThreeVector ThreeVector::operator/(double aRight)
