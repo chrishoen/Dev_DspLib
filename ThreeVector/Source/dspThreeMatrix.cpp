@@ -25,21 +25,33 @@ namespace Dsp
 // 
 ThreeMatrix::ThreeMatrix()
 {
-   mValues[0] = 0.0;
-   mValues[1] = 0.0;
-   mValues[2] = 0.0;
+   for (int i = 0; i < 3; i++)
+   {
+      for (int j = 0; j < 3; j++)
+      {
+         mValues[i][j] = 0.0;
+      }
+   }
 }
 
-ThreeMatrix::ThreeMatrix(double aV1,double aV2,double aV3)
+ThreeMatrix::ThreeMatrix(
+   double aA11,double aA12,double aA13,
+   double aA21,double aA22,double aA23,
+   double aA31,double aA32,double aA33)
 {
-   mValues[0] = aV1;
-   mValues[1] = aV2;
-   mValues[2] = aV3;
+
+   e(1,1) = aA11;
 }
 
 ThreeMatrix::ThreeMatrix(const double* aValues)
 {
-   for (int i=0;i<3;i++) mValues[i] = aValues[i];
+   for (int i = 0; i < 3; i++)
+   {
+      for (int j = 0; j < 3; j++)
+      {
+         mValues[i][j] = aValues[3*i + j];
+      }
+   }
 }
 
 
@@ -47,26 +59,54 @@ ThreeMatrix::ThreeMatrix(const double* aValues)
 //******************************************************************************
 //******************************************************************************
 
-void ThreeMatrix::set(double aV1,double aV2,double aV3)
+void ThreeMatrix::set(
+   double aA11,double aA12,double aA13,
+   double aA21,double aA22,double aA23,
+   double aA31,double aA32,double aA33)
 {
-   mValues[0] = aV1;
-   mValues[1] = aV2;
-   mValues[2] = aV3;
+
+   e(1,1) = aA11;
 }
+
 
 void ThreeMatrix::set(const double* aValues)
 {
-   for (int i=0;i<3;i++) mValues[i] = aValues[i];
+   for (int i = 0; i < 3; i++)
+   {
+      for (int j = 0; j < 3; j++)
+      {
+         mValues[i][j] = aValues[3*i + j];
+      }
+   }
 }
 
 void ThreeMatrix::setZero()
 {
-   for (int i=0;i<3;i++) mValues[i] = 0.0;
+   for (int i = 0; i < 3; i++)
+   {
+      for (int j = 0; j < 3; j++)
+      {
+         mValues[i][j] = 0.0;
+      }
+   }
 }
 
 void ThreeMatrix::setIdentity()
 {
-   for (int i=0;i<3;i++) mValues[i] = 0.0;
+   for (int i = 0; i < 3; i++)
+   {
+      for (int j = 0; j < 3; j++)
+      {
+         if (i == j)
+         {
+            mValues[i][j] = 1.0;
+         }
+         else
+         {
+            mValues[i][j] = 0.0;
+         }
+      }
+   }
 }
 
 //******************************************************************************
@@ -74,19 +114,19 @@ void ThreeMatrix::setIdentity()
 //******************************************************************************
 // Access components.
 
-double& ThreeMatrix::e (int aRow)
+double& ThreeMatrix::e (int aRow,int aCol)
 {
-   return mValues[aRow-1];
+   return mValues[aRow-1][aCol-1];
 }
 
-double& ThreeMatrix::operator() (int aRow)
+double& ThreeMatrix::operator() (int aRow,int aCol)
 {
-   return mValues[aRow-1];
+   return mValues[aRow-1][aCol-1];
 }
 
-double ThreeMatrix::get(int aRow) const
+double ThreeMatrix::get(int aRow,int aCol) const
 {
-   return mValues[aRow-1];
+   return mValues[aRow-1][aCol-1];
 }
 
 //******************************************************************************
@@ -98,14 +138,30 @@ void ThreeMatrix::show(char* aLabel)
 {
    if (aLabel==0)
    {
-      for (int i=1; i<=3; i++) printf("%11.6f\n",e(i));
+      for (int i=1;i<=3;i++)
+      {
+         for (int j=1;j<=3;j++)
+         {
+            printf("%11.6f ",e(i,j));
+         }
+         printf("\n");
+      }
    }
    else
    {
-      for (int i=1 ; i <= 3; i++) printf("%s %11.6f\n", aLabel,e(i));
+      for (int i=1;i<=3;i++)
+      {
+         printf("%s ",aLabel);
+         for (int j=1;j<=3;j++)
+         {
+            printf("%11.6f ",e(i,j));
+         }
+         printf("\n");
+      }
    }
    printf("\n");
 }
+
 
 //******************************************************************************
 //******************************************************************************
@@ -118,7 +174,10 @@ ThreeMatrix operator*(double aLeft, const ThreeMatrix& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tMatrix.e(i) = aLeft*aRight.get(i);
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i, j) = aLeft*aRight.get(i, j);
+      }
    }
 
    return tMatrix;
@@ -130,7 +189,10 @@ ThreeMatrix operator*(const ThreeMatrix& aLeft,double aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tMatrix.e(i) = aLeft.get(i)*aRight;
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i, j) = aLeft.get(i, j)*aRight;
+      }
    }
 
    return tMatrix;
@@ -142,7 +204,10 @@ ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tMatrix.e(i) = aLeft.get(i)/aRight;
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i, j) = aLeft.get(i, j) / aRight;
+      }
    }
 
    return tMatrix;
@@ -160,7 +225,10 @@ ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tMatrix.e(i) = aLeft.get(i) + aRight.get(i);
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i, j) = aLeft.get(i, j) + aRight.get(i, j);
+      }
    }
 
    return tMatrix;
@@ -173,7 +241,10 @@ ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tMatrix.e(i) = aLeft.get(i) - aRight.get(i);
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i, j) = aLeft.get(i, j) - aRight.get(i, j);
+      }
    }
 
    return tMatrix;
