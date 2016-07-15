@@ -168,12 +168,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspThreeMatrix.cpp" />
     <ClCompile Include="Source\dspThreeVector.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
+    <ClInclude Include="Source\dspThreeMatrix.h" />
     <ClInclude Include="Source\dspThreeVector.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>
