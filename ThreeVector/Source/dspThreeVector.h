@@ -24,11 +24,11 @@ public:
    // Constructor
    ThreeVector();
    ThreeVector(double aV1,double aV2,double aV3);
-   ThreeVector(const double* aValues);
+   ThreeVector(const double aValues[3]);
 
    // Assign values
    void set(double aV1,double aV2,double aV3);
-   void set(const double* aValues);
+   void set(const double aValues[3]);
    void setZero();
 
    // Access components

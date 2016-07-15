@@ -37,7 +37,7 @@ ThreeVector::ThreeVector(double aV1,double aV2,double aV3)
    mValues[2] = aV3;
 }
 
-ThreeVector::ThreeVector(const double* aValues)
+ThreeVector::ThreeVector(const double aValues[3])
 {
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
@@ -54,7 +54,7 @@ void ThreeVector::set(double aV1,double aV2,double aV3)
    mValues[2] = aV3;
 }
 
-void ThreeVector::set(const double* aValues)
+void ThreeVector::set(const double aValues[3])
 {
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }

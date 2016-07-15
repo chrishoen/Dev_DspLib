@@ -39,21 +39,21 @@ ThreeMatrix::ThreeMatrix(
    double aA21,double aA22,double aA23,
    double aA31,double aA32,double aA33)
 {
-
-   e(1,1) = aA11;
+   e(1,1) = aA11; e(1,2) = aA12; e(1,3) = aA13;
+   e(2,1) = aA21; e(2,2) = aA22; e(2,3) = aA23;
+   e(3,1) = aA31; e(3,2) = aA32; e(3,3) = aA33;
 }
 
-ThreeMatrix::ThreeMatrix(const double* aValues)
+ThreeMatrix::ThreeMatrix(const double aValues[3][3])
 {
    for (int i = 0; i < 3; i++)
    {
       for (int j = 0; j < 3; j++)
       {
-         mValues[i][j] = aValues[3*i + j];
+         mValues[i][j] = aValues[i][j];
       }
    }
 }
-
 
 //******************************************************************************
 //******************************************************************************
@@ -64,18 +64,19 @@ void ThreeMatrix::set(
    double aA21,double aA22,double aA23,
    double aA31,double aA32,double aA33)
 {
-
-   e(1,1) = aA11;
+   e(1,1) = aA11; e(1,2) = aA12; e(1,3) = aA13;
+   e(2,1) = aA21; e(2,2) = aA22; e(2,3) = aA23;
+   e(3,1) = aA31; e(3,2) = aA32; e(3,3) = aA33;
 }
 
 
-void ThreeMatrix::set(const double* aValues)
+void ThreeMatrix::set(const double aValues[3][3])
 {
    for (int i = 0; i < 3; i++)
    {
       for (int j = 0; j < 3; j++)
       {
-         mValues[i][j] = aValues[3*i + j];
+         mValues[i][j] = aValues[i][j];
       }
    }
 }

@@ -27,14 +27,14 @@ public:
       double aA11,double aA12,double aA13,
       double aA21,double aA22,double aA23,
       double aA31,double aA32,double aA33);
-   ThreeMatrix(const double* aValues);
+   ThreeMatrix(const double aValues[3][3]);
 
    // Assign values
    void set(
       double aA11,double aA12,double aA13,
       double aA21,double aA22,double aA23,
       double aA31,double aA32,double aA33);
-   void set(const double* aValues);
+   void set(const double aValues[3][3]);
    void setZero();
    void setIdentity();
 
