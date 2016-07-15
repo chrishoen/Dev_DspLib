@@ -76,68 +76,6 @@ public:
 };
 
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-class ThreeMatrix
-{
-public:
-   // Matrix components
-   double* mValues;
-   int mRows;
-   int mCols;
-
-   // Constructor
-   ThreeMatrix();
-  ~ThreeMatrix();
-
-   // Initialize
-   void initialize(
-      int     aRows,
-      int     aCols);
-
-   // Initialize
-   void initialize(
-      int     aRows,
-      int     aCols,
-      double* aValues);
-
-   // Assign values
-   void setValues(
-      double* aValues);
-
-   void reset();
-
-   // Access components
-   double& e(int aRow,int aCol);
-   double& operator()(int aRow,int aCol);
-   void show(char* aLabel=0);
-
-   // Operator
-   ThreeVector operator*(ThreeVector& aRight);
-
-   // Set matrix to a rotation matrix
-   void setRotateX   (double aAngle);
-   void setRotateY   (double aAngle);
-   void setRotateZ   (double aAngle);
-};
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void add          (ThreeVector& aY, ThreeVector& aX1, ThreeVector& aX2);  // Y  = X1 + X2
-void addTo        (ThreeVector& aY, ThreeVector& aX);                 // Y += X 
-void subtract     (ThreeVector& aY, ThreeVector& aX1, ThreeVector& aX2);  // Y  = X1 - X2
-void subtractFrom (ThreeVector& aY, ThreeVector& aX);                 // Y -= X
-void multiply     (ThreeVector& aY, ThreeVector& aX,  double   aA);   // Y  = X*a 
-void multiply     (ThreeVector& aY, ThreeMatrix& aA,  ThreeVector& aX);   // Y  = A*X
-
-void add          (ThreeMatrix& aC, ThreeMatrix& aA,  ThreeMatrix& aB);   // C  = A + B
-void multiply     (ThreeMatrix& aC, ThreeMatrix& aA,  ThreeMatrix& aB);   // C  = A*B
-void transpose    (ThreeMatrix& aC, ThreeMatrix& aA);                 // C  = Transpose[A]
-
-//******************************************************************************
 
 }//namespace
 #endif
