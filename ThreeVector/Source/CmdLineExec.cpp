@@ -8,7 +8,6 @@
 
 #include "dspThreeVector.h"
 #include "dspThreeMatrix.h"
-#include "dspThreeFunctions.h"
 
 #include "CmdLineExec.h"
 
@@ -89,8 +88,6 @@ void CmdLineExec::executeGo41(Ris::CmdLineCmd* aCmd)
    tG0.show("tG0");
    tG1.show("tG1");
 
-   double tA = Dsp::calcAngleBetween(tG0,tG1);
-   Prn::print(0,"AngleBetween %11.6f",tA);
 }
 
 //******************************************************************************
@@ -122,11 +119,6 @@ void CmdLineExec::executeGo42(Ris::CmdLineCmd* aCmd)
    tE0y.show("tE0y");
    tE1y.show("tE1y");
 
-   double tA = Dsp::calcAngleBetween(tE1y,tE0y);
-   Prn::print(0,"AngleBetween %11.6f",tA);
-
-   double tTilt = Dsp::calcTiltFromUnitVector(tE1y);
-   Prn::print(0,"TiltAngle    %11.6f",tTilt);
 }
 
 //******************************************************************************

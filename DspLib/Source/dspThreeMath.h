@@ -11,7 +11,6 @@ Vectors and matrices on R3.
 
 #include "dspThreeVector.h"
 #include "dspThreeMatrix.h"
-#include "dspThreeFunctions.h"
 
 #endif
 
