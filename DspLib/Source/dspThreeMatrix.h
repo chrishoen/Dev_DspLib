@@ -46,6 +46,10 @@ public:
    double get(int aRow,int aCol) const;
    void show(char* aLabel=0);
 
+   // Get rows and columns
+   ThreeVector getRow(int aRow);
+   ThreeVector getCol(int aCol);
+
    // Transpose
    ThreeMatrix transpose();
 
@@ -53,8 +57,6 @@ public:
    void setRotateX   (double aAngle);
    void setRotateY   (double aAngle);
    void setRotateZ   (double aAngle);
-
-
 };
 
 //******************************************************************************

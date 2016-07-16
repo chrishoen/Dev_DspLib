@@ -354,6 +354,17 @@ void CmdLineExec::executeGo26(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo27(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::ThreeMatrix tX1(
+      11.0, 12.0, 13.0,
+      21.0, 22.0, 23.0,
+      31.0, 32.0, 33.0);
+
+   Dsp::ThreeVector tRow = tX1.getRow(2);
+   Dsp::ThreeVector tCol = tX1.getCol(3);
+
+   tX1.show("tX1");
+   tRow.show("tRow");
+   tCol.show("tCol");
 }
 
 //******************************************************************************
