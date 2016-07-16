@@ -406,6 +406,31 @@ ThreeMatrix transpose(ThreeMatrix& aA)
    return tMatrix;
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Rotation matrices
+
+ThreeMatrix rotateX(double aAngle)
+{
+   ThreeMatrix tMatrix;
+   tMatrix.setRotateX(aAngle);
+   return tMatrix;
+}
+
+ThreeMatrix rotateY(double aAngle)
+{
+   ThreeMatrix tMatrix;
+   tMatrix.setRotateY(aAngle);
+   return tMatrix;
+}
+
+ThreeMatrix rotateZ(double aAngle)
+{
+   ThreeMatrix tMatrix;
+   tMatrix.setRotateZ(aAngle);
+   return tMatrix;
+}
 
 }//namespace
 

@@ -91,6 +91,16 @@ ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 ThreeMatrix transpose(ThreeMatrix& aA);
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Rotation matrices
+
+// Rotation matrices
+ThreeMatrix rotateX(double aAngle);
+ThreeMatrix rotateY(double aAngle);
+ThreeMatrix rotateZ(double aAngle);
+
+//******************************************************************************
 
 }//namespace
 #endif
