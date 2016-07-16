@@ -116,7 +116,32 @@ void CmdLineExec::executeGo32(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo33(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tR01;
+   Dsp::ThreeMatrix tR10;
+   Dsp::ThreeVector tG0;
+   Dsp::ThreeVector tG1;
+
+   tRx.setRotateX(45.0);
+   tRy.setRotateY( 0.0);
+   tRz.setRotateY( 0.0);
+
+   tR01 = tRx*tRy;
+   tR10 = tR01.transpose();
+
+   tR01.show("tR01");
+   tR10.show("tR10");
+
+
+   tG0.set(0.0,0.0,-1.0);
+   tG1 = tR10*tG0;
+
+   tG0.show("tG0");
+   tG1.show("tG1");
 }
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
