@@ -132,5 +132,8 @@
     <ClInclude Include="Source\dspThreeVector.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\dspThreeMath.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

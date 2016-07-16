@@ -58,6 +58,7 @@
     <ClInclude Include="Source\dspStatistics.h" />
     <ClInclude Include="Source\dspTextFile.h" />
     <ClInclude Include="Source\dspThreeFunctions.h" />
+    <ClInclude Include="Source\dspThreeMath.h" />
     <ClInclude Include="Source\dspThreeMatrix.h" />
     <ClInclude Include="Source\dspThreeVector.h" />
     <ClInclude Include="Source\dsp_functions.h" />
