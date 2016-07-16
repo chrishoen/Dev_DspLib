@@ -43,8 +43,80 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO27"    ))  executeGo27 (aCmd);
    if(aCmd->isCmd("GO28"    ))  executeGo28 (aCmd);
    if(aCmd->isCmd("GO29"    ))  executeGo29 (aCmd);
+
+   if(aCmd->isCmd("GO31"    ))  executeGo31 (aCmd);
+   if(aCmd->isCmd("GO32"    ))  executeGo32 (aCmd);
+   if(aCmd->isCmd("GO33"    ))  executeGo33 (aCmd);
+
 }
 
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+//******************************************************************************
+
+void CmdLineExec::executeGo31(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tR01;
+   Dsp::ThreeMatrix tR10;
+
+   tRx.setRotateX(30.0);
+   tRy.setRotateY(-60.0);
+
+   tR01 = tRx*tRy;
+   tR10 = tR01.transpose();
+
+   tRx.show("tRx");
+   tRy.show("tRy");
+
+   tR01.show("tR01");
+   tR10.show("tR10");
+
+   (tR01*tR10).show("tR01*tR10");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeGo32(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tTT1;
+   Dsp::ThreeMatrix tTT2;
+
+   tRx.setRotateX(30.0);
+   tRy.setRotateY(-60.0);
+   tRz.setRotateZ(-30.0);
+
+   tTT1 = tRx*tRy*tRz*tRz.transpose()*tRy.transpose()*tRx.transpose();
+   tTT2 = (tRx*tRy*tRz*tRz)*((tRx*tRy*tRz*tRz).transpose());
+   
+   tRx.show("tRx");
+   tRy.show("tRy");
+   tRz.show("tRz");
+
+   tTT1.show("tTT1");
+   tTT2.show("tTT2");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo33(Ris::CmdLineCmd* aCmd)
+{
+}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

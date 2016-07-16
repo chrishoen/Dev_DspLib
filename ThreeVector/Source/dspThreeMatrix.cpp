@@ -330,7 +330,7 @@ ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight)
       double tSum = 0.0;
       for (int j = 1; j <= 3; j++)
       {
-          tSum += aLeft.get(i, j) + aRight.get(j);
+          tSum += aLeft.get(i, j)*aRight.get(j);
       }
       tVector.e(i) = tSum;
    }
@@ -345,12 +345,12 @@ ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      double tSum = 0.0;
       for (int j = 1; j <= 3; j++)
       {
+         double tSum = 0.0;
          for (int k = 1; k <= 3; k++)
          {
-            tSum += aLeft.get(i, k) + aRight.get(k, j);
+            tSum += aLeft.get(i, k)*aRight.get(k, j);
          }
          tMatrix.e(i,j) = tSum;
       }

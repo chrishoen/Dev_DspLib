@@ -7,6 +7,7 @@
 #include "prnPrint.h"
 
 #include "dspThreeVector.h"
+#include "dspThreeMatrix.h"
 
 #include "CmdLineExec.h"
 
@@ -21,254 +22,298 @@ void CmdLineExec::reset()
 //******************************************************************************
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
-   if(aCmd->isCmd("RESET"  ))  reset();
-   if(aCmd->isCmd("GO1"    ))  executeGo1 (aCmd);
-   if(aCmd->isCmd("GO2"    ))  executeGo2 (aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3 (aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4 (aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5 (aCmd);
-   if(aCmd->isCmd("GO6"    ))  executeGo6 (aCmd);
-   if(aCmd->isCmd("GO7"    ))  executeGo7 (aCmd);
-   if(aCmd->isCmd("GO8"    ))  executeGo8 (aCmd);
-   if(aCmd->isCmd("GO9"    ))  executeGo9 (aCmd);
+   if(aCmd->isCmd("RESET"  ))   reset();
+
+   if(aCmd->isCmd("GO11"    ))  executeGo11 (aCmd);
+   if(aCmd->isCmd("GO12"    ))  executeGo12 (aCmd);
+   if(aCmd->isCmd("GO13"    ))  executeGo13 (aCmd);
+   if(aCmd->isCmd("GO14"    ))  executeGo14 (aCmd);
+   if(aCmd->isCmd("GO15"    ))  executeGo15 (aCmd);
+   if(aCmd->isCmd("GO16"    ))  executeGo16 (aCmd);
+   if(aCmd->isCmd("GO17"    ))  executeGo17 (aCmd);
+   if(aCmd->isCmd("GO18"    ))  executeGo18 (aCmd);
+   if(aCmd->isCmd("GO19"    ))  executeGo19 (aCmd);
+
+   if(aCmd->isCmd("GO21"    ))  executeGo21 (aCmd);
+   if(aCmd->isCmd("GO22"    ))  executeGo22 (aCmd);
+   if(aCmd->isCmd("GO23"    ))  executeGo23 (aCmd);
+   if(aCmd->isCmd("GO24"    ))  executeGo24 (aCmd);
+   if(aCmd->isCmd("GO25"    ))  executeGo25 (aCmd);
+   if(aCmd->isCmd("GO26"    ))  executeGo26 (aCmd);
+   if(aCmd->isCmd("GO27"    ))  executeGo27 (aCmd);
+   if(aCmd->isCmd("GO28"    ))  executeGo28 (aCmd);
+   if(aCmd->isCmd("GO29"    ))  executeGo29 (aCmd);
+
+   if(aCmd->isCmd("GO31"    ))  executeGo31 (aCmd);
+   if(aCmd->isCmd("GO32"    ))  executeGo32 (aCmd);
+   if(aCmd->isCmd("GO33"    ))  executeGo33 (aCmd);
 }
 
 //******************************************************************************
-
-void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
-{
-   double tT[3] = {201.0,
-                   202.0,
-                   203.0};
-
-   Dsp::ThreeVector tX;
-   tX.initialize(3,&tT[0]);
-
-   tX.show("tX");
-}
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 //******************************************************************************
 
-void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo31(Ris::CmdLineCmd* aCmd)
 {
-   double tT[3][3] = {{11.0,12.0,13.0},
-                      {21.0,22.0,23.0},
-                      {31.0,32.0,33.0}};
-   Dsp::ThreeMatrix tX;
-   tX.initialize(3,3,&tT[0][0]);
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tR01;
+   Dsp::ThreeMatrix tR10;
 
-   tX.show("tX");
+   tRx.setRotateX(45.0);
+   tRy.setRotateX(45.0);
+
+   tR01 = tRx*tRy;
+   tR10 = tR01.transpose();
+
+   tR01.show("tR01");
+   tR10.show("tR10");
 }
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo32(Ris::CmdLineCmd* aCmd)
 {
-   // X1
-   double tT1[3] = {101.0,
-                    102.0,
-                    103.0};
+   double tAV[3][3] = 
+   {{  11.0, 12.0, 13.0 },
+    {  21.0, 22.0, 23.0 },
+    {  31.0, 32.0, 33.0 }};
 
-   Dsp::ThreeVector tX1;
-   tX1.initialize(3,&tT1[0]);
+   Dsp::ThreeMatrix tX1(tAV);
+   tX1.show("tX");
 
-   tX1.show("tX1");
-
-   // X2
-   Dsp::ThreeVector tX2(tX1);
+   Dsp::ThreeMatrix tX2(
+      11.0, 12.0, 13.0,
+      21.0, 22.0, 23.0,
+      31.0, 32.0, 33.0);
 
    tX2.show("tX2");
+}
 
-   // X3
-   Dsp::ThreeVector tX3 = tX1;
+//******************************************************************************
 
+void CmdLineExec::executeGo33(Ris::CmdLineCmd* aCmd)
+{
+   double tAV[3][3] = 
+   {{  11.0, 12.0, 13.0 },
+    {  21.0, 22.0, 23.0 },
+    {  31.0, 32.0, 33.0 }};
+
+   Dsp::ThreeMatrix tX1;
+   tX1.set(tAV);
+   tX1.show("tX1");
+
+   Dsp::ThreeMatrix tX2;
+   tX2.set(
+      11.0, 12.0, 13.0,
+      21.0, 22.0, 23.0,
+      31.0, 32.0, 33.0);
+
+   tX2.show("tX2");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo23(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tX1(
+      11.0, 12.0, 13.0,
+      21.0, 22.0, 23.0,
+      31.0, 32.0, 33.0);
+
+   tX1.e(1,1) *= 2.0;
+   tX1(2,1) *= 2.0;
+   tX1(3,1) *= 2.0;
+
+   tX1.show("tX2");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo24(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tX1(
+      11.0,  0.0,  0.0,
+      21.0,  0.0,  0.0,
+      31.0,  0.0,  0.0);
+
+   Dsp::ThreeMatrix tX2(
+       0.0, 21.0,  0.0,
+       0.0, 22.0,  0.0,
+       0.0, 23.0,  0.0);
+
+   Dsp::ThreeMatrix tX3(
+       0.0,  0.0, 31.0,
+       0.0,  0.0, 32.0,
+       0.0,  0.0, 33.0);
+
+   Dsp::ThreeMatrix tX4 = tX1 + tX2 + tX3;
+   tX4.show("tX4");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo25(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tX1(
+      11.0, 12.0, 13.0,
+      21.0, 22.0, 23.0,
+      31.0, 32.0, 33.0);
+
+   Dsp::ThreeMatrix tX2 = tX1*2.0;
+   tX2.show("tX2");
+
+   Dsp::ThreeMatrix tX3 = 2.0*tX1;
    tX3.show("tX3");
+}
 
-   // X4
-   Dsp::ThreeVector tX4;
-   tX4 = tX1;
+//******************************************************************************
 
+void CmdLineExec::executeGo26(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeMatrix tX1(
+      11.0,  0.0,  0.0,
+      21.0,  0.0,  0.0,
+      31.0,  0.0,  0.0);
+
+   Dsp::ThreeMatrix tX2(
+       0.0, 21.0,  0.0,
+       0.0, 22.0,  0.0,
+       0.0, 23.0,  0.0);
+
+   Dsp::ThreeMatrix tX3(
+       0.0,  0.0, 31.0,
+       0.0,  0.0, 32.0,
+       0.0,  0.0, 33.0);
+
+   Dsp::ThreeMatrix tX4 = 2.0*(tX1 + tX2 - tX3);
+   tX4.show("tX4");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo27(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo28(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo29(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeGo11(Ris::CmdLineCmd* aCmd)
+{
+   double tAV[3] = { 201.0,202.0,203.0 };
+   Dsp::ThreeVector tX1(tAV);
+   tX1.show("tX");
+
+   Dsp::ThreeVector tX2(201.0,202.0,203.0);
+   tX2.show("tX2");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
+{
+   double tAV[3] = { 201.0,202.0,203.0 };
+   Dsp::ThreeVector tX;
+   tX.set(tAV);
+   tX.show("tX");
+
+   tX.set(201.0,202.0,203.0 );
+   tX.show("tX");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo13(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeVector tX1(101.0,102.0,103.0);
+   tX1.show("tX1");
+
+   tX1.e(1) *= 2.0;
+   tX1(2) *= 2.0;
+   tX1.show("tX1");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo14(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeVector tX1(101.0,102.0,103.0);
+   Dsp::ThreeVector tX2(201.0,202.0,203.0);
+   Dsp::ThreeVector tX3(301.0,302.0,303.0);
+   Dsp::ThreeVector tX4 = tX1 + tX2 + tX3;
+   tX4.show("tX4");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo15(Ris::CmdLineCmd* aCmd)
+{
+   double tS=2.0;
+   Dsp::ThreeVector tX1(101.0,102.0,103.0);
+   Dsp::ThreeVector tX2 = tX1*2.0;
+   tX2.show("tX2");
+
+   Dsp::ThreeVector tX3 = 2.0*tX1;
+   tX3.show("tX3");
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo16(Ris::CmdLineCmd* aCmd)
+{
+   Dsp::ThreeVector tX1(101.0,102.0,103.0);
+   Dsp::ThreeVector tX2(201.0,202.0,203.0);
+   Dsp::ThreeVector tX3(301.0,302.0,303.0);
+   Dsp::ThreeVector tX4 = 2.0*(tX1 + tX2 - tX3);
    tX4.show("tX4");
 
-   // X5
-   Dsp::ThreeVector tX5;
-   tX5.initialize(3);
-   tX5 = tX1;
-
-   tX5.show("tX5");
+   tX4.setNormalize();
+   tX4.show("tX4");
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo17(Ris::CmdLineCmd* aCmd)
 {
-   // X1
-   double tT1[3] = {101.0,
-                    102.0,
-                    103.0};
-
-   Dsp::ThreeVector tX1;
-   tX1.initialize(3,&tT1[0]);
-
-   tX1.show("tX1");
-
-   // X2
-   double tT2[3] = {201.0,
-                    202.0,
-                    203.0};
-
-   Dsp::ThreeVector tX2;
-   tX2.initialize(3,&tT2[0]);
-
-   tX2.show("tX2");
-
-   // X3
-   Dsp::ThreeVector tX3(3);
-
-   tX3 = tX1 + tX2;
-
-   tX3.show("tX3");
-
-   tX3 = tX1 + tX2;
-
-   tX3.show("tX3");
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo18(Ris::CmdLineCmd* aCmd)
 {
-   // X1
-   double tT1[3] = {101.0,
-                    102.0,
-                    103.0};
-
-   Dsp::ThreeVector tX1;
-   tX1.initialize(3,&tT1[0]);
-
-   tX1.show("tX1");
-
-   // X2
-   double tT2[3] = {201.0,
-                    202.0,
-                    203.0};
-
-   Dsp::ThreeVector tX2;
-   tX2.initialize(3,&tT2[0]);
-
-   tX2.show("tX2");
-
-   // X3
-   Dsp::ThreeVector tX3(3);
-
-   add(tX3,tX1,tX2);
-
-   tX3.show("tX3");
-
 }
 
 //******************************************************************************
 
-void CmdLineExec::executeGo6(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeGo19(Ris::CmdLineCmd* aCmd)
 {
-   double tAV[3][3] = {{11.0,12.0,13.0},
-                       {21.0,22.0,23.0},
-                       {31.0,32.0,33.0}};
-   Dsp::ThreeMatrix tA;
-   tA.initialize(3,3,&tAV[0][0]);
-   tA.show("tA");
-
-   // X1
-   double tT1[3] = {101.0,
-                    102.0,
-                    103.0};
-
-   Dsp::ThreeVector tX1;
-   tX1.initialize(3,&tT1[0]);
-
-   tX1.show("tX1");
-
-   // X2
-   Dsp::ThreeVector tX2(3);
-
-   multiply(tX2,tA,tX1);
-
-   tX2.show("tX2");
-
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGo7(Ris::CmdLineCmd* aCmd)
-{
-   double tAV[2][2] = {{1.0,0.0},
-                       {0.0,2.0}};
-   Dsp::ThreeMatrix tA;
-   tA.initialize(2,2,&tAV[0][0]);
-   tA.show("tA");
-
-   // X1
-   double tT1[2] = {101.0,
-                    102.0};
-
-   Dsp::ThreeVector tX1;
-   tX1.initialize(2,&tT1[0]);
-   tX1.show("tX1");
-
-   // X2
-   Dsp::ThreeVector tX2(2);
-
-   multiply(tX2,tA,tX1);
-
-   tX2.show("tX2");
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGo8(Ris::CmdLineCmd* aCmd)
-{
-   aCmd->setArgDefault(1,45.0);
-   double tAngle = aCmd->argDouble(1);
-
-   Dsp::ThreeMatrix tL;
-   tL.initialize(3,3);
-   tL.setRotateX(tAngle);
-   
-   tL.show("tL");
-}
-
-//******************************************************************************
-
-void CmdLineExec::executeGo9(Ris::CmdLineCmd* aCmd)
-{
-   aCmd->setArgDefault(1,45.0);
-   aCmd->setArgDefault(0, 0.0);
-   double tRollAngle  = aCmd->argDouble(1);
-   double tPitchAngle = aCmd->argDouble(2);
-
-   Dsp::ThreeMatrix tRy;
-   tRy.initialize(3,3);
-   tRy.setRotateY(tRollAngle);
-   
-   Dsp::ThreeMatrix tRx;
-   tRx.initialize(3,3);
-   tRx.setRotateX(tPitchAngle);
-   
-   Dsp::ThreeMatrix tL01;
-   tL01.initialize(3,3);
-   multiply(tL01,tRx,tRy);
-   
-   Dsp::ThreeMatrix tL10;
-   tL10.initialize(3,3);
-   transpose(tL10,tL01);
-
-   Dsp::ThreeMatrix tLI;
-   tLI.initialize(3,3);
-   multiply(tLI,tL01,tL10);
-
-   tL01.show("tL01");
-   tL10.show("tL10");
-   tLI.show("tLI");
-
 }
 
