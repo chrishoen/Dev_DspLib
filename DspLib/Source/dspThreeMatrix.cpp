@@ -359,6 +359,27 @@ ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight)
    return tMatrix;
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Transpose
+
+ThreeMatrix transpose(ThreeMatrix& aA)
+{
+   ThreeMatrix tMatrix;
+
+   for (int i=1; i<=3; i++)
+   {
+      double tSum = 0.0;
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix(i,j) = aA(j,i);
+      }
+   }
+
+   return tMatrix;
+}
+
 
 }//namespace
 

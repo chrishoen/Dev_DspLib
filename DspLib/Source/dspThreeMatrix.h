@@ -81,6 +81,14 @@ ThreeVector operator*(ThreeMatrix& aLeft,ThreeVector& aRight);
 ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Operators
+
+// Transpose
+ThreeMatrix transpose(ThreeMatrix& aA);
+
+//******************************************************************************
 
 }//namespace
 #endif

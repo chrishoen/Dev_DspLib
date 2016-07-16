@@ -212,7 +212,7 @@ void CmdLineExec::executeGo33(Ris::CmdLineCmd* aCmd)
    tRz.setRotateY( 0.0);
 
    tR01 = tRx*tRy;
-   tR10 = tR01.transpose();
+   tR10 = transpose(tR01);
 
    tR01.show("tR01");
    tR10.show("tR10");
