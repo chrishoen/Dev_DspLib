@@ -37,7 +37,7 @@ ThreeVector::ThreeVector(double aV1,double aV2,double aV3)
    mValues[2] = aV3;
 }
 
-ThreeVector::ThreeVector(const double aValues[3])
+ThreeVector::ThreeVector(double aValues[3])
 {
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
@@ -54,7 +54,7 @@ void ThreeVector::set(double aV1,double aV2,double aV3)
    mValues[2] = aV3;
 }
 
-void ThreeVector::set(const double aValues[3])
+void ThreeVector::set(double aValues[3])
 {
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
@@ -161,37 +161,37 @@ void ThreeVector::setNormalize()
 //******************************************************************************
 // Scalar multiply, divide
 
-ThreeVector operator*(double aLeft, const ThreeVector& aRight)
+ThreeVector operator*(double aLeft, ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft*aRight.get(i);
+      tVector.e(i) = aLeft*aRight(i);
    }
 
    return tVector;
 }
 
-ThreeVector operator*(const ThreeVector& aLeft,double aRight)
+ThreeVector operator*(ThreeVector& aLeft,double aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft.get(i)*aRight;
+      tVector.e(i) = aLeft(i)*aRight;
    }
 
    return tVector;
 }
 
-ThreeVector operator/(const ThreeVector& aLeft,double aRight)
+ThreeVector operator/(ThreeVector& aLeft,double aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft.get(i)/aRight;
+      tVector.e(i) = aLeft(i)/aRight;
    }
 
    return tVector;
@@ -203,26 +203,26 @@ ThreeVector operator/(const ThreeVector& aLeft,double aRight)
 // Vector sum, difference
 
 // Add two vectors
-ThreeVector operator+(const ThreeVector& aLeft,const ThreeVector& aRight)
+ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft.get(i) + aRight.get(i);
+      tVector.e(i) = aLeft(i) + aRight(i);
    }
 
    return tVector;
 }
 
 // Subtract two vectors
-ThreeVector operator-(const ThreeVector& aLeft,const ThreeVector& aRight)
+ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft.get(i) - aRight.get(i);
+      tVector.e(i) = aLeft(i) - aRight(i);
    }
 
    return tVector;
@@ -233,13 +233,13 @@ ThreeVector operator-(const ThreeVector& aLeft,const ThreeVector& aRight)
 //******************************************************************************
 // Inner product
 
-double operator*(const ThreeVector& aLeft,const ThreeVector& aRight)
+double operator*(ThreeVector& aLeft,ThreeVector& aRight)
 {
    double tSum=0.0;
 
    for (int i=1; i<=3; i++)
    {
-      tSum += aLeft.get(i) * aRight.get(i);
+      tSum += aLeft(i) * aRight(i);
    }
 
    return tSum;

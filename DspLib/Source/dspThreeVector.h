@@ -24,11 +24,11 @@ public:
    // Constructor
    ThreeVector();
    ThreeVector(double aV1,double aV2,double aV3);
-   ThreeVector(const double aValues[3]);
+   ThreeVector(double aValues[3]);
 
    // Assign values
    void set(double aV1,double aV2,double aV3);
-   void set(const double aValues[3]);
+   void set(double aValues[3]);
    void setZero();
 
    // Access components
@@ -54,16 +54,16 @@ public:
 // Operators
 
 // Scalar multilply, divide
-ThreeVector operator*(double aLeft, const ThreeVector& aRight);
-ThreeVector operator*(const ThreeVector& aLeft,double aRight);
-ThreeVector operator/(const ThreeVector& aLeft,double aRight);
+ThreeVector operator*(double aLeft, ThreeVector& aRight);
+ThreeVector operator*(ThreeVector& aLeft,double aRight);
+ThreeVector operator/(ThreeVector& aLeft,double aRight);
 
 // Vector sum, difference
-ThreeVector operator+(const ThreeVector& aLeft,const ThreeVector& aRight);
-ThreeVector operator-(const ThreeVector& aLeft,const ThreeVector& aRight);
+ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight);
+ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight);
 
 // Inner product
-double operator*(const ThreeVector& aLeft,const ThreeVector& aRight);
+double operator*(ThreeVector& aLeft,ThreeVector& aRight);
 
 // Cross product
 ThreeVector cross(ThreeVector& aLeft, ThreeVector& aRight);
