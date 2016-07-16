@@ -170,6 +170,64 @@ void ThreeMatrix::show(char* aLabel)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Transpose
+
+ThreeMatrix ThreeMatrix::transpose()
+{
+   ThreeMatrix tMatrix;
+
+   for (int i=1; i<=3; i++)
+   {
+      double tSum = 0.0;
+      for (int j = 1; j <= 3; j++)
+      {
+         tMatrix.e(i,j) = get(j,i);
+      }
+   }
+
+   return tMatrix;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void ThreeMatrix::setRotateX(double aAngle)
+{
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   set( 1.0, 0.0, 0.0,
+        0.0,  tC, -tS,
+        0.0,  tS,  tC);
+}
+
+void ThreeMatrix::setRotateY(double aAngle)
+{
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   set( tC, 0.0,  tS,
+       0.0, 1.0, 0.0,
+       -tS, 0.0,  tC);
+}
+
+void ThreeMatrix::setRotateZ(double aAngle)
+{
+   double tS = dsp_sin_deg(aAngle);
+   double tC = dsp_cos_deg(aAngle);
+
+   set( tC, -tS, 0.0,
+        tS,  tC, 0.0,
+       0.0, 0.0, 1.0);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Scalar multiply, divide
 
 ThreeMatrix operator*(double aLeft, const ThreeMatrix& aRight)
@@ -300,6 +358,7 @@ ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 
    return tMatrix;
 }
+
 
 }//namespace
 

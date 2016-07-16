@@ -45,6 +45,16 @@ public:
    double& operator()(int aRow,int aCol);
    double get(int aRow,int aCol) const;
    void show(char* aLabel=0);
+
+   // Transpose
+   ThreeMatrix transpose();
+
+   // Set to a rotation matrix
+   void setRotateX   (double aAngle);
+   void setRotateY   (double aAngle);
+   void setRotateZ   (double aAngle);
+
+
 };
 
 //******************************************************************************
