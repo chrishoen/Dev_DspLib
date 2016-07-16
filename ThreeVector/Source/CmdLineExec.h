@@ -39,6 +39,10 @@ public:
   void executeGo31  (Ris::CmdLineCmd* aCmd);
   void executeGo32  (Ris::CmdLineCmd* aCmd);
   void executeGo33  (Ris::CmdLineCmd* aCmd);
+
+  void executeGo41  (Ris::CmdLineCmd* aCmd);
+  void executeGo42  (Ris::CmdLineCmd* aCmd);
+  void executeGo43  (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************
