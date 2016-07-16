@@ -82,7 +82,7 @@ void ThreeMatrix::set(double aValues[3][3])
    }
 }
 
-void ThreeMatrix::setZero()
+void ThreeMatrix::setToZero()
 {
    for (int i = 0; i < 3; i++)
    {

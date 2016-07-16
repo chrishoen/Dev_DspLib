@@ -163,7 +163,7 @@ void CmdLineExec::executeGo31(Ris::CmdLineCmd* aCmd)
    tR10.show("tR10");
 
 
-   tG0.set(0.0,0.0,-1.0);
+   tG0.setToBasisVector(-3);
    tG1 = tR10*tG0;
 
    tG0.show("tG0");

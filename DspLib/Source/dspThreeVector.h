@@ -25,11 +25,13 @@ public:
    ThreeVector();
    ThreeVector(double aV1,double aV2,double aV3);
    ThreeVector(double aValues[3]);
+   ThreeVector(int aBasisCoordinate);
 
    // Assign values
    void set(double aV1,double aV2,double aV3);
    void set(double aValues[3]);
-   void setZero();
+   void setToZero();
+   void setToBasisVector(int aBasisCoordinate);
 
    // Access components
    double& e(int aRow);

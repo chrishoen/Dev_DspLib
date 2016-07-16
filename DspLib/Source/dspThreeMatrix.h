@@ -37,7 +37,7 @@ public:
       double aA21,double aA22,double aA23,
       double aA31,double aA32,double aA33);
    void set(double aValues[3][3]);
-   void setZero();
+   void setToZero();
    void setIdentity();
 
    // Access components

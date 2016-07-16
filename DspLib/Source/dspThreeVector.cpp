@@ -42,6 +42,18 @@ ThreeVector::ThreeVector(double aValues[3])
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
 
+ThreeVector::ThreeVector(int aBasisCoordinate)
+{
+   switch (aBasisCoordinate)
+   {
+   case  1: {mValues[0] =  1.0; mValues[1] =  0.0; mValues[2] =  0.0; } break;
+   case  2: {mValues[0] =  0.0; mValues[1] =  1.0; mValues[2] =  0.0; } break;
+   case  3: {mValues[0] =  0.0; mValues[1] =  0.0; mValues[2] =  1.0; } break;
+   case -1: {mValues[0] = -1.0; mValues[1] =  0.0; mValues[2] =  0.0; } break;
+   case -2: {mValues[0] =  0.0; mValues[1] = -1.0; mValues[2] =  0.0; } break;
+   case -3: {mValues[0] =  0.0; mValues[1] =  0.0; mValues[2] = -1.0; } break;
+   }
+}
 
 //******************************************************************************
 //******************************************************************************
@@ -59,9 +71,22 @@ void ThreeVector::set(double aValues[3])
    for (int i=0;i<3;i++) mValues[i] = aValues[i];
 }
 
-void ThreeVector::setZero()
+void ThreeVector::setToZero()
 {
    for (int i=0;i<3;i++) mValues[i] = 0.0;
+}
+
+void ThreeVector::setToBasisVector(int aBasisCoordinate)
+{
+   switch (aBasisCoordinate)
+   {
+   case  1: {mValues[0] =  1.0; mValues[1] =  0.0; mValues[2] =  0.0; } break;
+   case  2: {mValues[0] =  0.0; mValues[1] =  1.0; mValues[2] =  0.0; } break;
+   case  3: {mValues[0] =  0.0; mValues[1] =  0.0; mValues[2] =  1.0; } break;
+   case -1: {mValues[0] = -1.0; mValues[1] =  0.0; mValues[2] =  0.0; } break;
+   case -2: {mValues[0] =  0.0; mValues[1] = -1.0; mValues[2] =  0.0; } break;
+   case -3: {mValues[0] =  0.0; mValues[1] =  0.0; mValues[2] = -1.0; } break;
+   }
 }
 
 //******************************************************************************
