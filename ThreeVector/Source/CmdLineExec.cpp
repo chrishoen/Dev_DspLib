@@ -452,6 +452,14 @@ void CmdLineExec::executeGo16(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo17(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::ThreeVector tX1(1.0,0.0,0.0);
+   Dsp::ThreeVector tX2(0.0,1.0,0.0);
+   Dsp::ThreeVector tX3 = tX1 & tX1;
+   Dsp::ThreeVector tX4 = tX1 & tX2;
+   tX1.show("tX1");
+   tX2.show("tX2");
+   tX3.show("tX3");
+   tX4.show("tX4");
 }
 
 //******************************************************************************

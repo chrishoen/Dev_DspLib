@@ -65,6 +65,10 @@ ThreeVector operator-(const ThreeVector& aLeft,const ThreeVector& aRight);
 // Inner product
 double operator*(const ThreeVector& aLeft,const ThreeVector& aRight);
 
+// Cross product
+ThreeVector cross(ThreeVector& aLeft, ThreeVector& aRight);
+ThreeVector operator&(ThreeVector& aLeft, ThreeVector& aRight);
+
 //******************************************************************************
 
 }//namespace
