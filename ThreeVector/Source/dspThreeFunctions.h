@@ -17,7 +17,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 
-double calcAngleBetween(ThreeVector& aV1, ThreeVector& aV2);
+double calcAngleBetween       (ThreeVector& aV1, ThreeVector& aV2);
+double calcTiltFromVector     (ThreeVector& aV1);
+double calcTiltFromUnitVector (ThreeVector& aV1);
 
 //******************************************************************************
 

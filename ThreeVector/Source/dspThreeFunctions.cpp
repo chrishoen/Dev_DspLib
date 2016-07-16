@@ -12,7 +12,7 @@ Description:
 #include <string.h>
 
 #include "dsp_trig_functions.h"
-#include "dspThreeVector.h"
+#include "dspThreeFunctions.h"
 
 namespace Dsp
 {
@@ -22,7 +22,7 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// 
+// Calculate the angle between two vectors.
 
 double calcAngleBetween(ThreeVector& aV1, ThreeVector& aV2)
 {
@@ -33,6 +33,24 @@ double calcAngleBetween(ThreeVector& aV1, ThreeVector& aV2)
    if (tL2==0.0) return 0.0;
 
    return dsp_acos_deg((aV1*aV2)/(tL1*tL2));
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the tilt angle of a vector, the angle between the horizontal
+// plane (YZ) and the vector.
+
+double calcTiltFromVector(ThreeVector& aV1)
+{
+   ThreeVector tUnitVector = aV1.normalize();
+   return calcTiltFromUnitVector(tUnitVector);
+}
+
+double calcTiltFromUnitVector(ThreeVector& aV1)
+{
+   double tV1z = aV1.e(3);
+   return dsp_asin_deg(tV1z);
 }
 
 //******************************************************************************

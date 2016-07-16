@@ -8,6 +8,7 @@
 
 #include "dspThreeVector.h"
 #include "dspThreeMatrix.h"
+#include "dspThreeFunctions.h"
 
 #include "CmdLineExec.h"
 
@@ -24,33 +25,33 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if(aCmd->isCmd("RESET"  ))   reset();
 
-   if(aCmd->isCmd("GO11"    ))  executeGo11 (aCmd);
-   if(aCmd->isCmd("GO12"    ))  executeGo12 (aCmd);
-   if(aCmd->isCmd("GO13"    ))  executeGo13 (aCmd);
-   if(aCmd->isCmd("GO14"    ))  executeGo14 (aCmd);
-   if(aCmd->isCmd("GO15"    ))  executeGo15 (aCmd);
-   if(aCmd->isCmd("GO16"    ))  executeGo16 (aCmd);
-   if(aCmd->isCmd("GO17"    ))  executeGo17 (aCmd);
-   if(aCmd->isCmd("GO18"    ))  executeGo18 (aCmd);
-   if(aCmd->isCmd("GO19"    ))  executeGo19 (aCmd);
+   if(aCmd->isCmd("Go11"    ))  executeGo11 (aCmd);
+   if(aCmd->isCmd("Go12"    ))  executeGo12 (aCmd);
+   if(aCmd->isCmd("Go13"    ))  executeGo13 (aCmd);
+   if(aCmd->isCmd("Go14"    ))  executeGo14 (aCmd);
+   if(aCmd->isCmd("Go15"    ))  executeGo15 (aCmd);
+   if(aCmd->isCmd("Go16"    ))  executeGo16 (aCmd);
+   if(aCmd->isCmd("Go17"    ))  executeGo17 (aCmd);
+   if(aCmd->isCmd("Go18"    ))  executeGo18 (aCmd);
+   if(aCmd->isCmd("Go19"    ))  executeGo19 (aCmd);
 
-   if(aCmd->isCmd("GO21"    ))  executeGo21 (aCmd);
-   if(aCmd->isCmd("GO22"    ))  executeGo22 (aCmd);
-   if(aCmd->isCmd("GO23"    ))  executeGo23 (aCmd);
-   if(aCmd->isCmd("GO24"    ))  executeGo24 (aCmd);
-   if(aCmd->isCmd("GO25"    ))  executeGo25 (aCmd);
-   if(aCmd->isCmd("GO26"    ))  executeGo26 (aCmd);
-   if(aCmd->isCmd("GO27"    ))  executeGo27 (aCmd);
-   if(aCmd->isCmd("GO28"    ))  executeGo28 (aCmd);
-   if(aCmd->isCmd("GO29"    ))  executeGo29 (aCmd);
+   if(aCmd->isCmd("Go21"    ))  executeGo21 (aCmd);
+   if(aCmd->isCmd("Go22"    ))  executeGo22 (aCmd);
+   if(aCmd->isCmd("Go23"    ))  executeGo23 (aCmd);
+   if(aCmd->isCmd("Go24"    ))  executeGo24 (aCmd);
+   if(aCmd->isCmd("Go25"    ))  executeGo25 (aCmd);
+   if(aCmd->isCmd("Go26"    ))  executeGo26 (aCmd);
+   if(aCmd->isCmd("Go27"    ))  executeGo27 (aCmd);
+   if(aCmd->isCmd("Go28"    ))  executeGo28 (aCmd);
+   if(aCmd->isCmd("Go29"    ))  executeGo29 (aCmd);
 
-   if(aCmd->isCmd("GO31"    ))  executeGo31 (aCmd);
-   if(aCmd->isCmd("GO32"    ))  executeGo32 (aCmd);
-   if(aCmd->isCmd("GO33"    ))  executeGo33 (aCmd);
+   if(aCmd->isCmd("Go31"    ))  executeGo31 (aCmd);
+   if(aCmd->isCmd("Go32"    ))  executeGo32 (aCmd);
+   if(aCmd->isCmd("Go33"    ))  executeGo33 (aCmd);
 
-   if(aCmd->isCmd("GO31"    ))  executeGo41 (aCmd);
-   if(aCmd->isCmd("GO32"    ))  executeGo42 (aCmd);
-   if(aCmd->isCmd("GO33"    ))  executeGo43 (aCmd);
+   if(aCmd->isCmd("Go41"    ))  executeGo41 (aCmd);
+   if(aCmd->isCmd("Go42"    ))  executeGo42 (aCmd);
+   if(aCmd->isCmd("Go43"    ))  executeGo43 (aCmd);
 
 }
 
@@ -63,18 +64,69 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo41(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tR01;
+   Dsp::ThreeMatrix tR10;
    Dsp::ThreeVector tG0;
    Dsp::ThreeVector tG1;
 
+   tRx.setRotateX(45.0);
+   tRy.setRotateY( 0.0);
+   tRz.setRotateY( 0.0);
+
+   tR01 = tRx*tRy;
+   tR10 = tR01.transpose();
+
+   tR01.show("tR01");
+   tR10.show("tR10");
+
 
    tG0.set(0.0,0.0,-1.0);
-   tG0.set(0.0,0.0,-1.0);
+   tG1 = tR10*tG0;
+
+   tG0.show("tG0");
+   tG1.show("tG1");
+
+   double tA = Dsp::calcAngleBetween(tG0,tG1);
+   Prn::print(0,"AngleBetween %11.6f",tA);
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo42(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::ThreeMatrix tRx;
+   Dsp::ThreeMatrix tRy;
+   Dsp::ThreeMatrix tRz;
+   Dsp::ThreeMatrix tR01;
+   Dsp::ThreeMatrix tR10;
+   Dsp::ThreeVector tE0y;
+   Dsp::ThreeVector tE1y;
+
+   tRx.setRotateX(45.0);
+   tRy.setRotateY( 0.0);
+   tRz.setRotateY( 0.0);
+
+   tR01 = tRx*tRy;
+   tR10 = tR01.transpose();
+
+   tR01.show("tR01");
+   tR10.show("tR10");
+
+
+   tE0y.set(0.0,1.0,0.0);
+   tE1y = tR10*tE0y;
+
+   tE0y.show("tE0y");
+   tE1y.show("tE1y");
+
+   double tA = Dsp::calcAngleBetween(tE1y,tE0y);
+   Prn::print(0,"AngleBetween %11.6f",tA);
+
+   double tTilt = Dsp::calcTiltFromUnitVector(tE1y);
+   Prn::print(0,"TiltAngle    %11.6f",tTilt);
 }
 
 //******************************************************************************
