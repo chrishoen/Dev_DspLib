@@ -93,6 +93,28 @@ void ThreeVector::show(char* aLabel)
 {
    if (aLabel==0)
    {
+      for (int i=1;i<=3;i++)
+      {
+            printf("%11.6f ",e(i));
+      }
+      printf("\n");
+   }
+   else
+   {
+      printf("%s ",aLabel);
+      for (int i=1;i<=3;i++)
+      {
+         printf("%11.6f ",e(i));
+      }
+      printf("\n");
+   }
+   printf("\n");
+}
+
+void ThreeVector::show2(char* aLabel)
+{
+   if (aLabel==0)
+   {
       for (int i=1; i<=3; i++) printf("%11.6f\n",e(i));
    }
    else

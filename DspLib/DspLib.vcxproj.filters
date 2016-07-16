@@ -58,6 +58,15 @@
     <ClCompile Include="Source\dsp_trig_functions.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspThreeFunctions.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspThreeMatrix.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspThreeVector.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -112,6 +121,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dsp_trig_functions.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspThreeFunctions.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspThreeMatrix.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspThreeVector.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

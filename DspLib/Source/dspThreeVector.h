@@ -36,6 +36,7 @@ public:
    double& operator()(int aRow);
    double get(int aRow) const;
    void show(char* aLabel=0);
+   void show2(char* aLabel=0);
 
    // Length of a vector
    double length();
