@@ -167,7 +167,7 @@ ThreeVector operator*(double aLeft, ThreeVector& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft*aRight(i);
+      tVector(i) = aLeft*aRight(i);
    }
 
    return tVector;
@@ -179,7 +179,7 @@ ThreeVector operator*(ThreeVector& aLeft,double aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft(i)*aRight;
+      tVector(i) = aLeft(i)*aRight;
    }
 
    return tVector;
@@ -191,7 +191,7 @@ ThreeVector operator/(ThreeVector& aLeft,double aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft(i)/aRight;
+      tVector(i) = aLeft(i)/aRight;
    }
 
    return tVector;
@@ -209,7 +209,7 @@ ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft(i) + aRight(i);
+      tVector(i) = aLeft(i) + aRight(i);
    }
 
    return tVector;
@@ -222,7 +222,7 @@ ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight)
 
    for (int i=1; i<=3; i++)
    {
-      tVector.e(i) = aLeft(i) - aRight(i);
+      tVector(i) = aLeft(i) - aRight(i);
    }
 
    return tVector;

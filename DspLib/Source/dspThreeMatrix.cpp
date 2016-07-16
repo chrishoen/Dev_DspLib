@@ -181,7 +181,7 @@ ThreeMatrix ThreeMatrix::transpose()
       double tSum = 0.0;
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i,j) = get(j,i);
+         tMatrix(i,j) = get(j,i);
       }
    }
 
@@ -238,7 +238,7 @@ ThreeMatrix operator*(double aLeft, ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft*aRight(i, j);
+         tMatrix(i, j) = aLeft*aRight(i, j);
       }
    }
 
@@ -253,7 +253,7 @@ ThreeMatrix operator*(ThreeMatrix& aLeft,double aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft(i, j)*aRight;
+         tMatrix(i, j) = aLeft(i, j)*aRight;
       }
    }
 
@@ -268,7 +268,7 @@ ThreeMatrix operator/(ThreeMatrix& aLeft,double aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft(i, j) / aRight;
+         tMatrix(i, j) = aLeft(i, j) / aRight;
       }
    }
 
@@ -289,7 +289,7 @@ ThreeMatrix operator+(ThreeMatrix& aLeft,ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft(i, j) + aRight(i, j);
+         tMatrix(i, j) = aLeft(i, j) + aRight(i, j);
       }
    }
 
@@ -305,7 +305,7 @@ ThreeMatrix operator-(ThreeMatrix& aLeft,ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft(i, j) - aRight(i, j);
+         tMatrix(i, j) = aLeft(i, j) - aRight(i, j);
       }
    }
 
@@ -332,7 +332,7 @@ ThreeVector operator*(ThreeMatrix& aLeft,ThreeVector& aRight)
       {
           tSum += aLeft(i, j)*aRight(j);
       }
-      tVector.e(i) = tSum;
+      tVector(i) = tSum;
    }
 
    return tVector;
@@ -352,7 +352,7 @@ ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight)
          {
             tSum += aLeft(i, k)*aRight(k, j);
          }
-         tMatrix.e(i,j) = tSum;
+         tMatrix(i,j) = tSum;
       }
    }
 

@@ -281,7 +281,7 @@ void CmdLineExec::executeGo23(Ris::CmdLineCmd* aCmd)
       21.0, 22.0, 23.0,
       31.0, 32.0, 33.0);
 
-   tX1.e(1,1) *= 2.0;
+   tX1(1,1) *= 2.0;
    tX1(2,1) *= 2.0;
    tX1(3,1) *= 2.0;
 
@@ -405,7 +405,7 @@ void CmdLineExec::executeGo13(Ris::CmdLineCmd* aCmd)
    Dsp::ThreeVector tX1(101.0,102.0,103.0);
    tX1.show("tX1");
 
-   tX1.e(1) *= 2.0;
+   tX1(1) *= 2.0;
    tX1(2) *= 2.0;
    tX1.show("tX1");
 }
