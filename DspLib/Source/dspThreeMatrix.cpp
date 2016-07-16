@@ -45,7 +45,7 @@ ThreeMatrix::ThreeMatrix(
    e(3,1) = aA31; e(3,2) = aA32; e(3,3) = aA33;
 }
 
-ThreeMatrix::ThreeMatrix(const double aValues[3][3])
+ThreeMatrix::ThreeMatrix(double aValues[3][3])
 {
    for (int i = 0; i < 3; i++)
    {
@@ -71,7 +71,7 @@ void ThreeMatrix::set(
 }
 
 
-void ThreeMatrix::set(const double aValues[3][3])
+void ThreeMatrix::set(double aValues[3][3])
 {
    for (int i = 0; i < 3; i++)
    {
@@ -230,7 +230,7 @@ void ThreeMatrix::setRotateZ(double aAngle)
 //******************************************************************************
 // Scalar multiply, divide
 
-ThreeMatrix operator*(double aLeft, const ThreeMatrix& aRight)
+ThreeMatrix operator*(double aLeft, ThreeMatrix& aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -238,14 +238,14 @@ ThreeMatrix operator*(double aLeft, const ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft*aRight.get(i, j);
+         tMatrix.e(i, j) = aLeft*aRight(i, j);
       }
    }
 
    return tMatrix;
 }
 
-ThreeMatrix operator*(const ThreeMatrix& aLeft,double aRight)
+ThreeMatrix operator*(ThreeMatrix& aLeft,double aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -253,14 +253,14 @@ ThreeMatrix operator*(const ThreeMatrix& aLeft,double aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft.get(i, j)*aRight;
+         tMatrix.e(i, j) = aLeft(i, j)*aRight;
       }
    }
 
    return tMatrix;
 }
 
-ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight)
+ThreeMatrix operator/(ThreeMatrix& aLeft,double aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -268,7 +268,7 @@ ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft.get(i, j) / aRight;
+         tMatrix.e(i, j) = aLeft(i, j) / aRight;
       }
    }
 
@@ -281,7 +281,7 @@ ThreeMatrix operator/(const ThreeMatrix& aLeft,double aRight)
 // Matrix sum, difference
 
 // Add two matrices
-ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
+ThreeMatrix operator+(ThreeMatrix& aLeft,ThreeMatrix& aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -289,7 +289,7 @@ ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft.get(i, j) + aRight.get(i, j);
+         tMatrix.e(i, j) = aLeft(i, j) + aRight(i, j);
       }
    }
 
@@ -297,7 +297,7 @@ ThreeMatrix operator+(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 }
 
 // Subtract two matrices
-ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
+ThreeMatrix operator-(ThreeMatrix& aLeft,ThreeMatrix& aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -305,7 +305,7 @@ ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
    {
       for (int j = 1; j <= 3; j++)
       {
-         tMatrix.e(i, j) = aLeft.get(i, j) - aRight.get(i, j);
+         tMatrix.e(i, j) = aLeft(i, j) - aRight(i, j);
       }
    }
 
@@ -321,7 +321,7 @@ ThreeMatrix operator-(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
 // Matrix multiply
 
 // Multiply a matrix and a vector
-ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight)
+ThreeVector operator*(ThreeMatrix& aLeft,ThreeVector& aRight)
 {
    ThreeVector tVector;
 
@@ -330,7 +330,7 @@ ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight)
       double tSum = 0.0;
       for (int j = 1; j <= 3; j++)
       {
-          tSum += aLeft.get(i, j)*aRight.get(j);
+          tSum += aLeft(i, j)*aRight(j);
       }
       tVector.e(i) = tSum;
    }
@@ -339,7 +339,7 @@ ThreeVector operator*(const ThreeMatrix& aLeft,const ThreeVector& aRight)
 }
 
 // Multiply a matrix and a matrix
-ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
+ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight)
 {
    ThreeMatrix tMatrix;
 
@@ -350,7 +350,7 @@ ThreeMatrix operator*(const ThreeMatrix& aLeft,const ThreeMatrix& aRight)
          double tSum = 0.0;
          for (int k = 1; k <= 3; k++)
          {
-            tSum += aLeft.get(i, k)*aRight.get(k, j);
+            tSum += aLeft(i, k)*aRight(k, j);
          }
          tMatrix.e(i,j) = tSum;
       }
