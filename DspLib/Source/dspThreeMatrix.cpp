@@ -95,20 +95,18 @@ void ThreeMatrix::setToZero()
 
 void ThreeMatrix::setIdentity()
 {
-   for (int i = 0; i < 3; i++)
-   {
-      for (int j = 0; j < 3; j++)
-      {
-         if (i == j)
-         {
-            mValues[i][j] = 1.0;
-         }
-         else
-         {
-            mValues[i][j] = 0.0;
-         }
-      }
-   }
+   setToZero();
+   e(1,1) = 1.0;
+   e(2,2) = 1.0;
+   e(3,3) = 1.0;
+}
+
+void ThreeMatrix::setDiagonal(double aA11,double aA22, double aA33)
+{
+   setToZero();
+   e(1,1) = aA11;
+   e(2,2) = aA22;
+   e(3,3) = aA33;
 }
 
 //******************************************************************************
@@ -413,6 +411,29 @@ ThreeMatrix transpose(ThreeMatrix& aA)
       }
    }
 
+   return tMatrix;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Identity
+
+ThreeMatrix identity()
+{
+   ThreeMatrix tMatrix;
+   tMatrix(1,1) = 1.0;
+   tMatrix(2,2) = 1.0;
+   tMatrix(3,3) = 1.0;
+   return tMatrix;
+}
+
+ThreeMatrix diagonal(double aA11,double aA22,double aA33)
+{
+   ThreeMatrix tMatrix;
+   tMatrix(1,1) = aA11;
+   tMatrix(2,2) = aA22;
+   tMatrix(3,3) = aA33;
    return tMatrix;
 }
 

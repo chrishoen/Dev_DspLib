@@ -39,6 +39,7 @@ public:
    void set(double aValues[3][3]);
    void setToZero();
    void setIdentity();
+   void setDiagonal(double aA11,double aA22, double aA33);
 
    // Access components
    double& e(int aRow,int aCol);
@@ -90,8 +91,9 @@ ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 //******************************************************************************
 // Operators
 
-// Transpose
 ThreeMatrix transpose(ThreeMatrix& aA);
+ThreeMatrix identity();
+ThreeMatrix diagonal(double aA11,double aA22,double aA33);
 
 //******************************************************************************
 //******************************************************************************
