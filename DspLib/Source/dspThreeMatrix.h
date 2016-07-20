@@ -53,6 +53,9 @@ public:
    // Transpose
    ThreeMatrix transpose();
 
+   // Trace
+   double trace();
+
    // Set to a rotation matrix
    void setRotateX   (double aAngle);
    void setRotateY   (double aAngle);
