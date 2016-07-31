@@ -37,6 +37,9 @@ public:
    double& e(int aRow);
    double& operator()(int aRow);
    double get(int aRow) const;
+   double& x();
+   double& y();
+   double& z();
    void show(char* aLabel=0);
    void show2(char* aLabel=0);
 

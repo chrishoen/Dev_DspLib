@@ -109,6 +109,21 @@ double ThreeVector::get(int aRow) const
    return mValues[aRow-1];
 }
 
+double& ThreeVector::x ()
+{
+   return mValues[0];
+}
+
+double& ThreeVector::y ()
+{
+   return mValues[1];
+}
+
+double& ThreeVector::z ()
+{
+   return mValues[2];
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
