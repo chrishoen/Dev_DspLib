@@ -42,6 +42,7 @@ public:
    double& z();
    void show(char* aLabel=0);
    void show2(char* aLabel=0);
+   void show3(char* aLabel=0);
 
    // Length of a vector
    double length();
