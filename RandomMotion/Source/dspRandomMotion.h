@@ -91,7 +91,7 @@ public:
 //******************************************************************************
 // Global instance
 
-#ifdef _DSPFILTERTESTER_CPP_
+#ifdef _DSPRANDOMMOTION_CPP_
           RandomMotion gRandomMotion;
 #else
    extern RandomMotion gRandomMotion;

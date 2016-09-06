@@ -12,7 +12,7 @@ Description:
 
 #include "dspSample.h"
 
-#define  _DSPFILTERTESTER_CPP_
+#define  _DSPRANDOMMOTION_CPP_
 #include "dspRandomMotion.h"
 
 namespace Dsp
