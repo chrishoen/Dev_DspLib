@@ -18,31 +18,6 @@ CmdLineExec::CmdLineExec()
 //******************************************************************************
 void CmdLineExec::reset()
 {
-  mAlphaOneAP1   = 0.010866739550600640559;
-
-  mAlphaTwoAP1   = 0.020688654537394208753;
-  mAlphaTwoAP2   = 0.00021625305129201406;
-
-  
-
-
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeTestAlphaOne(Ris::CmdLineCmd* aCmd)
-{
-   MotionParms* tParms = new MotionParms;
-   tParms->mFs       = 20.0;
-   tParms->mAp1      = mAlphaOneAP1;
-   tParms->setInputFileName  ("C:\\Alpha\\Data\\SampleTest.csv");
-   tParms->setOutputFileName ("C:\\Alpha\\Data\\FilterAlphaOne.csv");
-   tParms->initialize();
-
-   gRandomMotion.testAlphaOne(tParms);
-   delete tParms;
 }
 
 //******************************************************************************
@@ -52,7 +27,29 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
-   if(aCmd->isCmd("ALPHAONE"  ))  executeTestAlphaOne(aCmd);
+   if(aCmd->isCmd("MOVE1"  ))  executeMove1(aCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeMove1(Ris::CmdLineCmd* aCmd)
+{
+   RandomMotion tRandomMotion;
+   MotionParms* tParms = new MotionParms;
+   tParms->mDuration   =     10.0;
+   tParms->mFs         =    100.0;
+   tParms->mFp         =      1.0;
+   tParms->mSigma      =      1.0;
+   tParms->mOffset     =      0.0;
+   tParms->mAmplitude  =     10.0;
+
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
+   tParms->initialize();
+
+   tRandomMotion.propagate(tParms);
+   delete tParms;
 }
 
 //******************************************************************************

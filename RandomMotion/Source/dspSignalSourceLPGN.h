@@ -1,5 +1,5 @@
-#ifndef _DSPRANDOMMOTION_H_
-#define _DSPRANDOMMOTION_H_
+#ifndef _DSPSIGNALSOURCELPGN_H_
+#define _DSPSIGNALSOURCELPGN_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -8,18 +8,26 @@
 //******************************************************************************
 //******************************************************************************
 
+#include <random>
+
 namespace Dsp
 {
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 
-class MotionParms
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This class encapsulates a signal source. It can be used to generate a time 
+// series of samples.
+
+class SignalSourceLPGN
 {
 public:
 
    //--------------------------------------------------------------------------
-   // Parameters
+   // Members.
+
+   double  mT;            // Time
+   double  mX;            // Sample
 
    double  mFs;           // Sampling frequency
    double  mTs;           // Sampling period
@@ -30,43 +38,42 @@ public:
    double  mAmplitude;    // amplitude
    double  mSigma;        // Sigma
 
-   double  mDuration;     // Time duration of signal
-   int     mNumSamples;   // Number of samples in array
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Guassian noise
 
-   
+   bool mSigmaFlag;
+   std::mt19937 mRandomGenerator;
+   std::normal_distribution<double> mRandomDistribution;
+
    //--------------------------------------------------------------------------
-   // File names
+   // Constructor and initialization.
+   // Create an new SignalSourceLPGN, set some of the members, call initialize to 
+   // set other members.
 
-   static const int cMaxStringSize=400;
-
-   char mOutputFileName [cMaxStringSize];
-
-   void setOutputFileName (char* aFileName);
-   
-   //--------------------------------------------------------------------------
-   // Constructors
-
-   MotionParms();
+   SignalSourceLPGN();
    void reset();
    void initialize();
-};
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
+    // Initialize random distribution.
+   void initializeNoise();
+   // Get noise from random distribution.
+   double getNoise();
 
-class RandomMotion
-{
-public:
-   RandomMotion();
-   void initialize();
+   //--------------------------------------------------------------------------
+   // Advance the signal for one time step, return the signal value.
 
+   double advance(double tTime = -1.0);
 
-   // Tests
-   void propagate         (MotionParms* aParms);
+   //--------------------------------------------------------------------------
+   // Support.
+
+   void show();
 };
 
 //******************************************************************************
 }//namespace
 
 #endif
+
