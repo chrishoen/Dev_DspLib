@@ -20,6 +20,7 @@ public:
    void executeGo2(Ris::CmdLineCmd* aCmd);
 
    void executeMove1 (Ris::CmdLineCmd* aCmd);
+   void executeMove2 (Ris::CmdLineCmd* aCmd);
 
   double mAlphaOneAP1;
   double mAlphaTwoAP1;

@@ -84,6 +84,7 @@ void RandomMotion::propagate(MotionParms* aParms)
    tSource->mOffset     =     aParms->mOffset;
    tSource->mAmplitude  =     aParms->mAmplitude;
    tSource->initialize();
+   tSource->show();
 
    // Input and output files.
    CsvFileWriter  tSampleWriter;
@@ -101,7 +102,8 @@ void RandomMotion::propagate(MotionParms* aParms)
       tSampleWriter.writeRow(
          tSampleCount,
          tSource->mT,
-         tSource->mX);
+         tSource->mX,
+         tSource->mEX);
 
       // Advance the sample.
       tSource->advance();

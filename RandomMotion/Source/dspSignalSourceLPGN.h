@@ -29,6 +29,7 @@ public:
 
    double  mT;            // Time
    double  mX;            // Sample
+   double  mEX;           // Sample estimate
 
    double  mFs;           // Sampling frequency
    double  mTs;           // Sampling period
@@ -38,6 +39,8 @@ public:
    double  mOffset;       // Offset
    double  mAmplitude;    // amplitude
    double  mSigma;        // Sigma
+
+   double  mAlphaOneAP1;  // Alpha filter constant
 
    //******************************************************************************
    //******************************************************************************

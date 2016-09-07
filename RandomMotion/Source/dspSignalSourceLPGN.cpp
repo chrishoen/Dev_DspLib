@@ -39,6 +39,9 @@ void SignalSourceLPGN::reset()
    mAmplitude = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
+
+   mAlphaOneAP1 = 1.0;
+
 }
 
 //******************************************************************************
@@ -71,6 +74,10 @@ void SignalSourceLPGN::initialize()
 
    mSigmaFlag = false;
    initializeNoise();
+
+   mAlphaOneAP1 = mTs/(mTs+mTp);
+   mAlphaOne.initialize(mAlphaOneAP1);
+
 }
    
 //******************************************************************************
@@ -122,6 +129,9 @@ void SignalSourceLPGN::show()
    printf("mTs          %10.4f\n",mTs);
    printf("mFp          %10.4f\n",mFp);
    printf("mTp          %10.4f\n",mTp);
+   printf("mSigma       %10.4f\n",mSigma);
+   printf("mOffset      %10.4f\n",mOffset);
+   printf("mAmplitude   %10.4f\n",mAmplitude);
 }
 
 //******************************************************************************
@@ -130,9 +140,6 @@ void SignalSourceLPGN::show()
 
 double SignalSourceLPGN::advance(double tTime)
 {
-   double tNoise = 0.0;
-   double tX = 0.0;
-
    //Time
    if (tTime != -1.0)
    {
@@ -143,15 +150,17 @@ double SignalSourceLPGN::advance(double tTime)
       mT += mTs;
    }
 
+   double tNoise = 0.0;
+
    // Noise
    tNoise = getNoise();
 
-   // Signal
-   tX = sin(DSP_2PI*mFp*mT);
-
    // Sample
-   mX = mAmplitude*tX + tNoise + mOffset;
+   mX = mAmplitude*tNoise + mOffset;
 
+   // Low pass filter
+   mAlphaOne.put(mX);
+   mEX = mAlphaOne.mXX;
    // Done
    return mX;
 }

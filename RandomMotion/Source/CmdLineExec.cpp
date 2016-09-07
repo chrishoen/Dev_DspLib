@@ -28,6 +28,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
    if(aCmd->isCmd("MOVE1"  ))  executeMove1(aCmd);
+   if(aCmd->isCmd("MOVE2"  ))  executeMove2(aCmd);
 }
 
 //******************************************************************************
@@ -44,6 +45,28 @@ void CmdLineExec::executeMove1(Ris::CmdLineCmd* aCmd)
    tParms->mSigma      =      1.0;
    tParms->mOffset     =      0.0;
    tParms->mAmplitude  =     10.0;
+
+   tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
+   tParms->initialize();
+
+   tRandomMotion.propagate(tParms);
+   delete tParms;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeMove2(Ris::CmdLineCmd* aCmd)
+{
+   RandomMotion tRandomMotion;
+   MotionParms* tParms = new MotionParms;
+   tParms->mDuration   =     10.0;
+   tParms->mFs         =    100.0;
+   tParms->mFp         =      0.1;
+   tParms->mSigma      =     50.0;
+   tParms->mOffset     =      0.0;
+   tParms->mAmplitude  =      1.0;
 
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
