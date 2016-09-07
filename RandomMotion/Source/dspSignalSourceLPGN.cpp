@@ -76,7 +76,8 @@ void SignalSourceLPGN::initialize()
    initializeNoise();
 
    mAlphaOneAP1 = mTs/(mTs+mTp);
-   mAlphaOne.initialize(mAlphaOneAP1);
+   mAlphaOne1.initialize(mAlphaOneAP1);
+   mAlphaOne2.initialize(mAlphaOneAP1);
 
 }
    
@@ -159,8 +160,9 @@ double SignalSourceLPGN::advance(double tTime)
    mX = mAmplitude*tNoise + mOffset;
 
    // Low pass filter
-   mAlphaOne.put(mX);
-   mEX = mAlphaOne.mXX;
+   mAlphaOne1.put(mX);
+   mAlphaOne2.put(mAlphaOne1.mXX);
+   mEX = mAlphaOne2.mXX;
    // Done
    return mX;
 }

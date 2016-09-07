@@ -61,9 +61,9 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
    RandomMotion tRandomMotion;
    MotionParms* tParms = new MotionParms;
-   tParms->mDuration   =     10.0;
+   tParms->mDuration   =    100.0;
    tParms->mFs         =    100.0;
-   tParms->mFp         =      0.1;
+   tParms->mFp         =     0.50;
    tParms->mSigma      =     50.0;
    tParms->mOffset     =      0.0;
    tParms->mAmplitude  =      1.0;
