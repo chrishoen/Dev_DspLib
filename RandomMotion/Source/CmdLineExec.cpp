@@ -27,15 +27,15 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
 
-   if(aCmd->isCmd("MOVE1"  ))  executeMove1(aCmd);
-   if(aCmd->isCmd("MOVE2"  ))  executeMove2(aCmd);
+   if(aCmd->isCmd("RUN1"   ))  executeRun1(aCmd);
+   if(aCmd->isCmd("RUN2"   ))  executeRun2(aCmd);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeMove1(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
    RandomMotion tRandomMotion;
    MotionParms* tParms = new MotionParms;
@@ -57,7 +57,7 @@ void CmdLineExec::executeMove1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeMove2(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
    RandomMotion tRandomMotion;
    MotionParms* tParms = new MotionParms;
