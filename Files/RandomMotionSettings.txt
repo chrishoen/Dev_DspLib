@@ -10,3 +10,15 @@ SectionBegin default
 
 SectionEnd
 
+//********************************************************************
+SectionBegin run2
+
+   Duration        10.0
+   Fs             100.0
+   Fp               1.0
+   Sigma           10.0
+   Offset           0.0
+   Amplitude        1.0
+
+SectionEnd
+

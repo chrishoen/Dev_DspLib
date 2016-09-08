@@ -27,6 +27,7 @@ public:
    //---------------------------------------------------------------------------
    // Settings members.
 
+   double  mDuration;     // Trial duration
    double  mFs;           // Sampling frequency
    double  mFp;           // Carrier frequency 
 

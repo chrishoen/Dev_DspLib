@@ -18,9 +18,9 @@
 {
    mSection[0]=0;
 
+   mDuration = 10.0;
    mFs = 1.0;
    mFp = 1.0;
-
    mAmplitude = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
@@ -30,6 +30,7 @@ void Settings::show()
 {
    printf("Settings ******* %s\n", mSection);
 
+   printf("mDuration    %10.4f\n",mDuration);
    printf("mFs          %10.4f\n",mFs);
    printf("mFp          %10.4f\n",mFp);
    printf("mSigma       %10.4f\n",mSigma);
@@ -85,6 +86,7 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
+   if(aCmd->isCmd("Duration"    )) mDuration  = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"          )) mFs        = aCmd->argDouble(1);
    if(aCmd->isCmd("Fp"          )) mFp        = aCmd->argDouble(1);
    if(aCmd->isCmd("Offset"      )) mOffset    = aCmd->argDouble(1);

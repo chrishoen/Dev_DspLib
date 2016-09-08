@@ -6,6 +6,7 @@
 
 #include "prnPrint.h"
 #include "CmdLineExec.h"
+#include "Settings.h"
 #include "dspSignalGen.h"
 #include "dspRandomMotion.h"
 
@@ -59,15 +60,15 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
+   gSettings.initialize("run2");
    RandomMotion tRandomMotion;
    MotionParms* tParms = new MotionParms;
-   tParms->mDuration   =    100.0;
-   tParms->mFs         =    100.0;
-   tParms->mFp         =     0.50;
-   tParms->mSigma      =     50.0;
-   tParms->mOffset     =      0.0;
-   tParms->mAmplitude  =      1.0;
-
+   tParms->mDuration   =    gSettings.mDuration;
+   tParms->mFs         =    gSettings.mFs;
+   tParms->mFp         =    gSettings.mFp;
+   tParms->mSigma      =    gSettings.mSigma;
+   tParms->mOffset     =    gSettings.mOffset;
+   tParms->mAmplitude  =    gSettings.mAmplitude;
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
