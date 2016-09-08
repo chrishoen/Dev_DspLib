@@ -171,12 +171,14 @@
     <ClCompile Include="Source\dspSignalSourceLPGN.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
+    <ClCompile Include="Source\Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspRandomMotion.h" />
     <ClInclude Include="Source\dspSignalSourceLPGN.h" />
     <ClInclude Include="Source\MainInit.h" />
+    <ClInclude Include="Source\Settings.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DspLib\DspLib.vcxproj">

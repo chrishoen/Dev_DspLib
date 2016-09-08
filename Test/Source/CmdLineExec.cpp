@@ -5,6 +5,7 @@
 #include <atomic>
 
 #include "risContainers2.h"
+#include "risPortableCalls.h"
 
 #include "prnPrint.h"
 #include "CmdLineExec.h"
@@ -43,13 +44,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.0);
+   char tFilePath[200];
 
-   double tA = aCmd->argDouble(1);
-
-   dsp_format_180_deg(&tA);
-
-   Prn::print(0, "%10.6f",tA);
+   strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
+   strcat(tFilePath, "..\\..\\Files\\RandomMotionSettings.txt");
+   Prn::print(0, "%s",tFilePath);
+   
 }
 
 //******************************************************************************

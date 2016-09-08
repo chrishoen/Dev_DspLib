@@ -1,0 +1,12 @@
+//********************************************************************
+SectionBegin default
+
+   Duration        10.0
+   Fs             100.0
+   Fp               1.0
+   Sigma            1.0
+   Offset           0.0
+   Amplitude       10.0
+
+SectionEnd
+

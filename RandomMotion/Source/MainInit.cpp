@@ -3,6 +3,7 @@
 #include "prnPrint.h"
 #include "logFiles.h"
 #include "risThreadsProcess.h"
+#include "Settings.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -52,7 +53,11 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
-   Prn::print(0,"AlphaTest********************************************BEGIN");
+   Prn::print(0,"RandomMotion********************************************BEGIN");
+
+   // Open settings file.
+   gSettings.initialize("default");
+   gSettings.show();
 
    // Open log files
    Log::reset();
@@ -69,7 +74,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"AlphaTest********************************************END");
+   Prn::print(0,"RandomMotion********************************************END");
 
    // Close log files
    Log::closeAllFiles();
