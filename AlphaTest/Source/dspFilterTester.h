@@ -74,7 +74,7 @@ public:
    Filter::AlphaStatistics mAlphaStatistics;
    Filter::MovingAverage   mMovingAverage;
 
-   // Statistics
+   // Statistist
    TrialStatistics         mTrialStatistics;
 
    // Tests

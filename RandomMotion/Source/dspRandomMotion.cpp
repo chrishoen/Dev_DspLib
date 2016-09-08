@@ -12,6 +12,7 @@ Description:
 
 #include "dspSample.h"
 #include "dspTextFile.h"
+#include "dspStatistics.h"
 #include "dspSignalSourceLPGN.h"
 
 #include "dspRandomMotion.h"
@@ -89,6 +90,11 @@ void RandomMotion::propagate(MotionParms* aParms)
    // Input and output files.
    CsvFileWriter  tSampleWriter;
 
+   // Statistics
+   TrialStatistics  mTrialStatistics;
+   mTrialStatistics.startTrial();
+
+
    tSampleWriter.open(aParms->mOutputFileName);
 
    // Local
@@ -105,6 +111,9 @@ void RandomMotion::propagate(MotionParms* aParms)
          tSource->mX,
          tSource->mEX);
 
+      // Put sample to statistics.
+      mTrialStatistics.put(tSource->mEX);
+
       // Advance the sample.
       tSource->advance();
 
@@ -114,6 +123,10 @@ void RandomMotion::propagate(MotionParms* aParms)
 
    // Close files.
    tSampleWriter.close();
+
+   // Finish statistics.
+   mTrialStatistics.finishTrial();
+   mTrialStatistics.show();
 }
 
 //******************************************************************************   
