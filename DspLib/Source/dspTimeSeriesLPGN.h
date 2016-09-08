@@ -40,6 +40,7 @@ public:
    double  mOffset;       // Offset
    double  mAmplitude;    // amplitude
    double  mSigma;        // Sigma
+   double  mScale;        // Scale
 
    double  mAlphaOneAP1;  // Alpha filter constant
 
@@ -79,6 +80,7 @@ public:
    // Generate the signal series history.
 
    void generate();
+   void normalize();
 
    //--------------------------------------------------------------------------
    // Support.

@@ -157,6 +157,7 @@ void RandomMotion::propagate2(MotionParms* aParms)
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();
+   tSeries->normalize();
 
    // Input and output files.
    CsvFileWriter  tSampleWriter;

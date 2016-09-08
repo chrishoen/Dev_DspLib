@@ -146,6 +146,39 @@ void TimeSeriesLPGN::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Normalize
+
+void TimeSeriesLPGN::normalize()
+{
+   // Get min and max
+   double xMin = 0.0;
+   double xMax = 0.0;
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      double x = mX[k];
+      if (x < xMin) xMin = x;
+      if (x > xMax) xMax = x;
+   }
+
+   // Get scale and offset
+   if (xMin != xMax)
+   {
+      double scale = 1.0 / ((xMax - xMin) / 2.0);
+      double offset = (xMax + xMin) / 2.0;
+
+      // Adjust signal to be -1 <= x[k] <= 1
+      for (int k = 0; k < mNumSamples; k++)
+      {
+         double x = mX[k];
+         double xa = scale * (x - offset);
+         mX[k] = mAmplitude*xa;
+      }
+   }
+}
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void TimeSeriesLPGN::generate()
 {
@@ -161,7 +194,7 @@ void TimeSeriesLPGN::generate()
       tNoise = getNoise();
 
       // Sample
-      double tX = mAmplitude*tNoise + mOffset;
+      double tX = tNoise + mOffset;
 
       // Low pass filter
       mAlphaOne1.put(tX);

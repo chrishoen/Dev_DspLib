@@ -18,7 +18,7 @@ SectionBegin run2
    Fp               1.0
    Sigma           10.0
    Offset           0.0
-   Amplitude        1.0
+   Amplitude        5.0
 
 SectionEnd
 
