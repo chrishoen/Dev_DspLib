@@ -110,7 +110,7 @@ void RandomMotion::propagate(MotionParms* aParms)
 
    } while (++tSampleCount < aParms->mNumSamples);
 
-   Prn::print(0, "TestAlphaOne %d",tSampleCount);
+   Prn::print(0, "RandomMotion %d",tSampleCount);
 
    // Close files.
    tSampleWriter.close();

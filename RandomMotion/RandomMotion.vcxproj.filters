@@ -19,9 +19,6 @@
     <ClCompile Include="Source\dspRandomMotion.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalSourceLPGN.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Settings.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -34,9 +31,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspRandomMotion.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspSignalSourceLPGN.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Settings.h">

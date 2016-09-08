@@ -127,9 +127,9 @@ double SignalSourceLPGN::getNoise()
 void SignalSourceLPGN::show()
 {
    printf("mFs          %10.4f\n",mFs);
-   printf("mTs          %10.4f\n",mTs);
+// printf("mTs          %10.4f\n",mTs);
    printf("mFp          %10.4f\n",mFp);
-   printf("mTp          %10.4f\n",mTp);
+// printf("mTp          %10.4f\n",mTp);
    printf("mSigma       %10.4f\n",mSigma);
    printf("mOffset      %10.4f\n",mOffset);
    printf("mAmplitude   %10.4f\n",mAmplitude);

@@ -32,6 +32,7 @@
     <ClCompile Include="Source\dspSignal.cpp" />
     <ClCompile Include="Source\dspSignalGen.cpp" />
     <ClCompile Include="Source\dspSignalSource.cpp" />
+    <ClCompile Include="Source\dspSignalSourceLPGN.cpp" />
     <ClCompile Include="Source\dspStatistics.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dspThreeMatrix.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Source\dspSignal.h" />
     <ClInclude Include="Source\dspSignalGen.h" />
     <ClInclude Include="Source\dspSignalSource.h" />
+    <ClInclude Include="Source\dspSignalSourceLPGN.h" />
     <ClInclude Include="Source\dspStatistics.h" />
     <ClInclude Include="Source\dspTextFile.h" />
     <ClInclude Include="Source\dspThreeMath.h" />
