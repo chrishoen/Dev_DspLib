@@ -67,6 +67,12 @@
     <ClCompile Include="Source\dspSignalSourceLPGN.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspTimeSeriesTIme.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspTimeSeriesLPGN.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -133,6 +139,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspSignalSourceLPGN.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspTimeSeriesTIme.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspTimeSeriesLPGN.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

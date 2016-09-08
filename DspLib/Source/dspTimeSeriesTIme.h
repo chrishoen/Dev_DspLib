@@ -1,5 +1,5 @@
-#ifndef _DSPRANDOMMOTION_H_
-#define _DSPRANDOMMOTION_H_
+#ifndef _DSPTIMESERIESTIME_H_
+#define _DSPTIMESERIESTIME_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -8,66 +8,59 @@
 //******************************************************************************
 //******************************************************************************
 
+#include <random>
+#include "dspFilterAlpha.h"
+
 namespace Dsp
 {
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 
-class MotionParms
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This class encapsulates a signal source. It can be used to generate a time 
+// series of samples.
+
+class TimeSeriesTime
 {
 public:
 
    //--------------------------------------------------------------------------
-   // Parameters
+   // Members.
 
-   double  mFs;           // Sampling frequency
-   double  mTs;           // Sampling period
-   double  mFp;           // Carrier frequency 
-   double  mTp;           // Carrier period
-
-   double  mOffset;       // Offset
-   double  mAmplitude;    // amplitude
-   double  mSigma;        // Sigma
+   double* mT;            // Array of time samples
 
    double  mDuration;     // Time duration of signal
    int     mNumSamples;   // Number of samples in array
 
-   
+   double  mFs;           // Sampling frequency
+   double  mTs;           // Sampling period
+
    //--------------------------------------------------------------------------
-   // File names
+   // Constructor and initialization.
+   // Create an new TimeSeriesTime, set some of the members, call initialize to 
+   // set other members.
 
-   static const int cMaxStringSize=400;
-
-   char mOutputFileName [cMaxStringSize];
-
-   void setOutputFileName (char* aFileName);
-   
-   //--------------------------------------------------------------------------
-   // Constructors
-
-   MotionParms();
+   TimeSeriesTime();
+  ~TimeSeriesTime();
    void reset();
    void initialize();
-};
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
+   // Get noise from random distribution.
+   double getNoise();
 
-class RandomMotion
-{
-public:
-   RandomMotion();
-   void initialize();
+   //--------------------------------------------------------------------------
+   // Generate the signal series history.
 
+   void generate();
 
-   // Tests
-   void propagate1(MotionParms* aParms);
-   void propagate2(MotionParms* aParms);
+   //--------------------------------------------------------------------------
+   // Support.
+
+   void show();
 };
 
 //******************************************************************************
 }//namespace
 
 #endif
+

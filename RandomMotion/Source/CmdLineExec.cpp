@@ -50,7 +50,7 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
-   tRandomMotion.propagate(tParms);
+   tRandomMotion.propagate1(tParms);
    delete tParms;
 }
 
@@ -72,7 +72,7 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
-   tRandomMotion.propagate(tParms);
+   tRandomMotion.propagate1(tParms);
    delete tParms;
 }
 
