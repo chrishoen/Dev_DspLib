@@ -96,6 +96,7 @@ void TimeSeriesLPGN::initialize()
 // Initialize random distribution.
 void TimeSeriesLPGN::initializeNoise()
 {
+   mSigma=1.0;
    // Set flag.
    mSigmaFlag = mSigma != 0.0;
 
