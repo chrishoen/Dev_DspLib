@@ -38,7 +38,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
-   gSettings.initialize("run2");
+   gSettings.initialize("run1");
    RandomMotion tRandomMotion;
    MotionParms* tParms = new MotionParms;
    tParms->mDuration   =    gSettings.mDuration;
@@ -60,20 +60,6 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
-   gSettings.initialize("run2");
-   RandomMotion tRandomMotion;
-   MotionParms* tParms = new MotionParms;
-   tParms->mDuration   =    gSettings.mDuration;
-   tParms->mFs         =    gSettings.mFs;
-   tParms->mFp         =    gSettings.mFp;
-   tParms->mSigma      =    gSettings.mSigma;
-   tParms->mOffset     =    gSettings.mOffset;
-   tParms->mScale  =    gSettings.mScale;
-   tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
-   tParms->initialize();
-
-   tRandomMotion.propagate2(tParms);
-   delete tParms;
 }
 
 //******************************************************************************

@@ -79,67 +79,6 @@ void RandomMotion::propagate1(MotionParms* aParms)
    // Initialize parameters.
    aParms->initialize();
 
-   // Initialize signal source.
-   SignalSourceLPGN* tSource = new SignalSourceLPGN();
-   tSource->mFs         =     aParms->mFs;
-   tSource->mFp         =     aParms->mFp;
-   tSource->mSigma      =     aParms->mSigma;
-   tSource->mOffset     =     aParms->mOffset;
-   tSource->mScale  =     aParms->mScale;
-   tSource->initialize();
-   tSource->show();
-
-   // Input and output files.
-   CsvFileWriter  tSampleWriter;
-
-   // Statistics
-   TrialStatistics  mTrialStatistics;
-   mTrialStatistics.startTrial();
-
-
-   tSampleWriter.open(aParms->mOutputFileName);
-
-   // Local
-   int tSampleCount = 0;
-   Sample tSample;
-
-   // Loop through all of the samples in the input file.
-   do
-   {
-      // Write the sample to the output file.
-      tSampleWriter.writeRow(
-         tSampleCount,
-         tSource->mT,
-         tSource->mX,
-         tSource->mEX);
-
-      // Put sample to statistics.
-      mTrialStatistics.put(tSource->mEX);
-
-      // Advance the sample.
-      tSource->advance();
-
-   } while (++tSampleCount < aParms->mNumSamples);
-
-   Prn::print(0, "RandomMotion %d",tSampleCount);
-
-   // Close files.
-   tSampleWriter.close();
-
-   // Finish statistics.
-   mTrialStatistics.finishTrial();
-   mTrialStatistics.show();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void RandomMotion::propagate2(MotionParms* aParms)
-{
-   // Initialize parameters.
-   aParms->initialize();
-
    // Initialize signal time series.
    TimeSeriesTime* tTime   = new TimeSeriesTime();
    TimeSeriesLPGN* tSeries = new TimeSeriesLPGN();
@@ -157,7 +96,6 @@ void RandomMotion::propagate2(MotionParms* aParms)
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();
-   tSeries->normalize();
 
    // Input and output files.
    CsvFileWriter  tSampleWriter;
@@ -169,7 +107,6 @@ void RandomMotion::propagate2(MotionParms* aParms)
    mTrialStatistics.startTrial();
 
    // Local
-   int tSampleCount = 0;
    Sample tSample;
 
    // Loop through all of the samples in the input file.
@@ -177,16 +114,16 @@ void RandomMotion::propagate2(MotionParms* aParms)
    {
       // Write the sample to the output file.
       tSampleWriter.writeRow(
-         tSampleCount,
+         k,
          tTime->mT[k],
          tSeries->mX[k]);
 
       // Put sample to statistics.
       mTrialStatistics.put(tSeries->mX[k]);
-
+    
    }
 
-   Prn::print(0, "RandomMotion %d",tSampleCount);
+   Prn::print(0, "RandomMotion::propagate1 %d",aParms->mNumSamples);
 
    // Close files.
    tSampleWriter.close();
@@ -198,6 +135,14 @@ void RandomMotion::propagate2(MotionParms* aParms)
    // Done.
    delete tTime;
    delete tSeries;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void RandomMotion::propagate2(MotionParms* aParms)
+{
 }
 
 //******************************************************************************   

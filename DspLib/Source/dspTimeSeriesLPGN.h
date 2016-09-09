@@ -79,7 +79,6 @@ public:
    // Generate the signal series history.
 
    void generate();
-   void normalize();
 
    //--------------------------------------------------------------------------
    // Support.

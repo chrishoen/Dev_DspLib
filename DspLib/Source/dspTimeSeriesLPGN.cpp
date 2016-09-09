@@ -11,6 +11,7 @@ Description:
 #include <math.h>
 
 #include "dspDefs.h"
+#include "dspStatistics.h"
 #include "dspTimeSeriesLPGN.h"
 
 namespace Dsp
@@ -140,54 +141,26 @@ void TimeSeriesLPGN::show()
    printf("mTp          %10.4f\n",mTp);
    printf("mSigma       %10.4f\n",mSigma);
    printf("mOffset      %10.4f\n",mOffset);
-   printf("mScale   %10.4f\n",mScale);
+   printf("mScale       %10.4f\n",mScale);
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Normalize
-
-void TimeSeriesLPGN::normalize()
-{
-   // Get min and max
-   double xMin = 0.0;
-   double xMax = 0.0;
-
-   for (int k = 0; k < mNumSamples; k++)
-   {
-      double x = mX[k];
-      if (x < xMin) xMin = x;
-      if (x > xMax) xMax = x;
-   }
-
-   // Get scale and offset
-   if (xMin != xMax)
-   {
-      double scale = 1.0 / ((xMax - xMin) / 2.0);
-      double offset = (xMax + xMin) / 2.0;
-
-      // Adjust signal to be -1 <= x[k] <= 1
-      for (int k = 0; k < mNumSamples; k++)
-      {
-         double x = mX[k];
-         double xa = scale * (x - offset);
-         mX[k] = mScale*xa;
-      }
-   }
-}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
 void TimeSeriesLPGN::generate()
 {
+   //---------------------------------------------------------------------------
+   // Initialize
+
    initialize();
    initializeNoise();
 
+   //---------------------------------------------------------------------------
+   // Generate
+
    for (int k = 0; k < mNumSamples; k++)
    {
-
       double tNoise = 0.0;
 
       // Noise
@@ -202,6 +175,31 @@ void TimeSeriesLPGN::generate()
       double tEX = mAlphaOne2.mXX;
       // Done
       mX[k] = tEX;
+   }
+
+   //---------------------------------------------------------------------------
+   // Statistics
+
+   TrialStatistics  tTrialStatistics;
+   tTrialStatistics.startTrial();
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      tTrialStatistics.put(mX[k]);
+   }
+
+   tTrialStatistics.finishTrial();
+
+   //---------------------------------------------------------------------------
+   // Normalize
+
+   double tScale = 1.0;
+   double tUX = tTrialStatistics.mUX;
+   if (tUX != 0.0) tScale = mScale/tUX;
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      mX[k] = tScale*mX[k] + mOffset;
    }
 }
 
