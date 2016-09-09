@@ -43,7 +43,7 @@ void TimeSeriesLPGN::reset()
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
 
-   mAmplitude = 1.0;
+   mScale = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
 
@@ -140,7 +140,7 @@ void TimeSeriesLPGN::show()
    printf("mTp          %10.4f\n",mTp);
    printf("mSigma       %10.4f\n",mSigma);
    printf("mOffset      %10.4f\n",mOffset);
-   printf("mAmplitude   %10.4f\n",mAmplitude);
+   printf("mScale   %10.4f\n",mScale);
 }
 
 //******************************************************************************
@@ -172,7 +172,7 @@ void TimeSeriesLPGN::normalize()
       {
          double x = mX[k];
          double xa = scale * (x - offset);
-         mX[k] = mAmplitude*xa;
+         mX[k] = mScale*xa;
       }
    }
 }

@@ -31,9 +31,9 @@ public:
    double  mFs;           // Sampling frequency
    double  mFp;           // Carrier frequency 
 
-   double  mOffset;       // Offset
-   double  mAmplitude;    // amplitude
    double  mSigma;        // Sigma
+   double  mOffset;       // Offset
+   double  mScale;        // Scale
 
    //---------------------------------------------------------------------------
    // Infrastucture. Constructor and such

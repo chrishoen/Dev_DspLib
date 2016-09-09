@@ -27,7 +27,7 @@ public:
    double  mTp;           // Carrier period
 
    double  mOffset;       // Offset
-   double  mAmplitude;    // amplitude
+   double  mScale;    // amplitude
    double  mSigma;        // Sigma
 
    double  mDuration;     // Time duration of signal

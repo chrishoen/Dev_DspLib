@@ -36,9 +36,9 @@ public:
    double  mFp;           // Carrier frequency 
    double  mTp;           // Carrier period
 
-   double  mOffset;       // Offset
-   double  mAmplitude;    // amplitude
    double  mSigma;        // Sigma
+   double  mOffset;       // Offset
+   double  mScale;        // Scale
 
    double  mAlphaOneAP1;  // Alpha filter constant
 

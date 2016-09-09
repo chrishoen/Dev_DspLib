@@ -41,7 +41,7 @@ void MotionParms::reset()
    mFp = 1.0;
    mTp = 1.0 / mFp;
 
-   mAmplitude = 1.0;
+   mScale = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
 
@@ -85,7 +85,7 @@ void RandomMotion::propagate1(MotionParms* aParms)
    tSource->mFp         =     aParms->mFp;
    tSource->mSigma      =     aParms->mSigma;
    tSource->mOffset     =     aParms->mOffset;
-   tSource->mAmplitude  =     aParms->mAmplitude;
+   tSource->mScale  =     aParms->mScale;
    tSource->initialize();
    tSource->show();
 
@@ -153,7 +153,7 @@ void RandomMotion::propagate2(MotionParms* aParms)
    tSeries->mFp         =     aParms->mFp;
    tSeries->mSigma      =     aParms->mSigma;
    tSeries->mOffset     =     aParms->mOffset;
-   tSeries->mAmplitude  =     aParms->mAmplitude;
+   tSeries->mScale      =     aParms->mScale;
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();

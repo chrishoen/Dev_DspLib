@@ -38,9 +38,8 @@ public:
    double  mTp;           // Carrier period
 
    double  mOffset;       // Offset
-   double  mAmplitude;    // amplitude
-   double  mSigma;        // Sigma
    double  mScale;        // Scale
+   double  mSigma;        // Sigma
 
    double  mAlphaOneAP1;  // Alpha filter constant
 

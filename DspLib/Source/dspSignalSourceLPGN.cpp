@@ -36,9 +36,9 @@ void SignalSourceLPGN::reset()
    mFp = 1.0;
    mTp = 1.0 / mFp;
 
-   mAmplitude = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
+   mScale = 1.0;
 
    mAlphaOneAP1 = 1.0;
 
@@ -132,7 +132,7 @@ void SignalSourceLPGN::show()
 // printf("mTp          %10.4f\n",mTp);
    printf("mSigma       %10.4f\n",mSigma);
    printf("mOffset      %10.4f\n",mOffset);
-   printf("mAmplitude   %10.4f\n",mAmplitude);
+   printf("mScale       %10.4f\n",mScale);
 }
 
 //******************************************************************************
@@ -157,7 +157,7 @@ double SignalSourceLPGN::advance(double tTime)
    tNoise = getNoise();
 
    // Sample
-   mX = mAmplitude*tNoise + mOffset;
+   mX = mScale*tNoise + mOffset;
 
    // Low pass filter
    mAlphaOne1.put(mX);

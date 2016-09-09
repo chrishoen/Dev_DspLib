@@ -6,7 +6,7 @@ SectionBegin default
    Fp               1.0
    Sigma            1.0
    Offset           0.0
-   Amplitude       10.0
+   Scale           10.0
 
 SectionEnd
 
@@ -18,7 +18,7 @@ SectionBegin run2
    Fp               1.0
    Sigma           10.0
    Offset           0.0
-   Amplitude        5.0
+   Scale            5.0
 
 SectionEnd
 

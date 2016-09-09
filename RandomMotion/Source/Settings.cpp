@@ -21,9 +21,9 @@
    mDuration = 10.0;
    mFs = 1.0;
    mFp = 1.0;
-   mAmplitude = 1.0;
    mSigma = 0.0;
    mOffset = 0.0;
+   mScale = 1.0;
 }
 
 void Settings::show()
@@ -35,7 +35,7 @@ void Settings::show()
    printf("mFp          %10.4f\n",mFp);
    printf("mSigma       %10.4f\n",mSigma);
    printf("mOffset      %10.4f\n",mOffset);
-   printf("mAmplitude   %10.4f\n",mAmplitude);
+   printf("mScale       %10.4f\n",mScale);
 
    printf("Settings ******* %s\n", mSection);
 }
@@ -89,9 +89,9 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Duration"    )) mDuration  = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"          )) mFs        = aCmd->argDouble(1);
    if(aCmd->isCmd("Fp"          )) mFp        = aCmd->argDouble(1);
-   if(aCmd->isCmd("Offset"      )) mOffset    = aCmd->argDouble(1);
-   if(aCmd->isCmd("Amplitude"   )) mAmplitude = aCmd->argDouble(1);
    if(aCmd->isCmd("Sigma"       )) mSigma     = aCmd->argDouble(1);
+   if(aCmd->isCmd("Offset"      )) mOffset    = aCmd->argDouble(1);
+   if(aCmd->isCmd("Scale"   )) mScale = aCmd->argDouble(1);
 }
 
 //******************************************************************************

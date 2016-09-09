@@ -46,7 +46,7 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
    tParms->mFp         =    gSettings.mFp;
    tParms->mSigma      =    gSettings.mSigma;
    tParms->mOffset     =    gSettings.mOffset;
-   tParms->mAmplitude  =    gSettings.mAmplitude;
+   tParms->mScale  =    gSettings.mScale;
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
@@ -68,7 +68,7 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
    tParms->mFp         =    gSettings.mFp;
    tParms->mSigma      =    gSettings.mSigma;
    tParms->mOffset     =    gSettings.mOffset;
-   tParms->mAmplitude  =    gSettings.mAmplitude;
+   tParms->mScale  =    gSettings.mScale;
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
