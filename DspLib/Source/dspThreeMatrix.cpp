@@ -11,7 +11,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
-#include "dsp_trig_functions.h"
+#include "dsp_math.h"
 #include "dspThreeMatrix.h"
 
 namespace Dsp
@@ -228,8 +228,8 @@ ThreeVector ThreeMatrix::getCol(int aCol)
 
 void ThreeMatrix::setRotateX(double aAngle)
 {
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    set( 1.0, 0.0, 0.0,
         0.0,  tC, -tS,
@@ -238,8 +238,8 @@ void ThreeMatrix::setRotateX(double aAngle)
 
 void ThreeMatrix::setRotateY(double aAngle)
 {
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    set( tC, 0.0,  tS,
        0.0, 1.0, 0.0,
@@ -248,8 +248,8 @@ void ThreeMatrix::setRotateY(double aAngle)
 
 void ThreeMatrix::setRotateZ(double aAngle)
 {
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    set( tC, -tS, 0.0,
         tS,  tC, 0.0,

@@ -9,7 +9,7 @@ Description:
 #include <stdlib.h>
 #include <stdio.h>
 #include "dsp_functions.h"
-#include "dspDefs.h"
+#include "dsp_math.h"
 
 #include <math.h>
 #include <string.h>

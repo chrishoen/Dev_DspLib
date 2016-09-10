@@ -11,7 +11,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
-#include "dsp_trig_functions.h"
+#include "dsp_math.h"
 #include "dspRVector.h"
 
 namespace Dsp
@@ -358,8 +358,8 @@ void RMatrix::setRotateX(double aAngle)
    if (mRows != 3) return;
    if (mCols != 3) return;
 
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    double tV[3][3] = {{ 1.0, 0.0, 0.0},
                       { 0.0,  tC, -tS},
@@ -373,8 +373,8 @@ void RMatrix::setRotateY(double aAngle)
    if (mRows != 3) return;
    if (mCols != 3) return;
 
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    double tV[3][3] = {{  tC, 0.0,  tS},
                       { 0.0, 1.0, 0.0},
@@ -388,8 +388,8 @@ void RMatrix::setRotateZ(double aAngle)
    if (mRows != 3) return;
    if (mCols != 3) return;
 
-   double tS = dsp_sin_deg(aAngle);
-   double tC = dsp_cos_deg(aAngle);
+   double tS = sin(aAngle);
+   double tC = cos(aAngle);
 
    double tV[3][3] = {{  tC, -tS, 0.0},
                       {  tS,  tC, 0.0},

@@ -11,7 +11,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
-#include "dsp_trig_functions.h"
+#include "dsp_math.h"
 #include "dspThreeVector.h"
 
 namespace Dsp

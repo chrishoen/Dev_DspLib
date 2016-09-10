@@ -10,7 +10,7 @@ Description:
 #include <math.h>
 #include <random>
 
-#include "dspDefs.h"
+#include "dsp_math.h"
 #include "dspSignalGen.h"
 
 namespace Dsp

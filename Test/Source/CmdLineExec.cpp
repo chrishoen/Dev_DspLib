@@ -10,7 +10,7 @@
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 
-#include "dsp_trig_functions.h"
+#include "dsp_math.h"
 
 using namespace std;
 
@@ -58,12 +58,13 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.99);
+   aCmd->setArgDefault(1,45.0);
 
-   double tC = aCmd->argDouble(1);
-   double tX = (1.0 + tC)/2.0;
+   double tAdeg = aCmd->argDouble(1);
+   double tArad = dsp_rad(tAdeg);
 
-   Prn::print(0, "%8.7f %8.7f",tC,tX);
+
+   Prn::print(0, "%8.7f %8.7f",tAdeg,tArad);
 }
 
 //******************************************************************************

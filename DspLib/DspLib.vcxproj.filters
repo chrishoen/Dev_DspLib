@@ -55,9 +55,6 @@
     <ClCompile Include="Source\dspSignalSource.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dsp_trig_functions.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspThreeMatrix.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
     <ClInclude Include="Source\dspFilterFilters.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspDefs.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspRVector.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -126,9 +120,6 @@
     <ClInclude Include="Source\dspSignalSource.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dsp_trig_functions.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspThreeMatrix.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -145,6 +136,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspTimeSeriesLPGN.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dsp_math.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

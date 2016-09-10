@@ -10,7 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dspDefs.h"
+#include "dsp_math.h"
 #include "dspSignalSource.h"
 
 namespace Dsp

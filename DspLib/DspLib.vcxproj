@@ -40,11 +40,9 @@
     <ClCompile Include="Source\dspTimeSeriesLPGN.cpp" />
     <ClCompile Include="Source\dspTimeSeriesTIme.cpp" />
     <ClCompile Include="Source\dsp_functions.cpp" />
-    <ClCompile Include="Source\dsp_trig_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspFilterStatistics.h" />
-    <ClInclude Include="Source\dspDefs.h" />
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
     <ClInclude Include="Source\dspLut.h" />
@@ -66,7 +64,7 @@
     <ClInclude Include="Source\dspTimeSeriesLPGN.h" />
     <ClInclude Include="Source\dspTimeSeriesTIme.h" />
     <ClInclude Include="Source\dsp_functions.h" />
-    <ClInclude Include="Source\dsp_trig_functions.h" />
+    <ClInclude Include="Source\dsp_math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C982FD1-5ABE-4C1F-B7E6-114F3A7617F2}</ProjectGuid>
