@@ -61,13 +61,13 @@
     <ClCompile Include="Source\dspThreeVector.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalSourceLPGN.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspTimeSeriesTIme.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspTimeSeriesLPGN.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspTimeSeriesHarmonic.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,9 +129,6 @@
     <ClInclude Include="Source\dspThreeMath.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspSignalSourceLPGN.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspTimeSeriesTIme.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -139,6 +136,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dsp_math.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspTimeSeriesHarmonic.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

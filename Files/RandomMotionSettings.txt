@@ -20,3 +20,21 @@ SectionBegin run1
 
 SectionEnd
 
+//********************************************************************
+SectionBegin run2
+
+   Duration       100.0
+   Fs             100.0
+   Fp               1.0
+   EX               4.0
+   UX               2.0
+
+   Fc1              4.0
+   Fc2              8.0
+   Ac1             10.0
+   Ac2              5.0
+   Pc1              0.0
+   Pc2             45.0  
+
+SectionEnd
+

@@ -1,5 +1,5 @@
-#ifndef _DSPSIGNALSOURCELPGN_H_
-#define _DSPSIGNALSOURCELPGN_H_
+#ifndef _DSPTIMESERIESHARMONIC_H_
+#define _DSPTIMESERIESHARMONIC_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -20,35 +20,31 @@ namespace Dsp
 // This class encapsulates a signal source. It can be used to generate a time 
 // series of samples.
 
-class SignalSourceLPGN
+class TimeSeriesHarmonic
 {
 public:
 
    //--------------------------------------------------------------------------
    // Members.
 
-   double  mT;            // Time
-   double  mX;            // Sample
-   double  mEX;           // Sample estimate
+   double* mX;            // Array of samples
 
+   double  mDuration;     // Time duration of signal
    double  mFs;           // Sampling frequency
+   double  mEX;           // Desired expectation
+   double  mUX;           // Desired uncertainty
+
+   double  mFc1;          // Carrier frequency 
+   double  mFc2;          // Carrier frequency 
+   double  mAc1;          // Carrier amplitude 
+   double  mAc2;          // Carrier amplitude 
+   double  mPc1;          // Carrier phase 
+   double  mPc2;          // Carrier phase 
+   double  mSigma;        // Random noise generator sigma
+
+
    double  mTs;           // Sampling period
-   double  mFp;           // Carrier frequency 
-   double  mTp;           // Carrier period
-
-   double  mSigma;        // Sigma
-   double  mOffset;       // Offset
-   double  mScale;        // Scale
-
-   double  mAlphaOneAP1;  // Alpha filter constant
-
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
-   // Low pass filter
-
-   Filter::AlphaOne mAlphaOne1;
-   Filter::AlphaOne mAlphaOne2;
+   int     mNumSamples;   // Number of samples in array
 
    //******************************************************************************
    //******************************************************************************
@@ -61,10 +57,11 @@ public:
 
    //--------------------------------------------------------------------------
    // Constructor and initialization.
-   // Create an new SignalSourceLPGN, set some of the members, call initialize to 
+   // Create an new TimeSeriesHarmonic, set some of the members, call initialize to 
    // set other members.
 
-   SignalSourceLPGN();
+   TimeSeriesHarmonic();
+  ~TimeSeriesHarmonic();
    void reset();
    void initialize();
 
@@ -74,9 +71,9 @@ public:
    double getNoise();
 
    //--------------------------------------------------------------------------
-   // Advance the signal for one time step, return the signal value.
+   // Generate the signal series history.
 
-   double advance(double tTime = -1.0);
+   void generate();
 
    //--------------------------------------------------------------------------
    // Support.

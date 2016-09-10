@@ -33,6 +33,15 @@ public:
    double  mTp;           // Carrier period
    int     mNumSamples;   // Number of samples in array
 
+   double  mFc1;          // Carrier frequency 
+   double  mFc2;          // Carrier frequency 
+   double  mAc1;          // Carrier amplitude 
+   double  mAc2;          // Carrier amplitude 
+   double  mPc1;          // Carrier phase 
+   double  mPc2;          // Carrier phase 
+   double  mSigma;        // Random noise generator sigma
+
+
    
    //--------------------------------------------------------------------------
    // File names

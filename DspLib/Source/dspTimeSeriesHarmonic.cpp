@@ -11,7 +11,8 @@ Description:
 #include <math.h>
 
 #include "dsp_math.h"
-#include "dspSignalSourceLPGN.h"
+#include "dspStatistics.h"
+#include "dspTimeSeriesHarmonic.h"
 
 namespace Dsp
 {
@@ -22,26 +23,36 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-SignalSourceLPGN::SignalSourceLPGN()
+TimeSeriesHarmonic::TimeSeriesHarmonic()
 {
    reset();
 }
 
-void SignalSourceLPGN::reset()
+TimeSeriesHarmonic::~TimeSeriesHarmonic()
 {
-   mT  = 0.0;
-   mX  = 0.0;
+   if (mX) delete mX;
+}
+
+void TimeSeriesHarmonic::reset()
+{
+   mX=0;
    mFs = 1.0;
    mTs = 1.0 / mFs;
-   mFp = 1.0;
-   mTp = 1.0 / mFp;
+
+   mDuration = 10.0;
+   mNumSamples = (int)(mDuration * mFs);
+
+   mEX = 0.0;
+   mUX = 1.0;
+
+   mFc1 = 1.0;
+   mFc2 = 1.0;
+   mAc1 = 1.0;
+   mAc2 = 1.0;
+   mPc1 = 0.0;
+   mPc2 = 0.0;
 
    mSigma = 0.0;
-   mOffset = 0.0;
-   mScale = 1.0;
-
-   mAlphaOneAP1 = 1.0;
-
 }
 
 //******************************************************************************
@@ -49,11 +60,8 @@ void SignalSourceLPGN::reset()
 //******************************************************************************
 // Initialize
 
-void SignalSourceLPGN::initialize()
+void TimeSeriesHarmonic::initialize()
 {
-   mT=0.0;
-   mX=0.0;
-
    if (mFs != 0.0)
    {
       mTs = 1.0 / mFs;
@@ -63,22 +71,12 @@ void SignalSourceLPGN::initialize()
       mFs = 1.0 / mTs;
    }
 
-   if (mFp != 0.0)
-   {
-      mTp = 1.0 / mFp;
-   }
-   else if (mTp != 0.0)
-   {
-      mFp = 1.0 / mTp;
-   }
 
    mSigmaFlag = false;
    initializeNoise();
 
-   mAlphaOneAP1 = mTs/(mTs+mTp);
-   mAlphaOne1.initialize(mAlphaOneAP1);
-   mAlphaOne2.initialize(mAlphaOneAP1);
-
+   mNumSamples = (int)(mDuration * mFs);
+   mX = new double[mNumSamples];
 }
    
 //******************************************************************************
@@ -87,7 +85,7 @@ void SignalSourceLPGN::initialize()
 // Guassian noise
 
 // Initialize random distribution.
-void SignalSourceLPGN::initializeNoise()
+void TimeSeriesHarmonic::initializeNoise()
 {
    // Set flag.
    mSigmaFlag = mSigma != 0.0;
@@ -105,7 +103,7 @@ void SignalSourceLPGN::initializeNoise()
 }
 
 // Get noise from random distribution.
-double SignalSourceLPGN::getNoise()
+double TimeSeriesHarmonic::getNoise()
 {
    double tNoise;
    if (mSigmaFlag)
@@ -124,47 +122,77 @@ double SignalSourceLPGN::getNoise()
 //******************************************************************************
 // Show
 
-void SignalSourceLPGN::show()
+void TimeSeriesHarmonic::show()
 {
+   printf("mDuration    %10.4f\n",mDuration);
+   printf("mNumSamples  %10d\n",  mNumSamples);
    printf("mFs          %10.4f\n",mFs);
-// printf("mTs          %10.4f\n",mTs);
-   printf("mFp          %10.4f\n",mFp);
-// printf("mTp          %10.4f\n",mTp);
-   printf("mSigma       %10.4f\n",mSigma);
-   printf("mOffset      %10.4f\n",mOffset);
-   printf("mScale       %10.4f\n",mScale);
+   printf("mTs          %10.4f\n",mTs);
+   printf("mEX          %10.4f\n",mEX);
+   printf("mUX          %10.4f\n",mUX);
+
+   printf("mFc1         %10.4f\n",mFc1);
+   printf("mFc2         %10.4f\n",mFc2);
+   printf("mAc1         %10.4f\n",mAc1);
+   printf("mAc2         %10.4f\n",mAc2);
+   printf("mPc1         %10.4f\n",deg(mPc1));
+   printf("mPc2         %10.4f\n",deg(mPc2));
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-double SignalSourceLPGN::advance(double tTime)
+void TimeSeriesHarmonic::generate()
 {
-   //Time
-   if (tTime != -1.0)
+   //---------------------------------------------------------------------------
+   // Initialize
+
+   initialize();
+   initializeNoise();
+
+   //---------------------------------------------------------------------------
+   // Generate harmonic signal with two frequencies.
+
+   for (int k = 0; k < mNumSamples; k++)
    {
-      mT = tTime;
+      // Time
+      double tTime = mTs*k;
+
+      // Signal
+      double tX1 = mAc1*sin(DSP_2PI*mFc1*tTime + mPc1);
+      double tX2 = mAc2*sin(DSP_2PI*mFc2*tTime + mPc2);
+
+      // Store.
+      mX[k] = tX1 + tX2;
    }
-   else
+
+   //---------------------------------------------------------------------------
+   // Statistics.
+
+   TrialStatistics  tTrialStatistics;
+   tTrialStatistics.startTrial();
+
+   for (int k = 0; k < mNumSamples; k++)
    {
-      mT += mTs;
+      tTrialStatistics.put(mX[k]);
    }
 
-   double tNoise = 0.0;
+   tTrialStatistics.finishTrial();
 
-   // Noise
-   tNoise = getNoise();
+   //---------------------------------------------------------------------------
+   // Normalize to get the desired expectation and uncertainty.
 
-   // Sample
-   mX = mScale*tNoise + mOffset;
+   double tScale = 1.0;
+   double tEX = tTrialStatistics.mEX;
+   double tUX = tTrialStatistics.mUX;
 
-   // Low pass filter
-   mAlphaOne1.put(mX);
-   mAlphaOne2.put(mAlphaOne1.mXX);
-   mEX = mAlphaOne2.mXX;
-   // Done
-   return mX;
+   if (tUX != 0.0) tScale = mUX/tUX;
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      mX[k] = tScale*(mX[k] - tEX) + mEX;
+   }
 }
 
 }//namespace

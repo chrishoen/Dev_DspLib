@@ -34,6 +34,14 @@ public:
    double  mEX;           // Desired expectation
    double  mUX;           // Desired uncertainty
 
+   double  mFc1;          // Carrier frequency 
+   double  mFc2;          // Carrier frequency 
+   double  mAc1;          // Carrier amplitude 
+   double  mAc2;          // Carrier amplitude 
+   double  mPc1;          // Carrier phase 
+   double  mPc2;          // Carrier phase 
+   double  mSigma;        // Random noise generator sigma
+
    //---------------------------------------------------------------------------
    // Infrastucture. Constructor and such
 

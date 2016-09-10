@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "my_functions.h"
+#include "dsp_math.h"
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
@@ -14,7 +15,7 @@
 
 //******************************************************************************
 
-   Settings::Settings()
+Settings::Settings()
 {
    mSection[0]=0;
 
@@ -23,6 +24,15 @@
    mFp = 1.0;
    mEX = 0.0;
    mUX = 1.0;
+
+   mFc1 = 1.0;
+   mFc2 = 1.0;
+   mAc1 = 1.0;
+   mAc2 = 1.0;
+   mPc1 = 0.0;
+   mPc2 = 0.0;
+
+   mSigma = 0.0;
 }
 
 void Settings::show()
@@ -34,6 +44,13 @@ void Settings::show()
    printf("mFp          %10.4f\n",mFp);
    printf("mEX          %10.4f\n",mEX);
    printf("mUX          %10.4f\n",mUX);
+
+   printf("mFc1         %10.4f\n",mFc1);
+   printf("mFc2         %10.4f\n",mFc2);
+   printf("mAc1         %10.4f\n",mAc1);
+   printf("mAc2         %10.4f\n",mAc2);
+   printf("mPc1         %10.4f\n",deg(mPc1));
+   printf("mPc2         %10.4f\n",deg(mPc2));
 
    printf("Settings ******* %s\n", mSection);
 }
@@ -89,6 +106,14 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Fp"          )) mFp        = aCmd->argDouble(1);
    if(aCmd->isCmd("EX"          )) mEX        = aCmd->argDouble(1);
    if(aCmd->isCmd("UX"          )) mUX        = aCmd->argDouble(1);
+
+   if(aCmd->isCmd("Fc1"         )) mFc1       = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc2"         )) mFc2       = aCmd->argDouble(1);
+   if(aCmd->isCmd("Ac1"         )) mAc1       = aCmd->argDouble(1);
+   if(aCmd->isCmd("Ac2"         )) mAc2       = aCmd->argDouble(1);
+   if(aCmd->isCmd("Pc1"         )) mPc1       = rad(aCmd->argDouble(1));
+   if(aCmd->isCmd("Pc2"         )) mPc2       = rad(aCmd->argDouble(1));
+
 }
 
 //******************************************************************************
