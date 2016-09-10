@@ -44,9 +44,8 @@ void TimeSeriesLPGN::reset()
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
 
-   mScale = 1.0;
-   mSigma = 0.0;
-   mOffset = 0.0;
+   mEX = 0.0;
+   mUX = 1.0;
 
    mAlphaOneAP1 = 1.0;
 
@@ -96,9 +95,9 @@ void TimeSeriesLPGN::initialize()
 // Initialize random distribution.
 void TimeSeriesLPGN::initializeNoise()
 {
-   mSigma=1.0;
+   mNoiseSigma=1.0;
    // Set flag.
-   mSigmaFlag = mSigma != 0.0;
+   mSigmaFlag = mNoiseSigma != 0.0;
 
    // Seed generator.
    std::random_device tRandomDevice;
@@ -106,7 +105,7 @@ void TimeSeriesLPGN::initializeNoise()
 
    // Set distribution parameters.
    std::normal_distribution<double>::param_type parm;
-   if (mSigmaFlag) parm._Init(0.0, mSigma);
+   if (mSigmaFlag) parm._Init(0.0, mNoiseSigma);
    else            parm._Init(0.0, 1.0);
 
    mRandomDistribution.param(parm);
@@ -140,9 +139,9 @@ void TimeSeriesLPGN::show()
    printf("mTs          %10.4f\n",mTs);
    printf("mFp          %10.4f\n",mFp);
    printf("mTp          %10.4f\n",mTp);
-   printf("mSigma       %10.4f\n",mSigma);
-   printf("mOffset      %10.4f\n",mOffset);
-   printf("mScale       %10.4f\n",mScale);
+   printf("mEX          %10.4f\n",mEX);
+   printf("mUX          %10.4f\n",mUX);
+
 }
 
 //******************************************************************************
@@ -158,28 +157,22 @@ void TimeSeriesLPGN::generate()
    initializeNoise();
 
    //---------------------------------------------------------------------------
-   // Generate
+   // Generate low pass filtered guassian noise.
+   // The low pass filter is two cascaded first order alpha filters.
 
    for (int k = 0; k < mNumSamples; k++)
    {
-      double tNoise = 0.0;
+      // Get noise.
+      double tX = getNoise();
 
-      // Noise
-      tNoise = getNoise();
-
-      // Sample
-      double tX = tNoise + mOffset;
-
-      // Low pass filter
+      // Low pass filter the noise.
       mAlphaOne1.put(tX);
       mAlphaOne2.put(mAlphaOne1.mXX);
-      double tEX = mAlphaOne2.mXX;
-      // Done
-      mX[k] = tEX;
+      mX[k] = mAlphaOne2.mXX;
    }
 
    //---------------------------------------------------------------------------
-   // Statistics
+   // Statistics.
 
    TrialStatistics  tTrialStatistics;
    tTrialStatistics.startTrial();
@@ -192,15 +185,17 @@ void TimeSeriesLPGN::generate()
    tTrialStatistics.finishTrial();
 
    //---------------------------------------------------------------------------
-   // Normalize
+   // Normalize to get the desired expectation and uncertainty.
 
    double tScale = 1.0;
+   double tEX = tTrialStatistics.mEX;
    double tUX = tTrialStatistics.mUX;
-   if (tUX != 0.0) tScale = mScale/tUX;
+
+   if (tUX != 0.0) tScale = mUX/tUX;
 
    for (int k = 0; k < mNumSamples; k++)
    {
-      mX[k] = tScale*mX[k] + mOffset;
+      mX[k] = tScale*(mX[k] - tEX) + mEX;
    }
 }
 

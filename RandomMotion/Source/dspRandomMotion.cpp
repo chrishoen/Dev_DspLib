@@ -41,9 +41,8 @@ void MotionParms::reset()
    mFp = 1.0;
    mTp = 1.0 / mFp;
 
-   mScale = 1.0;
-   mSigma = 0.0;
-   mOffset = 0.0;
+   mEX    = 0,0;
+   mUX    = 1.0;
 
    mOutputFileName [0]=0;
 }
@@ -90,9 +89,8 @@ void RandomMotion::propagate1(MotionParms* aParms)
    tSeries->mDuration   =     aParms->mDuration;
    tSeries->mFs         =     aParms->mFs;
    tSeries->mFp         =     aParms->mFp;
-   tSeries->mSigma      =     aParms->mSigma;
-   tSeries->mOffset     =     aParms->mOffset;
-   tSeries->mScale      =     aParms->mScale;
+   tSeries->mEX         =     aParms->mEX;
+   tSeries->mUX         =     aParms->mUX;
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();

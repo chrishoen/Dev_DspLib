@@ -57,7 +57,7 @@ void main_initialize(int argc,char** argv)
 
    // Open settings file.
    gSettings.initialize("default");
-   gSettings.show();
+// gSettings.show();
 
    // Open log files
    Log::reset();

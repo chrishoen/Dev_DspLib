@@ -30,17 +30,17 @@ public:
    double* mX;            // Array of samples
 
    double  mDuration;     // Time duration of signal
+   double  mFs;           // Sampling frequency
+   double  mFp;           // Carrier frequency 
+
+   double  mEX;           // Desired expectation
+   double  mUX;           // Desired uncertainty
+
+   double  mTs;           // Sampling period
+   double  mTp;           // Carrier period
    int     mNumSamples;   // Number of samples in array
 
-   double  mFs;           // Sampling frequency
-   double  mTs;           // Sampling period
-   double  mFp;           // Carrier frequency 
-   double  mTp;           // Carrier period
-
-   double  mOffset;       // Offset
-   double  mScale;        // Scale
-   double  mSigma;        // Sigma
-
+   double  mNoiseSigma;   // Random noise generator sigma
    double  mAlphaOneAP1;  // Alpha filter constant
 
    //******************************************************************************

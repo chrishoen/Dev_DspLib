@@ -21,9 +21,8 @@
    mDuration = 10.0;
    mFs = 1.0;
    mFp = 1.0;
-   mSigma = 0.0;
-   mOffset = 0.0;
-   mScale = 1.0;
+   mEX = 0.0;
+   mUX = 1.0;
 }
 
 void Settings::show()
@@ -33,9 +32,8 @@ void Settings::show()
    printf("mDuration    %10.4f\n",mDuration);
    printf("mFs          %10.4f\n",mFs);
    printf("mFp          %10.4f\n",mFp);
-   printf("mSigma       %10.4f\n",mSigma);
-   printf("mOffset      %10.4f\n",mOffset);
-   printf("mScale       %10.4f\n",mScale);
+   printf("mEX          %10.4f\n",mEX);
+   printf("mUX          %10.4f\n",mUX);
 
    printf("Settings ******* %s\n", mSection);
 }
@@ -89,9 +87,8 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Duration"    )) mDuration  = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"          )) mFs        = aCmd->argDouble(1);
    if(aCmd->isCmd("Fp"          )) mFp        = aCmd->argDouble(1);
-   if(aCmd->isCmd("Sigma"       )) mSigma     = aCmd->argDouble(1);
-   if(aCmd->isCmd("Offset"      )) mOffset    = aCmd->argDouble(1);
-   if(aCmd->isCmd("Scale"   )) mScale = aCmd->argDouble(1);
+   if(aCmd->isCmd("EX"          )) mEX        = aCmd->argDouble(1);
+   if(aCmd->isCmd("UX"          )) mUX        = aCmd->argDouble(1);
 }
 
 //******************************************************************************
@@ -108,12 +105,17 @@ bool Settings::initialize(char* aSection)
 
    // Copy arguments
    strcpy(mSection,aSection);
+   mDefaultSection = strcmp(mSection,"default")==0;
+
    // Apply settings file to this executive   
    Ris::CmdLineFile tCmdLineFile;
 
    if (tCmdLineFile.open(tFilePath))
    {
-      printf("Settings::file open PASS %s\n",tFilePath);
+      if (mDefaultSection)
+      {
+         printf("Settings::file open PASS %s\n", tFilePath);
+      }
       tCmdLineFile.execute(this);
       tCmdLineFile.close();
       return true;

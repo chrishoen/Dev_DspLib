@@ -31,9 +31,8 @@ public:
    double  mFs;           // Sampling frequency
    double  mFp;           // Carrier frequency 
 
-   double  mSigma;        // Sigma
-   double  mOffset;       // Offset
-   double  mScale;        // Scale
+   double  mEX;           // Desired expectation
+   double  mUX;           // Desired uncertainty
 
    //---------------------------------------------------------------------------
    // Infrastucture. Constructor and such
@@ -67,6 +66,7 @@ public:
 
    bool isMySection(Ris::CmdLineCmd* aCmd);
    bool mSectionFlag;
+   bool mDefaultSection;
 };
 
 //******************************************************************************

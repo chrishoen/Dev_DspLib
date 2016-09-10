@@ -21,16 +21,16 @@ public:
    //--------------------------------------------------------------------------
    // Parameters
 
-   double  mFs;           // Sampling frequency
-   double  mTs;           // Sampling period
-   double  mFp;           // Carrier frequency 
-   double  mTp;           // Carrier period
-
-   double  mOffset;       // Offset
-   double  mScale;    // amplitude
-   double  mSigma;        // Sigma
 
    double  mDuration;     // Time duration of signal
+   double  mFs;           // Sampling frequency
+   double  mFp;           // Carrier frequency 
+
+   double  mEX;           // Desired expectation
+   double  mUX;           // Desired uncertainty
+
+   double  mTs;           // Sampling period
+   double  mTp;           // Carrier period
    int     mNumSamples;   // Number of samples in array
 
    

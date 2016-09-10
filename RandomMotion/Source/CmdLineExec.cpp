@@ -44,9 +44,8 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
    tParms->mDuration   =    gSettings.mDuration;
    tParms->mFs         =    gSettings.mFs;
    tParms->mFp         =    gSettings.mFp;
-   tParms->mSigma      =    gSettings.mSigma;
-   tParms->mOffset     =    gSettings.mOffset;
-   tParms->mScale  =    gSettings.mScale;
+   tParms->mEX         =    gSettings.mEX;
+   tParms->mUX         =    gSettings.mUX;
    tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
    tParms->initialize();
 
