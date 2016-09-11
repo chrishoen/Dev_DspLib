@@ -113,7 +113,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    // Section commands
 
 
-	if(aCmd->isCmd("SectionBegin"      ))  mSectionFlag=isMySection(aCmd);
+   if(aCmd->isCmd("SectionBegin"      ))  mSectionFlag=isMySection(aCmd);
    if(aCmd->isCmd("SectionEnd"        ))  mSectionFlag=false;
 
    if (!mSectionFlag) return;
@@ -133,12 +133,12 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Fc2"         )) mFc2       = aCmd->argDouble(1);
    if(aCmd->isCmd("Ac1"         )) mAc1       = aCmd->argDouble(1);
    if(aCmd->isCmd("Ac2"         )) mAc2       = aCmd->argDouble(1);
-   if(aCmd->isCmd("Pc1"         )) mPc1       = rad(aCmd->argDouble(1));
-   if(aCmd->isCmd("Pc2"         )) mPc2       = rad(aCmd->argDouble(1));
+   if(aCmd->isCmd("Pc1"         )) mPc1       = aCmd->argRadian(1);
+   if(aCmd->isCmd("Pc2"         )) mPc2       = aCmd->argRadian(1);
 
    if(aCmd->isCmd("FcRandom"    )) mFcRandom  = aCmd->argDouble(1);
    if(aCmd->isCmd("AcRandom"    )) mAcRandom  = aCmd->argDouble(1);
-   if(aCmd->isCmd("PcRandom"    )) mPcRandom  = rad(aCmd->argDouble(1));
+   if(aCmd->isCmd("PcRandom"    )) mPcRandom  = aCmd->argRadian(1);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
