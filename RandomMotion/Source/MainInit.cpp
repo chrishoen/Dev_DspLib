@@ -3,7 +3,7 @@
 #include "prnPrint.h"
 #include "logFiles.h"
 #include "risThreadsProcess.h"
-#include "Settings.h"
+#include "Parms.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -56,8 +56,8 @@ void main_initialize(int argc,char** argv)
    Prn::print(0,"RandomMotion********************************************BEGIN");
 
    // Open settings file.
-   gSettings.initialize("default");
-// gSettings.show();
+   gParms.readSection("default");
+// gParms.show();
 
    // Open log files
    Log::reset();

@@ -6,6 +6,7 @@ SectionBegin default
    Fp               1.0
    EX               0.0
    UX               1.0
+   Outputfile     C:\Alpha\Data\RandomMotion.csv
 
 SectionEnd
 

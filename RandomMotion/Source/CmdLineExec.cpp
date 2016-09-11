@@ -6,7 +6,7 @@
 
 #include "prnPrint.h"
 #include "CmdLineExec.h"
-#include "Settings.h"
+#include "Parms.h"
 #include "dspSignalGen.h"
 #include "dspRandomMotion.h"
 
@@ -38,19 +38,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
-   gSettings.initialize("run1");
-   RandomMotion tRandomMotion;
-   MotionParms* tParms = new MotionParms;
-   tParms->mDuration   =    gSettings.mDuration;
-   tParms->mFs         =    gSettings.mFs;
-   tParms->mFp         =    gSettings.mFp;
-   tParms->mEX         =    gSettings.mEX;
-   tParms->mUX         =    gSettings.mUX;
-   tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
-   tParms->initialize();
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run1");
 
-   tRandomMotion.propagate1(tParms);
-   delete tParms;
+   RandomMotion tRandomMotion;
+   tRandomMotion.propagate1();
 }
 
 //******************************************************************************
@@ -59,26 +52,12 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
-   gSettings.initialize("run2");
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run2");
+
    RandomMotion tRandomMotion;
-   MotionParms* tParms = new MotionParms;
-   tParms->mDuration   =    gSettings.mDuration;
-   tParms->mFs         =    gSettings.mFs;
-   tParms->mFp         =    gSettings.mFp;
-   tParms->mEX         =    gSettings.mEX;
-   tParms->mUX         =    gSettings.mUX;
-   tParms->mFc1        =    gSettings.mFc1;
-   tParms->mFc2        =    gSettings.mFc2;
-   tParms->mAc1        =    gSettings.mAc1;
-   tParms->mAc2        =    gSettings.mAc2;
-   tParms->mPc1        =    gSettings.mPc1;
-   tParms->mPc2        =    gSettings.mPc2;
-
-   tParms->setOutputFileName ("C:\\Alpha\\Data\\RandomMotion.csv");
-   tParms->initialize();
-
-   tRandomMotion.propagate2(tParms);
-   delete tParms;
+   tRandomMotion.propagate2();
 }
 
 //******************************************************************************

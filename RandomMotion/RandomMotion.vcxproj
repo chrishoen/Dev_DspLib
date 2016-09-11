@@ -170,13 +170,13 @@
     <ClCompile Include="Source\dspRandomMotion.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
-    <ClCompile Include="Source\Settings.cpp" />
+    <ClCompile Include="Source\Parms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspRandomMotion.h" />
     <ClInclude Include="Source\MainInit.h" />
-    <ClInclude Include="Source\Settings.h" />
+    <ClInclude Include="Source\Parms.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DspLib\DspLib.vcxproj">

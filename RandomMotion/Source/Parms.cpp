@@ -10,12 +10,17 @@
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
-#define  _SETTINGS_CPP_
-#include "Settings.h"
+#define  _PARMS_CPP_
+#include "Parms.h"
 
 //******************************************************************************
 
-Settings::Settings()
+Parms::Parms()
+{
+   reset();
+}
+
+void Parms::reset()
 {
    mSection[0]=0;
 
@@ -33,11 +38,21 @@ Settings::Settings()
    mPc2 = 0.0;
 
    mSigma = 0.0;
+   strcpy(mOutputFile,"RandomMotion.txt");
+
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(mDuration * mFs);
 }
 
-void Settings::show()
+void Parms::expand()
 {
-   printf("Settings ******* %s\n", mSection);
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(round(mDuration) * mFs);
+}
+
+void Parms::show()
+{
+   printf("Parms ******* %s\n", mSection);
 
    printf("mDuration    %10.4f\n",mDuration);
    printf("mFs          %10.4f\n",mFs);
@@ -50,9 +65,10 @@ void Settings::show()
    printf("mAc1         %10.4f\n",mAc1);
    printf("mAc2         %10.4f\n",mAc2);
    printf("mPc1         %10.4f\n",deg(mPc1));
-   printf("mPc2         %10.4f\n",deg(mPc2));
 
-   printf("Settings ******* %s\n", mSection);
+   printf("mOutputFile  %10s\n",  mOutputFile);
+
+   printf("Parms ******* %s\n", mSection);
 }
 
 //******************************************************************************
@@ -60,7 +76,7 @@ void Settings::show()
 // if "Section", the first command line argument, is the same as the section 
 // specified in initialize.
 
-bool Settings::isMySection(Ris::CmdLineCmd* aCmd)
+bool Parms::isMySection(Ris::CmdLineCmd* aCmd)
 {
    bool tFlag=false;
 
@@ -83,7 +99,7 @@ bool Settings::isMySection(Ris::CmdLineCmd* aCmd)
 // BEGIN starts a section, END exits a section
 // Only commands for a section are processed
 
-void Settings::execute(Ris::CmdLineCmd* aCmd)
+void Parms::execute(Ris::CmdLineCmd* aCmd)
 {
    //---------------------------------------------------------------------------
    //---------------------------------------------------------------------------
@@ -114,19 +130,21 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Pc1"         )) mPc1       = rad(aCmd->argDouble(1));
    if(aCmd->isCmd("Pc2"         )) mPc2       = rad(aCmd->argDouble(1));
 
+   if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
+
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-bool Settings::initialize(char* aSection)
+bool Parms::readSection(char* aSection)
 { 
    // File path
    char tFilePath[200];
 
    strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\RandomMotionSettings.txt");
+   strcat(tFilePath, "..\\..\\Files\\RandomMotionParms.txt");
 
    // Copy arguments
    strcpy(mSection,aSection);
@@ -139,15 +157,16 @@ bool Settings::initialize(char* aSection)
    {
       if (mDefaultSection)
       {
-         printf("Settings::file open PASS %s\n", tFilePath);
+         printf("Parms::file open PASS %s\n", tFilePath);
       }
       tCmdLineFile.execute(this);
       tCmdLineFile.close();
+      expand();
       return true;
    }
    else
    {
-      printf("Settings::file open FAIL %s\n",tFilePath);
+      printf("Parms::file open FAIL %s\n",tFilePath);
       return false;
    }
 }

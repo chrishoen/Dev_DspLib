@@ -17,45 +17,12 @@ Description:
 #include "dspTimeSeriesLPGN.h"
 #include "dspTimeSeriesHarmonic.h"
 
+#include "Parms.h"
 #include "dspRandomMotion.h"
 
 namespace Dsp
 {
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-MotionParms::MotionParms()
-{
-   reset();
-}
-
-void MotionParms::reset()
-{
-   mFs = 10000.0;
-   mTs = 1.0 / mFs;
-   mDuration = 10.0;
-   mNumSamples = (int)(mDuration * mFs);
-
-   mFp = 1.0;
-   mTp = 1.0 / mFp;
-
-   mEX    = 0,0;
-   mUX    = 1.0;
-
-   mOutputFileName [0]=0;
-}
-
-void MotionParms::initialize()
-{
-   mTs = 1.0 / mFs;
-   mNumSamples = (int)(round(mDuration) * mFs);
-
-}
-
-void MotionParms::setOutputFileName (char* aFileName) { strcpy(mOutputFileName, aFileName); }
-   
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -73,24 +40,21 @@ void RandomMotion::initialize()
 //******************************************************************************
 //******************************************************************************
 
-void RandomMotion::propagate1(MotionParms* aParms)
+void RandomMotion::propagate1()
 {
-   // Initialize parameters.
-   aParms->initialize();
-
    // Initialize signal time series.
    TimeSeriesTime* tTime   = new TimeSeriesTime();
    TimeSeriesLPGN* tSeries = new TimeSeriesLPGN();
 
-   tTime->mDuration     =     aParms->mDuration;
-   tTime->mFs           =     aParms->mFs;
+   tTime->mDuration     =     gParms.mDuration;
+   tTime->mFs           =     gParms.mFs;
    tTime->generate();
 
-   tSeries->mDuration   =     aParms->mDuration;
-   tSeries->mFs         =     aParms->mFs;
-   tSeries->mFp         =     aParms->mFp;
-   tSeries->mEX         =     aParms->mEX;
-   tSeries->mUX         =     aParms->mUX;
+   tSeries->mDuration   =     gParms.mDuration;
+   tSeries->mFs         =     gParms.mFs;
+   tSeries->mFp         =     gParms.mFp;
+   tSeries->mEX         =     gParms.mEX;
+   tSeries->mUX         =     gParms.mUX;
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();
@@ -98,7 +62,7 @@ void RandomMotion::propagate1(MotionParms* aParms)
    // Input and output files.
    CsvFileWriter  tSampleWriter;
 
-   tSampleWriter.open(aParms->mOutputFileName);
+   tSampleWriter.open(gParms.mOutputFile);
 
    // Statistics
    TrialStatistics  mTrialStatistics;
@@ -108,7 +72,7 @@ void RandomMotion::propagate1(MotionParms* aParms)
    Sample tSample;
 
    // Loop through all of the samples in the input file.
-   for (int k = 0; k < aParms->mNumSamples; k++)
+   for (int k = 0; k < gParms.mNumSamples; k++)
    {
       // Write the sample to the output file.
       tSampleWriter.writeRow(
@@ -121,7 +85,7 @@ void RandomMotion::propagate1(MotionParms* aParms)
     
    }
 
-   Prn::print(0, "RandomMotion::propagate1 %d",aParms->mNumSamples);
+   Prn::print(0, "RandomMotion::propagate1 %d",gParms.mNumSamples);
 
    // Close files.
    tSampleWriter.close();
@@ -139,33 +103,28 @@ void RandomMotion::propagate1(MotionParms* aParms)
 //******************************************************************************
 //******************************************************************************
 
-void RandomMotion::propagate2(MotionParms* aParms)
+void RandomMotion::propagate2()
 {
-   // Initialize parameters.
-   aParms->initialize();
-
    // Initialize signal time series.
    TimeSeriesTime* tTime   = new TimeSeriesTime();
    TimeSeriesHarmonic* tSeries = new TimeSeriesHarmonic();
 
-   tTime->mDuration     =     aParms->mDuration;
-   tTime->mFs           =     aParms->mFs;
+   tTime->mDuration     =     gParms.mDuration;
+   tTime->mFs           =     gParms.mFs;
    tTime->generate();
 
-   tSeries->mDuration   =     aParms->mDuration;
-   tSeries->mFs         =     aParms->mFs;
-   tSeries->mEX         =     aParms->mEX;
-   tSeries->mUX         =     aParms->mUX;
+   tSeries->mDuration   =     gParms.mDuration;
+   tSeries->mFs         =     gParms.mFs;
+   tSeries->mEX         =     gParms.mEX;
+   tSeries->mUX         =     gParms.mUX;
 
-
-   tSeries->mFc1        =     aParms->mFc1;
-   tSeries->mFc2        =     aParms->mFc2;
-   tSeries->mAc1        =     aParms->mAc1;
-   tSeries->mAc2        =     aParms->mAc2;
-   tSeries->mPc1        =     aParms->mPc1;
-   tSeries->mPc2        =     aParms->mPc2;
-   tSeries->mSigma      =     aParms->mSigma;
-
+   tSeries->mFc1        =     gParms.mFc1;
+   tSeries->mFc2        =     gParms.mFc2;
+   tSeries->mAc1        =     gParms.mAc1;
+   tSeries->mAc2        =     gParms.mAc2;
+   tSeries->mPc1        =     gParms.mPc1;
+   tSeries->mPc2        =     gParms.mPc2;
+   tSeries->mSigma      =     gParms.mSigma;
 
    tSeries->initialize();
    tSeries->show();
@@ -174,7 +133,7 @@ void RandomMotion::propagate2(MotionParms* aParms)
    // Input and output files.
    CsvFileWriter  tSampleWriter;
 
-   tSampleWriter.open(aParms->mOutputFileName);
+   tSampleWriter.open(gParms.mOutputFile);
 
    // Statistics
    TrialStatistics  mTrialStatistics;
@@ -184,7 +143,7 @@ void RandomMotion::propagate2(MotionParms* aParms)
    Sample tSample;
 
    // Loop through all of the samples in the input file.
-   for (int k = 0; k < aParms->mNumSamples; k++)
+   for (int k = 0; k < gParms.mNumSamples; k++)
    {
       // Write the sample to the output file.
       tSampleWriter.writeRow(
@@ -197,7 +156,7 @@ void RandomMotion::propagate2(MotionParms* aParms)
     
    }
 
-   Prn::print(0, "RandomMotion::propagate1 %d",aParms->mNumSamples);
+   Prn::print(0, "RandomMotion::propagate1 %d",gParms.mNumSamples);
 
    // Close files.
    tSampleWriter.close();
