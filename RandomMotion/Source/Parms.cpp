@@ -36,8 +36,10 @@ void Parms::reset()
    mAc2 = 1.0;
    mPc1 = 0.0;
    mPc2 = 0.0;
+   mFcRandom = 0.0;
+   mAcRandom = 0.0;
+   mPcRandom = 0.0;
 
-   mSigma = 0.0;
    strcpy(mOutputFile,"RandomMotion.txt");
 
    mTs = 1.0 / mFs;
@@ -65,6 +67,10 @@ void Parms::show()
    printf("mAc1         %10.4f\n",mAc1);
    printf("mAc2         %10.4f\n",mAc2);
    printf("mPc1         %10.4f\n",deg(mPc1));
+
+   printf("mFcRandom    %10.4f\n",mFcRandom);
+   printf("mAcRandom    %10.4f\n",mAcRandom);
+   printf("mPcRandom    %10.4f\n",deg(mPcRandom));
 
    printf("mOutputFile  %10s\n",  mOutputFile);
 
@@ -129,6 +135,10 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Ac2"         )) mAc2       = aCmd->argDouble(1);
    if(aCmd->isCmd("Pc1"         )) mPc1       = rad(aCmd->argDouble(1));
    if(aCmd->isCmd("Pc2"         )) mPc2       = rad(aCmd->argDouble(1));
+
+   if(aCmd->isCmd("FcRandom"    )) mFcRandom  = aCmd->argDouble(1);
+   if(aCmd->isCmd("AcRandom"    )) mAcRandom  = aCmd->argDouble(1);
+   if(aCmd->isCmd("PcRandom"    )) mPcRandom  = rad(aCmd->argDouble(1));
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 

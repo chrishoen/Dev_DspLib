@@ -6,6 +6,7 @@ SectionBegin default
    Fp               1.0
    EX               0.0
    UX               1.0
+
    Outputfile     C:\Alpha\Data\RandomMotion.csv
 
 SectionEnd
@@ -35,7 +36,12 @@ SectionBegin run2
    Ac1             10.0
    Ac2              5.0
    Pc1              0.0
-   Pc2             45.0  
+   Pc2              0.0
+
+   FcRandom         0.0
+   AcRandom         0.0
+   PcRandom       360.0
+
 
 SectionEnd
 

@@ -24,7 +24,9 @@ class TimeSeriesHarmonic
 {
 public:
 
-   //--------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members.
 
    double* mX;            // Array of samples
@@ -40,42 +42,36 @@ public:
    double  mAc2;          // Carrier amplitude 
    double  mPc1;          // Carrier phase 
    double  mPc2;          // Carrier phase 
-   double  mSigma;        // Random noise generator sigma
 
+   double  mFcRandom;     // Carrier frequency randomize
+   double  mAcRandom;     // Carrier amplitude randomize
+   double  mPcRandom;     // Carrier phase randomize
 
    double  mTs;           // Sampling period
    int     mNumSamples;   // Number of samples in array
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
-   // Guassian noise
-
-   bool mSigmaFlag;
-   std::mt19937 mRandomGenerator;
-   std::normal_distribution<double> mRandomDistribution;
-
-   //--------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Constructor and initialization.
-   // Create an new TimeSeriesHarmonic, set some of the members, call initialize to 
-   // set other members.
+   // Create an new TimeSeriesHarmonic, set some of the members, call
+   // initialize to set other members.
 
    TimeSeriesHarmonic();
   ~TimeSeriesHarmonic();
    void reset();
    void initialize();
 
-    // Initialize random distribution.
-   void initializeNoise();
-   // Get noise from random distribution.
-   double getNoise();
-
-   //--------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Generate the signal series history.
 
    void generate();
 
-   //--------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Support.
 
    void show();

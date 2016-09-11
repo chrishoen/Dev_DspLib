@@ -52,7 +52,9 @@ void TimeSeriesHarmonic::reset()
    mPc1 = 0.0;
    mPc2 = 0.0;
 
-   mSigma = 0.0;
+   mFcRandom = 0.0;
+   mAcRandom = 0.0;
+   mPcRandom = 0.0;
 }
 
 //******************************************************************************
@@ -71,51 +73,9 @@ void TimeSeriesHarmonic::initialize()
       mFs = 1.0 / mTs;
    }
 
-
-   mSigmaFlag = false;
-   initializeNoise();
-
    mNumSamples = (int)(mDuration * mFs);
    mX = new double[mNumSamples];
-}
-   
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Guassian noise
-
-// Initialize random distribution.
-void TimeSeriesHarmonic::initializeNoise()
-{
-   // Set flag.
-   mSigmaFlag = mSigma != 0.0;
-
-   // Seed generator.
-   std::random_device tRandomDevice;
-   mRandomGenerator.seed(tRandomDevice());
-
-   // Set distribution parameters.
-   std::normal_distribution<double>::param_type parm;
-   if (mSigmaFlag) parm._Init(0.0, mSigma);
-   else            parm._Init(0.0, 1.0);
-
-   mRandomDistribution.param(parm);
-}
-
-// Get noise from random distribution.
-double TimeSeriesHarmonic::getNoise()
-{
-   double tNoise;
-   if (mSigmaFlag)
-   {
-      tNoise = mRandomDistribution(mRandomGenerator);
-   }
-   else
-   {
-      tNoise = 0.0;
-   }
-   return tNoise;
-}
+}  
 
 //******************************************************************************
 //******************************************************************************
@@ -137,6 +97,10 @@ void TimeSeriesHarmonic::show()
    printf("mAc2         %10.4f\n",mAc2);
    printf("mPc1         %10.4f\n",deg(mPc1));
    printf("mPc2         %10.4f\n",deg(mPc2));
+
+   printf("mFcRandom    %10.4f\n",mFcRandom);
+   printf("mAcRandom    %10.4f\n",mAcRandom);
+   printf("mPcRandom    %10.4f\n",deg(mPcRandom));
 }
 
 //******************************************************************************
@@ -149,7 +113,23 @@ void TimeSeriesHarmonic::generate()
    // Initialize
 
    initialize();
-   initializeNoise();
+
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+
+   std::uniform_real_distribution<double> tRandomDistributionFc1(mFc1-mFcRandom/2.0,mFc1+mFcRandom/2.0);
+   std::uniform_real_distribution<double> tRandomDistributionFc2(mFc2-mFcRandom/2.0,mFc2+mFcRandom/2.0);
+   std::uniform_real_distribution<double> tRandomDistributionAc1(mAc1-mAcRandom/2.0,mAc1+mAcRandom/2.0);
+   std::uniform_real_distribution<double> tRandomDistributionAc2(mAc2-mAcRandom/2.0,mAc2+mAcRandom/2.0);
+   std::uniform_real_distribution<double> tRandomDistributionPc1(mPc1-mPcRandom/2.0,mPc1+mPcRandom/2.0);
+   std::uniform_real_distribution<double> tRandomDistributionPc2(mPc2-mPcRandom/2.0,mPc2+mPcRandom/2.0);
+
+   double tFc1 = tRandomDistributionFc1(tRandomGenerator);
+   double tFc2 = tRandomDistributionFc2(tRandomGenerator);
+   double tAc1 = tRandomDistributionAc1(tRandomGenerator);
+   double tAc2 = tRandomDistributionAc2(tRandomGenerator);
+   double tPc1 = tRandomDistributionPc1(tRandomGenerator);
+   double tPc2 = tRandomDistributionPc2(tRandomGenerator);
 
    //---------------------------------------------------------------------------
    // Generate harmonic signal with two frequencies.
@@ -160,8 +140,8 @@ void TimeSeriesHarmonic::generate()
       double tTime = mTs*k;
 
       // Signal
-      double tX1 = mAc1*sin(DSP_2PI*mFc1*tTime + mPc1);
-      double tX2 = mAc2*sin(DSP_2PI*mFc2*tTime + mPc2);
+      double tX1 = tAc1*sin(DSP_2PI*tFc1*tTime + tPc1);
+      double tX2 = tAc2*sin(DSP_2PI*tFc2*tTime + tPc2);
 
       // Store.
       mX[k] = tX1 + tX2;

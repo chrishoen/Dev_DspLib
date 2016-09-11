@@ -80,10 +80,11 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double>::param_type parm;
+   std::uniform_real_distribution<double>::param_type parm;
 
    parm._Init(0.0,2.0);
-   std::normal_distribution<double> tRandomDistribution(parm);
+   std::uniform_real_distribution<double> tRandomDistribution(parm);
+   std::uniform_real_distribution<double> tRandomDistribution2(0.0,2.0);
 }
 
 //******************************************************************************

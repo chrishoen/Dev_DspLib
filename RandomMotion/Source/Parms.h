@@ -40,7 +40,10 @@ public:
    double  mAc2;          // Carrier amplitude 
    double  mPc1;          // Carrier phase 
    double  mPc2;          // Carrier phase 
-   double  mSigma;        // Random noise generator sigma
+
+   double  mFcRandom;     // Carrier frequency randomize
+   double  mAcRandom;     // Carrier amplitude randomize
+   double  mPcRandom;     // Carrier phase randomize
 
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];

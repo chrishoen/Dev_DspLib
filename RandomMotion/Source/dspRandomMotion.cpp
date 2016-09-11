@@ -124,7 +124,10 @@ void RandomMotion::propagate2()
    tSeries->mAc2        =     gParms.mAc2;
    tSeries->mPc1        =     gParms.mPc1;
    tSeries->mPc2        =     gParms.mPc2;
-   tSeries->mSigma      =     gParms.mSigma;
+
+   tSeries->mFcRandom   =     gParms.mFcRandom;
+   tSeries->mAcRandom   =     gParms.mAcRandom;
+   tSeries->mPcRandom   =     gParms.mPcRandom;
 
    tSeries->initialize();
    tSeries->show();
