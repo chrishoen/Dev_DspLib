@@ -19,6 +19,7 @@ Description:
 #include "dspTimeSeriesHarmonic.h"
 
 #include "Parms.h"
+#include "FilterCo.h"
 #include "dspRandomMotion.h"
 
 namespace Dsp
@@ -192,6 +193,10 @@ void RandomMotion::propagate3()
    tSeries->mFs         =     gParms.mFs;
    tSeries->mEX         =     gParms.mEX;
    tSeries->mUX         =     gParms.mUX;
+   tSeries->mBSize      =     gFilterCo.mBandPassB1.mRows;
+   tSeries->mASize      =     gFilterCo.mBandPassA1.mRows;
+   tSeries->mBArray     =     gFilterCo.mBandPassB1.mValues;
+   tSeries->mAArray     =     gFilterCo.mBandPassA1.mValues;
    tSeries->initialize();
    tSeries->show();
    tSeries->generate();

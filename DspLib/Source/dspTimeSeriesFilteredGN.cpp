@@ -31,6 +31,10 @@ TimeSeriesFilteredGN::TimeSeriesFilteredGN()
 void TimeSeriesFilteredGN::reset()
 {
    BaseClass::reset();
+   mBSize=0;
+   mASize=0;
+   mBArray=0;
+   mAArray=0;
 }
 
 //******************************************************************************
@@ -42,28 +46,8 @@ void TimeSeriesFilteredGN::initialize()
 {
    BaseClass::initialize();
 
-   // Filter coefficients from matlab
-
-   int tBSize = 5;
-
-   double tBArray[] = {
-      0.0000008984861463970644700000000000000000,
-      0.0000035939445855882579000000000000000000,
-      0.0000053909168783823870000000000000000000,
-      0.0000035939445855882579000000000000000000,
-      0.0000008984861463970644700000000000000000 };
-
-   int tASize = 5;
-
-   double tAArray[] = {
-      1.0000000000000000000000000000000000000000,
-      -3.8358255406473480000000000000000000000000,
-      5.5208191366222268000000000000000000000000,
-      -3.5335352194630136000000000000000000000000,
-      0.8485559992664766200000000000000000000000 };
-
    // Initialize bandpass filter
-   mFilter.initialize(tBSize,tASize,tBArray,tAArray);
+   mFilter.initialize(mBSize,mASize,mBArray,mAArray);
 }
    
 //******************************************************************************

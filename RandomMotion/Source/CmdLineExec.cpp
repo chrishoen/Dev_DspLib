@@ -7,6 +7,7 @@
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
+#include "FilterCo.h"
 #include "dspSignalGen.h"
 #include "dspRandomMotion.h"
 
@@ -71,6 +72,8 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection("run3");
+   gFilterCo.reset();
+   gFilterCo.readSection("default");
 
    RandomMotion tRandomMotion;
    tRandomMotion.propagate3();
@@ -82,25 +85,15 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::normal_distribution<double> tRandomDistribution(0.0, 1.0);
-   std::normal_distribution<double>::param_type parm = tRandomDistribution.param();
-   parm._Sigma = 2.0;
-   tRandomDistribution.param();
+   gFilterCo.reset();
+   gFilterCo.readSection("default");
+   gFilterCo.show();
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   std::random_device tRandomDevice;
-   std::mt19937 tRandomGenerator(tRandomDevice());
-   std::uniform_real_distribution<double>::param_type parm;
-
-   parm._Init(0.0,2.0);
-   std::uniform_real_distribution<double> tRandomDistribution(parm);
-   std::uniform_real_distribution<double> tRandomDistribution2(0.0,2.0);
 }
 
 //******************************************************************************
