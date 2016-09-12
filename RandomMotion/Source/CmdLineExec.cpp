@@ -30,6 +30,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("RUN1"   ))  executeRun1(aCmd);
    if(aCmd->isCmd("RUN2"   ))  executeRun2(aCmd);
+   if(aCmd->isCmd("RUN3"   ))  executeRun3(aCmd);
 }
 
 //******************************************************************************
@@ -59,6 +60,20 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
    RandomMotion tRandomMotion;
    tRandomMotion.propagate2();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run3");
+
+   RandomMotion tRandomMotion;
+   tRandomMotion.propagate3();
 }
 
 //******************************************************************************

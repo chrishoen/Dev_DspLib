@@ -25,6 +25,7 @@ public:
    // Tests
    void propagate1();
    void propagate2();
+   void propagate3();
 };
 
 //******************************************************************************

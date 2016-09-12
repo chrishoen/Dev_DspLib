@@ -182,12 +182,10 @@ void ShiftRegister::reset()
    mCount=0;
    mIndex=mSize-1;
    mK = 0;
-#if 0
    for(int i=0;i<mSize;i++)
    {
       mArray[i]=0.0;
    }
-#endif
    mValid=false;
 }
 
