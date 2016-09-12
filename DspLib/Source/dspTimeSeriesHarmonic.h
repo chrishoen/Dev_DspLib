@@ -9,6 +9,7 @@
 //******************************************************************************
 
 #include <random>
+#include "dspTimeSeriesBase.h"
 #include "dspFilterAlpha.h"
 
 namespace Dsp
@@ -20,21 +21,15 @@ namespace Dsp
 // This class encapsulates a signal source. It can be used to generate a time 
 // series of samples.
 
-class TimeSeriesHarmonic
+class TimeSeriesHarmonic : public TimeSeriesBase
 {
 public:
+   typedef TimeSeriesBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Members.
-
-   double* mX;            // Array of samples
-
-   double  mDuration;     // Time duration of signal
-   double  mFs;           // Sampling frequency
-   double  mEX;           // Desired expectation
-   double  mUX;           // Desired uncertainty
+   // Input paramters.
 
    double  mFc1;          // Carrier frequency 
    double  mFc2;          // Carrier frequency 
@@ -47,9 +42,6 @@ public:
    double  mAcRandom;     // Carrier amplitude randomize
    double  mPcRandom;     // Carrier phase randomize
 
-   double  mTs;           // Sampling period
-   int     mNumSamples;   // Number of samples in array
-
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -58,7 +50,6 @@ public:
    // initialize to set other members.
 
    TimeSeriesHarmonic();
-  ~TimeSeriesHarmonic();
    void reset();
    void initialize();
 

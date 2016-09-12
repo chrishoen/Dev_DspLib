@@ -28,22 +28,9 @@ TimeSeriesHarmonic::TimeSeriesHarmonic()
    reset();
 }
 
-TimeSeriesHarmonic::~TimeSeriesHarmonic()
-{
-   if (mX) delete mX;
-}
-
 void TimeSeriesHarmonic::reset()
 {
-   mX=0;
-   mFs = 1.0;
-   mTs = 1.0 / mFs;
-
-   mDuration = 10.0;
-   mNumSamples = (int)(mDuration * mFs);
-
-   mEX = 0.0;
-   mUX = 1.0;
+   BaseClass::reset();
 
    mFc1 = 1.0;
    mFc2 = 1.0;
@@ -64,17 +51,7 @@ void TimeSeriesHarmonic::reset()
 
 void TimeSeriesHarmonic::initialize()
 {
-   if (mFs != 0.0)
-   {
-      mTs = 1.0 / mFs;
-   }
-   else if (mTs != 0.0)
-   {
-      mFs = 1.0 / mTs;
-   }
-
-   mNumSamples = (int)(mDuration * mFs);
-   mX = new double[mNumSamples];
+   BaseClass::initialize();
 }  
 
 //******************************************************************************
@@ -84,12 +61,7 @@ void TimeSeriesHarmonic::initialize()
 
 void TimeSeriesHarmonic::show()
 {
-   printf("mDuration    %10.4f\n",mDuration);
-   printf("mNumSamples  %10d\n",  mNumSamples);
-   printf("mFs          %10.4f\n",mFs);
-   printf("mTs          %10.4f\n",mTs);
-   printf("mEX          %10.4f\n",mEX);
-   printf("mUX          %10.4f\n",mUX);
+   BaseClass::show();
 
    printf("mFc1         %10.4f\n",mFc1);
    printf("mFc2         %10.4f\n",mFc2);
@@ -148,31 +120,9 @@ void TimeSeriesHarmonic::generate()
    }
 
    //---------------------------------------------------------------------------
-   // Statistics.
-
-   TrialStatistics  tTrialStatistics;
-   tTrialStatistics.startTrial();
-
-   for (int k = 0; k < mNumSamples; k++)
-   {
-      tTrialStatistics.put(mX[k]);
-   }
-
-   tTrialStatistics.finishTrial();
-
-   //---------------------------------------------------------------------------
    // Normalize to get the desired expectation and uncertainty.
 
-   double tScale = 1.0;
-   double tEX = tTrialStatistics.mEX;
-   double tUX = tTrialStatistics.mUX;
-
-   if (tUX != 0.0) tScale = mUX/tUX;
-
-   for (int k = 0; k < mNumSamples; k++)
-   {
-      mX[k] = tScale*(mX[k] - tEX) + mEX;
-   }
+   normalize();
 }
 
 }//namespace
