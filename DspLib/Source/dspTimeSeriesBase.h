@@ -1,5 +1,5 @@
-#ifndef _DSPTIMESERIESLPGN_H_
-#define _DSPTIMESERIESLPGN_H_
+#ifndef _DSPTIMESERIESBASE_H_
+#define _DSPTIMESERIESBASE_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -9,8 +9,6 @@
 //******************************************************************************
 
 #include <random>
-#include "dspTimeSeriesBase.h"
-#include "dspFilterAlpha.h"
 
 namespace Dsp
 {
@@ -18,67 +16,58 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class encapsulates time series signal generator.
-// It is based on low pass filtering gaussian noise.
-// The low pass filter is imlemented with two cascaded alpha filters.
+// This is a base class for time series signal generators.
 
-class TimeSeriesLPGN : public TimeSeriesBase
+class TimeSeriesBase
 {
 public:
-   typedef TimeSeriesBase BaseClass;
 
    //--------------------------------------------------------------------------
    // Input parameters.
 
-   double  mFp;           // Carrier frequency 
-   double  mAlphaOneAP1;  // Alpha filter constant
+   double  mDuration;     // Time duration of signal
+   double  mFs;           // Sampling frequency
+
+   double  mEX;           // Desired expectation
+   double  mUX;           // Desired uncertainty
+
+   //--------------------------------------------------------------------------
+   // Generated time series.
+
+   double* mX;            // Array of samples
 
    //--------------------------------------------------------------------------
    // Extra parameters.
 
-   double  mTp;           // Carrier period
-   double  mNoiseSigma;   // Random noise generator sigma
+   double  mTs;           // Sampling period
+   int     mNumSamples;   // Number of samples in array
 
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Low pass filter
-
-   Filter::AlphaOne mAlphaOne1;
-   Filter::AlphaOne mAlphaOne2;
-
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
-   // Guassian noise
-
-   bool mSigmaFlag;
-   std::mt19937 mRandomGenerator;
-   std::normal_distribution<double> mRandomDistribution;
-
-   //--------------------------------------------------------------------------
    // Constructor and initialization.
-   // Create an new TimeSeriesLPGN, set some of the members, call initialize to 
+   // Create an new TimeSeriesBase, set some of the members, call initialize to 
    // set other members.
 
-   TimeSeriesLPGN();
-   void reset();
-   void initialize();
-
-    // Initialize random distribution.
-   void initializeNoise();
-   // Get noise from random distribution.
-   double getNoise();
+   TimeSeriesBase();
+  ~TimeSeriesBase();
+   virtual void reset();
+   virtual void initialize();
 
    //--------------------------------------------------------------------------
    // Generate the time series.
 
-   void generate();
+   virtual void generate()=0;
+
+   //--------------------------------------------------------------------------
+   // Generate the time series.
+
+   void normalize();
 
    //--------------------------------------------------------------------------
    // Support.
 
-   void show();
+   virtual void show();
 };
 
 //******************************************************************************

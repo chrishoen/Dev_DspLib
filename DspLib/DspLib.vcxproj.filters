@@ -70,6 +70,9 @@
     <ClCompile Include="Source\dspTimeSeriesHarmonic.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspTimeSeriesBase.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -139,6 +142,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspTimeSeriesHarmonic.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspTimeSeriesBase.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

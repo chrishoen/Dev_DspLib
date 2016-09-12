@@ -12,7 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspTimeSeriesLPGN.h"
+#include "dspTimeSeriesBase.h"
 
 namespace Dsp
 {
@@ -23,17 +23,27 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-TimeSeriesLPGN::TimeSeriesLPGN()
+TimeSeriesBase::TimeSeriesBase()
 {
    reset();
 }
 
-void TimeSeriesLPGN::reset()
+TimeSeriesBase::~TimeSeriesBase()
 {
-   BaseClass::reset();
-   mFp = 1.0;
-   mTp = 1.0 / mFp;
-   mAlphaOneAP1 = 1.0;
+   if (mX) delete mX;
+}
+
+void TimeSeriesBase::reset()
+{
+   mX=0;
+   mFs = 1.0;
+   mTs = 1.0 / mFs;
+
+   mDuration = 10.0;
+   mNumSamples = (int)(mDuration * mFs);
+
+   mEX = 0.0;
+   mUX = 1.0;
 }
 
 //******************************************************************************
@@ -41,92 +51,69 @@ void TimeSeriesLPGN::reset()
 //******************************************************************************
 // Initialize
 
-void TimeSeriesLPGN::initialize()
+void TimeSeriesBase::initialize()
 {
-   BaseClass::initialize();
-
-   if (mFp != 0.0)
+   if (mFs != 0.0)
    {
-      mTp = 1.0 / mFp;
+      mTs = 1.0 / mFs;
    }
-   else if (mTp != 0.0)
+   else if (mTs != 0.0)
    {
-      mFp = 1.0 / mTp;
+      mFs = 1.0 / mTs;
    }
 
-   initializeNoise();
-
-   mAlphaOneAP1 = mTs/(mTs+mTp);
-   mAlphaOne1.initialize(mAlphaOneAP1);
-   mAlphaOne2.initialize(mAlphaOneAP1);
+   mNumSamples = (int)(mDuration * mFs);
+   mX = new double[mNumSamples];
 }
    
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Guassian noise
-
-// Initialize random distribution.
-void TimeSeriesLPGN::initializeNoise()
-{
-   // Seed generator.
-   std::random_device tRandomDevice;
-   mRandomGenerator.seed(tRandomDevice());
-
-   // Set distribution parameters.
-   std::normal_distribution<double>::param_type parm;
-   parm._Init(0.0, 1.0);
-   mRandomDistribution.param(parm);
-}
-
-// Get noise from random distribution.
-double TimeSeriesLPGN::getNoise()
-{
-   return mRandomDistribution(mRandomGenerator);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // Show
 
-void TimeSeriesLPGN::show()
+void TimeSeriesBase::show()
 {
-   BaseClass::show();
-   printf("mFp          %10.4f\n",mFp);
-   printf("mTp          %10.4f\n",mTp);
+   printf("mDuration    %10.4f\n",mDuration);
+   printf("mNumSamples  %10d\n",  mNumSamples);
+   printf("mFs          %10.4f\n",mFs);
+   printf("mTs          %10.4f\n",mTs);
+   printf("mEX          %10.4f\n",mEX);
+   printf("mUX          %10.4f\n",mUX);
+
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void TimeSeriesLPGN::generate()
+void TimeSeriesBase::normalize()
 {
    //---------------------------------------------------------------------------
-   // Initialize
+   // Statistics.
 
-   initialize();
-
-   //---------------------------------------------------------------------------
-   // Generate low pass filtered guassian noise.
-   // The low pass filter is two cascaded first order alpha filters.
+   TrialStatistics  tTrialStatistics;
+   tTrialStatistics.startTrial();
 
    for (int k = 0; k < mNumSamples; k++)
    {
-      // Get noise.
-      double tX = getNoise();
-
-      // Low pass filter the noise.
-      mAlphaOne1.put(tX);
-      mAlphaOne2.put(mAlphaOne1.mXX);
-      mX[k] = mAlphaOne2.mXX;
+      tTrialStatistics.put(mX[k]);
    }
+
+   tTrialStatistics.finishTrial();
 
    //---------------------------------------------------------------------------
    // Normalize to get the desired expectation and uncertainty.
 
-   normalize();
+   double tScale = 1.0;
+   double tEX = tTrialStatistics.mEX;
+   double tUX = tTrialStatistics.mUX;
+
+   if (tUX != 0.0) tScale = mUX/tUX;
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      mX[k] = tScale*(mX[k] - tEX) + mEX;
+   }
 }
 
 }//namespace
