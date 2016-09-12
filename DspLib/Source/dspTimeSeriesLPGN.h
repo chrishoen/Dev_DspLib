@@ -52,7 +52,7 @@ public:
    //******************************************************************************
    // Guassian noise
 
-   bool mSigmaFlag;
+   bool mNoiseFlag;
    std::mt19937 mRandomGenerator;
    std::normal_distribution<double> mRandomDistribution;
 

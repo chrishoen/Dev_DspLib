@@ -34,6 +34,7 @@ void TimeSeriesLPGN::reset()
    mFp = 1.0;
    mTp = 1.0 / mFp;
    mAlphaOneAP1 = 1.0;
+   mNoiseSigma=1.0;
 }
 
 //******************************************************************************
@@ -64,25 +65,42 @@ void TimeSeriesLPGN::initialize()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Guassian noise
+// Initialize guassian noise
 
-// Initialize random distribution.
 void TimeSeriesLPGN::initializeNoise()
 {
+   // Set flag.
+   mNoiseFlag = mNoiseSigma != 0.0;
+
    // Seed generator.
    std::random_device tRandomDevice;
    mRandomGenerator.seed(tRandomDevice());
 
    // Set distribution parameters.
    std::normal_distribution<double>::param_type parm;
-   parm._Init(0.0, 1.0);
+   if (mNoiseFlag) parm._Init(0.0, mNoiseSigma);
+   else            parm._Init(0.0, 1.0);
+
    mRandomDistribution.param(parm);
 }
 
-// Get noise from random distribution.
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Get guassian noise
+
 double TimeSeriesLPGN::getNoise()
 {
-   return mRandomDistribution(mRandomGenerator);
+   double tNoise;
+   if (mNoiseFlag)
+   {
+      tNoise = mRandomDistribution(mRandomGenerator);
+   }
+   else
+   {
+      tNoise = 0.0;
+   }
+   return tNoise;
 }
 
 //******************************************************************************
