@@ -72,16 +72,29 @@ void TimeSeriesFilteredGN::generate()
    initialize();
 
    //---------------------------------------------------------------------------
-   // Generate low pass filtered guassian noise.
-   // The low pass filter is two cascaded first order alpha filters.
+   // Generate filtered guassian noise, allow filter to settle.
+
+   for (int k = 0; k < 200; k++)
+   {
+      // Get noise.
+      double tX = getNoise();
+
+      // Filter the noise.
+      mFilter.put(tX);
+   }
+
+   //---------------------------------------------------------------------------
+   // Generate filtered guassian noise.
 
    for (int k = 0; k < mNumSamples; k++)
    {
       // Get noise.
       double tX = getNoise();
 
-      // Low pass filter the noise.
+      // Filter the noise.
       mFilter.put(tX);
+
+      // Store
       mX[k] = mFilter.mY;
    }
 
