@@ -10,9 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dsp_math.h"
-#include "dspStatistics.h"
-#include "dspTimeSeriesLPGN.h"
+#include "dspTimeSeriesBaseGN.h"
 
 namespace Dsp
 {
@@ -23,17 +21,15 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-TimeSeriesLPGN::TimeSeriesLPGN()
+TimeSeriesBaseGN::TimeSeriesBaseGN()
 {
    reset();
 }
 
-void TimeSeriesLPGN::reset()
+void TimeSeriesBaseGN::reset()
 {
    BaseClass::reset();
-   mFp = 1.0;
-   mTp = 1.0 / mFp;
-   mAlphaOneAP1 = 1.0;
+   mNoiseSigma=1.0;
 }
 
 //******************************************************************************
@@ -41,66 +37,51 @@ void TimeSeriesLPGN::reset()
 //******************************************************************************
 // Initialize
 
-void TimeSeriesLPGN::initialize()
+void TimeSeriesBaseGN::initialize()
 {
    BaseClass::initialize();
 
-   if (mFp != 0.0)
-   {
-      mTp = 1.0 / mFp;
-   }
-   else if (mTp != 0.0)
-   {
-      mFp = 1.0 / mTp;
-   }
-
-   mAlphaOneAP1 = mTs/(mTs+mTp);
-   mAlphaOne1.initialize(mAlphaOneAP1);
-   mAlphaOne2.initialize(mAlphaOneAP1);
+   initializeNoise();
 }
    
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Show
+// Initialize guassian noise
 
-void TimeSeriesLPGN::show()
+void TimeSeriesBaseGN::initializeNoise()
 {
-   BaseClass::show();
-   printf("mFp          %10.4f\n",mFp);
-   printf("mTp          %10.4f\n",mTp);
+   // Set flag.
+   mNoiseFlag = mNoiseSigma != 0.0;
+
+   // Seed generator.
+   std::random_device tRandomDevice;
+   mRandomGenerator.seed(tRandomDevice());
+
+   // Set distribution parameters.
+   std::normal_distribution<double>::param_type parm;
+   if (mNoiseFlag) parm._Init(0.0, mNoiseSigma);
+   else            parm._Init(0.0, 1.0);
+
+   mRandomDistribution.param(parm);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Get guassian noise
 
-void TimeSeriesLPGN::generate()
+double TimeSeriesBaseGN::getNoise()
 {
-   //---------------------------------------------------------------------------
-   // Initialize
-
-   initialize();
-
-   //---------------------------------------------------------------------------
-   // Generate low pass filtered guassian noise.
-   // The low pass filter is two cascaded first order alpha filters.
-
-   for (int k = 0; k < mNumSamples; k++)
+   double tNoise;
+   if (mNoiseFlag)
    {
-      // Get noise.
-      double tX = getNoise();
-
-      // Low pass filter the noise.
-      mAlphaOne1.put(tX);
-      mAlphaOne2.put(mAlphaOne1.mXX);
-      mX[k] = mAlphaOne2.mXX;
+      tNoise = mRandomDistribution(mRandomGenerator);
    }
-
-   //---------------------------------------------------------------------------
-   // Normalize to get the desired expectation and uncertainty.
-
-   normalize();
+   else
+   {
+      tNoise = 0.0;
+   }
+   return tNoise;
 }
-
 }//namespace
