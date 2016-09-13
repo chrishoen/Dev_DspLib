@@ -109,7 +109,7 @@ bool FilterCo::readSection(char* aSection)
    char tFilePath[200];
 
    strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\FilterCoefficients.txt");
+   strcat(tFilePath, "..\\..\\Files\\DspFilterCo.txt");
 
    // Copy arguments
    strcpy(mSection,aSection);
