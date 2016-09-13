@@ -75,7 +75,6 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 
    gFilterCo.reset();
    gFilterCo.readSection("default");
-   gFilterCo.show();
 
    RandomMotion tRandomMotion;
    tRandomMotion.propagate3();
