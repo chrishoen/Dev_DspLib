@@ -117,9 +117,9 @@ public:
    // Initialize
    void startTrial(double aXLimit=0.0);
    void finishTrial();
-   void show();
-   void show2();
-   void showDeg();
+   void show(char* aLabel=0);
+   void show2(char* aLabel=0);
+   void showDeg(char* aLabel=0);
 
    // Put input value
    void put(double aX);
