@@ -23,9 +23,14 @@ FilterCo::FilterCo()
 void FilterCo::reset()
 {
    mSection[0]=0;
+   mSectionMode[0]=0;
+   mSectionFlag=false;
+   mDefaultSection=false;
+
    mBandPassB1.initialize(5);
    mBandPassA1.initialize(5);
-
+   mCode1=0;
+   mCode2=0;
 }
 
 void FilterCo::show()
@@ -34,6 +39,9 @@ void FilterCo::show()
 
    mBandPassB1.show("BandPassB1");
    mBandPassA1.show("BandPassA1");
+
+   printf("Code1      %10d\n",  mCode1);
+   printf("Code2      %10d\n",  mCode2);
 
    printf("FilterCo ******* %s\n", mSection);
 }
@@ -87,6 +95,8 @@ void FilterCo::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("BandPassB1"))         mBandPassB1.execute(aCmd);
    if (aCmd->isCmd("BandPassA1"))         mBandPassA1.execute(aCmd);
 
+   if(aCmd->isCmd("Code1"        ))       mCode1 = aCmd->argInt(1);
+   if(aCmd->isCmd("Code2"        ))       mCode2 = aCmd->argInt(1);
 }
 
 //******************************************************************************

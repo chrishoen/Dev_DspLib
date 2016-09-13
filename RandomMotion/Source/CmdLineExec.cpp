@@ -72,8 +72,10 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection("run3");
+
    gFilterCo.reset();
    gFilterCo.readSection("default");
+   gFilterCo.show();
 
    RandomMotion tRandomMotion;
    tRandomMotion.propagate3();
@@ -94,6 +96,9 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.show();
 }
 
 //******************************************************************************

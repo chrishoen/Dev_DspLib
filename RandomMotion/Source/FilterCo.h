@@ -31,6 +31,9 @@ public:
    Ris::CmdLineDoubleTable1D  mBandPassB1;
    Ris::CmdLineDoubleTable1D  mBandPassA1;
 
+   int mCode1;
+   int mCode2;
+
    //---------------------------------------------------------------------------
    // Infrastucture. Constructor and such
 
@@ -61,10 +64,10 @@ public:
 
    char mSection[200];
    char mSectionMode[200];
-
-   bool isMySection(Ris::CmdLineCmd* aCmd);
    bool mSectionFlag;
    bool mDefaultSection;
+
+   bool isMySection(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

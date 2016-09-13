@@ -87,10 +87,10 @@ public:
 
    char mSection[200];
    char mSectionMode[200];
-
-   bool isMySection(Ris::CmdLineCmd* aCmd);
    bool mSectionFlag;
    bool mDefaultSection;
+
+   bool isMySection(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

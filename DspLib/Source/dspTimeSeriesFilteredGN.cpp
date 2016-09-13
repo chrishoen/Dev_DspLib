@@ -74,7 +74,7 @@ void TimeSeriesFilteredGN::generate()
    //---------------------------------------------------------------------------
    // Generate filtered guassian noise, allow filter to settle.
 
-   for (int k = 0; k < 200; k++)
+   for (int k = 0; k < 1000; k++)
    {
       // Get noise.
       double tX = getNoise();

@@ -23,6 +23,9 @@ Parms::Parms()
 void Parms::reset()
 {
    mSection[0]=0;
+   mSectionMode[0]=0;
+   mSectionFlag=false;
+   mDefaultSection=false;
 
    mDuration = 10.0;
    mFs = 1.0;
