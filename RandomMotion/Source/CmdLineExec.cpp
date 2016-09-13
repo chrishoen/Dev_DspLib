@@ -69,7 +69,7 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"BandPass1");
+   aCmd->setArgDefault(1,"LowPass1");
 
    gParms.reset();
    gParms.readSection("default");
