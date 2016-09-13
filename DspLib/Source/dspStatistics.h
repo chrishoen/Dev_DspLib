@@ -119,6 +119,7 @@ public:
    void finishTrial();
    void show();
    void show2();
+   void showDeg();
 
    // Put input value
    void put(double aX);

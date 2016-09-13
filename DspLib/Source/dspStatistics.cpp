@@ -12,6 +12,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
+#include "dsp_math.h"
 #include "dspStatistics.h"
 
 namespace Dsp
@@ -384,6 +385,18 @@ void TrialStatistics::show2()
    printf("$$ %12.6f %12.6f\n",
       mEX,
       mUX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::showDeg()
+{
+   printf("%5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
+      mPutCount,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
 }
 
 //******************************************************************************
