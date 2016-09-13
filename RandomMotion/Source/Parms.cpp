@@ -43,7 +43,7 @@ void Parms::reset()
    mAcRandom = 0.0;
    mPcRandom = 0.0;
 
-   strcpy(mOutputFile,"RandomMotion.txt");
+   strcpy(mOutputFile,"Dynamic.txt");
 
    mTs = 1.0 / mFs;
    mNumSamples = (int)(mDuration * mFs);
@@ -157,7 +157,7 @@ bool Parms::readSection(char* aSection)
    char tFilePath[200];
 
    strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\RandomMotionParms.txt");
+   strcat(tFilePath, "..\\..\\Files\\Parms.txt");
 
    // Copy arguments
    strcpy(mSection,aSection);
