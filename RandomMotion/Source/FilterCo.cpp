@@ -92,8 +92,8 @@ void FilterCo::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
-   if (aCmd->isCmd("BandPassB1"))         mBandPassB1.execute(aCmd);
-   if (aCmd->isCmd("BandPassA1"))         mBandPassA1.execute(aCmd);
+   if (aCmd->isCmd("FilterB1"))           mBandPassB1.execute(aCmd);
+   if (aCmd->isCmd("FilterA1"))           mBandPassA1.execute(aCmd);
 
    if(aCmd->isCmd("Code1"        ))       mCode1 = aCmd->argInt(1);
    if(aCmd->isCmd("Code2"        ))       mCode2 = aCmd->argInt(1);

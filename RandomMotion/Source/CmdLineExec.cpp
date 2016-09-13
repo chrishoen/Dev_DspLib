@@ -69,12 +69,14 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1,"BandPass1");
+
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection("run3");
 
    gFilterCo.reset();
-   gFilterCo.readSection("default");
+   gFilterCo.readSection(aCmd->argString(1));
 
    RandomMotion tRandomMotion;
    tRandomMotion.propagate3();
