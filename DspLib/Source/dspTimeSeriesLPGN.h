@@ -29,13 +29,13 @@ public:
    //--------------------------------------------------------------------------
    // Input parameters.
 
-   double  mFp;           // Carrier frequency 
+   double  mFc;           // Carrier frequency 
    double  mAlphaOneAP1;  // Alpha filter constant
 
    //--------------------------------------------------------------------------
    // Extra parameters.
 
-   double  mTp;           // Carrier period
+   double  mTc;           // Carrier period
 
    //******************************************************************************
    //******************************************************************************

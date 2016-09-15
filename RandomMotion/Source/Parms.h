@@ -29,7 +29,7 @@ public:
 
    double  mDuration;     // Trial duration
    double  mFs;           // Sampling frequency
-   double  mFp;           // Carrier frequency 
+   double  mFc;           // Carrier frequency 
 
    double  mEX;           // Desired expectation
    double  mUX;           // Desired uncertainty

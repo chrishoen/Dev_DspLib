@@ -29,7 +29,7 @@ void Parms::reset()
 
    mDuration = 10.0;
    mFs = 1.0;
-   mFp = 1.0;
+   mFc = 1.0;
    mEX = 0.0;
    mUX = 1.0;
 
@@ -61,7 +61,7 @@ void Parms::show()
 
    printf("mDuration    %10.4f\n",mDuration);
    printf("mFs          %10.4f\n",mFs);
-   printf("mFp          %10.4f\n",mFp);
+   printf("mFc          %10.4f\n",mFc);
    printf("mEX          %10.4f\n",mEX);
    printf("mUX          %10.4f\n",mUX);
 
@@ -128,7 +128,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("Duration"    )) mDuration  = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"          )) mFs        = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fp"          )) mFp        = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc"          )) mFc        = aCmd->argDouble(1);
    if(aCmd->isCmd("EX"          )) mEX        = aCmd->argDouble(1);
    if(aCmd->isCmd("UX"          )) mUX        = aCmd->argDouble(1);
 

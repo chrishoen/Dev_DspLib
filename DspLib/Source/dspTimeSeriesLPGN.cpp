@@ -31,8 +31,8 @@ TimeSeriesLPGN::TimeSeriesLPGN()
 void TimeSeriesLPGN::reset()
 {
    BaseClass::reset();
-   mFp = 1.0;
-   mTp = 1.0 / mFp;
+   mFc = 1.0;
+   mTc = 1.0 / mFc;
    mAlphaOneAP1 = 1.0;
 }
 
@@ -45,16 +45,16 @@ void TimeSeriesLPGN::initialize()
 {
    BaseClass::initialize();
 
-   if (mFp != 0.0)
+   if (mFc != 0.0)
    {
-      mTp = 1.0 / mFp;
+      mTc = 1.0 / mFc;
    }
-   else if (mTp != 0.0)
+   else if (mTc != 0.0)
    {
-      mFp = 1.0 / mTp;
+      mFc = 1.0 / mTc;
    }
 
-   mAlphaOneAP1 = mTs/(mTs+mTp);
+   mAlphaOneAP1 = mTs/(mTs+mTc);
    mAlphaOne1.initialize(mAlphaOneAP1);
    mAlphaOne2.initialize(mAlphaOneAP1);
 }
@@ -67,8 +67,8 @@ void TimeSeriesLPGN::initialize()
 void TimeSeriesLPGN::show()
 {
    BaseClass::show();
-   printf("mFp          %10.4f\n",mFp);
-   printf("mTp          %10.4f\n",mTp);
+   printf("mFc          %10.4f\n",mFc);
+   printf("mTc          %10.4f\n",mTc);
 }
 
 //******************************************************************************
