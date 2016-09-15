@@ -1,5 +1,8 @@
-#ifndef _BUTTERWORTHCO_H_
-#define _BUTTERWORTHCO_H_
+#ifndef _DSPBUTTERWORTHCO_H_
+#define _DSPBUTTERWORTHCO_H_
+
+namespace Dsp
+{
 
 //******************************************************************************
 //******************************************************************************
@@ -16,15 +19,15 @@
 // BArray   B coefficients
 // AArray   A coefficients
 
-int butterworthco(
+int butterworthCoLP(
    int     aN,
    double  aFs,
    double  aFc,
    int*    aBSize,
    int*    aASize,
-   double  aBArray[], 
+   double  aBArray[],
    double  aAArray[]);
 
-
+}//namespace
 #endif
 

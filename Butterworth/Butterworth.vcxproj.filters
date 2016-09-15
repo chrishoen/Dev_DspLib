@@ -15,7 +15,7 @@
     <ClCompile Include="Source\MainInit.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ButterworthCo.cpp">
+    <ClCompile Include="Source\dspButterworthCo.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,7 +26,7 @@
     <ClInclude Include="Source\MainInit.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ButterworthCo.h">
+    <ClInclude Include="Source\dspButterworthCo.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -167,13 +167,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\ButterworthCo.cpp" />
+    <ClCompile Include="Source\dspButterworthCo.cpp" />
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\ButterworthCo.h" />
+    <ClInclude Include="Source\dspButterworthCo.h" />
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
   </ItemGroup>

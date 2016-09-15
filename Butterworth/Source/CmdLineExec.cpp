@@ -11,9 +11,9 @@
 #include "CmdLineExec.h"
 
 #include "dsp_math.h"
-#include "ButterworthCo.h"
+#include "dspButterworthCo.h"
 
-using namespace std;
+using namespace Dsp;
 
 //******************************************************************************
 // change101
@@ -54,7 +54,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tB[10];
    double tA[10];
 
-   butterworthco(tN,tFs,tFc,&tNa,&tNb,tB,tA);
+   butterworthCoLP(tN,tFs,tFc,&tNa,&tNb,tB,tA);
 
     printf("Bco %d\n", tNb );
     for (int i = 0; i < tNb; i++)
