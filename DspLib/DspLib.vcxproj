@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\dspButterworthCo.cpp" />
     <ClCompile Include="Source\dspFilterStatistics.cpp" />
     <ClCompile Include="Source\dspFilterAlpha.cpp" />
     <ClCompile Include="Source\dspFilterFilters.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="Source\dsp_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\dspButterworthCo.h" />
     <ClInclude Include="Source\dspFilterStatistics.h" />
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
