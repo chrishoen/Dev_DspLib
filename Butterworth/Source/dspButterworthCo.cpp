@@ -710,9 +710,9 @@ int butterworthCoBP(
     int *ccof;        // c coefficients
 
 
-   n = aN;
+   n = aN/2;
    f1f = 2.0 * aFc1 / aFs;
-   f2f = 2.0 * aFc1 / aFs;
+   f2f = 2.0 * aFc2 / aFs;
 
     /* calculate the d coefficients */
     dcof = dcof_bwbp( n, f1f, f2f );

@@ -75,7 +75,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   int tN = 4;
+   int tN = 2;
    double tFs = 100.0;
    double tFc1 =   0.25;
    double tFc2 =   1.00;
