@@ -7,7 +7,7 @@
 // Calculate low pass butterwoth filter coefficients.
 // H(z) = B(z)/A(z)
 //
-// N        Filter order
+// N        Filter order 2,4,6..
 // Fs       Sampling frequency
 // Fc       Cutoff frequency
 //

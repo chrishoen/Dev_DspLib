@@ -598,7 +598,7 @@ double sf_bwbs( int n, double f1f, double f2f )
 // Calculate low pass butterwoth filter coefficients.
 // H(z) = B(z)/A(z)
 //
-// N        Filter order
+// N        Filter order 2,4,6..
 // Fs       Sampling frequency
 // Fc       Cutoff frequency
 // BSize    Number of B coefficients
