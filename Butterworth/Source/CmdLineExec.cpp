@@ -48,11 +48,8 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    int tN = 4;
    double tFs = 100.0;
    double tFc =   0.1;
-   char tFilePath[100];
-   strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\ButterworthCo.txt");
 
-   butterworthco(tN,tFs,tFc,false,tFilePath);
+   butterworthco(tN,tFs,tFc,false);
 }
 
 //******************************************************************************

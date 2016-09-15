@@ -603,7 +603,7 @@ double sf_bwbs( int n, double f1f, double f2f )
 // sf = 0 to not scale c coefficients\n");
 // outfile = output file name\n");
 
-int butterworthco(int aN,double aFs, double aFc, bool aScale, char* aOutputfile)
+int butterworthco(int aN,double aFs, double aFc, bool aScale)
 {
     int n;            // filter order
     int sff;          // scale flag: 1 to scale, 0 to not scale ccof
@@ -612,7 +612,6 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale, char* aOutputfile)
     double sf;        // scaling factor
     double *dcof;     // d coefficients
     int *ccof;        // c coefficients
-    FILE *fp;         // output file
 
 
     n = aN;
@@ -637,36 +636,27 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale, char* aOutputfile)
 
     sf = sf_bwlp( n, fcf ); /* scaling factor for the c coefficients */
 
-    /* create the filter coefficient file */
-    fp = fopen(aOutputfile, "w");
-    if( fp == 0 )
-    {
-	perror( "Unable to open output file" );
-	return(-1);
-    }
-
     /* Output the file header */
-    fprintf( fp, "# Butterworth lowpass filter coefficients.\n" );
-    fprintf( fp, "# Produced by bwlp.\n" );
-    fprintf( fp, "# Filter order: %d\n", n );
-    fprintf( fp, "# Cutoff freq.: %1.15lf\n", fcf );
-    fprintf( fp, "# Scaling factor: %1.15lf\n", sf );
+    printf("# Butterworth lowpass filter coefficients.\n" );
+    printf("# Produced by bwlp.\n" );
+    printf("# Filter order: %d\n", n );
+    printf("# Cutoff freq.: %1.15lf\n", fcf );
+    printf("# Scaling factor: %1.15lf\n", sf );
 
     /* Output the c coefficients */
-    fprintf( fp, "%d\n", n+1 ); /* number of c coefficients */
+    printf("Bco %d\n", n+1 ); /* number of c coefficients */
     if( sff == 0 )
         for( i = 0; i <= n; ++i)
-	    fprintf( fp, "%d\n", ccof[i] );
+           printf("%d\n", ccof[i] );
     else
         for( i = 0; i <= n; ++i)
-	    fprintf( fp, "%1.15lf\n", (double)ccof[i]*sf );
+           printf("%1.15lf\n", (double)ccof[i]*sf );
 
     /* Output the d coefficients */
-    fprintf( fp, "%d\n", n+1 );  /* number of d coefficients */
+    printf("Aco %d\n", n+1 );  /* number of d coefficients */
     for( i = 0; i <= n; ++i )
-	fprintf( fp, "%1.12lf\n", dcof[i] );
+      printf("%1.12lf\n", dcof[i] );
 
-    fclose( fp );
     free( dcof );
     free( ccof );
 }

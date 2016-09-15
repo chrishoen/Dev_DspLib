@@ -9,7 +9,7 @@
 // s sampling frequency
 // f half power cutoff frequency
 
-int butterworthco(int aN,double aFs, double aFc, bool aScale, char* aOutputfile);
+int butterworthco(int aN,double aFs, double aFc, bool aScale);
 
 #endif
 
