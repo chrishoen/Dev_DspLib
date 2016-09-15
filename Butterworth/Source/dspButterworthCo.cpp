@@ -667,6 +667,90 @@ int butterworthCoLP(
 
    free(dcof);
    free(ccof);
+   return(0);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate bandpass butterwoth filter coefficients.
+// H(z) = B(z)/A(z)
+//
+// N        Filter order 2,4,6..
+// Fs       Sampling frequency
+// Fc1      Cutoff frequency
+// Fc2      Cutoff frequency
+// BSize    Number of B coefficients
+// ASize    Number of A coefficients
+// BArray   B coefficients
+// AArray   A coefficients
+
+int butterworthCoBP(
+   int     aN,
+   double  aFs,
+   double  aFc1,
+   double  aFc2,
+   int*    aBSize,
+   int*    aASize,
+   double  aBArray[],
+   double  aAArray[])
+{
+    int n;            // filter order
+    int i;            // loop variables
+    double f1f;       // lower cutoff frequency (fraction of pi)
+    double f2f;       // upper cutoff frequency (fraction of pi)
+    double sf;        // scaling factor
+    double *dcof;     // d coefficients
+    int *ccof;        // c coefficients
+
+
+   n = aN;
+   f1f = 2.0 * aFc1 / aFs;
+   f2f = 2.0 * aFc1 / aFs;
+
+    /* calculate the d coefficients */
+    dcof = dcof_bwbp( n, f1f, f2f );
+    if( dcof == NULL )
+    {
+        perror( "Unable to calculate d coefficients" );
+        return(-1);
+    }
+
+    /* calculate the c coefficients */
+    ccof = ccof_bwbp( n );
+    if( ccof == NULL )
+    {
+        perror( "Unable to calculate c coefficients" );
+        return(-1);
+    }
+    sf = sf_bwbp( n, f1f, f2f ); /* scaling factor for the c BBB coefficients */
+
+    /* Output the c coefficients */
+   *aBSize = 2*n + 1;
+   for (i = 0; i <= 2 * n; ++i)
+   {
+//    printf("%1.15lf\n", (double)ccof[i] * sf);
+      aBArray[i] = (double)ccof[i] * sf;
+   }
+
+    /* Output the d coefficients */
+   *aASize = 2*n + 1;
+   for (i = 0; i <= 2 * n; ++i)
+   {
+//    printf("%1.15lf\n", dcof[i]);
+      aAArray[i] = (double)dcof[i];
+   }
+
+
+    free( dcof );
+    free( ccof );
+   return(0);
 }
 
 }//namespace

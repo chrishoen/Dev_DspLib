@@ -67,7 +67,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
     {
        printf("%1.15lf\n", tA[i]);
     }
-
 }
 
 //******************************************************************************
@@ -76,13 +75,29 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,45.0);
+   int tN = 4;
+   double tFs = 100.0;
+   double tFc1 =   0.25;
+   double tFc2 =   1.00;
 
-   double tAdeg = aCmd->argDouble(1);
-   double tArad = dsp_rad(tAdeg);
+   int tNa=0;
+   int tNb=0;
+   double tB[10];
+   double tA[10];
 
+   butterworthCoBP(tN,tFs,tFc1,tFc2,&tNa,&tNb,tB,tA);
 
-   Prn::print(0, "%8.7f %8.7f",tAdeg,tArad);
+    printf("Bco %d\n", tNb );
+    for (int i = 0; i < tNb; i++)
+    {
+       printf("%1.15lf\n", tB[i]);
+    }
+
+    printf("Aco %d\n", tNa );
+    for (int i = 0; i < tNa; i++)
+    {
+       printf("%1.15lf\n", tA[i]);
+    }
 }
 
 //******************************************************************************
