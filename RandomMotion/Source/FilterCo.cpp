@@ -27,8 +27,8 @@ void FilterCo::reset()
    mSectionFlag=false;
    mDefaultSection=false;
 
-   mBandPassB1.initialize(5);
-   mBandPassA1.initialize(5);
+   mFilterB1.initialize(5);
+   mFilterA1.initialize(5);
    mCode1=0;
    mCode2=0;
 }
@@ -37,8 +37,8 @@ void FilterCo::show()
 {
    printf("FilterCo ******* %s\n", mSection);
 
-   mBandPassB1.show("BandPassB1");
-   mBandPassA1.show("BandPassA1");
+   mFilterB1.show("FilterB1");
+   mFilterA1.show("FilterA1");
 
    printf("Code1      %10d\n",  mCode1);
    printf("Code2      %10d\n",  mCode2);
@@ -92,8 +92,8 @@ void FilterCo::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
-   if (aCmd->isCmd("FilterB1"))           mBandPassB1.execute(aCmd);
-   if (aCmd->isCmd("FilterA1"))           mBandPassA1.execute(aCmd);
+   if (aCmd->isCmd("FilterB1"))           mFilterB1.execute(aCmd);
+   if (aCmd->isCmd("FilterA1"))           mFilterA1.execute(aCmd);
 
    if(aCmd->isCmd("Code1"        ))       mCode1 = aCmd->argInt(1);
    if(aCmd->isCmd("Code2"        ))       mCode2 = aCmd->argInt(1);

@@ -29,21 +29,12 @@ public:
 
    double  mDuration;     // Trial duration
    double  mFs;           // Sampling frequency
-   double  mFc;           // Carrier frequency 
+   double  mFc;           // Cutoff frequency 
+   double  mFc1;          // Cutoff frequency 
+   double  mFc2;          // Cutoff frequency 
 
    double  mEX;           // Desired expectation
    double  mUX;           // Desired uncertainty
-
-   double  mFc1;          // Carrier frequency 
-   double  mFc2;          // Carrier frequency 
-   double  mAc1;          // Carrier amplitude 
-   double  mAc2;          // Carrier amplitude 
-   double  mPc1;          // Carrier phase 
-   double  mPc2;          // Carrier phase 
-
-   double  mFcRandom;     // Carrier frequency randomize
-   double  mAcRandom;     // Carrier amplitude randomize
-   double  mPcRandom;     // Carrier phase randomize
 
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];

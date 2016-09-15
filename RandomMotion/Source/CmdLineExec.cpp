@@ -55,13 +55,6 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"run21");
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection(aCmd->argString(1));
-
-   RandomMotion tRandomMotion;
-   tRandomMotion.propagate2();
 }
 
 //******************************************************************************

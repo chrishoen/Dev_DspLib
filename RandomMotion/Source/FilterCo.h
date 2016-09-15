@@ -28,8 +28,8 @@ public:
    //---------------------------------------------------------------------------
    // Filter coefficients tables.
 
-   Ris::CmdLineDoubleTable1D  mBandPassB1;
-   Ris::CmdLineDoubleTable1D  mBandPassA1;
+   Ris::CmdLineDoubleTable1D  mFilterB1;
+   Ris::CmdLineDoubleTable1D  mFilterA1;
 
    int mCode1;
    int mCode2;
