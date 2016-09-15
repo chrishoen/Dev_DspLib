@@ -52,6 +52,7 @@ void RandomMotion::propagate1()
    tTime->generate();
 
    tSeries->mDuration   =     gParms.mDuration;
+   tSeries->mN          =     4;
    tSeries->mFs         =     gParms.mFs;
    tSeries->mFc         =     gParms.mFc;
    tSeries->mEX         =     gParms.mEX;

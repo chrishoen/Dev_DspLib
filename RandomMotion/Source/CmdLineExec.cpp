@@ -93,6 +93,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
    gParms.reset();
    gParms.readSection("default");
+   gParms.readSection("run1");
    gParms.show();
 }
 

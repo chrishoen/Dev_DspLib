@@ -9,7 +9,7 @@
 //******************************************************************************
 
 #include "dspTimeSeriesBaseGN.h"
-#include "dspFilterAlpha.h"
+#include "dspFilterButterworth.h"
 
 namespace Dsp
 {
@@ -29,21 +29,15 @@ public:
    //--------------------------------------------------------------------------
    // Input parameters.
 
-   double  mFc;           // Carrier frequency 
-   double  mAlphaOneAP1;  // Alpha filter constant
-
-   //--------------------------------------------------------------------------
-   // Extra parameters.
-
-   double  mTc;           // Carrier period
+   int    mN;
+   double mFc; 
 
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
    // Low pass filter
 
-   Filter::AlphaOne mAlphaOne1;
-   Filter::AlphaOne mAlphaOne2;
+   Filter::ButterworthLP mFilter;
 
    //--------------------------------------------------------------------------
    // Constructor and initialization.

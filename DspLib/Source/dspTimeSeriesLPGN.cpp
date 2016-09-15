@@ -31,9 +31,8 @@ TimeSeriesLPGN::TimeSeriesLPGN()
 void TimeSeriesLPGN::reset()
 {
    BaseClass::reset();
-   mFc = 1.0;
-   mTc = 1.0 / mFc;
-   mAlphaOneAP1 = 1.0;
+   mN = 2;
+   mFc = 1.0; 
 }
 
 //******************************************************************************
@@ -45,18 +44,7 @@ void TimeSeriesLPGN::initialize()
 {
    BaseClass::initialize();
 
-   if (mFc != 0.0)
-   {
-      mTc = 1.0 / mFc;
-   }
-   else if (mTc != 0.0)
-   {
-      mFc = 1.0 / mTc;
-   }
-
-   mAlphaOneAP1 = mTs/(mTs+mTc);
-   mAlphaOne1.initialize(mAlphaOneAP1);
-   mAlphaOne2.initialize(mAlphaOneAP1);
+   mFilter.initialize(mN,mFs,mFc);
 }
    
 //******************************************************************************
@@ -67,8 +55,9 @@ void TimeSeriesLPGN::initialize()
 void TimeSeriesLPGN::show()
 {
    BaseClass::show();
+   printf("mN           %10d\n",  mN);
    printf("mFc          %10.4f\n",mFc);
-   printf("mTc          %10.4f\n",mTc);
+   mFilter.show();
 }
 
 //******************************************************************************
@@ -92,9 +81,8 @@ void TimeSeriesLPGN::generate()
       double tX = getNoise();
 
       // Low pass filter the noise.
-      mAlphaOne1.put(tX);
-      mAlphaOne2.put(mAlphaOne1.mXX);
-      mX[k] = mAlphaOne2.mXX;
+      mFilter.put(tX);
+      mX[k] = mFilter.mY;
    }
 
    //---------------------------------------------------------------------------
