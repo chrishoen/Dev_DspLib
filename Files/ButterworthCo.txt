@@ -1,0 +1,17 @@
+# Butterworth lowpass filter coefficients.
+# Produced by bwlp.
+# Filter order: 4
+# Cutoff freq.: 0.002000000000000
+# Scaling factor: 0.000000000096614
+5
+1
+4
+6
+4
+1
+5
+1.000000000000
+-3.983581258659
+5.950878429267
+-3.951012436573
+0.983715267510
