@@ -7,22 +7,22 @@
 // Calculate low pass butterwoth filter coefficients.
 // H(z) = B(z)/A(z)
 //
-// N      Filter order
-// Fs     Sampling frequency
-// Fc     Cutoff frequency
-// Nb     Number of B coefficients
-// Na     Number of A coefficients
-// B      B coefficients
-// A      A coefficients
+// N        Filter order
+// Fs       Sampling frequency
+// Fc       Cutoff frequency
+// BSize    Number of B coefficients
+// ASize    Number of A coefficients
+// BArray   B coefficients
+// AArray   A coefficients
 
 int butterworthco(
    int     aN,
    double  aFs,
    double  aFc,
-   int*    aNb,
-   int*    aNa,
-   double* aB, 
-   double* aA);
+   int*    aBSize,
+   int*    aASize,
+   double* aBArray, 
+   double* aAArray);
 
 
 #endif

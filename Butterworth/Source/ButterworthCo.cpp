@@ -598,25 +598,22 @@ double sf_bwbs( int n, double f1f, double f2f )
 // Calculate low pass butterwoth filter coefficients.
 // H(z) = B(z)/A(z)
 //
-// N      Filter order
-// Fs     Sampling frequency
-// Fc     Cutoff frequency
-// Nb     Number of B coefficients
-// Na     Number of A coefficients
-// B      B coefficients
-// A      A coefficients
-//
-// C is B
-// D is A
+// N        Filter order
+// Fs       Sampling frequency
+// Fc       Cutoff frequency
+// BSize    Number of B coefficients
+// ASize    Number of A coefficients
+// BArray   B coefficients
+// AArray   A coefficients
 
 int butterworthco(
    int     aN,
-   double  aFs, 
+   double  aFs,
    double  aFc,
-   int*    aNb,
-   int*    aNa,
-   double* aB,
-   double* aA)
+   int*    aBSize,
+   int*    aASize,
+   double* aBArray, 
+   double* aAArray)
 {
     int n;            // filter order
     int sff;          // scale flag: 1 to scale, 0 to not scale ccof
@@ -650,20 +647,20 @@ int butterworthco(
 
     /* Output the c BBB coefficients */
 //  printf("Bco %d\n", n+1 ); /* number of c BBB coefficients */
-    *aNb = n+1;
+    *aBSize = n+1;
     for (i = 0; i <= n; ++i)
     {
 //     printf("%1.15lf\n", (double)ccof[i] * sf);
-       aB[i] = (double)ccof[i] * sf;
+       aBArray[i] = (double)ccof[i] * sf;
     }
 
     /* Output the d AAA coefficients */
 //  printf("Aco %d\n", n+1 );  /* number of d AAA coefficients */
-    *aNa = n+1;
+    *aASize = n+1;
     for (i = 0; i <= n; ++i)
     {
 //     printf("%1.12lf\n", dcof[i]);
-       aA[i] = dcof[i];
+       aAArray[i] = dcof[i];
     }
 
     free( dcof );
