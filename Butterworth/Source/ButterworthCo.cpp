@@ -595,13 +595,17 @@ double sf_bwbs( int n, double f1f, double f2f )
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// calculates Butterworth lowpass filter coefficients\n");
-// Usage: bwlp n fc sf outfile\n");
-// n = order of the filter\n");
-// fc = filter cutoff frequency as a fraction of Pi [0,1]\n");
-// sf = 1 to scale c coefficients for normalized response\n");
-// sf = 0 to not scale c coefficients\n");
-// outfile = output file name\n");
+// Calculate low pass butterwoth filter coefficients.
+// H(z) = B(z)/A(z)
+//
+// N      Filter order
+// Fs     Sampling frequency
+// Fc     Cutoff frequency
+// Nb     Number of B coefficients
+// Na     Number of A coefficients
+// B      B coefficients
+// A      A coefficients
+//
 // C is B
 // D is A
 
@@ -644,28 +648,21 @@ int butterworthco(
 
     sf = sf_bwlp( n, fcf ); /* scaling factor for the c BBB coefficients */
 
-    /* Output the file header */
-    printf("# Butterworth lowpass filter coefficients.\n" );
-    printf("# Produced by bwlp.\n" );
-    printf("# Filter order: %d\n", n );
-    printf("# Cutoff freq.: %1.15lf\n", fcf );
-    printf("# Scaling factor: %1.15lf\n", sf );
-
     /* Output the c BBB coefficients */
-    printf("Bco %d\n", n+1 ); /* number of c BBB coefficients */
+//  printf("Bco %d\n", n+1 ); /* number of c BBB coefficients */
     *aNb = n+1;
     for (i = 0; i <= n; ++i)
     {
-       printf("%1.15lf\n", (double)ccof[i] * sf);
+//     printf("%1.15lf\n", (double)ccof[i] * sf);
        aB[i] = (double)ccof[i] * sf;
     }
 
     /* Output the d AAA coefficients */
-    printf("Aco %d\n", n+1 );  /* number of d AAA coefficients */
+//  printf("Aco %d\n", n+1 );  /* number of d AAA coefficients */
     *aNa = n+1;
     for (i = 0; i <= n; ++i)
     {
-       printf("%1.12lf\n", dcof[i]);
+//     printf("%1.12lf\n", dcof[i]);
        aA[i] = dcof[i];
     }
 
