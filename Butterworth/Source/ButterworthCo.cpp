@@ -612,11 +612,10 @@ int butterworthco(
    double  aFc,
    int*    aBSize,
    int*    aASize,
-   double* aBArray, 
-   double* aAArray)
+   double  aBArray[], 
+   double  aAArray[])
 {
     int n;            // filter order
-    int sff;          // scale flag: 1 to scale, 0 to not scale ccof
     int i;            // loop variables
     double fcf;       // cutoff frequency (fraction of pi)
     double sf;        // scaling factor

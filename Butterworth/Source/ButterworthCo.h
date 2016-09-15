@@ -10,6 +10,7 @@
 // N        Filter order
 // Fs       Sampling frequency
 // Fc       Cutoff frequency
+//
 // BSize    Number of B coefficients
 // ASize    Number of A coefficients
 // BArray   B coefficients
@@ -21,8 +22,8 @@ int butterworthco(
    double  aFc,
    int*    aBSize,
    int*    aASize,
-   double* aBArray, 
-   double* aAArray);
+   double  aBArray[], 
+   double  aAArray[]);
 
 
 #endif
