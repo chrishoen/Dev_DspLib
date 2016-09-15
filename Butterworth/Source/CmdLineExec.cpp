@@ -54,7 +54,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tB[10];
    double tA[10];
 
-   butterworthCoLP(tN,tFs,tFc,&tNa,&tNb,tB,tA);
+   butterworthCoLP(tN,tFs,tFc,&tNb,&tNa,tB,tA);
 
     printf("Bco %d\n", tNb );
     for (int i = 0; i < tNb; i++)
@@ -85,7 +85,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    double tB[10];
    double tA[10];
 
-   butterworthCoBP(tN,tFs,tFc1,tFc2,&tNa,&tNb,tB,tA);
+   butterworthCoBP(tN,tFs,tFc1,tFc2,&tNb,&tNa,tB,tA);
 
     printf("Bco %d\n", tNb );
     for (int i = 0; i < tNb; i++)

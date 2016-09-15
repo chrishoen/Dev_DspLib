@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\dspButterworthCo.cpp" />
+    <ClCompile Include="Source\dspFilterButterworth.cpp" />
     <ClCompile Include="Source\dspFilterStatistics.cpp" />
     <ClCompile Include="Source\dspFilterAlpha.cpp" />
     <ClCompile Include="Source\dspFilterFilters.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspButterworthCo.h" />
+    <ClInclude Include="Source\dspFilterButterworth.h" />
     <ClInclude Include="Source\dspFilterStatistics.h" />
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
