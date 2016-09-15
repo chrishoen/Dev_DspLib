@@ -49,7 +49,25 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tFs = 100.0;
    double tFc =   0.1;
 
-   butterworthco(tN,tFs,tFc);
+   int tNa=0;
+   int tNb=0;
+   double tB[10];
+   double tA[10];
+
+   butterworthco(tN,tFs,tFc,&tNa,&tNb,tB,tA);
+
+    printf("Bco %d\n", tNb );
+    for (int i = 0; i < tNb; i++)
+    {
+       printf("%1.15lf\n", tB[i]);
+    }
+
+    printf("Aco %d\n", tNa );
+    for (int i = 0; i < tNa; i++)
+    {
+       printf("%1.15lf\n", tA[i]);
+    }
+
 }
 
 //******************************************************************************

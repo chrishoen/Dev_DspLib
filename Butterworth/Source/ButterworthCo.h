@@ -9,7 +9,15 @@
 // s sampling frequency
 // f half power cutoff frequency
 
-int butterworthco(int aN,double aFs, double aFc);
+int butterworthco(
+   int     aN,
+   double  aFs, 
+   double  aFc,
+   int*    aNb,
+   int*    aNa,
+   double* aB,
+   double* aA);
+
 
 #endif
 

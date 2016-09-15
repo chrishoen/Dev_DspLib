@@ -605,7 +605,14 @@ double sf_bwbs( int n, double f1f, double f2f )
 // C is B
 // D is A
 
-int butterworthco(int aN,double aFs, double aFc)
+int butterworthco(
+   int     aN,
+   double  aFs, 
+   double  aFc,
+   int*    aNb,
+   int*    aNa,
+   double* aB,
+   double* aA)
 {
     int n;            // filter order
     int sff;          // scale flag: 1 to scale, 0 to not scale ccof
@@ -646,16 +653,20 @@ int butterworthco(int aN,double aFs, double aFc)
 
     /* Output the c BBB coefficients */
     printf("Bco %d\n", n+1 ); /* number of c BBB coefficients */
+    *aNb = n+1;
     for (i = 0; i <= n; ++i)
     {
        printf("%1.15lf\n", (double)ccof[i] * sf);
+       aB[i] = (double)ccof[i] * sf;
     }
 
     /* Output the d AAA coefficients */
     printf("Aco %d\n", n+1 );  /* number of d AAA coefficients */
+    *aNa = n+1;
     for (i = 0; i <= n; ++i)
     {
        printf("%1.12lf\n", dcof[i]);
+       aA[i] = dcof[i];
     }
 
     free( dcof );
