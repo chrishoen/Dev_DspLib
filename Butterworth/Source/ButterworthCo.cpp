@@ -602,8 +602,10 @@ double sf_bwbs( int n, double f1f, double f2f )
 // sf = 1 to scale c coefficients for normalized response\n");
 // sf = 0 to not scale c coefficients\n");
 // outfile = output file name\n");
+// C is B
+// D is A
 
-int butterworthco(int aN,double aFs, double aFc, bool aScale)
+int butterworthco(int aN,double aFs, double aFc)
 {
     int n;            // filter order
     int sff;          // scale flag: 1 to scale, 0 to not scale ccof
@@ -616,9 +618,8 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale)
 
     n = aN;
     fcf = 2.0 * aFc/aFs;
-    sff = aScale?1:0;
 
-    /* calculate the d coefficients */
+    /* calculate the d coefficients AAA*/
     dcof = dcof_bwlp( n, fcf );
     if( dcof == NULL )
     {
@@ -626,7 +627,7 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale)
         return(-1);
     }
 
-    /* calculate the c coefficients */
+    /* calculate the c BBB coefficients */
     ccof = ccof_bwlp( n );
     if( ccof == NULL )
     {
@@ -634,7 +635,7 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale)
         return(-1);
     }
 
-    sf = sf_bwlp( n, fcf ); /* scaling factor for the c coefficients */
+    sf = sf_bwlp( n, fcf ); /* scaling factor for the c BBB coefficients */
 
     /* Output the file header */
     printf("# Butterworth lowpass filter coefficients.\n" );
@@ -643,19 +644,19 @@ int butterworthco(int aN,double aFs, double aFc, bool aScale)
     printf("# Cutoff freq.: %1.15lf\n", fcf );
     printf("# Scaling factor: %1.15lf\n", sf );
 
-    /* Output the c coefficients */
-    printf("Bco %d\n", n+1 ); /* number of c coefficients */
-    if( sff == 0 )
-        for( i = 0; i <= n; ++i)
-           printf("%d\n", ccof[i] );
-    else
-        for( i = 0; i <= n; ++i)
-           printf("%1.15lf\n", (double)ccof[i]*sf );
+    /* Output the c BBB coefficients */
+    printf("Bco %d\n", n+1 ); /* number of c BBB coefficients */
+    for (i = 0; i <= n; ++i)
+    {
+       printf("%1.15lf\n", (double)ccof[i] * sf);
+    }
 
-    /* Output the d coefficients */
-    printf("Aco %d\n", n+1 );  /* number of d coefficients */
-    for( i = 0; i <= n; ++i )
-      printf("%1.12lf\n", dcof[i] );
+    /* Output the d AAA coefficients */
+    printf("Aco %d\n", n+1 );  /* number of d AAA coefficients */
+    for (i = 0; i <= n; ++i)
+    {
+       printf("%1.12lf\n", dcof[i]);
+    }
 
     free( dcof );
     free( ccof );

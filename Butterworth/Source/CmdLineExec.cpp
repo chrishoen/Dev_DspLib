@@ -49,7 +49,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tFs = 100.0;
    double tFc =   0.1;
 
-   butterworthco(tN,tFs,tFc,false);
+   butterworthco(tN,tFs,tFc);
 }
 
 //******************************************************************************
