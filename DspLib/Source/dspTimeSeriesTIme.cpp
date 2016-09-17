@@ -24,6 +24,7 @@ namespace Dsp
 
 TimeSeriesTime::TimeSeriesTime()
 {
+   mT=0;
    reset();
 }
 
@@ -49,6 +50,8 @@ void TimeSeriesTime::reset()
 
 void TimeSeriesTime::initialize()
 {
+   if (mT) delete mT;
+
    if (mFs != 0.0)
    {
       mTs = 1.0 / mFs;
@@ -61,7 +64,6 @@ void TimeSeriesTime::initialize()
    mNumSamples = (int)(mDuration * mFs);
    mT = new double[mNumSamples];
 }
-   
 
 //******************************************************************************
 //******************************************************************************

@@ -25,6 +25,7 @@ namespace Dsp
 
 TimeSeriesBase::TimeSeriesBase()
 {
+   mX=0;
    reset();
 }
 
@@ -53,6 +54,8 @@ void TimeSeriesBase::reset()
 
 void TimeSeriesBase::initialize()
 {
+   if (mX) delete mX;
+
    if (mFs != 0.0)
    {
       mTs = 1.0 / mFs;

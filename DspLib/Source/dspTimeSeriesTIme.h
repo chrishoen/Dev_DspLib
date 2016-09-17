@@ -45,9 +45,6 @@ public:
    void reset();
    void initialize();
 
-   // Get noise from random distribution.
-   double getNoise();
-
    //--------------------------------------------------------------------------
    // Generate the signal series history.
 
