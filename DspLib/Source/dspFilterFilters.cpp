@@ -33,12 +33,27 @@ MovingAverage::MovingAverage()
 {
    mEArray = 0;
    mUArray = 0;
-   finalize();
+   reset();
 }
 
 MovingAverage::~MovingAverage()
 {
    finalize();
+}
+
+//******************************************************************************
+
+void MovingAverage::reset()
+{
+   mX=0.0;
+   mEX=0.0;
+   mUX=0.0;
+   mCount=0;
+   mK=0;
+   mIndex=mSize-1;
+   mESum=0;
+   mUSum=0;
+   mValid=false;
 }
 
 void MovingAverage::initialize(int aSize)
@@ -54,11 +69,6 @@ void MovingAverage::initialize(int aSize)
    mCount=0;
    mK=0;
    mIndex=mSize-1;
-   for(int i=0;i<mSize;i++)
-   {
-      mEArray[i]=0.0;
-      mUArray[i]=0.0;
-   }
    mESum=0;
    mUSum=0;
    mValid=false;
@@ -78,25 +88,6 @@ void MovingAverage::finalize()
       delete[] mUArray;
       mUArray=0;
    }
-}
-
-//******************************************************************************
-void MovingAverage::reset()
-{
-   mX=0.0;
-   mEX=0.0;
-   mUX=0.0;
-   mCount=0;
-   mK=0;
-   mIndex=mSize-1;
-   for(int i=0;i<mSize;i++)
-   {
-      mEArray[i]=0.0;
-      mUArray[i]=0.0;
-   }
-   mESum=0;
-   mUSum=0;
-   mValid=false;
 }
 
 //******************************************************************************
@@ -165,28 +156,63 @@ void MovingAverage::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-void ShiftRegister::initialize(int aSize)
+ShiftRegister::ShiftRegister()
 {
-   if (aSize > MaxShiftRegisterSize) aSize = MaxShiftRegisterSize;
-   if (aSize < 0) aSize=0;
-   mSize=aSize;
    reset();
 }
 
 //******************************************************************************
 
-void ShiftRegister::reset() 
+ShiftRegister::~ShiftRegister()
 {
-   mX=0.0;
-   mCount=0;
-   mIndex=mSize-1;
+   finalize();
+}
+
+//******************************************************************************
+
+void ShiftRegister::reset()
+{
+   mArray = 0;
+   mSize  = 0;
+   mCount = 0;
+   mIndex = 0;
+   mK     = 0;
+}
+
+//******************************************************************************
+
+void ShiftRegister::initialize(int aSize)
+{
+   finalize();
+   reset();
+   mArray = new double[aSize];
+   mSize  = aSize;
+   mCount = 0;
+   mIndex = mSize-1;
    mK = 0;
-   for(int i=0;i<mSize;i++)
+}
+
+//******************************************************************************
+
+void ShiftRegister::reinitialize()
+{
+   mCount = 0;
+   mIndex = mSize-1;
+   mK = 0;
+}
+
+//******************************************************************************
+
+void ShiftRegister::finalize()
+{
+   if (mArray)
    {
-      mArray[i]=0.0;
+      delete mArray;
+      mArray = 0;
    }
-   mValid=false;
 }
 
 //******************************************************************************
@@ -282,18 +308,54 @@ void ShiftRegister::show()
 //******************************************************************************
 //******************************************************************************
 
-void FIRFilter::initialize(int aSize)
+//******************************************************************************
+
+FIRFilter::FIRFilter()
 {
-   for (int i=0;i<mXSR.mSize;i++) mBArray[i]=0.0;
-   mXSR.initialize(aSize);
    reset();
 }
 
 //******************************************************************************
 
-void FIRFilter::reset() 
+FIRFilter::~FIRFilter()
 {
+   finalize();
+}
+
+//******************************************************************************
+
+void FIRFilter::reset()
+{
+   mX      = 0.0;
+   mY      = 0.0;
+   mBSize  = 0;
+   mValid  = false;
+   mBArray = 0;
    mXSR.reset();
+}
+
+//******************************************************************************
+
+void FIRFilter::initialize(int aBSize)
+{
+   finalize();
+   reset();
+   mBSize  = aBSize;
+   mBArray = new double[aBSize];
+   for (int i=0;i<aBSize;i++) mBArray[i]=0.0;
+   mXSR.initialize(aBSize);
+}
+
+//******************************************************************************
+
+void FIRFilter::finalize()
+{
+   if (mBArray)
+   {
+      delete mBArray;
+      mBArray = 0;
+   }
+   mXSR.finalize();
 }
 
 //******************************************************************************
@@ -358,26 +420,82 @@ void FIRTestFilter::initialize()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+
+IIRFilter::IIRFilter()
+{
+   reset();
+}
+
+//******************************************************************************
+
+IIRFilter::~IIRFilter()
+{
+   finalize();
+}
+
+//******************************************************************************
+
+void IIRFilter::reset()
+{
+   mX      = 0.0;
+   mY      = 0.0;
+   mBSize  = 0;
+   mValid  = false;
+   mBArray = 0;
+   mAArray = 0;
+   mXSR.reset();
+   mYSR.reset();
+}
+
+//******************************************************************************
 
 void IIRFilter::initialize(int aBSize, int aASize)
 {
+   finalize();
+   reset();
    mBSize = aBSize;
    mASize = aASize;
+   mBArray = new double[aBSize];
+   mAArray = new double[aASize];
    for (int i = 0; i<aBSize; i++) mBArray[i] = 0.0;
    for (int i = 0; i<aASize; i++) mAArray[i] = 0.0;
    mXSR.initialize(aBSize);
    mYSR.initialize(aASize);
 }
 
+//******************************************************************************
+
 void IIRFilter::initialize(int aBSize, int aASize, double aBArray[], double aAArray[])
 {
+   finalize();
+   reset();
    mBSize = aBSize;
    mASize = aASize;
+   mBArray = new double[aBSize];
+   mAArray = new double[aASize];
    for (int i=0; i<aBSize; i++) mBArray[i] = aBArray[i];
    for (int i=0; i<aASize; i++) mAArray[i] = aAArray[i];
-
    mXSR.initialize(aBSize);
    mYSR.initialize(aASize);
+}
+
+//******************************************************************************
+
+void IIRFilter::finalize()
+{
+   if (mBArray)
+   {
+      delete mBArray;
+      mBArray = 0;
+   }
+   if (mAArray)
+   {
+      delete mAArray;
+      mAArray = 0;
+   }
+   mXSR.finalize();
+   mYSR.finalize();
 }
 
 //******************************************************************************

@@ -29,7 +29,7 @@ class ButterworthLP : public IIRFilter
 {
 public:
    // Initialize
-   void initialize(int aN, double aFs, double aFc);
+   void initialize(int aNOrder, double aFs, double aFc);
 };
 
 //******************************************************************************
@@ -46,7 +46,7 @@ class ButterworthBP : public IIRFilter
 {
 public:
    // Initialize
-   void initialize(int aN, double aFs, double aFc1, double aFc2);
+   void initialize(int aNOrder, double aFs, double aFc1, double aFc2);
 };
 
 }//namespace

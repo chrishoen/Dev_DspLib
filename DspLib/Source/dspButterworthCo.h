@@ -28,6 +28,11 @@ int butterworthCoLP(
    double  aBArray[],
    double  aAArray[]);
 
+int butterworthCoLPSize(
+   int     aN,
+   int*    aBSize,
+   int*    aASize);
+
 
 //******************************************************************************
 //******************************************************************************
@@ -53,6 +58,11 @@ int butterworthCoBP(
    int*    aASize,
    double  aBArray[],
    double  aAArray[]);
+
+int butterworthCoBPSize(
+   int     aN,
+   int*    aBSize,
+   int*    aASize);
 
 }//namespace
 #endif

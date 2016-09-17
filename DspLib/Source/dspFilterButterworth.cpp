@@ -27,24 +27,32 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 
-void ButterworthLP::initialize(int aN, double aFs, double aFc)
+void ButterworthLP::initialize(int aNOrder, double aFs, double aFc)
 {
-   butterworthCoLP(aN,aFs,aFc,&mBSize,&mASize,mBArray,mAArray);
+   // Get filter sizes.
+   butterworthCoLPSize(aNOrder,&mBSize,&mASize);
 
-   mXSR.initialize(mBSize);
-   mYSR.initialize(mASize);
+   // Base class initialize.
+   IIRFilter::initialize(mBSize,mASize);
+
+   // Set filter coefficients.
+   butterworthCoLP(aNOrder,aFs,aFc,&mBSize,&mASize,mBArray,mAArray);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void ButterworthBP::initialize(int aN, double aFs, double aFc1, double aFc2)
+void ButterworthBP::initialize(int aNOrder, double aFs, double aFc1, double aFc2)
 {
-   butterworthCoBP(aN,aFs,aFc1,aFc2,&mBSize,&mASize,mBArray,mAArray);
+   // Get filter sizes.
+   butterworthCoBPSize(aNOrder,&mBSize,&mASize);
 
-   mXSR.initialize(mBSize);
-   mYSR.initialize(mASize);
+   // Base class initialize.
+   IIRFilter::initialize(mBSize,mASize);
+
+   // Set filter coefficients.
+   butterworthCoBP(aNOrder,aFs,aFc1,aFc2,&mBSize,&mASize,mBArray,mAArray);
 }
 
 

@@ -17,32 +17,17 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-   enum { MaxFilterSize = 200 };
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // Sliding window average, calculates expectation (mean)
 // and uncertainty (standard deviation)
 
 class MovingAverage
 {
 public:
-   // Constructor
-   MovingAverage();
-  ~MovingAverage();
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
 
-   // Initialize
-   void initialize(int aSize); 
-   void finalize(); 
-   void reset(); 
-   void show();
-   // Valid
-   bool mValid;
-
-   // Put input value
-   void put(double aX);
-   
    double  mX;         // Input value
    double  mEX;        // Expectation (mean)
    double  mUX;        // Uncertainty (standard deviation)
@@ -59,6 +44,24 @@ public:
    double  mESum;
    double* mUArray;
    double  mUSum;
+   bool    mValid;
+
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Methods.
+
+   // Constructor and initialize.
+   MovingAverage();
+   ~MovingAverage();
+
+   void initialize(int aSize);
+   void finalize();
+   void reset();
+   void show();
+
+   // Put input value.
+   void put(double aX);
 };
 
 //******************************************************************************
@@ -70,12 +73,37 @@ public:
 class ShiftRegister
 {
 public:
-   // Initialize
-   void initialize(int aSize);
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
+
+   double  mX;         // Input value
+   int     mSize;      // Array size
+   int     mIndex;     // Index of left end
+   int     mCount;     // Number of occupied elements
+   int     mK;         // Number of shifts
+   bool    mValid;     // Valid
+   double* mArray;     // Value array
+
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Methods.
+
+   // Constructors and initialization.
+   ShiftRegister();
+  ~ShiftRegister();
    void reset(); 
+
+   // Allocate memory and initialize.
+   void initialize(int aSize);
+   // Initialize, but reuse memory.
+   void reinitialize();
+   // Deallocate memory.
+   void finalize();
+   // Show.
    void show();
-   // Valid
-   bool mValid;
 
    // Shift right and put input value at the left end.
    void shiftRight(double aX);
@@ -83,59 +111,53 @@ public:
    // Set the left end value
    void setLeft(double aX);
 
-   // Input value
-   double mX;
-
    // Get value
    double get(int    aIndex);
    double getLeft();
    double getRight();
 
-   // Members
-
-   // Array size
-   int mSize;
-   // Index of left end
-   int mIndex;
-   // Number of occupied elements
-   int mCount;
-   // Number of shifts
-   int mK;
-
-   // Value array
-   enum { MaxShiftRegisterSize = 1000 };
-   double mArray[MaxShiftRegisterSize];
 };
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // FIRFilter, see wikipedia or matlab for definition
+// H(z)=B(z)
 
 class FIRFilter
 {
 public:
-   // Initialize
-   void initialize(int aSize); 
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
+
+   double         mX;       // Input value
+   double         mY;       // Output value
+   int            mBSize;   // B array size
+   ShiftRegister  mXSR;     // History array
+   bool           mValid;   // History valid
+   double*        mBArray;  // B coefficient array
+
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
+
+   // Constructors and initialization.
+   FIRFilter();
+  ~FIRFilter();
    void reset(); 
+
+   // Allocate memory and initialize.
+   void initialize(int aBSize);
+   // Deallocate memory.
+   void finalize();
+   // Show.
    void show();
-   // Valid
-   bool mValid;
 
-   // Put input value
+   // Put input value.
    double put(double aX);
-
-   // Input value
-   double mX;
-
-   // Output value
-   double mY;
-
-   // Value array
-   ShiftRegister mXSR;
-
-   // Coefficient array
-   double mBArray[MaxFilterSize];
 };
 
 //******************************************************************************
@@ -154,37 +176,47 @@ public:
 //******************************************************************************
 //******************************************************************************
 // IIRFilter, see wikipedia or matlab for definition
+// H(z)=B(z)/A(z)
 
 class IIRFilter
 {
 public:
-   // Initialize
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
+
+   double         mX;       // Input value
+   double         mY;       // Output value
+   int            mBSize;   // B array size
+   int            mASize;   // A array size
+   ShiftRegister  mYSR;     // History array
+   ShiftRegister  mXSR;     // History arrays
+   bool           mValid;   // History valid
+   double*        mBArray;  // B coefficient array
+   double*        mAArray;  // A coefficient array
+
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Methods.
+
+   // Constructors and initialization.
+   IIRFilter();
+  ~IIRFilter();
+   void reset(); 
+
+   // Allocate memory and initialize.
    void initialize(int aBSize, int aASize);
    void initialize(int aBSize, int aASize, double aBArray[], double aAArray[]);
+   // Deallocate memory.
+   void finalize();
+   // Show.
    void show();
-   // Valid
-   bool mValid;
 
    // Put input value
    double put(double aX);
 
-   // Input value
-   double mX;
-
-   // Output value
-   double mY;
-
-   // Sizes
-   int mBSize;
-   int mASize;
-
-   // Value arrays
-   ShiftRegister mYSR;
-   ShiftRegister mXSR;
-
-   // Coefficient arrays
-   double mBArray[MaxFilterSize];
-   double mAArray[MaxFilterSize];
 };
 
 //******************************************************************************
@@ -196,7 +228,7 @@ class IIRTestFilter : public IIRFilter
 {
 public:
    // Initialize
-   void initialize(); 
+   void initialize();
 };
 
 //******************************************************************************
@@ -208,7 +240,7 @@ class MovingDerivative : public FIRFilter
 {
 public:
    // Initialize
-   void initialize(int aOrder,double aDeltaTime); 
+   void initialize(int aOrder, double aDeltaTime);
 };
 
 //******************************************************************************
@@ -220,31 +252,39 @@ public:
 class CharacterFilter1
 {
 public:
-   // Initialize
-   void initialize(double aDeltaTime); 
-   void reset(); 
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
+
+   // Output values
+   double           mX;    // Input value
+   double           mV;    // Derivative of input 
+   double           mEX;   // Input expectation
+   double           mUX;   // Input uncertainty
+   double           mEV;   // Derivative expectation
+   double           mUV;   // Derivative uncertainty
+
+   MovingAverage    mXMA;   // Moving average of input
+   MovingDerivative mXMD;   // Moving derivative of input
+   MovingAverage    mVMA;   // Moving average of derivative of input
+
+   int              mK;     // Update count
+
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Methods.
+
+   // Constructors and initialize.
+   void initialize(double aDeltaTime);
+   void reset();
    void show();
    // Valid
    bool mValid;
 
    // Put input value
    void put(double aX);
-
-   // Output values
-   double mX;       // Input value
-   double mV;       // Derivative of input 
-   double mEX;      // Input expectation
-   double mUX;      // Input uncertainty
-   double mEV;      // Derivative expectation
-   double mUV;      // Derivative uncertainty
-
-   // Averages and derivatives
-   MovingAverage    mXMA;   // Moving average of input
-   MovingDerivative mXMD;   // Moving derivative of input
-   MovingAverage    mVMA;   // Moving average of derivative of input
-
-   // Members
-   int mK;
 };
 
 //******************************************************************************
@@ -255,20 +295,11 @@ public:
 class TestSignal
 {
 public:
-   TestSignal();
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Members.
 
-   // Initialize
-   void initialize(
-      double aBias,
-      double aAmplitude,
-      double aPhase,
-      double aFs,
-      double aF);
-
-   // Advance sinusoid
-   double advance();
-
-   // Members
    double mBias;
    double mAmplitude;
    double mPhase;
@@ -277,6 +308,23 @@ public:
    double mDT;
    double mT;
 
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   //---------------------------------------------------------------------------
+   // Methods.
+
+   // Constructors and initialize.
+   TestSignal();
+
+   void initialize(
+      double aBias,
+      double aAmplitude,
+      double aPhase,
+      double aFs,
+      double aF);
+
+   // Advance sinusoid.
+   double advance();
 };
 
 }//namespace

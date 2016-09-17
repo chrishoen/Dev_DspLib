@@ -670,6 +670,20 @@ int butterworthCoLP(
    return(0);
 }
 
+int butterworthCoLPSize(
+   int     aN,
+   int*    aBSize,
+   int*    aASize)
+{
+   int n;            // filter order
+
+
+   n = aN;
+   *aBSize = n + 1;
+   *aASize = n + 1;
+   return 0;
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -750,6 +764,20 @@ int butterworthCoBP(
 
     free( dcof );
     free( ccof );
+   return(0);
+}
+
+int butterworthCoBPSize(
+   int     aN,
+   int*    aBSize,
+   int*    aASize)
+{
+    int n;            // filter order
+
+   n = aN/2;
+
+   *aBSize = 2*n + 1;
+   *aASize = 2*n + 1;
    return(0);
 }
 
