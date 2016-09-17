@@ -72,8 +72,20 @@ void TimeSeriesLPGN::generate()
    initialize();
 
    //---------------------------------------------------------------------------
-   // Generate low pass filtered guassian noise.
-   // The low pass filter is two cascaded first order alpha filters.
+   // Generate filtered guassian noise, allow filter to settle.
+
+   for (int k = 0; k < 1000; k++)
+   {
+      // Get noise.
+      double tX = getNoise();
+
+      // Filter the noise.
+      mFilter.put(tX);
+   }
+
+   //---------------------------------------------------------------------------
+   // Generate filtered guassian noise.
+   // The filter is is a low pass butterworth filter.
 
    for (int k = 0; k < mNumSamples; k++)
    {
