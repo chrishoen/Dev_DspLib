@@ -275,6 +275,7 @@ void TrialStatistics::startTrial(double aXLimit)
    mStdDev = 0.0;
    mMinX = 0.0;
    mMaxX = 0.0;
+   mExtX = 0.0;
    mVariance = 0.0;
 
    mOLMean = 0.0;
@@ -302,6 +303,7 @@ void TrialStatistics::put(double aX)
 
    mX = aX;
    mPutCount++;
+
    //--------------------------------------------------------------------------- 
    // Update min and max
 
@@ -310,12 +312,14 @@ void TrialStatistics::put(double aX)
    {
       mMinX = mX;
       mMaxX = mX;
+      mExtX = mX;
    }
    // Else, calculate min and max
    else
    {
       if (mX < mMinX) mMinX = mX;
       if (mX > mMaxX) mMaxX = mX;
+      if (fabs(mX) > fabs(mExtX)) mExtX = mX;
    }
 
    //--------------------------------------------------------------------------- 
@@ -367,6 +371,8 @@ void TrialStatistics::finishTrial()
 }
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void TrialStatistics::show(char* aLabel)
 {
@@ -393,25 +399,6 @@ void TrialStatistics::show(char* aLabel)
 
 //******************************************************************************
 
-void TrialStatistics::show2(char* aLabel)
-{
-   if (aLabel == 0)
-   {
-      printf("$$ %12.6f %12.6f\n",
-         mEX,
-         mUX);
-   }
-   else
-   {
-      printf("%8s $$ %12.6f %12.6f\n",
-         aLabel,
-         mEX,
-         mUX);
-   }
-}
-
-//******************************************************************************
-
 void TrialStatistics::showDeg(char* aLabel)
 {
    if (aLabel == 0)
@@ -432,6 +419,98 @@ void TrialStatistics::showDeg(char* aLabel)
          deg(mUX),
          deg(mMinX),
          deg(mMaxX));
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::show1(char* aLabel)
+{
+   if (aLabel == 0)
+   {
+      printf("$$ %12.6f %12.6f %12.6f %12.6f\n",
+         mEX,
+         mUX,
+         mMinX,
+         mMaxX);
+   }
+   else
+   {
+      printf("%8s $$ %12.6f %12.6f %12.6f %12.6f\n",
+         aLabel,
+         mEX,
+         mUX,
+         mMinX,
+         mMaxX);
+   }
+}
+
+//******************************************************************************
+
+void TrialStatistics::showDeg1(char* aLabel)
+{
+   if (aLabel == 0)
+   {
+      printf("$$ %12.6f %12.6f %12.6f %12.6f\n",
+         deg(mEX),
+         deg(mUX),
+         deg(mMinX),
+         deg(mMaxX));
+   }
+   else
+   {
+      printf("%8s $$ %12.6f %12.6f %12.6f %12.6f\n",
+         aLabel,
+         deg(mEX),
+         deg(mUX),
+         deg(mMinX),
+         deg(mMaxX));
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::show2(char* aLabel)
+{
+   if (aLabel == 0)
+   {
+      printf("$$ %12.6f %12.6f %12.6f\n",
+         mEX,
+         mUX,
+         mExtX);
+   }
+   else
+   {
+      printf("%8s $$ %12.6f %12.6f %12.6f\n",
+         aLabel,
+         mEX,
+         mUX,
+         mExtX);
+   }
+}
+
+//******************************************************************************
+
+void TrialStatistics::showDeg2(char* aLabel)
+{
+   if (aLabel == 0)
+   {
+      printf("$$ %12.6f %12.6f %12.6f\n",
+         deg(mEX),
+         deg(mUX),
+         deg(mExtX));
+   }
+   else
+   {
+      printf("%8s $$ %12.6f %12.6f %12.6f\n",
+         aLabel,
+         deg(mEX),
+         deg(mUX),
+         deg(mExtX));
    }
 }
 

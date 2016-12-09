@@ -117,9 +117,13 @@ public:
    // Initialize
    void startTrial(double aXLimit=0.0);
    void finishTrial();
+
    void show(char* aLabel=0);
-   void show2(char* aLabel=0);
    void showDeg(char* aLabel=0);
+   void show1(char* aLabel=0);
+   void showDeg1(char* aLabel=0);
+   void show2(char* aLabel=0);
+   void showDeg2(char* aLabel=0);
 
    // Put input value
    void put(double aX);
@@ -136,6 +140,7 @@ public:
    double   mUX;           // uncertainty (standard deviation)
    double   mMinX;         // minimum 
    double   mMaxX;         // maximum
+   double   mExtX;         // extremum
    double   mMean;         // expectation (mean)
    double   mStdDev;       // uncertainty (standard deviation)
    double   mVariance;     // variance
