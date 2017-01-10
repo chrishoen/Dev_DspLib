@@ -32,7 +32,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN1"))  executeRun1(aCmd);
    if (aCmd->isCmd("RUN2"))  executeRun2(aCmd);
    if (aCmd->isCmd("RUN3"))  executeRun3(aCmd);
-   if (aCmd->isCmd("RUN" ))  executeRun3(aCmd);
+   if (aCmd->isCmd("RUN" ))  executeRun1(aCmd);
 }
 
 //******************************************************************************

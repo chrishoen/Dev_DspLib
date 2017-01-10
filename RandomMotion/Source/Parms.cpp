@@ -36,6 +36,8 @@ void Parms::reset()
    mFc1 = 1.0;
    mFc2 = 1.0;
 
+   mFilterOrder = 4;
+
    strcpy(mOutputFile,"Dynamic.txt");
 
    mTs = 1.0 / mFs;
@@ -60,6 +62,7 @@ void Parms::show()
 
    printf("mFc1         %10.4f\n",mFc1);
    printf("mFc2         %10.4f\n",mFc2);
+   printf("mFilterOrder %10d\n",  mFilterOrder);
 
    printf("mOutputFile  %10s\n",  mOutputFile);
 
@@ -112,14 +115,15 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
-   if(aCmd->isCmd("Duration"    )) mDuration  = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fs"          )) mFs        = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fc"          )) mFc        = aCmd->argDouble(1);
-   if(aCmd->isCmd("EX"          )) mEX        = aCmd->argDouble(1);
-   if(aCmd->isCmd("UX"          )) mUX        = aCmd->argDouble(1);
+   if(aCmd->isCmd("Duration"    )) mDuration     = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fs"          )) mFs           = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc"          )) mFc           = aCmd->argDouble(1);
+   if(aCmd->isCmd("EX"          )) mEX           = aCmd->argDouble(1);
+   if(aCmd->isCmd("UX"          )) mUX           = aCmd->argDouble(1);
 
-   if(aCmd->isCmd("Fc1"         )) mFc1       = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fc2"         )) mFc2       = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc1"         )) mFc1          = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc2"         )) mFc2          = aCmd->argDouble(1);
+   if(aCmd->isCmd("FilterOrder" )) mFilterOrder  = aCmd->argInt(1);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
@@ -148,7 +152,7 @@ bool Parms::readSection(char* aSection)
    {
       if (mDefaultSection)
       {
-         printf("Parms::file open PASS %s\n", tFilePath);
+       //printf("Parms::file open PASS %s\n", tFilePath);
       }
       tCmdLineFile.execute(this);
       tCmdLineFile.close();

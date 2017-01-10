@@ -32,6 +32,7 @@ public:
    double  mFc;           // Cutoff frequency 
    double  mFc1;          // Cutoff frequency 
    double  mFc2;          // Cutoff frequency 
+   int     mFilterOrder;  // Filter order
 
    double  mEX;           // Desired expectation
    double  mUX;           // Desired uncertainty

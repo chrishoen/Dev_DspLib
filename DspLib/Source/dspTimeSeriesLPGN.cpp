@@ -67,11 +67,6 @@ void TimeSeriesLPGN::show()
 void TimeSeriesLPGN::generate()
 {
    //---------------------------------------------------------------------------
-   // Initialize
-
-   initialize();
-
-   //---------------------------------------------------------------------------
    // Generate filtered guassian noise, allow filter to settle.
 
    for (int k = 0; k < 1000; k++)

@@ -19,7 +19,7 @@ namespace Dsp
 //******************************************************************************
 // This class encapsulates time series signal generator.
 // It is based on low pass filtering gaussian noise.
-// The low pass filter is imlemented with two cascaded alpha filters.
+// The low pass filter is a butterworth.
 
 class TimeSeriesLPGN : public TimeSeriesBaseGN
 {
