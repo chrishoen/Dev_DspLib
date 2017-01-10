@@ -32,6 +32,7 @@ TimeSeriesBase::TimeSeriesBase()
 TimeSeriesBase::~TimeSeriesBase()
 {
    if (mX) delete mX;
+   mX=0;
 }
 
 void TimeSeriesBase::reset()
