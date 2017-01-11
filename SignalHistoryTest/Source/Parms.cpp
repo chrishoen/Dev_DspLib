@@ -42,6 +42,9 @@ void Parms::reset()
 
    mTs = 1.0 / mFs;
    mNumSamples = (int)(mDuration * mFs);
+
+   mHistoryMaxSamples=0;
+
 }
 
 void Parms::expand()
@@ -54,17 +57,19 @@ void Parms::show()
 {
    printf("Parms ******* %s\n", mSection);
 
-   printf("mDuration    %10.4f\n",mDuration);
-   printf("mFs          %10.4f\n",mFs);
-   printf("mFc          %10.4f\n",mFc);
-   printf("mEX          %10.4f\n",mEX);
-   printf("mUX          %10.4f\n",mUX);
+   printf("mDuration          %10.4f\n",mDuration);
+   printf("mFs                %10.4f\n",mFs);
+   printf("mFc                %10.4f\n",mFc);
+   printf("mEX                %10.4f\n",mEX);
+   printf("mUX                %10.4f\n",mUX);
 
-   printf("mFc1         %10.4f\n",mFc1);
-   printf("mFc2         %10.4f\n",mFc2);
-   printf("mFilterOrder %10d\n",  mFilterOrder);
+   printf("mFc1               %10.4f\n",mFc1);
+   printf("mFc2               %10.4f\n",mFc2);
+   printf("mFilterOrder       %10d\n",  mFilterOrder);
 
-   printf("mOutputFile  %10s\n",  mOutputFile);
+   printf("mOutputFile        %10s\n",  mOutputFile);
+
+   printf("mHistoryMaxSamples %10d\n",  mHistoryMaxSamples);
 
    printf("Parms ******* %s\n", mSection);
 }
@@ -115,15 +120,16 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
-   if(aCmd->isCmd("Duration"    )) mDuration     = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fs"          )) mFs           = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fc"          )) mFc           = aCmd->argDouble(1);
-   if(aCmd->isCmd("EX"          )) mEX           = aCmd->argDouble(1);
-   if(aCmd->isCmd("UX"          )) mUX           = aCmd->argDouble(1);
+   if(aCmd->isCmd("Duration"          )) mDuration           = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fs"                )) mFs                 = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc"                )) mFc                 = aCmd->argDouble(1);
+   if(aCmd->isCmd("EX"                )) mEX                 = aCmd->argDouble(1);
+   if(aCmd->isCmd("UX"                )) mUX                 = aCmd->argDouble(1);
 
-   if(aCmd->isCmd("Fc1"         )) mFc1          = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fc2"         )) mFc2          = aCmd->argDouble(1);
-   if(aCmd->isCmd("FilterOrder" )) mFilterOrder  = aCmd->argInt(1);
+   if(aCmd->isCmd("Fc1"               )) mFc1                = aCmd->argDouble(1);
+   if(aCmd->isCmd("Fc2"               )) mFc2                = aCmd->argDouble(1);
+   if(aCmd->isCmd("FilterOrder"       )) mFilterOrder        = aCmd->argInt(1);
+   if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 

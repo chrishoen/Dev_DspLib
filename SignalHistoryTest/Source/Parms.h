@@ -25,7 +25,7 @@ class Parms : public Ris::BaseCmdLineExec
 public:
 
    //---------------------------------------------------------------------------
-   // Parms members that are read from the parms file.
+   // Lowpass filtered gaussian noise time series.
 
    double  mDuration;     // Trial duration
    double  mFs;           // Sampling frequency
@@ -40,6 +40,11 @@ public:
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];
 
+   //---------------------------------------------------------------------------
+   // Signal histories.
+
+   int mHistoryMaxSamples;
+      
    //---------------------------------------------------------------------------
    // Extra Parms members that are not read from the parms file.
 

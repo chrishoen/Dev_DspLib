@@ -40,20 +40,20 @@ SignalHistory::~SignalHistory()
 //******************************************************************************
 // Initialize.
 
-void SignalHistory::initialize(int aMaxNumSamples)
+void SignalHistory::initialize(int aMaxSamples)
 {
    // If memory has already been allocated then deallocate it.
    finalize();
 
    // Initialize member variables.
-   mMaxNumSamples = aMaxNumSamples;
+   mMaxSamples = aMaxSamples;
    mNumSamples = 0;
    mMeanDeltaTime = 0.0;
    mSumDeltaTime = 0.0;
 
    // Allocate memory.
-   mValue = new double[aMaxNumSamples];
-   mTime = new double[aMaxNumSamples];
+   mValue = new double[aMaxSamples];
+   mTime = new double[aMaxSamples];
    mMemoryFlag = true;
 }
    
@@ -82,7 +82,7 @@ void SignalHistory::finalize()
 
 void SignalHistory::show()
 {
-   printf("mMaxNumSamples   %10d\n",  mMaxNumSamples);
+   printf("mMaxSamples   %10d\n",  mMaxSamples);
    printf("mNumSamples      %10d\n",  mNumSamples);
    printf("mMeanDeltaTime      %10.4f\n",mMeanDeltaTime);
 }
@@ -97,7 +97,7 @@ void SignalHistory::startHistory()
    mMeanDeltaTime = 0.0;
    mSumDeltaTime = 0.0;
    mNumSamples = 0;
-   mK = 0;
+   mIndex = 0;
 }
 
 //******************************************************************************
@@ -108,10 +108,10 @@ void SignalHistory::startHistory()
 void SignalHistory::finishHistory()
 {
    // Guard.
-   if (mK==0)return;
+   if (mIndex==0)return;
 
    // Calculate the mean delta time.
-   mMeanDeltaTime = mSumDeltaTime/double(mK);
+   mMeanDeltaTime = mSumDeltaTime/double(mIndex);
 }
       
 //******************************************************************************
@@ -125,19 +125,19 @@ void SignalHistory::putSample(double aTime,double aValue)
    if (!mMemoryFlag) return;
 
    // Store sample value and time.
-   mTime[mK] = aTime;
-   mValue[mK] = aValue;
+   mTime[mIndex] = aTime;
+   mValue[mIndex] = aValue;
 
    // Accumulate the delta time. Add the current delta time (the difference
    // between the current time and the previous time) to the sum.
-   if (mK > 0)
+   if (mIndex > 0)
    {
-      mSumDeltaTime += aTime - mTime[mK - 1];
+      mSumDeltaTime += aTime - mTime[mIndex - 1];
    }
 
    // Increment.
-   mK++;
-   mNumSamples = mK;
+   mIndex++;
+   mNumSamples = mIndex;
 }
 
 //******************************************************************************
@@ -149,7 +149,7 @@ bool SignalHistory::getTimeAtIndex(int aIndex,double* aTime)
 {
    // Guard.
    if (aIndex < 0) return false;
-   if (aIndex >= mMaxNumSamples) return false;
+   if (aIndex >= mMaxSamples) return false;
    // Copy from array.
    *aTime = mTime[aIndex];
    // Done.
@@ -160,7 +160,7 @@ bool SignalHistory::getValueAtIndex(int aIndex,double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
-   if (aIndex >= mMaxNumSamples) return false;
+   if (aIndex >= mMaxSamples) return false;
    // Copy from array.
    *aValue = mValue[aIndex];
    // Done.
@@ -171,7 +171,7 @@ bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
-   if (aIndex >= mMaxNumSamples) return false;
+   if (aIndex >= mMaxSamples) return false;
    // Copy from array.
    *aTime  = mTime[aIndex];
    *aValue = mValue[aIndex];
@@ -206,7 +206,7 @@ bool SignalHistory::getValueInterpolateBefore (
    {
       // Guard.
       if (tIndex < 3) return false;
-      if (tIndex >= mMaxNumSamples-3) return false;
+      if (tIndex >= mMaxSamples-3) return false;
 
       // Locals, index one is after index zero. Time one is after time zero.
       double tTime1  = mTime [tIndex];       // Time  at the input    index, upper limit.
@@ -264,7 +264,7 @@ bool SignalHistory::getValueInterpolateAfter (
    {
       // Guard.
       if (tIndex < 3) return false;
-      if (tIndex >= mMaxNumSamples-3) return false;
+      if (tIndex >= mMaxSamples-3) return false;
 
       // Locals, index one is after index zero. Time one is after time zero.
       double tTime1  = mTime [tIndex + 1];    // Time  at the next     index, upper limit.

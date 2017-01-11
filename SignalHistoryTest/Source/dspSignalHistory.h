@@ -37,11 +37,11 @@ public:
    double* mTime;
 
    // Number of samples in array.
-   int     mMaxNumSamples;
+   int     mMaxSamples;
    int     mNumSamples;
 
    // Current index.
-   int     mK;
+   int     mIndex;
 
    // Mean of inter arrival times, the mean delta time.  If the sample time
    // series is periodic then this is the sampling period.
@@ -63,7 +63,7 @@ public:
   ~SignalHistory();
 
    // Allocate memory.
-   void initialize(int aMaxNumSamples);
+   void initialize(int aMaxSamples);
 
    // Deallocate memory.
    void finalize();
