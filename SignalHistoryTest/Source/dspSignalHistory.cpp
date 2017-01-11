@@ -82,8 +82,8 @@ void SignalHistory::finalize()
 
 void SignalHistory::show()
 {
-   printf("mMaxSamples   %10d\n",  mMaxSamples);
-   printf("mNumSamples      %10d\n",  mNumSamples);
+   printf("mMaxSamples         %10d\n",  mMaxSamples);
+   printf("mNumSamples         %10d\n",  mNumSamples);
    printf("mMeanDeltaTime      %10.4f\n",mMeanDeltaTime);
 }
 

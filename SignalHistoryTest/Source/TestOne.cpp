@@ -86,7 +86,7 @@ void TestOne::doRun1()
     
    }
 
-   Prn::print(0, "TestOne::propagate1 %d",gParms.mNumSamples);
+   Prn::print(0, "TestOne::doRun1 %d",gParms.mNumSamples);
 
    // Close files.
    tSampleWriter.close();
@@ -154,33 +154,65 @@ void TestOne::doRun2()
    SignalHistory tHistory1;
    SignalHistory tHistory2;
 
+   tHistory1.initialize(gParms.mHistoryMaxSamples);
+   tHistory2.initialize(gParms.mHistoryMaxSamples);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the time series to a signal history.
+   // Loop to transfer the time series to signal history1.
+
+   // Start the history.
+   tHistory1.startHistory();
+
+   // Start statistics.
+   mTrialStatistics.startTrial();
 
    // Loop through all of the samples in the time series.
    for (int k = 0; k < gParms.mNumSamples; k++)
    {
-      // Write the sample to the output file.
-      tSampleWriter.writeRow(
-         k,
+      // Copy the the time series sample to the signal history.
+      tHistory1.putSample(
          tTime->mT[k],
          tSeries->mX[k]);
 
       // Put sample to statistics.
       mTrialStatistics.put(tSeries->mX[k]);
-    
    }
 
-   Prn::print(0, "TestOne::propagate1 %d",gParms.mNumSamples);
-
-   // Close files.
-   tSampleWriter.close();
+   // Finish the history.
+   tHistory1.finishHistory();
 
    // Finish statistics.
    mTrialStatistics.finishTrial();
    mTrialStatistics.show();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the time series to signal history1.
+
+   // Loop through all of the samples in the time series.
+   for (int k = 0; k < gParms.mNumSamples; k++)
+   {
+      double tTime  = 0.0;
+      double tValue = 0.0;
+
+      // Get the sample from the hsitory.
+      tHistory1.getSampleAtIndex(k,&tTime,&tValue);
+
+      // Write the sample to the output file.
+      tSampleWriter.writeRow(
+         k,
+         tTime,
+         tValue);
+
+   }
+
+   Prn::print(0, "TestOne::doRun2 %d",gParms.mNumSamples);
+
+   // Close files.
+   tSampleWriter.close();
 
    // Done.
    delete tTime;
