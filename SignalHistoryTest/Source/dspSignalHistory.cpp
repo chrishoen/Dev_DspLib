@@ -25,8 +25,8 @@ namespace Dsp
 
 SignalHistory::SignalHistory()
 {
-   mX = 0;
-   mT = 0;
+   mValue = 0;
+   mTime = 0;
    mMemoryFlag=false;
 }
 
@@ -48,12 +48,12 @@ void SignalHistory::initialize(int aMaxNumSamples)
    // Initialize member variables.
    mMaxNumSamples = aMaxNumSamples;
    mNumSamples = 0;
-   mMeanDeltaT = 0.0;
-   mSumDeltaT = 0.0;
+   mMeanDeltaTime = 0.0;
+   mSumDeltaTime = 0.0;
 
    // Allocate memory.
-   mX = new double[aMaxNumSamples];
-   mT = new double[aMaxNumSamples];
+   mValue = new double[aMaxNumSamples];
+   mTime = new double[aMaxNumSamples];
    mMemoryFlag = true;
 }
    
@@ -67,10 +67,10 @@ void SignalHistory::finalize()
    // If memory was allocated then deallocate it.
    if (mMemoryFlag)
    {
-      delete mX;
-      delete mT;
-      mX = 0;
-      mT = 0;
+      delete mValue;
+      delete mTime;
+      mValue = 0;
+      mTime = 0;
       mMemoryFlag=false;
    }
 }
@@ -84,7 +84,7 @@ void SignalHistory::show()
 {
    printf("mMaxNumSamples   %10d\n",  mMaxNumSamples);
    printf("mNumSamples      %10d\n",  mNumSamples);
-   printf("mMeanDeltaT      %10.4f\n",mMeanDeltaT);
+   printf("mMeanDeltaTime      %10.4f\n",mMeanDeltaTime);
 }
 
 //******************************************************************************
@@ -94,8 +94,8 @@ void SignalHistory::show()
 
 void SignalHistory::startHistory()
 {
-   mMeanDeltaT = 0.0;
-   mSumDeltaT = 0.0;
+   mMeanDeltaTime = 0.0;
+   mSumDeltaTime = 0.0;
    mNumSamples = 0;
    mK = 0;
 }
@@ -111,7 +111,7 @@ void SignalHistory::finishHistory()
    if (mK==0)return;
 
    // Calculate the mean delta time.
-   mMeanDeltaT = mSumDeltaT/double(mK);
+   mMeanDeltaTime = mSumDeltaTime/double(mK);
 }
       
 //******************************************************************************
@@ -125,18 +125,68 @@ void SignalHistory::putSample(double aTime,double aValue)
    if (!mMemoryFlag) return;
 
    // Store sample value and time.
-   mT[mK] = aTime;
-   mX[mK] = aValue;
+   mTime[mK] = aTime;
+   mValue[mK] = aValue;
 
    // Accumulate the delta time. Add the current delta time (the difference
    // between the current time and the previous time) to the sum.
    if (mK > 0)
    {
-      mSumDeltaT += aTime - mT[mK - 1];
+      mSumDeltaTime += aTime - mTime[mK - 1];
    }
 
    // Increment.
    mK++;
+   mNumSamples = mK;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Get a sample at a particular index.
+
+bool SignalHistory::getTimeAtIndex(int aIndex,double* aTime)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxNumSamples) return false;
+   // Copy from array.
+   *aTime = mTime[aIndex];
+   // Done.
+   return true;
+}
+
+bool SignalHistory::getValueAtIndex(int aIndex,double* aValue)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxNumSamples) return false;
+   // Copy from array.
+   *aValue = mValue[aIndex];
+   // Done.
+   return true;
+}
+
+bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxNumSamples) return false;
+   // Copy from array.
+   *aTime  = mTime[aIndex];
+   *aValue = mValue[aIndex];
+   // Done.
+   return true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Get a sample value that is closest to a particular time.
+
+bool SignalHistory::getValueAtTime(double aTime,double* aValue)
+{
+
 }
 
 }//namespace

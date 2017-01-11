@@ -33,8 +33,8 @@ public:
    // Members.
 
    // Arrays of signal sample values and times of arrival.
-   double* mX;
-   double* mT;
+   double* mValue;
+   double* mTime;
 
    // Number of samples in array.
    int     mMaxNumSamples;
@@ -45,10 +45,10 @@ public:
 
    // Mean of inter arrival times, the mean delta time.  If the sample time
    // series is periodic then this is the sampling period.
-   double  mMeanDeltaT;
+   double  mMeanDeltaTime;
 
    // Sum used to calcaulte the mean delta time.
-   double  mSumDeltaT;
+   double  mSumDeltaTime;
 
    // If true then memory has been allocated.
    bool mMemoryFlag;
@@ -68,6 +68,11 @@ public:
    // Deallocate memory.
    void finalize();
 
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Add to the history.
+
    // Start recording a signal history. This resets member variables.
    void startHistory();
 
@@ -77,6 +82,23 @@ public:
    // Put a sample to the signal history.
    void putSample(double aTime,double aValue);
 
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Get from the history.
+
+   // Get a sample at a particular index.
+   bool getValueAtIndex  (int aIndex,double* aValue);
+   bool getTimeAtIndex   (int aIndex,double* aTime);
+   bool getSampleAtIndex (int aIndex,double* aTime,double* aValue);
+
+   // Get a sample value that is closest to a particular time.
+   bool getValueAtTime(double aTime,double* aValue);
+
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // More.
 
    void show();
 };
