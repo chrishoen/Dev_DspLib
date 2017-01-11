@@ -25,49 +25,54 @@ namespace Dsp
 
 SignalHistory::SignalHistory()
 {
-   mX=0;
-   reset();
+   mX = 0;
+   mT = 0;
+   mMemoryFlag=false;
 }
 
 SignalHistory::~SignalHistory()
 {
-   if (mX) delete mX;
-   mX=0;
-}
-
-void SignalHistory::reset()
-{
-   mX=0;
-   mFs = 1.0;
-   mTs = 1.0 / mFs;
-
-   mDuration = 10.0;
-   mNumSamples = (int)(mDuration * mFs);
-
-   mEX = 0.0;
-   mUX = 1.0;
+   finalize();
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize
+// Initialize.
 
-void SignalHistory::initialize()
+void SignalHistory::initialize(int aMaxNumSamples)
 {
-   if (mX) delete mX;
+   // If memory has already been allocated then deallocate it.
+   finalize();
 
-   if (mFs != 0.0)
-   {
-      mTs = 1.0 / mFs;
-   }
-   else if (mTs != 0.0)
-   {
-      mFs = 1.0 / mTs;
-   }
+   // Initialize member variables.
+   mMaxNumSamples = aMaxNumSamples;
+   mNumSamples = 0;
+   mMeanDeltaT = 0.0;
+   mSumDeltaT = 0.0;
 
-   mNumSamples = (int)(mDuration * mFs);
-   mX = new double[mNumSamples];
+   // Allocate memory.
+   mX = new double[aMaxNumSamples];
+   mT = new double[aMaxNumSamples];
+   mMemoryFlag = true;
+}
+   
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Finalize.
+
+void SignalHistory::finalize()
+{
+   // If memory was allocated then deallocate it.
+   if (mMemoryFlag)
+   {
+      delete mX;
+      delete mT;
+      mX = 0;
+      mT = 0;
+      mMemoryFlag=false;
+   }
 }
    
 //******************************************************************************
@@ -77,47 +82,61 @@ void SignalHistory::initialize()
 
 void SignalHistory::show()
 {
-   printf("mDuration    %10.4f\n",mDuration);
-   printf("mNumSamples  %10d\n",  mNumSamples);
-   printf("mFs          %10.4f\n",mFs);
-   printf("mTs          %10.4f\n",mTs);
-   printf("mEX          %10.4f\n",mEX);
-   printf("mUX          %10.4f\n",mUX);
-
+   printf("mMaxNumSamples   %10d\n",  mMaxNumSamples);
+   printf("mNumSamples      %10d\n",  mNumSamples);
+   printf("mMeanDeltaT      %10.4f\n",mMeanDeltaT);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Start recording a signal history. This resets member variables.
 
-void SignalHistory::normalize()
+void SignalHistory::startHistory()
 {
-   //---------------------------------------------------------------------------
-   // Statistics.
+   mMeanDeltaT = 0.0;
+   mSumDeltaT = 0.0;
+   mNumSamples = 0;
+   mK = 0;
+}
 
-   TrialStatistics  tTrialStatistics;
-   tTrialStatistics.startTrial();
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Finish recording a signal history.
 
-   for (int k = 0; k < mNumSamples; k++)
+void SignalHistory::finishHistory()
+{
+   // Guard.
+   if (mK==0)return;
+
+   // Calculate the mean delta time.
+   mMeanDeltaT = mSumDeltaT/double(mK);
+}
+      
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put a sample to the signal history.
+
+void SignalHistory::putSample(double aTime,double aValue)
+{
+   // Guard.
+   if (!mMemoryFlag) return;
+
+   // Store sample value and time.
+   mT[mK] = aTime;
+   mX[mK] = aValue;
+
+   // Accumulate the delta time. Add the current delta time (the difference
+   // between the current time and the previous time) to the sum.
+   if (mK > 0)
    {
-      tTrialStatistics.put(mX[k]);
+      mSumDeltaT += aTime - mT[mK - 1];
    }
 
-   tTrialStatistics.finishTrial();
-
-   //---------------------------------------------------------------------------
-   // Normalize to get the desired expectation and uncertainty.
-
-   double tScale = 1.0;
-   double tEX = tTrialStatistics.mEX;
-   double tUX = tTrialStatistics.mUX;
-
-   if (tUX != 0.0) tScale = mUX/tUX;
-
-   for (int k = 0; k < mNumSamples; k++)
-   {
-      mX[k] = tScale*(mX[k] - tEX) + mEX;
-   }
+   // Increment.
+   mK++;
 }
 
 }//namespace

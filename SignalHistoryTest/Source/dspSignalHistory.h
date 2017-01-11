@@ -19,58 +19,66 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class for time series signal generators.
+// This class provides a history of a signal. It is used for periodic or
+// aperiodic time series of the samples of a signal. It stores the signal
+// sample values and times of arrival.
 
 class SignalHistory
 {
 public:
 
-   //--------------------------------------------------------------------------
-   // Input parameters.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   double  mDuration;     // Time duration of signal
-   double  mFs;           // Sampling frequency
+   // Arrays of signal sample values and times of arrival.
+   double* mX;
+   double* mT;
 
-   double  mEX;           // Desired expectation
-   double  mUX;           // Desired uncertainty
+   // Number of samples in array.
+   int     mMaxNumSamples;
+   int     mNumSamples;
 
-   //--------------------------------------------------------------------------
-   // Generated time series.
+   // Current index.
+   int     mK;
 
-   double* mX;            // Array of samples
+   // Mean of inter arrival times, the mean delta time.  If the sample time
+   // series is periodic then this is the sampling period.
+   double  mMeanDeltaT;
 
-   //--------------------------------------------------------------------------
-   // Extra parameters.
+   // Sum used to calcaulte the mean delta time.
+   double  mSumDeltaT;
 
-   double  mTs;           // Sampling period
-   int     mNumSamples;   // Number of samples in array
+   // If true then memory has been allocated.
+   bool mMemoryFlag;
 
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
    // Constructor and initialization.
-   // Create an new SignalHistory, set some of the members, call initialize to 
-   // set other members.
 
+   // Constructor.
    SignalHistory();
   ~SignalHistory();
-   virtual void reset();
-   virtual void initialize();
 
-   //--------------------------------------------------------------------------
-   // Generate the time series.
+   // Allocate memory.
+   void initialize(int aMaxNumSamples);
 
-   virtual void generate()=0;
+   // Deallocate memory.
+   void finalize();
 
-   //--------------------------------------------------------------------------
-   // Generate the time series.
+   // Start recording a signal history. This resets member variables.
+   void startHistory();
 
-   void normalize();
+   // Finish recording a signal history.
+   void finishHistory();
+      
+   // Put a sample to the signal history.
+   void putSample(double aTime,double aValue);
 
-   //--------------------------------------------------------------------------
-   // Support.
 
-   virtual void show();
+   void show();
 };
 
 //******************************************************************************
