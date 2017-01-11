@@ -162,7 +162,7 @@ void TestOne::doRun2()
    tTrialStatistics.startTrial();
 
    // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mNumSamples; k++)
+   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
    {
       // Copy the the time series sample to the signal history.
       tHistory1.putSample(
@@ -189,7 +189,7 @@ void TestOne::doRun2()
    tHistory2.startHistory();
 
    // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mNumSamples; k++)
+   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
    {
       double tTime1  = 0.0;
       double tTime2  = 0.0;
@@ -220,7 +220,7 @@ void TestOne::doRun2()
    tSampleWriter.open(gParms.mOutputFile);
 
    // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mNumSamples; k++)
+   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
    {
       double tTime1  = 0.0;
       double tTime2  = 0.0;
@@ -247,7 +247,7 @@ void TestOne::doRun2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun2 %d",gParms.mNumSamples);
+   Prn::print(0, "TestOne::doRun2 %d",gParms.mHistoryMaxSamples);
 
    // Done.
    delete tTime;

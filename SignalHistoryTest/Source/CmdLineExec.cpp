@@ -24,9 +24,10 @@ void CmdLineExec::reset()
 //******************************************************************************
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("RESET"))  reset();
-   if (aCmd->isCmd("GO1"))  executeGo1(aCmd);
-   if (aCmd->isCmd("GO2"))  executeGo2(aCmd);
+   if (aCmd->isCmd("RESET")) reset();
+   if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
+   if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
+   if (aCmd->isCmd("Parms")) executeParms(aCmd);
 
    if (aCmd->isCmd("RUN1"))  executeRun1(aCmd);
    if (aCmd->isCmd("RUN2"))  executeRun2(aCmd);
@@ -93,4 +94,13 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+
+void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run1");
+   gParms.show();
+}
+
 

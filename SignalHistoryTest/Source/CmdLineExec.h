@@ -23,10 +23,7 @@ public:
    void executeRun2 (Ris::CmdLineCmd* aCmd);
    void executeRun3 (Ris::CmdLineCmd* aCmd);
 
-  double mAlphaOneAP1;
-  double mAlphaTwoAP1;
-  double mAlphaTwoAP2;
-
+   void executeParms (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

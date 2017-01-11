@@ -229,6 +229,8 @@ bool SignalHistory::getValueInterpolateBefore (
       // At this point, the target time is within the upper and lower limits,
       // so calculate the linear interpolation of the target time between them.
       double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      // Passback the value.
+      *aValue = tValue;
       // Exit the loop.
       break;
    }
@@ -287,6 +289,8 @@ bool SignalHistory::getValueInterpolateAfter (
       // At this point, the target time is within the upper and lower limits,
       // so calculate the linear interpolation of the target time between them.
       double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      // Passback the value.
+      *aValue = tValue;
       // Exit the loop.
       break;
    }
