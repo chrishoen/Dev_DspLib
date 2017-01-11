@@ -182,11 +182,67 @@ bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample value that is closest to a particular time.
+// Get a sample value that is interpolated to a time that is between the
+// time at a given index and the time at the previous index. The time is at
+// a delta from the time at the given index.
 
-bool SignalHistory::getValueAtTime(double aTime,double* aValue)
+bool SignalHistory::getValueInterpolateBefore (
+   int     aIndex, 
+   double  aBeforeDeltaTime,
+   double* aValue)
 {
+   // Guard.
+   if (aIndex < 2) return false;
+   if (aIndex >= mMaxNumSamples-2) return false;
 
+   // Copy from the arrays.
+   double tTime1  = mTime [aIndex];       // Time  at the given    index.
+   double tTime0  = mTime [aIndex - 1];   // Time  at the previous index.
+   double tValue1 = mValue[aIndex];       // Value at the given    index.
+   double tValue0 = mValue[aIndex - 1];   // Value at the previous index.
+
+   // Guard.
+   if (tTime1==tTime0) return false;
+
+   // Calculate the time to interpolate to. This is the time of the given
+   // index minus a delta.
+   double tTime = tTime1 - aBeforeDeltaTime;
+
+   // Calculate the linear interpolation of the value.
+   double tValue = tValue0 + (tTime - tTime0)*(tValue1 - tValue0)/(tTime1 - tTime0); 
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Get a sample value that is interpolated to a time that is between the
+// time at a given index and the time at the previous index. The time is at
+// a delta from the time at the given index.
+
+bool SignalHistory::getValueInterpolateAfter (
+   int     aIndex, 
+   double  aAfterDeltaTime,
+   double* aValue)
+{
+   // Guard.
+   if (aIndex < 2) return false;
+   if (aIndex >= mMaxNumSamples-2) return false;
+
+   // Copy from the arrays.
+   double tTime1  = mTime [aIndex + 1];  // Time  at the next  index.
+   double tTime0  = mTime [aIndex];      // Time  at the given index.
+   double tValue1 = mValue[aIndex + 1];  // Value at the next  index.
+   double tValue0 = mValue[aIndex];      // Value at the given index.
+
+   // Guard.
+   if (tTime1==tTime0) return false;
+
+   // Calculate the time to interpolate to. This is the time of the given
+   // index plus a delta.
+   double tTime = tTime0 + aAfterDeltaTime;
+
+   // Calculate the linear interpolation of the value.
+   double tValue = tValue0 + (tTime - tTime0)*(tValue1 - tValue0)/(tTime1 - tTime0); 
 }
 
 }//namespace
