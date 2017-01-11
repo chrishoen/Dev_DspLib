@@ -19,10 +19,10 @@
     <ClCompile Include="Source\Parms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalHistory.cpp">
+    <ClCompile Include="Source\TestOne.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestOne.cpp">
+    <ClCompile Include="Source\dspHistory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,10 +36,10 @@
     <ClInclude Include="Source\Parms.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspSignalHistory.h">
+    <ClInclude Include="Source\TestOne.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestOne.h">
+    <ClInclude Include="Source\dspHistory.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

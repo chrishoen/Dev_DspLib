@@ -12,7 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspSignalHistory.h"
+#include "dspHistory.h"
 
 namespace Dsp
 {
@@ -23,14 +23,14 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-SignalHistory::SignalHistory()
+History::History()
 {
    mValue = 0;
    mTime = 0;
    mMemoryFlag=false;
 }
 
-SignalHistory::~SignalHistory()
+History::~History()
 {
    finalize();
 }
@@ -40,7 +40,7 @@ SignalHistory::~SignalHistory()
 //******************************************************************************
 // Initialize.
 
-void SignalHistory::initialize(int aMaxSamples)
+void History::initialize(int aMaxSamples)
 {
    // If memory has already been allocated then deallocate it.
    finalize();
@@ -62,7 +62,7 @@ void SignalHistory::initialize(int aMaxSamples)
 //******************************************************************************
 // Finalize.
 
-void SignalHistory::finalize()
+void History::finalize()
 {
    // If memory was allocated then deallocate it.
    if (mMemoryFlag)
@@ -80,7 +80,7 @@ void SignalHistory::finalize()
 //******************************************************************************
 // Show
 
-void SignalHistory::show()
+void History::show()
 {
    printf("mMaxSamples         %10d\n",  mMaxSamples);
    printf("mNumSamples         %10d\n",  mNumSamples);
@@ -92,7 +92,7 @@ void SignalHistory::show()
 //******************************************************************************
 // Start recording a signal history. This resets member variables.
 
-void SignalHistory::startHistory()
+void History::startHistory()
 {
    mMeanDeltaTime = 0.0;
    mSumDeltaTime = 0.0;
@@ -105,7 +105,7 @@ void SignalHistory::startHistory()
 //******************************************************************************
 // Finish recording a signal history.
 
-void SignalHistory::finishHistory()
+void History::finishHistory()
 {
    // Guard.
    if (mIndex==0)return;
@@ -119,7 +119,7 @@ void SignalHistory::finishHistory()
 //******************************************************************************
 // Put a sample to the signal history.
 
-void SignalHistory::putSample(double aTime,double aValue)
+void History::putSample(double aTime,double aValue)
 {
    // Guard.
    if (!mMemoryFlag) return;
@@ -145,7 +145,7 @@ void SignalHistory::putSample(double aTime,double aValue)
 //******************************************************************************
 // Get a sample at a particular index.
 
-bool SignalHistory::getTimeAtIndex(int aIndex,double* aTime)
+bool History::getTimeAtIndex(int aIndex,double* aTime)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -156,7 +156,7 @@ bool SignalHistory::getTimeAtIndex(int aIndex,double* aTime)
    return true;
 }
 
-bool SignalHistory::getValueAtIndex(int aIndex,double* aValue)
+bool History::getValueAtIndex(int aIndex,double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -167,7 +167,7 @@ bool SignalHistory::getValueAtIndex(int aIndex,double* aValue)
    return true;
 }
 
-bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
+bool History::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -188,7 +188,7 @@ bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 // the time of the previous index then a downward search is performed 
 // until it is found.
 
-bool SignalHistory::getValueInterpolateBefore (
+bool History::getValueInterpolateBefore (
    int     aIndex, 
    double  aBeforeDeltaTime,
    double* aValue)
@@ -248,7 +248,7 @@ bool SignalHistory::getValueInterpolateBefore (
 // the time of the next index then a upward search is performed 
 // until it is found.
 
-bool SignalHistory::getValueInterpolateAfter (
+bool History::getValueInterpolateAfter (
    int     aIndex, 
    double  aAfterDeltaTime,
    double* aValue)

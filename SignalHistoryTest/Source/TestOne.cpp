@@ -15,7 +15,7 @@ Description:
 #include "dspStatistics.h"
 #include "dspTimeSeriesTime.h"
 #include "dspTimeSeriesLPGN.h"
-#include "dspSignalHistory.h"
+#include "dspHistory.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -144,8 +144,8 @@ void TestOne::doRun2()
    //***************************************************************************
    // Signal histories.
 
-   SignalHistory tHistory1;
-   SignalHistory tHistory2;
+   History tHistory1;
+   History tHistory2;
 
    tHistory1.initialize(gParms.mHistoryMaxSamples);
    tHistory2.initialize(gParms.mHistoryMaxSamples);

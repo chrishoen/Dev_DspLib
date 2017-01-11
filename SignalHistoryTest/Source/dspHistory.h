@@ -1,5 +1,5 @@
-#ifndef _DSPSIGNALHISTORY_H_
-#define _DSPSIGNALHISTORY_H_
+#ifndef _DSPHISTORY_H_
+#define _DSPHISTORY_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -23,7 +23,7 @@ namespace Dsp
 // aperiodic time series of the samples of a signal. It stores the signal
 // sample values and times of arrival.
 
-class SignalHistory
+class History
 {
 public:
 
@@ -59,8 +59,8 @@ public:
    // Constructor and initialization.
 
    // Constructor.
-   SignalHistory();
-  ~SignalHistory();
+   History();
+  ~History();
 
    // Allocate memory.
    void initialize(int aMaxSamples);

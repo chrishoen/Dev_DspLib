@@ -167,7 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\dspSignalHistory.cpp" />
+    <ClCompile Include="Source\dspHistory.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
@@ -175,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
-    <ClInclude Include="Source\dspSignalHistory.h" />
+    <ClInclude Include="Source\dspHistory.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Parms.h" />
     <ClInclude Include="Source\TestOne.h" />
