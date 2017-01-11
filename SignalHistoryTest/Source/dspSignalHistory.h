@@ -85,27 +85,31 @@ public:
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Get from the history.
+   // Get values from the signal history.
 
    // Get a sample at a particular index.
    bool getValueAtIndex  (int aIndex,double* aValue);
    bool getTimeAtIndex   (int aIndex,double* aTime);
    bool getSampleAtIndex (int aIndex,double* aTime,double* aValue);
 
-   // Get a sample value that is interpolated to a time that is between the
-   // time at a given index and the time at the previous index. The time is at
-   // a delta from the time at the given index.
+   // Get a sample value that is interpolated from a target time that is
+   // calculated to be the time at an input index minus an input delta.
+   // If the target time is not between the time at the input index and
+   // the time of the previous index then a downward search is performed 
+   // until it is found.
    bool getValueInterpolateBefore (
       int     aIndex, 
       double  aBeforeDeltaTime,
       double* aValue);
 
-   // Get a sample value that is interpolated to a time that is between the
-   // time at a given index and the time at the next index. The time is at
-   // a delta from the time at the given index.
+   // Get a sample value that is interpolated from a target time that is
+   // calculated to be the time at an input index plus an input delta.
+   // If the target time is not between the time at the input index and
+   // the time of the next index then a upward search is performed 
+   // until it is found.
    bool getValueInterpolateAfter (
       int     aIndex, 
-      double  aAfterDeltaTime,
+      double  aBeforeDeltaTime,
       double* aValue);
 
    //******************************************************************************

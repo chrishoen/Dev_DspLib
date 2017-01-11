@@ -182,67 +182,117 @@ bool SignalHistory::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample value that is interpolated to a time that is between the
-// time at a given index and the time at the previous index. The time is at
-// a delta from the time at the given index.
+// Get a sample value that is interpolated from a target time that is
+// calculated to be the time at an input index minus an input delta.
+// If the target time is not between the time at the input index and
+// the time of the previous index then a downward search is performed 
+// until it is found.
 
 bool SignalHistory::getValueInterpolateBefore (
    int     aIndex, 
    double  aBeforeDeltaTime,
    double* aValue)
 {
-   // Guard.
-   if (aIndex < 2) return false;
-   if (aIndex >= mMaxNumSamples-2) return false;
+   // Calculate the target time to interpolate to. This is the time of the
+   // input index minus a delta. The target time is before the upper limit.
+   double tTargetTime = mTime [aIndex] - aBeforeDeltaTime;
 
-   // Copy from the arrays.
-   double tTime1  = mTime [aIndex];       // Time  at the given    index.
-   double tTime0  = mTime [aIndex - 1];   // Time  at the previous index.
-   double tValue1 = mValue[aIndex];       // Value at the given    index.
-   double tValue0 = mValue[aIndex - 1];   // Value at the previous index.
+   // Initialize the index to start the search at.
+   int tIndex = aIndex;
 
-   // Guard.
-   if (tTime1==tTime0) return false;
+   // Loop until the time to interpolate is found. When it is, perform the 
+   // interpolation.
+   while (true)
+   {
+      // Guard.
+      if (tIndex < 3) return false;
+      if (tIndex >= mMaxNumSamples-3) return false;
 
-   // Calculate the time to interpolate to. This is the time of the given
-   // index minus a delta.
-   double tTime = tTime1 - aBeforeDeltaTime;
+      // Locals, index one is after index zero. Time one is after time zero.
+      double tTime1  = mTime [tIndex];       // Time  at the input    index, upper limit.
+      double tTime0  = mTime [tIndex - 1];   // Time  at the previous index, lower limit.
+      double tValue1 = mValue[tIndex];       // Value at the input    index.
+      double tValue0 = mValue[tIndex - 1];   // Value at the previous index.
 
-   // Calculate the linear interpolation of the value.
-   double tValue = tValue0 + (tTime - tTime0)*(tValue1 - tValue0)/(tTime1 - tTime0); 
+      // Guard.
+      if (tTime1 == tTime0) return false;
+
+      // If the target time is before the lower limit then continue
+      // the search (go back to the start of the loop).
+      if (tTargetTime < tTime0)
+      {
+         // Advance the seacrh downward.
+         tIndex--;
+         // Goto the top of the loop.
+         continue;
+      }
+      // At this point, the target time is within the upper and lower limits,
+      // so calculate the linear interpolation of the target time between them.
+      double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      // Exit the loop.
+      break;
+   }
+
+   // Done.
+   return true;
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample value that is interpolated to a time that is between the
-// time at a given index and the time at the previous index. The time is at
-// a delta from the time at the given index.
+// Get a sample value that is interpolated from a target time that is
+// calculated to be the time at an input index plus an input delta.
+// If the target time is not between the time at the input index and
+// the time of the next index then a upward search is performed 
+// until it is found.
 
 bool SignalHistory::getValueInterpolateAfter (
    int     aIndex, 
    double  aAfterDeltaTime,
    double* aValue)
 {
-   // Guard.
-   if (aIndex < 2) return false;
-   if (aIndex >= mMaxNumSamples-2) return false;
+   // Calculate the target time to interpolate to. This is the time of the
+   // input index plus a delta. The target time is after the lower limit.
+   double tTargetTime = mTime [aIndex] + aAfterDeltaTime;
 
-   // Copy from the arrays.
-   double tTime1  = mTime [aIndex + 1];  // Time  at the next  index.
-   double tTime0  = mTime [aIndex];      // Time  at the given index.
-   double tValue1 = mValue[aIndex + 1];  // Value at the next  index.
-   double tValue0 = mValue[aIndex];      // Value at the given index.
+   // Initialize the index to start the search at.
+   int tIndex = aIndex;
 
-   // Guard.
-   if (tTime1==tTime0) return false;
+   // Loop until the time to interpolate is found. When it is, perform the 
+   // interpolation.
+   while (true)
+   {
+      // Guard.
+      if (tIndex < 3) return false;
+      if (tIndex >= mMaxNumSamples-3) return false;
 
-   // Calculate the time to interpolate to. This is the time of the given
-   // index plus a delta.
-   double tTime = tTime0 + aAfterDeltaTime;
+      // Locals, index one is after index zero. Time one is after time zero.
+      double tTime1  = mTime [tIndex + 1];    // Time  at the next     index, upper limit.
+      double tTime0  = mTime [tIndex];        // Time  at the input    index, lower limit.
+      double tValue1 = mValue[tIndex + 1];    // Value at the next     index.
+      double tValue0 = mValue[tIndex];        // Value at the input    index.
 
-   // Calculate the linear interpolation of the value.
-   double tValue = tValue0 + (tTime - tTime0)*(tValue1 - tValue0)/(tTime1 - tTime0); 
+      // Guard.
+      if (tTime1 == tTime0) return false;
+
+      // If the target time is after the upper limit then continue
+      // the search (go back to the start of the loop).
+      if (tTargetTime > tTime1)
+      {
+         // Advance the seacrh downward.
+         tIndex--;
+         // Goto the top of the loop.
+         continue;
+      }
+      // At this point, the target time is within the upper and lower limits,
+      // so calculate the linear interpolation of the target time between them.
+      double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      // Exit the loop.
+      break;
+   }
+
+   // Done.
+   return true;
 }
 
 }//namespace
