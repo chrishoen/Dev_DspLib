@@ -133,18 +133,11 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Output files and statistics.
-
-   CsvFileWriter  tSampleWriter;
-
-   tSampleWriter.open(gParms.mOutputFile);
+   // Statistics.
 
    // Statistics
-   TrialStatistics  mTrialStatistics;
-   mTrialStatistics.startTrial();
-
-   // Local
-   Sample tSample;
+   TrialStatistics  tTrialStatistics;
+   tTrialStatistics.startTrial();
 
    //***************************************************************************
    //***************************************************************************
@@ -166,7 +159,7 @@ void TestOne::doRun2()
    tHistory1.startHistory();
 
    // Start statistics.
-   mTrialStatistics.startTrial();
+   tTrialStatistics.startTrial();
 
    // Loop through all of the samples in the time series.
    for (int k = 0; k < gParms.mNumSamples; k++)
@@ -177,42 +170,84 @@ void TestOne::doRun2()
          tSeries->mX[k]);
 
       // Put sample to statistics.
-      mTrialStatistics.put(tSeries->mX[k]);
+      tTrialStatistics.put(tSeries->mX[k]);
    }
 
    // Finish the history.
    tHistory1.finishHistory();
 
    // Finish statistics.
-   mTrialStatistics.finishTrial();
-   mTrialStatistics.show();
+   tTrialStatistics.finishTrial();
+   tTrialStatistics.show();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the time series to signal history1.
+   // Loop to transfer the signal history to the output file.
+
+   // Start history.
+   tHistory2.startHistory();
 
    // Loop through all of the samples in the time series.
    for (int k = 0; k < gParms.mNumSamples; k++)
    {
-      double tTime  = 0.0;
-      double tValue = 0.0;
+      double tTime1  = 0.0;
+      double tTime2  = 0.0;
+      double tValue1 = 0.0;
+      double tValue2 = 0.0;
+      double tDeltaT = gParms.mHistoryDeltaT;
+      
+      // Get the sample from the history with delay.
+      tHistory1.getTimeAtIndex(k,&tTime1);
+      tTime2 = tTime1;
 
-      // Get the sample from the hsitory.
-      tHistory1.getSampleAtIndex(k,&tTime,&tValue);
+      tHistory1.getValueAtIndex(k,&tValue1);
+      tHistory1.getValueInterpolateBefore(k,tDeltaT,&tValue2);
+//    tValue2 = tValue1;
+
+      tHistory2.putSample(tTime2,tValue2);
+   }
+
+   // Finish history.
+   tHistory2.finishHistory();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the signal histories to the output file.
+
+   CsvFileWriter  tSampleWriter;
+   tSampleWriter.open(gParms.mOutputFile);
+
+   // Loop through all of the samples in the time series.
+   for (int k = 0; k < gParms.mNumSamples; k++)
+   {
+      double tTime1  = 0.0;
+      double tTime2  = 0.0;
+      double tValue1 = 0.0;
+      double tValue2 = 0.0;
+
+      // Get the samples from both histories.
+      tHistory1.getSampleAtIndex(k,&tTime1,&tValue1);
+      tHistory2.getSampleAtIndex(k,&tTime2,&tValue2);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
          k,
-         tTime,
-         tValue);
-
+         tTime1,
+         tValue1,
+         tValue2);
    }
 
-   Prn::print(0, "TestOne::doRun2 %d",gParms.mNumSamples);
-
-   // Close files.
+   // Close the output file.
    tSampleWriter.close();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Done.
+
+   Prn::print(0, "TestOne::doRun2 %d",gParms.mNumSamples);
 
    // Done.
    delete tTime;

@@ -44,6 +44,7 @@ void Parms::reset()
    mNumSamples = (int)(mDuration * mFs);
 
    mHistoryMaxSamples=0;
+   mHistoryDeltaT=0.0;
 
 }
 
@@ -70,6 +71,7 @@ void Parms::show()
    printf("mOutputFile        %10s\n",  mOutputFile);
 
    printf("mHistoryMaxSamples %10d\n",  mHistoryMaxSamples);
+   printf("mHistoryDeltaT     %10.4f\n",mHistoryDeltaT);
 
    printf("Parms ******* %s\n", mSection);
 }
@@ -130,6 +132,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Fc2"               )) mFc2                = aCmd->argDouble(1);
    if(aCmd->isCmd("FilterOrder"       )) mFilterOrder        = aCmd->argInt(1);
    if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
+   if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 

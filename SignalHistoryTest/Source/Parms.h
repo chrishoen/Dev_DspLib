@@ -44,6 +44,7 @@ public:
    // Signal histories.
 
    int mHistoryMaxSamples;
+   double mHistoryDeltaT;
       
    //---------------------------------------------------------------------------
    // Extra Parms members that are not read from the parms file.

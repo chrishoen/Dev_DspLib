@@ -13,7 +13,8 @@ SectionBegin default
 
    Outputfile     C:\Alpha\Data\SignalHistory.csv
 
-   HistoryMaxSamples   10000;
+   HistoryMaxSamples   10000
+   HistoryDeltaT        0.02
 
 SectionEnd
 
