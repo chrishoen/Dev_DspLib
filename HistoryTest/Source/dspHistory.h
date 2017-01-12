@@ -77,35 +77,35 @@ public:
    // Finish recording a signal history.
    void finishHistory();
       
-   // Put a sample to the signal history.
-   void putSample(double aTime,double aValue);
+   // Write a sample to the signal history.
+   void writeSample(double aTime,double aValue);
 
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Get values from the signal history.
+   // Read values from the signal history.
 
-   // Get a sample at a particular index.
-   bool getValueAtIndex  (int aIndex,double* aValue);
-   bool getTimeAtIndex   (int aIndex,double* aTime);
-   bool getSampleAtIndex (int aIndex,double* aTime,double* aValue);
+   // Read a sample at a particular index.
+   bool readValueAtIndex  (int aIndex,double* aValue);
+   bool readTimeAtIndex   (int aIndex,double* aTime);
+   bool readSampleAtIndex (int aIndex,double* aTime,double* aValue);
 
-   // Get a sample value that is interpolated from a target time that is
+   // Read a sample value that is interpolated from a target time that is
    // calculated to be the time at an input index minus an input delta.
    // If the target time is not between the time at the input index and
    // the time of the previous index then a downward search is performed 
    // until it is found.
-   bool getValueInterpolateBefore (
+   bool readValueInterpolateBefore (
       int     aIndex, 
       double  aBeforeDeltaTime,
       double* aValue);
 
-   // Get a sample value that is interpolated from a target time that is
+   // Read a sample value that is interpolated from a target time that is
    // calculated to be the time at an input index plus an input delta.
    // If the target time is not between the time at the input index and
    // the time of the next index then a upward search is performed 
    // until it is found.
-   bool getValueInterpolateAfter (
+   bool readValueInterpolateAfter (
       int     aIndex, 
       double  aBeforeDeltaTime,
       double* aValue);

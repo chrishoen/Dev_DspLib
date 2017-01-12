@@ -40,10 +40,10 @@ void historyCopy(
       double tValueX = 0.0;
       
       // Get the sample from X.
-      aX.getSampleAtIndex(k,&tTimeX,&tValueX);
+      aX.readSampleAtIndex(k,&tTimeX,&tValueX);
 
       // Put the sample to Y.
-      aY.putSample(tTimeX,tValueX);
+      aY.writeSample(tTimeX,tValueX);
    }
 
    // Finish Y.
@@ -74,13 +74,13 @@ void historyCopyWithDelay(
       double tValueX = 0.0;
       
       // Get the time from X.
-      aX.getTimeAtIndex(k,&tTimeX);
+      aX.readTimeAtIndex(k,&tTimeX);
 
       // Get the value from X, interpolate backward with a delay.
-      aX.getValueInterpolateBefore(k,aDelay,&tValueX);
+      aX.readValueInterpolateBefore(k,aDelay,&tValueX);
 
       // Put the sample to Y.
-      aY.putSample(tTimeX,tValueX);
+      aY.writeSample(tTimeX,tValueX);
    }
 
    // Finish Y.

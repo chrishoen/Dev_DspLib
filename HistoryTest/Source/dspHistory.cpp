@@ -117,9 +117,9 @@ void History::finishHistory()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Put a sample to the signal history.
+// Write a sample to the signal history.
 
-void History::putSample(double aTime,double aValue)
+void History::writeSample(double aTime,double aValue)
 {
    // Guard.
    if (!mMemoryFlag) return;
@@ -143,9 +143,9 @@ void History::putSample(double aTime,double aValue)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample at a particular index.
+// Read a sample at a particular index.
 
-bool History::getTimeAtIndex(int aIndex,double* aTime)
+bool History::readTimeAtIndex(int aIndex,double* aTime)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -156,7 +156,7 @@ bool History::getTimeAtIndex(int aIndex,double* aTime)
    return true;
 }
 
-bool History::getValueAtIndex(int aIndex,double* aValue)
+bool History::readValueAtIndex(int aIndex,double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -167,7 +167,7 @@ bool History::getValueAtIndex(int aIndex,double* aValue)
    return true;
 }
 
-bool History::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
+bool History::readSampleAtIndex(int aIndex, double* aTime, double* aValue)
 {
    // Guard.
    if (aIndex < 0) return false;
@@ -182,20 +182,20 @@ bool History::getSampleAtIndex(int aIndex, double* aTime, double* aValue)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample value that is interpolated from a target time that is
+// Read a sample value that is interpolated from a target time that is
 // calculated to be the time at an input index minus an input delta.
 // If the target time is not between the time at the input index and
 // the time of the previous index then a downward search is performed 
 // until it is found.
 
-bool History::getValueInterpolateBefore (
+bool History::readValueInterpolateBefore (
    int     aIndex, 
    double  aBeforeDeltaTime,
    double* aValue)
 {
    // Calculate the target time to interpolate to. This is the time of the
    // input index minus a delta. The target time is before the upper limit.
-   double tTargetTime = mTime [aIndex] - aBeforeDeltaTime;
+   double tTarreadTime = mTime [aIndex] - aBeforeDeltaTime;
 
    // Initialize the index to start the search at.
    int tIndex = aIndex;
@@ -219,7 +219,7 @@ bool History::getValueInterpolateBefore (
 
       // If the target time is before the lower limit then continue
       // the search (go back to the start of the loop).
-      if (tTargetTime < tTime0)
+      if (tTarreadTime < tTime0)
       {
          // Advance the seacrh downward.
          tIndex--;
@@ -228,7 +228,7 @@ bool History::getValueInterpolateBefore (
       }
       // At this point, the target time is within the upper and lower limits,
       // so calculate the linear interpolation of the target time between them.
-      double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      double tValue = tValue0 + (tTarreadTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
       // Passback the value.
       *aValue = tValue;
       // Exit the loop.
@@ -242,20 +242,20 @@ bool History::getValueInterpolateBefore (
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get a sample value that is interpolated from a target time that is
+// Read a sample value that is interpolated from a target time that is
 // calculated to be the time at an input index plus an input delta.
 // If the target time is not between the time at the input index and
 // the time of the next index then a upward search is performed 
 // until it is found.
 
-bool History::getValueInterpolateAfter (
+bool History::readValueInterpolateAfter (
    int     aIndex, 
    double  aAfterDeltaTime,
    double* aValue)
 {
    // Calculate the target time to interpolate to. This is the time of the
    // input index plus a delta. The target time is after the lower limit.
-   double tTargetTime = mTime [aIndex] + aAfterDeltaTime;
+   double tTarreadTime = mTime [aIndex] + aAfterDeltaTime;
 
    // Initialize the index to start the search at.
    int tIndex = aIndex;
@@ -279,7 +279,7 @@ bool History::getValueInterpolateAfter (
 
       // If the target time is after the upper limit then continue
       // the search (go back to the start of the loop).
-      if (tTargetTime > tTime1)
+      if (tTarreadTime > tTime1)
       {
          // Advance the seacrh downward.
          tIndex--;
@@ -288,7 +288,7 @@ bool History::getValueInterpolateAfter (
       }
       // At this point, the target time is within the upper and lower limits,
       // so calculate the linear interpolation of the target time between them.
-      double tValue = tValue0 + (tTargetTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
+      double tValue = tValue0 + (tTarreadTime - tTime0)*(tValue1 - tValue0) / (tTime1 - tTime0);
       // Passback the value.
       *aValue = tValue;
       // Exit the loop.

@@ -165,7 +165,7 @@ void TestOne::doRun2()
    for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
    {
       // Copy the the time series sample to the signal history.
-      tHistory1.putSample(
+      tHistory1.writeSample(
          tTime->mT[k],
          tSeries->mX[k]);
 
@@ -207,8 +207,8 @@ void TestOne::doRun2()
       double tValue2 = 0.0;
 
       // Get the samples from both histories.
-      tHistory1.getSampleAtIndex(k,&tTime1,&tValue1);
-      tHistory2.getSampleAtIndex(k,&tTime2,&tValue2);
+      tHistory1.readSampleAtIndex(k,&tTime1,&tValue1);
+      tHistory2.readSampleAtIndex(k,&tTime2,&tValue2);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
