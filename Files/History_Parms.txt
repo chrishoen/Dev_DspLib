@@ -14,7 +14,7 @@ SectionBegin default
    Outputfile     C:\Alpha\Data\SignalHistory.csv
 
    HistoryMaxSamples   10000
-   HistoryDeltaT       0.020
+   HistoryDeltaT       0.045
 
 SectionEnd
 
@@ -23,13 +23,6 @@ SectionEnd
 //********************************************************************
 
 SectionBegin run1
-
-   Duration       100.0
-   Fs             100.0
-   Fc              0.10
-   EX               0.0
-   UX               1.0
-   FilterOrder        4
 
 SectionEnd
 

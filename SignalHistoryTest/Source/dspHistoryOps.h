@@ -21,11 +21,13 @@ namespace Dsp
 // This is a set of signal history operators, which are functions that operate
 // on signal histories.
 
-bool historyCopy(
+// Copy X to Y, X->Y.
+void historyCopy(
    History& aX,
    History& aY);
 
-bool historyCopyWithDelay(
+// Copy X to Y with values interpolated to a delay, X->Y.
+void historyCopyWithDelay(
    History& aX,
    double   aDelay,
    History& aY);

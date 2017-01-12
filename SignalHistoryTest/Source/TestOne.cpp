@@ -16,6 +16,7 @@ Description:
 #include "dspTimeSeriesTime.h"
 #include "dspTimeSeriesLPGN.h"
 #include "dspHistory.h"
+#include "dspHistoryOps.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -137,7 +138,6 @@ void TestOne::doRun2()
 
    // Statistics
    TrialStatistics  tTrialStatistics;
-   tTrialStatistics.startTrial();
 
    //***************************************************************************
    //***************************************************************************
@@ -153,7 +153,7 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the time series to signal history1.
+   // Transfer the time series to signal history1.
 
    // Start the history.
    tHistory1.startHistory();
@@ -183,33 +183,12 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the signal history to the output file.
+   // Transfer the signal history1 to signal history2, with a delay.
 
-   // Start history.
-   tHistory2.startHistory();
-
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
-   {
-      double tTime1  = 0.0;
-      double tTime2  = 0.0;
-      double tValue1 = 0.0;
-      double tValue2 = 0.0;
-      double tDeltaT = gParms.mHistoryDeltaT;
-      
-      // Get the sample from the history with delay.
-      tHistory1.getTimeAtIndex(k,&tTime1);
-      tTime2 = tTime1;
-
-      tHistory1.getValueAtIndex(k,&tValue1);
-      tHistory1.getValueInterpolateBefore(k,tDeltaT,&tValue2);
-//    tValue2 = tValue1;
-
-      tHistory2.putSample(tTime2,tValue2);
-   }
-
-   // Finish history.
-   tHistory2.finishHistory();
+   historyCopyWithDelay(
+      tHistory1,
+      gParms.mHistoryDeltaT,
+      tHistory2);
 
    //***************************************************************************
    //***************************************************************************
