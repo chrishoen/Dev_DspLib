@@ -72,7 +72,7 @@ void TimeSeriesFilteredGN::generate()
    initialize();
 
    //---------------------------------------------------------------------------
-   // Generate filtered guassian noise, allow filter to settle.
+   // Generate filtered gaussian noise, allow filter to settle.
 
    for (int k = 0; k < 1000; k++)
    {
@@ -84,7 +84,7 @@ void TimeSeriesFilteredGN::generate()
    }
 
    //---------------------------------------------------------------------------
-   // Generate filtered guassian noise.
+   // Generate filtered gaussian noise.
 
    for (int k = 0; k < mNumSamples; k++)
    {

@@ -47,32 +47,25 @@ public:
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Constructor and initialization.
-   // Create an new HistoryGenBase, set some of the members, call initialize to 
-   // set other members.
+   // Methods.
 
+   // Constructor.
    HistoryGenBase();
    virtual void reset();
-
-   //--------------------------------------------------------------------------
-   // Initialize variables. Initialize the history. Initialize the history time
-   // array.
-   virtual void initialize(History& aHistory);
-
-   //--------------------------------------------------------------------------
-   // Generate the signal history.
-
-   virtual void generate(History& aHistory)=0;
-
-   //--------------------------------------------------------------------------
-   // Normalize the signal history.
-
-   void normalize(History& aHistory);
-
-   //--------------------------------------------------------------------------
-   // Support.
-
    virtual void show();
+
+   // Initialize member variables. Initialize the history memory for the correct
+   // number of samples. Set the history value array to zero and the time array
+   // to linearly increasing.
+   virtual void initializeHistory(History& aHistory);
+
+   // Normalize the signal history to have the desired expectation and
+   // uncertainty.
+   void normalizeHistory(History& aHistory);
+
+   // Abstract method, generate the signal history.
+   virtual void generateHistory(History& aHistory)=0;
+
 };
 
 //******************************************************************************

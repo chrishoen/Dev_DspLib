@@ -67,7 +67,7 @@ void TimeSeriesLPGN::show()
 void TimeSeriesLPGN::generate()
 {
    //---------------------------------------------------------------------------
-   // Generate filtered guassian noise, allow filter to settle.
+   // Generate filtered gaussian noise, allow filter to settle.
 
    for (int k = 0; k < 1000; k++)
    {
@@ -79,7 +79,7 @@ void TimeSeriesLPGN::generate()
    }
 
    //---------------------------------------------------------------------------
-   // Generate filtered guassian noise.
+   // Generate filtered gaussian noise.
    // The filter is is a low pass butterworth filter.
 
    for (int k = 0; k < mNumSamples; k++)

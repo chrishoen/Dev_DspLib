@@ -43,10 +43,26 @@ void HistoryGenBase::reset()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize variables. Initialize the history. Initialize the history time
-// array.
+// Show
 
-void HistoryGenBase::initialize(History& aHistory)
+void HistoryGenBase::show()
+{
+   printf("mDuration    %10.4f\n",mDuration);
+   printf("mNumSamples  %10d\n",  mNumSamples);
+   printf("mFs          %10.4f\n",mFs);
+   printf("mTs          %10.4f\n",mTs);
+   printf("mEX          %10.4f\n",mEX);
+   printf("mUX          %10.4f\n",mUX);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Initialize member variables. Initialize the history memory for the correct
+// number of samples. Set the history value array to zero and the time array
+// to lenearly increasing.
+
+void HistoryGenBase::initializeHistory(History& aHistory)
 {
    // Initialize variables.
    mTs = 1.0 / mFs;
@@ -55,7 +71,8 @@ void HistoryGenBase::initialize(History& aHistory)
    // Initialize the history.
    aHistory.initialize(mNumSamples);
 
-   // Initialize the history to zeros.
+   // Set the history value array to zero and the time array to linearly
+   // increasing.
    double tTimeSum=0.0;
    aHistory.startHistory();
    for (int k = 0; k < mNumSamples; k++)
@@ -69,32 +86,18 @@ void HistoryGenBase::initialize(History& aHistory)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Show
+// Normalize the signal history to have the desired expectation and
+// uncertainty.
 
-void HistoryGenBase::show()
-{
-   printf("mDuration    %10.4f\n",mDuration);
-   printf("mNumSamples  %10d\n",  mNumSamples);
-   printf("mFs          %10.4f\n",mFs);
-   printf("mTs          %10.4f\n",mTs);
-   printf("mEX          %10.4f\n",mEX);
-   printf("mUX          %10.4f\n",mUX);
-
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void HistoryGenBase::normalize(History& aHistory)
+void HistoryGenBase::normalizeHistory(History& aHistory)
 {
    //---------------------------------------------------------------------------
-   // Statistics.
+   // Collect statistics for the value array.
 
    TrialStatistics  tTrialStatistics;
    tTrialStatistics.startTrial();
 
-   for (int k = 0; k < mNumSamples; k++)
+   for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       tTrialStatistics.put(aHistory.mValue[k]);
    }
@@ -102,7 +105,8 @@ void HistoryGenBase::normalize(History& aHistory)
    tTrialStatistics.finishTrial();
 
    //---------------------------------------------------------------------------
-   // Normalize to get the desired expectation and uncertainty.
+   // Use the statistics to normalize the value array to get the desired
+   // expectation and uncertainty.
 
    double tScale = 1.0;
    double tEX = tTrialStatistics.mEX;

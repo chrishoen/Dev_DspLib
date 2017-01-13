@@ -19,7 +19,7 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Constructor
+// Constructor.
 
 HistoryGenBaseGN::HistoryGenBaseGN()
 {
@@ -35,11 +35,11 @@ void HistoryGenBaseGN::reset()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize
+// Initialize.
 
-void HistoryGenBaseGN::initialize(History& aHistory)
+void HistoryGenBaseGN::initializeHistory(History& aHistory)
 {
-   BaseClass::initialize(aHistory);
+   BaseClass::initializeHistory(aHistory);
 
    initializeNoise();
 }
@@ -47,7 +47,7 @@ void HistoryGenBaseGN::initialize(History& aHistory)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize guassian noise
+// Initialize gaussian noise.
 
 void HistoryGenBaseGN::initializeNoise()
 {
@@ -69,7 +69,7 @@ void HistoryGenBaseGN::initializeNoise()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Get guassian noise
+// Get gaussian noise.
 
 double HistoryGenBaseGN::getNoise()
 {
@@ -84,4 +84,5 @@ double HistoryGenBaseGN::getNoise()
    }
    return tNoise;
 }
+
 }//namespace

@@ -28,10 +28,17 @@ HistoryGenWiener::HistoryGenWiener()
    reset();
 }
 
-void HistoryGenWiener::reset()
+HistoryGenWiener::HistoryGenWiener(HistoryGenWienerParms aParms)
 {
+   reset();
+   mParms = aParms;
 }
 
+void HistoryGenWiener::reset()
+{
+   BaseClass::reset();
+   mParms.reset();
+}
 
 //******************************************************************************
 //******************************************************************************
@@ -48,31 +55,33 @@ void HistoryGenWiener::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Generate the signal history according to the parameters.
 
-void HistoryGenWiener::generate(History& aHistory)
+void HistoryGenWiener::generateHistory(History& aHistory)
 {
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Initialize.
 
-   // Initialize base class variables and initialize the history and
-   // initialize the history time array.
+   // Initialize base class variables according to the parameters and 
+   // initialize the history for the correct sample size with a zero value
+   // array and a lineary increasing time array.
    BaseClass::reset();
    BaseClass::mDuration   = mParms.mDuration;
    BaseClass::mFs         = mParms.mFs;
    BaseClass::mEX         = mParms.mEX;
    BaseClass::mUX         = mParms.mUX;
    BaseClass::mNoiseSigma = 1.0;
-   BaseClass::initialize(aHistory);
+   BaseClass::initializeHistory(aHistory);
 
-   // Initialize the filter.
+   // Initialize the filter according to the parameters.
    mFilter.initialize(
       mParms.mFilterOrder,
       mParms.mFs,
       mParms.mFc);
 
-   //  Add a gaussian noise signal to the filter, allow it to settle.
+   //  Add some gaussian noise to the filter, allow it to settle.
    for (int k = 0; k < 1000; k++)
    {
       mFilter.put(getNoise());
@@ -85,10 +94,11 @@ void HistoryGenWiener::generate(History& aHistory)
 
    for (int k = 0; k < mNumSamples; k++)
    {
-      //  Add a gaussian noise signal to the filter.
+      //  Add gaussian noise to the filter.
       mFilter.put(getNoise());
 
-      // Add the filtered gaussian noise to the history value array
+      // Add the filtered gaussian noise to the history value array. The time
+      // array has already been set.
       aHistory.mValue[k] = mFilter.mY;
    }
 
@@ -97,7 +107,7 @@ void HistoryGenWiener::generate(History& aHistory)
    //***************************************************************************
    // Normalize the history to get the desired expectation and uncertainty.
 
-   normalize(aHistory);
+   BaseClass::normalizeHistory(aHistory);
 }
 
 }//namespace

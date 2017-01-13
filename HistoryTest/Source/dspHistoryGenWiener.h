@@ -2,6 +2,7 @@
 #define _DSPHISTORYGENWIENER_H_
 
 /*==============================================================================
+Signal history generator with a wiener process.
 ==============================================================================*/
 
 //******************************************************************************
@@ -22,9 +23,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// The class inherits from BaseCmdLineExec so that it can process command lines
-// from a nested command line file to set its parameters.
-
+// This class encapsulates parameters for the class that follows in this file.
+// it inherits from BaseCmdLineExec so that it can process commands from a
+// nested command file to set its parameters.
 
 class HistoryGenWienerParms : public Ris::BaseCmdLineExec
 {
@@ -52,58 +53,61 @@ public:
    HistoryGenWienerParms();
    void reset();
 
-   // Execute a command line in the section of the parms file that is specific
+   // Execute a command line in the section of the command file that is specific
    // to this object and set member variables accordingly. When an "End" is
-   // encountered, pop back out of the section and return control to its parent
+   // encountered, pop back out of the section and return control to the parent
    // executive.
    void execute(Ris::CmdLineCmd* aCmd);
 
    // Show.
    void show(char* aLabel);
-
 };
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a generator for a signal history that evolves
-// according to an integrated wiener process. The signal history is
-// implemented by low pass filtering gaussian noise with a butterworth filter
-// with a specified cutoff frequency. The history is then normalized to have
-// a specified expectation and uncertainty.
-// 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This class provides a generator for a signal history that evolves according
+// to an integrated wiener process. The signal history is implemented by low
+// pass filtering gaussian noise with a butterworth filter with a specified
+// cutoff frequency. The history is then normalized to have a specified
+// expectation and uncertainty.
+ 
 class HistoryGenWiener : public HistoryGenBaseGN
 {
 public:
    typedef HistoryGenBaseGN BaseClass;
 
-   //--------------------------------------------------------------------------
-   // Input parameters.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
+   // Input parameters.
    HistoryGenWienerParms mParms;
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
-   // Low pass filter
-
+   // Low pass butterworth filter.
    Filter::ButterworthLP mFilter;
 
    //--------------------------------------------------------------------------
    // Constructor.
 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
    HistoryGenWiener();
+   HistoryGenWiener(HistoryGenWienerParms aParms);
    void reset();
-
-   //--------------------------------------------------------------------------
-   // Generate the time series.
-
-   void generate(History& aHistory);
-
-   //--------------------------------------------------------------------------
-   // Support.
-
    void show();
+
+   // Generate the signal history according to the parameters.
+   void generateHistory(History& aHistory);
+
 };
 
 //******************************************************************************
