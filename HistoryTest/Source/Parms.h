@@ -2,7 +2,7 @@
 #define _PARMS_H_
 /*==============================================================================
 
-This file contains settings for parameter input. 
+Parameters class whose values are read from a command file. 
 
 ==============================================================================*/
 
@@ -16,8 +16,28 @@ This file contains settings for parameter input.
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Parameters class, inherits from BaseCmdLineExec to process
-// commands from a command line file to set parameters.
+// This is a class that contains parameter member variables. The values of the
+// parameters are set by reading a text file that contains command lines. Each
+// command line is of the form "command argument1 argument2 ...".
+// 
+// The command files are partitioned into different sections and only one
+// section can be read at a time to set member variables that are specified
+// in it.
+//
+// The command files are managed by a CmdLineFile object. This opens the 
+// file, reads each line in it, parses the line into a CmdLineCmd command 
+// object, passes the command object to this object for command execution,
+// and then closes the file. 
+//
+// This class inherits from BaseCmdLineExec. It provides an overload 
+// execute(cmd) method that is called by the CmdLineFile object 
+// for each command in the file. It then sets a member variables, according
+// to the command.
+// 
+// This class can contain member variables that also inherit from
+// BaseCmdLineExec. This provides for command files that have a nested
+// structure. If so, then this class is the root.
+// 
 
 class Parms : public Ris::BaseCmdLineExec
 {
@@ -62,7 +82,7 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Extra Parms members that are not read from the parms file.
+   // Expanded members that are not read from the parms file.
 
    double  mTs;           // Sampling period
    int     mNumSamples;   // Number of samples in array
@@ -77,24 +97,23 @@ public:
    void reset();
    void show();
 
-   // Read a section of the command line file. This only reads variables for a 
-   // specific section.
+   // Read a section of the command file and set member variables accordingly.
+   // This only reads variables for a specific section in the file.
    bool readSection(char* aSection);
 
-   // Baseclass override, execute for each line in the settings
-   // command line file to set a member variable. 
+   // Base class override: Execute a command from the command file to set a 
+   // member variable. This is called by an associated command file object
+   // for each command in the file.
    void execute(Ris::CmdLineCmd* aCmd);
 
-   // Calculate expanded member variables.
+   // Calculate expanded member variables. This is called after the entire
+   // section of the command file has been processed.
    void expand();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   //--------------------------------------------------------------------------
-   //--------------------------------------------------------------------------
-   //--------------------------------------------------------------------------
-   // Section
+   // Section varaibles.
 
    char mSection[200];
    char mSectionMode[200];
@@ -107,7 +126,7 @@ public:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Global instance
+// Global instance.
 
 #ifdef _PARMS_CPP_
         Parms gParms;
