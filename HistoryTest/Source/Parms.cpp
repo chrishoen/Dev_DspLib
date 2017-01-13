@@ -16,6 +16,10 @@
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Constructor.
 
 Parms::Parms()
 {
@@ -24,11 +28,11 @@ Parms::Parms()
 
 void Parms::reset()
 {
+   // File member variables.
    mSection[0]=0;
-   mSectionMode[0]=0;
    mSectionFlag=false;
-   mDefaultSection=false;
 
+   // Parameter member variables.
    mDuration = 10.0;
    mFs = 1.0;
    mFc = 1.0;
@@ -40,19 +44,20 @@ void Parms::reset()
 
    mFilterOrder = 4;
 
-   strcpy(mOutputFile,"Dynamic.txt");
+   mOutputFile[0]=0;
 
    mTs = 1.0 / mFs;
    mNumSamples = (int)(mDuration * mFs);
 
    mHistoryMaxSamples=0;
    mHistoryDeltaT=0.0;
-
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Calculate expanded member variables. This is called after the entire
+// section of the command file has been processed.
 
 void Parms::expand()
 {
@@ -63,6 +68,7 @@ void Parms::expand()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Show.
 
 void Parms::show()
 {
@@ -93,39 +99,16 @@ void Parms::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// For a given command line "Begin Section", this returns true
-// if "Section", the first command line argument, is the same as the section 
-// specified at a call to read section.
-
-bool Parms::isMySection(Ris::CmdLineCmd* aCmd)
-{
-   bool tFlag=false;
-
-   if (aCmd->numArg()==1)
-   {
-      if (aCmd->isArgString(1,mSection))
-      {
-         tFlag=true;
-      }
-   }
-
-   return tFlag;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// This is called for each command line in the settings file.
-// It processes commands, with arguments
-// BEGIN starts a section, END exits a section
-// Only commands for a section are processed
+// Base class override: Execute a command from the command file to set a 
+// member variable. This is called by the associated command file object
+// for each command in the file.
 
 void Parms::execute(Ris::CmdLineCmd* aCmd)
 {
-   //---------------------------------------------------------------------------
-   //---------------------------------------------------------------------------
-   //---------------------------------------------------------------------------
-   // Section commands
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Section commands. If not in the section to be read then exit.
 
 
    if(aCmd->isCmd("SectionBegin"      ))  mSectionFlag=isMySection(aCmd);
@@ -133,10 +116,11 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if (!mSectionFlag) return;
 
-   //---------------------------------------------------------------------------
-   //---------------------------------------------------------------------------
-   //---------------------------------------------------------------------------
-   // Only process commands for the section specified in initialize.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Jump table: Execute the command to set a member variable. Only process   
+   // commands for the section to be read.
 
    if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
    if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
@@ -161,31 +145,66 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Return true if the input command's first argument is equal to the
+// section that is to be read. This is called if the command is
+// "SectionBegin" and returns true if the section is equal to the section
+// that is to be read.
+
+bool Parms::isMySection(Ris::CmdLineCmd* aCmd)
+{
+   bool tFlag=false;
+
+   if (aCmd->numArg()==1)
+   {
+      if (aCmd->isArgString(1,mSection))
+      {
+         tFlag=true;
+      }
+   }
+
+   return tFlag;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Read a section of the command file and set member variables accordingly.
+// Create a command file object, open the file, pass this object to the file
+// object to read the file and apply this object's execution method to each
+// command in the file, and then close the file. This only reads variables for
+// a specific section in the file.
 
 bool Parms::readSection(char* aSection)
 { 
-   // File path
+   // Store arguments.
+   strcpy(mSection,aSection);
+
+   // File path.
    char tFilePath[200];
 
    strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
    strcat(tFilePath, "..\\..\\Files\\History_Parms.txt");
 
-   // Copy arguments
-   strcpy(mSection,aSection);
-   mDefaultSection = strcmp(mSection,"default")==0;
-
-   // Apply settings file to this executive   
+   // Temporary command line file object.   
    Ris::CmdLineFile tCmdLineFile;
 
+   // Open the file.
    if (tCmdLineFile.open(tFilePath))
    {
-      if (mDefaultSection)
-      {
-       //printf("Parms::file open PASS %s\n", tFilePath);
-      }
+      // Pass this object to the file object to read the file and apply this
+      // object's execution method to each command in the file.
       tCmdLineFile.execute(this);
+
+      // Close the file.
       tCmdLineFile.close();
+
+      // Expand extra member variables.
       expand();
+
+   //printf("Parms::file open PASS %s\n", tFilePath);
       return true;
    }
    else

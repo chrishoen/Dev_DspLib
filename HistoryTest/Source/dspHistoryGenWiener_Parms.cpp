@@ -62,7 +62,8 @@ void HistoryGenWienerParms::execute(Ris::CmdLineCmd* aCmd)
 
 void HistoryGenWienerParms::show(char* aLabel)
 {
-   printf("HistoryGenWienerParms BEGIN %s\n", aLabel);
+   printf("\n");
+   printf("%-23s BEGIN\n", aLabel);
 
    printf("mDuration          %10.4f\n",mDuration);
    printf("mFs                %10.4f\n",mFs);
@@ -71,7 +72,8 @@ void HistoryGenWienerParms::show(char* aLabel)
    printf("mEX                %10.4f\n",mEX);
    printf("mUX                %10.4f\n",mUX);
 
-   printf("HistoryGenWienerParms END   %s\n", aLabel);
+   printf("%-25s END\n", aLabel);
+   printf("\n");
 }
    
 }//namespace

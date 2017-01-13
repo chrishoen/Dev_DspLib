@@ -90,19 +90,16 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Infrastucture. Constructor and such
+   // Infrastucture.
 
+   // Constructor,
    typedef Ris::BaseCmdLineExec BaseClass;
    Parms();
    void reset();
    void show();
 
-   // Read a section of the command file and set member variables accordingly.
-   // This only reads variables for a specific section in the file.
-   bool readSection(char* aSection);
-
    // Base class override: Execute a command from the command file to set a 
-   // member variable. This is called by an associated command file object
+   // member variable. This is called by the associated command file object
    // for each command in the file.
    void execute(Ris::CmdLineCmd* aCmd);
 
@@ -110,16 +107,28 @@ public:
    // section of the command file has been processed.
    void expand();
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Section varaibles.
+   // Read a section of the command file and set member variables accordingly.
+   // Create a command file object, open the file, pass this object to the file
+   // object to read the file and apply this object's execution method to each
+   // command in the file, and then close the file. This only reads variables
+   // for a specific section in the file.
+   bool readSection(char* aSection);
 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Section variables.
+
+   // The section to be read.
    char mSection[200];
-   char mSectionMode[200];
-   bool mSectionFlag;
-   bool mDefaultSection;
 
+   // True if the current section is the section to be read.
+   bool mSectionFlag;
+
+   // Return true if the input command's first argument is equal to the
+   // section that is to be read. This is called if the command is
+   // "SectionBegin" and returns true if the section is equal to the section
+   // that is to be read.
    bool isMySection(Ris::CmdLineCmd* aCmd);
 };
 
