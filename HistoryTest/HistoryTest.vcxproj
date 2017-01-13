@@ -173,6 +173,7 @@
     <ClCompile Include="Source\dspHistoryGenWiener.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Parms.cpp" />
     <ClCompile Include="Source\dspHistoryOps.cpp" />
+    <ClCompile Include="Source\dspHistoryStatistics.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Source\dspHistoryGenBaseGN.h" />
     <ClInclude Include="Source\dspHistoryGenWiener.h" />
     <ClInclude Include="Source\dspHistoryOps.h" />
+    <ClInclude Include="Source\dspHistoryStatistics.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Parms.h" />
     <ClInclude Include="Source\TestOne.h" />

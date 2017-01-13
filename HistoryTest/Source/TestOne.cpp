@@ -18,6 +18,7 @@ Description:
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
 #include "dspHistoryGenWiener.h"
+#include "dspHistoryStatistics.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -49,7 +50,7 @@ void TestOne::doRun1()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Generated signal history.
+   // Generate a signal history.
 
    // Signal history.
    History tHistory;
@@ -66,21 +67,9 @@ void TestOne::doRun1()
    // Collect statistics on the history.
 
    // Statistics
-   TrialStatistics  tTrialStatistics;
-
-   // Start the statistics.
-   tTrialStatistics.startTrial();
-
-   // Loop through all of the samples in the history.
-   for (int k = 0; k < tHistory.mMaxSamples; k++)
-   {
-      // Put history value to statistics.
-      tTrialStatistics.put(tHistory.mValue[k]);
-   }
-
-   // Finish the statistics.
-   tTrialStatistics.finishTrial();
-   tTrialStatistics.show();
+   HistoryStatistics  tStatistics;
+   tStatistics.collectValue(tHistory);
+   tStatistics.show();
 
    //***************************************************************************
    //***************************************************************************
@@ -130,75 +119,33 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Input time series.
+   // Generate a signal history.
 
-   // Initialize signal time series.
-   TimeSeriesTime* tTime   = new TimeSeriesTime();
-   TimeSeriesLPGN* tSeries = new TimeSeriesLPGN();
+   // Signal history.
+   History tHistory1;
 
-   tTime->mDuration     =     gParms.mDuration;
-   tTime->mFs           =     gParms.mFs;
-   tTime->generate();
+   // Signal history generator.
+   HistoryGenWiener tGen(gParms.mHistoryGenWiener);
 
-   tSeries->reset();
-   tSeries->mDuration   =     gParms.mDuration;
-   tSeries->mN          =     gParms.mFilterOrder;
-   tSeries->mFs         =     gParms.mFs;
-   tSeries->mFc         =     gParms.mFc;
-   tSeries->mEX         =     gParms.mEX;
-   tSeries->mUX         =     gParms.mUX;
-   tSeries->initialize();
-   tSeries->show();
-   tSeries->generate();
+   // Generate the history.
+   tGen.generateHistory(tHistory1);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Statistics.
+   // Collect statistics on the history.
 
    // Statistics
-   TrialStatistics  tTrialStatistics;
+   HistoryStatistics  tStatistics;
+   tStatistics.collectValue(tHistory1);
+   tStatistics.show();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Signal histories.
+   // Another signal history.
 
-   History tHistory1;
    History tHistory2;
-
-   tHistory1.initialize(gParms.mHistoryMaxSamples);
-   tHistory2.initialize(gParms.mHistoryMaxSamples);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Transfer the time series to signal history1.
-
-   // Start the history.
-   tHistory1.startHistory();
-
-   // Start statistics.
-   tTrialStatistics.startTrial();
-
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
-   {
-      // Copy the the time series sample to the signal history.
-      tHistory1.writeSample(
-         tTime->mT[k],
-         tSeries->mX[k]);
-
-      // Put sample to statistics.
-      tTrialStatistics.put(tSeries->mX[k]);
-   }
-
-   // Finish the history.
-   tHistory1.finishHistory();
-
-   // Finish statistics.
-   tTrialStatistics.finishTrial();
-   tTrialStatistics.show();
 
    //***************************************************************************
    //***************************************************************************
@@ -248,8 +195,5 @@ void TestOne::doRun2()
 
    Prn::print(0, "TestOne::doRun2 %d",gParms.mHistoryMaxSamples);
 
-   // Done.
-   delete tTime;
-   delete tSeries;
 }
 
