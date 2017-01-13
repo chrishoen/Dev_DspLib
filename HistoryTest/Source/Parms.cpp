@@ -14,6 +14,8 @@
 #include "Parms.h"
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 Parms::Parms()
 {
@@ -48,16 +50,26 @@ void Parms::reset()
 
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void Parms::expand()
 {
    mTs = 1.0 / mFs;
    mNumSamples = (int)(round(mDuration) * mFs);
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void Parms::show()
 {
    printf("Parms ******* %s\n", mSection);
 
+   printf("Code1               %d\n",mCode1);
+   printf("Code2               %d\n",mCode2);
    printf("mDuration          %10.4f\n",mDuration);
    printf("mFs                %10.4f\n",mFs);
    printf("mFc                %10.4f\n",mFc);
@@ -73,13 +85,17 @@ void Parms::show()
    printf("mHistoryMaxSamples %10d\n",  mHistoryMaxSamples);
    printf("mHistoryDeltaT     %10.4f\n",mHistoryDeltaT);
 
+   mHistoryGenWiener.show("HistoryGenWiener");
+
    printf("Parms ******* %s\n", mSection);
 }
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // For a given command line "Begin Section", this returns true
 // if "Section", the first command line argument, is the same as the section 
-// specified in initialize.
+// specified at a call to read section.
 
 bool Parms::isMySection(Ris::CmdLineCmd* aCmd)
 {
@@ -122,6 +138,9 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    //---------------------------------------------------------------------------
    // Only process commands for the section specified in initialize.
 
+   if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
+   if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
+
    if(aCmd->isCmd("Duration"          )) mDuration           = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"                )) mFs                 = aCmd->argDouble(1);
    if(aCmd->isCmd("Fc"                )) mFc                 = aCmd->argDouble(1);
@@ -136,6 +155,10 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
+   if(aCmd->isCmd("BEGIN"))
+   {
+      if (aCmd->isArgString(1, "HistoryGenWiener"))   nestedPush(aCmd, &mHistoryGenWiener);
+   }
 }
 
 //******************************************************************************

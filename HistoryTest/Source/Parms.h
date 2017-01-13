@@ -6,25 +6,34 @@ This file contains settings for parameter input.
 
 ==============================================================================*/
 
-//**********************************************************************
-//**********************************************************************
-//**********************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 #include "risCmdLineFile.h"
+#include "dspHistoryGenWiener.h"
 
-//**********************************************************************
-//**********************************************************************
-//**********************************************************************
-// ProtoCommParms class, inherits from BaseCmdLineExec to process
-// command lines from a command line file.
-// Each application reads its own print settings from a common settings
-// file. 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Parameters class, inherits from BaseCmdLineExec to process
+// commands from a command line file to set parameters.
 
 class Parms : public Ris::BaseCmdLineExec
 {
 public:
 
-   //---------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Integrity checks.
+
+   int   mCode1;
+   int   mCode2;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Lowpass filtered gaussian noise time series.
 
    double  mDuration;     // Trial duration
@@ -40,19 +49,27 @@ public:
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];
 
-   //---------------------------------------------------------------------------
+   Dsp::HistoryGenWiener mHistoryGenWiener;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Signal histories.
 
    int mHistoryMaxSamples;
    double mHistoryDeltaT;
       
-   //---------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Extra Parms members that are not read from the parms file.
 
    double  mTs;           // Sampling period
    int     mNumSamples;   // Number of samples in array
 
-   //---------------------------------------------------------------------------
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Infrastucture. Constructor and such
 
    typedef Ris::BaseCmdLineExec BaseClass;
@@ -60,24 +77,20 @@ public:
    void reset();
    void show();
 
-   // Initialize.
-   // aParmsFileName is the settings filename. aSection is the settings
-   // file section that each application extracts its settings from. 
-   // aSectionMode specifies the section mode. Each section begins with a 
-   // command line, such as "Begin CmdFile Default", where "Begin" is the 
-   // command ,"CmdFile" is  first argument and denotes the section and
-   // "Default" is the second argument and denotes the section mode.
-
+   // Read a section of the command line file. This only reads variables for a 
+   // specific section.
    bool readSection(char* aSection);
 
-   // Baseclass override, executes for each line in the settings
-   // command line file
-
+   // Baseclass override, execute for each line in the settings
+   // command line file to set a member variable. 
    void execute(Ris::CmdLineCmd* aCmd);
 
-   // Calculate expanded parms.
+   // Calculate expanded member variables.
    void expand();
 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------

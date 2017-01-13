@@ -45,14 +45,13 @@ void HistoryGenWiener::reset()
 // encountered, pop back out of the section and return control to its parent
 // executive.
 
-// Execute each command in the 
-
 void HistoryGenWiener::execute(Ris::CmdLineCmd* aCmd)
 {
    // Execute commands to read parameter members.
    if(aCmd->isCmd("Duration"          )) mDuration           = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"                )) mFs                 = aCmd->argDouble(1);
    if(aCmd->isCmd("Fc"                )) mFc                 = aCmd->argDouble(1);
+   if(aCmd->isCmd("FilterOrder"       )) mFilterOrder        = aCmd->argInt(1);
    if(aCmd->isCmd("EX"                )) mEX                 = aCmd->argDouble(1);
    if(aCmd->isCmd("UX"                )) mUX                 = aCmd->argDouble(1);
 
@@ -60,6 +59,19 @@ void HistoryGenWiener::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("End"  ))  nestedPop(aCmd);
 }
 
+void HistoryGenWiener::show(char* aLabel)
+{
+   printf("HistoryGenWiener BEGIN %s\n", aLabel);
+
+   printf("mDuration          %10.4f\n",mDuration);
+   printf("mFs                %10.4f\n",mFs);
+   printf("mFc                %10.4f\n",mFc);
+   printf("mFilterOrder       %10d\n",  mFilterOrder);
+   printf("mEX                %10.4f\n",mEX);
+   printf("mUX                %10.4f\n",mUX);
+
+   printf("HistoryGenWiener END   %s\n", aLabel);
+}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
