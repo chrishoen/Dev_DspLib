@@ -1,5 +1,5 @@
-#ifndef _DSPHISTORYGENWIENER_H_
-#define _DSPHISTORYGENWIENER_H_
+#ifndef _DSPHISTORYGENBASEGN_H_
+#define _DSPHISTORYGENBASEGN_H_
 
 /*==============================================================================
 ==============================================================================*/
@@ -8,9 +8,8 @@
 //******************************************************************************
 //******************************************************************************
 
-#include "dspHistoryGenBaseGN.h"
-#include "dspFilterButterworth.h"
-#include "dspHistoryGenWienerParms.h"
+#include <random>
+#include "dspHistoryGenBase.h"
 
 namespace Dsp
 {
@@ -18,42 +17,39 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class encapsulates time series signal generator.
-// It is based on low pass filtering gaussian noise.
-// The low pass filter is a butterworth.
+// This is a base class for time series signal generators.
+// It extends the base class by adding a gaussian noise generator.
 
-class HistoryGenWiener : public HistoryGenBaseGN
+class HistoryGenBaseGN : public HistoryGenBase
 {
 public:
-   typedef HistoryGenBaseGN BaseClass;
+   typedef HistoryGenBase BaseClass;
 
    //--------------------------------------------------------------------------
    // Input parameters.
 
-   HistoryGenWienerParms mParms;
+   double  mNoiseSigma;   // Random noise generator sigma
 
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Low pass filter
+   // Guassian noise
 
-   Filter::ButterworthLP mFilter;
+   bool mNoiseFlag;
+   std::mt19937 mRandomGenerator;
+   std::normal_distribution<double> mRandomDistribution;
 
    //--------------------------------------------------------------------------
-   // Constructor.
+   // Constructor and initialization.
 
-   HistoryGenWiener();
+   HistoryGenBaseGN();
    void reset();
+   virtual void initialize(History& aHistory);
 
-   //--------------------------------------------------------------------------
-   // Generate the time series.
-
-   void generate(History& aHistory);
-
-   //--------------------------------------------------------------------------
-   // Support.
-
-   void show();
+    // Initialize random distribution.
+   void initializeNoise();
+   // Get noise from random distribution.
+   double getNoise();
 };
 
 //******************************************************************************

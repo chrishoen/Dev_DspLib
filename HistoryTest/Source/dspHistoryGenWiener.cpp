@@ -30,55 +30,74 @@ HistoryGenWiener::HistoryGenWiener()
 
 void HistoryGenWiener::reset()
 {
-   mDuration = 10.0;
-   mFs = 1.0;
-   mFc = 1.0;
-   mEX = 0.0;
-   mUX = 1.0;
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Execute a command line in the section of the parms file that is specific
-// to this object and set member variables accordingly. When an "End" is
-// encountered, pop back out of the section and return control to its parent
-// executive.
 
-void HistoryGenWiener::execute(Ris::CmdLineCmd* aCmd)
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Show
+
+void HistoryGenWiener::show()
 {
-   // Execute commands to read parameter members.
-   if(aCmd->isCmd("Duration"          )) mDuration           = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fs"                )) mFs                 = aCmd->argDouble(1);
-   if(aCmd->isCmd("Fc"                )) mFc                 = aCmd->argDouble(1);
-   if(aCmd->isCmd("FilterOrder"       )) mFilterOrder        = aCmd->argInt(1);
-   if(aCmd->isCmd("EX"                )) mEX                 = aCmd->argDouble(1);
-   if(aCmd->isCmd("UX"                )) mUX                 = aCmd->argDouble(1);
-
-   // Pop back out at the end.
-   if(aCmd->isCmd("End"  ))  nestedPop(aCmd);
+   BaseClass::show();
+   mParms.show("PARMS");
+   mFilter.show();
 }
 
-void HistoryGenWiener::show(char* aLabel)
-{
-   printf("HistoryGenWiener BEGIN %s\n", aLabel);
-
-   printf("mDuration          %10.4f\n",mDuration);
-   printf("mFs                %10.4f\n",mFs);
-   printf("mFc                %10.4f\n",mFc);
-   printf("mFilterOrder       %10d\n",  mFilterOrder);
-   printf("mEX                %10.4f\n",mEX);
-   printf("mUX                %10.4f\n",mUX);
-
-   printf("HistoryGenWiener END   %s\n", aLabel);
-}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Generate the signal history according to the parameters.
 
 void HistoryGenWiener::generate(History& aHistory)
 {
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Initialize.
+
+   // Initialize base class variables and initialize the history and
+   // initialize the history time array.
+   BaseClass::reset();
+   BaseClass::mDuration   = mParms.mDuration;
+   BaseClass::mFs         = mParms.mFs;
+   BaseClass::mEX         = mParms.mEX;
+   BaseClass::mUX         = mParms.mUX;
+   BaseClass::mNoiseSigma = 1.0;
+   BaseClass::initialize(aHistory);
+
+   // Initialize the filter.
+   mFilter.initialize(
+      mParms.mFilterOrder,
+      mParms.mFs,
+      mParms.mFc);
+
+   //  Add a gaussian noise signal to the filter, allow it to settle.
+   for (int k = 0; k < 1000; k++)
+   {
+      mFilter.put(getNoise());
+   }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate filtered gaussian noise and add it to the history value array.
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      //  Add a gaussian noise signal to the filter.
+      mFilter.put(getNoise());
+
+      // Add the filtered gaussian noise to the history value array
+      aHistory.mValue[k] = mFilter.mY;
+   }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Normalize the history to get the desired expectation and uncertainty.
+
+   normalize(aHistory);
 }
-   
+
 }//namespace

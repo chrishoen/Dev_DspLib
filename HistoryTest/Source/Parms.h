@@ -11,7 +11,7 @@ This file contains settings for parameter input.
 //******************************************************************************
 
 #include "risCmdLineFile.h"
-#include "dspHistoryGenWiener.h"
+#include "dspHistoryGenWienerParms.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -49,7 +49,7 @@ public:
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];
 
-   Dsp::HistoryGenWiener mHistoryGenWiener;
+   Dsp::HistoryGenWienerParms mHistoryGenWiener;
 
    //***************************************************************************
    //***************************************************************************
