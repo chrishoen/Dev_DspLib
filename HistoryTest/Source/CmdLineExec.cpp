@@ -69,12 +69,6 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run1");
-
-   TestOne tTestOne;
-   tTestOne.doRun3();
 }
 
 //******************************************************************************

@@ -12,7 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspHistoryGenWienerParms.h"
+#include "dspHistoryGenWiener.h"
 
 namespace Dsp
 {

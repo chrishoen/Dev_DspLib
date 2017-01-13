@@ -22,7 +22,6 @@ public:
    // Tests
    void doRun1();
    void doRun2();
-   void doRun3();
 };
 
 #endif

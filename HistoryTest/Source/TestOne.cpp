@@ -40,66 +40,83 @@ void TestOne::initialize()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void TestOne::doRun1()
 {
-   // Initialize signal time series.
-   TimeSeriesTime* tTime   = new TimeSeriesTime();
-   TimeSeriesLPGN* tSeries = new TimeSeriesLPGN();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generated signal history.
 
-   tTime->mDuration     =     gParms.mDuration;
-   tTime->mFs           =     gParms.mFs;
-   tTime->generate();
+   // Signal history.
+   History tHistory;
 
-   tSeries->reset();
-   tSeries->mDuration   =     gParms.mDuration;
-   tSeries->mN          =     gParms.mFilterOrder;
-   tSeries->mFs         =     gParms.mFs;
-   tSeries->mFc         =     gParms.mFc;
-   tSeries->mEX         =     gParms.mEX;
-   tSeries->mUX         =     gParms.mUX;
-   tSeries->initialize();
-   tSeries->show();
-   tSeries->generate();
+   // Signal history generator.
+   HistoryGenWiener tGen;
+   // Set parameters.
+   tGen.mParms = gParms.mHistoryGenWiener;
+   // Generate the history.
+   tGen.generate(tHistory);
 
-   // Input and output files.
-   CsvFileWriter  tSampleWriter;
-
-   tSampleWriter.open(gParms.mOutputFile);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Collect statistics on the history.
 
    // Statistics
-   TrialStatistics  mTrialStatistics;
-   mTrialStatistics.startTrial();
+   TrialStatistics  tTrialStatistics;
 
-   // Local
-   Sample tSample;
+   // Start the statistics.
+   tTrialStatistics.startTrial();
 
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mNumSamples; k++)
+   // Loop through all of the samples in the history.
+   for (int k = 0; k < tHistory.mMaxSamples; k++)
    {
+      // Put history value to statistics.
+      tTrialStatistics.put(tHistory.mValue[k]);
+   }
+
+   // Finish the statistics.
+   tTrialStatistics.finishTrial();
+   tTrialStatistics.show();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the signal history to an output file.
+
+   // Output file.
+   CsvFileWriter  tSampleWriter;
+   tSampleWriter.open(gParms.mOutputFile);
+
+   // Loop through all of the samples in the history.
+   for (int k = 0; k < tHistory.mMaxSamples; k++)
+   {
+      double tTime  = 0.0;
+      double tValue = 0.0;
+
+      // Get a sample from the history.
+      tHistory.readSampleAtIndex(k,&tTime,&tValue);
+
       // Write the sample to the output file.
       tSampleWriter.writeRow(
          k,
-         tTime->mT[k],
-         tSeries->mX[k]);
-
-      // Put sample to statistics.
-      mTrialStatistics.put(tSeries->mX[k]);
-    
+         tTime,
+         tValue);
    }
 
-   Prn::print(0, "TestOne::doRun1 %d",gParms.mNumSamples);
-
-   // Close files.
+   // Close the output file.
    tSampleWriter.close();
 
-   // Finish statistics.
-   mTrialStatistics.finishTrial();
-   mTrialStatistics.show();
-
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Done.
-   delete tTime;
-   delete tSeries;
+
+   Prn::print(0, "TestOne::doRun1 %d",tHistory.mMaxSamples);
 }
 
 //******************************************************************************
@@ -232,82 +249,5 @@ void TestOne::doRun2()
    // Done.
    delete tTime;
    delete tSeries;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void TestOne::doRun3()
-{
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Signal histories.
-
-   // History.
-   History tHistory;
-
-   // Generate history.
-   HistoryGenWiener tGen;
-   tGen.mParms = gParms.mHistoryGenWiener;
-   tGen.generate(tHistory);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Collect statistics on the history.
-
-   // Statistics
-   TrialStatistics  tTrialStatistics;
-
-   // Start statistics.
-   tTrialStatistics.startTrial();
-
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
-   {
-      // Put sample to statistics.
-      tTrialStatistics.put(tHistory.mValue[k]);
-   }
-
-   // Finish statistics.
-   tTrialStatistics.finishTrial();
-   tTrialStatistics.show();
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Loop to transfer the signal histories to the output file.
-
-   CsvFileWriter  tSampleWriter;
-   tSampleWriter.open(gParms.mOutputFile);
-
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < tHistory.mMaxSamples; k++)
-   {
-      double tTime  = 0.0;
-      double tValue = 0.0;
-
-      // Get the samples from both histories.
-      tHistory.readSampleAtIndex(k,&tTime,&tValue);
-
-      // Write the sample to the output file.
-      tSampleWriter.writeRow(
-         k,
-         tTime,
-         tValue);
-   }
-
-   // Close the output file.
-   tSampleWriter.close();
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Done.
-
-   Prn::print(0, "TestOne::doRun3 %d",tHistory.mMaxSamples);
-
 }
 

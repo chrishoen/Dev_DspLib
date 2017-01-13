@@ -11,7 +11,7 @@ This file contains settings for parameter input.
 //******************************************************************************
 
 #include "risCmdLineFile.h"
-#include "dspHistoryGenWienerParms.h"
+#include "dspHistoryGenWiener.h"
 
 //******************************************************************************
 //******************************************************************************
