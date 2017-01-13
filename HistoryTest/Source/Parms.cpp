@@ -155,10 +155,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
-   if(aCmd->isCmd("BEGIN"))
-   {
-      if (aCmd->isArgString(1, "HistoryGenWiener"))   nestedPush(aCmd, &mHistoryGenWiener);
-   }
+   if(aCmd->isCmd("HistoryGenWiener")) nestedPush(aCmd, &mHistoryGenWiener);
 }
 
 //******************************************************************************

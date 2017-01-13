@@ -57,6 +57,7 @@ void HistoryGenWienerParms::execute(Ris::CmdLineCmd* aCmd)
 
    // Pop back out at the end.
    if(aCmd->isCmd("End"  ))  nestedPop(aCmd);
+   if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
 }
 
 void HistoryGenWienerParms::show(char* aLabel)
