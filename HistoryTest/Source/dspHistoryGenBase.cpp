@@ -55,13 +55,15 @@ void HistoryGenBase::initialize(History& aHistory)
    // Initialize the history.
    aHistory.initialize(mNumSamples);
 
-   // Initialize the history time array.
+   // Initialize the history to zeros.
    double tTimeSum=0.0;
+   aHistory.startHistory();
    for (int k = 0; k < mNumSamples; k++)
    {
-      aHistory.mTime[k] = tTimeSum;
+      aHistory.writeSample(tTimeSum,0.0);
       tTimeSum += mTs;
    }
+   aHistory.finishHistory();
 }
    
 //******************************************************************************

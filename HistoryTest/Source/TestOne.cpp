@@ -17,6 +17,7 @@ Description:
 #include "dspTimeSeriesLPGN.h"
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
+#include "dspHistoryGenWiener.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -231,5 +232,82 @@ void TestOne::doRun2()
    // Done.
    delete tTime;
    delete tSeries;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TestOne::doRun3()
+{
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Signal histories.
+
+   // History.
+   History tHistory;
+
+   // Generate history.
+   HistoryGenWiener tGen;
+   tGen.mParms = gParms.mHistoryGenWiener;
+   tGen.generate(tHistory);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Collect statistics on the history.
+
+   // Statistics
+   TrialStatistics  tTrialStatistics;
+
+   // Start statistics.
+   tTrialStatistics.startTrial();
+
+   // Loop through all of the samples in the time series.
+   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
+   {
+      // Put sample to statistics.
+      tTrialStatistics.put(tHistory.mValue[k]);
+   }
+
+   // Finish statistics.
+   tTrialStatistics.finishTrial();
+   tTrialStatistics.show();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the signal histories to the output file.
+
+   CsvFileWriter  tSampleWriter;
+   tSampleWriter.open(gParms.mOutputFile);
+
+   // Loop through all of the samples in the time series.
+   for (int k = 0; k < tHistory.mMaxSamples; k++)
+   {
+      double tTime  = 0.0;
+      double tValue = 0.0;
+
+      // Get the samples from both histories.
+      tHistory.readSampleAtIndex(k,&tTime,&tValue);
+
+      // Write the sample to the output file.
+      tSampleWriter.writeRow(
+         k,
+         tTime,
+         tValue);
+   }
+
+   // Close the output file.
+   tSampleWriter.close();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Done.
+
+   Prn::print(0, "TestOne::doRun3 %d",tHistory.mMaxSamples);
+
 }
 

@@ -77,8 +77,11 @@ public:
    // Finish recording a signal history.
    void finishHistory();
       
-   // Write a sample to the signal history.
+   // Write a sample to the signal history and advance the index.
    void writeSample(double aTime,double aValue);
+
+   // Set the index to zero.
+   void rewind();
 
    //******************************************************************************
    //******************************************************************************
