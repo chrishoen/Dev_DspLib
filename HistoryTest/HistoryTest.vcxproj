@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspHistory.cpp" />
+    <ClCompile Include="Source\dspHistoryGenWiener.cpp" />
     <ClCompile Include="Source\dspHistoryOps.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspHistory.h" />
+    <ClInclude Include="Source\dspHistoryGenWiener.h" />
     <ClInclude Include="Source\dspHistoryOps.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Parms.h" />
