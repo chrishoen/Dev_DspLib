@@ -4,9 +4,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 #include "my_functions.h"
-#include "dsp_math.h"
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
@@ -28,11 +28,13 @@ Parms::Parms()
 
 void Parms::reset()
 {
-   // File member variables.
-   mSection[0]=0;
-   mSectionFlag=false;
+   BaseClass::reset();
+   strcpy(BaseClass::mFileName,"History_Parms.txt");
 
-   // Parameter member variables.
+   mCode1 = 0;
+   mCode2 = 0;
+
+   mLockFlag=false;
    mDuration = 10.0;
    mFs = 1.0;
    mFc = 1.0;
@@ -51,6 +53,8 @@ void Parms::reset()
 
    mHistoryMaxSamples=0;
    mHistoryDeltaT=0.0;
+
+   mHistoryGenWiener.reset();
 }
 
 //******************************************************************************
@@ -72,55 +76,42 @@ void Parms::expand()
 
 void Parms::show()
 {
-   printf("Parms ******* %s\n", mSection);
+   printf("Parms ***************** BEGIN %s\n", BaseClass::mTargetSection);
 
-   printf("Code1               %d\n",mCode1);
-   printf("Code2               %d\n",mCode2);
-   printf("mDuration          %10.4f\n",mDuration);
-   printf("mFs                %10.4f\n",mFs);
-   printf("mFc                %10.4f\n",mFc);
-   printf("mEX                %10.4f\n",mEX);
-   printf("mUX                %10.4f\n",mUX);
+   printf("Code1              %10d\n",mCode1);
+   printf("Code2              %10d\n",mCode2);
 
-   printf("mFc1               %10.4f\n",mFc1);
-   printf("mFc2               %10.4f\n",mFc2);
-   printf("mFilterOrder       %10d\n",  mFilterOrder);
+   printf("LockFlag           %10s\n",  my_string_from_bool(mLockFlag));
+   printf("Duration           %10.4f\n",mDuration);
+   printf("Fs                 %10.4f\n",mFs);
+   printf("Fc                 %10.4f\n",mFc);
+   printf("EX                 %10.4f\n",mEX);
+   printf("UX                 %10.4f\n",mUX);
 
-   printf("mOutputFile        %10s\n",  mOutputFile);
+   printf("Fc1                %10.4f\n",mFc1);
+   printf("Fc2                %10.4f\n",mFc2);
+   printf("FilterOrder        %10d\n",  mFilterOrder);
 
-   printf("mHistoryMaxSamples %10d\n",  mHistoryMaxSamples);
-   printf("mHistoryDeltaT     %10.4f\n",mHistoryDeltaT);
+   printf("OutputFile         %10s\n",  mOutputFile);
+
+   printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
+   printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
 
    mHistoryGenWiener.show("HistoryGenWiener");
 
-   printf("Parms ******* %s\n", mSection);
+   printf("Parms ******************* END %s\n", BaseClass::mTargetSection);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Base class override: Execute a command from the command file to set a 
-// member variable. This is called by the associated command file object
-// for each command in the file.
+// member variable.  Only process commands for the target section.This is
+// called by the associated command file object for each command in the file.
 
 void Parms::execute(Ris::CmdLineCmd* aCmd)
 {
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Section commands. If not in the section to be read then exit.
-
-
-   if(aCmd->isCmd("SectionBegin"      ))  mSectionFlag=isMySection(aCmd);
-   if(aCmd->isCmd("SectionEnd"        ))  mSectionFlag=false;
-
-   if (!mSectionFlag) return;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Jump table: Execute the command to set a member variable. Only process   
-   // commands for the section to be read.
+   if (!isTargetSection(aCmd)) return;
 
    if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
    if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
@@ -141,79 +132,4 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("HistoryGenWiener")) nestedPush(aCmd, &mHistoryGenWiener);
 }
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Return true if the input command's first argument is equal to the
-// section that is to be read. This is called if the command is
-// "SectionBegin" and returns true if the section is equal to the section
-// that is to be read.
-
-bool Parms::isMySection(Ris::CmdLineCmd* aCmd)
-{
-   bool tFlag=false;
-
-   if (aCmd->numArg()==1)
-   {
-      if (aCmd->isArgString(1,mSection))
-      {
-         tFlag=true;
-      }
-   }
-
-   return tFlag;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Read a section of the command file and set member variables accordingly.
-// Create a command file object, open the file, pass this object to the file
-// object to read the file and apply this object's execution method to each
-// command in the file, and then close the file. This only reads variables for
-// a specific section in the file.
-
-bool Parms::readSection(char* aSection)
-{ 
-   // Store arguments.
-   strcpy(mSection,aSection);
-
-   // File path.
-   char tFilePath[200];
-
-   strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\History_Parms.txt");
-
-   // Temporary command line file object.   
-   Ris::CmdLineFile tCmdLineFile;
-
-   // Open the file.
-   if (tCmdLineFile.open(tFilePath))
-   {
-      // Pass this object to the file object to read the file and apply this
-      // object's execution method to each command in the file.
-      tCmdLineFile.execute(this);
-
-      // Close the file.
-      tCmdLineFile.close();
-
-      // Expand extra member variables.
-      expand();
-
-   //printf("Parms::file open PASS %s\n", tFilePath);
-      return true;
-   }
-   else
-   {
-      printf("Parms::file open FAIL %s\n",tFilePath);
-      return false;
-   }
-}
-
-
-
 

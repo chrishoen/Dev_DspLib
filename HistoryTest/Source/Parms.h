@@ -10,15 +10,15 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 //******************************************************************************
 
-#include "risCmdLineFile.h"
+#include "risCmdLineParms.h"
 #include "dspHistoryGenWiener.h"
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a class that contains parameter member variables. The values of the
-// parameters are set by reading a text file that contains command lines. Each
-// command line is of the form "command argument1 argument2 ...".
+// This is a class that contains parameter member variables. The values of
+// the parameters are set by reading a text file that contains command lines.
+// Each command line is of the form "command argument1 argument2 ...".
 // 
 // The command files are partitioned into different sections and only one
 // section can be read at a time to set member variables that are specified
@@ -29,17 +29,20 @@ Parameters class whose values are read from a command file.
 // object, passes the command object to this object for command execution,
 // and then closes the file. 
 //
-// This class inherits from BaseCmdLineExec. It provides an overload 
-// execute(cmd) method that is called by the CmdLineFile object 
-// for each command in the file. It then sets a member variables, according
-// to the command.
+// This class inherits from BaseCmdLineParms, which inherits from 
+// BaseCmdLineExec. BaseCmdLineParms provides a method that uses a
+// CmdLineFile object to read and process the file. BaseCmdLineExec provides
+// an abstract execute(cmd) method to which inheritors provide an overload
+// that is called by the CmdLineFile object for each command in the file.
+// This execute method then sets a member variables, according to the
+// command.
 // 
 // This class can contain member variables that also inherit from
 // BaseCmdLineExec. This provides for command files that have a nested
 // structure. If so, then this class is the root.
 // 
 
-class Parms : public Ris::BaseCmdLineExec
+class Parms : public Ris::BaseCmdLineParms
 {
 public:
 
@@ -56,6 +59,7 @@ public:
    //***************************************************************************
    // Lowpass filtered gaussian noise time series.
 
+   bool    mLockFlag;     // True if locked.
    double  mDuration;     // Trial duration
    double  mFs;           // Sampling frequency
    double  mFc;           // Cutoff frequency 
@@ -93,7 +97,7 @@ public:
    // Infrastucture.
 
    // Constructor,
-   typedef Ris::BaseCmdLineExec BaseClass;
+   typedef Ris::BaseCmdLineParms BaseClass;
    Parms();
    void reset();
    void show();
@@ -106,30 +110,6 @@ public:
    // Calculate expanded member variables. This is called after the entire
    // section of the command file has been processed.
    void expand();
-
-   // Read a section of the command file and set member variables accordingly.
-   // Create a command file object, open the file, pass this object to the file
-   // object to read the file and apply this object's execution method to each
-   // command in the file, and then close the file. This only reads variables
-   // for a specific section in the file.
-   bool readSection(char* aSection);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Section variables.
-
-   // The section to be read.
-   char mSection[200];
-
-   // True if the current section is the section to be read.
-   bool mSectionFlag;
-
-   // Return true if the input command's first argument is equal to the
-   // section that is to be read. This is called if the command is
-   // "SectionBegin" and returns true if the section is equal to the section
-   // that is to be read.
-   bool isMySection(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************
