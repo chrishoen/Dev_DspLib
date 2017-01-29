@@ -46,5 +46,11 @@ My math functions
 
    }
 
+   //---------------------------------------------------------------------------
+   // Calculate binomial coefficints.
+
+   int dsp_binomial(int aN,int aK);
+
+
 #endif
 

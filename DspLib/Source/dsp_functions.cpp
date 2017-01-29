@@ -66,7 +66,23 @@ bool dsp_closeto (double aA,double aB,int aResolution)
 
 int dsp_round (double aA)
 {
-   if   (aA >= 0.0)  return int(aA + 0.5);
-   else              return int(aA - 0.5);
+   return lround(aA);
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate binomial coefficints.
+
+int dsp_binomial(int aN, int aK)
+{
+   // Guard.
+   if (aK >  aN) return 0; 
+   if (aN < 0)   return 0; 
+   if (aK < 0)   return 0; 
+
+   // Return recursive sum.
+   if (aK == 0)  return 1;
+   if (aK == aN) return 1;
+   return dsp_binomial(aN - 1, aK - 1) + dsp_binomial(aN - 1, aK);
+}

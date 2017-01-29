@@ -8,6 +8,7 @@
 #include "CmdLineExec.h"
 #include "Parms.h"
 #include "dspSignalGen.h"
+#include "dsp_functions.h"
 #include "TestOne.h"
 
 using namespace Dsp;
@@ -28,6 +29,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
    if (aCmd->isCmd("Parms")) executeParms(aCmd);
+   if (aCmd->isCmd("Bin"))   executeBin(aCmd);
 
    if (aCmd->isCmd("RUN1"))  executeRun1(aCmd);
    if (aCmd->isCmd("RUN2"))  executeRun2(aCmd);
@@ -101,6 +103,25 @@ void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
    gParms.readSection("default");
    gParms.readSection("run1");
    gParms.show();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeBin(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,2);
+   aCmd->setArgDefault(2,3);
+
+   int tN = aCmd->argInt(1);
+   int tK = aCmd->argInt(2);
+
+   int tB = dsp_binomial(tN,tK);
+
+   Prn::print(0,"Binomial N,K = %2d %2d $ %d",tN,tK,tB);
+
+
 }
 
 
