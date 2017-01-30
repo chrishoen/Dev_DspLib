@@ -55,18 +55,7 @@ void Parms::reset()
    mHistoryDeltaT=0.0;
 
    mHistoryGenWiener.reset();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Calculate expanded member variables. This is called after the entire
-// section of the command file has been processed.
-
-void Parms::expand()
-{
-   mTs = 1.0 / mFs;
-   mNumSamples = (int)(round(mDuration) * mFs);
+   mHistoryGenTime.reset();
 }
 
 //******************************************************************************
@@ -98,6 +87,7 @@ void Parms::show()
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
 
    mHistoryGenWiener.show("HistoryGenWiener");
+   mHistoryGenTime.show("HistoryGenTime");
 
    printf("Parms ******************* END %s\n", BaseClass::mTargetSection);
 }
@@ -131,5 +121,19 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
    if(aCmd->isCmd("HistoryGenWiener")) nestedPush(aCmd, &mHistoryGenWiener);
+   if(aCmd->isCmd("HistoryGenTime")) nestedPush(aCmd, &mHistoryGenTime);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate expanded member variables. This is called after the entire
+// section of the command file has been processed.
+
+void Parms::expand()
+{
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(round(mDuration) * mFs);
+   mHistoryGenTime.expand();
 }
 

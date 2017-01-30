@@ -12,6 +12,7 @@ Parameters class whose values are read from a command file.
 
 #include "risCmdLineParms.h"
 #include "dspHistoryGenWiener.h"
+#include "dspHistoryGenTime.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -74,6 +75,7 @@ public:
    char mOutputFile [cMaxStringSize];
 
    Dsp::HistoryGenWienerParms mHistoryGenWiener;
+   Dsp::HistoryGenTimeParms   mHistoryGenTime;
 
    //***************************************************************************
    //***************************************************************************
@@ -82,7 +84,7 @@ public:
 
    int mHistoryMaxSamples;
    double mHistoryDeltaT;
-      
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************

@@ -1,18 +1,14 @@
-#ifndef _DSPHISTORYGENWIENER_H_
-#define _DSPHISTORYGENWIENER_H_
+#pragma once
 
 /*==============================================================================
-Signal history generator with a wiener process.
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-#include "risCmdLineExec.h"
-
-#include "dspHistoryGenBaseGN.h"
-#include "dspFilterButterworth.h"
+#include "risCmdLineFile.h"
+#include "dspHistory.h"
 
 namespace Dsp
 {
@@ -27,22 +23,26 @@ namespace Dsp
 // it inherits from BaseCmdLineExec so that it can process commands from a
 // nested command file to set its parameters.
 
-class HistoryGenWienerParms : public Ris::BaseCmdLineExec
+class HistoryGenTimeParms : public Ris::BaseCmdLineExec
 {
 public:
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Members.
+   // Members. These are read in from a parms file.
 
    double  mDuration;     // History duration
    double  mFs;           // Sampling frequency
-   double  mFc;           // Cutoff frequency 
-   int     mFilterOrder;  // Filter order
+   double  mTm;           // Geometric distribution parameter
 
-   double  mEX;           // Desired expectation
-   double  mUX;           // Desired uncertainty
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Expanded members that are not read from the parms file.
+
+   double  mTs;           // Sampling period
+   int     mNumSamples;   // Number of samples in array
 
    //******************************************************************************
    //******************************************************************************
@@ -50,14 +50,18 @@ public:
    // Constructor and parameter initialization.
 
    // Constructor.
-   HistoryGenWienerParms();
+   HistoryGenTimeParms();
    void reset();
 
    // Execute a command line in the section of the command file that is specific
    // to this object and set member variables accordingly. When an "End" is
    // encountered, pop back out of the section and return control to the parent
    // executive.
-   void execute(Ris::CmdLineCmd* aCmd);
+   void execute(Ris::CmdLineCmd* aCmd) override;
+
+   // Calculate expanded member variables. This is called after the entire
+   // section of the command file has been processed.
+   void expand();
 
    // Show.
    void show(char* aLabel);
@@ -69,49 +73,41 @@ public:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a generator for a signal history that evolves according
-// to an integrated wiener process. The signal history is implemented by low
-// pass filtering gaussian noise with a butterworth filter with a specified
-// cutoff frequency. The history is then normalized to have a specified
-// expectation and uncertainty.
- 
-class HistoryGenWiener : public HistoryGenBaseGN
+// This is a base class for signal history generators.
+
+class HistoryGenTime
 {
 public:
-   typedef HistoryGenBaseGN BaseClass;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Members.
-
    // Input parameters.
-   HistoryGenWienerParms mParms;
 
-   // Low pass butterworth filter.
-   Filter::ButterworthLP mFilter;
+   HistoryGenTimeParms mParms;
 
-   //--------------------------------------------------------------------------
-   // Constructor.
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
    // Methods.
 
    // Constructor.
-   HistoryGenWiener();
-   HistoryGenWiener(HistoryGenWienerParms aParms);
-   void reset();
+   HistoryGenTime(HistoryGenTimeParms& aParms);
    void show();
 
-   // Generate the signal history according to the parameters.
-   void generateHistory(History& aHistory);
+   // Initialize member variables. Initialize the history memory for the correct
+   // number of samples. Set the history value array to zero and the time array
+   // to linearly increasing.
+   void initializeLinearTime(History& aHistory);
+
+   // Initialize member variables. Initialize the history memory for the correct
+   // number of samples. Set the history value array to zero and the time array
+   // to linearly increasing.
+   void initializeRandomTime(History& aHistory);
 
 };
 
 //******************************************************************************
 }//namespace
 
-#endif
 
