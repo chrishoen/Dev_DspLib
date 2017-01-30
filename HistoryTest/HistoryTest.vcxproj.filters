@@ -22,9 +22,6 @@
     <ClCompile Include="Source\TestOne.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistory.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryOps.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -41,6 +38,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryStatistics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistory_write.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistory_read.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

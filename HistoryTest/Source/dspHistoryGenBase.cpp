@@ -74,13 +74,13 @@ void HistoryGenBase::initializeHistory(History& aHistory)
    // Set the history value array to zero and the time array to linearly
    // increasing.
    double tTimeSum=0.0;
-   aHistory.startHistory();
+   aHistory.startWrite();
    for (int k = 0; k < mNumSamples; k++)
    {
       aHistory.writeSample(tTimeSum,0.0);
       tTimeSum += mTs;
    }
-   aHistory.finishHistory();
+   aHistory.finishWrite();
 }
    
 //******************************************************************************

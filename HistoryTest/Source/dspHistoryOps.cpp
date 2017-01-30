@@ -31,7 +31,7 @@ void historyCopy(
    aY.initialize(aX.mNumSamples);
 
    // Start Y.
-   aY.startHistory();
+   aY.startWrite();
 
    // Loop through all of the samples in X.
    for (int k = 0; k < aX.mNumSamples; k++)
@@ -47,7 +47,7 @@ void historyCopy(
    }
 
    // Finish Y.
-   aY.finishHistory();
+   aY.finishWrite();
 }
 
 
@@ -65,7 +65,7 @@ void historyCopyWithDelay(
    aY.initialize(aX.mNumSamples);
 
    // Start Y.
-   aY.startHistory();
+   aY.startWrite();
 
    // Loop through all of the samples in X.
    for (int k = 0; k < aX.mNumSamples; k++)
@@ -73,17 +73,16 @@ void historyCopyWithDelay(
       double tTimeX  = 0.0;
       double tValueX = 0.0;
       
-      // Get the time from X.
-      aX.readTimeAtIndex(k,&tTimeX);
+      // Get the sample from X.
+      aX.readSampleAtIndex(k,&tTimeX,&tValueX);
 
-      // Get the value from X, interpolate backward with a delay.
-      aX.readValueInterpolateBefore(k,aDelay,&tValueX);
+      tTimeX += aDelay;
 
       // Put the sample to Y.
       aY.writeSample(tTimeX,tValueX);
    }
 
    // Finish Y.
-   aY.finishHistory();
+   aY.finishWrite();
 }
 }//namespace

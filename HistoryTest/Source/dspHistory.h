@@ -39,14 +39,18 @@ public:
    int     mNumSamples;
 
    // Current index.
-   int     mIndex;
+   int     mWriteIndex;
 
-   // Mean of inter arrival times, the mean delta time.  If the sample time
-   // series is periodic then this is the sampling period.
-   double  mMeanDeltaTime;
+   // Boundary indices and times.
+   int    mBeginIndex;
+   int    mEndIndex;
+   double mBeginTime;
+   double mEndTime;
 
-   // Sum used to calcaulte the mean delta time.
-   double  mSumDeltaTime;
+
+   // The index and time of the last executed read operation.
+   int    mReadIndex;
+   double mReadTime;
 
    // If true then memory has been allocated.
    bool mMemoryFlag;
@@ -59,6 +63,7 @@ public:
    // Constructor.
    History();
   ~History();
+  void resetVariables();
 
    // Allocate memory.
    void initialize(int aMaxSamples);
@@ -69,49 +74,37 @@ public:
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Add to the history.
+   // Write to the history.
 
    // Start recording a signal history. This resets member variables.
-   void startHistory();
+   void startWrite();
 
    // Finish recording a signal history.
-   void finishHistory();
+   void finishWrite();
       
    // Write a sample to the signal history and advance the index.
    void writeSample(double aTime,double aValue);
 
-   // Set the index to zero.
-   void rewind();
-
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
-   // Read values from the signal history.
+   // Read values from the signal history, based on index.
 
    // Read a sample at a particular index.
    bool readValueAtIndex  (int aIndex,double* aValue);
    bool readTimeAtIndex   (int aIndex,double* aTime);
    bool readSampleAtIndex (int aIndex,double* aTime,double* aValue);
 
-   // Read a sample value that is interpolated from a target time that is
-   // calculated to be the time at an input index minus an input delta.
-   // If the target time is not between the time at the input index and
-   // the time of the previous index then a downward search is performed 
-   // until it is found.
-   bool readValueInterpolateBefore (
-      int     aIndex, 
-      double  aBeforeDeltaTime,
-      double* aValue);
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Read values from the signal history, based on time.
 
-   // Read a sample value that is interpolated from a target time that is
-   // calculated to be the time at an input index plus an input delta.
-   // If the target time is not between the time at the input index and
-   // the time of the next index then a upward search is performed 
-   // until it is found.
-   bool readValueInterpolateAfter (
-      int     aIndex, 
-      double  aBeforeDeltaTime,
-      double* aValue);
+   // Start read.
+   void startReadAtTime();
+
+   // Read value at time.
+   double readValueAtTime(double aReadTime);
 
    //******************************************************************************
    //******************************************************************************

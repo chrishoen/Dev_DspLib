@@ -167,7 +167,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\dspHistory.cpp" />
+    <ClCompile Include="Source\dspHistory_read.cpp" />
+    <ClCompile Include="Source\dspHistory_write.cpp" />
     <ClCompile Include="Source\dspHistoryGenBase.cpp" />
     <ClCompile Include="Source\dspHistoryGenBaseGN.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener.cpp" />
