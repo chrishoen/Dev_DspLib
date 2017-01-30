@@ -19,6 +19,7 @@ Description:
 #include "dspHistoryOps.h"
 #include "dspHistoryGenWiener.h"
 #include "dspHistoryStatistics.h"
+#include "dspHistoryLoopClock.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -80,21 +81,27 @@ void TestOne::doRun1()
    CsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
 
+   // Loop clock.
+   HistoryLoopClock tClock(
+      gParms.mHistoryGenWiener.mDuration,
+      gParms.mHistoryGenWiener.mFs);
+
    // Loop through all of the samples in the history.
-   for (int k = 0; k < tHistory.mMaxSamples; k++)
+   do
    {
-      double tTime  = 0.0;
+      int    tIndex = tClock.mCount;
+      double tTime  = tClock.mTime;
       double tValue = 0.0;
 
       // Get a sample from the history.
-      tHistory.readSampleAtIndex(k,&tTime,&tValue);
+      tValue = tHistory.readValueAtTime(tTime);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
-         k,
+         tIndex,
          tTime,
          tValue);
-   }
+   } while (tClock.advance());
 
    // Close the output file.
    tSampleWriter.close();

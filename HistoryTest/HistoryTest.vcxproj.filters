@@ -46,6 +46,9 @@
     <ClCompile Include="Source\dspHistory_read.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspHistoryLoopClock.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -76,6 +79,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryStatistics.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryLoopClock.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

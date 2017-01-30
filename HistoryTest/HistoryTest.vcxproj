@@ -167,6 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
     <ClCompile Include="Source\dspHistory_read.cpp" />
     <ClCompile Include="Source\dspHistory_write.cpp" />
     <ClCompile Include="Source\dspHistoryGenBase.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Source\dspHistoryGenBase.h" />
     <ClInclude Include="Source\dspHistoryGenBaseGN.h" />
     <ClInclude Include="Source\dspHistoryGenWiener.h" />
+    <ClInclude Include="Source\dspHistoryLoopClock.h" />
     <ClInclude Include="Source\dspHistoryOps.h" />
     <ClInclude Include="Source\dspHistoryStatistics.h" />
     <ClInclude Include="Source\MainInit.h" />
