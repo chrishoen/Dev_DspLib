@@ -38,7 +38,7 @@ public:
    int     mMaxSamples;
    int     mNumSamples;
 
-   // Current index.
+   // Current write index.
    int     mWriteIndex;
 
    // Boundary indices and times.
@@ -76,10 +76,10 @@ public:
    //******************************************************************************
    // Write to the history.
 
-   // Start recording a signal history. This resets member variables.
+   // Start writing a signal history. This resets member variables.
    void startWrite();
 
-   // Finish recording a signal history.
+   // Finish writing a signal history.
    void finishWrite();
       
    // Write a sample to the signal history and advance the index.
@@ -99,11 +99,17 @@ public:
    //******************************************************************************
    //******************************************************************************
    // Read values from the signal history, based on time.
+   // This is used in loops that process type2 signal histories. Samples are read
+   // from the history at monotically increasing times. The read is advanced
+   // through the history arrays and an interpolated value between array entries
+   // is returned.
 
    // Start read.
    void startReadAtTime();
 
-   // Read value at time.
+   // Read value at a specific time. This is called repeatedly in a loop where the
+   // read time is monotonic increasing. An interpolated value between array
+   // entries is returned.
    double readValueAtTime(double aReadTime);
 
    //******************************************************************************

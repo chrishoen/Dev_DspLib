@@ -20,7 +20,11 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Start read.
+// Read values from the signal history, based on time.
+// This is used in loops that process type2 signal histories. Samples are read
+// from the history at monotically increasing times. The read is advanced
+// through the history arrays and an interpolated value between array entries
+// is returned.
 
    void History::startReadAtTime()
 {
@@ -32,7 +36,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Read value at time.
+// Read value at a specific time. This is called repeatedly in a loop where the
+// read time is monotonic increasing. An interpolated value between array
+// entries is returned.
 
 double History::readValueAtTime(double aReadTime)
 {
