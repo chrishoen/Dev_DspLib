@@ -22,7 +22,7 @@ SectionBegin default
    Outputfile     C:\Alpha\Data\SignalHistory.csv
 
    HistoryMaxSamples   10000
-   HistoryDeltaT       0.100
+   HistoryDeltaT       1.0
 
    //-----------------------------------------------------------------
    // Signal History Generator.

@@ -140,25 +140,12 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Collect statistics on the history.
+   // Generate a signal history.
 
-   // Statistics
-   HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistory1);
-   tStatistics.show();
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Another signal history.
-
+   // Signal history.
    History tHistory2;
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Transfer the signal history1 to signal history2, with a delay.
-
+   // Generate the history.
    historyCopyWithDelay(
       tHistory1,
       gParms.mHistoryDeltaT,
@@ -167,30 +154,53 @@ void TestOne::doRun2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the signal histories to the output file.
+   // Collect statistics on the history.
 
+   // Statistics
+   HistoryStatistics  tStatistics;
+   tStatistics.collectValue(tHistory1);
+   tStatistics.show();
+
+   tStatistics.collectValue(tHistory2);
+   tStatistics.show();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the signal history to an output file.
+
+   // Output file.
    CsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
 
-   // Loop through all of the samples in the time series.
-   for (int k = 0; k < gParms.mHistoryMaxSamples; k++)
+   // Loop clock.
+   HistoryLoopClock tClock(
+      gParms.mHistoryGenWiener.mDuration,
+      gParms.mHistoryGenWiener.mFs);
+
+   // Start read.
+   tHistory1.startReadAtTime();
+   tHistory2.startReadAtTime();
+
+   // Loop through all of the samples in the history.
+   do
    {
-      double tTime1  = 0.0;
-      double tTime2  = 0.0;
+      int    tIndex = tClock.mCount;
+      double tTime  = tClock.mTime;
       double tValue1 = 0.0;
       double tValue2 = 0.0;
 
-      // Get the samples from both histories.
-      tHistory1.readSampleAtIndex(k,&tTime1,&tValue1);
-      tHistory2.readSampleAtIndex(k,&tTime2,&tValue2);
+      // Get a sample from the history.
+      tValue1 = tHistory1.readValueAtTime(tTime);
+      tValue2 = tHistory2.readValueAtTime(tTime);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
-         k,
-         tTime1,
+         tIndex,
+         tTime,
          tValue1,
          tValue2);
-   }
+   } while (tClock.advance());
 
    // Close the output file.
    tSampleWriter.close();
@@ -200,7 +210,6 @@ void TestOne::doRun2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun2 %d",gParms.mHistoryMaxSamples);
-
+   Prn::print(0, "TestOne::doRun2 %d",tHistory1.mMaxSamples);
 }
 
