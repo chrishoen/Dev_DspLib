@@ -51,8 +51,8 @@ void HistoryGenGen::show()
 //******************************************************************************
 //******************************************************************************
 // Generate the signal history according to the parameters. This is a jump 
-// table that selects one of the history generators according to the 
-// generator type paramater.
+// table that selects one of the concrete history generators according to
+// the generator type parameter and uses it to generate a history.
 
 void HistoryGenGen::generateHistory(History& aHistory)
 {

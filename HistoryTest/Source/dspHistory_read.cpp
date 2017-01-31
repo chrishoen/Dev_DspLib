@@ -21,10 +21,11 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 // Read values from the signal history, based on time.
-// This is used in loops that process type2 signal histories. Samples are read
-// from the history at monotically increasing times. The read is advanced
-// through the history arrays and an interpolated value between array entries
-// is returned.
+// This is used in loops that process type2 signal histories. Samples are
+// read from the history at monotically increasing times. The read is
+// advanced through the history arrays and an interpolated value between
+// array entries is returned. The reads must occur in sequential access such
+// that the time of a read must be after the time of the previous read.
 
    void History::startRead()
 {
@@ -36,9 +37,10 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Read value at a specific time. This is called repeatedly in a loop where the
-// read time is monotonic increasing. An interpolated value between array
-// entries is returned.
+// Read value at a specific time. This is called repeatedly in a loop where
+// the read time is monotonic increasing. An interpolated value between
+// array entries is returned. This allows a history to be approximated as a
+// continuous function of a real time variable.
 
 double History::readValueAtTime(double aReadTime)
 {
@@ -105,7 +107,7 @@ double History::readValueAtTime(double aReadTime)
       // the search (go back to the start of the loop).
       if (aReadTime > tTime1)
       {
-         // Advance the seacrh forward.
+         // Advance the search forward.
          tIndex++;
          // Goto the top of the loop.
          continue;

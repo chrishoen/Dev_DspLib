@@ -16,8 +16,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a history of a signal. It is used for periodic or
-// aperiodic time series of the samples of a signal. It stores the signal
+// This class provides the history of a signal. It is used to store and process
+// the samples of a periodic or aperiodic time series. It stores the signal
 // sample values and times of arrival in dynamically allocated arrays.
 
 class History
@@ -46,7 +46,6 @@ public:
    double  mBeginTime;
    double  mEndTime;
 
-
    // The index and time of the last executed read operation.
    int     mReadIndex;
    double  mReadTime;
@@ -54,9 +53,9 @@ public:
    // If true then memory has been allocated.
    bool    mMemoryFlag;
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Constructor and initialization.
 
    // Constructor.
@@ -70,9 +69,9 @@ public:
    // Deallocate memory.
    void finalize();
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Write to the history.
 
    // Start writing a signal history. This resets member variables.
@@ -84,9 +83,9 @@ public:
    // Write a sample to the signal history and advance the index.
    void writeSample(double aTime,double aValue);
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Read values from the signal history, based on index.
 
    // Read a sample at a particular index.
@@ -94,35 +93,37 @@ public:
    bool readTimeAtIndex   (int aIndex,double* aTime);
    bool readSampleAtIndex (int aIndex,double* aTime,double* aValue);
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Read values from the signal history, based on time.
-   // This is used in loops that process type2 signal histories. Samples are read
-   // from the history at monotically increasing times. The read is advanced
-   // through the history arrays and an interpolated value between array entries
-   // is returned.
+   // This is used in loops that process type2 signal histories. Samples are
+   // read from the history at monotically increasing times. The read is
+   // advanced through the history arrays and an interpolated value between
+   // array entries is returned. The reads must occur in sequential access such
+   // that the time of a read must be after the time of the previous read.
 
    // Start read.
    void startRead();
 
-   // Read value at a specific time. This is called repeatedly in a loop where the
-   // read time is monotonic increasing. An interpolated value between array
-   // entries is returned.
+   // Read value at a specific time. This is called repeatedly in a loop where
+   // the read time is monotonic increasing. An interpolated value between
+   // array entries is returned. This allows a history to be approximated as a
+   // continuous function of a real time variable.
    double readValueAtTime(double aReadTime);
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Adjustments.
 
    // Add a time delta to all times in the history and to all time member
    // variables.
    void addDeltaTime(double aDeltaTime);
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // More.
 
    void show();

@@ -57,11 +57,13 @@ public:
    //***************************************************************************
    // Constants.
 
+   // Generator types.
    static const int cGenZero     = 1;
    static const int cGenStep     = 2;
    static const int cGenSinWave  = 3;
    static const int cGenRandWave = 4;
 
+   // Sampling time types.
    static const int cTimeType1   = 1;
    static const int cTimeType2   = 2;
 
@@ -71,7 +73,7 @@ public:
    // Members that are read from the parms file.
 
    int     mGenType;      // History generator type.
-   int     mTimeType;     // History time      type.
+   int     mTimeType;     // History sampling time type.
 
    double  mDuration;     // History duration.
    double  mFs;           // Sampling frequency.
