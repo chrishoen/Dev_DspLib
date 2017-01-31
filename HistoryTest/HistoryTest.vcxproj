@@ -185,6 +185,7 @@
     <ClCompile Include="Source\TestOne_run2.cpp" />
     <ClCompile Include="Source\TestOne_run3.cpp" />
     <ClCompile Include="Source\TestOne_run4.cpp" />
+    <ClCompile Include="Source\TestOne_run5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />

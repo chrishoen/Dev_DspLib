@@ -13,8 +13,6 @@ Description:
 #include "dspSample.h"
 #include "dspTextFile.h"
 #include "dspStatistics.h"
-#include "dspTimeSeriesTime.h"
-#include "dspTimeSeriesLPGN.h"
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
 #include "dspHistoryGenWiener.h"
@@ -91,8 +89,8 @@ void TestOne::doRun2()
       gParms.mHistoryGenWiener.mFs);
 
    // Start read.
-   tHistory1.startReadAtTime();
-   tHistory2.startReadAtTime();
+   tHistory1.startRead();
+   tHistory2.startRead();
 
    // Loop through all of the samples in the history.
    do

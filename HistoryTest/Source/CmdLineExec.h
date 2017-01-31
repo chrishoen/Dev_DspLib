@@ -23,6 +23,7 @@ public:
    void executeRun2 (Ris::CmdLineCmd* aCmd);
    void executeRun3 (Ris::CmdLineCmd* aCmd);
    void executeRun4 (Ris::CmdLineCmd* aCmd);
+   void executeRun5 (Ris::CmdLineCmd* aCmd);
 
    void executeParms (Ris::CmdLineCmd* aCmd);
    void executeBin   (Ris::CmdLineCmd* aCmd);

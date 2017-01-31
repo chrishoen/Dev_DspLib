@@ -26,7 +26,7 @@ namespace Dsp
 // through the history arrays and an interpolated value between array entries
 // is returned.
 
-   void History::startReadAtTime()
+   void History::startRead()
 {
    // Set the last read index and time at the beginning.
    mReadIndex = mBeginIndex;

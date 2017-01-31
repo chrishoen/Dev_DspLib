@@ -32,21 +32,35 @@ using namespace Dsp;
 //******************************************************************************
 //******************************************************************************
 
-void TestOne::doRun3()
+void TestOne::doRun5()
 {
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Generate a signal history.
+   // Generate a signal history. Periodic wiener wave.
 
    // Signal history.
-   History tHistory;
+   History tHistory1;
 
    // Signal history generator.
-   HistoryGenTime tGen(gParms.mHistoryGenTime);
+   HistoryGenWiener tGen1(gParms.mHistoryGenWiener);
 
    // Generate the history.
-   tGen.initializeLinearTime(tHistory);
+   tGen1.generateHistory(tHistory1);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history. Random time.
+
+   // Signal history.
+   History tHistory2;
+
+   // Signal history generator.
+   HistoryGenTime tGen2(gParms.mHistoryGenTime);
+
+   // Generate the history.
+   tGen2.initializeRandomTime(tHistory2);
 
    //***************************************************************************
    //***************************************************************************
@@ -57,27 +71,21 @@ void TestOne::doRun3()
    CsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
 
-   // Loop clock.
-   HistoryLoopClock tClock(
-      gParms.mHistoryGenWiener.mDuration,
-      gParms.mHistoryGenWiener.mFs);
-
+   tHistory2.startRead();
+   
    // Loop through all of the samples in the history.
-   do
+   for (int k = 0; k < tHistory2.mNumSamples; k++)
    {
-      int    tIndex = tClock.mCount;
-      double tTime  = tClock.mTime;
-      double tValue = 0.0;
-
-      // Get a sample from the history.
-      tValue = tHistory.readValueAtTime(tTime);
+      int    tIndex = k;
+      double tTime  = tHistory2.mTime[k];
+      double tValue = tHistory1.readValueAtTime(tTime);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
          tIndex,
          tTime,
          tValue);
-   } while (tClock.advance());
+   }
 
    // Close the output file.
    tSampleWriter.close();
@@ -87,6 +95,6 @@ void TestOne::doRun3()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun3 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun5 %d",tHistory2.mNumSamples);
 }
 

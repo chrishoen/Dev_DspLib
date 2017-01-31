@@ -13,8 +13,6 @@ Description:
 #include "dspSample.h"
 #include "dspTextFile.h"
 #include "dspStatistics.h"
-#include "dspTimeSeriesTime.h"
-#include "dspTimeSeriesLPGN.h"
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
 #include "dspHistoryGenWiener.h"

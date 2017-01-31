@@ -42,18 +42,18 @@ public:
    int     mWriteIndex;
 
    // Boundary indices and times.
-   int    mBeginIndex;
-   int    mEndIndex;
-   double mBeginTime;
-   double mEndTime;
+   int     mBeginIndex;
+   int     mEndIndex;
+   double  mBeginTime;
+   double  mEndTime;
 
 
    // The index and time of the last executed read operation.
-   int    mReadIndex;
-   double mReadTime;
+   int     mReadIndex;
+   double  mReadTime;
 
    // If true then memory has been allocated.
-   bool mMemoryFlag;
+   bool    mMemoryFlag;
 
    //******************************************************************************
    //******************************************************************************
@@ -105,7 +105,7 @@ public:
    // is returned.
 
    // Start read.
-   void startReadAtTime();
+   void startRead();
 
    // Read value at a specific time. This is called repeatedly in a loop where the
    // read time is monotonic increasing. An interpolated value between array
