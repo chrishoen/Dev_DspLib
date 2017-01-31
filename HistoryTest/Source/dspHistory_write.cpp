@@ -138,7 +138,6 @@ void History::writeSample(double aTime,double aValue)
    // Store sample value and time.
    mTime [mWriteIndex] = aTime;
    mValue[mWriteIndex] = aValue;
-// printf("DESC2 %10.6f %10.6f\n",aTime,aValue);
 
    // If this is the first sample then store the beginning time.
    if (mWriteIndex == 0)

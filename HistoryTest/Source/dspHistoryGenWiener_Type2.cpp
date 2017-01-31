@@ -31,7 +31,7 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize the history.
+   // Initialize the generator base class.
 
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
@@ -42,21 +42,13 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    BaseClass::mEX         = mParms.mEX;
    BaseClass::mUX         = mParms.mUX;
    BaseClass::mNoiseSigma = 1.0;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Initialize the history.
+
    BaseClass::initializeHistory(aHistory);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a temp signal history. Periodic time. Wiener wave value.
-
-   // Signal history.
-   History tHistory1;
-
-   // Signal history generator.
-   HistoryGenWiener tGen1(mParms);
-
-   // Generate the history.
-   tGen1.generateHistoryType1(tHistory1);
 
    //***************************************************************************
    //***************************************************************************
@@ -64,17 +56,31 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    // Generate a temp signal history. Random time. Zero value.
 
    // Signal history.
-   History tHistory2;
+   History tHistory1;
 
    // Signal history generator.
    HistoryGenTimeParms tGenTimeParms(
       mParms.mDuration,
       mParms.mFs);
 
-   HistoryGenTime tGen2(tGenTimeParms);
+   HistoryGenTime tGen1(tGenTimeParms);
 
    // Generate the history.
-   tGen2.initializeRandomTime(tHistory2);
+   tGen1.initializeRandomTime(tHistory1);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a temp signal history. Periodic time. Wiener wave value.
+
+   // Signal history.
+   History tHistory2;
+
+   // Signal history generator.
+   HistoryGenWiener tGen2(mParms);
+
+   // Generate the history.
+   tGen2.generateHistoryType1(tHistory2);
 
    //***************************************************************************
    //***************************************************************************
@@ -92,10 +98,8 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    for (int k = 0; k < tHistory2.mNumSamples; k++)
    {
       int    tIndex = k;
-      double tTime  = tHistory2.mTime[k];
-      double tValue = tHistory1.readValueAtTime(tTime);
-
-//    printf("DESC1 %10.6f %10.6f\n",tTime,tValue);
+      double tTime  = tHistory1.mTime[k];
+      double tValue = tHistory2.readValueAtTime(tTime);
 
       aHistory.writeSample(tTime,tValue);
    }
@@ -107,7 +111,7 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    //***************************************************************************
    // Normalize the history to get the desired expectation and uncertainty.
 
-// BaseClass::normalizeHistory(aHistory);
+   BaseClass::normalizeHistory(aHistory);
 }
 
 }//namespace
