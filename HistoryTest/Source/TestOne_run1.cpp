@@ -58,7 +58,7 @@ void TestOne::doRun1()
    HistoryGenWiener tGen(gParms.mHistoryGenWiener);
 
    // Generate the history.
-   tGen.generateHistory(tHistory);
+   tGen.generateHistoryType1(tHistory);
 
    //***************************************************************************
    //***************************************************************************

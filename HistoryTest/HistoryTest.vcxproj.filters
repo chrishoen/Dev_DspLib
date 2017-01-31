@@ -28,9 +28,6 @@
     <ClCompile Include="Source\dspHistoryGenBaseGN.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenWiener.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryGenWiener_Parms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -65,6 +62,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestOne_run5.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryGenWiener_Type1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

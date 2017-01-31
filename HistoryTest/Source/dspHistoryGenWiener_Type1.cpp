@@ -57,7 +57,7 @@ void HistoryGenWiener::show()
 //******************************************************************************
 // Generate the signal history according to the parameters.
 
-void HistoryGenWiener::generateHistory(History& aHistory)
+void HistoryGenWiener::generateHistoryType1(History& aHistory)
 {
    //***************************************************************************
    //***************************************************************************

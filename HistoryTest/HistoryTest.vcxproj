@@ -174,7 +174,7 @@
     <ClCompile Include="Source\dspHistory_write.cpp" />
     <ClCompile Include="Source\dspHistoryGenBase.cpp" />
     <ClCompile Include="Source\dspHistoryGenBaseGN.cpp" />
-    <ClCompile Include="Source\dspHistoryGenWiener.cpp" />
+    <ClCompile Include="Source\dspHistoryGenWiener_Type1.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Parms.cpp" />
     <ClCompile Include="Source\dspHistoryOps.cpp" />
     <ClCompile Include="Source\dspHistoryStatistics.cpp" />

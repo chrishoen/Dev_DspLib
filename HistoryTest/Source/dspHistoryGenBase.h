@@ -64,7 +64,11 @@ public:
    void normalizeHistory(History& aHistory);
 
    // Abstract method, generate the signal history.
-   virtual void generateHistory(History& aHistory)=0;
+   // Type1 is  periodic, with   regular intersample arrival times.
+   // Type2 is aperiodic, with irregular intersample arrival times.
+
+   virtual void generateHistoryType1(History& aHistory)=0;
+   virtual void generateHistoryType2(History& aHistory)=0;
 
 };
 
