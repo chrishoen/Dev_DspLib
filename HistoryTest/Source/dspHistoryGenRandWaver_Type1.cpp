@@ -26,21 +26,9 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryGenRandWave::HistoryGenRandWave()
-{
-   reset();
-}
-
 HistoryGenRandWave::HistoryGenRandWave(HistoryGenParms& aParms)
 {
-   reset();
    mParms = aParms;
-}
-
-void HistoryGenRandWave::reset()
-{
-   BaseClass::reset();
-   mParms.reset();
 }
 
 //******************************************************************************
@@ -73,12 +61,6 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
    // array and a lineary increasing time array.
-   BaseClass::reset();
-   BaseClass::mDuration   = mParms.mDuration;
-   BaseClass::mFs         = mParms.mFs;
-   BaseClass::mEX         = mParms.mEX;
-   BaseClass::mUX         = mParms.mUX;
-   BaseClass::mNoiseSigma = 1.0;
    BaseClass::initializeHistory(aHistory);
 
    // Initialize the filter according to the parameters.
@@ -98,7 +80,7 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    //***************************************************************************
    // Generate filtered gaussian noise and add it to the history value array.
 
-   for (int k = 0; k < mNumSamples; k++)
+   for (int k = 0; k < mParms.mMaxSamples; k++)
    {
       //  Add gaussian noise to the filter.
       mFilter.put(getNoise());

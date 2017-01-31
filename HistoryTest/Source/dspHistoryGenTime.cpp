@@ -50,13 +50,13 @@ void HistoryGenTime::initializeLinearTime(History& aHistory)
 {
    // Initialize variables.
    // Initialize the history.
-   aHistory.initialize(mParms.mNumSamples);
+   aHistory.initialize(mParms.mMaxSamples);
 
    // Set the history value array to zero and the time array to linearly
    // increasing.
    double tTimeSum=0.0;
    aHistory.startWrite();
-   for (int k = 0; k < mParms.mNumSamples; k++)
+   for (int k = 0; k < mParms.mMaxSamples; k++)
    {
       aHistory.writeSample(tTimeSum,0.0);
       tTimeSum += mParms.mTs;
@@ -75,7 +75,7 @@ void HistoryGenTime::initializeLinearTime(History& aHistory)
 void HistoryGenTime::initializeRandomTime(History& aHistory)
 {
    // Initialize the history.
-   aHistory.initialize(mParms.mNumSamples);
+   aHistory.initialize(mParms.mMaxSamples);
 
    // Initialize random variables.
    std::random_device tRandomDevice;
@@ -83,9 +83,9 @@ void HistoryGenTime::initializeRandomTime(History& aHistory)
    std::exponential_distribution<double> tRandomDistribution(mParms.mFs);
 
    // Set the history value array to zero and the time array to linearly
-   // increasing.
+   // increasing with a random intersample arrival time.
    double tTime = 0.0;
-   for (int k = 0; k < mParms.mNumSamples; k++)
+   for (int k = 0; k < mParms.mMaxSamples; k++)
    {     double tDeltaTime = tRandomDistribution(tRandomGenerator);
          tTime += tDeltaTime;
          aHistory.writeSample(tTime,0.0);

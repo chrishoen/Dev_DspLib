@@ -30,14 +30,7 @@ HistoryGenBase::HistoryGenBase()
 
 void HistoryGenBase::reset()
 {
-   mFs = 1.0;
-   mTs = 1.0 / mFs;
-
-   mDuration = 10.0;
-   mNumSamples = (int)(mDuration * mFs);
-
-   mEX = 0.0;
-   mUX = 1.0;
+   mParms.reset();
 }
 
 //******************************************************************************
@@ -47,12 +40,7 @@ void HistoryGenBase::reset()
 
 void HistoryGenBase::show()
 {
-   printf("mDuration    %10.4f\n",mDuration);
-   printf("mNumSamples  %10d\n",  mNumSamples);
-   printf("mFs          %10.4f\n",mFs);
-   printf("mTs          %10.4f\n",mTs);
-   printf("mEX          %10.4f\n",mEX);
-   printf("mUX          %10.4f\n",mUX);
+   mParms.show("Parms");
 }
 
 //******************************************************************************
@@ -64,21 +52,17 @@ void HistoryGenBase::show()
 
 void HistoryGenBase::initializeHistory(History& aHistory)
 {
-   // Initialize variables.
-   mTs = 1.0 / mFs;
-   mNumSamples = (int)(mDuration * mFs);
-
    // Initialize the history.
-   aHistory.initialize(mNumSamples);
+   aHistory.initialize(mParms.mMaxSamples);
 
    // Set the history value array to zero and the time array to linearly
    // increasing.
    double tTimeSum=0.0;
    aHistory.startWrite();
-   for (int k = 0; k < mNumSamples; k++)
+   for (int k = 0; k < mParms.mMaxSamples; k++)
    {
       aHistory.writeSample(tTimeSum,0.0);
-      tTimeSum += mTs;
+      tTimeSum += mParms.mTs;
    }
    aHistory.finishWrite();
 }
@@ -97,7 +81,7 @@ void HistoryGenBase::normalizeHistory(History& aHistory)
    TrialStatistics  tTrialStatistics;
    tTrialStatistics.startTrial();
 
-   for (int k = 0; k < aHistory.mNumSamples; k++)
+   for (int k = 0; k < aHistory.mMaxSamples; k++)
    {
       tTrialStatistics.put(aHistory.mValue[k]);
    }
@@ -112,11 +96,11 @@ void HistoryGenBase::normalizeHistory(History& aHistory)
    double tEX = tTrialStatistics.mEX;
    double tUX = tTrialStatistics.mUX;
 
-   if (tUX != 0.0) tScale = mUX/tUX;
+   if (tUX != 0.0) tScale = mParms.mUX/tUX;
 
-   for (int k = 0; k < mNumSamples; k++)
+   for (int k = 0; k < aHistory.mMaxSamples; k++)
    {
-      aHistory.mValue[k] = tScale*(aHistory.mValue[k] - tEX) + mEX;
+      aHistory.mValue[k] = tScale*(aHistory.mValue[k] - tEX) + mParms.mEX;
    }
 }
 

@@ -44,7 +44,7 @@ void HistoryGenParms::reset()
    mFilterOrder = 4;
 
    mTs = 1.0 / mFs;
-   mNumSamples = (int)(mDuration * mFs);
+   mMaxSamples = (int)(mDuration * mFs);
 }
 
 //******************************************************************************
@@ -93,7 +93,7 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
 void HistoryGenParms::expand()
 {
    mTs = 1.0 / mFs;
-   mNumSamples = (int)(round(mDuration) * mFs);
+   mMaxSamples = (int)(round(mDuration) * mFs);
 }
 
 //******************************************************************************

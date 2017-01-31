@@ -36,11 +36,6 @@ void HistoryGenRandWave::generateHistoryType2(History& aHistory)
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
    // array and a lineary increasing time array.
-   BaseClass::reset();
-   BaseClass::mDuration   = mParms.mDuration;
-   BaseClass::mFs         = mParms.mFs;
-   BaseClass::mEX         = mParms.mEX;
-   BaseClass::mUX         = mParms.mUX;
    BaseClass::mNoiseSigma = 1.0;
 
    //***************************************************************************
@@ -91,7 +86,7 @@ void HistoryGenRandWave::generateHistoryType2(History& aHistory)
    aHistory.startWrite();
 
    // Loop through all of the samples in the history.
-   for (int k = 0; k < tHistory2.mNumSamples; k++)
+   for (int k = 0; k < tHistory2.mMaxSamples; k++)
    {
       int    tIndex = k;
       double tTime  = tHistory1.mTime[k];

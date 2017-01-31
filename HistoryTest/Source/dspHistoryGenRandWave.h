@@ -44,9 +44,6 @@ public:
    //***************************************************************************
    // Members.
 
-   // Input parameters.
-   HistoryGenParms mParms;
-
    // Low pass butterworth filter.
    Filter::ButterworthLP mFilter;
 
@@ -59,9 +56,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenRandWave();
    HistoryGenRandWave(HistoryGenParms& aParms);
-   void reset();
    void show();
 
    // Generate the signal history according to the parameters.

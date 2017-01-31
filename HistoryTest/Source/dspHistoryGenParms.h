@@ -71,7 +71,7 @@ public:
    // Expanded members that are not read from the parms file.
 
    double  mTs;           // Sampling period
-   int     mNumSamples;   // Number of samples in array
+   int     mMaxSamples;   // Number of samples in array
 
    //***************************************************************************
    //***************************************************************************
