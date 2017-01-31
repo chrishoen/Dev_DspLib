@@ -28,9 +28,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 // This class provides a generator for a signal history that evolves according
-// to a sin wave.
+// to a step function.
  
-class HistoryGenSinWave : public HistoryGenBase
+class HistoryGenStep : public HistoryGenBase
 {
 public:
    typedef HistoryGenBase BaseClass;
@@ -46,7 +46,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenSinWave(HistoryGenParms& aParms);
+   HistoryGenStep(HistoryGenParms& aParms);
    void show();
 
    // Generate the signal history according to the parameters.

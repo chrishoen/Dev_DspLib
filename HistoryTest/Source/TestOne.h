@@ -20,6 +20,7 @@ public:
    void doRun2();
    void doRun3();
    void doRun4();
+   void doRun5();
 
  };
 
