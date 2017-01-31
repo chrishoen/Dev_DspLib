@@ -12,7 +12,6 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspHistoryGenTime.h"
 #include "dspHistoryGenRandWave.h"
 
 namespace Dsp
@@ -31,38 +30,16 @@ void HistoryGenRandWave::generateHistoryType2(History& aHistory)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize the generator base class.
+   // Initialize the history with Type2 sample timing. Random intersample
+   // arrival times, zero values.
 
-   // Initialize base class variables according to the parameters and 
-   // initialize the history for the correct sample size with a zero value
-   // array and a lineary increasing time array.
-   BaseClass::mNoiseSigma = 1.0;
+   BaseClass::initializeHistoryType2(aHistory);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize the history.
-
-   BaseClass::initializeHistory(aHistory);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a temp signal history. Random time. Zero value.
-
-   // Signal history.
-   History tHistory1;
-
-   // Signal history generator.
-   HistoryGenTime tGen1(mParms);
-
-   // Generate the history.
-   tGen1.initializeRandomTime(tHistory1);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a temp signal history. Periodic time. RandWave wave value.
+   // Generate a temp history with Type1 sampling time and a random wave.
+   // Periodic intersample arrival times, random wave values.
 
    // Signal history.
    History tHistory2;
@@ -79,23 +56,17 @@ void HistoryGenRandWave::generateHistoryType2(History& aHistory)
    // Loop to transfer the two temp signal history to the output signal
    // history.
 
-
-   tHistory1.startRead();
-   tHistory2.startRead();
-
-   aHistory.startWrite();
-
    // Loop through all of the samples in the history.
-   for (int k = 0; k < tHistory2.mMaxSamples; k++)
+   for (int k = 0; k < aHistory.mMaxSamples; k++)
    {
-      int    tIndex = k;
-      double tTime  = tHistory1.mTime[k];
+      // Get the time from the first history.
+      double tTime  = aHistory.mTime[k];
+      // Get the value from the second history at that time.
       double tValue = tHistory2.readValueAtTime(tTime);
-
-      aHistory.writeSample(tTime,tValue);
+      // Set the value from the first history to the concurrent value
+      // of the second history.
+      aHistory.mValue[k] = tValue;
    }
-
-   aHistory.finishWrite();
 
    //***************************************************************************
    //***************************************************************************

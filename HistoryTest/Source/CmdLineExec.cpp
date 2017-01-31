@@ -73,12 +73,6 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run1");
-
-   TestOne tTestOne;
-   tTestOne.doRun3();
 }
 
 //******************************************************************************
@@ -87,12 +81,6 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun4(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run4");
-
-   TestOne tTestOne;
-   tTestOne.doRun4();
 }
 
 //******************************************************************************
@@ -101,12 +89,6 @@ void CmdLineExec::executeRun4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun5(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run5");
-
-   TestOne tTestOne;
-   tTestOne.doRun5();
 }
 
 //******************************************************************************
@@ -115,12 +97,6 @@ void CmdLineExec::executeRun5(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun6(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run6");
-
-   TestOne tTestOne;
-   tTestOne.doRun6();
 }
 
 //******************************************************************************

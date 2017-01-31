@@ -25,9 +25,6 @@
     <ClCompile Include="Source\dspHistoryGenBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenBaseGN.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryStatistics.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -40,34 +37,25 @@
     <ClCompile Include="Source\dspHistoryLoopClock.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenTime.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_run1.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestOne_run2.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestOne_run3.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestOne_run4.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestOne_run5.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestOne_run6.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryGenParms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenRandWaver_Type1.cpp">
+    <ClCompile Include="Source\dspHistoryGenRandWave_Type2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenRandWave_Type2.cpp">
+    <ClCompile Include="Source\dspHistoryGenRandWave_Type1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestOne_run2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryGenZero.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryGaussNoise.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,16 +78,10 @@
     <ClInclude Include="Source\dspHistoryGenBase.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenBaseGN.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspHistoryStatistics.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryLoopClock.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenTime.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\TestOne.h">
@@ -109,6 +91,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryGenRandWave.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryGenZero.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryGaussNoise.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

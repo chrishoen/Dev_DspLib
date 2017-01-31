@@ -7,9 +7,7 @@
 //******************************************************************************
 //******************************************************************************
 
-#include "risCmdLineFile.h"
-#include "dspHistory.h"
-#include "dspHistoryGenParms.h"
+#include "dspHistoryGenBase.h"
 
 namespace Dsp
 {
@@ -20,18 +18,12 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class for signal history generators.
+// This is a class for a signal history generators that generates a zero value
+// signal.
 
-class HistoryGenTime
+class HistoryGenZero : public HistoryGenBase
 {
 public:
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Input parameters.
-
-   HistoryGenParms mParms;
 
    //******************************************************************************
    //******************************************************************************
@@ -39,19 +31,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenTime(HistoryGenParms& aParms);
-   void show();
-
-   // Initialize the history memory for the correct number of samples. Set the
-   // history value array to zero and the time array to linearly increasing. This 
-   // has constant intersample arrival times.
-   void initializeLinearTime(History& aHistory);
-
-   // Initialize the history memory for the correct number of samples. Set the
-   // history value array to zero and the time array to linearly increasing. This
-   // has random intersample arrival times, based on an exponential random
-   // distribution.
-   void initializeRandomTime(History& aHistory);
+   HistoryGenZero(HistoryGenParms& aParms);
 
 };
 

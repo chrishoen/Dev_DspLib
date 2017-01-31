@@ -12,7 +12,8 @@ Signal history random wave generator with an integrated wiener process.
 #include "risCmdLineExec.h"
 
 #include "dspHistoryGenParms.h"
-#include "dspHistoryGenBaseGN.h"
+#include "dspHistoryGenBase.h"
+#include "dspHistoryGaussNoise.h"
 #include "dspFilterButterworth.h"
 
 //******************************************************************************
@@ -34,10 +35,10 @@ namespace Dsp
 // cutoff frequency. The history is then normalized to have a specified
 // expectation and uncertainty. This generates a random wave.
  
-class HistoryGenRandWave : public HistoryGenBaseGN
+class HistoryGenRandWave : public HistoryGenBase
 {
 public:
-   typedef HistoryGenBaseGN BaseClass;
+   typedef HistoryGenBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
@@ -45,10 +46,10 @@ public:
    // Members.
 
    // Low pass butterworth filter.
-   Filter::ButterworthLP mFilter;
+   HistoryGaussNoise mNoise;
 
-   //--------------------------------------------------------------------------
-   // Constructor.
+   // Low pass butterworth filter.
+   Filter::ButterworthLP mFilter;
 
    //***************************************************************************
    //***************************************************************************

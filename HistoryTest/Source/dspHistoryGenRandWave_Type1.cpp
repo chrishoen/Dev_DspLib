@@ -61,7 +61,11 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
    // array and a lineary increasing time array.
-   BaseClass::initializeHistory(aHistory);
+   BaseClass::initializeHistoryType1(aHistory);
+
+   // Initialize the gaussian noise generator.
+   mNoise.mNoiseSigma = 1.0;
+   mNoise.initializeNoise();
 
    // Initialize the filter according to the parameters.
    mFilter.initialize(
@@ -72,7 +76,7 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    //  Add some gaussian noise to the filter, allow it to settle.
    for (int k = 0; k < 1000; k++)
    {
-      mFilter.put(getNoise());
+      mFilter.put(mNoise.getNoise());
    }
 
    //***************************************************************************
@@ -83,7 +87,7 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    for (int k = 0; k < mParms.mMaxSamples; k++)
    {
       //  Add gaussian noise to the filter.
-      mFilter.put(getNoise());
+      mFilter.put(mNoise.getNoise());
 
       // Add the filtered gaussian noise to the history value array. The time
       // array has already been set.

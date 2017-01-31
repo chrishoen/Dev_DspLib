@@ -9,6 +9,7 @@ Description:
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <random>
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
@@ -46,11 +47,13 @@ void HistoryGenBase::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize member variables. Initialize the history memory for the correct
-// number of samples. Set the history value array to zero and the time array
-// to lenearly increasing.
+// Initialize member variables. Allocate the history memory for the correct
+// number of samples, according to the parameters. Set the history value array
+// to zero and the time array to linearly increasing.
+// Type1 is  periodic, with   regular intersample arrival times.
+// Type2 is aperiodic, with irregular intersample arrival times.
 
-void HistoryGenBase::initializeHistory(History& aHistory)
+void HistoryGenBase::initializeHistoryType1(History& aHistory)
 {
    // Initialize the history.
    aHistory.initialize(mParms.mMaxSamples);
@@ -63,6 +66,36 @@ void HistoryGenBase::initializeHistory(History& aHistory)
    {
       aHistory.writeSample(tTimeSum,0.0);
       tTimeSum += mParms.mTs;
+   }
+   aHistory.finishWrite();
+}
+   
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Initialize member variables. Allocate the history memory for the correct
+// number of samples, according to the parameters. Set the history value array
+// to zero and the time array to linearly increasing.
+// Type1 is  periodic, with   regular intersample arrival times.
+// Type2 is aperiodic, with irregular intersample arrival times.
+
+void HistoryGenBase::initializeHistoryType2(History& aHistory)
+{
+   // Initialize the history.
+   aHistory.initialize(mParms.mMaxSamples);
+
+   // Initialize random variables.
+   std::random_device tRandomDevice;
+   std::mt19937 tRandomGenerator(tRandomDevice());
+   std::exponential_distribution<double> tRandomDistribution(mParms.mFs);
+
+   // Set the history value array to zero and the time array to linearly
+   // increasing with a random intersample arrival time.
+   double tTime = 0.0;
+   for (int k = 0; k < mParms.mMaxSamples; k++)
+   {     double tDeltaTime = tRandomDistribution(tRandomGenerator);
+         tTime += tDeltaTime;
+         aHistory.writeSample(tTime,0.0);
    }
    aHistory.finishWrite();
 }

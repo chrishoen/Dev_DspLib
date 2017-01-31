@@ -10,7 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dspHistoryGenBaseGN.h"
+#include "dspHistoryGaussNoise.h"
 
 namespace Dsp
 {
@@ -21,35 +21,18 @@ namespace Dsp
 //******************************************************************************
 // Constructor.
 
-HistoryGenBaseGN::HistoryGenBaseGN()
+HistoryGaussNoise::HistoryGaussNoise()
 {
-   reset();
+   mNoiseSigma=0.0;
+   mNoiseSigma=false;
 }
 
-void HistoryGenBaseGN::reset()
-{
-   BaseClass::reset();
-   mNoiseSigma=1.0;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Initialize.
-
-void HistoryGenBaseGN::initializeHistory(History& aHistory)
-{
-   BaseClass::initializeHistory(aHistory);
-
-   initializeNoise();
-}
-   
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Initialize gaussian noise.
 
-void HistoryGenBaseGN::initializeNoise()
+void HistoryGaussNoise::initializeNoise()
 {
    // Set flag.
    mNoiseFlag = mNoiseSigma != 0.0;
@@ -71,7 +54,7 @@ void HistoryGenBaseGN::initializeNoise()
 //******************************************************************************
 // Get gaussian noise.
 
-double HistoryGenBaseGN::getNoise()
+double HistoryGaussNoise::getNoise()
 {
    double tNoise;
    if (mNoiseFlag)
