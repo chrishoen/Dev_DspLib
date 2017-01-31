@@ -32,9 +32,20 @@ void HistoryGenTimeParms::reset()
 {
    mDuration = 10.0;
    mFs = 1.0;
-   mDuration = 10.0;
-   mNumSamples = (int)(mDuration * mFs);
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(round(mDuration) * mFs);
 }
+
+HistoryGenTimeParms::HistoryGenTimeParms(
+   double  aDuration,
+   double  aFs)
+{
+   mDuration = aDuration;
+   mFs       = aFs;
+   mTs = 1.0 / mFs;
+   mNumSamples = (int)(round(mDuration) * mFs);
+}
+
 
 //******************************************************************************
 //******************************************************************************

@@ -12,6 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
+#include "dspHistoryGenTime.h"
 #include "dspHistoryGenWiener.h"
 
 namespace Dsp
@@ -30,7 +31,7 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize.
+   // Initialize the history.
 
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
@@ -43,39 +44,70 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    BaseClass::mNoiseSigma = 1.0;
    BaseClass::initializeHistory(aHistory);
 
-   // Initialize the filter according to the parameters.
-   mFilter.initialize(
-      mParms.mFilterOrder,
-      mParms.mFs,
-      mParms.mFc);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a temp signal history. Periodic time. Wiener wave value.
 
-   //  Add some gaussian noise to the filter, allow it to settle.
-   for (int k = 0; k < 1000; k++)
+   // Signal history.
+   History tHistory1;
+
+   // Signal history generator.
+   HistoryGenWiener tGen1(mParms);
+
+   // Generate the history.
+   tGen1.generateHistoryType1(tHistory1);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a temp signal history. Random time. Zero value.
+
+   // Signal history.
+   History tHistory2;
+
+   // Signal history generator.
+   HistoryGenTimeParms tGenTimeParms(
+      mParms.mDuration,
+      mParms.mFs);
+
+   HistoryGenTime tGen2(tGenTimeParms);
+
+   // Generate the history.
+   tGen2.initializeRandomTime(tHistory2);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Loop to transfer the two temp signal history to the output signal
+   // history.
+
+
+   tHistory1.startRead();
+   tHistory2.startRead();
+
+   aHistory.startWrite();
+
+   // Loop through all of the samples in the history.
+   for (int k = 0; k < tHistory2.mNumSamples; k++)
    {
-      mFilter.put(getNoise());
+      int    tIndex = k;
+      double tTime  = tHistory2.mTime[k];
+      double tValue = tHistory1.readValueAtTime(tTime);
+
+//    printf("DESC1 %10.6f %10.6f\n",tTime,tValue);
+
+      aHistory.writeSample(tTime,tValue);
    }
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate filtered gaussian noise and add it to the history value array.
-
-   for (int k = 0; k < mNumSamples; k++)
-   {
-      //  Add gaussian noise to the filter.
-      mFilter.put(getNoise());
-
-      // Add the filtered gaussian noise to the history value array. The time
-      // array has already been set.
-      aHistory.mValue[k] = mFilter.mY;
-   }
+   aHistory.finishWrite();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Normalize the history to get the desired expectation and uncertainty.
 
-   BaseClass::normalizeHistory(aHistory);
+// BaseClass::normalizeHistory(aHistory);
 }
 
 }//namespace

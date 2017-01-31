@@ -51,6 +51,9 @@ public:
    // Constructor.
    HistoryGenTimeParms();
    void reset();
+   HistoryGenTimeParms(
+      double  aDuration,
+      double  aFs);
 
    // Execute a command line in the section of the command file that is specific
    // to this object and set member variables accordingly. When an "End" is

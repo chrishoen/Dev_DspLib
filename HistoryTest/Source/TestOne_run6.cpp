@@ -31,7 +31,7 @@ using namespace Dsp;
 //******************************************************************************
 //******************************************************************************
 
-void TestOne::doRun1()
+void TestOne::doRun6()
 {
    //***************************************************************************
    //***************************************************************************
@@ -45,7 +45,7 @@ void TestOne::doRun1()
    HistoryGenWiener tGen(gParms.mHistoryGenWiener);
 
    // Generate the history.
-   tGen.generateHistoryType1(tHistory);
+   tGen.generateHistoryType2(tHistory);
 
    //***************************************************************************
    //***************************************************************************
@@ -66,27 +66,22 @@ void TestOne::doRun1()
    CsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
 
-   // Loop clock.
-   HistoryLoopClock tClock(
-      gParms.mHistoryGenWiener.mDuration,
-      gParms.mHistoryGenWiener.mFs);
 
    // Loop through all of the samples in the history.
-   do
+   for (int k=0;k<tHistory.mNumSamples;k++)
    {
-      int    tIndex = tClock.mCount;
-      double tTime  = tClock.mTime;
+      // Read the sample from the history.
+      int    tIndex = k;
+      double tTime  = 0.0;
       double tValue = 0.0;
-
-      // Get a sample from the history.
-      tValue = tHistory.readValueAtTime(tTime);
+      tHistory.readSampleAtIndex(k,&tTime,&tValue);
 
       // Write the sample to the output file.
       tSampleWriter.writeRow(
          tIndex,
          tTime,
          tValue);
-   } while (tClock.advance());
+   }
 
    // Close the output file.
    tSampleWriter.close();
@@ -96,6 +91,6 @@ void TestOne::doRun1()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun1 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun6 %d",tHistory.mMaxSamples);
 }
 

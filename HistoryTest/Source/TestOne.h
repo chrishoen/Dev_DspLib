@@ -15,16 +15,13 @@
 class TestOne
 {
 public:
-   TestOne();
-   void initialize();
-
-
    // Tests
    void doRun1();
    void doRun2();
    void doRun3();
    void doRun4();
    void doRun5();
+   void doRun6();
 
  };
 
