@@ -24,7 +24,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryGenTime::HistoryGenTime(HistoryGenTimeParms& aParms)
+HistoryGenTime::HistoryGenTime(HistoryGenParms& aParms)
 {
    mParms = aParms;
 }

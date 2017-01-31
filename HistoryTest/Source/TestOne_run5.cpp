@@ -43,7 +43,7 @@ void TestOne::doRun5()
    History tHistory1;
 
    // Signal history generator.
-   HistoryGenWiener tGen1(gParms.mHistoryGenWiener);
+   HistoryGenWiener tGen1(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen1.generateHistoryType1(tHistory1);
@@ -57,7 +57,7 @@ void TestOne::doRun5()
    History tHistory2;
 
    // Signal history generator.
-   HistoryGenTime tGen2(gParms.mHistoryGenTime);
+   HistoryGenTime tGen2(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen2.initializeRandomTime(tHistory2);

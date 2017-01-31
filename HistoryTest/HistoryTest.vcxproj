@@ -169,7 +169,6 @@
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenTime.cpp" />
-    <ClCompile Include="Source\dspHistoryGenTime_Parms.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Type1.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Type2.cpp" />
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />

@@ -31,7 +31,7 @@ HistoryGenWiener::HistoryGenWiener()
    reset();
 }
 
-HistoryGenWiener::HistoryGenWiener(HistoryGenWienerParms aParms)
+HistoryGenWiener::HistoryGenWiener(HistoryGenParms& aParms)
 {
    reset();
    mParms = aParms;

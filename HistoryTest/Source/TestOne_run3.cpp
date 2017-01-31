@@ -43,7 +43,7 @@ void TestOne::doRun3()
    History tHistory;
 
    // Signal history generator.
-   HistoryGenTime tGen(gParms.mHistoryGenTime);
+   HistoryGenTime tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen.initializeLinearTime(tHistory);
@@ -59,8 +59,8 @@ void TestOne::doRun3()
 
    // Loop clock.
    HistoryLoopClock tClock(
-      gParms.mHistoryGenWiener.mDuration,
-      gParms.mHistoryGenWiener.mFs);
+      gParms.mHistoryGenParms.mDuration,
+      gParms.mHistoryGenParms.mFs);
 
    // Loop through all of the samples in the history.
    do

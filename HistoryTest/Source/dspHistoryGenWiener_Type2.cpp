@@ -59,11 +59,7 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    History tHistory1;
 
    // Signal history generator.
-   HistoryGenTimeParms tGenTimeParms(
-      mParms.mDuration,
-      mParms.mFs);
-
-   HistoryGenTime tGen1(tGenTimeParms);
+   HistoryGenTime tGen1(mParms);
 
    // Generate the history.
    tGen1.initializeRandomTime(tHistory1);

@@ -43,7 +43,7 @@ void TestOne::doRun4()
    History tHistory;
 
    // Signal history generator.
-   HistoryGenTime tGen(gParms.mHistoryGenTime);
+   HistoryGenTime tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen.initializeRandomTime(tHistory);

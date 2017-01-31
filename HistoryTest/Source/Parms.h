@@ -11,8 +11,7 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 
 #include "risCmdLineParms.h"
-#include "dspHistoryGenWiener.h"
-#include "dspHistoryGenTime.h"
+#include "dspHistoryGenParms.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -58,24 +57,12 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Lowpass filtered gaussian noise time series.
+   // Members that are read from the parms file.
 
-   bool    mLockFlag;     // True if locked.
-   double  mDuration;     // Trial duration
-   double  mFs;           // Sampling frequency
-   double  mFc;           // Cutoff frequency 
-   double  mFc1;          // Cutoff frequency 
-   double  mFc2;          // Cutoff frequency 
-   int     mFilterOrder;  // Filter order
-
-   double  mEX;           // Desired expectation
-   double  mUX;           // Desired uncertainty
+   Dsp::HistoryGenParms mHistoryGenParms;
 
    static const int cMaxStringSize=400;
    char mOutputFile [cMaxStringSize];
-
-   Dsp::HistoryGenWienerParms mHistoryGenWiener;
-   Dsp::HistoryGenTimeParms   mHistoryGenTime;
 
    //***************************************************************************
    //***************************************************************************
@@ -89,9 +76,6 @@ public:
    //***************************************************************************
    //***************************************************************************
    // Expanded members that are not read from the parms file.
-
-   double  mTs;           // Sampling period
-   int     mNumSamples;   // Number of samples in array
 
    //***************************************************************************
    //***************************************************************************
