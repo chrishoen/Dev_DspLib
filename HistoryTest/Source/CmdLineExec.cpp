@@ -34,6 +34,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN1"))  executeRun1(aCmd);
    if (aCmd->isCmd("RUN2"))  executeRun2(aCmd);
    if (aCmd->isCmd("RUN3"))  executeRun3(aCmd);
+   if (aCmd->isCmd("RUN4"))  executeRun4(aCmd);
    if (aCmd->isCmd("RUN" ))  executeRun1(aCmd);
 }
 
@@ -71,6 +72,26 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run1");
+
+   TestOne tTestOne;
+   tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeRun4(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run4");
+
+   TestOne tTestOne;
+   tTestOne.doRun4();
 }
 
 //******************************************************************************

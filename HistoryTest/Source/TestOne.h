@@ -23,6 +23,7 @@ public:
    void doRun1();
    void doRun2();
    void doRun3();
-};
+   void doRun4();
+ };
 
 #endif
