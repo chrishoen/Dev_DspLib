@@ -43,6 +43,7 @@ public:
    // Constructor and initialization.
 
    HistoryGaussNoise();
+   HistoryGaussNoise(double aSigma);
 
    //******************************************************************************
    //******************************************************************************
@@ -50,7 +51,7 @@ public:
    // Gaussian noise methods.
 
    // Initialize random distribution.
-   void initializeNoise();
+   void initialize(double aSigma);
 
    // Get noise from random distribution.
    double getNoise();

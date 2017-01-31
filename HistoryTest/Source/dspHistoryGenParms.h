@@ -57,18 +57,20 @@ public:
    //***************************************************************************
    // Members that are read from the parms file.
 
-   double  mDuration;     // History duration
-   double  mFs;           // Sampling frequency
-   double  mFc;           // Cutoff frequency 
-   int     mFilterOrder;  // Filter order
+   double  mDuration;     // History duration.
+   double  mFs;           // Sampling frequency.
+   double  mFc;           // Filter cutoff frequency. 
+   int     mFilterOrder;  // Filter order.
 
-   double  mEX;           // Desired expectation
-   double  mUX;           // Desired uncertainty
+   double  mEX;           // Desired expectation.
+   double  mUX;           // Desired uncertainty.
 
-   double  mA;            // Sin wave amplitude
-   double  mPhi;          // Sin wave phase
+   double  mA;            // Sin wave amplitude.
+   double  mPhi;          // Sin wave phase.
 
-   double  mTp;           // Step transition time
+   double  mTp;           // Step transition time.
+
+   double  mSigma;        // Additive gaussian noise.
 
    //***************************************************************************
    //***************************************************************************

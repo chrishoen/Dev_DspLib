@@ -27,13 +27,20 @@ HistoryGaussNoise::HistoryGaussNoise()
    mNoiseSigma=false;
 }
 
+HistoryGaussNoise::HistoryGaussNoise(double aSigma)
+{
+   initialize(aSigma);
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Initialize gaussian noise.
 
-void HistoryGaussNoise::initializeNoise()
+void HistoryGaussNoise::initialize(double aSigma)
 {
+   // Store variable.
+   mNoiseSigma = aSigma;
    // Set flag.
    mNoiseFlag = mNoiseSigma != 0.0;
 

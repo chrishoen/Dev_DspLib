@@ -64,8 +64,7 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
    BaseClass::initializeHistoryType1(aHistory);
 
    // Initialize the gaussian noise generator.
-   mNoise.mNoiseSigma = 1.0;
-   mNoise.initializeNoise();
+   mNoise.initialize(1.0);
 
    // Initialize the filter according to the parameters.
    mFilter.initialize(
@@ -93,6 +92,13 @@ void HistoryGenRandWave::generateHistoryType1(History& aHistory)
       // array has already been set.
       aHistory.mValue[k] = mFilter.mY;
    }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Add gaussian noise to the history sample array.
+
+    BaseClass::addNoise(aHistory);
 
    //***************************************************************************
    //***************************************************************************
@@ -152,6 +158,13 @@ void HistoryGenRandWave::generateHistoryType2(History& aHistory)
       // of the second history.
       aHistory.mValue[k] = tValue;
    }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Add gaussian noise to the history sample array.
+
+    BaseClass::addNoise(aHistory);
 
    //***************************************************************************
    //***************************************************************************

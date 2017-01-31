@@ -200,4 +200,27 @@ bool History::readSampleAtIndex(int aIndex, double* aTime, double* aValue)
    return true;
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Add a time delta to all times in the history and to all time member
+// variables.
+
+void History::addDeltaTime(double aDeltaTime)
+{
+   // Add time delta to all time member variables.
+   mBeginTime += aDeltaTime;
+   mEndTime   += aDeltaTime;
+   mReadTime  += aDeltaTime;
+
+   // Add time delta to all times in the history.
+   for (int k = 0; k < mMaxSamples; k++)
+   {
+      mTime[k] += aDeltaTime;
+   }
+}
+
 }//namespace

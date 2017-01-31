@@ -57,6 +57,9 @@ public:
    virtual void generateHistoryType1(History& aHistory)=0;
    virtual void generateHistoryType2(History& aHistory)=0;
 
+   // Add gaussian noise to the history sample values.
+   void addNoise(History& aHistory);
+
    // Normalize the signal history to have the desired expectation and
    // uncertainty.
    void normalizeHistory(History& aHistory);

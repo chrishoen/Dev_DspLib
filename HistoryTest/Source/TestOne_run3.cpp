@@ -70,6 +70,6 @@ void TestOne::doRun3()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun2 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun3 %d",tHistory.mMaxSamples);
 }
 

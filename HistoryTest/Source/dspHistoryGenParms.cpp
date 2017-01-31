@@ -46,6 +46,7 @@ void HistoryGenParms::reset()
    mA   = 0.0;
    mPhi = 0.0;
    mTp  = 1.0;
+   mSigma = 0.0;
 
    mTs = 1.0 / mFs;
    mMaxSamples = (int)(mDuration * mFs);
@@ -69,6 +70,7 @@ void HistoryGenParms::show(char* aLabel)
    printf("A                  %10.4f\n", mA);
    printf("Phi                %10.4f\n", deg(mPhi));
    printf("Tp                 %10.4f\n", mTp);
+   printf("Sigma              %10.4f\n", mSigma);
 
    printf("HistoryGenParms ******** END %s\n", aLabel);
 }
@@ -82,16 +84,16 @@ void HistoryGenParms::show(char* aLabel)
 
 void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("Duration")) mDuration = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fs"))       mFs  = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fc"))       mFc  = aCmd->argDouble(1);
-   if (aCmd->isCmd("EX"))       mEX  = aCmd->argDouble(1);
-   if (aCmd->isCmd("UX"))       mUX  = aCmd->argDouble(1);
-   if (aCmd->isCmd("A"))        mA   = aCmd->argDouble(1);
-   if (aCmd->isCmd("Phi"))      mPhi = aCmd->argAngle(1);
-   if (aCmd->isCmd("Tp"))       mTp  = aCmd->argDouble(1);
-
+   if (aCmd->isCmd("Duration"))    mDuration    = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fs"))          mFs          = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fc"))          mFc          = aCmd->argDouble(1);
    if (aCmd->isCmd("FilterOrder")) mFilterOrder = aCmd->argInt(1);
+   if (aCmd->isCmd("EX"))          mEX          = aCmd->argDouble(1);
+   if (aCmd->isCmd("UX"))          mUX          = aCmd->argDouble(1);
+   if (aCmd->isCmd("A"))           mA           = aCmd->argDouble(1);
+   if (aCmd->isCmd("Phi"))         mPhi         = aCmd->argAngle(1);
+   if (aCmd->isCmd("Sigma"))       mSigma       = aCmd->argDouble(1);
+
 }
 
 //******************************************************************************

@@ -13,6 +13,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
+#include "dspHistoryGaussNoise.h"
 #include "dspHistoryGenBase.h"
 
 namespace Dsp
@@ -100,6 +101,22 @@ void HistoryGenBase::initializeHistoryType2(History& aHistory)
    aHistory.finishWrite();
 }
    
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Add gaussian noise to the history sample values.
+
+void HistoryGenBase::addNoise(History& aHistory)
+{
+   HistoryGaussNoise tNoise(mParms.mSigma);
+
+   for (int k = 0; k < aHistory.mMaxSamples; k++)
+   {
+      aHistory.mValue[k] += tNoise.getNoise();
+   }
+
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
