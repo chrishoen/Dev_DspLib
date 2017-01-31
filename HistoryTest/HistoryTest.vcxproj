@@ -167,9 +167,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenTime.cpp" />
     <ClCompile Include="Source\dspHistoryGenTime_Parms.cpp" />
-    <ClCompile Include="Source\dspHistoryGenWiener_Parms.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Type1.cpp" />
     <ClCompile Include="Source\dspHistoryGenWiener_Type2.cpp" />
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
@@ -194,6 +194,7 @@
     <ClInclude Include="Source\dspHistory.h" />
     <ClInclude Include="Source\dspHistoryGenBase.h" />
     <ClInclude Include="Source\dspHistoryGenBaseGN.h" />
+    <ClInclude Include="Source\dspHistoryGenParms.h" />
     <ClInclude Include="Source\dspHistoryGenTime.h" />
     <ClInclude Include="Source\dspHistoryGenWiener.h" />
     <ClInclude Include="Source\dspHistoryLoopClock.h" />
