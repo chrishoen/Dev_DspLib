@@ -22,6 +22,8 @@ SectionBegin default
 
    HistoryGenParms
    {
+      GenType       SinWave
+
       Duration       100.0
       Fs             100.0
       Fc              0.10

@@ -37,6 +37,8 @@ void HistoryGenParms::reset()
 {
    BaseClass::reset();
 
+   mGenType = cGenZero;
+
    mDuration = 10.0;
    mFs = 1.0;
    mFc = 1.0;
@@ -61,6 +63,7 @@ void HistoryGenParms::show(char* aLabel)
 {
    printf("HistoryGenParms ******** BEGIN %s\n", aLabel);
 
+   printf("GenType            %10s\n",  asStringGenType(mGenType));
    printf("Duration           %10.4f\n", mDuration);
    printf("Fs                 %10.4f\n", mFs);
    printf("Fc                 %10.4f\n", mFc);
@@ -94,6 +97,14 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("Phi"))         mPhi         = aCmd->argAngle(1);
    if (aCmd->isCmd("Sigma"))       mSigma       = aCmd->argDouble(1);
 
+   if (aCmd->isCmd("GenType"))
+   {
+      if (aCmd->isArgString(1,asStringGenType(cGenZero)))     mGenType = cGenZero;
+      if (aCmd->isArgString(1,asStringGenType(cGenStep)))     mGenType = cGenStep;
+      if (aCmd->isArgString(1,asStringGenType(cGenSinWave)))  mGenType = cGenSinWave;
+      if (aCmd->isArgString(1,asStringGenType(cGenRandWave))) mGenType = cGenRandWave;
+   }
+
 }
 
 //******************************************************************************
@@ -111,5 +122,17 @@ void HistoryGenParms::expand()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+char* HistoryGenParms::asStringGenType(int aGenType)
+{
+   switch (aGenType)
+   {
+   case cGenZero     : return "Zero";
+   case cGenStep     : return "Step";
+   case cGenSinWave  : return "SinWave";
+   case cGenRandWave : return "RandWave";
+   default : return "UNKNOWN";
+   }
+}
+
 
 }//namespace

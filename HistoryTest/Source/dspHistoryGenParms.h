@@ -55,7 +55,19 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Constants.
+
+   static const int cGenZero     = 1;
+   static const int cGenStep     = 2;
+   static const int cGenSinWave  = 3;
+   static const int cGenRandWave = 4;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members that are read from the parms file.
+
+   int     mGenType;      // History generator type.
 
    double  mDuration;     // History duration.
    double  mFs;           // Sampling frequency.
@@ -99,6 +111,14 @@ public:
    // Calculate expanded member variables. This is called after the entire
    // section of the command file has been processed.
    void expand();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Helpers.
+
+   static char* asStringGenType(int aGenType);
+
 };
 
 }//namespace
