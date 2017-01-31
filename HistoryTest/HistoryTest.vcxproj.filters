@@ -58,6 +58,12 @@
     <ClCompile Include="Source\dspHistoryGenRandWave.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspHistoryGenSinWave.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestOne_run3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -100,6 +106,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryTextFile.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryGenSinWave.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
