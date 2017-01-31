@@ -22,8 +22,8 @@ SectionBegin default
 
    HistoryGenParms
    {
-      GenType        Zero
-      TimeType      Type1
+      GenType        RandWave
+      TimeType       Type1
 
       Duration       100.0
       Fs             100.0
