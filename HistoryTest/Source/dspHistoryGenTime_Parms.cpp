@@ -34,7 +34,6 @@ void HistoryGenTimeParms::reset()
    mFs = 1.0;
    mDuration = 10.0;
    mNumSamples = (int)(mDuration * mFs);
-   mTm = 1.0;
 }
 
 //******************************************************************************
@@ -49,7 +48,6 @@ void HistoryGenTimeParms::show(char* aLabel)
 
    printf("mDuration          %10.4f\n",mDuration);
    printf("mFs                %10.4f\n",mFs);
-   printf("mTm                %10.4f\n",mTm);
    printf("mTs                %10.4f\n",mTs);
 
    printf("%-25s END\n", aLabel);
@@ -69,7 +67,6 @@ void HistoryGenTimeParms::execute(Ris::CmdLineCmd* aCmd)
    // Execute commands to read parameter members.
    if(aCmd->isCmd("Duration"          )) mDuration           = aCmd->argDouble(1);
    if(aCmd->isCmd("Fs"                )) mFs                 = aCmd->argDouble(1);
-   if(aCmd->isCmd("Tm"                )) mTm                 = aCmd->argDouble(1);
 
    // Pop back out at the end.
    if(aCmd->isCmd("End"  ))  nestedPop(aCmd);

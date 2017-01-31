@@ -42,9 +42,9 @@ void HistoryGenTime::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize member variables. Initialize the history memory for the correct
-// number of samples. Set the history value array to zero and the time array
-// to lenearly increasing.
+// Initialize the history memory for the correct number of samples. Set the
+// history value array to zero and the time array to linearly increasing. This 
+// has constant intersample arrival times.
 
 void HistoryGenTime::initializeLinearTime(History& aHistory)
 {
@@ -67,31 +67,29 @@ void HistoryGenTime::initializeLinearTime(History& aHistory)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize member variables. Initialize the history memory for the correct
-// number of samples. Set the history value array to zero and the time array
-// to lenearly increasing.
+// Initialize the history memory for the correct number of samples. Set the
+// history value array to zero and the time array to linearly increasing. This
+// has random intersample arrival times, based on an exponential random
+// distribution.
 
 void HistoryGenTime::initializeRandomTime(History& aHistory)
 {
+   mParms.show("GenTime");
    // Initialize the history.
    aHistory.initialize(mParms.mNumSamples);
 
    // Initialize random variables.
    std::random_device tRandomDevice;
    std::mt19937 tRandomGenerator(tRandomDevice());
-   std::geometric_distribution<int> tRandomDistribution(mParms.mTm);
+   std::exponential_distribution<double> tRandomDistribution(mParms.mFs);
 
    // Set the history value array to zero and the time array to linearly
    // increasing.
-   int kevent = tRandomDistribution(tRandomGenerator);
+   double tTime = 0.0;
    for (int k = 0; k < mParms.mNumSamples; k++)
-   {
-      if (k >= kevent)
-      {
-         double tTime = k * mParms.mTs;
+   {     double tDeltaTime = tRandomDistribution(tRandomGenerator);
+         tTime += tDeltaTime;
          aHistory.writeSample(tTime,0.0);
-         kevent += tRandomDistribution(tRandomGenerator);
-      }
    }
    aHistory.finishWrite();
 }

@@ -34,7 +34,6 @@ public:
 
    double  mDuration;     // History duration
    double  mFs;           // Sampling frequency
-   double  mTm;           // Geometric distribution parameter
 
    //***************************************************************************
    //***************************************************************************
@@ -95,14 +94,15 @@ public:
    HistoryGenTime(HistoryGenTimeParms& aParms);
    void show();
 
-   // Initialize member variables. Initialize the history memory for the correct
-   // number of samples. Set the history value array to zero and the time array
-   // to linearly increasing.
+   // Initialize the history memory for the correct number of samples. Set the
+   // history value array to zero and the time array to linearly increasing. This 
+   // has constant intersample arrival times.
    void initializeLinearTime(History& aHistory);
 
-   // Initialize member variables. Initialize the history memory for the correct
-   // number of samples. Set the history value array to zero and the time array
-   // to linearly increasing.
+   // Initialize the history memory for the correct number of samples. Set the
+   // history value array to zero and the time array to linearly increasing. This
+   // has random intersample arrival times, based on an exponential random
+   // distribution.
    void initializeRandomTime(History& aHistory);
 
 };
