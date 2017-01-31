@@ -167,6 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspHistoryGenGen.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenRandWave.cpp" />
     <ClCompile Include="Source\dspHistoryGenSinWave.cpp" />
@@ -187,12 +188,14 @@
     <ClCompile Include="Source\TestOne_run2.cpp" />
     <ClCompile Include="Source\TestOne_run3.cpp" />
     <ClCompile Include="Source\TestOne_run4.cpp" />
+    <ClCompile Include="Source\TestOne_run5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspHistory.h" />
     <ClInclude Include="Source\dspHistoryGenBase.h" />
     <ClInclude Include="Source\dspHistoryGaussNoise.h" />
+    <ClInclude Include="Source\dspHistoryGenGen.h" />
     <ClInclude Include="Source\dspHistoryGenParms.h" />
     <ClInclude Include="Source\dspHistoryGenRandWave.h" />
     <ClInclude Include="Source\dspHistoryGenSinWave.h" />

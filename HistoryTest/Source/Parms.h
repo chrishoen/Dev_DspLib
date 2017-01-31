@@ -1,5 +1,5 @@
-#ifndef _PARMS_H_
-#define _PARMS_H_
+#pragma once
+
 /*==============================================================================
 
 Parameters class whose values are read from a command file. 
@@ -109,5 +109,4 @@ public:
         extern Parms gParms;
 #endif
 
-#endif
 

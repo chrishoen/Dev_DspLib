@@ -1,5 +1,4 @@
-#ifndef _DSPHISTORYGENBASE_H_
-#define _DSPHISTORYGENBASE_H_
+#pragma once
 
 /*==============================================================================
 ==============================================================================*/
@@ -57,6 +56,9 @@ public:
    virtual void generateHistoryType1(History& aHistory)=0;
    virtual void generateHistoryType2(History& aHistory)=0;
 
+   // Based on the parms, this calls one of the above, Type1 or Type2.
+   virtual void generateHistory(History& aHistory);
+
    // Add gaussian noise to the history sample values.
    void addNoise(History& aHistory);
 
@@ -69,5 +71,4 @@ public:
 //******************************************************************************
 }//namespace
 
-#endif
 

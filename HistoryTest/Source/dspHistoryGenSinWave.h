@@ -1,5 +1,4 @@
-#ifndef _DSPHISTORYGENWIENER_H_
-#define _DSPHISTORYGENWIENER_H_
+#pragma once
 
 /*==============================================================================
 Signal history random wave generator with an integrated wiener process.
@@ -59,5 +58,4 @@ public:
 //******************************************************************************
 }//namespace
 
-#endif
 

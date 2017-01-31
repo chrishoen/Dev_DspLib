@@ -1,5 +1,4 @@
-#ifndef _DSPHISTORYSTATISTICS_H_
-#define _DSPHISTORYSTATISTICS_H_
+#pragma once
 
 /*==============================================================================
 Signal history statistics.
@@ -45,5 +44,4 @@ public:
 //******************************************************************************
 }//namespace
 
-#endif
 

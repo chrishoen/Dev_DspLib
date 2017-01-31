@@ -1,19 +1,15 @@
 #pragma once
 
 /*==============================================================================
-Signal history random wave generator with an integrated wiener process.
+Signal history general generator.
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-#include "risCmdLineExec.h"
-
 #include "dspHistoryGenParms.h"
-#include "dspHistoryGenBase.h"
-#include "dspHistoryGaussNoise.h"
-#include "dspFilterButterworth.h"
+#include "dspHistory.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -29,26 +25,18 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 // This class provides a generator for a signal history that evolves according
-// to an integrated wiener process. The signal history is implemented by low
-// pass filtering gaussian noise with a butterworth filter with a specified
-// cutoff frequency. The history is then normalized to have a specified
-// expectation and uncertainty. This generates a random wave.
+// parameters specified in the parms file. 
  
-class HistoryGenRandWave : public HistoryGenBase
+class HistoryGenGen
 {
 public:
-   typedef HistoryGenBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members.
 
-   // Low pass butterworth filter.
-   HistoryGaussNoise mNoise;
-
-   // Low pass butterworth filter.
-   Filter::ButterworthLP mFilter;
+   HistoryGenParms mParms;
 
    //***************************************************************************
    //***************************************************************************
@@ -56,17 +44,15 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenRandWave(HistoryGenParms& aParms);
+   HistoryGenGen(HistoryGenParms& aParms);
    void show();
 
-   // Generate the signal history according to the parameters.
-   // Type1 is  periodic, with   regular intersample arrival times.
-   // Type2 is aperiodic, with irregular intersample arrival times.
-   void generateHistoryType1(History& aHistory);   
-   void generateHistoryType2(History& aHistory);
+   // Generate the signal history according to the parameters. This is a jump 
+   // table that selects one of the history generators according to the 
+   // generator type paramater.
+   void generateHistory(History& aHistory);   
 };
 
 //******************************************************************************
 }//namespace
-
 

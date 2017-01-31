@@ -104,6 +104,25 @@ void HistoryGenBase::initializeHistoryType2(History& aHistory)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Based on the parms, this calls one of the above, Type1 or Type2.
+
+void HistoryGenBase::generateHistory(History& aHistory)
+{
+   switch (mParms.mTimeType)
+   {
+   case HistoryGenParms::cTimeType1 : 
+      generateHistoryType1(aHistory);
+      break;
+   case HistoryGenParms::cTimeType2 : 
+      generateHistoryType2(aHistory);
+      break;
+   }
+   
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Add gaussian noise to the history sample values.
 
 void HistoryGenBase::addNoise(History& aHistory)

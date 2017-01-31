@@ -31,7 +31,15 @@ public:
    // Methods.
 
    // Constructor.
+   typedef HistoryGenBase BaseClass;
    HistoryGenZero(HistoryGenParms& aParms);
+   void show();
+
+   // Generate the signal history according to the parameters.
+   // Type1 is  periodic, with   regular intersample arrival times.
+   // Type2 is aperiodic, with irregular intersample arrival times.
+   void generateHistoryType1(History& aHistory);   
+   void generateHistoryType2(History& aHistory);
 
 };
 
