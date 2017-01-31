@@ -62,12 +62,16 @@ public:
    static const int cGenSinWave  = 3;
    static const int cGenRandWave = 4;
 
+   static const int cTimeType1   = 1;
+   static const int cTimeType2   = 2;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members that are read from the parms file.
 
    int     mGenType;      // History generator type.
+   int     mTimeType;     // History time      type.
 
    double  mDuration;     // History duration.
    double  mFs;           // Sampling frequency.
@@ -117,7 +121,8 @@ public:
    //***************************************************************************
    // Helpers.
 
-   static char* asStringGenType(int aGenType);
+   static char* asStringGenType (int aGenType);
+   static char* asStringTimeType(int aTimeType);
 
 };
 
