@@ -15,7 +15,7 @@ Description:
 #include "dspStatistics.h"
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
-#include "dspHistoryGenWiener.h"
+#include "dspHistoryGenRandWave.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryLoopClock.h"
 #include "dspHistoryGenTime.h"

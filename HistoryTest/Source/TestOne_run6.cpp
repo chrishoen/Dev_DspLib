@@ -15,7 +15,7 @@ Description:
 #include "dspStatistics.h"
 #include "dspHistory.h"
 #include "dspHistoryOps.h"
-#include "dspHistoryGenWiener.h"
+#include "dspHistoryGenRandWave.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryLoopClock.h"
 
@@ -42,7 +42,7 @@ void TestOne::doRun6()
    History tHistory;
 
    // Signal history generator.
-   HistoryGenWiener tGen(gParms.mHistoryGenParms);
+   HistoryGenRandWave tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen.generateHistoryType2(tHistory);

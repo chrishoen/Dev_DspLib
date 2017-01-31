@@ -12,11 +12,48 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspHistoryGenTime.h"
-#include "dspHistoryGenWiener.h"
+#include "dspHistoryGenRandWave.h"
 
 namespace Dsp
 {
+
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Constructor
+
+HistoryGenRandWave::HistoryGenRandWave()
+{
+   reset();
+}
+
+HistoryGenRandWave::HistoryGenRandWave(HistoryGenParms& aParms)
+{
+   reset();
+   mParms = aParms;
+}
+
+void HistoryGenRandWave::reset()
+{
+   BaseClass::reset();
+   mParms.reset();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Show
+
+void HistoryGenRandWave::show()
+{
+   BaseClass::show();
+   mParms.show("PARMS");
+   mFilter.show();
+}
 
 //******************************************************************************
 //******************************************************************************
@@ -26,12 +63,12 @@ namespace Dsp
 //******************************************************************************
 // Generate the signal history according to the parameters.
 
-void HistoryGenWiener::generateHistoryType2(History& aHistory)
+void HistoryGenRandWave::generateHistoryType1(History& aHistory)
 {
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize the generator base class.
+   // Initialize.
 
    // Initialize base class variables according to the parameters and 
    // initialize the history for the correct sample size with a zero value
@@ -42,65 +79,34 @@ void HistoryGenWiener::generateHistoryType2(History& aHistory)
    BaseClass::mEX         = mParms.mEX;
    BaseClass::mUX         = mParms.mUX;
    BaseClass::mNoiseSigma = 1.0;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Initialize the history.
-
    BaseClass::initializeHistory(aHistory);
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a temp signal history. Random time. Zero value.
+   // Initialize the filter according to the parameters.
+   mFilter.initialize(
+      mParms.mFilterOrder,
+      mParms.mFs,
+      mParms.mFc);
 
-   // Signal history.
-   History tHistory1;
-
-   // Signal history generator.
-   HistoryGenTime tGen1(mParms);
-
-   // Generate the history.
-   tGen1.initializeRandomTime(tHistory1);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a temp signal history. Periodic time. Wiener wave value.
-
-   // Signal history.
-   History tHistory2;
-
-   // Signal history generator.
-   HistoryGenWiener tGen2(mParms);
-
-   // Generate the history.
-   tGen2.generateHistoryType1(tHistory2);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Loop to transfer the two temp signal history to the output signal
-   // history.
-
-
-   tHistory1.startRead();
-   tHistory2.startRead();
-
-   aHistory.startWrite();
-
-   // Loop through all of the samples in the history.
-   for (int k = 0; k < tHistory2.mNumSamples; k++)
+   //  Add some gaussian noise to the filter, allow it to settle.
+   for (int k = 0; k < 1000; k++)
    {
-      int    tIndex = k;
-      double tTime  = tHistory1.mTime[k];
-      double tValue = tHistory2.readValueAtTime(tTime);
-
-      aHistory.writeSample(tTime,tValue);
+      mFilter.put(getNoise());
    }
 
-   aHistory.finishWrite();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate filtered gaussian noise and add it to the history value array.
+
+   for (int k = 0; k < mNumSamples; k++)
+   {
+      //  Add gaussian noise to the filter.
+      mFilter.put(getNoise());
+
+      // Add the filtered gaussian noise to the history value array. The time
+      // array has already been set.
+      aHistory.mValue[k] = mFilter.mY;
+   }
 
    //***************************************************************************
    //***************************************************************************

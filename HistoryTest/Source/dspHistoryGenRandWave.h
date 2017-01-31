@@ -2,7 +2,7 @@
 #define _DSPHISTORYGENWIENER_H_
 
 /*==============================================================================
-Signal history generator with a wiener process.
+Signal history random wave generator with an integrated wiener process.
 ==============================================================================*/
 
 //******************************************************************************
@@ -32,9 +32,9 @@ namespace Dsp
 // to an integrated wiener process. The signal history is implemented by low
 // pass filtering gaussian noise with a butterworth filter with a specified
 // cutoff frequency. The history is then normalized to have a specified
-// expectation and uncertainty.
+// expectation and uncertainty. This generates a random wave.
  
-class HistoryGenWiener : public HistoryGenBaseGN
+class HistoryGenRandWave : public HistoryGenBaseGN
 {
 public:
    typedef HistoryGenBaseGN BaseClass;
@@ -59,16 +59,16 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenWiener();
-   HistoryGenWiener(HistoryGenParms& aParms);
+   HistoryGenRandWave();
+   HistoryGenRandWave(HistoryGenParms& aParms);
    void reset();
    void show();
 
    // Generate the signal history according to the parameters.
+   // Type1 is  periodic, with   regular intersample arrival times.
+   // Type2 is aperiodic, with irregular intersample arrival times.
    void generateHistoryType1(History& aHistory);   
    void generateHistoryType2(History& aHistory);
-
-
 };
 
 //******************************************************************************

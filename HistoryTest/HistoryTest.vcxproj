@@ -169,8 +169,8 @@
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenTime.cpp" />
-    <ClCompile Include="Source\dspHistoryGenWiener_Type1.cpp" />
-    <ClCompile Include="Source\dspHistoryGenWiener_Type2.cpp" />
+    <ClCompile Include="Source\dspHistoryGenRandWaver_Type1.cpp" />
+    <ClCompile Include="Source\dspHistoryGenRandWave_Type2.cpp" />
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
     <ClCompile Include="Source\dspHistory_read.cpp" />
     <ClCompile Include="Source\dspHistory_write.cpp" />
@@ -195,7 +195,7 @@
     <ClInclude Include="Source\dspHistoryGenBaseGN.h" />
     <ClInclude Include="Source\dspHistoryGenParms.h" />
     <ClInclude Include="Source\dspHistoryGenTime.h" />
-    <ClInclude Include="Source\dspHistoryGenWiener.h" />
+    <ClInclude Include="Source\dspHistoryGenRandWave.h" />
     <ClInclude Include="Source\dspHistoryLoopClock.h" />
     <ClInclude Include="Source\dspHistoryOps.h" />
     <ClInclude Include="Source\dspHistoryStatistics.h" />

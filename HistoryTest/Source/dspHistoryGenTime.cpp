@@ -74,7 +74,6 @@ void HistoryGenTime::initializeLinearTime(History& aHistory)
 
 void HistoryGenTime::initializeRandomTime(History& aHistory)
 {
-   mParms.show("GenTime");
    // Initialize the history.
    aHistory.initialize(mParms.mNumSamples);
 
