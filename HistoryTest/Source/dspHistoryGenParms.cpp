@@ -10,6 +10,7 @@
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
+#include "dsp_math.h"
 #include "dspHistoryGenParms.h"
 
 //******************************************************************************
@@ -42,6 +43,8 @@ void HistoryGenParms::reset()
    mEX = 0.0;
    mUX = 1.0;
    mFilterOrder = 4;
+   mA   = 0.0;
+   mPhi = 0.0;
 
    mTs = 1.0 / mFs;
    mMaxSamples = (int)(mDuration * mFs);
@@ -62,6 +65,8 @@ void HistoryGenParms::show(char* aLabel)
    printf("FilterOrder        %10d\n", mFilterOrder);
    printf("EX                 %10.4f\n", mEX);
    printf("UX                 %10.4f\n", mUX);
+   printf("A                  %10.4f\n", mA);
+   printf("Phi                %10.4f\n", deg(mPhi));
 
    printf("HistoryGenParms ******** END %s\n", aLabel);
 }
@@ -76,10 +81,12 @@ void HistoryGenParms::show(char* aLabel)
 void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("Duration")) mDuration = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fs")) mFs = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fc")) mFc = aCmd->argDouble(1);
-   if (aCmd->isCmd("EX")) mEX = aCmd->argDouble(1);
-   if (aCmd->isCmd("UX")) mUX = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fs"))       mFs  = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fc"))       mFc  = aCmd->argDouble(1);
+   if (aCmd->isCmd("EX"))       mEX  = aCmd->argDouble(1);
+   if (aCmd->isCmd("UX"))       mUX  = aCmd->argDouble(1);
+   if (aCmd->isCmd("A"))        mA   = aCmd->argDouble(1);
+   if (aCmd->isCmd("Phi"))      mPhi = aCmd->argAngle(1);
 
    if (aCmd->isCmd("FilterOrder")) mFilterOrder = aCmd->argInt(1);
 }
