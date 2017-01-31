@@ -107,7 +107,7 @@ public:
 
    // Generate the signal history according to the parameters.
    void generateHistoryType1(History& aHistory);   
-   void generateHistoryType2(History& aHistory) {;}
+   void generateHistoryType2(History& aHistory);
 
 
 };
