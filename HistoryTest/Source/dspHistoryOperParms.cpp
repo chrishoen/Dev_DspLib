@@ -10,8 +10,15 @@
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
-#define  _PARMS_CPP_
-#include "Parms.h"
+#include "dsp_math.h"
+#include "dspHistoryOperParms.h"
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+namespace Dsp
+{
 
 //******************************************************************************
 //******************************************************************************
@@ -21,27 +28,16 @@
 //******************************************************************************
 // Constructor.
 
-Parms::Parms()
+HistoryOperParms::HistoryOperParms()
 {
    reset();
 }
 
-void Parms::reset()
+void HistoryOperParms::reset()
 {
    BaseClass::reset();
-   strcpy(BaseClass::mFileName,"History_Parms.txt");
 
-   mCode1 = 0;
-   mCode2 = 0;
-
-   mHistoryGenParms.reset();
-   mHistoryOperParms.reset();
-
-   mOutputFile[0]=0;
-
-   mHistoryMaxSamples=0;
-   mHistoryDeltaT=0.0;
-
+   mOperType  = cOperIdentity;
 }
 
 //******************************************************************************
@@ -49,22 +45,14 @@ void Parms::reset()
 //******************************************************************************
 // Show.
 
-void Parms::show()
+void HistoryOperParms::show(char* aLabel)
 {
-   printf("Parms ************************ BEGIN %s\n", BaseClass::mTargetSection);
+   printf("HistoryOperParms ************** BEGIN %s\n", aLabel);
 
-   printf("Code1              %10d\n",mCode1);
-   printf("Code2              %10d\n",mCode2);
+   printf("OperType           %10s\n",   asStringOperType(mOperType));
+   printf("M                  %10d\n",   mM);
 
-   printf("OutputFile         %10s\n",  mOutputFile);
-
-   mHistoryGenParms.show("HistoryGen");
-   mHistoryOperParms.show("HistoryOper");
-
-   printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
-   printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
-
-   printf("Parms ************************ END   %s\n", BaseClass::mTargetSection);
+   printf("HistoryOperParms ************** END   %s\n", aLabel);
 }
 
 //******************************************************************************
@@ -74,20 +62,18 @@ void Parms::show()
 // member variable.  Only process commands for the target section.This is
 // called by the associated command file object for each command in the file.
 
-void Parms::execute(Ris::CmdLineCmd* aCmd)
+void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (!isTargetSection(aCmd)) return;
+   if (aCmd->isCmd("M"))           mM           = aCmd->argInt(1);
 
-   if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
-   if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
+   if (aCmd->isCmd("OperType"))
+   {
+      if (aCmd->isArgString(1,asStringOperType(cOperIdentity)))     mOperType = cOperIdentity;
+      if (aCmd->isArgString(1,asStringOperType(cOperDerivOne)))     mOperType = cOperDerivOne;
+   }
 
-   if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
-
-   if(aCmd->isCmd("HistoryGenParms"))  nestedPush(aCmd, &mHistoryGenParms);
-   if(aCmd->isCmd("HistoryOperParms")) nestedPush(aCmd, &mHistoryOperParms);
-
-   if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
-   if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
+   // Pop back out at the end.
+   if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
 }
 
 //******************************************************************************
@@ -96,8 +82,23 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 // Calculate expanded member variables. This is called after the entire
 // section of the command file has been processed.
 
-void Parms::expand()
+void HistoryOperParms::expand()
 {
-   mHistoryGenParms.expand();
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+char* HistoryOperParms::asStringOperType(int aOperType)
+{
+   switch (aOperType)
+   {
+   case cOperIdentity    : return "Identity";
+   case cOperDerivOne    : return "DerivOne";
+   default : return "UNKNOWN";
+   }
+}
+
+
+}//namespace

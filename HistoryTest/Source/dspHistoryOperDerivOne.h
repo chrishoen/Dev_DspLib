@@ -1,16 +1,18 @@
 #pragma once
 
 /*==============================================================================
-Signal history differentiator - first time derivative.
+Signal history linear operator: first time derivative.
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-#include "dspHistory.h"
-#include "dspHistoryDiffParms.h"
-// SDSAT-882 #comment BEGIN
+#include "risCmdLineExec.h"
+
+#include "dspHistoryOperParms.h"
+#include "dspHistoryOperBase.h"
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -24,21 +26,18 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a differentiator for a signal history, it calculates
-// the first time derivative of an input history and stores it in an output
-// history. This is a history operator: it is a function from an input history
-// to an output history.
+// This class provides a linear operator on the set of signal histories the 
+// first time derivative. It's a differentiator.
  
-class HistoryDiffOne
+class HistoryOperDerivOne : public HistoryOperBase
 {
 public:
+   typedef HistoryOperBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members.
-
-   HistoryDiffParms mParms;
 
    //***************************************************************************
    //***************************************************************************
@@ -46,12 +45,11 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryDiffOne(HistoryDiffParms& aParms);
+   HistoryOperDerivOne(HistoryOperParms& aParms);
    void show();
 
-   // Differentiate the input history to produce an ouput history.
-   // XD (X dot) equals dX/dt
-   void differentiateHistoryOne(History& aX,History& aXD);   
+   // Apply the linear operator from the input to the output. F:X->Y
+   void operate(History& aX,History& aY) override;
 };
 
 //******************************************************************************

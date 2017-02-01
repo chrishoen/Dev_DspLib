@@ -12,7 +12,7 @@ Parameters class whose values are read from a command file.
 
 #include "risCmdLineParms.h"
 #include "dspHistoryGenParms.h"
-#include "dspHistoryDiffParms.h"
+#include "dspHistoryOperParms.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -64,7 +64,7 @@ public:
    char mOutputFile [cMaxStringSize];
 
    Dsp::HistoryGenParms  mHistoryGenParms;
-   Dsp::HistoryDiffParms mHistoryDiffParms;
+   Dsp::HistoryOperParms mHistoryOperParms;
 
    //***************************************************************************
    //***************************************************************************

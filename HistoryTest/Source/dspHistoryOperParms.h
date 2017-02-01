@@ -48,21 +48,35 @@ namespace Dsp
 // structure. If so, then this class is the root.
 // 
 
-class HistoryDiffParms : public Ris::BaseCmdLineExec
+class HistoryOperParms : public Ris::BaseCmdLineExec
 {
 public:
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Constants.
+
+   // Generator types.
+   static const int cOperIdentity = 1;
+   static const int cOperDerivOne = 2;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mM;        // Central difference order.
+   int     mOperType;     // History operator type.
+
+   int     mM;            // Cnetral difference order
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Expanded members that are not read from the parms file.
+
+   double  mTs;           // Sampling period
+   int     mMaxSamples;   // Number of samples in array
 
    //***************************************************************************
    //***************************************************************************
@@ -71,7 +85,7 @@ public:
 
    // Constructor,
    typedef Ris::BaseCmdLineExec BaseClass;
-   HistoryDiffParms();
+   HistoryOperParms();
    void reset();
    void show(char* aLabel);
 
@@ -83,6 +97,13 @@ public:
    // Calculate expanded member variables. This is called after the entire
    // section of the command file has been processed.
    void expand();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Helpers.
+
+   static char* asStringOperType (int aGenType);
 
 };
 

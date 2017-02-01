@@ -41,8 +41,9 @@ SectionBegin default
    //-----------------------------------------------------------------
    // Signal Differentiator Parms.
 
-   HistoryDiffParms
+   HistoryOperParms
    {
+      OperType    Identity
       M                  4
    }
 

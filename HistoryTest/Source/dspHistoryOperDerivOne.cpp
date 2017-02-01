@@ -12,7 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspHistoryDiffOne.h"
+#include "dspHistoryOperDerivOne.h"
 
 namespace Dsp
 {
@@ -26,7 +26,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryDiffOne::HistoryDiffOne(HistoryDiffParms& aParms)
+HistoryOperDerivOne::HistoryOperDerivOne(HistoryOperParms& aParms)
 {
    mParms = aParms;
 }
@@ -36,9 +36,9 @@ HistoryDiffOne::HistoryDiffOne(HistoryDiffParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryDiffOne::show()
+void HistoryOperDerivOne::show()
 {
-   mParms.show("HistoryDiffOne");
+   BaseClass::show();
 }
 
 //******************************************************************************
@@ -47,11 +47,9 @@ void HistoryDiffOne::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Differentiate the input history to produce an ouput history.
-// XD (X dot) equals dX/dt
+// Apply the linear operator from the input to the output. F:X->Y
 
-void HistoryDiffOne::differentiateHistoryOne(History& aX, History& aXD)
+void HistoryOperDerivOne::operate(History& aX, History& aY)
 {
-
 }
 }//namespace

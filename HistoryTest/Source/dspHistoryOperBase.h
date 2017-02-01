@@ -1,12 +1,15 @@
 #pragma once
 
 /*==============================================================================
+Base class for signal history linear operators.
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+
 #include "dspHistory.h"
+#include "dspHistoryOperParms.h"
 
 namespace Dsp
 {
@@ -17,21 +20,32 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a set of signal history operators, which are functions that operate
-// on signal histories.
+// This is a base class for signal history linear operators, which are linear
+// functions on the set of histories F:H->H.
 
-// Copy X to Y, X->Y.
-void historyCopy(
-   History& aX,
-   History& aY);
+class HistoryOperBase
+{
+public:
 
-// Copy X to Y with values interpolated to a delay, X->Y.
-void historyCopyWithDelay(
-   History& aX,
-   double   aDelay,
-   History& aY);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Parameters. These are read from a parms file.
 
+   HistoryOperParms mParms;
 
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Methods.
+
+   // Constructor.
+   HistoryOperBase();
+   virtual void show();
+
+   // Apply the linear operator from the input to the output. F:X->Y
+   virtual void operate(History& aX,History& aY)=0;
+};
 
 //******************************************************************************
 }//namespace

@@ -10,15 +10,12 @@ Description:
 #include "prnPrint.h"
 #include "logFiles.h"
 
-#include "dspSample.h"
-#include "dspTextFile.h"
-#include "dspStatistics.h"
 #include "dspHistory.h"
-#include "dspHistoryOps.h"
-#include "dspHistoryGenRandWave.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryLoopClock.h"
 #include "dspHistoryTextFile.h"
+#include "dspHistoryGenGen.h"
+#include "dspHistoryOperGen.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -40,13 +37,27 @@ void TestOne::doRun2()
    // Generate a signal history.
 
    // Signal history.
-   History tHistory;
+   History tHistoryX;
 
    // Signal history generator.
-   HistoryGenRandWave tGen(gParms.mHistoryGenParms);
+   HistoryGenGen tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistoryType2(tHistory);
+   tGen.generateHistory(tHistoryX);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history.
+
+   // Signal history.
+   History tHistoryY;
+
+   // Signal history generator.
+   HistoryOperGen tOper(gParms.mHistoryOperParms);
+
+   // Generate the history.
+   tOper.operate(tHistoryX,tHistoryY);
 
    //***************************************************************************
    //***************************************************************************
@@ -55,7 +66,10 @@ void TestOne::doRun2()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistory);
+   tStatistics.collectValue(tHistoryX);
+   tStatistics.show();
+
+   tStatistics.collectValue(tHistoryY);
    tStatistics.show();
 
    //***************************************************************************
@@ -66,7 +80,7 @@ void TestOne::doRun2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistory);
+   tSampleWriter.writeHistory(tHistoryX);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -74,6 +88,6 @@ void TestOne::doRun2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun2 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun2 %d",tHistoryX.mMaxSamples);
 }
 
