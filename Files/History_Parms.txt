@@ -43,8 +43,8 @@ SectionBegin default
 
    HistoryOperParms
    {
-      OperType    Smoother
-      M                  4
+      OperType       Smoother
+      FilterOrder           9
    }
 
    //-----------------------------------------------------------------

@@ -52,13 +52,8 @@ void HistoryOperBase::initialize(HistoryOperParms& aParms)
    mParms = aParms;
 
    // Allocate memory.
-   int tM = mParms.mM;
-   if (tM > 0)
-   {
-      // Allocate memory.
-      mC = new double[tM * 2 + 1];
-      mMemoryFlag = true;
-   }
+   mC = new double[mParms.mFilterOrder];
+   mMemoryFlag = true;
 }
    
 //******************************************************************************
@@ -121,6 +116,7 @@ void HistoryOperBase::createTimeClone(History& aX, History& aY)
 void HistoryOperBase::setC(int aIndex, double aValue)
 {
    // Local.
+   int tN = mParms.mN;
    int tM = mParms.mM;
    // Guard, bound the index.
    int tIndex = my_ibound(aIndex,-tM,tM);

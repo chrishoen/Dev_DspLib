@@ -69,15 +69,15 @@ public:
 
    int     mOperType;     // History operator type.
 
-   int     mM;            // Cnetral difference order
+   int     mFilterOrder;  // Central difference filter order. Must be odd.
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Expanded members that are not read from the parms file.
 
-   double  mTs;           // Sampling period
-   int     mMaxSamples;   // Number of samples in array
+   int mN;                // Central difference filter order.
+   int mM;                // M = (N-1)/2
 
    //***************************************************************************
    //***************************************************************************

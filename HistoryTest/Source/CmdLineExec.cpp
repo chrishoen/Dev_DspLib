@@ -123,6 +123,26 @@ void CmdLineExec::executeRun6(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1,10);
+   aCmd->setArgDefault(2,7);
+   int tP = aCmd->argInt(1);
+   int tN = aCmd->argInt(2);
+   int tM = (tN-1)/2;
+
+   printf("P,N,M %3d %3d %3d\n\n",tP,tN,tN);
+
+   for (int i = 0; i < tP; i++)
+   {
+      printf("%3d  $$ ", i);
+      for (int k = 1; k <= tM; k++)
+      {
+         int iB = dsp_imax(i - k,0);
+         int iF = dsp_imin(i + k,tP-1);
+         printf("[%3d](%3d,%3d) ", k,iB,iF);
+      }
+      printf("\n");
+   }
+
 }
 
 //******************************************************************************

@@ -99,5 +99,6 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 void Parms::expand()
 {
    mHistoryGenParms.expand();
+   mHistoryOperParms.expand();
 }
 
