@@ -51,7 +51,7 @@ My math functions
    //---------------------------------------------------------------------------
    // Calculate binomial coefficints.
 
-   int dsp_binomial(int aN,int aK);
+   long long dsp_binomial(long long aN, long long aK);
 
    // Calculate two raised to the Nth.
    int dsp_two_to_the(int aN);

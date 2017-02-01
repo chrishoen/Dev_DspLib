@@ -170,8 +170,6 @@ long long my_binomial1(long long aN, long long aK)
 {
    // Guard.
    if (aK >  aN) return 0; 
-   if (aN < 0)   return 0; 
-   if (aK < 0)   return 0; 
 
    // Return recursive sum.
    if (aK == 0)  return 1;
@@ -179,16 +177,37 @@ long long my_binomial1(long long aN, long long aK)
    return my_binomial1(aN - 1, aK - 1) + my_binomial1(aN - 1, aK);
 }
 
+long long my_binomial2(long long aN, long long aK)
+{
+   // Guard.
+   if (aK >  aN) return 999; 
+
+   long long tA = 1;
+   long long tF = 1;
+
+   for (long long i = 1; i <= aK; i++)
+   {
+      tA *= (aN + 1 - i);
+      tF *= i;
+   }
+   return tA/tF;
+}
+
 //******************************************************************************
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,32);
-   aCmd->setArgDefault(2,15);
+//   aCmd->setArgDefault(1,32);
+//   aCmd->setArgDefault(2,15);
+
+   aCmd->setArgDefault(1,5);
+   aCmd->setArgDefault(2,4);
+
+
    int tN = aCmd->argInt(1);
    int tK = aCmd->argInt(2);
 
-   long long tB = my_binomial1(tN,tK);
+   long long tB = my_binomial2(tN,tK);
 
    printf("%5d %5d  $$ %lld\n",tN,tK,tB);
 
@@ -233,9 +252,9 @@ void CmdLineExec::executeBin(Ris::CmdLineCmd* aCmd)
    int tN = aCmd->argInt(1);
    int tK = aCmd->argInt(2);
 
-   int tB = dsp_binomial(tN,tK);
+   long long tB = dsp_binomial(tN,tK);
 
-   Prn::print(0,"Binomial N,K = %2d %2d $ %d",tN,tK,tB);
+   Prn::print(0,"Binomial N,K = %2d %2d $ %lld",tN,tK,tB);
 
 
 }

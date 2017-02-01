@@ -81,17 +81,20 @@ int dsp_round (double aA)
 //******************************************************************************
 // Calculate binomial coefficints.
 
-int dsp_binomial(int aN, int aK)
+long long dsp_binomial(long long aN, long long aK)
 {
    // Guard.
    if (aK >  aN) return 0; 
-   if (aN < 0)   return 0; 
-   if (aK < 0)   return 0; 
 
-   // Return recursive sum.
-   if (aK == 0)  return 1;
-   if (aK == aN) return 1;
-   return dsp_binomial(aN - 1, aK - 1) + dsp_binomial(aN - 1, aK);
+   long long tA = 1;
+   long long tF = 1;
+
+   for (long long i = 1; i <= aK; i++)
+   {
+      tA *= (aN + 1 - i);
+      tF *= i;
+   }
+   return tA/tF;
 }
 
 //******************************************************************************
