@@ -10,8 +10,15 @@
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
-#define  _PARMS_CPP_
-#include "Parms.h"
+#include "dsp_math.h"
+#include "dspHistoryDiffParms.h"
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+namespace Dsp
+{
 
 //******************************************************************************
 //******************************************************************************
@@ -21,27 +28,16 @@
 //******************************************************************************
 // Constructor.
 
-Parms::Parms()
+HistoryDiffParms::HistoryDiffParms()
 {
    reset();
 }
 
-void Parms::reset()
+void HistoryDiffParms::reset()
 {
    BaseClass::reset();
-   strcpy(BaseClass::mFileName,"History_Parms.txt");
 
-   mCode1 = 0;
-   mCode2 = 0;
-
-   mHistoryGenParms.reset();
-   mHistoryDiffParms.reset();
-
-   mOutputFile[0]=0;
-
-   mHistoryMaxSamples=0;
-   mHistoryDeltaT=0.0;
-
+   mM = 1;
 }
 
 //******************************************************************************
@@ -49,22 +45,13 @@ void Parms::reset()
 //******************************************************************************
 // Show.
 
-void Parms::show()
+void HistoryDiffParms::show(char* aLabel)
 {
-   printf("Parms ************************ BEGIN %s\n", BaseClass::mTargetSection);
+   printf("HistoryDiffParms ************* BEGIN %s\n", aLabel);
 
-   printf("Code1              %10d\n",mCode1);
-   printf("Code2              %10d\n",mCode2);
+   printf("M                  %10d\n",   mM);
 
-   printf("OutputFile         %10s\n",  mOutputFile);
-
-   mHistoryGenParms.show("HistoryGen");
-   mHistoryDiffParms.show("HistoryDiff");
-
-   printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
-   printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
-
-   printf("Parms ************************ END   %s\n", BaseClass::mTargetSection);
+   printf("HistoryDiffParms ************* END   %s\n", aLabel);
 }
 
 //******************************************************************************
@@ -74,20 +61,12 @@ void Parms::show()
 // member variable.  Only process commands for the target section.This is
 // called by the associated command file object for each command in the file.
 
-void Parms::execute(Ris::CmdLineCmd* aCmd)
+void HistoryDiffParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (!isTargetSection(aCmd)) return;
+   if (aCmd->isCmd("M"))         mM = aCmd->argInt(1);
 
-   if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
-   if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
-
-   if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
-
-   if(aCmd->isCmd("HistoryGenParms"))  nestedPush(aCmd, &mHistoryGenParms);
-   if(aCmd->isCmd("HistoryDiffParms")) nestedPush(aCmd, &mHistoryDiffParms);
-
-   if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
-   if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
+   // Pop back out at the end.
+   if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
 }
 
 //******************************************************************************
@@ -96,8 +75,8 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 // Calculate expanded member variables. This is called after the entire
 // section of the command file has been processed.
 
-void Parms::expand()
+void HistoryDiffParms::expand()
 {
-   mHistoryGenParms.expand();
 }
 
+}//namespace

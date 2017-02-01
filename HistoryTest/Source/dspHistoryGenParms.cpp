@@ -62,7 +62,7 @@ void HistoryGenParms::reset()
 
 void HistoryGenParms::show(char* aLabel)
 {
-   printf("HistoryGenParms ******** BEGIN %s\n", aLabel);
+   printf("HistoryGenParms ************** BEGIN %s\n", aLabel);
 
    printf("GenType            %10s\n",  asStringGenType(mGenType));
    printf("TimeType           %10s\n",  asStringTimeType(mTimeType));
@@ -77,7 +77,7 @@ void HistoryGenParms::show(char* aLabel)
    printf("Tp                 %10.4f\n", mTp);
    printf("Sigma              %10.4f\n", mSigma);
 
-   printf("HistoryGenParms ******** END %s\n", aLabel);
+   printf("HistoryGenParms ************** END   %s\n", aLabel);
 }
 
 //******************************************************************************
@@ -113,6 +113,8 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringTimeType(cTimeType2)))     mTimeType = cTimeType2;
    }
 
+   // Pop back out at the end.
+   if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
 }
 
 //******************************************************************************

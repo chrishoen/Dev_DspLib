@@ -39,6 +39,14 @@ SectionBegin default
    }
 
    //-----------------------------------------------------------------
+   // Signal Differentiator Parms.
+
+   HistoryDiffParms
+   {
+      M                  4
+   }
+
+   //-----------------------------------------------------------------
    // Integrity check
 
    Code2              102

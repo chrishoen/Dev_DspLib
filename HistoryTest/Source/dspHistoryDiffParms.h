@@ -10,9 +10,14 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 //******************************************************************************
 
-#include "risCmdLineParms.h"
-#include "dspHistoryGenParms.h"
-#include "dspHistoryDiffParms.h"
+#include "risCmdLineExec.h"
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+namespace Dsp
+{
 
 //******************************************************************************
 //******************************************************************************
@@ -43,36 +48,16 @@ Parameters class whose values are read from a command file.
 // structure. If so, then this class is the root.
 // 
 
-class Parms : public Ris::BaseCmdLineParms
+class HistoryDiffParms : public Ris::BaseCmdLineExec
 {
 public:
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Integrity checks.
-
-   int   mCode1;
-   int   mCode2;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
    // Members that are read from the parms file.
 
-   static const int cMaxStringSize=400;
-   char mOutputFile [cMaxStringSize];
-
-   Dsp::HistoryGenParms  mHistoryGenParms;
-   Dsp::HistoryDiffParms mHistoryDiffParms;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Signal histories.
-
-   int mHistoryMaxSamples;
-   double mHistoryDeltaT;
+   int     mM;        // Central difference order.
 
    //***************************************************************************
    //***************************************************************************
@@ -85,10 +70,10 @@ public:
    // Infrastucture.
 
    // Constructor,
-   typedef Ris::BaseCmdLineParms BaseClass;
-   Parms();
+   typedef Ris::BaseCmdLineExec BaseClass;
+   HistoryDiffParms();
    void reset();
-   void show();
+   void show(char* aLabel);
 
    // Base class override: Execute a command from the command file to set a 
    // member variable. This is called by the associated command file object
@@ -98,17 +83,7 @@ public:
    // Calculate expanded member variables. This is called after the entire
    // section of the command file has been processed.
    void expand();
+
 };
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Global instance.
-
-#ifdef _PARMS_CPP_
-        Parms gParms;
-#else
-        extern Parms gParms;
-#endif
-
-
+}//namespace
