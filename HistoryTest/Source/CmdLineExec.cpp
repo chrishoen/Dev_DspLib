@@ -28,6 +28,9 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RESET")) reset();
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
+   if (aCmd->isCmd("GO3"))   executeGo3(aCmd);
+   if (aCmd->isCmd("GO4"))   executeGo4(aCmd);
+   if (aCmd->isCmd("GO5"))   executeGo5(aCmd);
    if (aCmd->isCmd("Parms")) executeParms(aCmd);
    if (aCmd->isCmd("Bin"))   executeBin(aCmd);
 
@@ -156,6 +159,51 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    for (int i=1;i<=aN-1;i++) tA *= 2;
 
    printf("%5d %5d\n",aN,tA);
+ 
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+long long my_binomial1(long long aN, long long aK)
+{
+   // Guard.
+   if (aK >  aN) return 0; 
+   if (aN < 0)   return 0; 
+   if (aK < 0)   return 0; 
+
+   // Return recursive sum.
+   if (aK == 0)  return 1;
+   if (aK == aN) return 1;
+   return my_binomial1(aN - 1, aK - 1) + my_binomial1(aN - 1, aK);
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,32);
+   aCmd->setArgDefault(2,15);
+   int tN = aCmd->argInt(1);
+   int tK = aCmd->argInt(2);
+
+   long long tB = my_binomial1(tN,tK);
+
+   printf("%5d %5d  $$ %lld\n",tN,tK,tB);
+
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
+{
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
+{
  
 }
 

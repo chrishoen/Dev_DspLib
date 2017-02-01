@@ -123,12 +123,14 @@ void HistoryOperDerivOne::calculateCoefficients2()
    int N = mParms.mN;
    int M = mParms.mM;
    int m = (N-3)/2;
+   printf("LINE101 N,M,m %d %d %d\n",N,M,m);
 
    double tTerm1 = 1.0/pow(2.0,double(2*m+1));
    double tTerm2 = 1.0/tH;
 
    for (int k = 1; k <= M; k++)
    {
+      printf("LINE102 %d %d\n",k,m);
       mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
@@ -148,7 +150,6 @@ void HistoryOperDerivOne::operate(History& aX, History& aY)
    printf("HistoryOperDerivOne::operate %d\n",mParms.mFilterOrder);
 
    // Calculate the central difference filter coefficents, based on the parms.
-   calculateCoefficients1();
    calculateCoefficients2();
 
    // Create the destination history as clone of the source history that has
