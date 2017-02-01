@@ -25,6 +25,13 @@ double dsp_fmax (double aA,double aB) {return aA > aB ? aA : aB;}
 int    dsp_imin (int aA,int aB) {return aA > aB ? aB : aA;}
 int    dsp_imax (int aA,int aB) {return aA > aB ? aA : aB;}
 
+int    my_ibound(int aA, int aLowerBound, int aUpperBound)
+{
+   if (aA < aLowerBound) return aLowerBound;
+   if (aA > aUpperBound) return aUpperBound;
+   return aA;
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

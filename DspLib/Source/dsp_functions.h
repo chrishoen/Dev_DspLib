@@ -20,6 +20,8 @@ My math functions
    int    dsp_imin (int aA,int aB);
    int    dsp_imax (int aA,int aB);
 
+   int    my_ibound (int aA,int aLowerBound,int aUpperBound);
+
    // Close to
    bool dsp_closeto (double aA,double aB,double aResolution);
    bool dsp_closeto (double aA,double aB,int aResolution);

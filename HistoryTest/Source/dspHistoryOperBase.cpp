@@ -12,6 +12,7 @@ Description:
 #include <random>
 
 #include "dsp_math.h"
+#include "dsp_functions.h"
 #include "dspHistoryOperBase.h"
 
 namespace Dsp
@@ -111,4 +112,29 @@ void HistoryOperBase::createTimeClone(History& aX, History& aY)
    aY.finishWrite();
 }
 
-}//namespace
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Manage the values of the central difference coefficients array.
+// aIndex varies like -M .. 0 .. M
+
+void HistoryOperBase::setC(int aIndex, double aValue)
+{
+   // Local.
+   int tM = mParms.mM;
+   // Guard, bound the index.
+   int tIndex = my_ibound(aIndex,-tM,tM);
+   // Set the array value.
+   mC[tIndex + tM] = aValue;
+}
+
+double HistoryOperBase::getC(int aIndex)
+{
+   // Local.
+   int tM = mParms.mM;
+   // Guard, bound the index.
+   int tIndex = my_ibound(aIndex,-tM,tM);
+   // Get the array value.
+   return mC[tIndex + tM];
+}
+}//namespace;

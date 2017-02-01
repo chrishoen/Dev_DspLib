@@ -71,6 +71,16 @@ public:
    // Create a clone of the source that has the same size and time array,
    // but has a zero value array.
    void createTimeClone(History& aX,History& aY);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Helpers.
+
+   // Manage the values of the central difference coefficients array.
+   // aIndex varies like -M .. 0 .. M
+   void   setC(int aIndex,double aValue);
+   double getC(int aIndex);
 };
 
 //******************************************************************************
