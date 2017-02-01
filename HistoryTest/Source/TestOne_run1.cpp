@@ -10,14 +10,11 @@ Description:
 #include "prnPrint.h"
 #include "logFiles.h"
 
-#include "dspSample.h"
-#include "dspTextFile.h"
-#include "dspStatistics.h"
 #include "dspHistory.h"
-#include "dspHistoryOps.h"
-#include "dspHistoryGenRandWave.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryLoopClock.h"
+#include "dspHistoryTextFile.h"
+#include "dspHistoryGenGen.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -42,10 +39,10 @@ void TestOne::doRun1()
    History tHistory;
 
    // Signal history generator.
-   HistoryGenRandWave tGen(gParms.mHistoryGenParms);
+   HistoryGenGen tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistoryType1(tHistory);
+   tGen.generateHistory(tHistory);
 
    //***************************************************************************
    //***************************************************************************
@@ -63,32 +60,9 @@ void TestOne::doRun1()
    // Loop to transfer the signal history to an output file.
 
    // Output file.
-   CsvFileWriter  tSampleWriter;
+   HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-
-   // Loop clock.
-   HistoryLoopClock tClock(
-      gParms.mHistoryGenParms.mDuration,
-      gParms.mHistoryGenParms.mFs);
-
-   // Loop through all of the samples in the history.
-   do
-   {
-      int    tIndex = tClock.mCount;
-      double tTime  = tClock.mTime;
-      double tValue = 0.0;
-
-      // Get a sample from the history.
-      tValue = tHistory.readValueAtTime(tTime);
-
-      // Write the sample to the output file.
-      tSampleWriter.writeRow(
-         tIndex,
-         tTime,
-         tValue);
-   } while (tClock.advance());
-
-   // Close the output file.
+   tSampleWriter.writeHistory(tHistory);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -96,6 +70,6 @@ void TestOne::doRun1()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun1 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun5 %d",tHistory.mMaxSamples);
 }
 
