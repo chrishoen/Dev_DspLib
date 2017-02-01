@@ -10,11 +10,9 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dspHistoryOperIdentity.h"
+#include "dsp_math.h"
+#include "dspStatistics.h"
 #include "dspHistoryOperSmoother.h"
-#include "dspHistoryOperDerivOne.h"
-
-#include "dspHistoryOperGen.h"
 
 namespace Dsp
 {
@@ -28,7 +26,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperGen::HistoryOperGen(HistoryOperParms& aParms)
+HistoryOperSmoother::HistoryOperSmoother(HistoryOperParms& aParms)
 {
    mParms = aParms;
 }
@@ -38,9 +36,9 @@ HistoryOperGen::HistoryOperGen(HistoryOperParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryOperGen::show()
+void HistoryOperSmoother::show()
 {
-   mParms.show("HistoryOperGen");
+   BaseClass::show();
 }
 
 //******************************************************************************
@@ -49,36 +47,27 @@ void HistoryOperGen::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Operate on the signal history according to the parameters. This is a jump 
-// table that selects one of the concrete history operators according to
-// the operator type parameter and uses it to operate on a history to produce
-// a new history.
+// Apply the linear operator from the input to the output. F:X->Y
+// This is the identity operator.
 
-void HistoryOperGen::operate(History& aX, History& aY)
+void HistoryOperSmoother::operate(History& aX, History& aY)
 {
-   switch (mParms.mOperType)
+   // Initialize the destination to be the same size as the source.
+   aY.initialize(aX.mMaxSamples);
+
+   // Copy the samples from the source to the destination.
+   aX.startRead();
+   aY.startWrite();
+   for (int k = 0; k < aX.mMaxSamples; k++)
    {
-   //*******************************************************************************
-   case HistoryOperParms::cOperIdentity:
-   {
-      HistoryOperIdentity tOper(mParms);
-      tOper.operate(aX, aY);
+      // Read a sample from the source.
+      double tTime = 0.0;
+      double tValue = 0.0;
+      aX.readSampleAtIndex(k,&tTime,&tValue);
+      tValue += 1.0;
+      // Write the sample to the destination.
+      aY.writeSample(tTime,tValue);
    }
-   break;
-   //*******************************************************************************
-   case HistoryOperParms::cOperSmoother:
-   {
-      HistoryOperSmoother tOper(mParms);
-      tOper.operate(aX, aY);
-   }
-   break;
-   //*******************************************************************************
-   case HistoryOperParms::cOperDerivOne:
-   {
-      HistoryOperDerivOne tOper(mParms);
-      tOper.operate(aX, aY);
-   }
-   break;
-   }
+   aY.finishWrite();
 }
 }//namespace

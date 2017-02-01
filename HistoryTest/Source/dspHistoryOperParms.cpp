@@ -69,6 +69,7 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("OperType"))
    {
       if (aCmd->isArgString(1,asStringOperType(cOperIdentity)))     mOperType = cOperIdentity;
+      if (aCmd->isArgString(1,asStringOperType(cOperSmoother)))     mOperType = cOperSmoother;
       if (aCmd->isArgString(1,asStringOperType(cOperDerivOne)))     mOperType = cOperDerivOne;
    }
 
@@ -95,6 +96,7 @@ char* HistoryOperParms::asStringOperType(int aOperType)
    switch (aOperType)
    {
    case cOperIdentity    : return "Identity";
+   case cOperSmoother    : return "Smoother";
    case cOperDerivOne    : return "DerivOne";
    default : return "UNKNOWN";
    }

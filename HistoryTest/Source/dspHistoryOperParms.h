@@ -59,7 +59,8 @@ public:
 
    // Generator types.
    static const int cOperIdentity = 1;
-   static const int cOperDerivOne = 2;
+   static const int cOperSmoother = 2;
+   static const int cOperDerivOne = 3;
 
    //***************************************************************************
    //***************************************************************************

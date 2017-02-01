@@ -179,6 +179,7 @@
     <ClCompile Include="Source\dspHistoryOperGen.cpp" />
     <ClCompile Include="Source\dspHistoryOperIdentity.cpp" />
     <ClCompile Include="Source\dspHistoryOperParms.cpp" />
+    <ClCompile Include="Source\dspHistoryOperSmoother.cpp" />
     <ClCompile Include="Source\dspHistoryTextFile.cpp" />
     <ClCompile Include="Source\dspHistory_read.cpp" />
     <ClCompile Include="Source\dspHistory_write.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Source\dspHistoryOperGen.h" />
     <ClInclude Include="Source\dspHistoryOperIdentity.h" />
     <ClInclude Include="Source\dspHistoryOperParms.h" />
+    <ClInclude Include="Source\dspHistoryOperSmoother.h" />
     <ClInclude Include="Source\dspHistoryStatistics.h" />
     <ClInclude Include="Source\dspHistoryTextFile.h" />
     <ClInclude Include="Source\MainInit.h" />

@@ -43,7 +43,7 @@ SectionBegin default
 
    HistoryOperParms
    {
-      OperType    Identity
+      OperType    Smoother
       M                  4
    }
 
