@@ -39,6 +39,7 @@ void HistoryOperParms::reset()
 
    mOperType  = cOperIdentity;
    mFilterOrder = 1;
+   mH = 1.0;
    mN = 1;
    mM = 0;
 
@@ -55,6 +56,7 @@ void HistoryOperParms::show(char* aLabel)
 
    printf("OperType           %10s\n",   asStringOperType(mOperType));
    printf("FilterOrder        %10d\n",   mFilterOrder);
+   printf("H                  %10.6f\n", mH);
    printf("N                  %10d\n",   mN);
    printf("M                  %10d\n",   mM);
 
@@ -70,7 +72,8 @@ void HistoryOperParms::show(char* aLabel)
 
 void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("FilterOrder"))           mFilterOrder = aCmd->argInt(1);
+   if (aCmd->isCmd("FilterOrder"))     mFilterOrder = aCmd->argInt(1);
+   if (aCmd->isCmd("H"))               mH           = aCmd->argDouble(1);
 
    if (aCmd->isCmd("OperType"))
    {

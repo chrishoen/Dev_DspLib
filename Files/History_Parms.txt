@@ -22,7 +22,7 @@ SectionBegin default
 
    HistoryGenParms
    {
-      GenType        RandWave
+      GenType        SinWave
       TimeType       Type1
 
       Duration       100.0
@@ -35,7 +35,7 @@ SectionBegin default
       A                1.0
       Phi              0.0
       Tp              10.0
-      Sigma            0.0
+      Sigma           0.01
    }
 
    //-----------------------------------------------------------------
@@ -43,8 +43,9 @@ SectionBegin default
 
    HistoryOperParms
    {
-      OperType       Smoother
-      FilterOrder           9
+      OperType       DerivOne
+      FilterOrder          11
+      H                  0.01
    }
 
    //-----------------------------------------------------------------

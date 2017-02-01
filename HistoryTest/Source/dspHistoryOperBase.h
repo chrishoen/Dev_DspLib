@@ -68,8 +68,8 @@ public:
    //***************************************************************************
    // Helpers.
 
-   // Create a clone of the source that has the same size and time array,
-   // but has a zero value array.
+   // Create the destination history as clone of the source history that has
+   // the same size and time array, but has a zero value array.
    void createTimeClone(History& aX,History& aY);
 
 };

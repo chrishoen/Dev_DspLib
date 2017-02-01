@@ -48,7 +48,9 @@ namespace Dsp
       HistoryOperDerivOne(HistoryOperParms& aParms);
       void show();
 
-      // Apply the linear operator from the input to the output. F:X->Y
+      // Apply the linear operator from the input to the output. F:X->Y.
+      // This calculates the first derivative using a central difference method
+      // based on the Holoborodko algorithm for regular time intervals.
       void operate(History& aX, History& aY) override;
 
       //***************************************************************************
@@ -57,7 +59,7 @@ namespace Dsp
       // Methods.
 
       // Calculate the central difference filter coefficents, based on the parms.
-      void calculateCoefficients(double aH);
+      void calculateCoefficients();
 };
 
 //******************************************************************************

@@ -70,6 +70,7 @@ public:
    int     mOperType;     // History operator type.
 
    int     mFilterOrder;  // Central difference filter order. Must be odd.
+   double  mH;            // Central difference time delta. 
 
    //***************************************************************************
    //***************************************************************************
