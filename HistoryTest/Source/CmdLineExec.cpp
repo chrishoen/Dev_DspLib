@@ -149,10 +149,14 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("run1");
-   gParms.show();
+   aCmd->setArgDefault(1,4);
+   int aN = aCmd->argInt(1);
+
+   int tA = 2;
+   for (int i=1;i<=aN-1;i++) tA *= 2;
+
+   printf("%5d %5d\n",aN,tA);
+ 
 }
 
 //******************************************************************************

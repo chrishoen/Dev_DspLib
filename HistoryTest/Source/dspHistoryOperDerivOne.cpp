@@ -10,8 +10,8 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dsp_functions.h"
 #include "dsp_math.h"
+#include "dsp_functions.h"
 #include "dspStatistics.h"
 #include "dspHistoryOperDerivOne.h"
 
@@ -55,7 +55,7 @@ void HistoryOperDerivOne::show()
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
 
-void HistoryOperDerivOne::calculateCoefficients()
+void HistoryOperDerivOne::calculateCoefficients1()
 {
    // Locals.
    mC[0] = 0.0;
@@ -99,6 +99,41 @@ void HistoryOperDerivOne::calculateCoefficients()
    }
    break;
    }
+
+   for (int k = 1; k <= mParms.mM; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryOperDerivOne::calculateCoefficients2()
+{
+   // Start.
+   mC[0] = 0.0;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   int N = mParms.mN;
+   int M = mParms.mM;
+   int m = (N-3)/2;
+
+   double tTerm1 = 1.0/pow(2.0,double(2*m+1));
+   double tTerm2 = 1.0/tH;
+
+   for (int k = 1; k <= M; k++)
+   {
+      mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+
 }
 
 //******************************************************************************
@@ -113,11 +148,13 @@ void HistoryOperDerivOne::operate(History& aX, History& aY)
    printf("HistoryOperDerivOne::operate %d\n",mParms.mFilterOrder);
 
    // Calculate the central difference filter coefficents, based on the parms.
-   calculateCoefficients();
+   calculateCoefficients1();
+   calculateCoefficients2();
 
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
    BaseClass::createTimeClone(aX,aY);
+   return;
 
    // Locals
    int tP = aX.mNumSamples;

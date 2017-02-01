@@ -44,7 +44,7 @@ SectionBegin default
    HistoryOperParms
    {
       OperType       DerivOne
-      FilterOrder          11
+      FilterOrder          39
       H                  0.01
    }
 

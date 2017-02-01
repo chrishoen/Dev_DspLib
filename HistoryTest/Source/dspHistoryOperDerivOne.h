@@ -59,7 +59,8 @@ namespace Dsp
       // Methods.
 
       // Calculate the central difference filter coefficents, based on the parms.
-      void calculateCoefficients();
+      void calculateCoefficients1();
+      void calculateCoefficients2();
 };
 
 //******************************************************************************

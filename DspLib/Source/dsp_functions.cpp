@@ -93,3 +93,18 @@ int dsp_binomial(int aN, int aK)
    if (aK == aN) return 1;
    return dsp_binomial(aN - 1, aK - 1) + dsp_binomial(aN - 1, aK);
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate two raised to the Nth.
+
+int dsp_two_to_the(int aN)
+{
+   if (aN==0) return 1;
+
+   int tA = 2;
+   for (int i=1;i<=aN-1;i++) tA *= 2;
+   return tA;
+}
+

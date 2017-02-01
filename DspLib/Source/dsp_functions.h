@@ -53,6 +53,9 @@ My math functions
 
    int dsp_binomial(int aN,int aK);
 
+   // Calculate two raised to the Nth.
+   int dsp_two_to_the(int aN);
+
 
 #endif
 
