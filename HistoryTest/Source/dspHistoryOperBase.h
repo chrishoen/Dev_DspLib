@@ -37,11 +37,28 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Members.
+
+   double* mC;      // Central difference coefficients.
+
+   // If true then memory has been allocated.
+   bool    mMemoryFlag;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Methods.
 
    // Constructor.
    HistoryOperBase();
+   ~HistoryOperBase();
    virtual void show();
+
+   // Allocate memory.
+   void initialize(HistoryOperParms& aParms);
+
+   // Deallocate memory.
+   void finalize();
 
    // Apply the linear operator from the input to the output. F:X->Y
    virtual void operate(History& aX,History& aY)=0;

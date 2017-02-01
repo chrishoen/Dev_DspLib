@@ -28,7 +28,7 @@ namespace Dsp
 
 HistoryOperSmoother::HistoryOperSmoother(HistoryOperParms& aParms)
 {
-   mParms = aParms;
+   BaseClass::initialize(aParms);
 }
 
 //******************************************************************************

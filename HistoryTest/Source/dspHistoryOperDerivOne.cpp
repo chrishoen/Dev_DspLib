@@ -28,7 +28,7 @@ namespace Dsp
 
 HistoryOperDerivOne::HistoryOperDerivOne(HistoryOperParms& aParms)
 {
-   mParms = aParms;
+   BaseClass::initialize(aParms);
 }
 
 //******************************************************************************

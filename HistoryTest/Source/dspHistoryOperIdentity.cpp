@@ -28,7 +28,7 @@ namespace Dsp
 
 HistoryOperIdentity::HistoryOperIdentity(HistoryOperParms& aParms)
 {
-   mParms = aParms;
+   BaseClass::initialize(aParms);
 }
 
 //******************************************************************************
@@ -64,7 +64,6 @@ void HistoryOperIdentity::operate(History& aX, History& aY)
       double tTime = 0.0;
       double tValue = 0.0;
       aX.readSampleAtIndex(k,&tTime,&tValue);
-      tValue += 1.0;
       // Write the sample to the destination.
       aY.writeSample(tTime,tValue);
    }
