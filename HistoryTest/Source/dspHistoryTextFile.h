@@ -21,9 +21,14 @@ class HistoryCsvFileWriter : public CsvFileWriter
 {
 public:
 
-   // Write a history to a csv file.
+   // Write history to a csv file.
+   void writeHistory(
+      History& aHistory);
 
-   void writeHistory(History& aHistory);
+   // Write history to a csv file.
+   void writeHistory(
+      History& aHistory1,
+      History& aHistory2);
 };
 
 //******************************************************************************

@@ -56,7 +56,7 @@ void TestOne::doRun2()
    // Signal history generator.
    HistoryOperGen tOper(gParms.mHistoryOperParms);
 
-   // Generate the history.
+   // Apply the operator on the history to produce a new history. F:X->Y.
    tOper.operate(tHistoryX,tHistoryY);
 
    //***************************************************************************
@@ -80,7 +80,7 @@ void TestOne::doRun2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX);
+   tSampleWriter.writeHistory(tHistoryX,tHistoryY);
    tSampleWriter.close();
 
    //***************************************************************************

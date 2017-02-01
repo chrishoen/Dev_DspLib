@@ -49,6 +49,7 @@ public:
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y
+   // This is the identity operator.
    void operate(History& aX,History& aY) override;
 };
 

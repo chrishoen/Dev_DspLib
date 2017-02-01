@@ -48,8 +48,26 @@ void HistoryOperIdentity::show()
 //******************************************************************************
 //******************************************************************************
 // Apply the linear operator from the input to the output. F:X->Y
+// This is the identity operator.
 
 void HistoryOperIdentity::operate(History& aX, History& aY)
 {
+   // Initialize the destination to be the same size as the source.
+   aY.initialize(aX.mMaxSamples);
+
+   // Copy the samples from the source to the destination.
+   aX.startRead();
+   aY.startWrite();
+   for (int k = 0; k < aX.mMaxSamples; k++)
+   {
+      // Read a sample from the source.
+      double tTime = 0.0;
+      double tValue = 0.0;
+      aX.readSampleAtIndex(k,&tTime,&tValue);
+      tValue += 1.0;
+      // Write the sample to the destination.
+      aY.writeSample(tTime,tValue);
+   }
+   aY.finishWrite();
 }
 }//namespace
