@@ -49,7 +49,60 @@ void HistoryOperDerivOne::show()
 //******************************************************************************
 // Apply the linear operator from the input to the output. F:X->Y
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryOperDerivOne::calculateCoefficients(double aH)
+{
+   mC[0] = 0.0;
+   switch (mParms.mN)
+   {
+   case 5:
+   {
+      double tDenom = (8.0*aH);
+      mC[1] =   2.0/tDenom;
+      mC[2] =   1.0/tDenom;
+   }
+   break;
+   case 7:
+   {
+      double tDenom = (32.0*aH);
+      mC[1] =   5.0/tDenom;
+      mC[2] =   4.0/tDenom;
+      mC[3] =   1.0/tDenom;
+   }
+   break;
+   case 9:
+   {
+      double tDenom = (128.0*aH);
+      mC[1] =  14.0/tDenom;
+      mC[2] =  14.0/tDenom;
+      mC[3] =   6.0/tDenom;
+      mC[4] =   1.0/tDenom;
+   }
+   break;
+   case 11:
+   {
+      double tDenom = (512.0*aH);
+      mC[1] =  42.0;
+      mC[2] =  48.0;
+      mC[3] =  27.0;
+      mC[4] =   8.0;
+      mC[5] =   1.0;
+   }
+   break;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
 void HistoryOperDerivOne::operate(History& aX, History& aY)
 {
+   calculateCoefficients(double(0.01));
 }
 }//namespace

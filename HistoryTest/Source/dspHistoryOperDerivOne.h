@@ -29,27 +29,35 @@ namespace Dsp
 // This class provides a linear operator on the set of signal histories the 
 // first time derivative. It's a differentiator.
  
-class HistoryOperDerivOne : public HistoryOperBase
-{
-public:
-   typedef HistoryOperBase BaseClass;
+   class HistoryOperDerivOne : public HistoryOperBase
+   {
+   public:
+      typedef HistoryOperBase BaseClass;
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Members.
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Members.
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Methods.
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Methods.
 
-   // Constructor.
-   HistoryOperDerivOne(HistoryOperParms& aParms);
-   void show();
+      // Constructor.
+      HistoryOperDerivOne(HistoryOperParms& aParms);
+      void show();
 
-   // Apply the linear operator from the input to the output. F:X->Y
-   void operate(History& aX,History& aY) override;
+      // Apply the linear operator from the input to the output. F:X->Y
+      void operate(History& aX, History& aY) override;
+
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Methods.
+
+      // Calculate the central difference filter coefficents, based on the parms.
+      void calculateCoefficients(double aH);
 };
 
 //******************************************************************************
