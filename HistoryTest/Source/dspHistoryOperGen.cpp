@@ -12,7 +12,7 @@ Description:
 
 #include "dspHistoryOperIdentity.h"
 #include "dspHistoryOperSmoother.h"
-#include "dspHistoryOperDerivOne.h"
+#include "dspHistoryOperFilterPH.h"
 
 #include "dspHistoryOperGen.h"
 
@@ -75,7 +75,7 @@ void HistoryOperGen::operate(History& aX, History& aY)
    //*******************************************************************************
    case HistoryOperParms::cOperDerivOne:
    {
-      HistoryOperDerivOne tOper(mParms);
+      HistoryOperFilterPH tOper(mParms);
       tOper.operate(aX, aY);
    }
    break;

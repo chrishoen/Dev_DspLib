@@ -81,7 +81,7 @@ SectionBegin run2
    HistoryOperParms1
    {
       OperType       DerivOne
-      FilterOrder          21
+      FilterOrder          31
       H                  0.01
    }
 
@@ -107,7 +107,7 @@ SectionBegin run3
    HistoryOperParms2
    {
       OperType       DerivOne
-      FilterOrder          11
+      FilterOrder          31
       H                  0.01
    }
 

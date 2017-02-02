@@ -176,6 +176,7 @@
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
     <ClCompile Include="Source\dspHistoryOperBase.cpp" />
     <ClCompile Include="Source\dspHistoryOperDerivOne.cpp" />
+    <ClCompile Include="Source\dspHistoryOperFilterPH.cpp" />
     <ClCompile Include="Source\dspHistoryOperGen.cpp" />
     <ClCompile Include="Source\dspHistoryOperIdentity.cpp" />
     <ClCompile Include="Source\dspHistoryOperParms.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Source\dspHistoryLoopClock.h" />
     <ClInclude Include="Source\dspHistoryOperBase.h" />
     <ClInclude Include="Source\dspHistoryOperDerivOne.h" />
+    <ClInclude Include="Source\dspHistoryOperFilterPH.h" />
     <ClInclude Include="Source\dspHistoryOperGen.h" />
     <ClInclude Include="Source\dspHistoryOperIdentity.h" />
     <ClInclude Include="Source\dspHistoryOperParms.h" />

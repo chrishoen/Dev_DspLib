@@ -91,6 +91,9 @@
     <ClCompile Include="Source\dspHistoryOperSmoother.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspHistoryOperFilterPH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -157,6 +160,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryOperSmoother.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryOperFilterPH.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
