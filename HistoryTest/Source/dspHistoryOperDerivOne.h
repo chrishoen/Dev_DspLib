@@ -29,38 +29,38 @@ namespace Dsp
 // This class provides a linear operator on the set of signal histories the 
 // first time derivative. It's a differentiator.
  
-   class HistoryOperDerivOne : public HistoryOperBase
-   {
-   public:
-      typedef HistoryOperBase BaseClass;
+class HistoryOperDerivOne : public HistoryOperBase
+{
+public:
+   typedef HistoryOperBase BaseClass;
 
-      //***************************************************************************
-      //***************************************************************************
-      //***************************************************************************
-      // Members.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-      //***************************************************************************
-      //***************************************************************************
-      //***************************************************************************
-      // Methods.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
 
-      // Constructor.
-      HistoryOperDerivOne(HistoryOperParms& aParms);
-      void show();
+   // Constructor.
+   HistoryOperDerivOne(HistoryOperParms& aParms);
+   void show();
 
-      // Apply the linear operator from the input to the output. F:X->Y.
-      // This calculates the first derivative using a central difference method
-      // based on the Holoborodko algorithm for regular time intervals.
-      void operate(History& aX, History& aY) override;
+   // Apply the linear operator from the input to the output. F:X->Y.
+   // This calculates the first derivative using a central difference method 
+   // based on the Holoborodko algorithm for regular time intervals.
+   void operate(History& aX, History& aY) override;
 
-      //***************************************************************************
-      //***************************************************************************
-      //***************************************************************************
-      // Methods.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
 
-      // Calculate the central difference filter coefficents, based on the parms.
-      void calculateCoefficients1();
-      void calculateCoefficients2();
+   // Calculate the central difference filter coefficents, based on the parms.
+   void calculateCoefficients1();
+   void calculateCoefficients2();
 };
 
 //******************************************************************************

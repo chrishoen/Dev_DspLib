@@ -54,10 +54,10 @@ void TestOne::doRun2()
    History tHistoryY;
 
    // Signal history generator.
-   HistoryOperGen tOper(gParms.mHistoryOperParms);
+   HistoryOperGen tOperXY(gParms.mHistoryOperParms1);
 
    // Apply the operator on the history to produce a new history. F:X->Y.
-   tOper.operate(tHistoryX,tHistoryY);
+   tOperXY.operate(tHistoryX,tHistoryY);
 
    //***************************************************************************
    //***************************************************************************
@@ -88,6 +88,6 @@ void TestOne::doRun2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun2 %d %d",tHistoryX.mMaxSamples);
+   Prn::print(0, "TestOne::doRun2 %d",tHistoryX.mMaxSamples);
 }
 

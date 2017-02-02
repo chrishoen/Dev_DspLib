@@ -144,7 +144,7 @@ void HistoryOperDerivOne::calculateCoefficients2()
 //******************************************************************************
 //******************************************************************************
 // Apply the linear operator from the input to the output. F:X->Y.
-// This calculates the first derivative using a central difference method
+// This calculates the first derivative using a central difference method 
 // based on the Holoborodko algorithm for regular time intervals.
 
 void HistoryOperDerivOne::operate(History& aX, History& aY)
@@ -152,7 +152,6 @@ void HistoryOperDerivOne::operate(History& aX, History& aY)
    printf("HistoryOperDerivOne::operate %d\n",mParms.mFilterOrder);
 
    // Calculate the central difference filter coefficents, based on the parms.
-// calculateCoefficients1();
    calculateCoefficients2();
 
    // Create the destination history as clone of the source history that has

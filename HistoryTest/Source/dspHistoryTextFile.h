@@ -29,6 +29,12 @@ public:
    void writeHistory(
       History& aHistory1,
       History& aHistory2);
+
+   // Write history to a csv file.
+   void writeHistory(
+      History& aHistory1,
+      History& aHistory2,
+      History& aHistory3);
 };
 
 //******************************************************************************

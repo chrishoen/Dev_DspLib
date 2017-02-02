@@ -61,4 +61,36 @@ void HistoryCsvFileWriter::writeHistory(
 
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Write a history to a csv file.
+
+void HistoryCsvFileWriter::writeHistory(
+   History& aHistory1,
+   History& aHistory2,
+   History& aHistory3)
+{
+   int tMaxSamples = dsp_imin(
+      aHistory1.mMaxSamples,
+      aHistory2.mMaxSamples);
+
+   tMaxSamples = dsp_imin(
+      tMaxSamples,
+      aHistory3.mMaxSamples);
+
+   // Loop through all of the samples in the history.
+   for (int k = 0; k < tMaxSamples; k++)
+   {
+      // Write the sample to the csv file
+      writeRow(
+         k,
+         aHistory1.mTime[k],
+         aHistory1.mValue[k],
+         aHistory2.mValue[k],
+         aHistory3.mValue[k]);
+   }
+
+}
+
 }//namespace

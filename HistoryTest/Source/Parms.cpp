@@ -35,7 +35,8 @@ void Parms::reset()
    mCode2 = 0;
 
    mHistoryGenParms.reset();
-   mHistoryOperParms.reset();
+   mHistoryOperParms1.reset();
+   mHistoryOperParms2.reset();
 
    mOutputFile[0]=0;
 
@@ -59,7 +60,8 @@ void Parms::show()
    printf("OutputFile         %10s\n",  mOutputFile);
 
    mHistoryGenParms.show("HistoryGen");
-   mHistoryOperParms.show("HistoryOper");
+   mHistoryOperParms1.show("HistoryOper1");
+   mHistoryOperParms2.show("HistoryOper2");
 
    printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
@@ -83,8 +85,9 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
-   if(aCmd->isCmd("HistoryGenParms"))  nestedPush(aCmd, &mHistoryGenParms);
-   if(aCmd->isCmd("HistoryOperParms")) nestedPush(aCmd, &mHistoryOperParms);
+   if(aCmd->isCmd("HistoryGenParms"))    nestedPush(aCmd, &mHistoryGenParms);
+   if(aCmd->isCmd("HistoryOperParms1"))  nestedPush(aCmd, &mHistoryOperParms1);
+   if(aCmd->isCmd("HistoryOperParms2"))  nestedPush(aCmd, &mHistoryOperParms2);
 
    if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
    if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
@@ -99,6 +102,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 void Parms::expand()
 {
    mHistoryGenParms.expand();
-   mHistoryOperParms.expand();
+   mHistoryOperParms1.expand();
+   mHistoryOperParms2.expand();
 }
 

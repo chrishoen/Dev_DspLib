@@ -64,7 +64,8 @@ public:
    char mOutputFile [cMaxStringSize];
 
    Dsp::HistoryGenParms  mHistoryGenParms;
-   Dsp::HistoryOperParms mHistoryOperParms;
+   Dsp::HistoryOperParms mHistoryOperParms1;
+   Dsp::HistoryOperParms mHistoryOperParms2;
 
    //***************************************************************************
    //***************************************************************************

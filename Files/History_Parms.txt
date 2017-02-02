@@ -35,16 +35,23 @@ SectionBegin default
       A                1.0
       Phi              0.0
       Tp              10.0
-      Sigma           0.01
+      Sigma           0.10
    }
 
    //-----------------------------------------------------------------
    // Signal Differentiator Parms.
 
-   HistoryOperParms
+   HistoryOperParms1
+   {
+      OperType       Smoother
+      FilterOrder          11
+      H                  0.01
+   }
+
+   HistoryOperParms2
    {
       OperType       DerivOne
-      FilterOrder          21
+      FilterOrder          11
       H                  0.01
    }
 

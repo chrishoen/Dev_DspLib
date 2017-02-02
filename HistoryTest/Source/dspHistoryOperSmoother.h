@@ -51,6 +51,15 @@ public:
    // Apply the linear operator from the input to the output. F:X->Y
    // This is smoother.
    void operate(History& aX,History& aY) override;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Calculate the central difference filter coefficents, based on the parms.
+   void calculateCoefficients1();
+
 };
 
 //******************************************************************************

@@ -14,7 +14,8 @@ Description:
 #include "dspHistoryStatistics.h"
 #include "dspHistoryLoopClock.h"
 #include "dspHistoryTextFile.h"
-#include "dspHistoryGenSinWave.h"
+#include "dspHistoryGenGen.h"
+#include "dspHistoryOperGen.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -36,13 +37,41 @@ void TestOne::doRun3()
    // Generate a signal history.
 
    // Signal history.
-   History tHistory;
+   History tHistoryX;
 
    // Signal history generator.
-   HistoryGenSinWave tGen(gParms.mHistoryGenParms);
+   HistoryGenGen tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistoryType2(tHistory);
+   tGen.generateHistory(tHistoryX);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history.
+
+   // Signal history.
+   History tHistoryY;
+
+   // Signal history generator.
+   HistoryOperGen tOperXY(gParms.mHistoryOperParms1);
+
+   // Apply the operator on the history to produce a new history. F:X->Y.
+   tOperXY.operate(tHistoryX,tHistoryY);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history.
+
+   // Signal history.
+   History tHistoryZ;
+
+   // Signal history generator.
+   HistoryOperGen tOperYZ(gParms.mHistoryOperParms2);
+
+   // Apply the operator on the history to produce a new history. F:Y->Z.
+   tOperYZ.operate(tHistoryY,tHistoryZ);
 
    //***************************************************************************
    //***************************************************************************
@@ -51,7 +80,13 @@ void TestOne::doRun3()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistory);
+   tStatistics.collectValue(tHistoryX);
+   tStatistics.show();
+
+   tStatistics.collectValue(tHistoryY);
+   tStatistics.show();
+
+   tStatistics.collectValue(tHistoryZ);
    tStatistics.show();
 
    //***************************************************************************
@@ -62,7 +97,10 @@ void TestOne::doRun3()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistory);
+   tSampleWriter.writeHistory(
+      tHistoryX,
+      tHistoryY,
+      tHistoryZ);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -70,6 +108,6 @@ void TestOne::doRun3()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun3 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun3 %d",tHistoryX.mMaxSamples);
 }
 
