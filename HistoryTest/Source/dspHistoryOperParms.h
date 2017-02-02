@@ -58,9 +58,10 @@ public:
    // Constants.
 
    // Operator types.
-   static const int cOperIdentity   = 1;
-   static const int cOperSmoother   = 2;
-   static const int cOperFirstDeriv = 3;
+   static const int cOperIdentity    = 1;
+   static const int cOperSmoother    = 2;
+   static const int cOperFirstDeriv  = 3;
+   static const int cOperSecondDeriv = 4;
 
    // Filter structures.
    static const int cFiltStructSavGol = 1;

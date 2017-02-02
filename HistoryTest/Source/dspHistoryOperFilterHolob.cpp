@@ -130,6 +130,48 @@ void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+// This coefficients are used to calculate the second derivative.
+
+static long long recursive_s(int N, int M, int k)
+{
+   if(k >  M) return 0;
+   if(k == M) return 1;
+   return ((2*N-10)*recursive_s(N,M,k+1) - (N+2*k+3)*recursive_s(N,M,k+2))/(N-2*k-1);
+}
+
+void HistoryOperFilterHolob::calculateCoefficientsSecondDerivative()
+{
+   // Start.
+   mBackAddFlag = true;
+   mC[0] = 0.0;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   // Locals.
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
+
+   double tTerm1 = 1.0/pow(2.0,double(N-3));
+   double tTerm2 = 1.0/(tH*tH);
+
+   for (int k = 0; k <= M; k++)
+   {
+      mC[k] = tTerm1*tTerm2*double(recursive_s(N,M,k));
+   }
+
+   for (int k = 0; k <= M; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Apply the linear operator from the input to the output. F:X->Y.
 // This applies the central difference filter using the coefficients 
 // calculated below.
@@ -148,6 +190,11 @@ void HistoryOperFilterHolob::operate(History& aX, History& aY)
    case HistoryOperParms::cOperFirstDeriv:
    {
       calculateCoefficientsFirstDerivative();
+   }
+   break;
+   case HistoryOperParms::cOperSecondDeriv:
+   {
+      calculateCoefficientsSecondDerivative();
    }
    break;
    }
@@ -170,7 +217,7 @@ void HistoryOperFilterHolob::operate(History& aX, History& aY)
    for (int i = 0; i < tP; i++)
    {
       // For all of the coefficients (backward and forward are the same).
-      double tSum = 0.0;
+      double tSum = mC[0]*aX.mValue[i];
       for (int k = 1; k <= tM; k++)
       {
          // Calculate the forward  array index, trim at the end.

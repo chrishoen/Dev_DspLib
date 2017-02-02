@@ -87,9 +87,9 @@ SectionBegin run2
 
    HistoryOperParms1
    {
-      OperType        FirstDeriv
+      OperType       SecondDeriv
       FiltStruct           Holob
-      FilterOrder             11
+      FilterOrder             15
       H                     0.01
    }
 
