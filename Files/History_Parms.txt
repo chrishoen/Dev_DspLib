@@ -44,7 +44,7 @@ SectionBegin default
    HistoryOperParms1
    {
       OperType       Smoother
-      FilterOrder          11
+      FilterOrder         101
       H                  0.01
    }
 
