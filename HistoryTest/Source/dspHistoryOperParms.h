@@ -57,17 +57,22 @@ public:
    //***************************************************************************
    // Constants.
 
-   // Generator types.
+   // Operator types.
    static const int cOperIdentity = 1;
    static const int cOperSmoother = 2;
    static const int cOperDerivOne = 3;
+
+   // Filter structures.
+   static const int cFiltStructSavGol = 1;
+   static const int cFiltStructHolob  = 2;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mOperType;     // History operator type.
+   int     mOperType;         // Linear operator type.
+   int     mFiltStruct;      // Filter structure type.
 
    int     mFilterOrder;  // Central difference filter order. Must be odd.
    double  mH;            // Central difference time delta. 
@@ -76,9 +81,6 @@ public:
    //***************************************************************************
    //***************************************************************************
    // Expanded members that are not read from the parms file.
-
-   int mN;                // Central difference filter order.
-   int mM;                // M = (N-1)/2
 
    //***************************************************************************
    //***************************************************************************
@@ -105,7 +107,8 @@ public:
    //***************************************************************************
    // Helpers.
 
-   static char* asStringOperType (int aGenType);
+   static char* asStringOperType (int aX);
+   static char* asStringFiltStruct (int aX);
 
 };
 

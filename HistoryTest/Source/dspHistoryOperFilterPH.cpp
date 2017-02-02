@@ -64,8 +64,9 @@ void HistoryOperFilterPH::calculateCoefficientsFirstDerivative()
    // Locals.
    double tH = mParms.mH;
 
-   int N = mParms.mN;
-   int M = mParms.mM;
+   // Locals.
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
    int m = (N-3)/2;
 
    double tTerm1 = 1.0/pow(2.0,double(2*m+1));
@@ -76,7 +77,7 @@ void HistoryOperFilterPH::calculateCoefficientsFirstDerivative()
       mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
    }
 
-   for (int k = 1; k <= mParms.mM; k++)
+   for (int k = 1; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
@@ -121,7 +122,8 @@ void HistoryOperFilterPH::operate(History& aX, History& aY)
 
    // Locals
    int tP = aX.mNumSamples;
-   int tM = mParms.mM;
+   int tN = mParms.mFilterOrder;
+   int tM = (tN-1)/2;
 
    // For all of the samples in the source and destination arrays.
    for (int i = 0; i < tP; i++)

@@ -62,14 +62,15 @@ void HistoryOperFilterSG::calculateCoefficientsSmoother()
    mC[0] = 0.0;
 
    // Locals.
-   int N = mParms.mN;
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
 
-   for (int k = 0; k < N; k++)
+   for (int k = 0; k < M; k++)
    {
       mC[k] = 1.0/double(N);
    }
 
-   for (int k = 1; k <= mParms.mM; k++)
+   for (int k = 1; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
@@ -113,7 +114,8 @@ void HistoryOperFilterSG::operate(History& aX, History& aY)
 
    // Locals
    int tP = aX.mNumSamples;
-   int tM = mParms.mM;
+   int tN = mParms.mFilterOrder;
+   int tM = (tN-1)/2;
 
    // For all of the samples in the source and destination arrays.
    for (int i = 0; i < tP; i++)

@@ -37,12 +37,11 @@ void HistoryOperParms::reset()
 {
    BaseClass::reset();
 
-   mOperType  = cOperIdentity;
+   mOperType    = cOperIdentity;
+   mFiltStruct  = cFiltStructSavGol;
+
    mFilterOrder = 1;
    mH = 1.0;
-   mN = 1;
-   mM = 0;
-
 }
 
 //******************************************************************************
@@ -55,10 +54,9 @@ void HistoryOperParms::show(char* aLabel)
    printf("HistoryOperParms ************* BEGIN %s\n", aLabel);
 
    printf("OperType           %10s\n",   asStringOperType(mOperType));
+   printf("FiltStruct         %10s\n",   asStringFiltStruct(mFiltStruct));
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
-   printf("N                  %10d\n",   mN);
-   printf("M                  %10d\n",   mM);
 
    printf("HistoryOperParms ************* END   %s\n", aLabel);
 }
@@ -82,6 +80,12 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringOperType(cOperDerivOne)))     mOperType = cOperDerivOne;
    }
 
+   if (aCmd->isCmd("FiltStruct"))
+   {
+      if (aCmd->isArgString(1,asStringFiltStruct(cFiltStructSavGol)))     mFiltStruct = cFiltStructSavGol;
+      if (aCmd->isArgString(1,asStringFiltStruct(cFiltStructHolob)))      mFiltStruct = cFiltStructHolob;
+   }
+
    // Pop back out at the end.
    if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
 }
@@ -94,25 +98,29 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
 
 void HistoryOperParms::expand()
 {
-   // Guard, filter order must be odd.
-   if (mFilterOrder<=0) mFilterOrder=1;
-   if (mFilterOrder%2==0) mFilterOrder++;
-
-   mN = mFilterOrder;
-   mM = (mN-1)/2;
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-char* HistoryOperParms::asStringOperType(int aOperType)
+char* HistoryOperParms::asStringOperType(int aX)
 {
-   switch (aOperType)
+   switch (aX)
    {
    case cOperIdentity    : return "Identity";
    case cOperSmoother    : return "Smoother";
    case cOperDerivOne    : return "DerivOne";
+   default : return "UNKNOWN";
+   }
+}
+
+char* HistoryOperParms::asStringFiltStruct(int aX)
+{
+   switch (aX)
+   {
+   case cFiltStructSavGol    : return "SavGol";
+   case cFiltStructHolob     : return "Holob";
    default : return "UNKNOWN";
    }
 }
