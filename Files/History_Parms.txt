@@ -89,7 +89,7 @@ SectionBegin run2
    {
       OperType       SecondDeriv
       FiltStruct           Holob
-      FilterOrder             15
+      FilterOrder             51
       H                     0.01
    }
 
