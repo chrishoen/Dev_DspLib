@@ -11,8 +11,8 @@ Description:
 #include <math.h>
 
 #include "dspHistoryOperIdentity.h"
-#include "dspHistoryOperFilterPH.h"
-#include "dspHistoryOperFilterSG.h"
+#include "dspHistoryOperFilterHolob.h"
+#include "dspHistoryOperFilterSavGol.h"
 
 #include "dspHistoryOperGen.h"
 
@@ -56,27 +56,53 @@ void HistoryOperGen::show()
 
 void HistoryOperGen::operate(History& aX, History& aY)
 {
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Select on linear operator type.
+
    switch (mParms.mOperType)
    {
-   //*******************************************************************************
+   //***************************************************************************
    case HistoryOperParms::cOperIdentity:
    {
+      printf("OPERATOR IDENTITY\n");
+
       HistoryOperIdentity tOper(mParms);
       tOper.operate(aX, aY);
+
+      return;
+   }
+   break;
+   }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Select on filter structure.
+
+   switch (mParms.mFiltStruct)
+   {
+   //*******************************************************************************
+   case HistoryOperParms::cFiltStructSavGol:
+   {
+      printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringOperType(),mParms.mFilterOrder);
+
+      HistoryOperFilterSavGol tOper(mParms);
+      tOper.operate(aX, aY);
+
+      return;
    }
    break;
    //*******************************************************************************
-   case HistoryOperParms::cOperSmoother:
+   case HistoryOperParms::cFiltStructHolob:
    {
-      HistoryOperFilterSG tOper(mParms);
+      printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringOperType(),mParms.mFilterOrder);
+
+      HistoryOperFilterHolob tOper(mParms);
       tOper.operate(aX, aY);
-   }
-   break;
-   //*******************************************************************************
-   case HistoryOperParms::cOperDerivOne:
-   {
-      HistoryOperFilterPH tOper(mParms);
-      tOper.operate(aX, aY);
+
+      return;
    }
    break;
    }

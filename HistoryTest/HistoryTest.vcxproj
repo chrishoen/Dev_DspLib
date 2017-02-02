@@ -175,8 +175,8 @@
     <ClCompile Include="Source\dspHistoryGenZero.cpp" />
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
     <ClCompile Include="Source\dspHistoryOperBase.cpp" />
-    <ClCompile Include="Source\dspHistoryOperFilterPH.cpp" />
-    <ClCompile Include="Source\dspHistoryOperFilterSG.cpp" />
+    <ClCompile Include="Source\dspHistoryOperFilterHolob.cpp" />
+    <ClCompile Include="Source\dspHistoryOperFilterSavGol.cpp" />
     <ClCompile Include="Source\dspHistoryOperGen.cpp" />
     <ClCompile Include="Source\dspHistoryOperIdentity.cpp" />
     <ClCompile Include="Source\dspHistoryOperParms.cpp" />
@@ -208,8 +208,8 @@
     <ClInclude Include="Source\dspHistoryGenZero.h" />
     <ClInclude Include="Source\dspHistoryLoopClock.h" />
     <ClInclude Include="Source\dspHistoryOperBase.h" />
-    <ClInclude Include="Source\dspHistoryOperFilterPH.h" />
-    <ClInclude Include="Source\dspHistoryOperFilterSG.h" />
+    <ClInclude Include="Source\dspHistoryOperFilterHolob.h" />
+    <ClInclude Include="Source\dspHistoryOperFilterSavGol.h" />
     <ClInclude Include="Source\dspHistoryOperGen.h" />
     <ClInclude Include="Source\dspHistoryOperIdentity.h" />
     <ClInclude Include="Source\dspHistoryOperParms.h" />

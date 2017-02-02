@@ -58,13 +58,16 @@ void Parms::show()
    printf("Code2              %10d\n",mCode2);
 
    printf("OutputFile         %10s\n",  mOutputFile);
-
-   mHistoryGenParms.show("HistoryGen");
-   mHistoryOperParms1.show("HistoryOper1");
-   mHistoryOperParms2.show("HistoryOper2");
-
    printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
+   printf("\n");
+
+   mHistoryGenParms.show("HistoryGen");
+   printf("\n");
+   mHistoryOperParms1.show("HistoryOper1");
+   printf("\n");
+   mHistoryOperParms2.show("HistoryOper2");
+   printf("\n");
 
    printf("Parms ************************ END   %s\n", BaseClass::mTargetSection);
 }

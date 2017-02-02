@@ -51,7 +51,7 @@ SectionBegin default
 
    HistoryOperParms2
    {
-      OperType       DerivOne
+      OperType     FirstDeriv
       FiltStruct        Holob
       FilterOrder          11
       H                  0.01
@@ -104,15 +104,15 @@ SectionBegin run3
    {
       OperType       Smoother
       FiltStruct       SavGol
-      FilterOrder          31
+      FilterOrder          51
       H                  0.01
    }
 
    HistoryOperParms2
    {
-      OperType       DerivOne
+      OperType     FirstDeriv
       FiltStruct        Holob
-      FilterOrder          31
+      FilterOrder          21
       H                  0.01
    }
 

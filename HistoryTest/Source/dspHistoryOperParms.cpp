@@ -59,6 +59,7 @@ void HistoryOperParms::show(char* aLabel)
    printf("H                  %10.6f\n", mH);
 
    printf("HistoryOperParms ************* END   %s\n", aLabel);
+   printf("\n");
 }
 
 //******************************************************************************
@@ -77,7 +78,7 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
    {
       if (aCmd->isArgString(1,asStringOperType(cOperIdentity)))     mOperType = cOperIdentity;
       if (aCmd->isArgString(1,asStringOperType(cOperSmoother)))     mOperType = cOperSmoother;
-      if (aCmd->isArgString(1,asStringOperType(cOperDerivOne)))     mOperType = cOperDerivOne;
+      if (aCmd->isArgString(1,asStringOperType(cOperFirstDeriv)))   mOperType = cOperFirstDeriv;
    }
 
    if (aCmd->isCmd("FiltStruct"))
@@ -110,7 +111,7 @@ char* HistoryOperParms::asStringOperType(int aX)
    {
    case cOperIdentity    : return "Identity";
    case cOperSmoother    : return "Smoother";
-   case cOperDerivOne    : return "DerivOne";
+   case cOperFirstDeriv  : return "FirstDeriv";
    default : return "UNKNOWN";
    }
 }
@@ -123,6 +124,20 @@ char* HistoryOperParms::asStringFiltStruct(int aX)
    case cFiltStructHolob     : return "Holob";
    default : return "UNKNOWN";
    }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+char* HistoryOperParms::asStringOperType()
+{
+   return asStringOperType(mOperType);
+}
+
+char* HistoryOperParms::asStringFiltStruct()
+{
+   return asStringFiltStruct(mFiltStruct);
 }
 
 

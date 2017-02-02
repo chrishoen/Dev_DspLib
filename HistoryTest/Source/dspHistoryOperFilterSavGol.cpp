@@ -13,7 +13,7 @@ Description:
 #include "dsp_math.h"
 #include "dsp_functions.h"
 #include "dspStatistics.h"
-#include "dspHistoryOperFilterPH.h"
+#include "dspHistoryOperFilterSavGol.h"
 
 namespace Dsp
 {
@@ -27,7 +27,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperFilterPH::HistoryOperFilterPH(HistoryOperParms& aParms)
+HistoryOperFilterSavGol::HistoryOperFilterSavGol(HistoryOperParms& aParms)
 {
    BaseClass::initialize(aParms);
 }
@@ -37,7 +37,7 @@ HistoryOperFilterPH::HistoryOperFilterPH(HistoryOperParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryOperFilterPH::show()
+void HistoryOperFilterSavGol::show()
 {
    BaseClass::show();
 }
@@ -54,27 +54,20 @@ void HistoryOperFilterPH::show()
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate the first derivative.
+// This coefficients are used to calculate a smoothed output.
 
-void HistoryOperFilterPH::calculateCoefficientsFirstDerivative()
+void HistoryOperFilterSavGol::calculateCoefficientsSmoother()
 {
    // Start.
    mC[0] = 0.0;
 
    // Locals.
-   double tH = mParms.mH;
-
-   // Locals.
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
-   int m = (N-3)/2;
 
-   double tTerm1 = 1.0/pow(2.0,double(2*m+1));
-   double tTerm2 = 1.0/tH;
-
-   for (int k = 1; k <= M; k++)
+   for (int k = 0; k < M; k++)
    {
-      mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
+      mC[k] = 1.0/double(N);
    }
 
    for (int k = 1; k <= M; k++)
@@ -82,7 +75,6 @@ void HistoryOperFilterPH::calculateCoefficientsFirstDerivative()
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
    printf("\n");
-
 }
 
 //******************************************************************************
@@ -92,21 +84,19 @@ void HistoryOperFilterPH::calculateCoefficientsFirstDerivative()
 // This applies the central difference filter using the coefficients 
 // calculated below.
 
-void HistoryOperFilterPH::operate(History& aX, History& aY)
+void HistoryOperFilterSavGol::operate(History& aX, History& aY)
 {
-   printf("HistoryOperFilterPH::operate %d\n",mParms.mFilterOrder);
-
    //***************************************************************************
    // Calculate the central difference filter coefficents, based on the parms.
    switch (mParms.mOperType)
    {
    case HistoryOperParms::cOperSmoother:
    {
+      calculateCoefficientsSmoother();
    }
    break;
-   case HistoryOperParms::cOperDerivOne:
+   case HistoryOperParms::cOperFirstDeriv:
    {
-      calculateCoefficientsFirstDerivative();
    }
    break;
    }
@@ -129,7 +119,7 @@ void HistoryOperFilterPH::operate(History& aX, History& aY)
    for (int i = 0; i < tP; i++)
    {
       // For all of the coefficients (backward and forward are the same).
-      double tSum = 0.0;
+      double tSum = mC[0]*aX.mValue[i];
       for (int k = 1; k <= tM; k++)
       {
          // Calculate the forward  array index, trim at the end.
@@ -139,7 +129,7 @@ void HistoryOperFilterPH::operate(History& aX, History& aY)
          // Accumulate the sum from forward  source samples and coefficients.
          tSum += mC[k]*aX.mValue[iF];
          // Accumulate the sum from backward source samples and coefficients.
-         tSum -= mC[k]*aX.mValue[iB];
+         tSum += mC[k]*aX.mValue[iB];
       }
       // Store the sum in the destination array.
       aY.mValue[i] = tSum;

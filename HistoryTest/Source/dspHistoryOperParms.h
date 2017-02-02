@@ -58,9 +58,9 @@ public:
    // Constants.
 
    // Operator types.
-   static const int cOperIdentity = 1;
-   static const int cOperSmoother = 2;
-   static const int cOperDerivOne = 3;
+   static const int cOperIdentity   = 1;
+   static const int cOperSmoother   = 2;
+   static const int cOperFirstDeriv = 3;
 
    // Filter structures.
    static const int cFiltStructSavGol = 1;
@@ -109,6 +109,9 @@ public:
 
    static char* asStringOperType (int aX);
    static char* asStringFiltStruct (int aX);
+
+   char* asStringOperType ();
+   char* asStringFiltStruct ();
 
 };
 

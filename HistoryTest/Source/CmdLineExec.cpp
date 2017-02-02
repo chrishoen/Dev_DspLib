@@ -252,9 +252,10 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1,"run2");
    gParms.reset();
    gParms.readSection("default");
-   gParms.readSection("run1");
+   gParms.readSection(aCmd->argString(1));
    gParms.show();
 }
 

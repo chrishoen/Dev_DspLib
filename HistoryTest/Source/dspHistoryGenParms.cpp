@@ -78,6 +78,7 @@ void HistoryGenParms::show(char* aLabel)
    printf("Sigma              %10.4f\n", mSigma);
 
    printf("HistoryGenParms ************** END   %s\n", aLabel);
+   printf("\n");
 }
 
 //******************************************************************************

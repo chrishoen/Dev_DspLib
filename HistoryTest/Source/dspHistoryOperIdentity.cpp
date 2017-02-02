@@ -52,8 +52,6 @@ void HistoryOperIdentity::show()
 
 void HistoryOperIdentity::operate(History& aX, History& aY)
 {
-   printf("HistoryOperIdentity::operate\n");
-
    // Initialize the destination to be the same size as the source.
    aY.initialize(aX.mMaxSamples);
 
