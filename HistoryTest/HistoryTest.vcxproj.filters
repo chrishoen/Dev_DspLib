@@ -76,9 +76,6 @@
     <ClCompile Include="Source\dspHistoryOperBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperDerivOne.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryOperGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -88,10 +85,10 @@
     <ClCompile Include="Source\dspHistoryOperIdentity.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperSmoother.cpp">
+    <ClCompile Include="Source\dspHistoryOperFilterPH.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperFilterPH.cpp">
+    <ClCompile Include="Source\dspHistoryOperFilterSG.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,9 +144,6 @@
     <ClInclude Include="Source\dspHistoryOperBase.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperDerivOne.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspHistoryOperGen.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -159,10 +153,10 @@
     <ClInclude Include="Source\dspHistoryOperIdentity.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperSmoother.h">
+    <ClInclude Include="Source\dspHistoryOperFilterPH.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperFilterPH.h">
+    <ClInclude Include="Source\dspHistoryOperFilterSG.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

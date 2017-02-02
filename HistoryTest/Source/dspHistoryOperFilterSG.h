@@ -1,7 +1,8 @@
 #pragma once
 
 /*==============================================================================
-Signal history linear operator: first time derivative.
+Signal history linear operator: Filter - Savitzky-Golay central difference
+algorithms for smoothing, first and second derivates.
 ==============================================================================*/
 
 //******************************************************************************
@@ -26,10 +27,13 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a linear operator on the set of signal histories the 
-// first time derivative. It's a differentiator.
+// This class provides a linear operator on the set of signal histories.
+// It implements the central difference algorithms of Savitzky-Golay to 
+// calculate smoothing, first and second derivatives. The central differece
+// calculations for smoothing, first and second derivatives are the same but
+// with different coefficients.
  
-class HistoryOperDerivOne : public HistoryOperBase
+class HistoryOperFilterSG : public HistoryOperBase
 {
 public:
    typedef HistoryOperBase BaseClass;
@@ -45,12 +49,12 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryOperDerivOne(HistoryOperParms& aParms);
+   HistoryOperFilterSG(HistoryOperParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y.
-   // This calculates the first derivative using a central difference method 
-   // based on the Holoborodko algorithm for regular time intervals.
+   // This applies the central difference filter using the coefficients 
+   // calculated below.
    void operate(History& aX, History& aY) override;
 
    //***************************************************************************
@@ -59,8 +63,12 @@ public:
    // Methods.
 
    // Calculate the central difference filter coefficents, based on the parms.
-   void calculateCoefficients1();
-   void calculateCoefficients2();
+   // This coefficients are used to calculate a smoothed output.
+   void calculateCoefficientsSmoother();
+
+   // Calculate the central difference filter coefficents, based on the parms.
+   // This coefficients are used to calculate the first derivative.
+   void calculateCoefficientsFirstDerivative() {}
 };
 
 //******************************************************************************

@@ -13,7 +13,7 @@ Description:
 #include "dsp_math.h"
 #include "dsp_functions.h"
 #include "dspStatistics.h"
-#include "dspHistoryOperSmoother.h"
+#include "dspHistoryOperFilterSG.h"
 
 namespace Dsp
 {
@@ -27,7 +27,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperSmoother::HistoryOperSmoother(HistoryOperParms& aParms)
+HistoryOperFilterSG::HistoryOperFilterSG(HistoryOperParms& aParms)
 {
    BaseClass::initialize(aParms);
 }
@@ -37,7 +37,7 @@ HistoryOperSmoother::HistoryOperSmoother(HistoryOperParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryOperSmoother::show()
+void HistoryOperFilterSG::show()
 {
    BaseClass::show();
 }
@@ -48,9 +48,15 @@ void HistoryOperSmoother::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Calculate the central difference filter coefficents, based on the parms.
+// Apply the linear operator from the input to the output. F:X->Y
 
-void HistoryOperSmoother::calculateCoefficients1()
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+// This coefficients are used to calculate a smoothed output.
+
+void HistoryOperFilterSG::calculateCoefficientsSmoother()
 {
    // Start.
    mC[0] = 0.0;
@@ -73,51 +79,41 @@ void HistoryOperSmoother::calculateCoefficients1()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Calculate the central difference filter coefficents, based on the parms.
+// Apply the linear operator from the input to the output. F:X->Y.
+// This applies the central difference filter using the coefficients 
+// calculated below.
 
-void HistoryOperSmoother::calculateCoefficients2()
+void HistoryOperFilterSG::operate(History& aX, History& aY)
 {
-   // Start.
-   mC[0] = 0.0;
+   printf("HistoryOperFilterSG::operate %d\n",mParms.mFilterOrder);
 
-   // Locals.
-   double tH = mParms.mH;
-
-   int N = mParms.mN;
-   int m = mParms.mM;
-
-   double tTerm1 = 1.0/pow(2.0,double(2*m+1));
-   double tTerm2 = 1.0/tH;
-
-   for (int k = 0; k < N; k++)
-   {
-      mC[k] = 1.0/double(N);
-   }
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Apply the linear operator from the input to the output. F:X->Y
-// This is the identity operator.
-
-void HistoryOperSmoother::operate(History& aX, History& aY)
-{
-   printf("HistoryOperSmoother::operate %d\n",mParms.mFilterOrder);
-
+   //***************************************************************************
    // Calculate the central difference filter coefficents, based on the parms.
-   calculateCoefficients1();
+   switch (mParms.mOperType)
+   {
+   case HistoryOperParms::cOperSmoother:
+   {
+      calculateCoefficientsSmoother();
+   }
+   break;
+   case HistoryOperParms::cOperDerivOne:
+   {
+   }
+   break;
+   }
 
+   //***************************************************************************
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
    BaseClass::createTimeClone(aX,aY);
 
+   //***************************************************************************
+   // Execute a loop to calculate the central difference sum to implement
+   // the algorithm.
+
    // Locals
    int tP = aX.mNumSamples;
    int tM = mParms.mM;
-
-   // Execute a loop to calculate the central difference sum to implement
-   // the algorithm.
 
    // For all of the samples in the source and destination arrays.
    for (int i = 0; i < tP; i++)

@@ -80,7 +80,7 @@ SectionBegin run2
 
    HistoryOperParms1
    {
-      OperType       DerivOne
+      OperType       Smoother
       FilterOrder          31
       H                  0.01
    }
@@ -100,7 +100,7 @@ SectionBegin run3
    HistoryOperParms1
    {
       OperType       Smoother
-      FilterOrder         101
+      FilterOrder          31
       H                  0.01
    }
 

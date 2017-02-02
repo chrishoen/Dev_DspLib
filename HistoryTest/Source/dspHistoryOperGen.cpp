@@ -11,8 +11,8 @@ Description:
 #include <math.h>
 
 #include "dspHistoryOperIdentity.h"
-#include "dspHistoryOperSmoother.h"
 #include "dspHistoryOperFilterPH.h"
+#include "dspHistoryOperFilterSG.h"
 
 #include "dspHistoryOperGen.h"
 
@@ -68,7 +68,7 @@ void HistoryOperGen::operate(History& aX, History& aY)
    //*******************************************************************************
    case HistoryOperParms::cOperSmoother:
    {
-      HistoryOperSmoother tOper(mParms);
+      HistoryOperFilterSG tOper(mParms);
       tOper.operate(aX, aY);
    }
    break;

@@ -115,13 +115,13 @@ void HistoryOperFilterPH::operate(History& aX, History& aY)
    // the same size and time array, but has a zero value array.
    BaseClass::createTimeClone(aX,aY);
 
-   // Locals
-   int tP = aX.mNumSamples;
-   int tM = mParms.mM;
-
    //***************************************************************************
    // Execute a loop to calculate the central difference sum to implement
    // the algorithm.
+
+   // Locals
+   int tP = aX.mNumSamples;
+   int tM = mParms.mM;
 
    // For all of the samples in the source and destination arrays.
    for (int i = 0; i < tP; i++)
