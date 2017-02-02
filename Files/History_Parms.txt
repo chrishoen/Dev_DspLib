@@ -69,6 +69,23 @@ SectionEnd
 SectionBegin run1
 
 SectionEnd
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
+SectionBegin run2
+
+   //-----------------------------------------------------------------
+   // Signal Differentiator Parms.
+
+   HistoryOperParms1
+   {
+      OperType       DerivOne
+      FilterOrder          21
+      H                  0.01
+   }
+
+SectionEnd
 
 //********************************************************************
 //********************************************************************
@@ -76,6 +93,23 @@ SectionEnd
 
 SectionBegin run3
 
+
+   //-----------------------------------------------------------------
+   // Signal Differentiator Parms.
+
+   HistoryOperParms1
+   {
+      OperType       Smoother
+      FilterOrder         101
+      H                  0.01
+   }
+
+   HistoryOperParms2
+   {
+      OperType       DerivOne
+      FilterOrder          11
+      H                  0.01
+   }
 
 SectionEnd
 

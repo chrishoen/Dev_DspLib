@@ -152,7 +152,7 @@ void HistoryOperDerivOne::operate(History& aX, History& aY)
    printf("HistoryOperDerivOne::operate %d\n",mParms.mFilterOrder);
 
    // Calculate the central difference filter coefficents, based on the parms.
-   calculateCoefficients1();
+   calculateCoefficients2();
 
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
