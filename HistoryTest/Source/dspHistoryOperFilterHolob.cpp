@@ -30,6 +30,7 @@ namespace Dsp
 HistoryOperFilterHolob::HistoryOperFilterHolob(HistoryOperParms& aParms)
 {
    BaseClass::initialize(aParms);
+   mBackAddFlag = true;
 }
 
 //******************************************************************************
@@ -56,9 +57,50 @@ void HistoryOperFilterHolob::show()
 // Calculate the central difference filter coefficents, based on the parms.
 // This coefficients are used to calculate the first derivative.
 
+void HistoryOperFilterHolob::calculateCoefficientsSmoother()
+{
+   // Start.
+   mBackAddFlag = true;
+   mC[0] = 0.0;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   // Locals.
+   int N = mParms.mFilterOrder;
+   int m = (N-1)/2;
+
+   double tTerm1 = 1.0/pow(2.0,double(2*m));
+
+   for (int k = 0; k <= m; k++)
+   {
+      int kp2 = k*k;
+      long long tTerm2 = (3*m - 1 - 2*kp2);
+      long long tTerm3 = dsp_binomial(2*m,m+k);
+      long long tTerm4 = (2*m - 1);
+      long long tTerm5 = (tTerm2*tTerm3)/tTerm4;
+
+      mC[k] = tTerm1*double(tTerm5);
+   }
+
+   for (int k = 0; k <= m; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+// This coefficients are used to calculate the first derivative.
+
 void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
 {
    // Start.
+   mBackAddFlag = false;
    mC[0] = 0.0;
 
    // Locals.
@@ -100,6 +142,7 @@ void HistoryOperFilterHolob::operate(History& aX, History& aY)
    {
    case HistoryOperParms::cOperSmoother:
    {
+      calculateCoefficientsSmoother();
    }
    break;
    case HistoryOperParms::cOperFirstDeriv:
@@ -137,7 +180,14 @@ void HistoryOperFilterHolob::operate(History& aX, History& aY)
          // Accumulate the sum from forward  source samples and coefficients.
          tSum += mC[k]*aX.mValue[iF];
          // Accumulate the sum from backward source samples and coefficients.
-         tSum -= mC[k]*aX.mValue[iB];
+         if (mBackAddFlag)
+         {
+            tSum += mC[k] * aX.mValue[iB];
+         }
+         else
+         {
+            tSum -= mC[k] * aX.mValue[iB];
+         }
       }
       // Store the sum in the destination array.
       aY.mValue[i] = tSum;

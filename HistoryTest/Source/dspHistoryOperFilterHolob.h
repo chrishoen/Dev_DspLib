@@ -43,6 +43,9 @@ public:
    //***************************************************************************
    // Members.
 
+   // If true then add backward terms, else subtract
+   bool mBackAddFlag;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -61,6 +64,10 @@ public:
    //***************************************************************************
    //***************************************************************************
    // Methods.
+
+   // Calculate the central difference filter coefficents, based on the parms.
+   // This coefficients are used to calculate the smoothed output.
+   void calculateCoefficientsSmoother();
 
    // Calculate the central difference filter coefficents, based on the parms.
    // This coefficients are used to calculate the first derivative.

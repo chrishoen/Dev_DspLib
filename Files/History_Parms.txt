@@ -7,35 +7,35 @@ SectionBegin default
    //-----------------------------------------------------------------
    // Integrity check
 
-   Code1              101
+   Code1 101
 
    //-----------------------------------------------------------------
    // Parms.
 
-   Outputfile     C:\Alpha\Data\SignalHistory.csv
+   Outputfile C:\Alpha\Data\SignalHistory.csv
 
-   HistoryMaxSamples   10000
-   HistoryDeltaT       1.0
+   HistoryMaxSamples       10000
+   HistoryDeltaT             1.0
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
 
    HistoryGenParms
    {
-      GenType        SinWave
-      TimeType       Type1
+      GenType            SinWave
+      TimeType             Type1
 
-      Duration       100.0
-      Fs             100.0
-      Fc              0.10
-      FilterOrder        4
-      EX               0.0
-      UX               2.0
+      Duration             100.0
+      Fs                   100.0
+      Fc                    0.10
+      FilterOrder              4
+      EX                     0.0
+      UX                     2.0
 
-      A                1.0
-      Phi              0.0
-      Tp              10.0
-      Sigma           0.10
+      A                      1.0
+      Phi                    0.0
+      Tp                    10.0
+      Sigma                 0.10
    }
 
    //-----------------------------------------------------------------
@@ -43,24 +43,24 @@ SectionBegin default
 
    HistoryOperParms1
    {
-      OperType       Smoother
-      FiltStruct       SavGol
-      FilterOrder          31
-      H                  0.01
+      OperType          Smoother
+      FiltStruct          SavGol
+      FilterOrder             31
+      H                     0.01
    }
 
    HistoryOperParms2
    {
-      OperType     FirstDeriv
-      FiltStruct        Holob
-      FilterOrder          11
-      H                  0.01
+      OperType        FirstDeriv
+      FiltStruct           Holob
+      FilterOrder             11
+      H                     0.01
    }
 
    //-----------------------------------------------------------------
    // Integrity check
 
-   Code2              102
+   Code2 102
 
 SectionEnd
 
@@ -77,15 +77,20 @@ SectionEnd
 
 SectionBegin run2
 
+   HistoryGenParms
+   {
+      Sigma                 0.00
+   }
+
    //-----------------------------------------------------------------
    // Signal Differentiator Parms.
 
    HistoryOperParms1
    {
-      OperType       Smoother
-      FiltStruct       SavGol
-      FilterOrder          31
-      H                  0.01
+      OperType        FirstDeriv
+      FiltStruct           Holob
+      FilterOrder             11
+      H                     0.01
    }
 
 SectionEnd
@@ -102,18 +107,18 @@ SectionBegin run3
 
    HistoryOperParms1
    {
-      OperType       Smoother
-      FiltStruct       SavGol
-      FilterOrder          51
-      H                  0.01
+      OperType          Smoother
+      FiltStruct          SavGol
+      FilterOrder             51
+      H                     0.01
    }
 
    HistoryOperParms2
    {
-      OperType     FirstDeriv
-      FiltStruct        Holob
-      FilterOrder          21
-      H                  0.01
+      OperType        FirstDeriv
+      FiltStruct           Holob
+      FilterOrder             21
+      H                     0.01
    }
 
 SectionEnd
