@@ -59,19 +59,18 @@ void HistoryOperFilterHolob::show()
 
 void HistoryOperFilterHolob::calculateCoefficientsSmoother()
 {
-   // Start.
+   // Add the backward time terms.
    mBackAddFlag = true;
-   mC[0] = 0.0;
 
    // Locals.
    double tH = mParms.mH;
 
-   // Locals.
    int N = mParms.mFilterOrder;
    int m = (N-1)/2;
 
    double tTerm1 = 1.0/pow(2.0,double(2*m));
 
+   // Calculate the coefficients.
    for (int k = 0; k <= m; k++)
    {
       int kp2 = k*k;
@@ -83,6 +82,7 @@ void HistoryOperFilterHolob::calculateCoefficientsSmoother()
       mC[k] = tTerm1*double(tTerm5);
    }
 
+   // Show.
    for (int k = 0; k <= m; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
@@ -99,14 +99,12 @@ void HistoryOperFilterHolob::calculateCoefficientsSmoother()
 
 void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
 {
-   // Start.
+   // Subtract the backward time terms.
    mBackAddFlag = false;
-   mC[0] = 0.0;
 
    // Locals.
    double tH = mParms.mH;
 
-   // Locals.
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
    int m = (N-3)/2;
@@ -114,11 +112,15 @@ void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
    double tTerm1 = 1.0/pow(2.0,double(2*m+1));
    double tTerm2 = 1.0/tH;
 
+   // Calculate the coefficients.
+   mC[0] = 0.0;
+
    for (int k = 1; k <= M; k++)
    {
       mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
    }
 
+   // Show.
    for (int k = 1; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
@@ -142,33 +144,36 @@ static long long recursive_s(int N, int M, int k)
 
 void HistoryOperFilterHolob::calculateCoefficientsSecondDerivative()
 {
-   // Start.
+   // Add the backward time terms.
    mBackAddFlag = true;
    mC[0] = 0.0;
 
    // Locals.
    double tH = mParms.mH;
 
-   // Locals.
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
 
    double tTerm1 = 1.0/pow(2.0,double(N-3));
    double tTerm2 = 1.0/(tH*tH);
 
+   // Calculate the coefficients.
    for (int k = 0; k <= M; k++)
    {
       mC[k] = tTerm1*tTerm2*double(recursive_s(N,M,k));
    }
 
+   // Show.
    for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
    printf("\n");
-
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

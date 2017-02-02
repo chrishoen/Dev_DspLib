@@ -43,6 +43,14 @@ public:
    //***************************************************************************
    // Members.
 
+   // If true then add backward terms, else subtract.
+   // Central difference filters are symmetric or asymetric. The coefficients
+   // for forward time and backward time are the same. Forward terms are added
+   // to the accumulator. Backward terms are either added or subtracted,
+   // depending on the type. Smoothers add the backward terms, first
+   // derivatives subtract, and second derivatives add.
+   bool mBackAddFlag;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -69,6 +77,10 @@ public:
    // Calculate the central difference filter coefficents, based on the parms.
    // This coefficients are used to calculate the first derivative.
    void calculateCoefficientsFirstDerivative() {}
+
+   // Calculate the central difference filter coefficents, based on the parms.
+   // This coefficients are used to calculate the first derivative.
+   void calculateCoefficientsSecondDerivative() {}
 };
 
 //******************************************************************************

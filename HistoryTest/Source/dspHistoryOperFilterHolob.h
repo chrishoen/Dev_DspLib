@@ -43,7 +43,12 @@ public:
    //***************************************************************************
    // Members.
 
-   // If true then add backward terms, else subtract
+   // If true then add backward terms, else subtract.
+   // Central difference filters are symmetric or asymetric. The coefficients
+   // for forward time and backward time are the same. Forward terms are added
+   // to the accumulator. Backward terms are either added or subtracted,
+   // depending on the type. Smoothers add the backward terms, first
+   // derivatives subtract, and second derivatives add.
    bool mBackAddFlag;
 
    //***************************************************************************

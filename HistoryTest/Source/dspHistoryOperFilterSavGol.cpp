@@ -30,6 +30,7 @@ namespace Dsp
 HistoryOperFilterSavGol::HistoryOperFilterSavGol(HistoryOperParms& aParms)
 {
    BaseClass::initialize(aParms);
+   mBackAddFlag = true;
 }
 
 //******************************************************************************
@@ -58,25 +59,30 @@ void HistoryOperFilterSavGol::show()
 
 void HistoryOperFilterSavGol::calculateCoefficientsSmoother()
 {
-   // Start.
-   mC[0] = 0.0;
+   // Add the backward time terms.
+   mBackAddFlag = true;
 
    // Locals.
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
 
-   for (int k = 0; k < M; k++)
+   // Calculate coefficents.
+   for (int k = 0; k <= M; k++)
    {
       mC[k] = 1.0/double(N);
    }
 
-   for (int k = 1; k <= M; k++)
+   // Show.
+   for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
    printf("\n");
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -97,6 +103,12 @@ void HistoryOperFilterSavGol::operate(History& aX, History& aY)
    break;
    case HistoryOperParms::cOperFirstDeriv:
    {
+      calculateCoefficientsFirstDerivative();
+   }
+   break;
+   case HistoryOperParms::cOperSecondDeriv:
+   {
+      calculateCoefficientsSecondDerivative();
    }
    break;
    }
@@ -129,7 +141,14 @@ void HistoryOperFilterSavGol::operate(History& aX, History& aY)
          // Accumulate the sum from forward  source samples and coefficients.
          tSum += mC[k]*aX.mValue[iF];
          // Accumulate the sum from backward source samples and coefficients.
-         tSum += mC[k]*aX.mValue[iB];
+         if (mBackAddFlag)
+         {
+            tSum += mC[k] * aX.mValue[iB];
+         }
+         else
+         {
+            tSum -= mC[k] * aX.mValue[iB];
+         }
       }
       // Store the sum in the destination array.
       aY.mValue[i] = tSum;
