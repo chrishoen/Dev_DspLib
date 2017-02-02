@@ -39,18 +39,20 @@ SectionBegin default
    }
 
    //-----------------------------------------------------------------
-   // Signal Differentiator Parms.
+   // Signal Linear Operator Parms.
 
    HistoryOperParms1
    {
       OperType       Smoother
-      FilterOrder         101
+      FiltStruct       SavGol
+      FilterOrder          31
       H                  0.01
    }
 
    HistoryOperParms2
    {
       OperType       DerivOne
+      FiltStruct        Holob
       FilterOrder          11
       H                  0.01
    }
@@ -81,6 +83,7 @@ SectionBegin run2
    HistoryOperParms1
    {
       OperType       Smoother
+      FiltStruct       SavGol
       FilterOrder          31
       H                  0.01
    }
@@ -100,6 +103,7 @@ SectionBegin run3
    HistoryOperParms1
    {
       OperType       Smoother
+      FiltStruct       SavGol
       FilterOrder          31
       H                  0.01
    }
@@ -107,6 +111,7 @@ SectionBegin run3
    HistoryOperParms2
    {
       OperType       DerivOne
+      FiltStruct        Holob
       FilterOrder          31
       H                  0.01
    }
