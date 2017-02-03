@@ -42,6 +42,8 @@ void HistoryOperParms::reset()
 
    mFilterOrder = 1;
    mH = 1.0;
+
+   mSelect = 1;
 }
 
 //******************************************************************************
@@ -57,6 +59,7 @@ void HistoryOperParms::show(char* aLabel)
    printf("FiltStruct         %10s\n",   asStringFiltStruct(mFiltStruct));
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
+   printf("Select             %10d\n",   mSelect);
 
    printf("HistoryOperParms ************* END   %s\n", aLabel);
    printf("\n");
@@ -73,6 +76,7 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("FilterOrder"))     mFilterOrder = aCmd->argInt(1);
    if (aCmd->isCmd("H"))               mH           = aCmd->argDouble(1);
+   if (aCmd->isCmd("Select"))          mSelect      = aCmd->argInt(1);
 
    if (aCmd->isCmd("OperType"))
    {

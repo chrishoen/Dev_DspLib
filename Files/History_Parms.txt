@@ -35,7 +35,7 @@ SectionBegin default
       A                      1.0
       Phi                    0.0
       Tp                    10.0
-      Sigma                 0.10
+      Sigma                 0.00
    }
 
    //-----------------------------------------------------------------
@@ -79,7 +79,7 @@ SectionBegin run2
 
    HistoryGenParms
    {
-      Sigma                 0.10
+      Sigma                 0.00
    }
 
    //-----------------------------------------------------------------
@@ -87,10 +87,12 @@ SectionBegin run2
 
    HistoryOperParms1
    {
-      OperType          Smoother
+      OperType        FirstDeriv
       FiltStruct          SavGol
-      FilterOrder             51
+      FilterOrder              9
       H                     0.01
+      Select                   1
+
    }
 
 SectionEnd

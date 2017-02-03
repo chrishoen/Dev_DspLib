@@ -72,11 +72,13 @@ public:
    //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mOperType;         // Linear operator type.
-   int     mFiltStruct;      // Filter structure type.
+   int     mOperType;     // Linear operator type.
+   int     mFiltStruct;   // Filter structure type.
 
    int     mFilterOrder;  // Central difference filter order. Must be odd.
    double  mH;            // Central difference time delta. 
+
+   int     mSelect;       // Selector, debug.
 
    //***************************************************************************
    //***************************************************************************
