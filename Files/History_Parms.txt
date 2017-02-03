@@ -139,9 +139,8 @@ SectionBegin Causal1
       CausalType               ButterworthLP
       FilterOrder              4
       Fs                       100.0
-      Fc                       1.0
+      Fc                       0.25
    }
 
-   Code2 302
 SectionEnd
 
