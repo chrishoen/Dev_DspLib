@@ -93,7 +93,7 @@ void AlphaTwo::initialize(double aP1, double aP2, double aDT)
 
 //******************************************************************************
 
-void AlphaTwo::put(double aY)
+double AlphaTwo::put(double aY)
 {
    // Store input
    mY = aY;
@@ -111,6 +111,7 @@ void AlphaTwo::put(double aY)
 
    // Done
    mK++;
+   return mXX;
 }
 
 //******************************************************************************
@@ -165,7 +166,7 @@ void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
 
 //******************************************************************************
 
-void AlphaThree::put(double aY)
+double AlphaThree::put(double aY)
 {
    // Store input
    mY = aY;
@@ -184,6 +185,7 @@ void AlphaThree::put(double aY)
 
    // Done
    mK++;
+   return mXX;
 }
 
 //******************************************************************************

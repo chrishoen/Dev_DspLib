@@ -68,7 +68,7 @@ public:
    void show();
 
    // Put input value
-   void put(double aY);
+   double put(double aY);
 
    // Input value
    double mY;
@@ -110,7 +110,7 @@ public:
    void show();
 
    // Put input value
-   void put(double aY);
+   double put(double aY);
 
    // Input value
    double mY;

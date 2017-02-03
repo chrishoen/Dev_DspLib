@@ -64,6 +64,23 @@ void HistoryFilterCausal::initializeCausalFilter()
          mParms.mAlphaP1);
    }
    break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      mAlphaTwo.initialize(
+         mParms.mAlphaP1,
+         mParms.mAlphaP2,
+         mParms.mAlphaDT);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      mAlphaThree.initialize(
+         mParms.mAlphaP1,
+         mParms.mAlphaP2,
+         mParms.mAlphaP3,
+         mParms.mAlphaDT);
+   }
+   break;
    }
 
 }
@@ -113,6 +130,16 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
       case HistoryFilterParms::cCausalAlphaOne:
       {
          tY = mAlphaOne.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaTwo:
+      {
+         tY = mAlphaTwo.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaThree:
+      {
+         tY = mAlphaThree.put(tX);
       }
       break;
       }
