@@ -55,7 +55,6 @@ void HistoryOperFilterSavGol::show()
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate a smoothed output.
 
 void HistoryOperFilterSavGol::calculateCoefficientsSmoother1()
 {
@@ -93,7 +92,6 @@ void HistoryOperFilterSavGol::calculateCoefficientsSmoother1()
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate a smoothed output.
 
 void HistoryOperFilterSavGol::calculateCoefficientsSmoother2()
 {
@@ -165,6 +163,46 @@ void HistoryOperFilterSavGol::calculateCoefficientsFirstDerivative1()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryOperFilterSavGol::calculateCoefficientsSecondDerivative1()
+{
+   // Add the backward time terms.
+   mBackAddFlag = true;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
+
+   // Calculate the coefficients.
+   for (int k = 0; k <= M; k++)
+   {
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k2 = double(k*k);
+
+      double tTermH = 1.0/(tH*tH);
+      double tTerm1 = 12*m1*k2 - m1*(m2-1);
+      double tTerm2 = m2*(m2-1)*(m2-4)/30.0;
+
+      mC[k] = tTermH*tTerm1/tTerm2;
+//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
+   }
+
+   // Show.
+   printf("FirstDerivative1\n");
+   for (int k = 0; k <= M; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -183,7 +221,7 @@ void HistoryOperFilterSavGol::operate(History& aX, History& aY)
       switch (mParms.mSelect)
       {
       case 1: calculateCoefficientsSmoother1();  break;
-      case 2: calculateCoefficientsSmoother1();  break;
+      case 2: calculateCoefficientsSmoother2();  break;
       }
    }
    break;
@@ -198,7 +236,7 @@ void HistoryOperFilterSavGol::operate(History& aX, History& aY)
    break;
    case HistoryOperParms::cOperSecondDeriv:
    {
-      calculateCoefficientsSecondDerivative();
+      calculateCoefficientsSecondDerivative1();
    }
    break;
    }
