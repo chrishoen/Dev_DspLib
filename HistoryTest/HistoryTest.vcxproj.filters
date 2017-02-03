@@ -94,6 +94,9 @@
     <ClCompile Include="Source\dspHistoryFilterOperator.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestOne_causal1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">

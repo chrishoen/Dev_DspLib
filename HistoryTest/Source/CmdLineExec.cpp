@@ -40,6 +40,22 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN4"))  executeRun4(aCmd);
    if (aCmd->isCmd("RUN5"))  executeRun5(aCmd);
    if (aCmd->isCmd("RUN6"))  executeRun6(aCmd);
+
+   if (aCmd->isCmd("Causal1"))  executeCausal1(aCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeCausal1(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("causal1");
+
+   TestOne tTestOne;
+   tTestOne.doCausal1();
 }
 
 //******************************************************************************
@@ -252,7 +268,8 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"run2");
+   Prn::print(0,"PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS ");
+   aCmd->setArgDefault(1,"causal1");
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection(aCmd->argString(1));

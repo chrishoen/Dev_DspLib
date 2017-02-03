@@ -190,6 +190,7 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
+    <ClCompile Include="Source\TestOne_causal1.cpp" />
     <ClCompile Include="Source\TestOne_run1.cpp" />
     <ClCompile Include="Source\TestOne_run2.cpp" />
     <ClCompile Include="Source\TestOne_run3.cpp" />

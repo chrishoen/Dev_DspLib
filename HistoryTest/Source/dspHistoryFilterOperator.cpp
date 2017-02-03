@@ -13,6 +13,7 @@ Description:
 #include "dspHistoryFilterCDiffIdentity.h"
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
+#include "dspHistoryFilterCausal.h"
 
 #include "dspHistoryFilterOperator.h"
 
@@ -59,7 +60,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Select on linear operator type.
+   // Select on filter type.
 
    switch (mParms.mFilterType)
    {
@@ -74,7 +75,20 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
       return;
    }
    break;
+   //***************************************************************************
+   case HistoryFilterParms::cFilterCausal:
+   {
+      printf("OPERATOR CAUSAL\n");
+
+      HistoryFilterCausal tFilter(mParms);
+      tFilter.operate(aX, aY);
+
+      return;
    }
+   break;
+   }
+
+
 
    //***************************************************************************
    //***************************************************************************

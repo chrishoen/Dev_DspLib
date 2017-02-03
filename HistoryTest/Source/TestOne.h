@@ -21,5 +21,6 @@ public:
    void doRun4();
    void doRun5();
 
+   void doCausal1();
  };
 

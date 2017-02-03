@@ -62,14 +62,13 @@ void Parms::show()
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
    printf("\n");
 
-   mHistoryGenParms.show("HistoryGen");
+   mHistoryGenParms.show("Gen");
    printf("\n");
-   mHistoryFilterParms1.show("HistoryOper1");
+   mHistoryFilterParms1.show("Filter1");
    printf("\n");
-   mHistoryFilterParms2.show("HistoryOper2");
+   mHistoryFilterParms2.show("Filter2");
    printf("\n");
 
-   printf("Parms ************************ END   %s\n", BaseClass::mTargetSection);
 }
 
 //******************************************************************************

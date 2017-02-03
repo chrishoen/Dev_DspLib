@@ -64,11 +64,10 @@ void HistoryFilterParms::show(char* aLabel)
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
    printf("Select             %10d\n",   mSelect);
-   printf("CausalType      %10s\n",   asStringCausalType(mCausalType));
+   printf("CausalType         %10s\n",   asStringCausalType(mCausalType));
    printf("Fs                 %10.4f\n", mFs);
    printf("Fc                 %10.4f\n", mFc);
 
-   printf("HistoryFilterParms ************* END   %s\n", aLabel);
    printf("\n");
 }
 
@@ -93,6 +92,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))     mFilterType = cFilterSmoother;
       if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterCausal)))       mFilterType = cFilterCausal;
    }
 
    if (aCmd->isCmd("FilterMethod"))
@@ -135,6 +135,7 @@ char* HistoryFilterParms::asStringFilterType(int aX)
    case cFilterSmoother    : return "Smoother";
    case cFilterFirstDeriv  : return "FirstDeriv";
    case cFilterSecondDeriv : return "SecondDeriv";
+   case cFilterCausal      : return "Causal";
    default : return "UNKNOWN";
    }
 }
