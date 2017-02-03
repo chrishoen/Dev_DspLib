@@ -144,3 +144,28 @@ SectionBegin Causal1
 
 SectionEnd
 
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
+SectionBegin Noncausal1
+
+   HistoryGenParms
+   {
+      Sigma                    0.11
+   }
+
+   //-----------------------------------------------------------------
+   // Signal Differentiator Parms.
+
+   HistoryFilterParms1
+   {
+      FilterType               Causal
+      CausalType               ButterworthLP
+      FilterOrder              4
+      Fs                       100.0
+      Fc                       0.25
+   }
+
+SectionEnd
+

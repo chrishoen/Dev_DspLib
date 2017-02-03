@@ -93,6 +93,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
       if (aCmd->isArgString(1,asStringFilterType(cFilterCausal)))       mFilterType = cFilterCausal;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterNoncausal)))   mFilterType = cFilterNoncausal;
    }
 
    if (aCmd->isCmd("FilterMethod"))
@@ -137,6 +138,7 @@ char* HistoryFilterParms::asStringFilterType(int aX)
    case cFilterFirstDeriv  : return "FirstDeriv";
    case cFilterSecondDeriv : return "SecondDeriv";
    case cFilterCausal      : return "Causal";
+   case cFilterNoncausal   : return "Noncausal";
    default : return "UNKNOWN";
    }
 }

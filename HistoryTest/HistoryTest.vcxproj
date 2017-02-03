@@ -171,6 +171,7 @@
     <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterNoncausal.cpp" />
     <ClCompile Include="Source\dspHistoryFilterOperator.cpp" />
     <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCausal.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
     <ClCompile Include="Source\TestOne_causal1.cpp" />
+    <ClCompile Include="Source\TestOne_noncausal1.cpp" />
     <ClCompile Include="Source\TestOne_run1.cpp" />
     <ClCompile Include="Source\TestOne_run2.cpp" />
     <ClCompile Include="Source\TestOne_run3.cpp" />
@@ -204,6 +206,7 @@
     <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h" />
+    <ClInclude Include="Source\dspHistoryFilterNoncausal.h" />
     <ClInclude Include="Source\dspHistoryFilterOperator.h" />
     <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryFilterCausal.h" />

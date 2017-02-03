@@ -66,6 +66,7 @@ public:
    static const int cFilterFirstDeriv  = 3;
    static const int cFilterSecondDeriv = 4;
    static const int cFilterCausal      = 5;
+   static const int cFilterNoncausal   = 6;
 
    // Filter methods.
    static const int cMethodSavGol = 1;

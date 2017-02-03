@@ -14,6 +14,7 @@ Description:
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
 #include "dspHistoryFilterCausal.h"
+#include "dspHistoryFilterNoncausal.h"
 
 #include "dspHistoryFilterOperator.h"
 
@@ -79,6 +80,17 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    case HistoryFilterParms::cFilterCausal:
    {
       printf("OPERATOR CAUSAL\n");
+
+      HistoryFilterCausal tFilter(mParms);
+      tFilter.operate(aX, aY);
+
+      return;
+   }
+   break;
+   //***************************************************************************
+   case HistoryFilterParms::cFilterNoncausal:
+   {
+      printf("OPERATOR NONCAUSAL\n");
 
       HistoryFilterCausal tFilter(mParms);
       tFilter.operate(aX, aY);
