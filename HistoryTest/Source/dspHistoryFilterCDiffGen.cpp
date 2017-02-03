@@ -14,7 +14,7 @@ Description:
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
 
-#include "dspHistoryFilterGen.h"
+#include "dspHistoryFilterCDiffGen.h"
 
 namespace Dsp
 {
@@ -28,7 +28,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryFilterGen::HistoryFilterGen(HistoryFilterParms& aParms)
+HistoryFilterCDiffGen::HistoryFilterCDiffGen(HistoryFilterParms& aParms)
 {
    mParms = aParms;
 }
@@ -38,9 +38,9 @@ HistoryFilterGen::HistoryFilterGen(HistoryFilterParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryFilterGen::show()
+void HistoryFilterCDiffGen::show()
 {
-   mParms.show("HistoryFilterGen");
+   mParms.show("HistoryFilterCDiffGen");
 }
 
 //******************************************************************************
@@ -54,7 +54,7 @@ void HistoryFilterGen::show()
 // the operator type parameter and uses it to operate on a history to produce
 // a new history.
 
-void HistoryFilterGen::operate(History& aX, History& aY)
+void HistoryFilterCDiffGen::operate(History& aX, History& aY)
 {
    //***************************************************************************
    //***************************************************************************
@@ -68,8 +68,8 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    {
       printf("OPERATOR IDENTITY\n");
 
-      HistoryFilterCDiffIdentity tOper(mParms);
-      tOper.operate(aX, aY);
+      HistoryFilterCDiffIdentity tFilter(mParms);
+      tFilter.operate(aX, aY);
 
       return;
    }
@@ -88,8 +88,8 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    {
       printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryFilterCDiffSavGol tOper(mParms);
-      tOper.operate(aX, aY);
+      HistoryFilterCDiffSavGol tFilter(mParms);
+      tFilter.operate(aX, aY);
 
       return;
    }
@@ -99,8 +99,8 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    {
       printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryFilterCDiffHolob tOper(mParms);
-      tOper.operate(aX, aY);
+      HistoryFilterCDiffHolob tFilter(mParms);
+      tFilter.operate(aX, aY);
 
       return;
    }

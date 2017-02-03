@@ -168,10 +168,10 @@
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffGen.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterGen.cpp" />
     <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenGen.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
@@ -199,10 +199,10 @@
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspHistory.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffBase.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffGen.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h" />
-    <ClInclude Include="Source\dspHistoryFilterGen.h" />
     <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryGenBase.h" />
     <ClInclude Include="Source\dspHistoryGaussNoise.h" />

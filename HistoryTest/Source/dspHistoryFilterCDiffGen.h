@@ -29,7 +29,7 @@ namespace Dsp
 // parameter, it instantiates one of the concrete operators and used it to
 // operate on a history to produce a new history.
  
-class HistoryFilterGen
+class HistoryFilterCDiffGen
 {
 public:
 
@@ -46,7 +46,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryFilterGen(HistoryFilterParms& aParms);
+   HistoryFilterCDiffGen(HistoryFilterParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y
