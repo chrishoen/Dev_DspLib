@@ -83,6 +83,7 @@ void HistoryFilterHolob::calculateCoefficientsSmoother()
    }
 
    // Show.
+   printf("Smoother\n");
    for (int k = 0; k <= m; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
