@@ -70,11 +70,11 @@ void HistoryOperFilterSavGol::calculateCoefficientsSmoother1()
    // Calculate the coefficients.
    for (int k = 0; k <= M; k++)
    {
-      double m = double(N);
-      double mp2 = double(N*N);
-      double kp2 = double(k*k);
-      double tTerm1 = (3*mp2 - 7 - 20*kp2)/4.0;
-      double tTerm2 = m*(mp2 - 4)/3.0;
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k2 = double(k*k);
+      double tTerm1 = (3*m2-7-20*k2)/4.0;
+      double tTerm2 = m1*(m2-4)/3.0;
 
       mC[k] = tTerm1/tTerm2;
    }
@@ -105,7 +105,8 @@ void HistoryOperFilterSavGol::calculateCoefficientsSmoother2()
    // Calculate coefficents.
    for (int k = 0; k <= m; k++)
    {
-      mC[k] = 1.0/double(N);
+      double m1 = double(N);
+      mC[k] = 1.0/m1;
    }
 
    // Show.
@@ -153,6 +154,46 @@ void HistoryOperFilterSavGol::calculateCoefficientsFirstDerivative1()
 
    // Show.
    printf("FirstDerivative1\n");
+   for (int k = 0; k <= M; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryOperFilterSavGol::calculateCoefficientsFirstDerivative2()
+{
+   // Subtract the backward time terms.
+   mBackAddFlag = false;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
+
+   // Calculate the coefficients.
+   for (int k = 0; k <= M; k++)
+   {
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k1 = double(k);
+
+      double tTermH = 1.0/tH;
+      double tTerm1 = k1;
+      double tTerm2 = m1*(m2 - 1)/12.0;
+
+      mC[k] = tTermH*tTerm1/tTerm2;
+//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
+   }
+
+   // Show.
+   printf("FirstDerivative2\n");
    for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);

@@ -78,7 +78,7 @@ public:
    // Calculate the central difference filter coefficents, based on the parms.
    // This coefficients are used to calculate the first derivative.
    void calculateCoefficientsFirstDerivative1();
-   void calculateCoefficientsFirstDerivative2() {}
+   void calculateCoefficientsFirstDerivative2();
 
    // Calculate the central difference filter coefficents, based on the parms.
    // This coefficients are used to calculate the first derivative.

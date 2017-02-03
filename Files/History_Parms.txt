@@ -79,7 +79,7 @@ SectionBegin run2
 
    HistoryGenParms
    {
-      Sigma                 0.00
+      Sigma                 0.1
    }
 
    //-----------------------------------------------------------------
@@ -87,7 +87,7 @@ SectionBegin run2
 
    HistoryOperParms1
    {
-      OperType       SecondDeriv
+      OperType          Smoother
       FiltStruct          SavGol
       FilterOrder              9
       H                     0.01
