@@ -37,7 +37,7 @@ void HistoryFilterParms::reset()
 {
    BaseClass::reset();
 
-   mFilterType    = cFilterIdentity;
+   mFilterType    = cFilterCDiffIdentity;
    mFilterMethod  = cMethodSavGol;
 
    mFilterOrder = 1;
@@ -80,7 +80,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("FilterType"))
    {
-      if (aCmd->isArgString(1,asStringFilterType(cFilterIdentity)))     mFilterType = cFilterIdentity;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterCDiffIdentity)))     mFilterType = cFilterCDiffIdentity;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))     mFilterType = cFilterSmoother;
       if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
@@ -114,7 +114,7 @@ char* HistoryFilterParms::asStringFilterType(int aX)
 {
    switch (aX)
    {
-   case cFilterIdentity    : return "Identity";
+   case cFilterCDiffIdentity    : return "Identity";
    case cFilterSmoother    : return "Smoother";
    case cFilterFirstDeriv  : return "FirstDeriv";
    case cFilterSecondDeriv : return "SecondDeriv";

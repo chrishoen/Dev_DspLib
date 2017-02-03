@@ -73,19 +73,19 @@
     <ClCompile Include="Source\TestOne_run5.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterBase.cpp">
+    <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterHolob.cpp">
+    <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterSavGol.cpp">
+    <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryFilterGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterIdentity.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryFilterParms.cpp">
@@ -141,22 +141,20 @@
     <ClInclude Include="Source\dspHistoryGenGen.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterBase.h">
+    <ClInclude Include="Source\dspHistoryFilterParms.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffBase.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterHolob.h">
+    <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterSavGol.h">
+    <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryFilterGen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterIdentity.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterParms.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

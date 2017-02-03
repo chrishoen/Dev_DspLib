@@ -11,7 +11,7 @@ Signal history linear operator: the identity operator.
 #include "risCmdLineExec.h"
 
 #include "dspHistoryFilterParms.h"
-#include "dspHistoryFilterBase.h"
+#include "dspHistoryFilterCDiffBase.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -29,10 +29,10 @@ namespace Dsp
 // This class provides a linear operator on the set of signal histories: the 
 // identity operator. It's a copier.
  
-class HistoryFilterIdentity : public HistoryFilterBase
+class HistoryFilterCDiffIdentity : public HistoryFilterCDiffBase
 {
 public:
-   typedef HistoryFilterBase BaseClass;
+   typedef HistoryFilterCDiffBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
@@ -45,7 +45,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryFilterIdentity(HistoryFilterParms& aParms);
+   HistoryFilterCDiffIdentity(HistoryFilterParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y

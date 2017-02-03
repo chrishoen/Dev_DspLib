@@ -23,7 +23,7 @@ namespace Dsp
 // This is a base class for signal history filters, which are linear
 // operators on the set of histories F:H->H.
 
-class HistoryFilterBase
+class HistoryFilterCDiffBase
 {
 public:
 
@@ -50,8 +50,8 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryFilterBase();
-   ~HistoryFilterBase();
+   HistoryFilterCDiffBase();
+   ~HistoryFilterCDiffBase();
    virtual void show();
 
    // Allocate memory.

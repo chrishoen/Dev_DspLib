@@ -12,7 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
-#include "dspHistoryFilterIdentity.h"
+#include "dspHistoryFilterCDiffIdentity.h"
 
 namespace Dsp
 {
@@ -26,7 +26,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryFilterIdentity::HistoryFilterIdentity(HistoryFilterParms& aParms)
+HistoryFilterCDiffIdentity::HistoryFilterCDiffIdentity(HistoryFilterParms& aParms)
 {
    BaseClass::initialize(aParms);
 }
@@ -36,7 +36,7 @@ HistoryFilterIdentity::HistoryFilterIdentity(HistoryFilterParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryFilterIdentity::show()
+void HistoryFilterCDiffIdentity::show()
 {
    BaseClass::show();
 }
@@ -50,7 +50,7 @@ void HistoryFilterIdentity::show()
 // Apply the linear operator from the input to the output. F:X->Y
 // This is the identity operator.
 
-void HistoryFilterIdentity::operate(History& aX, History& aY)
+void HistoryFilterCDiffIdentity::operate(History& aX, History& aY)
 {
    // Initialize the destination to be the same size as the source.
    aY.initialize(aX.mMaxSamples);

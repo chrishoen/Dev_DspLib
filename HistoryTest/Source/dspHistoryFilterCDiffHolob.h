@@ -12,7 +12,7 @@ algorithms for smoothing, first and second derivates.
 #include "risCmdLineExec.h"
 
 #include "dspHistoryFilterParms.h"
-#include "dspHistoryFilterBase.h"
+#include "dspHistoryFilterCDiffBase.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -33,10 +33,10 @@ namespace Dsp
 // calculations for smoothing, first and second derivatives are the same but
 // with different coefficients.
  
-class HistoryFilterHolob : public HistoryFilterBase
+class HistoryFilterCDiffHolob : public HistoryFilterCDiffBase
 {
 public:
-   typedef HistoryFilterBase BaseClass;
+   typedef HistoryFilterCDiffBase BaseClass;
 
    //***************************************************************************
    //***************************************************************************
@@ -57,7 +57,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryFilterHolob(HistoryFilterParms& aParms);
+   HistoryFilterCDiffHolob(HistoryFilterParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y.

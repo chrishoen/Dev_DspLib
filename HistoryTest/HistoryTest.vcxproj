@@ -167,6 +167,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterGen.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenGen.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenRandWave.cpp" />
@@ -174,12 +180,6 @@
     <ClCompile Include="Source\dspHistoryGenStep.cpp" />
     <ClCompile Include="Source\dspHistoryGenZero.cpp" />
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterBase.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterHolob.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterSavGol.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterGen.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterIdentity.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryTextFile.cpp" />
     <ClCompile Include="Source\dspHistory_read.cpp" />
     <ClCompile Include="Source\dspHistory_write.cpp" />
@@ -198,6 +198,12 @@
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\dspHistory.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffBase.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h" />
+    <ClInclude Include="Source\dspHistoryFilterGen.h" />
+    <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryGenBase.h" />
     <ClInclude Include="Source\dspHistoryGaussNoise.h" />
     <ClInclude Include="Source\dspHistoryGenGen.h" />
@@ -207,12 +213,6 @@
     <ClInclude Include="Source\dspHistoryGenStep.h" />
     <ClInclude Include="Source\dspHistoryGenZero.h" />
     <ClInclude Include="Source\dspHistoryLoopClock.h" />
-    <ClInclude Include="Source\dspHistoryFilterBase.h" />
-    <ClInclude Include="Source\dspHistoryFilterHolob.h" />
-    <ClInclude Include="Source\dspHistoryFilterSavGol.h" />
-    <ClInclude Include="Source\dspHistoryFilterGen.h" />
-    <ClInclude Include="Source\dspHistoryFilterIdentity.h" />
-    <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryStatistics.h" />
     <ClInclude Include="Source\dspHistoryTextFile.h" />
     <ClInclude Include="Source\MainInit.h" />

@@ -10,9 +10,9 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dspHistoryFilterIdentity.h"
-#include "dspHistoryFilterHolob.h"
-#include "dspHistoryFilterSavGol.h"
+#include "dspHistoryFilterCDiffIdentity.h"
+#include "dspHistoryFilterCDiffHolob.h"
+#include "dspHistoryFilterCDiffSavGol.h"
 
 #include "dspHistoryFilterGen.h"
 
@@ -64,11 +64,11 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    switch (mParms.mFilterType)
    {
    //***************************************************************************
-   case HistoryFilterParms::cFilterIdentity:
+   case HistoryFilterParms::cFilterCDiffIdentity:
    {
       printf("OPERATOR IDENTITY\n");
 
-      HistoryFilterIdentity tOper(mParms);
+      HistoryFilterCDiffIdentity tOper(mParms);
       tOper.operate(aX, aY);
 
       return;
@@ -88,7 +88,7 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    {
       printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryFilterSavGol tOper(mParms);
+      HistoryFilterCDiffSavGol tOper(mParms);
       tOper.operate(aX, aY);
 
       return;
@@ -99,7 +99,7 @@ void HistoryFilterGen::operate(History& aX, History& aY)
    {
       printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryFilterHolob tOper(mParms);
+      HistoryFilterCDiffHolob tOper(mParms);
       tOper.operate(aX, aY);
 
       return;

@@ -58,7 +58,7 @@ public:
    // Constants.
 
    // Operator types.
-   static const int cFilterIdentity    = 1;
+   static const int cFilterCDiffIdentity    = 1;
    static const int cFilterSmoother    = 2;
    static const int cFilterFirstDeriv  = 3;
    static const int cFilterSecondDeriv = 4;
