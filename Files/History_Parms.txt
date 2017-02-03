@@ -127,7 +127,7 @@ SectionBegin Causal1
 
    HistoryGenParms
    {
-      Sigma                    0.11
+      Sigma                    0.10
    }
 
    //-----------------------------------------------------------------
@@ -152,7 +152,7 @@ SectionBegin Noncausal1
 
    HistoryGenParms
    {
-      Sigma                    0.11
+      Sigma                    0.10
    }
 
    //-----------------------------------------------------------------
@@ -160,7 +160,7 @@ SectionBegin Noncausal1
 
    HistoryFilterParms1
    {
-      FilterType               Causal
+      FilterType               Noncausal
       CausalType               ButterworthLP
       FilterOrder              4
       Fs                       100.0

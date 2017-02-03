@@ -42,6 +42,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN6"))  executeRun6(aCmd);
 
    if (aCmd->isCmd("Causal1"))     executeCausal1(aCmd);
+   if (aCmd->isCmd("Cas1"))        executeCausal1(aCmd);
+
    if (aCmd->isCmd("Noncausal1"))  executeNoncausal1(aCmd);
    if (aCmd->isCmd("Non1"))        executeNoncausal1(aCmd);
 }
@@ -184,13 +186,22 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,11);
-   int N = aCmd->argInt(1);
-   int m = (N-3)/2;
+   aCmd->setArgDefault(1,10);
+   int tP = aCmd->argInt(1);
 
-   double tT = pow(2.0,double(2*m+1));
+   printf("Forward\n");
+   for (int i = 0; i < tP; i++)
+   {
+      printf("%2d",i);
+   }
+   printf("\n\n");
 
-   printf("N,m %3d %3d $$ %10.6f\n",N,m,tT);
+   printf("Backward\n");
+   for (int i = tP-1; i >= 0; i--)
+   {
+      printf("%2d",i);
+   }
+   printf("\n\n");
  
 }
 

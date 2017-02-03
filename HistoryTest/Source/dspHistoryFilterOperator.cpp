@@ -92,7 +92,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    {
       printf("OPERATOR NONCAUSAL\n");
 
-      HistoryFilterCausal tFilter(mParms);
+      HistoryFilterNoncausal tFilter(mParms);
       tFilter.operate(aX, aY);
 
       return;

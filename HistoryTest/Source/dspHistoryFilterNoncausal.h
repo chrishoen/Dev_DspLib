@@ -66,7 +66,7 @@ public:
 
    // Calculate the central difference filter coefficents, based on the parms.
    // This coefficients are used to calculate a smoothed output.
-   void initializeFilter();
+   void initializeCausalFilter();
 };
 
 //******************************************************************************

@@ -46,13 +46,20 @@ void HistoryFilterNoncausal::show()
 //******************************************************************************
 // Initialize.
 
-void HistoryFilterNoncausal::initializeFilter()
+void HistoryFilterNoncausal::initializeCausalFilter()
 {
-   // Initialize the filter according to the parameters.
-   mFilter.initialize(
-      mParms.mFilterOrder,
-      mParms.mFs,
-      mParms.mFc);
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      // Initialize the filter according to the parameters.
+      mFilter.initialize(
+         mParms.mFilterOrder,
+         mParms.mFs,
+         mParms.mFc);
+   }
+   break;
+   }
 }
 
 //******************************************************************************
@@ -69,14 +76,7 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
    //***************************************************************************
    // Initialize the filter, based on the parms.
 
-   switch (mParms.mCausalType)
-   {
-   case HistoryFilterParms::cCausalButterworthLP:
-   {
-      initializeFilter();
-   }
-   break;
-   }
+   initializeCausalFilter();
 
    //***************************************************************************
    // Create the destination history as clone of the source history that has
@@ -85,21 +85,49 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
    aX.createTimeClone(aY);
 
    //***************************************************************************
-   // Execute a loop to calculate the central difference sum to implement
-   // the algorithm.
-
    // Locals
+
    int tP = aX.mNumSamples;
 
-   // For all of the samples in the source and destination arrays.
+   //***************************************************************************
+   // Create a temp array to store filtered values from the forward loop.
+
+   double* tYForward = new double[tP];
+
+   //***************************************************************************
+   // Execute a forward loop to calculate the causally filtered values of the
+   // input array.Store the filtered values in the temp array.
+
+   // Forward loop. Progress forward in time.
    for (int i = 0; i < tP; i++)
    {
-      // Read the sample value from the source.
+      // Read the sample value from the source array.
       double tX = aX.mValue[i];
+      // Filter the value.
+      double tY = mFilter.put(tX);
+      // Write the filtered value to the temp forward array.
+      tYForward[i] = tY;
+   }
+
+   //***************************************************************************
+   // Execute a backward loop to calculate the causally filtered values of the
+   // previously filtered forward array.Store the filtered values in the
+   // destination array.
+
+   // Backward loop. Progress backward in time. Time reversal.
+   for (int i = tP-1; i >= 0; i--)
+   {
+      // Read the sample value from the temp forward array.
+      double tX = tYForward[i];
       // Filter the value.
       double tY = mFilter.put(tX);
       // Write the filtered value to the destination.
       aY.mValue[i] = tY;
    }
+
+   //***************************************************************************
+   // Delete the temp array.
+
+   delete tYForward;
 }
 }//namespace
