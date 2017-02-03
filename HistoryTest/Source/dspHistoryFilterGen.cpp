@@ -10,11 +10,11 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dspHistoryOperIdentity.h"
-#include "dspHistoryOperFilterHolob.h"
-#include "dspHistoryOperFilterSavGol.h"
+#include "dspHistoryFilterIdentity.h"
+#include "dspHistoryFilterHolob.h"
+#include "dspHistoryFilterSavGol.h"
 
-#include "dspHistoryOperGen.h"
+#include "dspHistoryFilterGen.h"
 
 namespace Dsp
 {
@@ -28,7 +28,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperGen::HistoryOperGen(HistoryOperParms& aParms)
+HistoryFilterGen::HistoryFilterGen(HistoryFilterParms& aParms)
 {
    mParms = aParms;
 }
@@ -38,9 +38,9 @@ HistoryOperGen::HistoryOperGen(HistoryOperParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryOperGen::show()
+void HistoryFilterGen::show()
 {
-   mParms.show("HistoryOperGen");
+   mParms.show("HistoryFilterGen");
 }
 
 //******************************************************************************
@@ -54,21 +54,21 @@ void HistoryOperGen::show()
 // the operator type parameter and uses it to operate on a history to produce
 // a new history.
 
-void HistoryOperGen::operate(History& aX, History& aY)
+void HistoryFilterGen::operate(History& aX, History& aY)
 {
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Select on linear operator type.
 
-   switch (mParms.mOperType)
+   switch (mParms.mFilterType)
    {
    //***************************************************************************
-   case HistoryOperParms::cOperIdentity:
+   case HistoryFilterParms::cFilterIdentity:
    {
       printf("OPERATOR IDENTITY\n");
 
-      HistoryOperIdentity tOper(mParms);
+      HistoryFilterIdentity tOper(mParms);
       tOper.operate(aX, aY);
 
       return;
@@ -81,25 +81,25 @@ void HistoryOperGen::operate(History& aX, History& aY)
    //***************************************************************************
    // Select on filter structure.
 
-   switch (mParms.mFiltStruct)
+   switch (mParms.mFilterMethod)
    {
    //*******************************************************************************
-   case HistoryOperParms::cFiltStructSavGol:
+   case HistoryFilterParms::cMethodSavGol:
    {
-      printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringOperType(),mParms.mFilterOrder);
+      printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryOperFilterSavGol tOper(mParms);
+      HistoryFilterSavGol tOper(mParms);
       tOper.operate(aX, aY);
 
       return;
    }
    break;
    //*******************************************************************************
-   case HistoryOperParms::cFiltStructHolob:
+   case HistoryFilterParms::cMethodHolob:
    {
-      printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringOperType(),mParms.mFilterOrder);
+      printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
 
-      HistoryOperFilterHolob tOper(mParms);
+      HistoryFilterHolob tOper(mParms);
       tOper.operate(aX, aY);
 
       return;

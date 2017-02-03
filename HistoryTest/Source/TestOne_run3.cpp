@@ -15,7 +15,7 @@ Description:
 #include "dspHistoryLoopClock.h"
 #include "dspHistoryTextFile.h"
 #include "dspHistoryGenGen.h"
-#include "dspHistoryOperGen.h"
+#include "dspHistoryFilterGen.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -54,7 +54,7 @@ void TestOne::doRun3()
    History tHistoryY;
 
    // Signal history generator.
-   HistoryOperGen tOperXY(gParms.mHistoryOperParms1);
+   HistoryFilterGen tOperXY(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:X->Y.
    tOperXY.operate(tHistoryX,tHistoryY);
@@ -68,7 +68,7 @@ void TestOne::doRun3()
    History tHistoryZ;
 
    // Signal history generator.
-   HistoryOperGen tOperYZ(gParms.mHistoryOperParms2);
+   HistoryFilterGen tOperYZ(gParms.mHistoryFilterParms2);
 
    // Apply the operator on the history to produce a new history. F:Y->Z.
    tOperYZ.operate(tHistoryY,tHistoryZ);

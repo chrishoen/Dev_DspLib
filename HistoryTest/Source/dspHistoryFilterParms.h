@@ -48,7 +48,7 @@ namespace Dsp
 // structure. If so, then this class is the root.
 // 
 
-class HistoryOperParms : public Ris::BaseCmdLineExec
+class HistoryFilterParms : public Ris::BaseCmdLineExec
 {
 public:
 
@@ -58,22 +58,22 @@ public:
    // Constants.
 
    // Operator types.
-   static const int cOperIdentity    = 1;
-   static const int cOperSmoother    = 2;
-   static const int cOperFirstDeriv  = 3;
-   static const int cOperSecondDeriv = 4;
+   static const int cFilterIdentity    = 1;
+   static const int cFilterSmoother    = 2;
+   static const int cFilterFirstDeriv  = 3;
+   static const int cFilterSecondDeriv = 4;
 
    // Filter structures.
-   static const int cFiltStructSavGol = 1;
-   static const int cFiltStructHolob  = 2;
+   static const int cMethodSavGol = 1;
+   static const int cMethodHolob  = 2;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mOperType;     // Linear operator type.
-   int     mFiltStruct;   // Filter structure type.
+   int     mFilterType;     // Linear operator type.
+   int     mFilterMethod;   // Filter structure type.
 
    int     mFilterOrder;  // Central difference filter order. Must be odd.
    double  mH;            // Central difference time delta. 
@@ -92,7 +92,7 @@ public:
 
    // Constructor,
    typedef Ris::BaseCmdLineExec BaseClass;
-   HistoryOperParms();
+   HistoryFilterParms();
    void reset();
    void show(char* aLabel);
 
@@ -110,11 +110,11 @@ public:
    //***************************************************************************
    // Helpers.
 
-   static char* asStringOperType (int aX);
-   static char* asStringFiltStruct (int aX);
+   static char* asStringFilterType (int aX);
+   static char* asStringFilterMethod (int aX);
 
-   char* asStringOperType ();
-   char* asStringFiltStruct ();
+   char* asStringFilterType ();
+   char* asStringFilterMethod ();
 
 };
 

@@ -13,7 +13,7 @@ Description:
 #include "dsp_math.h"
 #include "dsp_functions.h"
 #include "dspStatistics.h"
-#include "dspHistoryOperFilterHolob.h"
+#include "dspHistoryFilterSavGol.h"
 
 namespace Dsp
 {
@@ -27,7 +27,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperFilterHolob::HistoryOperFilterHolob(HistoryOperParms& aParms)
+HistoryFilterSavGol::HistoryFilterSavGol(HistoryFilterParms& aParms)
 {
    BaseClass::initialize(aParms);
    mBackAddFlag = true;
@@ -38,7 +38,7 @@ HistoryOperFilterHolob::HistoryOperFilterHolob(HistoryOperParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryOperFilterHolob::show()
+void HistoryFilterSavGol::show()
 {
    BaseClass::show();
 }
@@ -55,9 +55,8 @@ void HistoryOperFilterHolob::show()
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate the first derivative.
 
-void HistoryOperFilterHolob::calculateCoefficientsSmoother()
+void HistoryFilterSavGol::calculateCoefficientsSmoother1()
 {
    // Add the backward time terms.
    mBackAddFlag = true;
@@ -66,38 +65,65 @@ void HistoryOperFilterHolob::calculateCoefficientsSmoother()
    double tH = mParms.mH;
 
    int N = mParms.mFilterOrder;
-   int m = (N-1)/2;
-
-   double tTerm1 = 1.0/pow(2.0,double(2*m));
+   int M = (N-1)/2;
 
    // Calculate the coefficients.
-   for (int k = 0; k <= m; k++)
+   for (int k = 0; k <= M; k++)
    {
-      int kp2 = k*k;
-      long long tTerm2 = (3*m - 1 - 2*kp2);
-      long long tTerm3 = dsp_binomial(2*m,m+k);
-      long long tTerm4 = (2*m - 1);
-      long long tTerm5 = (tTerm2*tTerm3)/tTerm4;
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k2 = double(k*k);
+      double tTerm1 = (3*m2-7-20*k2)/4.0;
+      double tTerm2 = m1*(m2-4)/3.0;
 
-      mC[k] = tTerm1*double(tTerm5);
+      mC[k] = tTerm1/tTerm2;
    }
 
    // Show.
-   for (int k = 0; k <= m; k++)
+   printf("Smoother1\n");
+   for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
    printf("\n");
-
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate the first derivative.
 
-void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
+void HistoryFilterSavGol::calculateCoefficientsSmoother2()
+{
+   // Add the backward time terms.
+   mBackAddFlag = true;
+
+   // Locals.
+   int N = mParms.mFilterOrder;
+   int m = (N-1)/2;
+
+   // Calculate coefficents.
+   for (int k = 0; k <= m; k++)
+   {
+      double m1 = double(N);
+      mC[k] = 1.0/m1;
+   }
+
+   // Show.
+   printf("Smoother2\n");
+   for (int k = 0; k <= m; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryFilterSavGol::calculateCoefficientsFirstDerivative1()
 {
    // Subtract the backward time terms.
    mBackAddFlag = false;
@@ -107,46 +133,43 @@ void HistoryOperFilterHolob::calculateCoefficientsFirstDerivative()
 
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
-   int m = (N-3)/2;
-
-   double tTerm1 = 1.0/pow(2.0,double(2*m+1));
-   double tTerm2 = 1.0/tH;
 
    // Calculate the coefficients.
-   mC[0] = 0.0;
-
-   for (int k = 1; k <= M; k++)
+   for (int k = 0; k <= M; k++)
    {
-      mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double m4 = double(N*N*N*N);
+      double k1 = double(k);
+      double k2 = double(k*k);
+      double k3 = double(k*k*k);
+
+      double tTermH = 1.0/tH;
+      double tTerm1 = 5*(3*m4 - 18*m2 + 31)*k1 -28*(3*m2 - 7)*k3;
+      double tTerm2 = m1*(m2 - 1)*(3*m4 - 39*m2 + 108)/15.0;
+
+      mC[k] = tTermH*tTerm1/tTerm2;
+//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
    }
 
    // Show.
-   for (int k = 1; k <= M; k++)
+   printf("FirstDerivative1\n");
+   for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
    }
    printf("\n");
-
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Calculate the central difference filter coefficents, based on the parms.
-// This coefficients are used to calculate the second derivative.
 
-static long long recursive_s(int N, int M, int k)
+void HistoryFilterSavGol::calculateCoefficientsFirstDerivative2()
 {
-   if(k >  M) return 0;
-   if(k == M) return 1;
-   return ((2*N-10)*recursive_s(N,M,k+1) - (N+2*k+3)*recursive_s(N,M,k+2))/(N-2*k-1);
-}
-
-void HistoryOperFilterHolob::calculateCoefficientsSecondDerivative()
-{
-   // Add the backward time terms.
-   mBackAddFlag = true;
-   mC[0] = 0.0;
+   // Subtract the backward time terms.
+   mBackAddFlag = false;
 
    // Locals.
    double tH = mParms.mH;
@@ -154,16 +177,63 @@ void HistoryOperFilterHolob::calculateCoefficientsSecondDerivative()
    int N = mParms.mFilterOrder;
    int M = (N-1)/2;
 
-   double tTerm1 = 1.0/pow(2.0,double(N-3));
-   double tTerm2 = 1.0/(tH*tH);
+   // Calculate the coefficients.
+   for (int k = 0; k <= M; k++)
+   {
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k1 = double(k);
+
+      double tTermH = 1.0/tH;
+      double tTerm1 = k1;
+      double tTerm2 = m1*(m2 - 1)/12.0;
+
+      mC[k] = tTermH*tTerm1/tTerm2;
+//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
+   }
+
+   // Show.
+   printf("FirstDerivative2\n");
+   for (int k = 0; k <= M; k++)
+   {
+      printf("C[%3d]  %10.6f\n",k,mC[k]);
+   }
+   printf("\n");
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents, based on the parms.
+
+void HistoryFilterSavGol::calculateCoefficientsSecondDerivative1()
+{
+   // Add the backward time terms.
+   mBackAddFlag = true;
+
+   // Locals.
+   double tH = mParms.mH;
+
+   int N = mParms.mFilterOrder;
+   int M = (N-1)/2;
 
    // Calculate the coefficients.
    for (int k = 0; k <= M; k++)
    {
-      mC[k] = tTerm1*tTerm2*double(recursive_s(N,M,k));
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k2 = double(k*k);
+
+      double tTermH = 1.0/(tH*tH);
+      double tTerm1 = 12*m1*k2 - m1*(m2-1);
+      double tTerm2 = m2*(m2-1)*(m2-4)/30.0;
+
+      mC[k] = tTermH*tTerm1/tTerm2;
+//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
    }
 
    // Show.
+   printf("FirstDerivative1\n");
    for (int k = 0; k <= M; k++)
    {
       printf("C[%3d]  %10.6f\n",k,mC[k]);
@@ -181,25 +251,33 @@ void HistoryOperFilterHolob::calculateCoefficientsSecondDerivative()
 // This applies the central difference filter using the coefficients 
 // calculated below.
 
-void HistoryOperFilterHolob::operate(History& aX, History& aY)
+void HistoryFilterSavGol::operate(History& aX, History& aY)
 {
    //***************************************************************************
    // Calculate the central difference filter coefficents, based on the parms.
-   switch (mParms.mOperType)
+   switch (mParms.mFilterType)
    {
-   case HistoryOperParms::cOperSmoother:
+   case HistoryFilterParms::cFilterSmoother:
    {
-      calculateCoefficientsSmoother();
+      switch (mParms.mSelect)
+      {
+      case 1: calculateCoefficientsSmoother1();  break;
+      case 2: calculateCoefficientsSmoother2();  break;
+      }
    }
    break;
-   case HistoryOperParms::cOperFirstDeriv:
+   case HistoryFilterParms::cFilterFirstDeriv:
    {
-      calculateCoefficientsFirstDerivative();
+      switch (mParms.mSelect)
+      {
+      case 1: calculateCoefficientsFirstDerivative1();  break;
+      case 2: calculateCoefficientsFirstDerivative2();  break;
+      }
    }
    break;
-   case HistoryOperParms::cOperSecondDeriv:
+   case HistoryFilterParms::cFilterSecondDeriv:
    {
-      calculateCoefficientsSecondDerivative();
+      calculateCoefficientsSecondDerivative1();
    }
    break;
    }

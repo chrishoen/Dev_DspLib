@@ -13,7 +13,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dsp_functions.h"
-#include "dspHistoryOperBase.h"
+#include "dspHistoryFilterBase.h"
 
 namespace Dsp
 {
@@ -27,13 +27,13 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryOperBase::HistoryOperBase()
+HistoryFilterBase::HistoryFilterBase()
 {
    mC = 0;
    mMemoryFlag=false;
 }
 
-HistoryOperBase::~HistoryOperBase()
+HistoryFilterBase::~HistoryFilterBase()
 {
    finalize();
 }
@@ -43,7 +43,7 @@ HistoryOperBase::~HistoryOperBase()
 //******************************************************************************
 // Initialize.
 
-void HistoryOperBase::initialize(HistoryOperParms& aParms)
+void HistoryFilterBase::initialize(HistoryFilterParms& aParms)
 {
    // If memory has already been allocated then deallocate it.
    finalize();
@@ -61,7 +61,7 @@ void HistoryOperBase::initialize(HistoryOperParms& aParms)
 //******************************************************************************
 // Finalize.
 
-void HistoryOperBase::finalize()
+void HistoryFilterBase::finalize()
 {
    // If memory was allocated then deallocate it.
    if (mMemoryFlag)
@@ -77,7 +77,7 @@ void HistoryOperBase::finalize()
 //******************************************************************************
 // Show
 
-void HistoryOperBase::show()
+void HistoryFilterBase::show()
 {
    mParms.show("Parms");
 }
@@ -88,7 +88,7 @@ void HistoryOperBase::show()
 // Create the destination history as clone of the source history that has
 // the same size and time array, but has a zero value array.
 
-void HistoryOperBase::createTimeClone(History& aX, History& aY)
+void HistoryFilterBase::createTimeClone(History& aX, History& aY)
 {
    // Initialize the destination to be the same size as the source.
    aY.initialize(aX.mMaxSamples);

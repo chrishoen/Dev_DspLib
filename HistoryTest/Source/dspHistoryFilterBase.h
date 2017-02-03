@@ -1,7 +1,7 @@
 #pragma once
 
 /*==============================================================================
-Base class for signal history linear operators.
+Base class for signal history filters.
 ==============================================================================*/
 
 //******************************************************************************
@@ -9,7 +9,7 @@ Base class for signal history linear operators.
 //******************************************************************************
 
 #include "dspHistory.h"
-#include "dspHistoryOperParms.h"
+#include "dspHistoryFilterParms.h"
 
 namespace Dsp
 {
@@ -20,10 +20,10 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class for signal history linear operators, which are linear
-// functions on the set of histories F:H->H.
+// This is a base class for signal history filters, which are linear
+// operators on the set of histories F:H->H.
 
-class HistoryOperBase
+class HistoryFilterBase
 {
 public:
 
@@ -32,7 +32,7 @@ public:
    //***************************************************************************
    // Parameters. These are read from a parms file.
 
-   HistoryOperParms mParms;
+   HistoryFilterParms mParms;
 
    //***************************************************************************
    //***************************************************************************
@@ -50,17 +50,17 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryOperBase();
-   ~HistoryOperBase();
+   HistoryFilterBase();
+   ~HistoryFilterBase();
    virtual void show();
 
    // Allocate memory.
-   void initialize(HistoryOperParms& aParms);
+   void initialize(HistoryFilterParms& aParms);
 
    // Deallocate memory.
    void finalize();
 
-   // Apply the linear operator from the input to the output. F:X->Y
+   // Apply the filter from the input to the output. F:X->Y
    virtual void operate(History& aX,History& aY)=0;
 
    //***************************************************************************

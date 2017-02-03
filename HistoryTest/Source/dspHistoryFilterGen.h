@@ -8,7 +8,7 @@ Signal history general operator.
 //******************************************************************************
 //******************************************************************************
 
-#include "dspHistoryOperParms.h"
+#include "dspHistoryFilterParms.h"
 #include "dspHistory.h"
 
 //******************************************************************************
@@ -29,7 +29,7 @@ namespace Dsp
 // parameter, it instantiates one of the concrete operators and used it to
 // operate on a history to produce a new history.
  
-class HistoryOperGen
+class HistoryFilterGen
 {
 public:
 
@@ -38,7 +38,7 @@ public:
    //***************************************************************************
    // Members.
 
-   HistoryOperParms mParms;
+   HistoryFilterParms mParms;
 
    //***************************************************************************
    //***************************************************************************
@@ -46,7 +46,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryOperGen(HistoryOperParms& aParms);
+   HistoryFilterGen(HistoryFilterParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y

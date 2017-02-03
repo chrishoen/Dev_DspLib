@@ -11,7 +11,7 @@
 #include "risPortableCalls.h"
 
 #include "dsp_math.h"
-#include "dspHistoryOperParms.h"
+#include "dspHistoryFilterParms.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -28,17 +28,17 @@ namespace Dsp
 //******************************************************************************
 // Constructor.
 
-HistoryOperParms::HistoryOperParms()
+HistoryFilterParms::HistoryFilterParms()
 {
    reset();
 }
 
-void HistoryOperParms::reset()
+void HistoryFilterParms::reset()
 {
    BaseClass::reset();
 
-   mOperType    = cOperIdentity;
-   mFiltStruct  = cFiltStructSavGol;
+   mFilterType    = cFilterIdentity;
+   mFilterMethod  = cMethodSavGol;
 
    mFilterOrder = 1;
    mH = 1.0;
@@ -51,17 +51,17 @@ void HistoryOperParms::reset()
 //******************************************************************************
 // Show.
 
-void HistoryOperParms::show(char* aLabel)
+void HistoryFilterParms::show(char* aLabel)
 {
-   printf("HistoryOperParms ************* BEGIN %s\n", aLabel);
+   printf("HistoryFilterParms ************* BEGIN %s\n", aLabel);
 
-   printf("OperType           %10s\n",   asStringOperType(mOperType));
-   printf("FiltStruct         %10s\n",   asStringFiltStruct(mFiltStruct));
+   printf("FilterType         %10s\n",   asStringFilterType(mFilterType));
+   printf("FilterMethod       %10s\n",   asStringFilterMethod(mFilterMethod));
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
    printf("Select             %10d\n",   mSelect);
 
-   printf("HistoryOperParms ************* END   %s\n", aLabel);
+   printf("HistoryFilterParms ************* END   %s\n", aLabel);
    printf("\n");
 }
 
@@ -72,24 +72,24 @@ void HistoryOperParms::show(char* aLabel)
 // member variable.  Only process commands for the target section.This is
 // called by the associated command file object for each command in the file.
 
-void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
+void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("FilterOrder"))     mFilterOrder = aCmd->argInt(1);
    if (aCmd->isCmd("H"))               mH           = aCmd->argDouble(1);
    if (aCmd->isCmd("Select"))          mSelect      = aCmd->argInt(1);
 
-   if (aCmd->isCmd("OperType"))
+   if (aCmd->isCmd("FilterType"))
    {
-      if (aCmd->isArgString(1,asStringOperType(cOperIdentity)))     mOperType = cOperIdentity;
-      if (aCmd->isArgString(1,asStringOperType(cOperSmoother)))     mOperType = cOperSmoother;
-      if (aCmd->isArgString(1,asStringOperType(cOperFirstDeriv)))   mOperType = cOperFirstDeriv;
-      if (aCmd->isArgString(1,asStringOperType(cOperSecondDeriv)))  mOperType = cOperSecondDeriv;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterIdentity)))     mFilterType = cFilterIdentity;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))     mFilterType = cFilterSmoother;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
    }
 
-   if (aCmd->isCmd("FiltStruct"))
+   if (aCmd->isCmd("FilterMethod"))
    {
-      if (aCmd->isArgString(1,asStringFiltStruct(cFiltStructSavGol)))     mFiltStruct = cFiltStructSavGol;
-      if (aCmd->isArgString(1,asStringFiltStruct(cFiltStructHolob)))      mFiltStruct = cFiltStructHolob;
+      if (aCmd->isArgString(1,asStringFilterMethod(cMethodSavGol)))     mFilterMethod = cMethodSavGol;
+      if (aCmd->isArgString(1,asStringFilterMethod(cMethodHolob)))      mFilterMethod = cMethodHolob;
    }
 
    // Pop back out at the end.
@@ -102,7 +102,7 @@ void HistoryOperParms::execute(Ris::CmdLineCmd* aCmd)
 // Calculate expanded member variables. This is called after the entire
 // section of the command file has been processed.
 
-void HistoryOperParms::expand()
+void HistoryFilterParms::expand()
 {
 }
 
@@ -110,24 +110,24 @@ void HistoryOperParms::expand()
 //******************************************************************************
 //******************************************************************************
 
-char* HistoryOperParms::asStringOperType(int aX)
+char* HistoryFilterParms::asStringFilterType(int aX)
 {
    switch (aX)
    {
-   case cOperIdentity    : return "Identity";
-   case cOperSmoother    : return "Smoother";
-   case cOperFirstDeriv  : return "FirstDeriv";
-   case cOperSecondDeriv : return "SecondDeriv";
+   case cFilterIdentity    : return "Identity";
+   case cFilterSmoother    : return "Smoother";
+   case cFilterFirstDeriv  : return "FirstDeriv";
+   case cFilterSecondDeriv : return "SecondDeriv";
    default : return "UNKNOWN";
    }
 }
 
-char* HistoryOperParms::asStringFiltStruct(int aX)
+char* HistoryFilterParms::asStringFilterMethod(int aX)
 {
    switch (aX)
    {
-   case cFiltStructSavGol    : return "SavGol";
-   case cFiltStructHolob     : return "Holob";
+   case cMethodSavGol    : return "SavGol";
+   case cMethodHolob     : return "Holob";
    default : return "UNKNOWN";
    }
 }
@@ -136,14 +136,14 @@ char* HistoryOperParms::asStringFiltStruct(int aX)
 //******************************************************************************
 //******************************************************************************
 
-char* HistoryOperParms::asStringOperType()
+char* HistoryFilterParms::asStringFilterType()
 {
-   return asStringOperType(mOperType);
+   return asStringFilterType(mFilterType);
 }
 
-char* HistoryOperParms::asStringFiltStruct()
+char* HistoryFilterParms::asStringFilterMethod()
 {
-   return asStringFiltStruct(mFiltStruct);
+   return asStringFilterMethod(mFilterMethod);
 }
 
 

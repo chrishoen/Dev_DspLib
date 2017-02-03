@@ -73,22 +73,22 @@
     <ClCompile Include="Source\TestOne_run5.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperBase.cpp">
+    <ClCompile Include="Source\dspHistoryFilterBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperGen.cpp">
+    <ClCompile Include="Source\dspHistoryFilterHolob.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperParms.cpp">
+    <ClCompile Include="Source\dspHistoryFilterSavGol.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperIdentity.cpp">
+    <ClCompile Include="Source\dspHistoryFilterGen.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperFilterSavGol.cpp">
+    <ClCompile Include="Source\dspHistoryFilterIdentity.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryOperFilterHolob.cpp">
+    <ClCompile Include="Source\dspHistoryFilterParms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -141,22 +141,22 @@
     <ClInclude Include="Source\dspHistoryGenGen.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperBase.h">
+    <ClInclude Include="Source\dspHistoryFilterBase.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperGen.h">
+    <ClInclude Include="Source\dspHistoryFilterHolob.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperParms.h">
+    <ClInclude Include="Source\dspHistoryFilterSavGol.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperIdentity.h">
+    <ClInclude Include="Source\dspHistoryFilterGen.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperFilterSavGol.h">
+    <ClInclude Include="Source\dspHistoryFilterIdentity.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryOperFilterHolob.h">
+    <ClInclude Include="Source\dspHistoryFilterParms.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
