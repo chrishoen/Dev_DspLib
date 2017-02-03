@@ -30,7 +30,7 @@ SectionBegin default
       Fc                       0.10
       FilterOrder              4
       EX                       0.0
-      UX                       2.0
+      UX                       1.0
 
       A                        1.0
       Phi                      0.0
@@ -152,7 +152,8 @@ SectionBegin Noncausal1
 
    HistoryGenParms
    {
-      Sigma                    0.10
+      GenType                  RandWave
+      Sigma                    0.1
    }
 
    //-----------------------------------------------------------------
