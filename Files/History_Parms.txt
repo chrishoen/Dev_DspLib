@@ -75,9 +75,6 @@ SectionBegin run2
       Sigma                    0.1
    }
 
-   //-----------------------------------------------------------------
-   // Signal Differentiator Parms.
-
    HistoryFilterParms1
    {
       FilterType               Smoother
@@ -94,10 +91,6 @@ SectionEnd
 //********************************************************************
 
 SectionBegin run3
-
-
-   //-----------------------------------------------------------------
-   // Signal Differentiator Parms.
 
    HistoryFilterParms1
    {
@@ -130,16 +123,15 @@ SectionBegin Causal1
       Sigma                    0.10
    }
 
-   //-----------------------------------------------------------------
-   // Signal Differentiator Parms.
-
    HistoryFilterParms1
    {
       FilterType               Causal
-      CausalType               ButterworthLP
+      CausalType               AlphaOne
       FilterOrder              4
       Fs                       100.0
       Fc                       0.25
+
+      AlphaP1                  0.02
    }
 
 SectionEnd
@@ -152,12 +144,9 @@ SectionBegin Noncausal1
 
    HistoryGenParms
    {
-      GenType                  RandWave
+      GenType                  SinWave
       Sigma                    0.1
    }
-
-   //-----------------------------------------------------------------
-   // Signal Differentiator Parms.
 
    HistoryFilterParms1
    {

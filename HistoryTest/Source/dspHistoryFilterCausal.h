@@ -11,6 +11,7 @@ Signal history linear operator: the identity operator.
 #include "dspHistoryFilterParms.h"
 #include "dspHistory.h"
 #include "dspFilterButterworth.h"
+#include "dspFilterAlpha.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -44,7 +45,10 @@ public:
    //***************************************************************************
    // Members.
 
-   Dsp::Filter::ButterworthLP mFilter;
+   Dsp::Filter::ButterworthLP mButterworth;
+   Dsp::Filter::AlphaOne      mAlphaOne;
+   Dsp::Filter::AlphaTwo      mAlphaTwo;
+   Dsp::Filter::AlphaThree    mAlphaThree;
 
    //***************************************************************************
    //***************************************************************************
@@ -64,9 +68,8 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Calculate the central difference filter coefficents, based on the parms.
-   // This coefficients are used to calculate a smoothed output.
-   void initializeFilter();
+   // Initialize the causal filter, based on the parms.
+   void initializeCausalFilter();
 };
 
 //******************************************************************************

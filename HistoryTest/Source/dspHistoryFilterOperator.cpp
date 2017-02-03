@@ -79,7 +79,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //***************************************************************************
    case HistoryFilterParms::cFilterCausal:
    {
-      printf("OPERATOR CAUSAL\n");
+      printf("OPERATOR CAUSAL %s\n",mParms.asStringCausalType()); 
 
       HistoryFilterCausal tFilter(mParms);
       tFilter.operate(aX, aY);

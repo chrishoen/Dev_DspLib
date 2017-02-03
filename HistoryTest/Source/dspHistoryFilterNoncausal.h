@@ -56,7 +56,6 @@ public:
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y
-   // This is the identity operator.
    void operate(History& aX,History& aY);
 
    //***************************************************************************
@@ -64,8 +63,7 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Calculate the central difference filter coefficents, based on the parms.
-   // This coefficients are used to calculate a smoothed output.
+   // Initialize the causal filter, based on the parms.
    void initializeCausalFilter();
 };
 

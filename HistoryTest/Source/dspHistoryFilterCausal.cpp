@@ -44,15 +44,28 @@ void HistoryFilterCausal::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize.
+// Initialize the causal filter, based on the parms.
 
-void HistoryFilterCausal::initializeFilter()
+void HistoryFilterCausal::initializeCausalFilter()
 {
-   // Initialize the filter according to the parameters.
-   mFilter.initialize(
-      mParms.mFilterOrder,
-      mParms.mFs,
-      mParms.mFc);
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      mButterworth.initialize(
+         mParms.mFilterOrder,
+         mParms.mFs,
+         mParms.mFc);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      mAlphaOne.initialize(
+         mParms.mAlphaP1);
+   }
+   break;
+   }
+
 }
 
 //******************************************************************************
@@ -69,14 +82,7 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
    //***************************************************************************
    // Initialize the filter, based on the parms.
 
-   switch (mParms.mCausalType)
-   {
-   case HistoryFilterParms::cCausalButterworthLP:
-   {
-      initializeFilter();
-   }
-   break;
-   }
+   initializeCausalFilter();
 
    //***************************************************************************
    // Create the destination history as clone of the source history that has
@@ -85,9 +91,8 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
    aX.createTimeClone(aY);
 
    //***************************************************************************
-   // Execute a loop to calculate the central difference sum to implement
-   // the algorithm.
-
+   // Execute a loop to filter the input to the output.
+   
    // Locals
    int tP = aX.mNumSamples;
 
@@ -96,8 +101,21 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
    {
       // Read the sample value from the source.
       double tX = aX.mValue[i];
+      double tY = 0.0;
       // Filter the value.
-      double tY = mFilter.put(tX);
+      switch (mParms.mCausalType)
+      {
+      case HistoryFilterParms::cCausalButterworthLP:
+      {
+         tY = mButterworth.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaOne:
+      {
+         tY = mAlphaOne.put(tX);
+      }
+      break;
+      }
       // Write the filtered value to the destination.
       aY.mValue[i] = tY;
    }

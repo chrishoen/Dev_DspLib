@@ -95,6 +95,11 @@ public:
    double  mFs;             // Causal filter Sampling frequency.
    double  mFc;             // Causal filter cutoff frequency. 
 
+   double  mAlphaP1;        // Alpha filter parameter.
+   double  mAlphaP2;        // Alpha filter parameter.
+   double  mAlphaP3;        // Alpha filter parameter.
+   double  mAlphaDT;        // Alpha filter parameter.
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************

@@ -44,7 +44,7 @@ void HistoryFilterNoncausal::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize.
+// Initialize the causal filter, based on the parms.
 
 void HistoryFilterNoncausal::initializeCausalFilter()
 {
