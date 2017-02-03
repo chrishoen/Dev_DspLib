@@ -57,28 +57,39 @@ public:
    //***************************************************************************
    // Constants.
 
-   // Operator types.
-   static const int cFilterCDiffIdentity    = 1;
+   // Filter types.
+   static const int cFilterIdentity    = 1;
    static const int cFilterSmoother    = 2;
    static const int cFilterFirstDeriv  = 3;
    static const int cFilterSecondDeriv = 4;
+   static const int cFilterCausal      = 5;
 
-   // Filter structures.
+   // Filter methods.
    static const int cMethodSavGol = 1;
    static const int cMethodHolob  = 2;
+
+   // Causal filter types.
+   static const int cCausalButterworthLP   = 1;
+   static const int cCausalAlphaOne        = 2;
+   static const int cCausalAlphaTwo        = 3;
+   static const int cCausalAlphaThree      = 4;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mFilterType;     // Linear operator type.
+   int     mFilterType;     // Filter type.
    int     mFilterMethod;   // Filter structure type.
 
-   int     mFilterOrder;  // Central difference filter order. Must be odd.
-   double  mH;            // Central difference time delta. 
+   int     mFilterOrder;    // Central difference filter order. Must be odd.
+   double  mH;              // Central difference time delta. 
 
-   int     mSelect;       // Selector, debug.
+   int     mSelect;         // Selector, general purpose.
+
+   int     mCausalType;     // Causal filter type.
+   double  mFs;             // Causal filter Sampling frequency.
+   double  mFc;             // Causal filter cutoff frequency. 
 
    //***************************************************************************
    //***************************************************************************
@@ -112,9 +123,11 @@ public:
 
    static char* asStringFilterType (int aX);
    static char* asStringFilterMethod (int aX);
+   static char* asStringCausalType (int aX);
 
    char* asStringFilterType ();
    char* asStringFilterMethod ();
+   char* asStringCausalType ();
 
 };
 

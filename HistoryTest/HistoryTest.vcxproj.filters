@@ -76,9 +76,6 @@
     <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCDiffGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -89,6 +86,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryFilterParms.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterCausal.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterOperator.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -141,11 +144,7 @@
     <ClInclude Include="Source\dspHistoryGenGen.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffBase.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCDiffGen.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h">
@@ -155,6 +154,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryFilterParms.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryFilterCausal.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryFilterOperator.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

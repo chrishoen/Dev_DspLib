@@ -43,20 +43,28 @@ SectionBegin default
 
    HistoryFilterParms1
    {
-      FilterType        Smoother
-      FilterMethod        SavGol
-      FilterOrder             31
-      H                     0.01
-      Select                   1
+      FilterType               Smoother
+      FilterMethod               SavGol
+      FilterOrder                    31
+      H                            0.01
+      Select                          1
+
+      CausalType       ButterworthLP
+      Fs                          100.0
+      Fc                            1.0
    }
 
    HistoryFilterParms2
    {
-      FilterType      FirstDeriv
-      FilterMethod         Holob
-      FilterOrder             11
-      H                     0.01
-      Select                   1
+      FilterType             FirstDeriv
+      FilterMethod                Holob
+      FilterOrder                    11
+      H                            0.01
+      Select                          1
+
+      CausalType          ButterworthLP
+      Fs                          100.0
+      Fc                            1.0
    }
 
    //-----------------------------------------------------------------
@@ -73,6 +81,7 @@ SectionEnd
 SectionBegin run1
 
 SectionEnd
+
 //********************************************************************
 //********************************************************************
 //********************************************************************
@@ -81,7 +90,7 @@ SectionBegin run2
 
    HistoryGenParms
    {
-      Sigma                 0.1
+      Sigma                         0.1
    }
 
    //-----------------------------------------------------------------
@@ -89,11 +98,11 @@ SectionBegin run2
 
    HistoryFilterParms1
    {
-      FilterType        Smoother
-      FilterMethod         Holob
-      FilterOrder             11
-      H                     0.01
-      Select                   1
+      FilterType               Smoother
+      FilterMethod                Holob
+      FilterOrder                    11
+      H                            0.01
+      Select                          1
    }
 
 SectionEnd
@@ -110,20 +119,44 @@ SectionBegin run3
 
    HistoryFilterParms1
    {
-      FilterType        Smoother
-      FilterMethod        SavGol
-      FilterOrder             31
-      H                     0.01
-      Select                   1
+      FilterType               Smoother
+      FilterMethod               SavGol
+      FilterOrder                    31
+      H                            0.01
+      Select                          1
    }
 
    HistoryFilterParms2
    {
-      FilterType      FirstDeriv
-      FilterMethod        SavGol
-      FilterOrder             21
-      H                     0.01
-      Select                   1
+      FilterType             FirstDeriv
+      FilterMethod               SavGol
+      FilterOrder                    21
+      H                            0.01
+      Select                          1
+   }
+
+SectionEnd
+
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
+SectionBegin Causal1
+
+   HistoryGenParms
+   {
+      Sigma                         0.1
+   }
+
+   //-----------------------------------------------------------------
+   // Signal Differentiator Parms.
+
+   HistoryFilterParms1
+   {
+      FilterType                 Causal
+      CausalType          ButterworthLP
+      Fs                          100.0
+      Fc                            1.0
    }
 
 SectionEnd

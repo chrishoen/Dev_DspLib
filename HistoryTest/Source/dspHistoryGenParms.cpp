@@ -69,7 +69,7 @@ void HistoryGenParms::show(char* aLabel)
    printf("Duration           %10.4f\n", mDuration);
    printf("Fs                 %10.4f\n", mFs);
    printf("Fc                 %10.4f\n", mFc);
-   printf("FilterOrder        %10d\n", mFilterOrder);
+   printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("EX                 %10.4f\n", mEX);
    printf("UX                 %10.4f\n", mUX);
    printf("A                  %10.4f\n", mA);

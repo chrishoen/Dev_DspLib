@@ -37,13 +37,17 @@ void HistoryFilterParms::reset()
 {
    BaseClass::reset();
 
-   mFilterType    = cFilterCDiffIdentity;
+   mFilterType    = cFilterIdentity;
    mFilterMethod  = cMethodSavGol;
 
    mFilterOrder = 1;
    mH = 1.0;
 
    mSelect = 1;
+
+   mCausalType    = cCausalButterworthLP;
+   mFs = 1.0;
+   mFc = 1.0;
 }
 
 //******************************************************************************
@@ -60,6 +64,9 @@ void HistoryFilterParms::show(char* aLabel)
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
    printf("Select             %10d\n",   mSelect);
+   printf("CausalType      %10s\n",   asStringCausalType(mCausalType));
+   printf("Fs                 %10.4f\n", mFs);
+   printf("Fc                 %10.4f\n", mFc);
 
    printf("HistoryFilterParms ************* END   %s\n", aLabel);
    printf("\n");
@@ -77,10 +84,12 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("FilterOrder"))     mFilterOrder = aCmd->argInt(1);
    if (aCmd->isCmd("H"))               mH           = aCmd->argDouble(1);
    if (aCmd->isCmd("Select"))          mSelect      = aCmd->argInt(1);
+   if (aCmd->isCmd("Fs"))              mFs          = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fc"))              mFc          = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {
-      if (aCmd->isArgString(1,asStringFilterType(cFilterCDiffIdentity)))     mFilterType = cFilterCDiffIdentity;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterIdentity)))     mFilterType = cFilterIdentity;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))     mFilterType = cFilterSmoother;
       if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
       if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
@@ -90,6 +99,14 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    {
       if (aCmd->isArgString(1,asStringFilterMethod(cMethodSavGol)))     mFilterMethod = cMethodSavGol;
       if (aCmd->isArgString(1,asStringFilterMethod(cMethodHolob)))      mFilterMethod = cMethodHolob;
+   }
+
+   if (aCmd->isCmd("CausalType"))
+   {
+      if (aCmd->isArgString(1,asStringCausalType(cCausalButterworthLP)))  mCausalType = cCausalButterworthLP;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaOne)))       mCausalType = cCausalAlphaOne;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaTwo)))       mCausalType = cCausalAlphaTwo;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaThree)))     mCausalType = cCausalAlphaThree;
    }
 
    // Pop back out at the end.
@@ -114,7 +131,7 @@ char* HistoryFilterParms::asStringFilterType(int aX)
 {
    switch (aX)
    {
-   case cFilterCDiffIdentity    : return "Identity";
+   case cFilterIdentity    : return "Identity";
    case cFilterSmoother    : return "Smoother";
    case cFilterFirstDeriv  : return "FirstDeriv";
    case cFilterSecondDeriv : return "SecondDeriv";
@@ -132,6 +149,18 @@ char* HistoryFilterParms::asStringFilterMethod(int aX)
    }
 }
 
+char* HistoryFilterParms::asStringCausalType(int aX)
+{
+   switch (aX)
+   {
+   case cCausalButterworthLP    : return "ButterworthLP";
+   case cCausalAlphaOne         : return "AlphaOne";
+   case cCausalAlphaTwo         : return "AlphaTwo";
+   case cCausalAlphaThree       : return "AlphaThree";
+   default : return "UNKNOWN";
+   }
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -144,6 +173,11 @@ char* HistoryFilterParms::asStringFilterType()
 char* HistoryFilterParms::asStringFilterMethod()
 {
    return asStringFilterMethod(mFilterMethod);
+}
+
+char* HistoryFilterParms::asStringCausalType()
+{
+   return asStringCausalType(mCausalType);
 }
 
 

@@ -24,12 +24,12 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides a operator for a signal history that evolves according
-// parameters specified in the parms file. Based on the operator type
-// parameter, it instantiates one of the concrete operators and used it to
+// This class provides an operator for a signal history that evolves according
+// to parameters specified in the parms file. Based on the operator type
+// parameter, it instantiates one of the concrete operators and uses it to
 // operate on a history to produce a new history.
  
-class HistoryFilterCDiffGen
+class HistoryFilterOperator
 {
 public:
 
@@ -46,7 +46,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryFilterCDiffGen(HistoryFilterParms& aParms);
+   HistoryFilterOperator(HistoryFilterParms& aParms);
    void show();
 
    // Apply the linear operator from the input to the output. F:X->Y

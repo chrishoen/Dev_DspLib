@@ -14,7 +14,7 @@ Description:
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
 
-#include "dspHistoryFilterCDiffGen.h"
+#include "dspHistoryFilterOperator.h"
 
 namespace Dsp
 {
@@ -28,7 +28,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryFilterCDiffGen::HistoryFilterCDiffGen(HistoryFilterParms& aParms)
+HistoryFilterOperator::HistoryFilterOperator(HistoryFilterParms& aParms)
 {
    mParms = aParms;
 }
@@ -38,9 +38,9 @@ HistoryFilterCDiffGen::HistoryFilterCDiffGen(HistoryFilterParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryFilterCDiffGen::show()
+void HistoryFilterOperator::show()
 {
-   mParms.show("HistoryFilterCDiffGen");
+   mParms.show("HistoryFilterOperator");
 }
 
 //******************************************************************************
@@ -54,7 +54,7 @@ void HistoryFilterCDiffGen::show()
 // the operator type parameter and uses it to operate on a history to produce
 // a new history.
 
-void HistoryFilterCDiffGen::operate(History& aX, History& aY)
+void HistoryFilterOperator::operate(History& aX, History& aY)
 {
    //***************************************************************************
    //***************************************************************************
@@ -64,7 +64,7 @@ void HistoryFilterCDiffGen::operate(History& aX, History& aY)
    switch (mParms.mFilterType)
    {
    //***************************************************************************
-   case HistoryFilterParms::cFilterCDiffIdentity:
+   case HistoryFilterParms::cFilterIdentity:
    {
       printf("OPERATOR IDENTITY\n");
 
