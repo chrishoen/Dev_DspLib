@@ -28,6 +28,8 @@ namespace Dsp
 
 HistoryFilterCausal::HistoryFilterCausal(HistoryFilterParms& aParms)
 {
+   // Store.
+   mParms = aParms;
 }
 
 //******************************************************************************
@@ -42,6 +44,20 @@ void HistoryFilterCausal::show()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Initialize.
+
+void HistoryFilterCausal::initializeFilter()
+{
+   // Initialize the filter according to the parameters.
+   mFilter.initialize(
+      mParms.mFilterOrder,
+      mParms.mFs,
+      mParms.mFc);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -50,21 +66,40 @@ void HistoryFilterCausal::show()
 
 void HistoryFilterCausal::operate(History& aX, History& aY)
 {
-   // Initialize the destination to be the same size as the source.
-   aY.initialize(aX.mMaxSamples);
+   //***************************************************************************
+   // Initialize the filter, based on the parms.
 
-   // Copy the samples from the source to the destination.
-   aX.startRead();
-   aY.startWrite();
-   for (int k = 0; k < aX.mMaxSamples; k++)
+   switch (mParms.mCausalType)
    {
-      // Read a sample from the source.
-      double tTime = 0.0;
-      double tValue = 0.0;
-      aX.readSampleAtIndex(k,&tTime,&tValue);
-      // Write the sample to the destination.
-      aY.writeSample(tTime,tValue);
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      initializeFilter();
    }
-   aY.finishWrite();
+   break;
+   }
+
+   //***************************************************************************
+   // Create the destination history as clone of the source history that has
+   // the same size and time array, but has a zero value array.
+
+   aX.createTimeClone(aY);
+
+   //***************************************************************************
+   // Execute a loop to calculate the central difference sum to implement
+   // the algorithm.
+
+   // Locals
+   int tP = aX.mNumSamples;
+
+   // For all of the samples in the source and destination arrays.
+   for (int i = 0; i < tP; i++)
+   {
+      // Read the sample value from the source.
+      double tX = aX.mValue[i];
+      // Filter the value.
+      double tY = mFilter.put(tX);
+      // Write the filtered value to the destination.
+      aY.mValue[i] = tY;
+   }
 }
 }//namespace
