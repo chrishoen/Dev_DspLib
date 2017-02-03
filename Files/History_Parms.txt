@@ -43,28 +43,10 @@ SectionBegin default
 
    HistoryFilterParms1
    {
-      FilterType               Smoother
-      FilterMethod             SavGol
-      FilterOrder              31
-      H                        0.01
-      Select                   1
-
-      CausalType               ButterworthLP
-      Fs                       100.0
-      Fc                       1.0
    }
 
    HistoryFilterParms2
    {
-      FilterType               FirstDeriv
-      FilterMethod             Holob
-      FilterOrder              11
-      H                        0.01
-      Select                   1
-
-      CausalType               ButterworthLP
-      Fs                       100.0
-      Fc                       1.0
    }
 
    //-----------------------------------------------------------------
@@ -155,6 +137,7 @@ SectionBegin Causal1
    {
       FilterType               Causal
       CausalType               ButterworthLP
+      FilterOrder              4
       Fs                       100.0
       Fc                       1.0
    }

@@ -57,6 +57,9 @@ public:
    //***************************************************************************
    // Constants.
 
+   // None.
+   static const int cNone              = 0;
+
    // Filter types.
    static const int cFilterIdentity    = 1;
    static const int cFilterSmoother    = 2;

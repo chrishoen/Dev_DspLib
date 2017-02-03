@@ -37,15 +37,15 @@ void HistoryFilterParms::reset()
 {
    BaseClass::reset();
 
-   mFilterType    = cFilterIdentity;
-   mFilterMethod  = cMethodSavGol;
+   mFilterType    = cNone;
+   mFilterMethod  = cNone;
 
    mFilterOrder = 1;
    mH = 1.0;
 
    mSelect = 1;
 
-   mCausalType    = cCausalButterworthLP;
+   mCausalType    = cNone;
    mFs = 1.0;
    mFc = 1.0;
 }
@@ -64,7 +64,7 @@ void HistoryFilterParms::show(char* aLabel)
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("H                  %10.6f\n", mH);
    printf("Select             %10d\n",   mSelect);
-   printf("CausalType         %10s\n",   asStringCausalType(mCausalType));
+   printf("CausalType      %13s\n",   asStringCausalType(mCausalType));
    printf("Fs                 %10.4f\n", mFs);
    printf("Fc                 %10.4f\n", mFc);
 
@@ -131,6 +131,7 @@ char* HistoryFilterParms::asStringFilterType(int aX)
 {
    switch (aX)
    {
+   case cNone              : return "None";
    case cFilterIdentity    : return "Identity";
    case cFilterSmoother    : return "Smoother";
    case cFilterFirstDeriv  : return "FirstDeriv";
@@ -144,8 +145,9 @@ char* HistoryFilterParms::asStringFilterMethod(int aX)
 {
    switch (aX)
    {
-   case cMethodSavGol    : return "SavGol";
-   case cMethodHolob     : return "Holob";
+   case cNone              : return "None";
+   case cMethodSavGol      : return "SavGol";
+   case cMethodHolob       : return "Holob";
    default : return "UNKNOWN";
    }
 }
@@ -154,6 +156,7 @@ char* HistoryFilterParms::asStringCausalType(int aX)
 {
    switch (aX)
    {
+   case cNone                   : return "None";
    case cCausalButterworthLP    : return "ButterworthLP";
    case cCausalAlphaOne         : return "AlphaOne";
    case cCausalAlphaTwo         : return "AlphaTwo";
