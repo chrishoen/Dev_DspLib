@@ -1,82 +1,97 @@
-#pragma once
-
 /*==============================================================================
-Signal history linear operator: the identity operator.
+Description:
 ==============================================================================*/
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+#include <math.h>
+#include "my_functions.h"
+#include "prnPrint.h"
+#include "logFiles.h"
 
-#include "dspHistoryFilterParms.h"
 #include "dspHistory.h"
-#include "dspFilterButterworth.h"
-#include "dspFilterAlpha.h"
+#include "dspHistoryStatistics.h"
+#include "dspHistoryLoopClock.h"
+#include "dspHistoryTextFile.h"
+#include "dspHistoryGenGen.h"
+#include "dspHistoryFilterOperator.h"
+
+#include "Parms.h"
+#include "TestOne.h"
+
+using namespace Dsp;
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-namespace Dsp
+void TestOne::doCausal2()
 {
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history.
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// This class provides a linear operator on the set of signal histories:  
-// It applies some recursive filters causally.
- 
-class HistoryFilterCausal
-{
-public:
+   // Signal history.
+   History tHistoryX;
+
+   // Signal history generator.
+   HistoryGenGen tGen(gParms.mHistoryGenParms);
+
+   // Generate the history.
+   tGen.generateHistory(tHistoryX);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Parameters. These are read from a parms file.
+   // Generate a signal history.
 
-   HistoryFilterParms mParms;
+   // Signal history.
+   History tHistoryY;
+   History tHistoryDY;
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Members.
+   // Signal history generator.
+   HistoryFilterOperator tFilterXY(gParms.mHistoryFilterParms1);
 
-   Dsp::Filter::ButterworthLP mButterworth;
-   Dsp::Filter::AlphaOne      mAlphaOne;
-   Dsp::Filter::AlphaTwo      mAlphaTwo;
-   Dsp::Filter::AlphaThree    mAlphaThree;
+   // Apply the operator on the history to produce a new history. F:X->Y.
+   tFilterXY.operate(tHistoryX,tHistoryY,tHistoryDY);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods.
+   // Collect statistics on the history.
 
-   // Constructor.
-   HistoryFilterCausal(HistoryFilterParms& aParms);
-   void show();
+   // Statistics
+   HistoryStatistics  tStatistics;
+   tStatistics.collectValue(tHistoryX);
+   tStatistics.show();
 
-   // Apply the linear operator from the input to the output. F:X->Y
-   // This is the identity operator.
-   void operate(History& aX,History& aY);
+   tStatistics.collectValue(tHistoryY);
+   tStatistics.show();
 
-   // Apply the linear operator from the input to the output. F:X->Y
-   // This is the identity operator.
-   void operate(History& aX,History& aY,History& aDY);
+   tStatistics.collectValue(tHistoryDY);
+   tStatistics.show();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods.
+   // Loop to transfer the signal history to an output file.
 
-   // Initialize the causal filter, based on the parms.
-   void initializeCausalFilter();
-};
+   // Output file.
+   HistoryCsvFileWriter  tSampleWriter;
+   tSampleWriter.open(gParms.mOutputFile);
+   tSampleWriter.writeHistory(tHistoryX,tHistoryY,tHistoryDY);
+   tSampleWriter.close();
 
-//******************************************************************************
-}//namespace
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Done.
 
+   Prn::print(0, "TestOne::doCausal2 %d",tHistoryX.mMaxSamples);
+}
 

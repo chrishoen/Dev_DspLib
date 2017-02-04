@@ -41,10 +41,9 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN5"))  executeRun5(aCmd);
    if (aCmd->isCmd("RUN6"))  executeRun6(aCmd);
 
-   if (aCmd->isCmd("Causal1"))     executeCausal1(aCmd);
    if (aCmd->isCmd("Cas1"))        executeCausal1(aCmd);
+   if (aCmd->isCmd("Cas2"))        executeCausal2(aCmd);
 
-   if (aCmd->isCmd("Noncausal1"))  executeNoncausal1(aCmd);
    if (aCmd->isCmd("Non1"))        executeNoncausal1(aCmd);
 }
 
@@ -60,6 +59,20 @@ void CmdLineExec::executeCausal1(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doCausal1();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeCausal2(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("causal1");
+
+   TestOne tTestOne;
+   tTestOne.doCausal2();
 }
 
 //******************************************************************************

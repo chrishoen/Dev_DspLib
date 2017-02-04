@@ -91,9 +91,6 @@
     <ClCompile Include="Source\dspHistoryFilterCausal.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterOperator.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_causal1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -101,6 +98,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestOne_noncausal1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestOne_causal2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterOperator_XY.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterOperator_XYDY.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -171,10 +177,10 @@
     <ClInclude Include="Source\dspHistoryFilterCausal.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterOperator.h">
+    <ClInclude Include="Source\dspHistoryFilterNoncausal.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterNoncausal.h">
+    <ClInclude Include="Source\dspHistoryFilterOperator.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

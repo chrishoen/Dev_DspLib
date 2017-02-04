@@ -29,6 +29,7 @@ public:
    void executeRun6 (Ris::CmdLineCmd* aCmd);
 
    void executeCausal1    (Ris::CmdLineCmd* aCmd);
+   void executeCausal2    (Ris::CmdLineCmd* aCmd);
    void executeNoncausal1 (Ris::CmdLineCmd* aCmd);
 
    void executeParms (Ris::CmdLineCmd* aCmd);

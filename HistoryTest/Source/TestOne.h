@@ -22,6 +22,7 @@ public:
    void doRun5();
 
    void doCausal1();
+   void doCausal2();
    void doNoncausal1();
  };
 
