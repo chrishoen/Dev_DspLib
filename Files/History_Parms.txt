@@ -153,9 +153,13 @@ SectionBegin Noncausal1
    {
       FilterType               Noncausal
       CausalType               ButterworthLP
+      CausalType               AlphaThree
       FilterOrder              4
       Fs                       100.0
       Fc                       0.25
+
+      AlphaDT                  0.01
+      AlphaLambda              0.0279155
    }
 
 SectionEnd

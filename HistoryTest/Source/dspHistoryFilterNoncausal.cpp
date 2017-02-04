@@ -52,14 +52,34 @@ void HistoryFilterNoncausal::initializeCausalFilter()
    {
    case HistoryFilterParms::cCausalButterworthLP:
    {
-      // Initialize the filter according to the parameters.
-      mFilter.initialize(
+      mButterworth.initialize(
          mParms.mFilterOrder,
          mParms.mFs,
          mParms.mFc);
    }
    break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      mAlphaOne.initialize(
+         mParms.mAlphaLambda);
    }
+   break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      mAlphaTwo.initialize(
+         mParms.mAlphaLambda,
+         mParms.mAlphaDT);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      mAlphaThree.initialize(
+         mParms.mAlphaLambda,
+         mParms.mAlphaDT);
+   }
+   break;
+   }
+
 }
 
 //******************************************************************************
@@ -98,17 +118,39 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
    // Execute a forward loop to calculate the causally filtered values of the
    // input array.Store the filtered values in the temp array.
 
-   // Forward loop. Progress forward in time.
+   // For all of the samples in the source and destination arrays.
    for (int i = 0; i < tP; i++)
    {
-      // Read the sample value from the source array.
+      // Read the sample value from the source.
       double tX = aX.mValue[i];
+      double tY = 0.0;
       // Filter the value.
-      double tY = mFilter.put(tX);
+      switch (mParms.mCausalType)
+      {
+      case HistoryFilterParms::cCausalButterworthLP:
+      {
+         tY = mButterworth.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaOne:
+      {
+         tY = mAlphaOne.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaTwo:
+      {
+         tY = mAlphaTwo.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaThree:
+      {
+         tY = mAlphaThree.put(tX);
+      }
+      break;
+      }
       // Write the filtered value to the temp forward array.
       tYForward[i] = tY;
    }
-
    //***************************************************************************
    // Execute a backward loop to calculate the causally filtered values of the
    // previously filtered forward array.Store the filtered values in the
@@ -117,10 +159,33 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
    // Backward loop. Progress backward in time. Time reversal.
    for (int i = tP-1; i >= 0; i--)
    {
-      // Read the sample value from the temp forward array.
+      // Read the sample value from the source.
       double tX = tYForward[i];
+      double tY = 0.0;
       // Filter the value.
-      double tY = mFilter.put(tX);
+      switch (mParms.mCausalType)
+      {
+      case HistoryFilterParms::cCausalButterworthLP:
+      {
+         tY = mButterworth.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaOne:
+      {
+         tY = mAlphaOne.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaTwo:
+      {
+         tY = mAlphaTwo.put(tX);
+      }
+      break;
+      case HistoryFilterParms::cCausalAlphaThree:
+      {
+         tY = mAlphaThree.put(tX);
+      }
+      break;
+      }
       // Write the filtered value to the destination.
       aY.mValue[i] = tY;
    }
