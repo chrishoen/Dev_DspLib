@@ -29,6 +29,8 @@ class AlphaOne
 public:
    // Initialize with alpha
    void initialize (double aP1); 
+   // Initialize with lambdaT
+   void initializeFromLambda(double aL); 
    // Show
    void show();
 
@@ -64,6 +66,9 @@ class AlphaTwo
 public:
    // Initialize with alpha,beta,DT
    void initialize(double aP1,double aP2,double aDT); 
+   // Initialize with lambda,DT
+   void initializeFromLambda(double aL,double aDT); 
+
    // Show
    void show();
 
@@ -106,6 +111,8 @@ class AlphaThree
 public:
    // Initialize with alpha,beta,gamma,DT
    void initialize(double aP1,double aP2,double aP3,double aDT); 
+   // Initialize with lambda,DT
+   void initializeFromLambda(double aL,double aDT); 
    // Show
    void show();
 

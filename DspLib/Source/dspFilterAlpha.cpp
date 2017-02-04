@@ -27,7 +27,7 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 
-   void AlphaOne::initialize(double aP1)
+void AlphaOne::initialize(double aP1)
 {
    mP1  = aP1;
    mAP1 = 1.0 - aP1;
@@ -35,6 +35,16 @@ namespace Filter
    mY   = 0.0;
    mXX  = 0.0;
    mK   = 0;
+}
+
+//******************************************************************************
+
+void AlphaOne::initializeFromLambda(double aL)
+{
+   double L  = aL;
+   double L2 = L*L;
+   double A = (-L2 + L*sqrt(16 + L2))/8;
+   initialize(A);
 }
 
 //******************************************************************************
@@ -89,6 +99,22 @@ void AlphaTwo::initialize(double aP1, double aP2, double aDT)
    mXV=0.0;
    mX.reset();
    mK  = 0;
+}
+
+//******************************************************************************
+
+void AlphaTwo::initializeFromLambda(double aL,double aDT)
+{
+   double L  = aL;
+   double L2 = L*L;
+
+   double r  = (4 + L-sqrt(8*L + L2))/4;
+   double r2 = r*r;
+
+   double A  = 1-r2;
+   double B  = 2*(2-A) - 4*sqrt(1-A);
+
+   initialize(A,B,aDT);
 }
 
 //******************************************************************************
@@ -162,6 +188,38 @@ void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
    mXA=0.0;
    mX.reset();
    mK  = 0;
+}
+
+//******************************************************************************
+
+void AlphaThree::initializeFromLambda(double aL,double aDT)
+{
+   double L  = aL;
+   double L2 = L*L;
+
+   double b  = L/2 - 3;
+   double b2 = b*b;
+   double b3 = b*b*b;
+   double c  = L/2 + 3;
+   double d  = -1;
+
+   double p  = c - b2/3;
+   double p3 = p*p*p;
+   double q  = 2*b3/27 - b*c/3 + d;
+   double q2 = q*q;
+
+   double v  = sqrt(q2 + 4*p3/27);
+   double z  = -pow(q + v/2, 3.0/2.0);
+
+   double s  = z - p/(3*z) - b/3;
+   double s2 = s*s;
+
+   double A  = 1-s2;
+   double B  = 2*pow(1-s,2);
+   double B2 = B*B;
+   double G  = B2/(2*A);
+
+   initialize(A,B,G,aDT);
 }
 
 //******************************************************************************
