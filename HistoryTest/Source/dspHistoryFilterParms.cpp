@@ -53,7 +53,7 @@ void HistoryFilterParms::reset()
    mAlphaP2 = 0.0;
    mAlphaP3 = 0.0;
    mAlphaDT = 0.0;
-
+   mAlphaLambda = 0.0;
 }
 
 //******************************************************************************
@@ -77,6 +77,7 @@ void HistoryFilterParms::show(char* aLabel)
    printf("AlphaP2            %10.4f\n", mAlphaP2);
    printf("AlphaP3            %10.4f\n", mAlphaP3);
    printf("AlphaDT            %10.4f\n", mAlphaDT);
+   printf("AlphaLambda        %10.4f\n", mAlphaLambda);
 
    printf("\n");
 }
@@ -99,6 +100,8 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("AlphaP2"))         mAlphaP2     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaP3"))         mAlphaP3     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaLambda"))     mAlphaLambda = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {

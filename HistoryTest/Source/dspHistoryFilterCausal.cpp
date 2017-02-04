@@ -60,24 +60,21 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaOne:
    {
-      mAlphaOne.initialize(
-         mParms.mAlphaP1);
+      mAlphaOne.initializeFromLambda(
+         mParms.mAlphaLambda);
    }
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
    {
-      mAlphaTwo.initialize(
-         mParms.mAlphaP1,
-         mParms.mAlphaP2,
+      mAlphaTwo.initializeFromLambda(
+         mParms.mAlphaLambda,
          mParms.mAlphaDT);
    }
    break;
    case HistoryFilterParms::cCausalAlphaThree:
    {
-      mAlphaThree.initialize(
-         mParms.mAlphaP1,
-         mParms.mAlphaP2,
-         mParms.mAlphaP3,
+      mAlphaThree.initializeFromLambda(
+         mParms.mAlphaLambda,
          mParms.mAlphaDT);
    }
    break;

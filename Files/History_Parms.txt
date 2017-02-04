@@ -131,9 +131,8 @@ SectionBegin Causal1
       Fs                       100.0
       Fc                       0.25
 
-      AlphaP1                  0.0894342153953168639
-      AlphaP2                  0.004188741018861376
       AlphaDT                  0.01
+      AlphaLambda              0.0001
    }
 
 SectionEnd
