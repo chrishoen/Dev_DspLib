@@ -79,6 +79,9 @@ void AlphaTwo::initialize(double aLambda,double aDT)
    double B  = 2*(2-A) - 4*sqrt(1-A);
 
    // Initialize output variables.
+   mAlpha = A;
+   mBeta = B;
+
    mY=0.0;
    mXX=0.0;
    mXV=0.0;
@@ -107,13 +110,13 @@ double AlphaTwo::put(double aY)
    // Implement the filter.
    xm = aY;
 
-   xk = xk_1 + ( vk_1 * dt );
+   xk = xk_1 + vk_1*dt;
    vk = vk_1;
 
    rk = xm - xk;
 
-   xk += a * rk;
-   vk += ( b * rk ) / dt;
+   xk += a*rk;
+   vk += b*rk/dt;
 
    xk_1 = xk;
    vk_1 = vk;
@@ -133,42 +136,10 @@ double AlphaTwo::put(double aY)
 //******************************************************************************
 //******************************************************************************
 
-void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
+void AlphaThree::initialize(double aLambda,double aDT)
 {
-   // X
-   mX.initialize(3);
-   mTempX1.initialize(3);
-   mTempX2.initialize(3);
-
-   // Temps
-   double tDT  = aDT;
-   double tDT2 = aDT*aDT;
-   // F
-   double tFValues[3][3] = 
-      {{ (1.0 - aP1),       (1.0 - aP1)*tDT, (1.0 - aP1)*tDT2/2.0 },
-       { (-aP2/tDT),        (1.0 - aP2),     (1.0 - aP2/2.0)*tDT     },
-       { (-aP3/tDT2),       (- aP3/tDT),     (1.0 - aP3/2.0)         }};
-
-   mF.initialize(3,3,&tFValues[0][0]);
-
-   // G
-   double tGValues[3] = { aP1, aP2/tDT, aP3/tDT2 };
-
-   mG.initialize(3,&tGValues[0]);
-
-   // Reset
-   mY=0.0;
-   mXX=0.0;
-   mXV=0.0;
-   mXA=0.0;
-   mX.reset();
-}
-
-//******************************************************************************
-
-void AlphaThree::initializeFromLambda(double aL,double aDT)
-{
-   double L  = aL;
+   // Calculate filter parameters.
+   double L  = aLambda;
    double L2 = L*L;
 
    double b  = L/2 - 3;
@@ -193,32 +164,101 @@ void AlphaThree::initializeFromLambda(double aL,double aDT)
    double B2 = B*B;
    double G  = B2/(2*A);
 
-   initialize(A,B,G,aDT);
+   // Initialize output variables.
+   mY=0.0;
+   mXX=0.0;
+   mXV=0.0;
+
+   mAlpha = A;
+   mBeta = B;
+   mGamma = G;
+
+   printf("ABG %10.6f %10.6f %10.6f\n",A,B,G);
+
+   // Initialize filter variables.
+   a = A;
+   b = B;
+   g = G;
+
+   dt = aDT;
+   dt2 = dt*dt;
+
+   xk_1 = 0.0;
+   vk_1 = 0.0;
+   ak_1 = 0.0;
+   xk = 0.0;
+   vk = 0.0;
+   ak = 0.0;
+
+   rk = 0.0;
+   xm = 0.0;
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 
 double AlphaThree::put(double aY)
 {
-   // Store input
+   // Store input.
    mY = aY;
 
-   // State space calculation
-   multiply (mTempX1,mF,mX);
+   // Implement the filter.
+   xm = aY;
 
-   multiply (mTempX2,mG,aY);
+   xk = xk_1*(1-a)    + vk_1*(1-a)*dt + ak_1*(1-a)*dt2/2  + xm*a;
+   vk = xk_1*(-b/dt)  + vk_1*(1-b)    + ak_1*(1-b/2)*dt   + xm*b/dt;
+   ak = xk_1*(-g/dt2) + vk_1*(-g/dt)  + ak_1*(1-g/2)      + xm*g/dt2;
+   
+   ak=0.0;
+   
+   xk_1 = xk;
+   vk_1 = vk;
+   ak_1 = ak;
 
-   add (mX,mTempX1,mTempX2);
+   // Store outputs.
+   mXX = xk;
+   mXV = vk;
+   mXA = ak;
 
-   // Store outputs
-   mXX = mX.e(1);
-   mXV = mX.e(2);
-   mXA = mX.e(3);
-
-   // Done
+   // Return output.
    return mXX;
 }
 
 }//namespace
 }//namespace
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+#if 0
+double AlphaThree::put(double aY)
+{
+   // Store input.
+   mY = aY;
+
+   // Implement the filter.
+   xm = aY;
+
+   xk = xk_1 + vk_1*dt + ak_1*(dt2/2);
+   vk = vk_1 + ak_1*dt;
+   ak = ak_1;
+
+   rk = xm - xk;
+
+   xk += (a)*rk;
+   vk += (b/dt)*rk;
+   ak += (g/(2*dt2))*rk;
+   xk_1 = xk;
+   vk_1 = vk;
+   ak_1 = ak;
+
+   // Store outputs.
+   mXX = xk;
+   mXV = vk;
+   mXA = ak;
+
+   // Return output.
+   return mXX;
+}
+#endif

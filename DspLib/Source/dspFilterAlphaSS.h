@@ -1,5 +1,4 @@
-#ifndef _DSPFILTERALPHA_H_
-#define _DSPFILTERALPHA_H_
+#pragma once
 /*==============================================================================
 
 filters
@@ -170,5 +169,4 @@ public:
 
 }//namespace
 }//namespace
-#endif
 

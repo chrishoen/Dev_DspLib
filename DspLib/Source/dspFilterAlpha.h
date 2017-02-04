@@ -1,5 +1,4 @@
-#ifndef _DSPFILTERALPHA_H_
-#define _DSPFILTERALPHA_H_
+#pragma once
 /*==============================================================================
 
 filters
@@ -95,34 +94,32 @@ public:
 class AlphaThree
 {
 public:
-   // Initialize with alpha,beta,gamma,DT
-   void initialize(double aP1,double aP2,double aP3,double aDT); 
-   // Initialize with lambda,DT
-   void initializeFromLambda(double aL,double aDT); 
+   // Initialize with lambda,DT.
+   void initialize(double aLambda,double aDT); 
 
-   // Put input value
+   // Put input value, return filtered output.
    double put(double aY);
 
-   // Input value
+   // Input variable.
    double mY;
 
-   // Output value
+   // Output variables.
    double mXX;
    double mXV;
    double mXA;
 
-   // State space
-   // X = F*X + G*Y
-   RVector  mX;
-   RMatrix  mF;
-   RVector  mG;
+   // Filter parameters.
+   double mAlpha;
+   double mBeta;
+   double mGamma;
 
-   // State space temps
-   RVector mTempX1;
-   RVector mTempX2;
+   // Filter variables.
+   double dt,dt2;
+   double xk_1,vk_1,ak_1,a,b,g;
+   double xk,vk,ak,rk;
+   double xm;
 };
 
 }//namespace
 }//namespace
-#endif
 
