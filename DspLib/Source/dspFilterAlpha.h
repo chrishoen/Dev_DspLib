@@ -32,13 +32,13 @@ public:
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
 
-   // Put input value
+   // Put input value, return filtered output.
    double put(double aY);
 
-   // Input value
+   // Input variable.
    double mY;
 
-   // Output value
+   // Output variables.
    double mXX;
 
    // Filter parameters
@@ -58,30 +58,28 @@ public:
 class AlphaTwo
 {
 public:
-   // Initialize with alpha,beta,DT
-   void initialize(double aP1,double aP2,double aDT); 
-   // Initialize with lambda,DT
-   void initializeFromLambda(double aL,double aDT); 
+   // Initialize with lambda,DT.
+   void initialize(double aLambda,double aDT); 
 
-   // Put input value
+   // Put input value, return filtered output.
    double put(double aY);
 
-   // Input value
+   // Input variable.
    double mY;
 
-   // Output value
+   // Output variables.
    double mXX;
    double mXV;
 
-   // State space
-   // X = F*X + G*Y
-   RVector  mX;
-   RMatrix  mF;
-   RVector  mG;
+   // Filter parameters.
+   double mAlpha;
+   double mBeta;
 
-   // State space temps
-   RVector mTempX1;
-   RVector mTempX2;
+   // Filter variables.
+   double dt;
+   double xk_1,vk_1,a,b;
+   double xk,vk,rk;
+   double xm;
 };
 
 //******************************************************************************

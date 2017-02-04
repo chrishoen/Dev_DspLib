@@ -29,11 +29,13 @@ namespace Filter
 
 void AlphaOne::initialize(double aLambda)
 {
+   // Calculate filter parameters.
    double L  = aLambda;
    double L2 = L*L;
    double A = (-L2 + L*sqrt(16 + L2))/8;
-
    mAlpha = A;
+
+   // Initialize filter variables.
    mY   = 0.0;
    mXX  = 0.0;
 }
@@ -64,36 +66,10 @@ double AlphaOne::put(double aY)
 //******************************************************************************
 //******************************************************************************
 
-void AlphaTwo::initialize(double aP1, double aP2, double aDT)
+void AlphaTwo::initialize(double aLambda,double aDT)
 {
-   // X
-   mX.initialize(2);
-   mTempX1.initialize(2);
-   mTempX2.initialize(2);
-
-   // F
-   double tFValues[2][2] = {{ (1.0 - aP1), (1.0 - aP1)*aDT },
-                            { (-aP2/aDT),  (1.0 - aP2)     }};
-
-   mF.initialize(2,2,&tFValues[0][0]);
-
-   // G
-   double tGValues[2] = { aP1, aP2/aDT };
-
-   mG.initialize(2,&tGValues[0]);
-
-   // Reset
-   mY=0.0;
-   mXX=0.0;
-   mXV=0.0;
-   mX.reset();
-}
-
-//******************************************************************************
-
-void AlphaTwo::initializeFromLambda(double aL,double aDT)
-{
-   double L  = aL;
+   // Calculate filter parameters.
+   double L  = aLambda;
    double L2 = L*L;
 
    double r  = (4 + L-sqrt(8*L + L2))/4;
@@ -102,27 +78,51 @@ void AlphaTwo::initializeFromLambda(double aL,double aDT)
    double A  = 1-r2;
    double B  = 2*(2-A) - 4*sqrt(1-A);
 
-   initialize(A,B,aDT);
+   // Initialize output variables.
+   mY=0.0;
+   mXX=0.0;
+   mXV=0.0;
+
+   // Initialize filter variables.
+   dt = aDT;
+   xk_1 = 0.0;
+   vk_1 = 0.0;
+   a = A;
+   b = B;
+   xk = 0.0;
+   vk = 0.0;
+   rk = 0.0;
+   xm = 0.0;
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 
 double AlphaTwo::put(double aY)
 {
-   // Store input
+   // Store input.
    mY = aY;
 
-   // State space calculation
-   multiply (mTempX1,mF,mX);
+   // Implement the filter.
+   xm = aY;
 
-   multiply (mTempX2,mG,aY);
+   xk = xk_1 + ( vk_1 * dt );
+   vk = vk_1;
 
-   add (mX,mTempX1,mTempX2);
+   rk = xm - xk;
 
-   // Store outputs
-   mXX = mX.e(1);
-   mXV = mX.e(2);
+   xk += a * rk;
+   vk += ( b * rk ) / dt;
 
+   xk_1 = xk;
+   vk_1 = vk;
+
+   // Store outputs.
+   mXX = xk;
+   mXV = vk;
+
+   // Return output.
    return mXX;
 }
 

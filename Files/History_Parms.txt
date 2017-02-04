@@ -126,7 +126,7 @@ SectionBegin Causal1
    HistoryFilterParms1
    {
       FilterType               Causal
-      CausalType               AlphaOne
+      CausalType               AlphaTwo
       FilterOrder              4
       Fs                       100.0
       Fc                       0.25
