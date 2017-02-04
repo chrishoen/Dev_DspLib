@@ -85,9 +85,6 @@
     <ClCompile Include="Source\dspFilterButterworth.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspFilterAlphaSS.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -172,9 +169,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspFilterButterworth.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspFilterAlphaSS.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

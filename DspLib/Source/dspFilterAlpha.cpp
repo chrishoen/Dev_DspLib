@@ -54,7 +54,10 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 double AlphaOne::put(double aY)
 {
    mY  = aY;
-   mXX = mAlpha*mY + (1-mAlpha)*mXX;
+
+   double a = mAlpha;
+
+   mXX = (1-a)*mXX + a*mY;
 
    return mXX;
 }
@@ -78,24 +81,15 @@ void AlphaTwo::initialize(double aLambda,double aDT)
    double A  = 1-r2;
    double B  = 2*(2-A) - 4*sqrt(1-A);
 
-   // Initialize output variables.
+   // Store parameter variables.
    mAlpha = A;
-   mBeta = B;
+   mBeta  = B;
+   mDT    = aDT;
 
+   // Initialize output variables.
    mY=0.0;
    mXX=0.0;
    mXV=0.0;
-
-   // Initialize filter variables.
-   dt = aDT;
-   xk_1 = 0.0;
-   vk_1 = 0.0;
-   a = A;
-   b = B;
-   xk = 0.0;
-   vk = 0.0;
-   rk = 0.0;
-   xm = 0.0;
 }
 
 //******************************************************************************
@@ -104,26 +98,20 @@ void AlphaTwo::initialize(double aLambda,double aDT)
 
 double AlphaTwo::put(double aY)
 {
-   // Store input.
+   // Store input
    mY = aY;
 
    // Implement the filter.
-   xm = aY;
+   double a   = mAlpha;
+   double b   = mBeta;
+   double dt  = mDT;
 
-   xk = xk_1 + vk_1*dt;
-   vk = vk_1;
+   double xm = aY;
+   double xk = mXX;
+   double vk = mXV;
 
-   rk = xm - xk;
-
-   xk += a*rk;
-   vk += b*rk/dt;
-
-   xk_1 = xk;
-   vk_1 = vk;
-
-   // Store outputs.
-   mXX = xk;
-   mXV = vk;
+   mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
+   mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
 
    // Return output.
    return mXX;
@@ -213,34 +201,39 @@ double AlphaThree::put(double aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 #if 0
-double AlphaThree::put(double aY)
+void AlphaTwo::initialize(double aLambda,double aDT)
 {
-   // Store input.
-   mY = aY;
+   // Calculate filter parameters.
+   double L  = aLambda;
+   double L2 = L*L;
 
-   // Implement the filter.
-   xm = aY;
+   double r  = (4 + L-sqrt(8*L + L2))/4;
+   double r2 = r*r;
 
-   xk = xk_1 + vk_1*dt + ak_1*(dt2/2);
-   vk = vk_1 + ak_1*dt;
-   ak = ak_1;
+   double A  = 1-r2;
+   double B  = 2*(2-A) - 4*sqrt(1-A);
 
-   rk = xm - xk;
+   // Initialize output variables.
+   mAlpha = A;
+   mBeta = B;
 
-   xk += (a)*rk;
-   vk += (b/dt)*rk;
-   ak += (g/(2*dt2))*rk;
-   xk_1 = xk;
-   vk_1 = vk;
-   ak_1 = ak;
+   mY=0.0;
+   mXX=0.0;
+   mXV=0.0;
 
-   // Store outputs.
-   mXX = xk;
-   mXV = vk;
-   mXA = ak;
-
-   // Return output.
-   return mXX;
+   // Initialize filter variables.
+   dt = aDT;
+   xk_1 = 0.0;
+   vk_1 = 0.0;
+   a = A;
+   b = B;
+   xk = 0.0;
+   vk = 0.0;
+   rk = 0.0;
+   xm = 0.0;
 }
+
 #endif

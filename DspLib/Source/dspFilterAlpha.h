@@ -66,19 +66,14 @@ public:
    // Input variable.
    double mY;
 
-   // Output variables.
+   // Filter state output variables.
    double mXX;
    double mXV;
 
    // Filter parameters.
    double mAlpha;
    double mBeta;
-
-   // Filter variables.
-   double dt;
-   double xk_1,vk_1,a,b;
-   double xk,vk,rk;
-   double xm;
+   double mDT;
 };
 
 //******************************************************************************
