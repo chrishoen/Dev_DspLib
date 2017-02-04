@@ -209,7 +209,7 @@ void AlphaThree::initializeFromLambda(double aL,double aDT)
    double q2 = q*q;
 
    double v  = sqrt(q2 + 4*p3/27);
-   double z  = -pow(q + v/2, 3.0/2.0);
+   double z  = -pow(q + v/2, 1.0/3.0);
 
    double s  = z - p/(3*z) - b/3;
    double s2 = s*s;
