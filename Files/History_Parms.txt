@@ -132,7 +132,7 @@ SectionBegin Causal1
       Fc                       0.25
 
       AlphaDT                  0.01
-      AlphaLambda              0.0001
+      AlphaLambda              0.0279155
    }
 
 SectionEnd
