@@ -60,7 +60,7 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaOne:
    {
-      mAlphaOne.initializeFromLambda(
+      mAlphaOne.initialize(
          mParms.mAlphaLambda);
    }
    break;

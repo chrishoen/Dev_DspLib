@@ -27,23 +27,24 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 
-void AlphaOne::initialize(double aP1)
+void AlphaOne::initialize(double aLambda)
 {
-   mP1  = aP1;
-   mAP1 = 1.0 - aP1;
+   double L  = aLambda;
+   double L2 = L*L;
+   double A = (-L2 + L*sqrt(16 + L2))/8;
 
+   mAlpha = A;
    mY   = 0.0;
    mXX  = 0.0;
 }
 
 //******************************************************************************
 
-void AlphaOne::initializeFromLambda(double aL)
+void AlphaOne::initializeFromAlpha(double aAlpha)
 {
-   double L  = aL;
-   double L2 = L*L;
-   double A = (-L2 + L*sqrt(16 + L2))/8;
-   initialize(A);
+   mAlpha = aAlpha;
+   mY   = 0.0;
+   mXX  = 0.0;
 }
 
 //******************************************************************************
@@ -51,7 +52,7 @@ void AlphaOne::initializeFromLambda(double aL)
 double AlphaOne::put(double aY)
 {
    mY  = aY;
-   mXX = mP1 * aY + mAP1 * mXX;
+   mXX = mAlpha*mY + (1-mAlpha)*mXX;
 
    return mXX;
 }

@@ -27,10 +27,10 @@ namespace Filter
 class AlphaOne
 {
 public:
-   // Initialize with alpha
-   void initialize (double aP1); 
-   // Initialize with lambdaT
-   void initializeFromLambda(double aL); 
+   // Initialize with lambda.
+   void initialize (double aLambda); 
+   // Initialize with alpha.
+   void initializeFromAlpha (double aP1); 
 
    // Put input value
    double put(double aY);
@@ -42,8 +42,7 @@ public:
    double mXX;
 
    // Filter parameters
-   double mP1;    // Filter parameter     : alpha
-   double mAP1;   // Filter aux parameter : 1 - alpha
+   double mAlpha;
 };
 
 //******************************************************************************
