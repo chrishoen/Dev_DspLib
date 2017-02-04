@@ -12,7 +12,7 @@ Description:
 #include <math.h>
 #include <string.h>
 
-#include "dspFilterAlpha.h"
+#include "dspFilterAlphaSS.h"
 
 namespace Dsp
 {
@@ -27,7 +27,7 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 
-void AlphaOne::initialize(double aP1)
+void AlphaOneSS::initialize(double aP1)
 {
    mP1  = aP1;
    mAP1 = 1.0 - aP1;
@@ -39,7 +39,7 @@ void AlphaOne::initialize(double aP1)
 
 //******************************************************************************
 
-void AlphaOne::initializeFromLambda(double aL)
+void AlphaOneSS::initializeFromLambda(double aL)
 {
    double L  = aL;
    double L2 = L*L;
@@ -49,7 +49,7 @@ void AlphaOne::initializeFromLambda(double aL)
 
 //******************************************************************************
 
-double AlphaOne::put(double aY)
+double AlphaOneSS::put(double aY)
 {
    mY  = aY;
    mXX = mP1 * aY + mAP1 * mXX;
@@ -60,7 +60,7 @@ double AlphaOne::put(double aY)
 
 //******************************************************************************
 
-void AlphaOne::show()
+void AlphaOneSS::show()
 {
    printf("%3d $$ %8.3f %8.3f\n",
       mK,
@@ -75,7 +75,7 @@ void AlphaOne::show()
 //******************************************************************************
 //******************************************************************************
 
-void AlphaTwo::initialize(double aP1, double aP2, double aDT)
+void AlphaTwoSS::initialize(double aP1, double aP2, double aDT)
 {
    // X
    mX.initialize(2);
@@ -103,7 +103,7 @@ void AlphaTwo::initialize(double aP1, double aP2, double aDT)
 
 //******************************************************************************
 
-void AlphaTwo::initializeFromLambda(double aL,double aDT)
+void AlphaTwoSS::initializeFromLambda(double aL,double aDT)
 {
    double L  = aL;
    double L2 = L*L;
@@ -119,7 +119,7 @@ void AlphaTwo::initializeFromLambda(double aL,double aDT)
 
 //******************************************************************************
 
-double AlphaTwo::put(double aY)
+double AlphaTwoSS::put(double aY)
 {
    // Store input
    mY = aY;
@@ -142,7 +142,7 @@ double AlphaTwo::put(double aY)
 
 //******************************************************************************
 
-void AlphaTwo::show()
+void AlphaTwoSS::show()
 {
    printf("%3d $$ %8.3f %8.3f %8.3f\n",
       mK,
@@ -158,7 +158,7 @@ void AlphaTwo::show()
 //******************************************************************************
 //******************************************************************************
 
-void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
+void AlphaThreeSS::initialize(double aP1,double aP2,double aP3,double aDT)
 {
    // X
    mX.initialize(3);
@@ -192,7 +192,7 @@ void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
 
 //******************************************************************************
 
-void AlphaThree::initializeFromLambda(double aL,double aDT)
+void AlphaThreeSS::initializeFromLambda(double aL,double aDT)
 {
    double L  = aL;
    double L2 = L*L;
@@ -224,7 +224,7 @@ void AlphaThree::initializeFromLambda(double aL,double aDT)
 
 //******************************************************************************
 
-double AlphaThree::put(double aY)
+double AlphaThreeSS::put(double aY)
 {
    // Store input
    mY = aY;
@@ -248,7 +248,7 @@ double AlphaThree::put(double aY)
 
 //******************************************************************************
 
-void AlphaThree::show()
+void AlphaThreeSS::show()
 {
    printf("%3d $$ %8.3f %8.3f %8.3f %8.3f\n",
       mK,
@@ -258,6 +258,30 @@ void AlphaThree::show()
       mXA);
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void PropagatorSS::initialize(double aX0,double aXV,double aDT)
+{
+   mXX = aX0;
+   mDX = aXV*aDT;
+}
+
+//******************************************************************************
+
+double PropagatorSS::update()
+{
+   // Integrate
+   mXX += mDX;
+
+   // Done
+   mK++;
+   return mXX;
+}
 }//namespace
 }//namespace
 

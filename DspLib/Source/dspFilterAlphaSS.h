@@ -24,7 +24,7 @@ namespace Filter
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
 
-class AlphaOne
+class AlphaOneSS
 {
 public:
    // Initialize with alpha
@@ -61,7 +61,7 @@ public:
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
 
-class AlphaTwo
+class AlphaTwoSS
 {
 public:
    // Initialize with alpha,beta,DT
@@ -106,7 +106,7 @@ public:
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
 
-class AlphaThree
+class AlphaThreeSS
 {
 public:
    // Initialize with alpha,beta,gamma,DT
@@ -140,6 +140,33 @@ public:
    // Members
    int mK;
 };
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Constant velocity propagator. Given an initial position and an assumed
+// constant velocity, this integrates through time for an updated position
+// estimate
+
+class PropagatorSS
+{
+public:
+   // Initialize with initial position,velocity,DT
+   void initialize(double aX0,double aXV,double aDT); 
+   void show();
+
+   // Integrate X += V*DT, also
+   // Integrate X += DX
+   double update();
+
+   // Output value
+   double mXX;
+
+   // Members
+   double mDX;
+   int mK;
+};
+
 
 }//namespace
 }//namespace
