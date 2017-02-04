@@ -120,7 +120,7 @@ SectionBegin Causal1
 
    HistoryGenParms
    {
-      Sigma                    0.10
+      Sigma                    0.1
    }
 
    HistoryFilterParms1

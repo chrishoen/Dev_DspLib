@@ -103,7 +103,7 @@ public:
    // Input variable.
    double mY;
 
-   // Output variables.
+   // Filter state output variables.
    double mXX;
    double mXV;
    double mXA;
@@ -112,12 +112,7 @@ public:
    double mAlpha;
    double mBeta;
    double mGamma;
-
-   // Filter variables.
-   double dt,dt2;
-   double xk_1,vk_1,ak_1,a,b,g;
-   double xk,vk,ak,rk;
-   double xm;
+   double mDT;
 };
 
 }//namespace
