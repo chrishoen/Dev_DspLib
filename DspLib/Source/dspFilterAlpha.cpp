@@ -34,7 +34,6 @@ void AlphaOne::initialize(double aP1)
 
    mY   = 0.0;
    mXX  = 0.0;
-   mK   = 0;
 }
 
 //******************************************************************************
@@ -54,18 +53,7 @@ double AlphaOne::put(double aY)
    mY  = aY;
    mXX = mP1 * aY + mAP1 * mXX;
 
-   mK++;
    return mXX;
-}
-
-//******************************************************************************
-
-void AlphaOne::show()
-{
-   printf("%3d $$ %8.3f %8.3f\n",
-      mK,
-      mY,
-      mXX);
 }
 
 //******************************************************************************
@@ -98,7 +86,6 @@ void AlphaTwo::initialize(double aP1, double aP2, double aDT)
    mXX=0.0;
    mXV=0.0;
    mX.reset();
-   mK  = 0;
 }
 
 //******************************************************************************
@@ -135,20 +122,7 @@ double AlphaTwo::put(double aY)
    mXX = mX.e(1);
    mXV = mX.e(2);
 
-   // Done
-   mK++;
    return mXX;
-}
-
-//******************************************************************************
-
-void AlphaTwo::show()
-{
-   printf("%3d $$ %8.3f %8.3f %8.3f\n",
-      mK,
-      mY,
-      mXX,
-      mXV);
 }
 
 //******************************************************************************
@@ -187,7 +161,6 @@ void AlphaThree::initialize(double aP1,double aP2,double aP3,double aDT)
    mXV=0.0;
    mXA=0.0;
    mX.reset();
-   mK  = 0;
 }
 
 //******************************************************************************
@@ -242,20 +215,7 @@ double AlphaThree::put(double aY)
    mXA = mX.e(3);
 
    // Done
-   mK++;
    return mXX;
-}
-
-//******************************************************************************
-
-void AlphaThree::show()
-{
-   printf("%3d $$ %8.3f %8.3f %8.3f %8.3f\n",
-      mK,
-      mY,
-      mXX,
-      mXV,
-      mXA);
 }
 
 }//namespace

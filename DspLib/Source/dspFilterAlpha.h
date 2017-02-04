@@ -31,8 +31,6 @@ public:
    void initialize (double aP1); 
    // Initialize with lambdaT
    void initializeFromLambda(double aL); 
-   // Show
-   void show();
 
    // Put input value
    double put(double aY);
@@ -46,9 +44,6 @@ public:
    // Filter parameters
    double mP1;    // Filter parameter     : alpha
    double mAP1;   // Filter aux parameter : 1 - alpha
-
-   // Members
-   int mK;
 };
 
 //******************************************************************************
@@ -69,9 +64,6 @@ public:
    // Initialize with lambda,DT
    void initializeFromLambda(double aL,double aDT); 
 
-   // Show
-   void show();
-
    // Put input value
    double put(double aY);
 
@@ -91,9 +83,6 @@ public:
    // State space temps
    RVector mTempX1;
    RVector mTempX2;
-
-   // Members
-   int mK;
 };
 
 //******************************************************************************
@@ -113,8 +102,6 @@ public:
    void initialize(double aP1,double aP2,double aP3,double aDT); 
    // Initialize with lambda,DT
    void initializeFromLambda(double aL,double aDT); 
-   // Show
-   void show();
 
    // Put input value
    double put(double aY);
@@ -136,9 +123,6 @@ public:
    // State space temps
    RVector mTempX1;
    RVector mTempX2;
-
-   // Members
-   int mK;
 };
 
 }//namespace
