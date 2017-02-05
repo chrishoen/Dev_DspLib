@@ -48,16 +48,16 @@ void DemoOne::doDemo2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Filter the signal history. Smoother.
+   // Filter the signal history. Differentiator.
 
    // Signal history.
-   History tHistoryXS;
+   History tHistoryDX1;
 
    // Signal history filter.
-   HistoryFilterOperator tSmoother(gParms.mHistoryFilterParms1);
+   HistoryFilterOperator tDifferentiator1(gParms.mHistoryFilterParms1);
 
-   // Apply the operator on the history to produce a new history. F:X->XS.
-   tSmoother.operate(tHistoryX,tHistoryXS);
+   // Apply the operator on the history to produce a new history. F:XS->Y,DY.
+   tDifferentiator1.operate(tHistoryX,tHistoryDX1);
 
    //***************************************************************************
    //***************************************************************************
@@ -65,14 +65,13 @@ void DemoOne::doDemo2()
    // Filter the signal history. Differentiator.
 
    // Signal history.
-   History tHistoryY;
-   History tHistoryDY;
+   History tHistoryDX2;
 
    // Signal history filter.
-   HistoryFilterOperator tDifferentiator(gParms.mHistoryFilterParms2);
+   HistoryFilterOperator tDifferentiator2(gParms.mHistoryFilterParms2);
 
    // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator.operate(tHistoryXS,tHistoryY,tHistoryDY);
+   tDifferentiator2.operate(tHistoryX,tHistoryDX2);
 
    //***************************************************************************
    //***************************************************************************
@@ -84,10 +83,10 @@ void DemoOne::doDemo2()
    tStatistics.collectValue(tHistoryX);
    tStatistics.show();
 
-   tStatistics.collectValue(tHistoryXS);
+   tStatistics.collectValue(tHistoryDX1);
    tStatistics.show();
 
-   tStatistics.collectValue(tHistoryDY);
+   tStatistics.collectValue(tHistoryDX2);
    tStatistics.show();
 
    //***************************************************************************
@@ -98,7 +97,7 @@ void DemoOne::doDemo2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryXS,tHistoryDY);
+   tSampleWriter.writeHistory(tHistoryX,tHistoryDX1,tHistoryDX2);
    tSampleWriter.close();
 
    //***************************************************************************
