@@ -7,7 +7,6 @@ filters
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-#include "dspRVector.h"
 
 namespace Dsp
 {
@@ -22,11 +21,14 @@ namespace Filter
 // For documentation, google
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
+// For documentation, google wikipedia
+// "Alpha beta filter"
+//
 
 class AlphaOne
 {
 public:
-   // Initialize with lambda.
+   // Initialize with lambda (tracking index).
    void initialize (double aLambda); 
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
@@ -53,11 +55,13 @@ public:
 // For documentation, google
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
+// For documentation, google wikipedia
+// "Alpha beta filter"
 
 class AlphaTwo
 {
 public:
-   // Initialize with lambda,DT.
+   // Initialize with lambda,DT (tracking index, time increment).
    void initialize(double aLambda,double aDT); 
 
    // Put input value, return filtered output.
@@ -85,11 +89,13 @@ public:
 // For documentation, google
 // "ADA255832" or
 // "FIXED-GAIN, TWO-STAGE ESTIMATORS FOR TRACKING MANEUVERING TARGETS"
+// For documentation, google wikipedia
+// "Alpha beta filter"
 
 class AlphaThree
 {
 public:
-   // Initialize with lambda,DT.
+   // Initialize with lambda,DT (tracking index, time increment).
    void initialize(double aLambda,double aDT); 
 
    // Put input value, return filtered output.
