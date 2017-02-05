@@ -87,7 +87,7 @@ void CmdLineExec::executeNoncausal1(Ris::CmdLineCmd* aCmd)
    gParms.readSection("noncausal1");
 
    TestOne tTestOne;
-   tTestOne.doNoncausal1();
+   tTestOne.doCausal1();
 }
 
 //******************************************************************************
@@ -101,7 +101,7 @@ void CmdLineExec::executeNoncausal12(Ris::CmdLineCmd* aCmd)
    gParms.readSection("noncausal1");
 
    TestOne tTestOne;
-   tTestOne.doNoncausal12();
+   tTestOne.doCausal12();
 }
 
 //******************************************************************************
