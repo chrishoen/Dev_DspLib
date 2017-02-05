@@ -61,6 +61,7 @@ public:
 
    // Apply the linear operator from the input to the output. F:X->Y
    void operate(History& aX,History& aY);
+   void operate(History& aX,History& aY1,History& aY2);
 
    //***************************************************************************
    //***************************************************************************

@@ -146,7 +146,7 @@ SectionBegin Noncausal1
    HistoryGenParms
    {
       GenType                  SinWave
-      Sigma                    0.1
+      Sigma                    0.0
    }
 
    HistoryFilterParms1

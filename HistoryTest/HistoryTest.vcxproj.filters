@@ -100,13 +100,16 @@
     <ClCompile Include="Source\TestOne_noncausal1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestOne_causal2.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryFilterOperator_XY.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterOperator_XYDY.cpp">
+    <ClCompile Include="Source\TestOne_causal12.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryFilterOperator_XY12.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestOne_noncausal12.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

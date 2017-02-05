@@ -22,7 +22,8 @@ public:
    void doRun5();
 
    void doCausal1();
-   void doCausal2();
+   void doCausal12();
    void doNoncausal1();
+   void doNoncausal12();
  };
 

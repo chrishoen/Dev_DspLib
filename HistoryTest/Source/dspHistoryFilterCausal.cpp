@@ -150,10 +150,9 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Apply the linear operator from the input to the output. F:X->Y
-// This is the identity operator.
+// Apply the linear operator from the input to the output. F:X->Y1,,Y2
 
-void HistoryFilterCausal::operate(History& aX, History& aY,History& aDY)
+void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2)
 {
    //***************************************************************************
    // Initialize the filter, based on the parms.
@@ -164,8 +163,8 @@ void HistoryFilterCausal::operate(History& aX, History& aY,History& aDY)
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
 
-   aX.createTimeClone(aY);
-   aX.createTimeClone(aDY);
+   aX.createTimeClone(aY1);
+   aX.createTimeClone(aY2);
 
    //***************************************************************************
    // Execute a loop to filter the input to the output.
@@ -178,40 +177,40 @@ void HistoryFilterCausal::operate(History& aX, History& aY,History& aDY)
    {
       // Read the sample value from the source.
       double tX = aX.mValue[i];
-      double tY = 0.0;
-      double tDY = 0.0;
+      double tY1 = 0.0;
+      double tY2 = 0.0;
       // Filter the value.
       switch (mParms.mCausalType)
       {
       case HistoryFilterParms::cCausalButterworthLP:
       {
-         tY = mButterworth.put(tX);
+         tY1 = mButterworth.put(tX);
       }
       break;
       case HistoryFilterParms::cCausalAlphaOne:
       {
-         tY = mAlphaOne.put(tX);
+         tY1 = mAlphaOne.put(tX);
       }
       break;
       case HistoryFilterParms::cCausalAlphaTwo:
       {
          mAlphaTwo.put(tX);
-         tY  = mAlphaTwo.mXX;
-         tDY = mAlphaTwo.mXV;
+         tY1  = mAlphaTwo.mXX;
+         tY2 = mAlphaTwo.mXV;
 
       }
       break;
       case HistoryFilterParms::cCausalAlphaThree:
       {
          mAlphaThree.put(tX);
-         tY  = mAlphaThree.mXX;
-         tDY = mAlphaThree.mXV;
+         tY1  = mAlphaThree.mXX;
+         tY2 = mAlphaThree.mXV;
       }
       break;
       }
       // Write the filtered value to the destination.
-      aY.mValue[i]  = tY;
-      aDY.mValue[i] = tDY;
+      aY1.mValue[i] = tY1;
+      aY2.mValue[i] = tY2;
    }
 }
 }//namespace

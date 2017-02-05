@@ -173,7 +173,7 @@
     <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp" />
     <ClCompile Include="Source\dspHistoryFilterNoncausal.cpp" />
     <ClCompile Include="Source\dspHistoryFilterOperator_XY.cpp" />
-    <ClCompile Include="Source\dspHistoryFilterOperator_XYDY.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterOperator_XY12.cpp" />
     <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCausal.cpp" />
     <ClCompile Include="Source\dspHistoryGenGen.cpp" />
@@ -193,8 +193,9 @@
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
     <ClCompile Include="Source\TestOne_causal1.cpp" />
-    <ClCompile Include="Source\TestOne_causal2.cpp" />
+    <ClCompile Include="Source\TestOne_causal12.cpp" />
     <ClCompile Include="Source\TestOne_noncausal1.cpp" />
+    <ClCompile Include="Source\TestOne_noncausal12.cpp" />
     <ClCompile Include="Source\TestOne_run1.cpp" />
     <ClCompile Include="Source\TestOne_run2.cpp" />
     <ClCompile Include="Source\TestOne_run3.cpp" />
