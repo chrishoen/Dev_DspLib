@@ -32,7 +32,8 @@ public:
    void executeCausal12    (Ris::CmdLineCmd* aCmd);
    void executeNoncausal1  (Ris::CmdLineCmd* aCmd);
    void executeNoncausal12 (Ris::CmdLineCmd* aCmd);
-   void executeDemo        (Ris::CmdLineCmd* aCmd);
+   void executeDemo1       (Ris::CmdLineCmd* aCmd);
+   void executeDemo2       (Ris::CmdLineCmd* aCmd);
 
    void executeParms (Ris::CmdLineCmd* aCmd);
    void executeBin   (Ris::CmdLineCmd* aCmd);

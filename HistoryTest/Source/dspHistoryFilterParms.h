@@ -78,6 +78,11 @@ public:
    static const int cCausalAlphaTwo        = 3;
    static const int cCausalAlphaThree      = 4;
 
+   // Alpha filter states.
+   static const int cAlphaSelectXX         = 1;
+   static const int cAlphaSelectXV         = 2;
+   static const int cAlphaSelectXA         = 3;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -97,6 +102,8 @@ public:
 
    double  mAlphaDT;        // Alpha filter parameter.
    double  mAlphaLambda;    // Alpha filter parameter.
+
+   int     mAlphaSelect;    // Alpha filter output state selector.
 
    //***************************************************************************
    //***************************************************************************
@@ -131,10 +138,12 @@ public:
    static char* asStringFilterType (int aX);
    static char* asStringFilterMethod (int aX);
    static char* asStringCausalType (int aX);
+   static char* asStringAlphaSelect (int aX);
 
    char* asStringFilterType ();
    char* asStringFilterMethod ();
    char* asStringCausalType ();
+   char* asStringAlphaSelect ();
 
 };
 

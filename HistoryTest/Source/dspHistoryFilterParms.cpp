@@ -51,6 +51,8 @@ void HistoryFilterParms::reset()
 
    mAlphaDT = 0.0;
    mAlphaLambda = 0.0;
+
+   mAlphaSelect = cNone;
 }
 
 //******************************************************************************
@@ -72,6 +74,7 @@ void HistoryFilterParms::show(char* aLabel)
    printf("Fc                 %10.4f\n", mFc);
    printf("AlphaDT            %10.4f\n", mAlphaDT);
    printf("AlphaLambda        %10.4f\n", mAlphaLambda);
+   printf("AlphaSelect        %10s\n",   asStringFilterMethod(mAlphaSelect));
 
    printf("\n");
 }
@@ -91,23 +94,22 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("Fs"))              mFs          = aCmd->argDouble(1);
    if (aCmd->isCmd("Fc"))              mFc          = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaLambda"))     mAlphaLambda = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {
-      if (aCmd->isArgString(1,asStringFilterType(cFilterIdentity)))     mFilterType = cFilterIdentity;
-      if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))     mFilterType = cFilterSmoother;
-      if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))   mFilterType = cFilterFirstDeriv;
-      if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))  mFilterType = cFilterSecondDeriv;
-      if (aCmd->isArgString(1,asStringFilterType(cFilterCausal)))       mFilterType = cFilterCausal;
-      if (aCmd->isArgString(1,asStringFilterType(cFilterNoncausal)))   mFilterType = cFilterNoncausal;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterIdentity)))       mFilterType = cFilterIdentity;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterSmoother)))       mFilterType = cFilterSmoother;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterFirstDeriv)))     mFilterType = cFilterFirstDeriv;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterSecondDeriv)))    mFilterType = cFilterSecondDeriv;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterCausal)))         mFilterType = cFilterCausal;
+      if (aCmd->isArgString(1,asStringFilterType(cFilterNoncausal)))      mFilterType = cFilterNoncausal;
    }
 
    if (aCmd->isCmd("FilterMethod"))
    {
-      if (aCmd->isArgString(1,asStringFilterMethod(cMethodSavGol)))     mFilterMethod = cMethodSavGol;
-      if (aCmd->isArgString(1,asStringFilterMethod(cMethodHolob)))      mFilterMethod = cMethodHolob;
+      if (aCmd->isArgString(1,asStringFilterMethod(cMethodSavGol)))       mFilterMethod = cMethodSavGol;
+      if (aCmd->isArgString(1,asStringFilterMethod(cMethodHolob)))        mFilterMethod = cMethodHolob;
    }
 
    if (aCmd->isCmd("CausalType"))
@@ -116,6 +118,13 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaOne)))       mCausalType = cCausalAlphaOne;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaTwo)))       mCausalType = cCausalAlphaTwo;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaThree)))     mCausalType = cCausalAlphaThree;
+   }
+
+   if (aCmd->isCmd("AlphaSelect"))
+   {
+      if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXX)))       mAlphaSelect = cAlphaSelectXX;
+      if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXV)))       mAlphaSelect = cAlphaSelectXV;
+      if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXA)))       mAlphaSelect = cAlphaSelectXA;
    }
 
    // Pop back out at the end.
@@ -175,6 +184,18 @@ char* HistoryFilterParms::asStringCausalType(int aX)
    }
 }
 
+char* HistoryFilterParms::asStringAlphaSelect(int aX)
+{
+   switch (aX)
+   {
+   case cNone                   : return "None";
+   case cAlphaSelectXX           : return "XX";
+   case cAlphaSelectXV           : return "XV";
+   case cAlphaSelectXA           : return "XA";
+   default : return "UNKNOWN";
+   }
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -192,6 +213,11 @@ char* HistoryFilterParms::asStringFilterMethod()
 char* HistoryFilterParms::asStringCausalType()
 {
    return asStringCausalType(mCausalType);
+}
+
+char* HistoryFilterParms::asStringAlphaSelect()
+{
+   return asStringAlphaSelect(mAlphaSelect);
 }
 
 

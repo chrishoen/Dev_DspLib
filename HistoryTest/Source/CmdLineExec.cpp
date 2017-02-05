@@ -48,7 +48,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("Non1"))   executeNoncausal1(aCmd);
    if (aCmd->isCmd("Non12"))  executeNoncausal12(aCmd);
 
-   if (aCmd->isCmd("Demo"))   executeDemo(aCmd);
+   if (aCmd->isCmd("Demo1"))  executeDemo1(aCmd);
+   if (aCmd->isCmd("Demo2"))  executeDemo2(aCmd);
 }
 
 //******************************************************************************
@@ -58,14 +59,28 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeDemo(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeDemo1(Ris::CmdLineCmd* aCmd)
 {
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection("Demo1");
 
    DemoOne tDemoOne;
-   tDemoOne.doDemo();
+   tDemoOne.doDemo1();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeDemo2(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("Demo2");
+
+   DemoOne tDemoOne;
+   tDemoOne.doDemo2();
 }
 
 //******************************************************************************

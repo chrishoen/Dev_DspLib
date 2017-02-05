@@ -167,7 +167,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\DemoOne.cpp" />
+    <ClCompile Include="Source\DemoOne_demo1.cpp" />
+    <ClCompile Include="Source\DemoOne_demo2.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp" />

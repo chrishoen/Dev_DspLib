@@ -15,6 +15,7 @@ class DemoOne
 {
 public:
    // Demos
-   void doDemo();
+   void doDemo1();
+   void doDemo2();
  };
 

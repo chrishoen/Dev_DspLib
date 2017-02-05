@@ -106,7 +106,10 @@
     <ClCompile Include="Source\dspHistoryFilterOperator_XY12.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DemoOne.cpp">
+    <ClCompile Include="Source\DemoOne_demo1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DemoOne_demo2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
