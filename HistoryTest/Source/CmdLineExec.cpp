@@ -14,7 +14,7 @@
 
 using namespace Dsp;
 
-//**************************************************************Demo****************
+//******************************************************************************
 CmdLineExec::CmdLineExec()
 {
 }
@@ -42,13 +42,13 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN5"))  executeRun5(aCmd);
    if (aCmd->isCmd("RUN6"))  executeRun6(aCmd);
 
-   if (aCmd->isCmd("Cas1"))        executeCausal1(aCmd);
-   if (aCmd->isCmd("Cas12"))       executeCausal12(aCmd);
+   if (aCmd->isCmd("Cas1"))   executeCausal1(aCmd);
+   if (aCmd->isCmd("Cas12"))  executeCausal12(aCmd);
 
-   if (aCmd->isCmd("Non1"))        executeNoncausal1(aCmd);
-   if (aCmd->isCmd("Non12"))       executeNoncausal12(aCmd);
+   if (aCmd->isCmd("Non1"))   executeNoncausal1(aCmd);
+   if (aCmd->isCmd("Non12"))  executeNoncausal12(aCmd);
 
-   if (aCmd->isCmd("Demo"))       executeDemo(aCmd);
+   if (aCmd->isCmd("Demo"))   executeDemo(aCmd);
 }
 
 //******************************************************************************
