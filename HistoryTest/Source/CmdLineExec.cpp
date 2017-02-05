@@ -10,10 +10,11 @@
 #include "dspSignalGen.h"
 #include "dsp_functions.h"
 #include "TestOne.h"
+#include "DemoOne.h"
 
 using namespace Dsp;
 
-//******************************************************************************
+//**************************************************************Demo****************
 CmdLineExec::CmdLineExec()
 {
 }
@@ -46,8 +47,30 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("Non1"))        executeNoncausal1(aCmd);
    if (aCmd->isCmd("Non12"))       executeNoncausal12(aCmd);
+
+   if (aCmd->isCmd("Demo"))       executeDemo(aCmd);
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeDemo(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("Demo1");
+
+   DemoOne tDemoOne;
+   tDemoOne.doDemo();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -324,7 +347,7 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
    Prn::print(0,"PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS ");
-   aCmd->setArgDefault(1,"causal1");
+   aCmd->setArgDefault(1,"demo1");
    gParms.reset();
    gParms.readSection("default");
    gParms.readSection(aCmd->argString(1));

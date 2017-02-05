@@ -152,11 +152,42 @@ SectionBegin Noncausal1
    HistoryFilterParms1
    {
       FilterType               Noncausal
-      CausalType               ButterworthLP
       CausalType               AlphaThree
       FilterOrder              4
       Fs                       100.0
       Fc                       0.25
+
+      AlphaDT                  0.01
+      AlphaLambda              0.0279155
+   }
+
+SectionEnd
+
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
+SectionBegin Demo1
+
+   HistoryGenParms
+   {
+      GenType                  SinWave
+      Sigma                    0.5
+   }
+
+   HistoryFilterParms1
+   {
+      FilterType               Noncausal
+      CausalType               ButterworthLP
+      FilterOrder              4
+      Fs                       100.0
+      Fc                       0.25
+   }
+
+   HistoryFilterParms2
+   {
+      FilterType               Noncausal
+      CausalType               AlphaThree
 
       AlphaDT                  0.01
       AlphaLambda              0.0279155

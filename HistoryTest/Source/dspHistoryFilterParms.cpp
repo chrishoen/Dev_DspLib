@@ -40,18 +40,15 @@ void HistoryFilterParms::reset()
    mFilterType    = cNone;
    mFilterMethod  = cNone;
 
-   mFilterOrder = 1;
-   mH = 1.0;
+   mFilterOrder = 0;
+   mH = 0.0;
 
-   mSelect = 1;
+   mSelect = 0;
 
    mCausalType    = cNone;
-   mFs = 1.0;
-   mFc = 1.0;
+   mFs = 0.0;
+   mFc = 0.0;
 
-   mAlphaP1 = 0.0;
-   mAlphaP2 = 0.0;
-   mAlphaP3 = 0.0;
    mAlphaDT = 0.0;
    mAlphaLambda = 0.0;
 }
@@ -73,9 +70,6 @@ void HistoryFilterParms::show(char* aLabel)
    printf("CausalType      %13s\n",   asStringCausalType(mCausalType));
    printf("Fs                 %10.4f\n", mFs);
    printf("Fc                 %10.4f\n", mFc);
-   printf("AlphaP1            %10.4f\n", mAlphaP1);
-   printf("AlphaP2            %10.4f\n", mAlphaP2);
-   printf("AlphaP3            %10.4f\n", mAlphaP3);
    printf("AlphaDT            %10.4f\n", mAlphaDT);
    printf("AlphaLambda        %10.4f\n", mAlphaLambda);
 
@@ -96,9 +90,6 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("Select"))          mSelect      = aCmd->argInt(1);
    if (aCmd->isCmd("Fs"))              mFs          = aCmd->argDouble(1);
    if (aCmd->isCmd("Fc"))              mFc          = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaP1"))         mAlphaP1     = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaP2"))         mAlphaP2     = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaP3"))         mAlphaP3     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaLambda"))     mAlphaLambda = aCmd->argDouble(1);
