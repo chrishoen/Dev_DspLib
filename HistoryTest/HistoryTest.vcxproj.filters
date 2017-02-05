@@ -19,91 +19,25 @@
     <ClCompile Include="Source\Parms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenBase.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryStatistics.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistory_write.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistory_read.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryLoopClock.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_run1.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenParms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestOne_run2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenZero.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryGaussNoise.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryTextFile.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenRandWave.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenSinWave.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_run3.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenStep.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestOne_run4.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_run5.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterParms.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterCausal.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestOne_causal1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterNoncausal.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterOperator_XY.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestOne_causal12.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspHistoryFilterOperator_XY12.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\DemoOne_demo1.cpp">
@@ -123,67 +57,7 @@
     <ClInclude Include="Source\Parms.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistory.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenBase.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryStatistics.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryLoopClock.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\TestOne.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenParms.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenRandWave.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenZero.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGaussNoise.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryTextFile.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenSinWave.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenStep.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenGen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCDiffBase.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterParms.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterCausal.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterNoncausal.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspHistoryFilterOperator.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DemoOne.h">

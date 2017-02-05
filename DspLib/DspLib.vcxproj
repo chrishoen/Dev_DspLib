@@ -24,6 +24,28 @@
     <ClCompile Include="Source\dspFilterStatistics.cpp" />
     <ClCompile Include="Source\dspFilterAlpha.cpp" />
     <ClCompile Include="Source\dspFilterFilters.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCausal.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffIdentity.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterCDiffSavGol.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterNoncausal.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterOperator_XY.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterOperator_XY12.cpp" />
+    <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
+    <ClCompile Include="Source\dspHistoryGaussNoise.cpp" />
+    <ClCompile Include="Source\dspHistoryGenBase.cpp" />
+    <ClCompile Include="Source\dspHistoryGenGen.cpp" />
+    <ClCompile Include="Source\dspHistoryGenParms.cpp" />
+    <ClCompile Include="Source\dspHistoryGenRandWave.cpp" />
+    <ClCompile Include="Source\dspHistoryGenSinWave.cpp" />
+    <ClCompile Include="Source\dspHistoryGenStep.cpp" />
+    <ClCompile Include="Source\dspHistoryGenZero.cpp" />
+    <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
+    <ClCompile Include="Source\dspHistoryStatistics.cpp" />
+    <ClCompile Include="Source\dspHistoryTextFile.cpp" />
+    <ClCompile Include="Source\dspHistory_read.cpp" />
+    <ClCompile Include="Source\dspHistory_write.cpp" />
     <ClCompile Include="Source\dspLut.cpp" />
     <ClCompile Include="Source\dspPdw.cpp" />
     <ClCompile Include="Source\dspPdwFreeList.cpp" />
@@ -52,6 +74,26 @@
     <ClInclude Include="Source\dspFilterStatistics.h" />
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
+    <ClInclude Include="Source\dspHistory.h" />
+    <ClInclude Include="Source\dspHistoryFilterCausal.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffBase.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffIdentity.h" />
+    <ClInclude Include="Source\dspHistoryFilterCDiffSavGol.h" />
+    <ClInclude Include="Source\dspHistoryFilterNoncausal.h" />
+    <ClInclude Include="Source\dspHistoryFilterOperator.h" />
+    <ClInclude Include="Source\dspHistoryFilterParms.h" />
+    <ClInclude Include="Source\dspHistoryGaussNoise.h" />
+    <ClInclude Include="Source\dspHistoryGenBase.h" />
+    <ClInclude Include="Source\dspHistoryGenGen.h" />
+    <ClInclude Include="Source\dspHistoryGenParms.h" />
+    <ClInclude Include="Source\dspHistoryGenRandWave.h" />
+    <ClInclude Include="Source\dspHistoryGenSinWave.h" />
+    <ClInclude Include="Source\dspHistoryGenStep.h" />
+    <ClInclude Include="Source\dspHistoryGenZero.h" />
+    <ClInclude Include="Source\dspHistoryLoopClock.h" />
+    <ClInclude Include="Source\dspHistoryStatistics.h" />
+    <ClInclude Include="Source\dspHistoryTextFile.h" />
     <ClInclude Include="Source\dspLut.h" />
     <ClInclude Include="Source\dspPdw.h" />
     <ClInclude Include="Source\dspPdwFreeList.h" />
@@ -180,8 +222,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
