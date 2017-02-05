@@ -79,7 +79,143 @@ void HistoryFilterNoncausal::initializeCausalFilter()
    }
    break;
    }
+}
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put an input to the filter, return the output.
+
+void HistoryFilterNoncausal::putToFilterForward(double aInput, double* aOutput)
+{
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      *aOutput = mButterworth.put(aInput);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      *aOutput = mAlphaOne.put(aInput);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      mAlphaTwo.put(aInput);
+      *aOutput = mAlphaTwo.mXX;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      mAlphaThree.put(aInput);
+      *aOutput = mAlphaThree.mXX;
+   }
+   break;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put an input to the filter, return the output.
+
+void HistoryFilterNoncausal::putToFilterBackward(double aInput, double* aOutput)
+{
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      *aOutput = mButterworth.put(aInput);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      *aOutput = mAlphaOne.put(aInput);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      *aOutput = 0.0;
+      mAlphaTwo.put(aInput);
+      switch (mParms.mAlphaSelect)
+      {
+      case HistoryFilterParms::cAlphaSelectXX:
+      {
+         *aOutput = mAlphaTwo.mXX;
+      }
+      break;
+      case HistoryFilterParms::cAlphaSelectXV:
+      {
+         *aOutput = mAlphaTwo.mXV;
+      }
+      break;
+      }
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      *aOutput = 0.0;
+      mAlphaThree.put(aInput);
+      switch (mParms.mAlphaSelect)
+      {
+      case HistoryFilterParms::cAlphaSelectXX:
+      {
+         *aOutput = mAlphaThree.mXX;
+      }
+      break;
+      case HistoryFilterParms::cAlphaSelectXV:
+      {
+         *aOutput = mAlphaThree.mXV;
+      }
+      break;
+      case HistoryFilterParms::cAlphaSelectXA:
+      {
+         *aOutput = mAlphaThree.mXA;
+      }
+      break;
+      }
+   }
+   break;
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put an input to the filter, return the output.
+
+void HistoryFilterNoncausal::putToFilterBackward(double aInput, double* aOutput1, double* aOutput2)
+{
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      *aOutput1 = mButterworth.put(aInput);
+      *aOutput2 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      *aOutput1 = mAlphaOne.put(aInput);
+      *aOutput2 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      mAlphaTwo.put(aInput);
+      *aOutput1 = mAlphaTwo.mXX;
+      *aOutput2 = mAlphaTwo.mXV;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      mAlphaThree.put(aInput);
+      *aOutput1 = mAlphaThree.mXX;
+      *aOutput2 = mAlphaThree.mXV;
+   }
+   break;
+   }
 }
 
 //******************************************************************************
@@ -125,29 +261,7 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
       double tX = aX.mValue[i];
       double tY = 0.0;
       // Filter the value.
-      switch (mParms.mCausalType)
-      {
-      case HistoryFilterParms::cCausalButterworthLP:
-      {
-         tY = mButterworth.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaOne:
-      {
-         tY = mAlphaOne.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaTwo:
-      {
-         tY = mAlphaTwo.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaThree:
-      {
-         tY = mAlphaThree.put(tX);
-      }
-      break;
-      }
+      putToFilterForward(tX,&tY);
       // Write the filtered value to the temp forward array.
       tYForward[i] = tY;
    }
@@ -163,29 +277,7 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY)
       double tX = tYForward[i];
       double tY = 0.0;
       // Filter the value.
-      switch (mParms.mCausalType)
-      {
-      case HistoryFilterParms::cCausalButterworthLP:
-      {
-         tY = mButterworth.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaOne:
-      {
-         tY = mAlphaOne.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaTwo:
-      {
-         tY = mAlphaTwo.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaThree:
-      {
-         tY = mAlphaThree.put(tX);
-      }
-      break;
-      }
+      putToFilterBackward(tX,&tY);
       // Write the filtered value to the destination.
       aY.mValue[i] = tY;
    }
@@ -239,29 +331,7 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY1, History& aY2)
       double tX = aX.mValue[i];
       double tY = 0.0;
       // Filter the value.
-      switch (mParms.mCausalType)
-      {
-      case HistoryFilterParms::cCausalButterworthLP:
-      {
-         tY = mButterworth.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaOne:
-      {
-         tY = mAlphaOne.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaTwo:
-      {
-         tY = mAlphaTwo.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaThree:
-      {
-         tY = mAlphaThree.put(tX);
-      }
-      break;
-      }
+      putToFilterForward(tX,&tY);
       // Write the filtered value to the temp forward array.
       tYForward[i] = tY;
    }
@@ -279,33 +349,7 @@ void HistoryFilterNoncausal::operate(History& aX, History& aY1, History& aY2)
       double tY1 = 0.0;
       double tY2 = 0.0;
       // Filter the value.
-      switch (mParms.mCausalType)
-      {
-      case HistoryFilterParms::cCausalButterworthLP:
-      {
-         tY1 = mButterworth.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaOne:
-      {
-         tY1 = mAlphaOne.put(tX);
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaTwo:
-      {
-         mAlphaTwo.put(tX);
-         tY1 = mAlphaTwo.mXX;
-         tY2 = mAlphaTwo.mXV;
-      }
-      break;
-      case HistoryFilterParms::cCausalAlphaThree:
-      {
-         mAlphaThree.put(tX);
-         tY1 = mAlphaThree.mXX;
-         tY2 = mAlphaThree.mXV;
-      }
-      break;
-      }
+      putToFilterBackward(tX,&tY1,&tY2);
       // Write the filtered value to the destination.
       aY1.mValue[i] = tY1;
       aY2.mValue[i] = tY2;

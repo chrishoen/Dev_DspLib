@@ -74,7 +74,7 @@ void HistoryFilterParms::show(char* aLabel)
    printf("Fc                 %10.4f\n", mFc);
    printf("AlphaDT            %10.4f\n", mAlphaDT);
    printf("AlphaLambda        %10.4f\n", mAlphaLambda);
-   printf("AlphaSelect        %10s\n",   asStringFilterMethod(mAlphaSelect));
+   printf("AlphaSelect        %10s\n",   asStringAlphaSelect(mAlphaSelect));
 
    printf("\n");
 }

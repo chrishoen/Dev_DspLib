@@ -72,6 +72,10 @@ public:
 
    // Initialize the causal filter, based on the parms.
    void initializeCausalFilter();
+
+   // Put an input to the filter, return the output.
+   void putToFilter(double aInput,double* aOutput);
+   void putToFilter(double aInput,double* aOutput1,double* aOutput2);
 };
 
 //******************************************************************************
