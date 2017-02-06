@@ -2,6 +2,7 @@
 
 /*==============================================================================
 ==============================================================================*/
+#include "dspGoldSearch.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -13,9 +14,9 @@
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class that provides a golden section search.
+// This is a stub for the golden section search.
 
-class DelayEstimator
+class DelayStub : public Dsp::GoldSearchBase
 {
 public:
 
@@ -33,13 +34,16 @@ public:
 
    double mA,mB,mC,mD;
 
+   double mXDelay;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Constructor and initialization.
 
    // Constructor.
-   DelayEstimator();
+   typedef Dsp::GoldSearchBase BaseClass;
+   DelayStub();
    void reset();
 
    //***************************************************************************
@@ -48,15 +52,10 @@ public:
    // Write to the history.
 
    // Perform the search.
-   double search(
-      double aXAinitial,
-      double aXBinitial,
-      double aTolerance,
-      double aMaxIterations);
+   double search();
 
-
-   // Abstract f(x), supplied by inheritors.
-   virtual double function(double aX)=0;
+   // f(x).
+   double function(double aX) override;
       
    //***************************************************************************
    //***************************************************************************

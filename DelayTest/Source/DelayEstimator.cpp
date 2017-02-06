@@ -38,7 +38,7 @@ double DelayEstimator::search(
       double aXAinitial,
       double aXBinitial,
       double aTolerance,
-      double aMaxIterate)
+      double aMaxIterations)
 {
   double a   = aXAinitial;
   double b   = aXBinitial;
@@ -60,7 +60,7 @@ double DelayEstimator::search(
         return x;
      }
 
-     if (++tCount > aMaxIterate)
+     if (++tCount > aMaxIterations)
      {
         double x = (b + a) / 2;
         printf("GSS FAIL\n");

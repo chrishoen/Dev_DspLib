@@ -14,8 +14,10 @@ SectionBegin default
 
    Outputfile C:\Alpha\Data\SignalHistory.csv
 
-   HistoryMaxSamples           10000
-   HistoryDeltaT               1.0
+   XAInitial                  -4.0
+   XBInitial                   4.0
+   Tolerance                   0.01
+   MaxIterations               100
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
@@ -39,17 +41,6 @@ SectionBegin default
    }
 
    //-----------------------------------------------------------------
-   // Signal Filter Parms.
-
-   HistoryFilterParms1
-   {
-   }
-
-   HistoryFilterParms2
-   {
-   }
-
-   //-----------------------------------------------------------------
    // Integrity check
 
    Code2 102
@@ -60,15 +51,7 @@ SectionEnd
 //********************************************************************
 //********************************************************************
 
-SectionBegin run1
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin run2
+SectionBegin delay2
 
    HistoryGenParms
    {
@@ -82,150 +65,6 @@ SectionBegin run2
       FilterOrder              11
       H                        0.01
       Select                   1
-   }
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin run3
-
-   HistoryFilterParms1
-   {
-      FilterType               Smoother
-      FilterMethod             SavGol
-      FilterOrder              31
-      H                        0.01
-      Select                   1
-   }
-
-   HistoryFilterParms2
-   {
-      FilterType               FirstDeriv
-      FilterMethod             SavGol
-      FilterOrder              21
-      H                        0.01
-      Select                   1
-   }
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin Causal1
-
-   HistoryGenParms
-   {
-      Sigma                    0.0
-   }
-
-   HistoryFilterParms1
-   {
-      FilterType               Causal
-      CausalType               AlphaThree
-      FilterOrder              4
-      Fs                       100.0
-      Fc                       0.25
-
-      AlphaDT                  0.01
-      AlphaLambda              0.0279155
-   }
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin Noncausal1
-
-   HistoryGenParms
-   {
-      GenType                  SinWave
-      Sigma                    0.0
-   }
-
-   HistoryFilterParms1
-   {
-      FilterType               Noncausal
-      CausalType               AlphaThree
-      FilterOrder              4
-      Fs                       100.0
-      Fc                       0.25
-
-      AlphaDT                  0.01
-      AlphaLambda              0.0279155
-   }
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin Demo1
-
-   HistoryGenParms
-   {
-      GenType                  SinWave
-      Sigma                    0.5
-   }
-
-   HistoryFilterParms1
-   {
-      FilterType               Noncausal
-      CausalType               ButterworthLP
-      FilterOrder              4
-      Fs                       100.0
-      Fc                       0.25
-   }
-
-   HistoryFilterParms2
-   {
-      FilterType               Noncausal
-      CausalType               AlphaThree
-
-      AlphaDT                  0.01
-      AlphaLambda              0.0279155
-      AlphaSelect              XV
-   }
-
-SectionEnd
-
-//********************************************************************
-//********************************************************************
-//********************************************************************
-
-SectionBegin Demo2
-
-   HistoryGenParms
-   {
-      GenType                  SinWave
-      Sigma                    0.0
-   }
-
-
-   HistoryFilterParms1
-   {
-      FilterType               SecondDeriv
-      FilterMethod             SavGol
-      FilterOrder              21
-      H                        0.01
-      Select                   1
-   }
-
-   HistoryFilterParms2
-   {
-      FilterType               Noncausal
-      CausalType               AlphaThree
-
-      AlphaDT                  0.01
-      AlphaLambda              0.0279155
-      AlphaSelect              XA
    }
 
 SectionEnd

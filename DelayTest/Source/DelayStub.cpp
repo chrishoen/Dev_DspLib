@@ -10,12 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
-#include "dsp_math.h"
-#include "dspStatistics.h"
-#include "dspGoldSearch.h"
-
-namespace Dsp
-{
+#include "DelayStub.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -25,12 +20,12 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-GoldSearchBase::GoldSearchBase()
+DelayStub::DelayStub()
 {
    reset();
 }
 
-void GoldSearchBase::reset()
+void DelayStub::reset()
 {
 }
 
@@ -39,52 +34,24 @@ void GoldSearchBase::reset()
 //******************************************************************************
 // Perform the search.
 
-double GoldSearchBase::search(
-      double aXAinitial,
-      double aXBinitial,
-      double aTolerance,
-      double aMaxIterations)
+double DelayStub::search()
 {
-  double a   = aXAinitial;
-  double b   = aXBinitial;
-  double tol = aTolerance;
+   mXDelay = BaseClass::search(
+      mXAinitial,
+      mXBinitial,
+      mTolerance,
+      mMaxIterations);
 
-  double gr = (sqrt(5) + 1) / 2;
-
-  double c = b - (b - a) / gr;
-  double d = a + (b - a) / gr; 
-
-  int tCount = 0;
-
-  while (1)
-  {
-     if (fabs(c - d) <= tol)
-     {
-        double x = (b + a) / 2;
-        printf("GSS PASS %d $$ %10.6f\n", tCount,x);
-        return x;
-     }
-
-     if (++tCount > aMaxIterations)
-     {
-        double x = (b + a) / 2;
-        printf("GSS FAIL\n");
-        return 0.0;
-     }
-
-     if (function(c) < function(d))
-     {
-        b = d;
-     }
-     else
-     {
-        a = c;
-     }
-
-     c = b - (b - a) / gr;
-     d = a + (b - a) / gr; 
-  }
-
+   return mXDelay;
 }
-   
-}//namespace
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Perform the search.
+double DelayStub::function(double aX)
+{
+   return pow(aX-2,2) + 1;
+}
+
+

@@ -31,6 +31,9 @@
     <ClCompile Include="Source\DelayOne_delay2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DelayStub.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -49,6 +52,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DelayOne.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DelayStub.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

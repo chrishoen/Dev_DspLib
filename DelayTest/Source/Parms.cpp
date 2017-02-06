@@ -40,9 +40,10 @@ void Parms::reset()
 
    mOutputFile[0]=0;
 
-   mHistoryMaxSamples=0;
-   mHistoryDeltaT=0.0;
-
+   mXAInitial = 0.0;
+   mXBInitial = 0.0;
+   mTolerance = 0.0;
+   mMaxIterations = 0;
 }
 
 //******************************************************************************
@@ -58,8 +59,10 @@ void Parms::show()
    printf("Code2              %10d\n",mCode2);
 
    printf("OutputFile         %10s\n",  mOutputFile);
-   printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
-   printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
+   printf("XAInitial          %10.4f\n",mXAInitial);
+   printf("XBInitial          %10.4f\n",mXBInitial);
+   printf("Tolerance          %10.4f\n",mTolerance);
+   printf("MaxIterations      %10d\n",  mMaxIterations);
    printf("\n");
 
    mHistoryGenParms.show("Gen");
@@ -87,12 +90,14 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
 
-   if(aCmd->isCmd("HistoryGenParms"))    nestedPush(aCmd, &mHistoryGenParms);
+   if(aCmd->isCmd("HistoryGenParms"))      nestedPush(aCmd, &mHistoryGenParms);
    if(aCmd->isCmd("HistoryFilterParms1"))  nestedPush(aCmd, &mHistoryFilterParms1);
    if(aCmd->isCmd("HistoryFilterParms2"))  nestedPush(aCmd, &mHistoryFilterParms2);
 
-   if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
-   if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
+   if(aCmd->isCmd("XAInitial" ))         mXAInitial     = aCmd->argDouble(1);
+   if(aCmd->isCmd("XBInitial" ))         mXBInitial     = aCmd->argDouble(1);
+   if(aCmd->isCmd("Tolerance" ))         mTolerance     = aCmd->argDouble(1);
+   if(aCmd->isCmd("MaxIterations" ))     mMaxIterations = aCmd->argInt(1);
 }
 
 //******************************************************************************

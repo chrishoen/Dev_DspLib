@@ -32,7 +32,7 @@ public:
    double mXBinitial;
 
    double mTolerance;
-   int    mMaxIterate;
+   int    mMaxIterations;
 
    double mA,mB,mC,mD;
 
@@ -55,7 +55,7 @@ public:
       double aXAinitial,
       double aXBinitial,
       double aTolerance,
-      double aMaxIterate);
+      double aMaxIterations);
 
 
    // Abstract f(x), supplied by inheritors.
