@@ -27,6 +27,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RandomMotion", "RandomMotio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{058D0B03-84D9-42AC-8B38-1F665BE13EDD}"
 	ProjectSection(SolutionItems) = preProject
+		Files\Delay_Parms.txt = Files\Delay_Parms.txt
 		Files\FilterCo.txt = Files\FilterCo.txt
 		Files\History_Parms.txt = Files\History_Parms.txt
 		Files\RandomMotion_Parms.txt = Files\RandomMotion_Parms.txt
@@ -35,6 +36,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Butterworth", "Butterworth\Butterworth.vcxproj", "{646835A9-405E-4D4E-A5B5-155B780211C1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HistoryTest", "HistoryTest\HistoryTest.vcxproj", "{78329633-7706-43D7-A1B8-4314D41374AA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DelayTest", "DelayTest\DelayTest.vcxproj", "{6F70377E-0918-45EE-8A8F-6D91CD164576}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -230,6 +233,20 @@ Global
 		{78329633-7706-43D7-A1B8-4314D41374AA}.Release|Win32.Build.0 = Release|Win32
 		{78329633-7706-43D7-A1B8-4314D41374AA}.Release|x64.ActiveCfg = Release|x64
 		{78329633-7706-43D7-A1B8-4314D41374AA}.Release|x64.Build.0 = Release|x64
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|Win32.Build.0 = Debug|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|x64.ActiveCfg = Debug|x64
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Debug|x64.Build.0 = Debug|x64
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|Win32.ActiveCfg = Release|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|Win32.Build.0 = Release|Win32
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|x64.ActiveCfg = Release|x64
+		{6F70377E-0918-45EE-8A8F-6D91CD164576}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
