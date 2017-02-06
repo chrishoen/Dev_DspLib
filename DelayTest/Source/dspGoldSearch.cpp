@@ -59,8 +59,7 @@ double GoldSearchBase::search(
   printf("GSS %10.6f %10.6f %10.6f %10.6f %10.6f\n", a,b,c,d,tol);
   printf("\n");
 
-  double fc_1;
-  double fd_1;
+  double fm_1;
 
   while (1)
   {
@@ -82,26 +81,18 @@ double GoldSearchBase::search(
      double fc = function(c);
      double fd = function(d);
 
+     // Check in case not unimodal.
+     double fm = fc < fd ? fc : fd;
      if (tCount > 1)
      {
-         bool abort = false;
-         if (fc < fd) 
-         {
-            if (fc > fc_1) abort = true;
-         }
-         else
-         {
-            if (fd > fd_1) abort = true;
-         }
-         if (abort)
+         if (fm > fm_1) 
          {
             double x = (b + a) / 2;
             printf("GSS ABORT %d $$ %10.6f\n", tCount,x);
             return x;
          }
      }
-     fc_1 = fc;
-     fd_1 = fd;
+     fm_1 = fm;
 
      if (fc < fd)
      {
