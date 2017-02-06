@@ -59,6 +59,9 @@ double GoldSearchBase::search(
   printf("GSS %10.6f %10.6f %10.6f %10.6f %10.6f\n", a,b,c,d,tol);
   printf("\n");
 
+  double fc_1;
+  double fd_1;
+
   while (1)
   {
      printf("GSS %3d $$ %10.6f %10.6f %10.6f %10.6f\n", tCount,a,b,c,d);
@@ -76,7 +79,31 @@ double GoldSearchBase::search(
         return 0.0;
      }
 
-     if (function(c) < function(d))
+     double fc = function(c);
+     double fd = function(d);
+
+     if (tCount > 1)
+     {
+         bool abort = false;
+         if (fc < fd) 
+         {
+            if (fc > fc_1) abort = true;
+         }
+         else
+         {
+            if (fd > fd_1) abort = true;
+         }
+         if (abort)
+         {
+            double x = (b + a) / 2;
+            printf("GSS ABORT %d $$ %10.6f\n", tCount,x);
+            return x;
+         }
+     }
+     fc_1 = fc;
+     fd_1 = fd;
+
+     if (fc < fd)
      {
         b = d;
      }
