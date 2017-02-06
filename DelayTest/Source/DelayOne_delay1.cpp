@@ -35,7 +35,7 @@ void DelayOne::doDelay1()
    DelayStub tDelayStub;
    tDelayStub.mXAinitial     = gParms.mXAInitial;
    tDelayStub.mXBinitial     = gParms.mXBInitial;
-   tDelayStub.mTolerance     = gParms.mXAInitial;
+   tDelayStub.mTolerance     = gParms.mTolerance;
    tDelayStub.mMaxIterations = gParms.mMaxIterations;
 
    double tDelay = tDelayStub.search();

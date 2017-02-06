@@ -43,7 +43,7 @@ double GoldSearchBase::search(
       double aXAinitial,
       double aXBinitial,
       double aTolerance,
-      double aMaxIterations)
+      int    aMaxIterations)
 {
   double a   = aXAinitial;
   double b   = aXBinitial;
@@ -56,8 +56,13 @@ double GoldSearchBase::search(
 
   int tCount = 0;
 
+  printf("GSS %10.6f %10.6f %10.6f %10.6f %10.6f\n", a,b,c,d,tol);
+  printf("\n");
+
   while (1)
   {
+     printf("GSS %3d $$ %10.6f %10.6f %10.6f %10.6f\n", tCount,a,b,c,d);
+
      if (fabs(c - d) <= tol)
      {
         double x = (b + a) / 2;
@@ -67,7 +72,6 @@ double GoldSearchBase::search(
 
      if (++tCount > aMaxIterations)
      {
-        double x = (b + a) / 2;
         printf("GSS FAIL\n");
         return 0.0;
      }

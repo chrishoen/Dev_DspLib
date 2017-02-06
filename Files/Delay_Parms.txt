@@ -16,7 +16,7 @@ SectionBegin default
 
    XAInitial                  -4.0
    XBInitial                   4.0
-   Tolerance                   0.01
+   Tolerance                   0.001
    MaxIterations               100
 
    //-----------------------------------------------------------------

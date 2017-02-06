@@ -55,7 +55,7 @@ public:
       double aXAinitial,
       double aXBinitial,
       double aTolerance,
-      double aMaxIterations);
+      int MaxIterations);
 
 
    // Abstract f(x), supplied by inheritors.

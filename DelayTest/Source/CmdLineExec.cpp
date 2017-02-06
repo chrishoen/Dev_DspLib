@@ -33,8 +33,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("GO5"))   executeGo5(aCmd);
    if (aCmd->isCmd("Parms")) executeParms(aCmd);
 
-   if (aCmd->isCmd("Delay1"))  executeDelay1(aCmd);
-   if (aCmd->isCmd("Delay2"))  executeDelay2(aCmd);
+   if (aCmd->isCmd("Del1"))  executeDelay1(aCmd);
+   if (aCmd->isCmd("Del2"))  executeDelay2(aCmd);
 }
 
 //******************************************************************************
