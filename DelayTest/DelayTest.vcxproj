@@ -167,21 +167,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\DelayEstimator.cpp" />
     <ClCompile Include="Source\DelayOne_delay1.cpp" />
     <ClCompile Include="Source\DelayOne_delay2.cpp" />
     <ClCompile Include="Source\DelayStub.cpp" />
     <ClCompile Include="Source\dspGoldSearch.cpp" />
+    <ClCompile Include="Source\dspHistoryDelayEstimator.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
-    <ClInclude Include="Source\DelayEstimator.h" />
     <ClInclude Include="Source\DelayOne.h" />
     <ClInclude Include="Source\DelayStub.h" />
     <ClInclude Include="Source\dspGoldSearch.h" />
+    <ClInclude Include="Source\dspHistoryDelayEstimator.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Parms.h" />
   </ItemGroup>

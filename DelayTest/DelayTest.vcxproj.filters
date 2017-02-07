@@ -22,9 +22,6 @@
     <ClCompile Include="Source\dspGoldSearch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DelayEstimator.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DelayOne_delay1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -32,6 +29,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\DelayStub.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryDelayEstimator.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,13 +48,13 @@
     <ClInclude Include="Source\dspGoldSearch.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DelayEstimator.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\DelayOne.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DelayStub.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryDelayEstimator.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

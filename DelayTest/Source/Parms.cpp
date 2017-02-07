@@ -44,6 +44,13 @@ void Parms::reset()
    mXBInitial = 0.0;
    mTolerance = 0.0;
    mMaxIterations = 0;
+
+   mDelayEstimatorTestDelay = 0.0;
+   mDelayEstimatorSearchDelay = 0.0;
+   mDelayEstimatorTolerance = 0.0;
+   mDelayEstimatorMaxIterations = 0;
+   mDelayEstimatorDeltaTime = 0.0;
+
 }
 
 //******************************************************************************
@@ -59,10 +66,17 @@ void Parms::show()
    printf("Code2              %10d\n",mCode2);
 
    printf("OutputFile         %10s\n",  mOutputFile);
-   printf("XAInitial          %10.4f\n",mXAInitial);
-   printf("XBInitial          %10.4f\n",mXBInitial);
-   printf("Tolerance          %10.4f\n",mTolerance);
+   printf("XAInitial          %10.6f\n",mXAInitial);
+   printf("XBInitial          %10.6f\n",mXBInitial);
+   printf("Tolerance          %10.6f\n",mTolerance);
    printf("MaxIterations      %10d\n",  mMaxIterations);
+
+   printf("DelayEstimatorTestDelay       %10.6f\n",mDelayEstimatorTestDelay);
+   printf("DelayEstimatorSearchDelay     %10.6f\n",mDelayEstimatorSearchDelay);
+   printf("DelayEstimatorTolerance       %10.6f\n",mDelayEstimatorTolerance);
+   printf("DelayEstimatorMaxIterations   %10d\n",  mDelayEstimatorMaxIterations);
+   printf("DelayEstimatorDeltaTime       %10.6f\n",mDelayEstimatorDeltaTime);
+
    printf("\n");
 
    mHistoryGenParms.show("Gen");
@@ -98,6 +112,13 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("XBInitial" ))         mXBInitial     = aCmd->argDouble(1);
    if(aCmd->isCmd("Tolerance" ))         mTolerance     = aCmd->argDouble(1);
    if(aCmd->isCmd("MaxIterations" ))     mMaxIterations = aCmd->argInt(1);
+
+
+   if(aCmd->isCmd("DelayEstimatorTestDelay" ))     mDelayEstimatorTestDelay     = aCmd->argDouble(1);
+   if(aCmd->isCmd("DelayEstimatorSearchDelay" ))   mDelayEstimatorSearchDelay   = aCmd->argDouble(1);
+   if(aCmd->isCmd("DelayEstimatorTolerance" ))     mDelayEstimatorTolerance     = aCmd->argDouble(1);
+   if(aCmd->isCmd("DelayEstimatorMaxIterations" )) mDelayEstimatorMaxIterations = aCmd->argInt(1);
+   if(aCmd->isCmd("DelayEstimatorDeltaTime" ))     mDelayEstimatorDeltaTime     = aCmd->argDouble(1);
 }
 
 //******************************************************************************

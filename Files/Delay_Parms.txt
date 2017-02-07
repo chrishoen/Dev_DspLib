@@ -14,10 +14,16 @@ SectionBegin default
 
    Outputfile C:\Alpha\Data\SignalHistory.csv
 
-   XAInitial                  -4.0
-   XBInitial                   4.0
-   Tolerance                   0.001
-   MaxIterations               100
+   XAInitial                    -4.0
+   XBInitial                     4.0
+   Tolerance                     0.001
+   MaxIterations                 100
+
+   DelayEstimatorTestDelay       0.025
+   DelayEstimatorSearchDelay     0.05
+   DelayEstimatorTolerance       0.001
+   DelayEstimatorMaxIterations   100
+   DelayEstimatorDeltaTime       0.01
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
