@@ -22,8 +22,8 @@ SectionBegin default
    DelayEstimatorTestDelay       0.025
    DelayEstimatorSearchDelay     0.05
    DelayEstimatorTolerance       0.001
-   DelayEstimatorMaxIterations   100
-   DelayEstimatorDeltaTime       0.01
+   DelayEstimatorMaxIterations   50
+   DelayEstimatorFs              100.0
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.

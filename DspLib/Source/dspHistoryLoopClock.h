@@ -49,7 +49,14 @@ public:
    // Constructor and parameter initialization.
 
    // Constructor.
-   HistoryLoopClock(double aDuration, double aFs);
+   HistoryLoopClock(
+      double aDuration, 
+      double aFs);
+
+   HistoryLoopClock(
+      double aBeginTime, 
+      double aEndTime, 
+      double aFs);
 
    // Advance forward through time, updating the time and count variables.
    // Return false if the time duration has been reached. 

@@ -81,7 +81,7 @@ public:
    double mDelayEstimatorSearchDelay;
    double mDelayEstimatorTolerance;
    int    mDelayEstimatorMaxIterations;
-   double mDelayEstimatorDeltaTime;
+   double mDelayEstimatorFs;
 
    //***************************************************************************
    //***************************************************************************

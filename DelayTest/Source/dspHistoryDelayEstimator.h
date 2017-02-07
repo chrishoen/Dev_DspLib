@@ -33,6 +33,7 @@ public:
 
    History* mHistory1;
    History* mHistory2;
+   double   mSearchFs;
 
    // Search variables.
    double mDelayEstimate;
@@ -56,9 +57,10 @@ public:
    double search(
       History* aHistory1,
       History* aHistory2,
-      double   amSearchDelay,
-      double   aTolerance,
-      int      aMaxIterations);
+      double   aSearchFs,
+      double   aSearchDelay,
+      double   aSearchTolerance,
+      int      aSearchMaxIterations);
 
    // f(x). Error function.
    double function(double aX) override;

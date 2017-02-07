@@ -33,6 +33,22 @@ HistoryLoopClock::HistoryLoopClock(double aDuration, double aFs)
    mMaxCount = (int)(mDuration * mFs);
 }
 
+HistoryLoopClock::HistoryLoopClock(
+      double aBeginTime, 
+      double aEndTime, 
+      double aFs)
+{
+   mDuration = aEndTime - aBeginTime;
+   mFs       = aFs;
+
+   mTime     = 0.0;
+   mCount    = 0;
+
+   mTs = 1.0 / mFs;
+   mMaxCount = (int)(mDuration * mFs);
+}
+
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

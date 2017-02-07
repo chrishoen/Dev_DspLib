@@ -49,7 +49,7 @@ void Parms::reset()
    mDelayEstimatorSearchDelay = 0.0;
    mDelayEstimatorTolerance = 0.0;
    mDelayEstimatorMaxIterations = 0;
-   mDelayEstimatorDeltaTime = 0.0;
+   mDelayEstimatorFs = 0.0;
 
 }
 
@@ -75,7 +75,7 @@ void Parms::show()
    printf("DelayEstimatorSearchDelay     %10.6f\n",mDelayEstimatorSearchDelay);
    printf("DelayEstimatorTolerance       %10.6f\n",mDelayEstimatorTolerance);
    printf("DelayEstimatorMaxIterations   %10d\n",  mDelayEstimatorMaxIterations);
-   printf("DelayEstimatorDeltaTime       %10.6f\n",mDelayEstimatorDeltaTime);
+   printf("DelayEstimatorFs              %10.6f\n",mDelayEstimatorFs);
 
    printf("\n");
 
@@ -118,7 +118,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("DelayEstimatorSearchDelay" ))   mDelayEstimatorSearchDelay   = aCmd->argDouble(1);
    if(aCmd->isCmd("DelayEstimatorTolerance" ))     mDelayEstimatorTolerance     = aCmd->argDouble(1);
    if(aCmd->isCmd("DelayEstimatorMaxIterations" )) mDelayEstimatorMaxIterations = aCmd->argInt(1);
-   if(aCmd->isCmd("DelayEstimatorDeltaTime" ))     mDelayEstimatorDeltaTime     = aCmd->argDouble(1);
+   if(aCmd->isCmd("DelayEstimatorFs" ))            mDelayEstimatorFs            = aCmd->argDouble(1);
 }
 
 //******************************************************************************
