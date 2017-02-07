@@ -45,13 +45,14 @@ void Parms::reset()
    mTolerance = 0.0;
    mMaxIterations = 0;
 
-   mDelayEstimatorTestDelay = 0.0;
+   mTestDelay = 0.0;
+   mTestSigma = 0.0;
+
    mDelayEstimatorSearchDelay = 0.0;
    mDelayEstimatorTolerance = 0.0;
    mDelayEstimatorMaxIterations = 0;
    mDelayEstimatorFs = 0.0;
 
-   mTestSigma = 0.0;
 }
 
 //******************************************************************************
@@ -72,12 +73,13 @@ void Parms::show()
    printf("Tolerance          %10.6f\n",mTolerance);
    printf("MaxIterations      %10d\n",  mMaxIterations);
 
-   printf("DelayEstimatorTestDelay       %10.6f\n",mDelayEstimatorTestDelay);
+   printf("TestDelay                     %10.6f\n",mTestDelay);
+   printf("TestSigma                     %10.6f\n",mTestSigma);
+
    printf("DelayEstimatorSearchDelay     %10.6f\n",mDelayEstimatorSearchDelay);
    printf("DelayEstimatorTolerance       %10.6f\n",mDelayEstimatorTolerance);
    printf("DelayEstimatorMaxIterations   %10d\n",  mDelayEstimatorMaxIterations);
    printf("DelayEstimatorFs              %10.6f\n",mDelayEstimatorFs);
-   printf("TestSigma                     %10.6f\n",mTestSigma);
 
    printf("\n");
 
@@ -116,12 +118,13 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("MaxIterations" ))     mMaxIterations = aCmd->argInt(1);
 
 
-   if(aCmd->isCmd("DelayEstimatorTestDelay" ))     mDelayEstimatorTestDelay     = aCmd->argDouble(1);
+   if(aCmd->isCmd("TestDelay" ))                   mTestDelay                   = aCmd->argDouble(1);
+   if(aCmd->isCmd("TestSigma" ))                   mTestSigma                   = aCmd->argDouble(1);
+
    if(aCmd->isCmd("DelayEstimatorSearchDelay" ))   mDelayEstimatorSearchDelay   = aCmd->argDouble(1);
    if(aCmd->isCmd("DelayEstimatorTolerance" ))     mDelayEstimatorTolerance     = aCmd->argDouble(1);
    if(aCmd->isCmd("DelayEstimatorMaxIterations" )) mDelayEstimatorMaxIterations = aCmd->argInt(1);
    if(aCmd->isCmd("DelayEstimatorFs" ))            mDelayEstimatorFs            = aCmd->argDouble(1);
-   if(aCmd->isCmd("TestSigma" ))                   mTestSigma                   = aCmd->argDouble(1);
 }
 
 //******************************************************************************

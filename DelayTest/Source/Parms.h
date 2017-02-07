@@ -77,13 +77,13 @@ public:
    double mTolerance;
    int    mMaxIterations;
 
-   double mDelayEstimatorTestDelay;
+   double mTestDelay;
+   double mTestSigma;
+
    double mDelayEstimatorSearchDelay;
    double mDelayEstimatorTolerance;
    int    mDelayEstimatorMaxIterations;
    double mDelayEstimatorFs;
-
-   double mTestSigma;
 
    //***************************************************************************
    //***************************************************************************

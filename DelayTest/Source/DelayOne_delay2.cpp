@@ -37,41 +37,20 @@ void DelayOne::doDelay2()
    // Generate two signal histories.
 
    // Signal history.
-   History tHistoryX1;
-   History tHistoryX2;
+   History tHistory1;
+   History tHistory2;
 
    // Generate two of the same signal.
    HistoryGenGen tGen1(gParms.mHistoryGenParms);
-   HistoryGenGen tGen2(gParms.mHistoryGenParms);
+   tGen1.generateHistory(tHistory1);
+   tHistory1.createClone(tHistory2);
 
+   // Add noise to both.
+   tHistory1.addNoise(gParms.mTestSigma);
+   tHistory2.addNoise(gParms.mTestSigma);
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Filter the signal history. Differentiator.
-
-   // Signal history.
-   History tHistoryDX1;
-
-   // Signal history filter.
-   HistoryFilterOperator tDifferentiator1(gParms.mHistoryFilterParms1);
-
-   // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator1.operate(tHistoryX,tHistoryDX1);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Filter the signal history. Differentiator.
-
-   // Signal history.
-   History tHistoryDX2;
-
-   // Signal history filter.
-   HistoryFilterOperator tDifferentiator2(gParms.mHistoryFilterParms2);
-
-   // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator2.operate(tHistoryX,tHistoryDX2);
+   // Add time offset to number two.
+   tHistory2.addDeltaTime(gParms.mTestDelay);
 
    //***************************************************************************
    //***************************************************************************
@@ -80,13 +59,10 @@ void DelayOne::doDelay2()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistoryX);
+   tStatistics.collectValue(tHistory1);
    tStatistics.show();
 
-   tStatistics.collectValue(tHistoryDX1);
-   tStatistics.show();
-
-   tStatistics.collectValue(tHistoryDX2);
+   tStatistics.collectValue(tHistory2);
    tStatistics.show();
 
    //***************************************************************************
@@ -97,7 +73,7 @@ void DelayOne::doDelay2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryDX1,tHistoryDX2);
+   tSampleWriter.writeHistory(tHistory1,tHistory2);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -105,6 +81,6 @@ void DelayOne::doDelay2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "DelayOne::doDelay2 %d",tHistoryX.mMaxSamples);
+   Prn::print(0, "DelayOne::doDelay2 %d",tHistory1.mMaxSamples);
 }
 
