@@ -1,6 +1,7 @@
 #pragma once
 
 /*==============================================================================
+Golden section search base class
 ==============================================================================*/
 
 //******************************************************************************
@@ -16,7 +17,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class that provides a golden section search.
+// This is a base class that provides a golden section search. Inheritors
+// provide an override for f(x).
 
 class GoldSearchBase
 {
@@ -48,15 +50,15 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Write to the history.
-
    // Perform the search.
+
+   // Perform the search. Inputs are an initial bracket and a convergence 
+   // tolerance.
    double search(
       double aXAinitial,
       double aXBinitial,
       double aTolerance,
-      int MaxIterations);
-
+      int    aMaxIterations);
 
    // Abstract f(x), supplied by inheritors.
    virtual double function(double aX)=0;
@@ -66,7 +68,6 @@ public:
    //***************************************************************************
    // More.
 
-   void show();
 };
 
 //******************************************************************************

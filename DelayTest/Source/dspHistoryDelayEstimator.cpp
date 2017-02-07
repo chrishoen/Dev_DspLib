@@ -44,7 +44,7 @@ void HistoryDelayEstimator::reset()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Perform the search.
+// Perform the search. Find the delay that minimizes the error function.
 
 double HistoryDelayEstimator::search(
       History* aHistory1,
@@ -72,7 +72,10 @@ double HistoryDelayEstimator::search(
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Error function.
+// f(x). Error function. x is the variable delay.
+// Return the sum of the square of the difference between the two
+// histories, one is evaluated at time t and the other is evaluated at
+// time t + delay.
 
 double HistoryDelayEstimator::function(double aX)
 {

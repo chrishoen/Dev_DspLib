@@ -24,15 +24,15 @@ SectionBegin default
    DelayEstimatorMaxIterations   50
    DelayEstimatorFs              100.0
 
-   TestDelay                     0.0201
-   TestSigma                     0.00
+   TestDelay                     0.001
+   TestSigma                     0.0
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
 
    HistoryGenParms
    {
-      GenType                  SinWave
+      GenType                  RandWave
       TimeType                 Type1
 
       Duration                 100.0
