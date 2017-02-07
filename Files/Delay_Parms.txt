@@ -19,13 +19,13 @@ SectionBegin default
    Tolerance                     0.001
    MaxIterations                 100
 
-   DelayEstimatorSearchDelay     0.05
-   DelayEstimatorTolerance       0.001
+   DelayEstimatorSearchDelay     1.0
+   DelayEstimatorTolerance       0.0001
    DelayEstimatorMaxIterations   50
    DelayEstimatorFs              100.0
 
-   TestDelay                     0.025
-   TestSigma                     0.01
+   TestDelay                     0.0
+   TestSigma                     0.0
 
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
@@ -63,7 +63,7 @@ SectionBegin delay2
 
    HistoryGenParms
    {
-      Sigma                    0.1
+      Sigma                    0.0
    }
 
    HistoryFilterParms1

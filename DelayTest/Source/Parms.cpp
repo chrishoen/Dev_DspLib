@@ -73,6 +73,7 @@ void Parms::show()
    printf("Tolerance          %10.6f\n",mTolerance);
    printf("MaxIterations      %10d\n",  mMaxIterations);
 
+   printf("\n");
    printf("TestDelay                     %10.6f\n",mTestDelay);
    printf("TestSigma                     %10.6f\n",mTestSigma);
 

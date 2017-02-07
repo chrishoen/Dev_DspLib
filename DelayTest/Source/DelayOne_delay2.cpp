@@ -12,10 +12,10 @@ Description:
 
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
-#include "dspHistoryLoopClock.h"
 #include "dspHistoryTextFile.h"
 #include "dspHistoryGenGen.h"
 #include "dspHistoryFilterOperator.h"
+#include "dspHistoryDelayEstimator.h"
 
 #include "Parms.h"
 #include "DelayOne.h"
@@ -68,13 +68,34 @@ void DelayOne::doDelay2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the signal history to an output file.
+   // Write the histories to the output file.
 
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
    tSampleWriter.writeHistory(tHistory1,tHistory2);
    tSampleWriter.close();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Estimate the delay between the two histories.
+   Prn::print(0, "");
+
+   HistoryDelayEstimator tDelayEstimator;
+   double tDelay = tDelayEstimator.search(
+      &tHistory1,
+      &tHistory2,
+      gParms.mDelayEstimatorFs,
+      gParms.mDelayEstimatorSearchDelay,
+      gParms.mDelayEstimatorTolerance,
+      gParms.mDelayEstimatorMaxIterations);
+
+   Prn::print(0, "");
+   Prn::print(0, "Test      Delay %10.6f",gParms.mTestDelay);
+   Prn::print(0, "Estimated Delay %10.6f",tDelay);
+// Prn::print(0, "Error           %10.6f",tDelay - gParms.mTestDelay);
+   Prn::print(0, "");
 
    //***************************************************************************
    //***************************************************************************
