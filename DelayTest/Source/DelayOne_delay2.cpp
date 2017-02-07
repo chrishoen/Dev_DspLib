@@ -96,6 +96,7 @@ void DelayOne::doDelay2()
    Prn::print(0, "");
    Prn::print(0, "Test      Delay           %10.6f",gParms.mTestDelay);
    Prn::print(0, "Estimated Delay           %10.6f",tEstimatedDelay);
+   Prn::print(0, "Error                     %10.6f",gParms.mTestDelay - tEstimatedDelay);
    Prn::print(0, "");
 
    //***************************************************************************
