@@ -121,6 +121,9 @@ public:
    // variables.
    void addDeltaTime(double aDeltaTime);
 
+   // Add gaussian noise to the values.
+   void addNoise(double aSigma);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -129,6 +132,10 @@ public:
    // Clone this history into a new one that has the same size and time array,
    // but has a zero value array.
    void createTimeClone(History& aY);
+
+   // Clone this history into a new one that has the same sizeand time array
+   // and value array.
+   void createClone(History& aY);
 
    //***************************************************************************
    //***************************************************************************

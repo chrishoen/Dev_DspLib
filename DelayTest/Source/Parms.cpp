@@ -51,6 +51,7 @@ void Parms::reset()
    mDelayEstimatorMaxIterations = 0;
    mDelayEstimatorFs = 0.0;
 
+   mTestSigma = 0.0;
 }
 
 //******************************************************************************
@@ -76,6 +77,7 @@ void Parms::show()
    printf("DelayEstimatorTolerance       %10.6f\n",mDelayEstimatorTolerance);
    printf("DelayEstimatorMaxIterations   %10d\n",  mDelayEstimatorMaxIterations);
    printf("DelayEstimatorFs              %10.6f\n",mDelayEstimatorFs);
+   printf("TestSigma                     %10.6f\n",mTestSigma);
 
    printf("\n");
 
@@ -119,6 +121,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("DelayEstimatorTolerance" ))     mDelayEstimatorTolerance     = aCmd->argDouble(1);
    if(aCmd->isCmd("DelayEstimatorMaxIterations" )) mDelayEstimatorMaxIterations = aCmd->argInt(1);
    if(aCmd->isCmd("DelayEstimatorFs" ))            mDelayEstimatorFs            = aCmd->argDouble(1);
+   if(aCmd->isCmd("TestSigma" ))                   mTestSigma                   = aCmd->argDouble(1);
 }
 
 //******************************************************************************

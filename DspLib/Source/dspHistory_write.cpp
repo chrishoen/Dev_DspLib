@@ -12,6 +12,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dspStatistics.h"
+#include "dspHistoryGaussNoise.h"
 #include "dspHistory.h"
 
 namespace Dsp
@@ -226,6 +227,21 @@ void History::addDeltaTime(double aDeltaTime)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Add gaussian noise to the values.
+
+void History::addNoise(double aSigma)
+{
+   HistoryGaussNoise tNoise(aSigma);
+
+   for (int k = 0; k < mMaxSamples; k++)
+   {
+      mValue[k] += tNoise.getNoise();
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Clone this history into a new one that has the same size and time array,
 // but has a zero value array.
 
@@ -242,6 +258,31 @@ void History::createTimeClone(History& aY)
       // Read the time from the source.
       double tTime  = this->mTime[k];
       double tValue = 0.0;
+      // Write the sample to the destination, same time, zero value.
+      aY.writeSample(tTime,tValue);
+   }
+   aY.finishWrite();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Clone this history into a new one that has the same size and time array,
+// and value array.
+
+void History::createClone(History& aY)
+{
+   // Initialize the destination to be the same size as the source.
+   aY.initialize(this->mMaxSamples);
+
+   // Copy the samples from the source to the destination.
+   this->startRead();
+   aY.startWrite();
+   for (int k = 0; k < this->mMaxSamples; k++)
+   {
+      // Read the time from the source.
+      double tTime  = this->mTime[k];
+      double tValue = this->mValue[k];;
       // Write the sample to the destination, same time, zero value.
       aY.writeSample(tTime,tValue);
    }

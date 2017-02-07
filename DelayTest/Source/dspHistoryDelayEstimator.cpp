@@ -76,36 +76,39 @@ double HistoryDelayEstimator::search(
 
 double HistoryDelayEstimator::function(double aX)
 {
-#if 0
    // Loop clock.
    HistoryLoopClock tClock(
-      gParms.mHistoryGenParms.mDuration,
-      gParms.mHistoryGenParms.mFs);
+      mHistory1->mBeginTime,
+      mHistory1->mEndTime,
+      mSearchFs);
 
    // Start read.
-   tHistory1.startRead();
-   tHistory2.startRead();
+   mHistory1->startRead();
+   mHistory2->startRead();
+
+   // Loop variables.
+   double tErrorSqSum = 0.0;
 
    // Loop through all of the samples in the history.
    do
    {
-      int    tIndex = tClock.mCount;
       double tTime  = tClock.mTime;
       double tValue1 = 0.0;
       double tValue2 = 0.0;
 
       // Get a sample from the history.
-      tValue1 = tHistory1.readValueAtTime(tTime);
-      tValue2 = tHistory2.readValueAtTime(tTime);
+      tValue1 = mHistory1->readValueAtTime(tTime);
+      tValue2 = mHistory2->readValueAtTime(tTime);
 
-      // Write the sample to the output file.
-      tSampleWriter.writeRow(
-         tIndex,
-         tTime,
-         tValue1,
-         tValue2);
+      // Calculate square of error and add it to the sum.
+      double tError = tValue2 - tValue1;
+      double tErrorSq = tError*tError;
+      tErrorSqSum += tErrorSq;
+
    } while (tClock.advance());
-#endif
+
+   // Return the error squared.
+   return tErrorSqSum;
 }
 
 //******************************************************************************

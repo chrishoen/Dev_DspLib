@@ -34,16 +34,16 @@ void DelayOne::doDelay2()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Generate a signal history.
+   // Generate two signal histories.
 
    // Signal history.
-   History tHistoryX;
+   History tHistoryX1;
+   History tHistoryX2;
 
-   // Signal history generator.
-   HistoryGenGen tGen(gParms.mHistoryGenParms);
+   // Generate two of the same signal.
+   HistoryGenGen tGen1(gParms.mHistoryGenParms);
+   HistoryGenGen tGen2(gParms.mHistoryGenParms);
 
-   // Generate the history.
-   tGen.generateHistory(tHistoryX);
 
    //***************************************************************************
    //***************************************************************************
