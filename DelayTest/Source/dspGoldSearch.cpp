@@ -81,6 +81,7 @@ double GoldSearchBase::search(
      double fc = function(c);
      double fd = function(d);
 
+#if 0
      // Check in case not unimodal.
      double fmin = fc < fd ? fc : fd;
      if (tCount > 1)
@@ -93,7 +94,7 @@ double GoldSearchBase::search(
          }
      }
      fmin_1 = fmin;
-
+#endif
      if (fc < fd)
      {
         b = d;

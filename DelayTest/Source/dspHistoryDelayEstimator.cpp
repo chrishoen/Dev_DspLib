@@ -98,7 +98,7 @@ double HistoryDelayEstimator::function(double aX)
 
       // Get a sample from the history.
       tValue1 = mHistory1->readValueAtTime(tTime);
-      tValue2 = mHistory2->readValueAtTime(tTime);
+      tValue2 = mHistory2->readValueAtTime(tTime + aX);
 
       // Calculate square of error and add it to the sum.
       double tError = tValue2 - tValue1;

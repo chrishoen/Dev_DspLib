@@ -24,7 +24,7 @@ SectionBegin default
    DelayEstimatorMaxIterations   50
    DelayEstimatorFs              100.0
 
-   TestDelay                     0.0
+   TestDelay                    -0.1
    TestSigma                     0.0
 
    //-----------------------------------------------------------------

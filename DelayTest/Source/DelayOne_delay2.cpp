@@ -83,7 +83,8 @@ void DelayOne::doDelay2()
    Prn::print(0, "");
 
    HistoryDelayEstimator tDelayEstimator;
-   double tDelay = tDelayEstimator.search(
+
+   double tEstimatedDelay = tDelayEstimator.search(
       &tHistory1,
       &tHistory2,
       gParms.mDelayEstimatorFs,
@@ -91,10 +92,10 @@ void DelayOne::doDelay2()
       gParms.mDelayEstimatorTolerance,
       gParms.mDelayEstimatorMaxIterations);
 
+
    Prn::print(0, "");
-   Prn::print(0, "Test      Delay %10.6f",gParms.mTestDelay);
-   Prn::print(0, "Estimated Delay %10.6f",tDelay);
-// Prn::print(0, "Error           %10.6f",tDelay - gParms.mTestDelay);
+   Prn::print(0, "Test      Delay           %10.6f",gParms.mTestDelay);
+   Prn::print(0, "Estimated Delay           %10.6f",tEstimatedDelay);
    Prn::print(0, "");
 
    //***************************************************************************
