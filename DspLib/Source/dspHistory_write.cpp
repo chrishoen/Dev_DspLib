@@ -42,6 +42,7 @@ void History::resetVariables()
    mReadIndex = 0;
    mReadTime = 0.0;
    mWriteIndex = 0;
+   mWriteEnable = true;
    mNumSamples = 0;
 }
 
@@ -121,6 +122,7 @@ void History::startWrite()
 
 void History::finishWrite()
 {
+   mWriteEnable = false;
 }
       
 //******************************************************************************
@@ -132,6 +134,9 @@ void History::writeSample(double aTime,double aValue)
 {
    // Guard.
    if (!mMemoryFlag) return;
+
+   // Guard.
+   if (!mWriteEnable) return;
 
    // Guard.
    if (mNumSamples==mMaxSamples) return;

@@ -37,6 +37,8 @@ public:
    int     mMaxSamples;
    int     mNumSamples;
 
+   // True if write is enabled.
+   bool    mWriteEnable;
    // Current write index.
    int     mWriteIndex;
 
