@@ -83,7 +83,9 @@ public:
    void finishWrite();
       
    // Write a sample to the signal history and advance the index.
-   void writeSample(double aTime,double aValue);
+   // Return true if sample was written successfully. Return if not,
+   // i.e. if the history is full.
+   bool writeSample(double aTime,double aValue);
 
    //***************************************************************************
    //***************************************************************************

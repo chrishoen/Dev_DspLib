@@ -130,16 +130,16 @@ void History::finishWrite()
 //******************************************************************************
 // Write a sample to the signal history.
 
-void History::writeSample(double aTime,double aValue)
+bool History::writeSample(double aTime,double aValue)
 {
    // Guard.
-   if (!mMemoryFlag) return;
+   if (!mMemoryFlag) return false;
 
    // Guard.
-   if (!mWriteEnable) return;
+   if (!mWriteEnable) return false;
 
    // Guard.
-   if (mNumSamples==mMaxSamples) return;
+   if (mNumSamples==mMaxSamples) return false; 
 
    // Store sample value and time.
    mTime [mWriteIndex] = aTime;
@@ -159,6 +159,9 @@ void History::writeSample(double aTime,double aValue)
    // Increment the index.
    mWriteIndex++;
    mNumSamples = mWriteIndex;
+
+   // Sample was written successfully.
+   return true;
 }
 
 //******************************************************************************
