@@ -87,6 +87,9 @@ public:
    // i.e. if the history is full.
    bool writeSample(double aTime,double aValue);
 
+   // Return true if the last write that was started is finished.
+   bool writeFinished();
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
