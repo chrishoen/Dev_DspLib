@@ -29,7 +29,7 @@ void HistoryStatistics::collectValue(History& aHistory)
    BaseClass::startTrial();
 
    // Loop through all of the samples in the history.
-   for (int k = 0; k < aHistory.mMaxSamples; k++)
+   for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Put history value to statistics.
       BaseClass::put(aHistory.mValue[k]);
@@ -50,7 +50,7 @@ void HistoryStatistics::collectTime(History& aHistory)
    BaseClass::startTrial();
 
    // Loop through all of the samples in the history.
-   for (int k = 0; k < aHistory.mMaxSamples; k++)
+   for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Put history value to statistics.
       BaseClass::put(aHistory.mTime[k]);
