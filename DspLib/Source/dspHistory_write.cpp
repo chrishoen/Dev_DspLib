@@ -39,6 +39,7 @@ void History::resetVariables()
    mEndIndex = 0;
    mBeginTime = 0.0;
    mEndTime = 0.0;
+   mDuration = 0.0;
    mReadIndex = 0;
    mReadTime = 0.0;
    mWriteIndex = 0;
@@ -160,6 +161,7 @@ bool History::writeSample(double aTime,double aValue)
    // Store the ending index and time as the last that was written.
    mEndIndex = mWriteIndex;
    mEndTime = aTime;
+   mDuration = mEndTime - mBeginTime;
 
    // Increment the index.
    mWriteIndex++;

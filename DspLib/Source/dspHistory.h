@@ -50,6 +50,7 @@ public:
    int     mEndIndex;
    double  mBeginTime;
    double  mEndTime;
+   double  mDuration;
 
    // The index and time of the last executed read operation.
    int     mReadIndex;
