@@ -24,7 +24,7 @@ void HistoryCsvFileWriter::writeHistory(
    History& aHistory)
 {
    // Loop through all of the samples in the history.
-   for (int k = 0; k < aHistory.mMaxSamples; k++)
+   for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Write the sample to the csv file
       writeRow(
@@ -45,8 +45,8 @@ void HistoryCsvFileWriter::writeHistory(
    History& aHistory2)
 {
    int tMaxSamples = dsp_imin(
-      aHistory1.mMaxSamples,
-      aHistory2.mMaxSamples);
+      aHistory1.mNumSamples,
+      aHistory2.mNumSamples);
 
    // Loop through all of the samples in the history.
    for (int k = 0; k < tMaxSamples; k++)
@@ -72,12 +72,12 @@ void HistoryCsvFileWriter::writeHistory(
    History& aHistory3)
 {
    int tMaxSamples = dsp_imin(
-      aHistory1.mMaxSamples,
-      aHistory2.mMaxSamples);
+      aHistory1.mNumSamples,
+      aHistory2.mNumSamples);
 
    tMaxSamples = dsp_imin(
       tMaxSamples,
-      aHistory3.mMaxSamples);
+      aHistory3.mNumSamples);
 
    // Loop through all of the samples in the history.
    for (int k = 0; k < tMaxSamples; k++)
