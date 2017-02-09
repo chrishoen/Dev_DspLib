@@ -56,7 +56,7 @@ History::~History()
 //******************************************************************************
 // Initialize.
 
-void History::initialize(int aMaxSamples)
+void History::initialize(int aMaxSamples,double aMaxDuration)
 {
    // If memory has already been allocated then deallocate it.
    finalize();
@@ -66,6 +66,7 @@ void History::initialize(int aMaxSamples)
 
    // Initialize member variables.
    mMaxSamples = aMaxSamples;
+   mMaxDuration = aMaxDuration;
 
    // Allocate memory.
    mValue = new double[aMaxSamples];
@@ -139,7 +140,11 @@ bool History::writeSample(double aTime,double aValue)
    if (!mWriteEnable) return false;
 
    // Guard.
-   if (mNumSamples==mMaxSamples) return false; 
+   if (mNumSamples == mMaxSamples)
+   {
+      mWriteEnable = false;
+      return false;
+   }
 
    // Store sample value and time.
    mTime [mWriteIndex] = aTime;
@@ -160,6 +165,16 @@ bool History::writeSample(double aTime,double aValue)
    mWriteIndex++;
    mNumSamples = mWriteIndex;
 
+   double tDuration = mEndTime - mBeginTime;
+   if (mMaxDuration > 0.0)
+   {
+      if (tDuration >= mMaxDuration)
+      {
+         mWriteEnable = false;
+         return true;
+      }
+   }
+
    // Sample was written successfully.
    return true;
 }
@@ -171,7 +186,7 @@ bool History::writeSample(double aTime,double aValue)
 
 bool History::writeFinished()
 {
-   return mNumSamples==mMaxSamples; 
+   return !mWriteEnable; 
 }
 
 //******************************************************************************

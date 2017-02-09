@@ -37,6 +37,9 @@ public:
    int     mMaxSamples;
    int     mNumSamples;
 
+   // Maximum duration.
+   double  mMaxDuration;
+
    // True if write is enabled.
    bool    mWriteEnable;
    // Current write index.
@@ -66,7 +69,7 @@ public:
   void resetVariables();
 
    // Allocate memory.
-   void initialize(int aMaxSamples);
+   void initialize(int aMaxSamples,double aMaxDuration=0.0);
 
    // Deallocate memory.
    void finalize();
