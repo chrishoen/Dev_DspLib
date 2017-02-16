@@ -10,6 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
+#include "my_functions.h"
 #include "dsp_math.h"
 #include "dspStatistics.h"
 #include "dspHistoryGaussNoise.h"
@@ -17,6 +18,32 @@ Description:
 
 namespace Dsp
 {
+
+static bool mMyPrintFlag = false;
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Memory control. An instance of this is allocated on the heap when 
+// data memory is allocated. It contains a resource count. It used so that
+// separate instances of history can point to the same allocated data memory.
+
+class HistoryMemoryControl
+{
+public:
+
+   // Resource count.
+   int mResourceCount;
+   // Constructor.
+   HistoryMemoryControl()
+   {
+      mResourceCount = 0;
+   }
+};
+
 
 //******************************************************************************
 //******************************************************************************
@@ -28,13 +55,20 @@ namespace Dsp
 
 History::History()
 {
+   if (mMyPrintFlag) printf("$$$$$ History constructor\n");
    mValue = 0;
    mTime = 0;
-   mResourceCount = 0;
+   mMemoryControl = 0;
+   resetVariables();
+   mMaxSamples = 0;
+   mMaxDuration = 0.0;
 }
 
 void History::resetVariables()
 {
+   mNumSamples = 0;
+   mWriteEnable = true;
+   mWriteIndex = 0;
    mBeginIndex = 0;
    mEndIndex = 0;
    mBeginTime = 0.0;
@@ -42,13 +76,32 @@ void History::resetVariables()
    mDuration = 0.0;
    mReadIndex = 0;
    mReadTime = 0.0;
-   mWriteIndex = 0;
-   mWriteEnable = true;
-   mNumSamples = 0;
+}
+
+void copyVariables(History* aY, const History* aX)
+{
+   aY->mValue         = aX->mValue;
+   aY->mTime          = aX->mTime;
+   aY->mMemoryControl = aX->mMemoryControl;
+
+   aY->mMaxSamples    = aX->mMaxSamples;
+   aY->mMaxDuration   = aX->mMaxDuration;
+
+   aY->mNumSamples    = aX->mNumSamples;
+   aY->mWriteEnable   = aX->mWriteEnable;
+   aY->mWriteIndex    = aX->mWriteIndex;
+   aY->mBeginIndex    = aX->mBeginIndex;
+   aY->mEndIndex      = aX->mEndIndex;
+   aY->mBeginTime     = aX->mBeginTime;
+   aY->mEndTime       = aX->mEndTime;
+   aY->mDuration      = aX->mDuration;
+   aY->mReadIndex     = aX->mReadIndex;
+   aY->mReadTime      = aX->mReadTime;
 }
 
 History::~History()
 {
+   if (mMyPrintFlag) printf("$$$$$ History destructor\n");
    // If memory has already been allocated then deallocate it.
    decrementResourceCount();
 }
@@ -61,7 +114,7 @@ History::~History()
 void History::initialize(int aMaxSamples,double aMaxDuration)
 {
    // If memory has already been allocated then deallocate it.
-   decrementResourceCount();
+   finalize();
 
    // Reset member variables to defaults.
    resetVariables();
@@ -73,7 +126,28 @@ void History::initialize(int aMaxSamples,double aMaxDuration)
    // Allocate memory.
    mValue = new double[aMaxSamples];
    mTime = new double[aMaxSamples];
-   mResourceCount++;
+   mMemoryControl = new HistoryMemoryControl;
+
+   incrementResourceCount();
+}
+   
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Finalize.
+
+void History::finalize()
+{
+   // If memory was allocated then deallocate it.
+   if (mMemoryControl)
+   {
+      delete mValue;
+      delete mTime;
+      delete mMemoryControl;
+      mValue = 0;
+      mTime = 0;
+      mMemoryControl=0;
+   }
 }
    
 //******************************************************************************
@@ -83,22 +157,66 @@ void History::initialize(int aMaxSamples,double aMaxDuration)
 
 void History::incrementResourceCount()
 {
-   mResourceCount++;
+   // Guard.
+   if (mMemoryControl==0) return;
+   // Increment the resource count.
+   mMemoryControl->mResourceCount++;
 }
 
 void History::decrementResourceCount()
 {
+   // Guard.
+   if (mMemoryControl==0) return;
    // If there is no memory allocated then return.
-   if (mResourceCount == 0) return;
+   if (mMemoryControl->mResourceCount==0) return;
 
    // Decrement the resource count. If it is zero then deallocate memory.
-   if (--mResourceCount == 0)
+   if (--mMemoryControl->mResourceCount == 0)
    {
-      delete mValue;
-      delete mTime;
-      mValue = 0;
-      mTime = 0;
+      finalize();
    }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Memory status.
+
+// Return true if memory has been allocated.
+bool History::isValid()
+{
+   return mMemoryControl!=0;
+}
+
+// Return resource count. If memory has not been allocated return -1.
+int  History::getResourceCount()
+{
+   if (mMemoryControl==0) return -1;
+   return mMemoryControl->mResourceCount;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Copy constructor and assignment operator. Copy variables and data
+// pointers. Do not copy data. This makes a copy of a history variable 
+// that points to the same allocated memory
+
+History::History(const History& aRhs)
+{
+   if (mMyPrintFlag) printf("$$$$$ History copy constructor\n");
+   copyVariables(this,&aRhs);
+   incrementResourceCount();
+}
+
+History& History::operator= (const History& aRhs)
+{
+   if (mMyPrintFlag) printf("$$$$$ History assignment\n");
+
+   if(this == &aRhs) return *this;
+   copyVariables(this,&aRhs);
+   incrementResourceCount();
+   return *this;
 }
 
 //******************************************************************************
@@ -106,10 +224,22 @@ void History::decrementResourceCount()
 //******************************************************************************
 // Show
 
-void History::show()
+void History::show(char* aLabel)
 {
+   if (aLabel)
+   {
+   printf("History             %10s\n",  aLabel);
+   }
+
+   printf("Valid               %10s\n",  my_string_from_bool(isValid()));
+   printf("ResourceCount       %10d\n",  getResourceCount());
    printf("mMaxSamples         %10d\n",  mMaxSamples);
    printf("mNumSamples         %10d\n",  mNumSamples);
+
+   if (aLabel)
+   {
+   printf("\n");
+   }
 }
 
 //******************************************************************************
@@ -143,7 +273,7 @@ void History::finishWrite()
 bool History::writeSample(double aTime,double aValue)
 {
    // Guard.
-   if (mResourceCount==0) return false;
+   if (!isValid()) return false;
 
    // Guard.
    if (!mWriteEnable) return false;

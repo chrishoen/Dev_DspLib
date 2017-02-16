@@ -23,5 +23,7 @@ public:
 
    void doCausal1();
    void doCausal12();
+
+   void doMem1();
  };
 

@@ -20,6 +20,8 @@ namespace Dsp
 // the samples of a periodic or aperiodic time series. It stores the signal
 // sample values and times of arrival in dynamically allocated arrays.//
 
+class HistoryMemoryControl;
+
 class History
 {
 public:
@@ -32,13 +34,15 @@ public:
    // Arrays of signal sample values and times of arrival.
    double* mValue;
    double* mTime;
+   // Memory management control pointer.
+   HistoryMemoryControl* mMemoryControl;
+
+   // Maximum number of samples in array.
+   int     mMaxSamples;
+   double  mMaxDuration;
 
    // Number of samples in array.
-   int     mMaxSamples;
    int     mNumSamples;
-
-   // Maximum duration.
-   double  mMaxDuration;
 
    // True if write is enabled.
    bool    mWriteEnable;
@@ -56,9 +60,6 @@ public:
    int     mReadIndex;
    double  mReadTime;
 
-   // Memory management resource counter.
-   int     mResourceCount;
-
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -70,15 +71,30 @@ public:
   ~History();
   void resetVariables();
 
-   // Initialize variables, allocate memory, and set the resource counter to
-   // one.
+   // Initialize variables, allocate memory, and increment the resource
+   // counter.
    void initialize(int aMaxSamples,double aMaxDuration=0.0);
+
+   // If memory was allocated then deallocate it.
+   void finalize();
 
    // Increment the resource counter.
    void incrementResourceCount();
 
    // Decrement the resource counter. If it is zero then deallocate memory.
    void decrementResourceCount();
+
+   // Return true if memory has been allocated.
+   bool isValid();
+   // Return resource count. If memory has not been allocated return -1.
+   int  getResourceCount();
+
+   // Copy constructor and assignment operator. Copy variables and data
+   // pointers. Do not copy data. This makes a copy of a history variable 
+   // that points to the same allocated memory
+   History(const History& aRhs); 
+   History& operator= (const History& aRhs); 
+
 
    //***************************************************************************
    //***************************************************************************
@@ -158,7 +174,7 @@ public:
    //***************************************************************************
    // More.
 
-   void show();
+   void show(char* aLabel=0);
 };
 
 //******************************************************************************

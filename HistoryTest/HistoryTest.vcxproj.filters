@@ -46,6 +46,9 @@
     <ClCompile Include="Source\DemoOne_demo2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestOne_mem1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
