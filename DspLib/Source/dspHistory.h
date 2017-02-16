@@ -18,7 +18,7 @@ namespace Dsp
 //******************************************************************************
 // This class provides the history of a signal. It is used to store and process
 // the samples of a periodic or aperiodic time series. It stores the signal
-// sample values and times of arrival in dynamically allocated arrays.
+// sample values and times of arrival in dynamically allocated arrays.//
 
 class History
 {
