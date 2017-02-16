@@ -56,24 +56,29 @@ public:
    int     mReadIndex;
    double  mReadTime;
 
-   // If true then memory has been allocated.
-   bool    mMemoryFlag;
+   // Memory management resource counter.
+   int     mResourceCount;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Constructor and initialization.
 
-   // Constructor.
+   // Initialize varaibles. Do not allocate memory.
    History();
+   // Decrement the resource counter. If it is zero then deallocate memory.
   ~History();
   void resetVariables();
 
-   // Allocate memory.
+   // Initialize variables, allocate memory, and set the resource counter to
+   // one.
    void initialize(int aMaxSamples,double aMaxDuration=0.0);
 
-   // Deallocate memory.
-   void finalize();
+   // Increment the resource counter.
+   void incrementResourceCount();
+
+   // Decrement the resource counter. If it is zero then deallocate memory.
+   void decrementResourceCount();
 
    //***************************************************************************
    //***************************************************************************

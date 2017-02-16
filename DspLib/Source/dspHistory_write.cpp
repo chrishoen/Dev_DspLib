@@ -30,7 +30,7 @@ History::History()
 {
    mValue = 0;
    mTime = 0;
-   mMemoryFlag=false;
+   mResourceCount = 0;
 }
 
 void History::resetVariables()
@@ -49,7 +49,8 @@ void History::resetVariables()
 
 History::~History()
 {
-   finalize();
+   // If memory has already been allocated then deallocate it.
+   decrementResourceCount();
 }
 
 //******************************************************************************
@@ -60,7 +61,7 @@ History::~History()
 void History::initialize(int aMaxSamples,double aMaxDuration)
 {
    // If memory has already been allocated then deallocate it.
-   finalize();
+   decrementResourceCount();
 
    // Reset member variables to defaults.
    resetVariables();
@@ -72,27 +73,34 @@ void History::initialize(int aMaxSamples,double aMaxDuration)
    // Allocate memory.
    mValue = new double[aMaxSamples];
    mTime = new double[aMaxSamples];
-   mMemoryFlag = true;
+   mResourceCount++;
 }
    
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Finalize.
+// Resource count management.
 
-void History::finalize()
+void History::incrementResourceCount()
 {
-   // If memory was allocated then deallocate it.
-   if (mMemoryFlag)
+   mResourceCount++;
+}
+
+void History::decrementResourceCount()
+{
+   // If there is no memory allocated then return.
+   if (mResourceCount == 0) return;
+
+   // Decrement the resource count. If it is zero then deallocate memory.
+   if (--mResourceCount == 0)
    {
       delete mValue;
       delete mTime;
       mValue = 0;
       mTime = 0;
-      mMemoryFlag=false;
    }
 }
-   
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -135,7 +143,7 @@ void History::finishWrite()
 bool History::writeSample(double aTime,double aValue)
 {
    // Guard.
-   if (!mMemoryFlag) return false;
+   if (mResourceCount==0) return false;
 
    // Guard.
    if (!mWriteEnable) return false;
