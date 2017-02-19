@@ -74,12 +74,12 @@ void HistoryGenParms::show(char* aLabel)
    printf("Fc                 %10.4f\n", mFc);
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
-   printf("EX                 %10.4f\n", mEX);
-   printf("UX                 %10.4f\n", mUX);
-   printf("A                  %10.4f\n", mA);
+   printf("EX                 %10.4f\n", (mAngleFlag ? deg(mEX) : mEX));
+   printf("UX                 %10.4f\n", (mAngleFlag ? deg(mUX) : mUX));
+   printf("A                  %10.4f\n", (mAngleFlag ? deg(mA)  : mA));
    printf("Phi                %10.4f\n", deg(mPhi));
    printf("Tp                 %10.4f\n", mTp);
-   printf("Sigma              %10.4f\n", mSigma);
+   printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
 
    printf("\n");
 }
