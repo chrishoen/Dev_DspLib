@@ -80,6 +80,8 @@ public:
    double  mFc;           // Filter cutoff frequency. 
    int     mFilterOrder;  // Filter order.
 
+   bool    mAngleFlag;    // True if values are angles.
+
    double  mEX;           // Desired expectation.
    double  mUX;           // Desired uncertainty.
 

@@ -221,7 +221,7 @@ void CmdLineExec::executeRun5(Ris::CmdLineCmd* aCmd)
 {
    gParms.reset();
    gParms.readSection("default");
-   gParms.readSection("run1");
+   gParms.readSection("run5");
 
    TestOne tTestOne;
    tTestOne.doRun5();
