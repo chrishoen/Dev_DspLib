@@ -60,12 +60,6 @@
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dspThreeMatrix.cpp" />
     <ClCompile Include="Source\dspThreeVector.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesBase.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesBaseGN.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesFilteredGN.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesHarmonic.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesLPGN.cpp" />
-    <ClCompile Include="Source\dspTimeSeriesTIme.cpp" />
     <ClCompile Include="Source\dsp_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -109,12 +103,6 @@
     <ClInclude Include="Source\dspThreeMath.h" />
     <ClInclude Include="Source\dspThreeMatrix.h" />
     <ClInclude Include="Source\dspThreeVector.h" />
-    <ClInclude Include="Source\dspTimeSeriesBase.h" />
-    <ClInclude Include="Source\dspTimeSeriesBaseGN.h" />
-    <ClInclude Include="Source\dspTimeSeriesFilteredGN.h" />
-    <ClInclude Include="Source\dspTimeSeriesHarmonic.h" />
-    <ClInclude Include="Source\dspTimeSeriesLPGN.h" />
-    <ClInclude Include="Source\dspTimeSeriesTIme.h" />
     <ClInclude Include="Source\dsp_functions.h" />
     <ClInclude Include="Source\dsp_math.h" />
   </ItemGroup>

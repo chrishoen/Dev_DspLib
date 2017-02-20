@@ -23,8 +23,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreqDetector", "FreqDetecto
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreeVector", "ThreeVector\ThreeVector.vcxproj", "{BE6EB81D-2C58-45DC-9F4F-F908291FA1FC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RandomMotion", "RandomMotion\RandomMotion.vcxproj", "{D34A3639-9CCF-46F1-911E-28FB7EA7B925}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{058D0B03-84D9-42AC-8B38-1F665BE13EDD}"
 	ProjectSection(SolutionItems) = preProject
 		Files\Delay_Parms.txt = Files\Delay_Parms.txt
@@ -191,20 +189,6 @@ Global
 		{BE6EB81D-2C58-45DC-9F4F-F908291FA1FC}.Release|Win32.Build.0 = Release|Win32
 		{BE6EB81D-2C58-45DC-9F4F-F908291FA1FC}.Release|x64.ActiveCfg = Release|x64
 		{BE6EB81D-2C58-45DC-9F4F-F908291FA1FC}.Release|x64.Build.0 = Release|x64
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|Win32.Build.0 = Debug|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|x64.ActiveCfg = Debug|x64
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Debug|x64.Build.0 = Debug|x64
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|Any CPU.ActiveCfg = Release|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|Win32.ActiveCfg = Release|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|Win32.Build.0 = Release|Win32
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|x64.ActiveCfg = Release|x64
-		{D34A3639-9CCF-46F1-911E-28FB7EA7B925}.Release|x64.Build.0 = Release|x64
 		{646835A9-405E-4D4E-A5B5-155B780211C1}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{646835A9-405E-4D4E-A5B5-155B780211C1}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{646835A9-405E-4D4E-A5B5-155B780211C1}.Debug|Mixed Platforms.Build.0 = Debug|Win32
