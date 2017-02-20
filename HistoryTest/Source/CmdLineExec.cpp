@@ -7,7 +7,6 @@
 #include "prnPrint.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
-#include "dspSignalGen.h"
 #include "dsp_functions.h"
 #include "TestOne.h"
 #include "DemoOne.h"

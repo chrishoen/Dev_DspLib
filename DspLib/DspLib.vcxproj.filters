@@ -49,12 +49,6 @@
     <ClCompile Include="Source\dsp_functions.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspSignalGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspSignalSource.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspThreeMatrix.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -175,12 +169,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dsp_functions.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspSignalGen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspSignalSource.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspThreeMatrix.h">
