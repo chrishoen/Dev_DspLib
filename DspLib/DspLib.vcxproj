@@ -36,7 +36,7 @@
     <ClCompile Include="Source\dspHistoryFilterParms.cpp" />
     <ClCompile Include="Source\dspHistoryGaussNoise.cpp" />
     <ClCompile Include="Source\dspHistoryGenBase.cpp" />
-    <ClCompile Include="Source\dspHistoryGenGen.cpp" />
+    <ClCompile Include="Source\dspHistoryGenerator.cpp" />
     <ClCompile Include="Source\dspHistoryGenParms.cpp" />
     <ClCompile Include="Source\dspHistoryGenRandWave.cpp" />
     <ClCompile Include="Source\dspHistoryGenSinWave.cpp" />
@@ -79,7 +79,7 @@
     <ClInclude Include="Source\dspHistoryFilterParms.h" />
     <ClInclude Include="Source\dspHistoryGaussNoise.h" />
     <ClInclude Include="Source\dspHistoryGenBase.h" />
-    <ClInclude Include="Source\dspHistoryGenGen.h" />
+    <ClInclude Include="Source\dspHistoryGenerator.h" />
     <ClInclude Include="Source\dspHistoryGenParms.h" />
     <ClInclude Include="Source\dspHistoryGenRandWave.h" />
     <ClInclude Include="Source\dspHistoryGenSinWave.h" />

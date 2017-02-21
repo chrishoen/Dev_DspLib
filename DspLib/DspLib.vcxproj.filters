@@ -100,9 +100,6 @@
     <ClCompile Include="Source\dspHistoryGenBase.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspHistoryGenGen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspHistoryGenParms.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -128,6 +125,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistoryConverters.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspHistoryGenerator.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -225,9 +225,6 @@
     <ClInclude Include="Source\dspHistoryGenBase.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dspHistoryGenGen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\dspHistoryGenParms.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -253,6 +250,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryConverters.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryGenerator.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

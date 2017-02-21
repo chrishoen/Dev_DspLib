@@ -29,7 +29,7 @@ namespace Dsp
 // parameter, it instantiates one of the concrete generators and used it to
 // generate a history.
  
-class HistoryGenGen
+class HistoryGenerator
 {
 public:
 
@@ -46,7 +46,7 @@ public:
    // Methods.
 
    // Constructor.
-   HistoryGenGen(HistoryGenParms& aParms);
+   HistoryGenerator(HistoryGenParms& aParms);
    void show();
 
    // Generate the signal history according to the parameters. This is a jump 

@@ -13,7 +13,7 @@ Description:
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryTextFile.h"
-#include "dspHistoryGenGen.h"
+#include "dspHistoryGenerator.h"
 #include "dspHistoryFilterOperator.h"
 
 #include "Parms.h"
@@ -39,7 +39,7 @@ void TestOne::doRun2()
    History tHistoryX;
 
    // Signal history generator.
-   HistoryGenGen tGen(gParms.mHistoryGenParms);
+   HistoryGenerator tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
    tGen.generateHistory(tHistoryX);

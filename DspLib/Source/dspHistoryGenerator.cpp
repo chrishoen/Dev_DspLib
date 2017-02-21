@@ -15,7 +15,7 @@ Description:
 #include "dspHistoryGenSinWave.h"
 #include "dspHistoryGenRandWave.h"
 
-#include "dspHistoryGenGen.h"
+#include "dspHistoryGenerator.h"
 
 namespace Dsp
 {
@@ -29,7 +29,7 @@ namespace Dsp
 //******************************************************************************
 // Constructor
 
-HistoryGenGen::HistoryGenGen(HistoryGenParms& aParms)
+HistoryGenerator::HistoryGenerator(HistoryGenParms& aParms)
 {
    mParms = aParms;
 }
@@ -39,9 +39,9 @@ HistoryGenGen::HistoryGenGen(HistoryGenParms& aParms)
 //******************************************************************************
 // Show
 
-void HistoryGenGen::show()
+void HistoryGenerator::show()
 {
-   mParms.show("HistoryGenGen");
+   mParms.show("HistoryGenerator");
 }
 
 //******************************************************************************
@@ -54,7 +54,7 @@ void HistoryGenGen::show()
 // table that selects one of the concrete history generators according to
 // the generator type parameter and uses it to generate a history.
 
-void HistoryGenGen::generateHistory(History& aHistory)
+void HistoryGenerator::generateHistory(History& aHistory)
 {
    switch (mParms.mGenType)
    {

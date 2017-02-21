@@ -13,7 +13,7 @@ Description:
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryTextFile.h"
-#include "dspHistoryGenGen.h"
+#include "dspHistoryGenerator.h"
 #include "dspHistoryFilterOperator.h"
 #include "dspHistoryDelayEstimator.h"
 
@@ -41,7 +41,7 @@ void DelayOne::doDelay2()
    History tHistory2;
 
    // Generate two of the same signal.
-   HistoryGenGen tGen1(gParms.mHistoryGenParms);
+   HistoryGenerator tGen1(gParms.mHistoryGenParms);
    tGen1.generateHistory(tHistory1);
    tHistory1.createClone(tHistory2);
 
