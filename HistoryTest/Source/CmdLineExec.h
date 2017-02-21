@@ -37,7 +37,6 @@ public:
    void executeDemo2       (Ris::CmdLineCmd* aCmd);
 
    void executeParms (Ris::CmdLineCmd* aCmd);
-   void executeBin   (Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

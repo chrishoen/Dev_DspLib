@@ -54,7 +54,7 @@ void TestOne::doCausal1()
 
    // Signal history generator.
    HistoryFilterOperator tFilterXY(gParms.mHistoryFilterParms1);
-
+   gParms.mHistoryFilterParms1.show("LINE101");
    // Apply the operator on the history to produce a new history. F:X->Y.
    tFilterXY.operate(tHistoryX,tHistoryY);
 

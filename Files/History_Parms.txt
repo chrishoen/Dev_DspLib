@@ -163,6 +163,7 @@ SectionBegin Causal1
 
       AlphaDT                  0.01
       AlphaLambda              0.0279155
+      AlphaSelect              XX
    }
 
 SectionEnd
