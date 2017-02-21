@@ -39,6 +39,7 @@ void Parms::reset()
    mHistoryFilterParms2.reset();
 
    mOutputFile[0]=0;
+   mOutputFile2[0]=0;
 
    mHistoryMaxSamples=0;
    mHistoryDeltaT=0.0;
@@ -58,6 +59,10 @@ void Parms::show()
    printf("Code2              %10d\n",mCode2);
 
    printf("OutputFile         %10s\n",  mOutputFile);
+   if (mOutputFile2[0] != 0)
+   {
+   printf("OutputFile2        %10s\n", mOutputFile2);
+   }
    printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
    printf("\n");
@@ -86,6 +91,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
+   if(aCmd->isCmd("OutputFile2" )) aCmd->copyArgString(1,mOutputFile2,cMaxStringSize);
 
    if(aCmd->isCmd("HistoryGenParms"))    nestedPush(aCmd, &mHistoryGenParms);
    if(aCmd->isCmd("HistoryFilterParms1"))  nestedPush(aCmd, &mHistoryFilterParms1);

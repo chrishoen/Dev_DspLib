@@ -61,7 +61,8 @@ public:
    // Members that are read from the parms file.
 
    static const int cMaxStringSize=400;
-   char mOutputFile [cMaxStringSize];
+   char mOutputFile  [cMaxStringSize];
+   char mOutputFile2 [cMaxStringSize];
 
    Dsp::HistoryGenParms  mHistoryGenParms;
    Dsp::HistoryFilterParms mHistoryFilterParms1;

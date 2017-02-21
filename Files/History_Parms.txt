@@ -261,3 +261,30 @@ SectionBegin Demo2
 
 SectionEnd
 
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
+SectionBegin Run4
+
+   //-----------------------------------------------------------------
+   // Signal History Generator Parms.
+
+   Outputfile  C:\Alpha\Data\SignalHistory.csv
+   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
+
+   HistoryGenParms
+   {
+      GenType                  SinWave
+      TimeType                 Type2
+
+      Duration                 100.0
+      Fs                       100.0
+      A                        1.0
+      Fc                       0.10
+      Phi                      0.0
+      Sigma                    0.00
+   }
+
+SectionEnd
+
