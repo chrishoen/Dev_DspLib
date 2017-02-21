@@ -71,15 +71,38 @@ void HistoryGenParms::show(char* aLabel)
    printf("TimeType           %10s\n",  asStringTimeType(mTimeType));
    printf("Duration           %10.4f\n", mDuration);
    printf("Fs                 %10.4f\n", mFs);
-   printf("Fc                 %10.4f\n", mFc);
-   printf("FilterOrder        %10d\n",   mFilterOrder);
-   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
+
+   if (mGenType == cGenZero)
+   {
    printf("EX                 %10.4f\n", (mAngleFlag ? deg(mEX) : mEX));
    printf("UX                 %10.4f\n", (mAngleFlag ? deg(mUX) : mUX));
-   printf("A                  %10.4f\n", (mAngleFlag ? deg(mA)  : mA));
-   printf("Phi                %10.4f\n", deg(mPhi));
+   printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
+   }
+
+   if (mGenType == cGenStep)
+   {
    printf("Tp                 %10.4f\n", mTp);
    printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
+   }
+
+   if (mGenType == cGenSinWave)
+   {
+   printf("A                  %10.4f\n", (mAngleFlag ? deg(mA) : mA));
+   printf("Fc                 %10.4f\n", mFc);
+   printf("Phi                %10.4f\n", deg(mPhi));
+   printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
+   }
+
+   if (mGenType == cGenRandWave)
+   {
+   printf("Fc                 %10.4f\n", mFc);
+   printf("FilterOrder        %10d\n",   mFilterOrder);
+   printf("EX                 %10.4f\n", (mAngleFlag ? deg(mEX) : mEX));
+   printf("UX                 %10.4f\n", (mAngleFlag ? deg(mUX) : mUX));
+   printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
+   }
 
    printf("\n");
 }
