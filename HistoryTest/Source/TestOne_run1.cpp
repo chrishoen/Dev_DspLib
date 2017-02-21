@@ -12,7 +12,6 @@ Description:
 
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
-#include "dspHistoryLoopClock.h"
 #include "dspHistoryTextFile.h"
 #include "dspHistoryGenGen.h"
 

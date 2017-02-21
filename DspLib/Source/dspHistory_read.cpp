@@ -20,6 +20,54 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Read a sample at a particular index.
+
+bool History::readTimeAtIndex(int aIndex,double* aTime)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxSamples) return false;
+
+   // Copy from array.
+   *aTime = mTime[aIndex];
+   // Done.
+   return true;
+}
+
+bool History::readValueAtIndex(int aIndex,double* aValue)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxSamples) return false;
+
+   // Copy from array.
+   *aValue = mValue[aIndex];
+   // Done.
+   return true;
+}
+
+bool History::readSampleAtIndex(int aIndex, double* aTime, double* aValue)
+{
+   // Guard.
+   if (aIndex < 0) return false;
+   if (aIndex >= mMaxSamples) return false;
+
+   // Copy from array.
+   *aTime  = mTime[aIndex];
+   *aValue = mValue[aIndex];
+   // Done.
+   return true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Read values from the signal history, based on time.
 // This is used in loops that process type2 signal histories. Samples are
 // read from the history at monotically increasing times. The read is

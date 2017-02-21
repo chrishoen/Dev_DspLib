@@ -334,51 +334,6 @@ bool History::writeFinished()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Read a sample at a particular index.
-
-bool History::readTimeAtIndex(int aIndex,double* aTime)
-{
-   // Guard.
-   if (aIndex < 0) return false;
-   if (aIndex >= mMaxSamples) return false;
-
-   // Copy from array.
-   *aTime = mTime[aIndex];
-   // Done.
-   return true;
-}
-
-bool History::readValueAtIndex(int aIndex,double* aValue)
-{
-   // Guard.
-   if (aIndex < 0) return false;
-   if (aIndex >= mMaxSamples) return false;
-
-   // Copy from array.
-   *aValue = mValue[aIndex];
-   // Done.
-   return true;
-}
-
-bool History::readSampleAtIndex(int aIndex, double* aTime, double* aValue)
-{
-   // Guard.
-   if (aIndex < 0) return false;
-   if (aIndex >= mMaxSamples) return false;
-
-   // Copy from array.
-   *aTime  = mTime[aIndex];
-   *aValue = mValue[aIndex];
-   // Done.
-   return true;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // Add a time delta to all times in the history and to all time member
 // variables.
 
