@@ -24,6 +24,7 @@
     <ClCompile Include="Source\dspFilterStatistics.cpp" />
     <ClCompile Include="Source\dspFilterAlpha.cpp" />
     <ClCompile Include="Source\dspFilterFilters.cpp" />
+    <ClCompile Include="Source\dspHistoryConverters.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCausal.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffBase.cpp" />
     <ClCompile Include="Source\dspHistoryFilterCDiffHolob.cpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
     <ClInclude Include="Source\dspHistory.h" />
+    <ClInclude Include="Source\dspHistoryConverters.h" />
     <ClInclude Include="Source\dspHistoryFilterCausal.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffBase.h" />
     <ClInclude Include="Source\dspHistoryFilterCDiffHolob.h" />
