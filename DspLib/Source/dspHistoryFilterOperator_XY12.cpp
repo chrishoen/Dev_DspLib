@@ -10,6 +10,8 @@ Description:
 #include <string.h>
 #include <math.h>
 
+#include "prnPrint.h"
+
 #include "dspHistoryFilterCDiffIdentity.h"
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
@@ -43,7 +45,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY1,History& aY2)
    //***************************************************************************
    case HistoryFilterParms::cFilterCausal:
    {
-      printf("OPERATOR CAUSAL XY1Y2 %s\n",mParms.asStringCausalType()); 
+      Prn::print(Prn::DspRun2,"OPERATOR CAUSAL XY1Y2 %s",mParms.asStringCausalType()); 
 
       HistoryFilterCausal tFilter(mParms);
       tFilter.operate(aX, aY1, aY2);
@@ -54,7 +56,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY1,History& aY2)
    //***************************************************************************
    case HistoryFilterParms::cFilterNoncausal:
    {
-      printf("OPERATOR NONCAUSAL XY1Y2 %s\n",mParms.asStringCausalType()); 
+      Prn::print(Prn::DspRun2,"OPERATOR NONCAUSAL XY1Y2 %s",mParms.asStringCausalType()); 
 
       HistoryFilterNoncausal tFilter(mParms);
       tFilter.operate(aX, aY1, aY2);

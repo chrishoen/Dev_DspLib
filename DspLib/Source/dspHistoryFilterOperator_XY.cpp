@@ -10,6 +10,8 @@ Description:
 #include <string.h>
 #include <math.h>
 
+#include "prnPrint.h"
+
 #include "dspHistoryFilterCDiffIdentity.h"
 #include "dspHistoryFilterCDiffHolob.h"
 #include "dspHistoryFilterCDiffSavGol.h"
@@ -68,7 +70,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //***************************************************************************
    case HistoryFilterParms::cFilterIdentity:
    {
-      printf("OPERATOR IDENTITY\n");
+      Prn::print(Prn::DspRun2,"OPERATOR IDENTITY");
 
       HistoryFilterCDiffIdentity tFilter(mParms);
       tFilter.operate(aX, aY);
@@ -79,7 +81,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //***************************************************************************
    case HistoryFilterParms::cFilterCausal:
    {
-      printf("OPERATOR CAUSAL %s\n",mParms.asStringCausalType()); 
+      Prn::print(Prn::DspRun2,"OPERATOR CAUSAL %s",mParms.asStringCausalType()); 
 
       HistoryFilterCausal tFilter(mParms);
       tFilter.operate(aX, aY);
@@ -90,7 +92,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //***************************************************************************
    case HistoryFilterParms::cFilterNoncausal:
    {
-      printf("OPERATOR NONCAUSAL %s\n",mParms.asStringCausalType()); 
+      Prn::print(Prn::DspRun2,"OPERATOR NONCAUSAL %s",mParms.asStringCausalType()); 
 
       HistoryFilterNoncausal tFilter(mParms);
       tFilter.operate(aX, aY);
@@ -112,7 +114,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //*******************************************************************************
    case HistoryFilterParms::cMethodSavGol:
    {
-      printf("OPERATOR SAVGOL   %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
+      Prn::print(Prn::DspRun2,"OPERATOR SAVGOL   %10s %3d",mParms.asStringFilterType(),mParms.mFilterOrder);
 
       HistoryFilterCDiffSavGol tFilter(mParms);
       tFilter.operate(aX, aY);
@@ -123,7 +125,7 @@ void HistoryFilterOperator::operate(History& aX, History& aY)
    //*******************************************************************************
    case HistoryFilterParms::cMethodHolob:
    {
-      printf("OPERATOR HOLOB    %10s %3d\n",mParms.asStringFilterType(),mParms.mFilterOrder);
+      Prn::print(Prn::DspRun2,"OPERATOR HOLOB    %10s %3d",mParms.asStringFilterType(),mParms.mFilterOrder);
 
       HistoryFilterCDiffHolob tFilter(mParms);
       tFilter.operate(aX, aY);

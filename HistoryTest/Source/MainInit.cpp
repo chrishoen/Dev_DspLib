@@ -53,6 +53,11 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
+   Prn::setFilter(Prn::DspRun1,    true);
+   Prn::setFilter(Prn::DspRun2,    true);
+   Prn::setFilter(Prn::DspRun3,    false);
+   Prn::setFilter(Prn::DspRun4,    false);
+
    Prn::print(0,"SignalHistoryTest***************************************PROGRAM BEGIN");
 
    // Open settings file.

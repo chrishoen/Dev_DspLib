@@ -78,14 +78,6 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsSmoother1()
 
       mC[k] = tTerm1/tTerm2;
    }
-
-   // Show.
-   printf("Smoother1\n");
-   for (int k = 0; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************
@@ -108,14 +100,6 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsSmoother2()
       double m1 = double(N);
       mC[k] = 1.0/m1;
    }
-
-   // Show.
-   printf("Smoother2\n");
-   for (int k = 0; k <= m; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************
@@ -149,16 +133,7 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsFirstDerivative1()
       double tTerm2 = m1*(m2 - 1)*(3*m4 - 39*m2 + 108)/15.0;
 
       mC[k] = tTermH*tTerm1/tTerm2;
-//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
    }
-
-   // Show.
-   printf("FirstDerivative1\n");
-   for (int k = 0; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************
@@ -184,21 +159,12 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsFirstDerivative2()
       double m2 = double(N*N);
       double k1 = double(k);
 
-      double tTermH = 1.0/tH;
+      double tTermH = 1.0 / tH;
       double tTerm1 = k1;
-      double tTerm2 = m1*(m2 - 1)/12.0;
+      double tTerm2 = m1*(m2 - 1) / 12.0;
 
-      mC[k] = tTermH*tTerm1/tTerm2;
-//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
+      mC[k] = tTermH*tTerm1 / tTerm2;
    }
-
-   // Show.
-   printf("FirstDerivative2\n");
-   for (int k = 0; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************
@@ -229,16 +195,7 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsSecondDerivative1()
       double tTerm2 = m2*(m2-1)*(m2-4)/30.0;
 
       mC[k] = tTermH*tTerm1/tTerm2;
-//    printf("C[%3d]  %10.1f %10.1f\n",k,tTerm1,tTerm2);
    }
-
-   // Show.
-   printf("FirstDerivative1\n");
-   for (int k = 0; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************

@@ -81,15 +81,6 @@ void HistoryFilterCDiffHolob::calculateCoefficientsSmoother()
 
       mC[k] = tTerm1*double(tTerm5);
    }
-
-   // Show.
-   printf("Smoother\n");
-   for (int k = 0; k <= m; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
-
 }
 
 //******************************************************************************
@@ -120,14 +111,6 @@ void HistoryFilterCDiffHolob::calculateCoefficientsFirstDerivative()
    {
       mC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
    }
-
-   // Show.
-   for (int k = 1; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
-
 }
 
 //******************************************************************************
@@ -163,13 +146,6 @@ void HistoryFilterCDiffHolob::calculateCoefficientsSecondDerivative()
    {
       mC[k] = tTerm1*tTerm2*double(recursive_s(N,M,k));
    }
-
-   // Show.
-   for (int k = 0; k <= M; k++)
-   {
-      printf("C[%3d]  %10.6f\n",k,mC[k]);
-   }
-   printf("\n");
 }
 
 //******************************************************************************

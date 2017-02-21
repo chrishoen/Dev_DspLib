@@ -10,6 +10,7 @@ Description:
 #include <string.h>
 #include <math.h>
 
+#include "prnPrint.h"
 #include "my_functions.h"
 #include "dsp_math.h"
 #include "dspStatistics.h"
@@ -18,8 +19,6 @@ Description:
 
 namespace Dsp
 {
-
-static bool mMyPrintFlag = false;
 
 //******************************************************************************
 //******************************************************************************
@@ -55,7 +54,7 @@ public:
 
 History::History()
 {
-   if (mMyPrintFlag) printf("$$$$$ History constructor\n");
+   Prn::print(Prn::DspRun4,"$$$$$ History constructor");
    mValue = 0;
    mTime = 0;
    mMemoryControl = 0;
@@ -101,7 +100,7 @@ void copyVariables(History* aY, const History* aX)
 
 History::~History()
 {
-   if (mMyPrintFlag) printf("$$$$$ History destructor\n");
+   Prn::print(Prn::DspRun4,"$$$$$ History destructor");
    // If memory has already been allocated then deallocate it.
    decrementResourceCount();
 }
@@ -204,14 +203,14 @@ int  History::getResourceCount()
 
 History::History(const History& aRhs)
 {
-   if (mMyPrintFlag) printf("$$$$$ History copy constructor\n");
+   Prn::print(Prn::DspRun4,"$$$$$ History copy constructor");
    copyVariables(this,&aRhs);
    incrementResourceCount();
 }
 
 History& History::operator= (const History& aRhs)
 {
-   if (mMyPrintFlag) printf("$$$$$ History assignment\n");
+   Prn::print(Prn::DspRun4,"$$$$$ History assignment");
 
    if(this == &aRhs) return *this;
    copyVariables(this,&aRhs);
@@ -228,17 +227,17 @@ void History::show(char* aLabel)
 {
    if (aLabel)
    {
-   printf("History             %10s\n",  aLabel);
+   Prn::print(Prn::DspRun1,"History             %10s",  aLabel);
    }
 
-   printf("Valid               %10s\n",  my_string_from_bool(isValid()));
-   printf("ResourceCount       %10d\n",  getResourceCount());
-   printf("mMaxSamples         %10d\n",  mMaxSamples);
-   printf("mNumSamples         %10d\n",  mNumSamples);
+   Prn::print(Prn::DspRun1,"Valid               %10s",  my_string_from_bool(isValid()));
+   Prn::print(Prn::DspRun1,"ResourceCount       %10d",  getResourceCount());
+   Prn::print(Prn::DspRun1,"mMaxSamples         %10d",  mMaxSamples);
+   Prn::print(Prn::DspRun1,"mNumSamples         %10d",  mNumSamples);
 
    if (aLabel)
    {
-   printf("\n");
+   Prn::print(Prn::DspRun1,"");
    }
 }
 
