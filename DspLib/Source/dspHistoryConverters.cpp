@@ -50,22 +50,25 @@ void convertHistoryFromType2ToType1(
    //***************************************************************************
    // Loop to transfer the input history to the output history.
 
-   // Loop time 
+   // Loop time. 
    double tLoopTime = 0.0;
 
+   // Start the output write.
+   aOutput.startWrite();
+
    // Loop through all of the samples in the history.
-   for (int k = 0; k < aOutput.mMaxSamples; k++)
+   for (int k = 0; k < tMaxSamples; k++)
    {
-      // Get the value from the input history at the loop time. This does an
-      // interpolation.
+      // Get the interpolated value from the input history at the loop time.
       double tValue = aInput.readValueAtTime(tLoopTime);
-      // Set the time and value of the output history to the loop time and 
-      // the input value.
-      aOutput.mTime[k]  = tLoopTime;
-      aOutput.mValue[k] = tValue;
+      // Write the loop time and the value to the output history.
+      aOutput.writeSample(tLoopTime,tValue);
       // Advance the loop time by the sampling period.
       tLoopTime += tTs;
    }
+
+   // Finish the output write.
+   aOutput.finishWrite();
 }
 
 //******************************************************************************
