@@ -70,10 +70,14 @@ void ThreeAxisAngle::setIdentity()
 
 void ThreeAxisAngle::show(char* aLabel)
 {
-   printf("%10s ", aLabel);
-   printf("%10.6f %10.6f %10.6f %10.6f", mAxisX, mAxisY, mAxisZ, mAngle);
+   printf("%s ",aLabel);
+   printf("%11.6f ",mAxisX);
+   printf("%11.6f ",mAxisY);
+   printf("%11.6f ",mAxisZ);
+   printf("%11.6f ",mAngle);
    printf("\n");
 }
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
