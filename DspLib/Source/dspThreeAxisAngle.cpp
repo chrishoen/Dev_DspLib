@@ -74,7 +74,7 @@ void ThreeAxisAngle::show(char* aLabel)
    printf("%11.6f ",mAxisX);
    printf("%11.6f ",mAxisY);
    printf("%11.6f ",mAxisZ);
-   printf("%11.6f ",mAngle);
+   printf("%11.6f ",deg(mAngle));
    printf("\n");
 }
 
