@@ -47,6 +47,22 @@ void ThreeAxisAngle::set(double aAxisX,double aAxisY,double aAxisZ,double aAngle
    mAngle = aAngle;
 }
 
+void ThreeAxisAngle::setToZero()
+{
+   mAxisX = 0.0;
+   mAxisY = 0.0;
+   mAxisZ = 0.0;
+   mAngle = 0.0;
+}
+
+void ThreeAxisAngle::setIdentity()
+{
+   mAxisX = 0.0;
+   mAxisY = 0.0;
+   mAxisZ = 0.0;
+   mAngle = 0.0;
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

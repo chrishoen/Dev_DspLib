@@ -28,6 +28,8 @@ public:
 
    // Assign values
    void set(double aAxisX,double aAxisY,double aAxisZ,double aAngle);
+   void setToZero();
+   void setIdentity();
 
    //show
    void show(char* aLabel);
