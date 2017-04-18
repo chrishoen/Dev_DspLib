@@ -130,6 +130,9 @@
     <ClCompile Include="Source\dspHistoryGenerator.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspThreeAxisAngle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -253,6 +256,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspHistoryGenerator.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspThreeAxisAngle.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
