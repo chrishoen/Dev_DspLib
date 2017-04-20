@@ -66,10 +66,10 @@ void TestOne::doCausal1()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show();
+   tStatistics.show(0,"X   ");
 
    tStatistics.collectValue(tHistoryY);
-   tStatistics.show();
+   tStatistics.show(0,"Y   ");
 
    //***************************************************************************
    //***************************************************************************

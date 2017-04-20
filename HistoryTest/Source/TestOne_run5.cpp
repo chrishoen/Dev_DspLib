@@ -51,7 +51,7 @@ void TestOne::doRun5()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistory);
-   tStatistics.show();
+   tStatistics.show(0,"X   ");
 
    //***************************************************************************
    //***************************************************************************
@@ -62,7 +62,7 @@ void TestOne::doRun5()
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
    tSampleWriter.writeHistory(tHistory);
-   tSampleWriter.close();
+   tStatistics.show(0,"X   ");
 
    //***************************************************************************
    //***************************************************************************

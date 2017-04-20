@@ -118,23 +118,36 @@ public:
    void startTrial(double aXLimit=0.0);
    void finishTrial();
 
-   void show(char* aLabel=0);
-   void showDeg(char* aLabel=0);
-   void show1(char* aLabel=0);
-   void showDeg1(char* aLabel=0);
-   void show2(char* aLabel=0);
-   void showDeg2(char* aLabel=0);
+   // Show 
+   void show        (int aPrintFilter,char* aLabel);
+   void showDeg     (int aPrintFilter,char* aLabel);
+   void showEUMM    (int aPrintFilter,char* aLabel);
+   void showDegEUMM (int aPrintFilter,char* aLabel);
+   void showEUX     (int aPrintFilter,char* aLabel);
+   void showDegEUX  (int aPrintFilter,char* aLabel);
+   void showEMM     (int aPrintFilter,char* aLabel);
+   void showDegEMM  (int aPrintFilter,char* aLabel);
+
+   // Write to log file 
+   void log         (int aLogNum,char* aLabel);
+   void logDeg      (int aLogNum,char* aLabel);
+   void logEUMM     (int aLogNum,char* aLabel);
+   void logDegEUMM  (int aLogNum,char* aLabel);
+   void logEUX      (int aLogNum,char* aLabel);
+   void logDegEUX   (int aLogNum,char* aLabel);
+   void logUX       (int aLogNum);
+   void logDegUX    (int aLogNum);
 
    // Put input value
    void put(double aX);
 
    // Members
-   unsigned long long mPutCount;    // Number of samples
+   unsigned long long mCount;    // Number of samples
 
    // Input values
    double   mX;            // Input value
-   double   mXLimit;       // Input limit
-   bool     mXLimitFlag;   // Input limit
+   double   mXLimit;       // Input limit, for ignoring outliers
+   bool     mXLimitFlag;   // Input limit, for ignoring outliers
    // Output values
    double   mEX;           // expectation (mean)
    double   mUX;           // uncertainty (standard deviation)
@@ -153,6 +166,9 @@ public:
    double   mXSum;         // Sum of X
    double   mXMean;        // expectation (mean)
 };
+
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 }//namespace
 #endif

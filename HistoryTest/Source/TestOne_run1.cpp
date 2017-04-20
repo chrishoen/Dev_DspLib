@@ -51,7 +51,7 @@ void TestOne::doRun1()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistory);
-   tStatistics.show();
+   tStatistics.show(0,"H   ");
 
    //***************************************************************************
    //***************************************************************************

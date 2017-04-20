@@ -12,12 +12,18 @@ Description:
 #include <math.h>
 #include <string.h>
 
+#include "prnPrint.h"
+#include "logFiles.h"
+
 #include "dsp_math.h"
 #include "dspStatistics.h"
 
 namespace Dsp
 {
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -264,7 +270,7 @@ TrialStatistics::TrialStatistics()
 
 void TrialStatistics::startTrial(double aXLimit)
 {
-   mPutCount = 0;
+   mCount = 0;
    mXLimit = aXLimit;
    mXLimitFlag = aXLimit!=0.0;
    mX = 0.0;
@@ -302,13 +308,13 @@ void TrialStatistics::put(double aX)
    }
 
    mX = aX;
-   mPutCount++;
+   mCount++;
 
    //--------------------------------------------------------------------------- 
    // Update min and max
 
    // If first in period, set to current input  
-   if (mPutCount==1)
+   if (mCount==1)
    {
       mMinX = mX;
       mMaxX = mX;
@@ -326,7 +332,7 @@ void TrialStatistics::put(double aX)
    // Calculate sums
 
       mOLDelta =  mX - mOLMean;
-      mOLMean  += mOLDelta/mPutCount;
+      mOLMean  += mOLDelta/mCount;
       mOLM2    += mOLDelta*(mX - mOLMean);
 
       mXSum += mX;
@@ -344,13 +350,13 @@ void TrialStatistics::finishTrial()
    mEX = mOLMean;
 
    // Variance of X
-   if (mPutCount < 2)
+   if (mCount < 2)
    {
       mVariance = 0.0;
    }
    else
    {
-      mVariance = mOLM2/(mPutCount);
+      mVariance = mOLM2/(mCount);
    }
 
    // Uncertainty (stddev) of X
@@ -367,153 +373,215 @@ void TrialStatistics::finishTrial()
    mMean   = mEX;
    mStdDev = mUX;
 
-   mXMean = mXSum/mPutCount;
+   mXMean = mXSum/mCount;
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-void TrialStatistics::show(char* aLabel)
+void TrialStatistics::show(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("%5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
-         mPutCount,
-         mEX,
-         mUX,
-         mMinX,
-         mMaxX);
-   }
-   else
-   {
-      printf("%8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
-         aLabel,
-         mPutCount,
-         mEX,
-         mUX,
-         mMinX,
-         mMaxX);
-   }
+   Prn::print(aPF,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+      aLabel,
+      mCount,
+      mEX,
+      mUX,
+      mMinX,
+      mMaxX);
 }
 
 //******************************************************************************
 
-void TrialStatistics::showDeg(char* aLabel)
+void TrialStatistics::showDeg(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("%5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
-         mPutCount,
-         deg(mEX),
-         deg(mUX),
-         deg(mMinX),
-         deg(mMaxX));
-   }
-   else
-   {
-      printf("%8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f\n",
-         aLabel,
-         mPutCount,
-         deg(mEX),
-         deg(mUX),
-         deg(mMinX),
-         deg(mMaxX));
-   }
+   Prn::print(aPF,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+      aLabel,
+      mCount,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void TrialStatistics::show1(char* aLabel)
+void TrialStatistics::showEUMM(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("$$ %12.6f %12.6f %12.6f %12.6f\n",
-         mEX,
-         mUX,
-         mMinX,
-         mMaxX);
-   }
-   else
-   {
-      printf("%8s $$ %12.6f %12.6f %12.6f %12.6f\n",
-         aLabel,
-         mEX,
-         mUX,
-         mMinX,
-         mMaxX);
-   }
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mUX,
+      mMinX,
+      mMaxX);
 }
 
 //******************************************************************************
 
-void TrialStatistics::showDeg1(char* aLabel)
+void TrialStatistics::showDegEUMM(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("$$ %12.6f %12.6f %12.6f %12.6f\n",
-         deg(mEX),
-         deg(mUX),
-         deg(mMinX),
-         deg(mMaxX));
-   }
-   else
-   {
-      printf("%8s $$ %12.6f %12.6f %12.6f %12.6f\n",
-         aLabel,
-         deg(mEX),
-         deg(mUX),
-         deg(mMinX),
-         deg(mMaxX));
-   }
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-void TrialStatistics::show2(char* aLabel)
+void TrialStatistics::showEUX(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("$$ %12.6f %12.6f %12.6f\n",
-         mEX,
-         mUX,
-         mExtX);
-   }
-   else
-   {
-      printf("%8s $$ %12.6f %12.6f %12.6f\n",
-         aLabel,
-         mEX,
-         mUX,
-         mExtX);
-   }
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mUX,
+      mExtX);
 }
 
 //******************************************************************************
 
-void TrialStatistics::showDeg2(char* aLabel)
+void TrialStatistics::showDegEUX(int aPF,char* aLabel)
 {
-   if (aLabel == 0)
-   {
-      printf("$$ %12.6f %12.6f %12.6f\n",
-         deg(mEX),
-         deg(mUX),
-         deg(mExtX));
-   }
-   else
-   {
-      printf("%8s $$ %12.6f %12.6f %12.6f\n",
-         aLabel,
-         deg(mEX),
-         deg(mUX),
-         deg(mExtX));
-   }
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mUX),
+      deg(mExtX));
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::showEMM(int aPF,char* aLabel)
+{
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::showDegEMM(int aPF,char* aLabel)
+{
+   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::log(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+      aLabel,
+      mCount,
+      mEX,
+      mUX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDeg(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+      aLabel,
+      mCount,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::logEUMM(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mUX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegEUMM(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::logEUX(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mUX,
+      mExtX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegEUX(int aLogNum,char* aLabel)
+{
+   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mUX),
+      deg(mExtX));
+}
+
+//******************************************************************************
+
+void TrialStatistics::logUX(int aLogNum)
+{
+   Log::write(aLogNum,"%12.6f,%12.6f,",
+      mUX,
+      mExtX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegUX(int aLogNum)
+{
+   Log::write(aLogNum,"%12.6f,%12.6f,",
+      deg(mUX),
+      deg(mExtX));
+}
+
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 }//namespace
 

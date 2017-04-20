@@ -80,13 +80,13 @@ void TestOne::doRun3()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show();
+   tStatistics.show(0,"X   ");
 
    tStatistics.collectValue(tHistoryY);
-   tStatistics.show();
+   tStatistics.show(0,"Y   ");
 
    tStatistics.collectValue(tHistoryZ);
-   tStatistics.show();
+   tStatistics.show(0,"Z   ");
 
    //***************************************************************************
    //***************************************************************************

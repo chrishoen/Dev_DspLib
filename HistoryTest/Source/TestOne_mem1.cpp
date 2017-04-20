@@ -80,11 +80,11 @@ void TestOne::doMem1()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistory1);
-   tStatistics.show();
+   tStatistics.show(0,"X1  ");
    tStatistics.collectValue(tHistory2);
-   tStatistics.show();
+   tStatistics.show(0,"X2  ");
    tStatistics.collectValue(tHistory3);
-   tStatistics.show();
+   tStatistics.show(0,"X3  ");
 
    Prn::print(0, "TestOne::doMem1");
    return;

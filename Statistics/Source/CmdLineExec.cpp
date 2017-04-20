@@ -65,7 +65,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    }
 
    tF.finishTrial();
-   tF.show();
+   tF.show(0,"X1  ");
    Prn::print(0,"");
 
 
@@ -86,7 +86,7 @@ void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
    }
 
    tF.finishTrial();
-   tF.show();
+   tF.show(0,"X1  ");
    Prn::print(0,"");
 }
 

@@ -80,13 +80,13 @@ void DemoOne::doDemo2()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show();
+   tStatistics.show(0,"X  ");
 
    tStatistics.collectValue(tHistoryDX1);
-   tStatistics.show();
+   tStatistics.show(0,"DX1");
 
    tStatistics.collectValue(tHistoryDX2);
-   tStatistics.show();
+   tStatistics.show(0,"DX2");
 
    //***************************************************************************
    //***************************************************************************

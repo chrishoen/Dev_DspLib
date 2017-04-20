@@ -67,13 +67,13 @@ void TestOne::doCausal12()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show();
+   tStatistics.show(0,"X   ");
 
    tStatistics.collectValue(tHistoryY);
-   tStatistics.show();
+   tStatistics.show(0,"Y   ");
 
    tStatistics.collectValue(tHistoryDY);
-   tStatistics.show();
+   tStatistics.show(0,"DY   ");
 
    //***************************************************************************
    //***************************************************************************

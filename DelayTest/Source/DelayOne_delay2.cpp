@@ -60,10 +60,10 @@ void DelayOne::doDelay2()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistory1);
-   tStatistics.show();
+   tStatistics.show(0,"X1  ");
 
    tStatistics.collectValue(tHistory2);
-   tStatistics.show();
+   tStatistics.show(0,"X2  ");
 
    //***************************************************************************
    //***************************************************************************
