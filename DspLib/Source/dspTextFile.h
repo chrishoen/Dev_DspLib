@@ -31,7 +31,8 @@ public:
    //---------------------------------------------------------------------------
    // Open the text file for write
 
-   bool open (char* aFilename);
+   bool open (char* aFileName);
+   bool open (char* aFileDir,char* aFileName);
 
    //---------------------------------------------------------------------------
    // Write to the text file
@@ -72,6 +73,7 @@ public:
    // Open the text file for write
 
    bool open (char* aFilename);
+   bool open (char* aFileDir,char* aFileName);
 
    //---------------------------------------------------------------------------
 

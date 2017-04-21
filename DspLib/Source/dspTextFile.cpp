@@ -34,9 +34,9 @@ LogFileWriter::LogFileWriter()
 //******************************************************************************
 // Open the file
 
-bool LogFileWriter::open(char* aFilename)
+bool LogFileWriter::open(char* aFileName)
 {            
-   mFile = fopen(aFilename,"w");
+   mFile = fopen(aFileName,"w");
 
    if (mFile==0)
    {
@@ -44,6 +44,18 @@ bool LogFileWriter::open(char* aFilename)
    }
 
    return true;
+}
+
+bool LogFileWriter::open(char* aFileDir,char* aFileName)
+{            
+   // Construct file path.
+   char tFilePath[cMaxStringSize];
+   strcpy(tFilePath,aFileDir);
+   strcat(tFilePath,"\\");
+   strcat(tFilePath,aFileName);
+
+   // Open file.
+   return open(tFilePath);
 }
 
 //******************************************************************************
@@ -107,6 +119,18 @@ bool CsvFileWriter::open(char* aFilename)
    }
 
    return true;
+}
+
+bool CsvFileWriter::open(char* aFileDir,char* aFileName)
+{            
+   // Construct file path.
+   char tFilePath[cMaxStringSize];
+   strcpy(tFilePath,aFileDir);
+   strcat(tFilePath,"\\");
+   strcat(tFilePath,aFileName);
+
+   // Open file.
+   return open(tFilePath);
 }
 
 //******************************************************************************
