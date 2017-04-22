@@ -46,10 +46,25 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   double tV1[3] = { 0.0 };
-   double tV2[3] = { 1.0,2.0,3.0 };
+   Dsp::TrialStatistics tF;
+   tF.startTrial();
+
+   for (int i = 0; i<100000; i++)
+   {
+//    tF.put((double)my_irand(0,1));
+      tF.put(my_frand());
+   }
+
+   tF.finishTrial();
 
    Prn::print(0,"");
+   tF.show(0,"123456");
+
+   Prn::print(0,"");
+   tF.show(0,"1234567890");
+
+
+
 }
 
 //******************************************************************************

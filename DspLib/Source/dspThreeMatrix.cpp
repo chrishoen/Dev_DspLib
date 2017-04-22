@@ -151,7 +151,7 @@ void ThreeMatrix::show(char* aLabel)
    {
       for (int i=1;i<=3;i++)
       {
-         printf("%s ",aLabel);
+         printf("%-10s ",aLabel);
          for (int j=1;j<=3;j++)
          {
             printf("%11.6f ",e(i,j));

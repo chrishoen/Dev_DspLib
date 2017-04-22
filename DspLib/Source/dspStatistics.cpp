@@ -150,7 +150,7 @@ void TrialStatistics::finishTrial()
 
 void TrialStatistics::show(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Prn::print(aPF,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       mEX,
@@ -163,7 +163,7 @@ void TrialStatistics::show(int aPF,char* aLabel)
 
 void TrialStatistics::showDeg(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Prn::print(aPF,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       deg(mEX),
@@ -178,7 +178,7 @@ void TrialStatistics::showDeg(int aPF,char* aLabel)
 
 void TrialStatistics::showEUMM(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -190,7 +190,7 @@ void TrialStatistics::showEUMM(int aPF,char* aLabel)
 
 void TrialStatistics::showDegEUMM(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mUX),
@@ -204,7 +204,7 @@ void TrialStatistics::showDegEUMM(int aPF,char* aLabel)
 
 void TrialStatistics::showEUX(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -215,7 +215,7 @@ void TrialStatistics::showEUX(int aPF,char* aLabel)
 
 void TrialStatistics::showDegEUX(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mUX),
@@ -228,7 +228,7 @@ void TrialStatistics::showDegEUX(int aPF,char* aLabel)
 
 void TrialStatistics::showEMM(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mMinX,
@@ -239,7 +239,7 @@ void TrialStatistics::showEMM(int aPF,char* aLabel)
 
 void TrialStatistics::showDegEMM(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-8s $$ %12.6f %12.6f %12.6f",
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mMinX),
@@ -255,7 +255,7 @@ void TrialStatistics::showDegEMM(int aPF,char* aLabel)
 
 void TrialStatistics::log(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLogNum,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       mEX,
@@ -268,7 +268,7 @@ void TrialStatistics::log(int aLogNum,char* aLabel)
 
 void TrialStatistics::logDeg(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLogNum,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       deg(mEX),
@@ -283,7 +283,7 @@ void TrialStatistics::logDeg(int aLogNum,char* aLabel)
 
 void TrialStatistics::logEUMM(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -295,7 +295,7 @@ void TrialStatistics::logEUMM(int aLogNum,char* aLabel)
 
 void TrialStatistics::logDegEUMM(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f %12.6f",
+   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mUX),
@@ -309,7 +309,7 @@ void TrialStatistics::logDegEUMM(int aLogNum,char* aLabel)
 
 void TrialStatistics::logEUX(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f",
+   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -320,7 +320,7 @@ void TrialStatistics::logEUX(int aLogNum,char* aLabel)
 
 void TrialStatistics::logDegEUX(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-8s $$ %12.6f %12.6f %12.6f",
+   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mUX),
