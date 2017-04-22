@@ -10,7 +10,7 @@
 
 #include "dspPdw.h"
 #include "dspFilterFilters.h"
-#include "dspStatistics.h"
+#include "dspStatistics2.h"
 
 namespace Dsp
 {

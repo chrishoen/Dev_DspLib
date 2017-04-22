@@ -133,6 +133,9 @@
     <ClCompile Include="Source\dspThreeAxisAngle.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspStatistics2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -259,6 +262,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspThreeAxisAngle.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspStatistics2.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

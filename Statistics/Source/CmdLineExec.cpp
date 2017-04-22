@@ -7,6 +7,7 @@
 #include "prnPrint.h"
 #include "my_functions.h"
 #include "dspStatistics.h"
+#include "dspStatistics2.h"
 
 #include "CmdLineExec.h"
 

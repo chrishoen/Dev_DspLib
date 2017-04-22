@@ -56,6 +56,7 @@
     <ClCompile Include="Source\dspSample.cpp" />
     <ClCompile Include="Source\dspSignal.cpp" />
     <ClCompile Include="Source\dspStatistics.cpp" />
+    <ClCompile Include="Source\dspStatistics2.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dspThreeAxisAngle.cpp" />
     <ClCompile Include="Source\dspThreeMatrix.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="Source\dspSample.h" />
     <ClInclude Include="Source\dspSignal.h" />
     <ClInclude Include="Source\dspStatistics.h" />
+    <ClInclude Include="Source\dspStatistics2.h" />
     <ClInclude Include="Source\dspTextFile.h" />
     <ClInclude Include="Source\dspThreeAxisAngle.h" />
     <ClInclude Include="Source\dspThreeMath.h" />
