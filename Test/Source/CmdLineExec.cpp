@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <atomic>
+#include <stdarg.h>
 
 #include "risContainers2.h"
 #include "risPortableCalls.h"
@@ -68,9 +69,25 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 }
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+int dsp_imin(int n, ...)
+{
+    va_list ap;
+    int sum = 0;
+
+    va_start(ap, n);
+    for (int i=0; i<n; i++)
+        sum += va_arg(ap, int);
+    va_end(ap);
+    return sum;
+}
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
+   int sum = dsp_imin(3,1,2,3);
+   Prn::print(0, " summate %d",sum);
 }
 
 //******************************************************************************
