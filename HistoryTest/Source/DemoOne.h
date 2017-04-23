@@ -17,5 +17,6 @@ public:
    // Demos
    void doDemo1();
    void doDemo2();
+   void doDemo3();
  };
 

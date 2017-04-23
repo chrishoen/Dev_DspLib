@@ -49,6 +49,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("Demo1"))  executeDemo1(aCmd);
    if (aCmd->isCmd("Demo2"))  executeDemo2(aCmd);
+   if (aCmd->isCmd("Demo3"))  executeDemo3(aCmd);
 }
 
 //******************************************************************************
@@ -80,6 +81,20 @@ void CmdLineExec::executeDemo2(Ris::CmdLineCmd* aCmd)
 
    DemoOne tDemoOne;
    tDemoOne.doDemo2();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeDemo3(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("Demo3");
+
+   DemoOne tDemoOne;
+   tDemoOne.doDemo3();
 }
 
 //******************************************************************************

@@ -169,6 +169,7 @@
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\DemoOne_demo1.cpp" />
     <ClCompile Include="Source\DemoOne_demo2.cpp" />
+    <ClCompile Include="Source\DemoOne_demo3.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Parms.cpp" />

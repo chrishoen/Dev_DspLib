@@ -63,6 +63,7 @@ public:
    static const int cMaxStringSize=400;
    char mOutputFile  [cMaxStringSize];
    char mOutputFile2 [cMaxStringSize];
+   char mOutputFile3 [cMaxStringSize];
 
    Dsp::HistoryGenParms  mHistoryGenParms;
    Dsp::HistoryFilterParms mHistoryFilterParms1;
