@@ -20,6 +20,13 @@ Extends math.h
 #define DSP_RAD   DSP_PI/180.0
 #define DSP_DEG   180.0/DSP_PI
 
+static constexpr double cDsp_C     = 299792458.0;
+static constexpr double cDsp_Pi    = 3.14159265358979323846264338327950288419716939937510;
+static constexpr double cDsp_TwoPi = 2.0*cDsp_Pi;
+
+static constexpr double cDsp_Rad   = cDsp_Pi/180.0;
+static constexpr double cDsp_Deg   = 180.0/cDsp_Pi;
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
