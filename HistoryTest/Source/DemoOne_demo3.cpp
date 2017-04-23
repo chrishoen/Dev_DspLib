@@ -15,6 +15,7 @@ Description:
 #include "dspHistoryTextFile.h"
 #include "dspHistoryGenerator.h"
 #include "dspHistoryFilterOperator.h"
+#include "dspHistoryConverters.h"
 
 #include "Parms.h"
 #include "DemoOne.h"
@@ -36,13 +37,27 @@ void DemoOne::doDemo3()
    // Generate a signal history.
 
    // Signal history.
-   History tHistoryX;
+   History tHistoryX_Type2;
 
    // Signal history generator.
    HistoryGenerator tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistory(tHistoryX);
+   tGen.generateHistory(tHistoryX_Type2);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history, converted
+
+   // Signal history.
+   History tHistoryX_Type1;
+
+   // Signal history generator.
+   convertHistoryFromType2ToType1(
+      tHistoryX_Type2,
+      gParms.mHistoryGenParms.mFs,
+      tHistoryX_Type1);
 
    //***************************************************************************
    //***************************************************************************
@@ -56,7 +71,7 @@ void DemoOne::doDemo3()
    HistoryFilterOperator tSmoother(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:X->XS.
-   tSmoother.operate(tHistoryX,tHistoryXS);
+   tSmoother.operate(tHistoryX_Type1,tHistoryXS);
 
    //***************************************************************************
    //***************************************************************************
@@ -80,14 +95,17 @@ void DemoOne::doDemo3()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistoryX);
-   tStatistics.show(0,"X  ");
+   tStatistics.collectValue(tHistoryX_Type2);
+   tStatistics.show(0,"X_Type2");
+
+   tStatistics.collectValue(tHistoryX_Type1);
+   tStatistics.show(0,"X_Type1");
 
    tStatistics.collectValue(tHistoryXS);
-   tStatistics.show(0,"XS ");
+   tStatistics.show(0,"XS");
 
    tStatistics.collectValue(tHistoryDY);
-   tStatistics.show(0,"DY  ");
+   tStatistics.show(0,"DY");
 
    //***************************************************************************
    //***************************************************************************
@@ -96,8 +114,13 @@ void DemoOne::doDemo3()
 
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
+
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryXS,tHistoryDY);
+   tSampleWriter.writeHistory(tHistoryX_Type2,tHistoryX_Type1);
+   tSampleWriter.close();
+
+   tSampleWriter.open(gParms.mOutputFile2);
+   tSampleWriter.writeHistory(tHistoryX_Type2,tHistoryXS,tHistoryDY);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -105,6 +128,6 @@ void DemoOne::doDemo3()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "DemoOne::doDemo3 %d",tHistoryX.mMaxSamples);
+   Prn::print(0, "DemoOne::doDemo3 %d %d",tHistoryX_Type2.mMaxSamples,tHistoryX_Type1.mMaxSamples);
 }
 

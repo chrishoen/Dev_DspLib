@@ -270,7 +270,9 @@ SectionBegin Demo3
    HistoryGenParms
    {
       GenType                  SinWave
+      TimeType                 Type1
       Sigma                    0.5
+      Sigma                    0.0
    }
 
    HistoryFilterParms1
