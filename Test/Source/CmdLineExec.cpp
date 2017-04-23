@@ -7,6 +7,7 @@
 
 #include "risContainers2.h"
 #include "risPortableCalls.h"
+#include "dsp_functions.h"
 
 #include "prnPrint.h"
 #include "CmdLineExec.h"
@@ -72,22 +73,17 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-int dsp_imin(int n, ...)
-{
-    va_list ap;
-    int sum = 0;
-
-    va_start(ap, n);
-    for (int i=0; i<n; i++)
-        sum += va_arg(ap, int);
-    va_end(ap);
-    return sum;
-}
-
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   int sum = dsp_imin(3,1,2,3);
-   Prn::print(0, " summate %d",sum);
+   Prn::print(0, "dsp_imin  %d",dsp_imin_n(3, 1,2,3));
+   Prn::print(0, "dsp_imax  %d",dsp_imax_n(3, 1,2,3));
+
+   double tX1 = 1.1;
+   double tX2 = 2.2;
+   double tX3 = 3.3;
+
+   Prn::print(0, "dsp_fmin  %10.2f",dsp_fmin_n(3, tX1,tX2,tX3));
+   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmax_n(3, tX1,tX2,tX3));
 }
 
 //******************************************************************************

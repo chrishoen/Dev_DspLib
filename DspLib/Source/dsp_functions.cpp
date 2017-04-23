@@ -10,6 +10,7 @@ Description:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 #include <time.h>
 
 #include "dsp_functions.h"
@@ -24,6 +25,79 @@ double dsp_fmax (double aA,double aB) {return aA > aB ? aA : aB;}
 
 int    dsp_imin (int aA,int aB) {return aA > aB ? aB : aA;}
 int    dsp_imax (int aA,int aB) {return aA > aB ? aA : aB;}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Min,Max
+
+int dsp_imin_n(int aN, ...)
+{
+    va_list ap;
+    int a;
+
+    va_start(ap, aN);
+    for (int i = 0; i < aN; i++)
+    {
+       int x = va_arg(ap, int);
+       if (i==0) a = x;
+       else      a = dsp_imin(a,x);
+    }
+    va_end(ap);
+    return a;
+}
+
+int dsp_imax_n(int aN, ...)
+{
+    va_list ap;
+    int a;
+
+    va_start(ap, aN);
+    for (int i = 0; i < aN; i++)
+    {
+       int x = va_arg(ap, int);
+       if (i==0) a = x;
+       else      a = dsp_imax(a,x);
+    }
+    va_end(ap);
+    return a;
+}
+
+double dsp_fmin_n(int aN, ...)
+{
+    va_list ap;
+    double a;
+
+    va_start(ap, aN);
+    for (int i = 0; i < aN; i++)
+    {
+       double x = va_arg(ap, double);
+       if (i==0) a = x;
+       else      a = dsp_fmin(a,x);
+    }
+    va_end(ap);
+    return a;
+}
+
+double dsp_fmax_n(int aN, ...)
+{
+    va_list ap;
+    double a;
+
+    va_start(ap, aN);
+    for (int i = 0; i < aN; i++)
+    {
+       double x = va_arg(ap, double);
+       if (i==0) a = x;
+       else      a = dsp_fmax(a,x);
+    }
+    va_end(ap);
+    return a;
+}
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Min,Max
 
 int    my_ibound(int aA, int aLowerBound, int aUpperBound)
 {

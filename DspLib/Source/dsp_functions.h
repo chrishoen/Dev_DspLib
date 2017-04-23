@@ -19,6 +19,11 @@ double dsp_fmax (double aA,double aB);
 int    dsp_imin (int aA,int aB);
 int    dsp_imax (int aA,int aB);
 
+int    dsp_imin_n  (int aN, ...);
+int    dsp_imax_n  (int aN, ...);
+double dsp_fmin_n  (int aN, ...);
+double dsp_fmax_n  (int aN, ...);
+
 int    my_ibound (int aA,int aLowerBound,int aUpperBound);
 
 // Close to
