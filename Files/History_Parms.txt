@@ -12,7 +12,8 @@ SectionBegin Default
    //-----------------------------------------------------------------
    // Parms.
 
-   Outputfile C:\Alpha\Data\SignalHistory.csv
+   Outputfile  C:\Alpha\Data\SignalHistory.csv
+   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
 
    HistoryMaxSamples           10000
    HistoryDeltaT               1.0
@@ -267,10 +268,13 @@ SectionEnd
 
 SectionBegin Demo3
 
+   Outputfile  C:\Alpha\Data\SignalHistory.csv
+   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
+
    HistoryGenParms
    {
       GenType                  SinWave
-      TimeType                 Type1
+      TimeType                 Type2
       Sigma                    0.5
       Sigma                    0.0
    }

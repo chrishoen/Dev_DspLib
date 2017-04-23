@@ -34,7 +34,7 @@ void DemoOne::doDemo3()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Generate a signal history.
+   // Generate a signal history for type2.
 
    // Signal history.
    History tHistoryX_Type2;
@@ -48,7 +48,7 @@ void DemoOne::doDemo3()
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Generate a signal history, converted
+   // Generate a signal history, type 1 converted from type2
 
    // Signal history.
    History tHistoryX_Type1;
@@ -120,7 +120,7 @@ void DemoOne::doDemo3()
    tSampleWriter.close();
 
    tSampleWriter.open(gParms.mOutputFile2);
-   tSampleWriter.writeHistory(tHistoryX_Type2,tHistoryXS,tHistoryDY);
+   tSampleWriter.writeHistory(tHistoryX_Type1,tHistoryXS,tHistoryDY);
    tSampleWriter.close();
 
    //***************************************************************************
