@@ -84,6 +84,9 @@ void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 
    Prn::print(0, "dsp_fmin  %10.2f",dsp_fmin_n(3, tX1,tX2,tX3));
    Prn::print(0, "dsp_fmax  %10.2f",dsp_fmax_n(3, tX1,tX2,tX3));
+
+   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmin_n(3, 1.11,2.22,3.33));
+   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmax_n(3, 1.11,2.22,3.33));
 }
 
 //******************************************************************************
