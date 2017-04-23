@@ -99,13 +99,26 @@ double dsp_fmax_n(int aN, ...)
 //******************************************************************************
 // Min,Max
 
-int    my_ibound(int aA, int aLowerBound, int aUpperBound)
+int    dsp_ibound(int aA, int aLowerBound, int aUpperBound)
 {
    if (aA < aLowerBound) return aLowerBound;
    if (aA > aUpperBound) return aUpperBound;
    return aA;
 }
 
+bool dsp_is_inbounds(int aA, int aLowerBound, int aUpperBound)
+{
+   if (aA < aLowerBound) return false;
+   if (aA > aUpperBound) return false;
+   return true;
+}
+
+bool dsp_is_inbounds(double aA, double aLowerBound, double aUpperBound)
+{
+   if (aA < aLowerBound) return false;
+   if (aA > aUpperBound) return false;
+   return true;
+}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

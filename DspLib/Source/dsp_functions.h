@@ -24,7 +24,10 @@ int    dsp_imax_n  (int aN, ...);
 double dsp_fmin_n  (int aN, ...);
 double dsp_fmax_n  (int aN, ...);
 
-int    my_ibound (int aA,int aLowerBound,int aUpperBound);
+// Bounds
+int    dsp_ibound    (int aA,int aLowerBound,int aUpperBound);
+bool dsp_is_inbounds (int aA,int aLowerBound,int aUpperBound);
+bool dsp_is_inbounds (double aA,double aLowerBound,double aUpperBound);
 
 // Close to
 bool dsp_closeto (double aA,double aB,double aResolution);
