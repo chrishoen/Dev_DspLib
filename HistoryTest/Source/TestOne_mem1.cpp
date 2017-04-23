@@ -29,7 +29,7 @@ using namespace Dsp;
 
 void my_test_function(History aX)
 {
-   aX.show("my_test_function");
+   aX.show(0,"my_test_function");
 }
 
 void TestOne::doMem1()
@@ -43,7 +43,7 @@ void TestOne::doMem1()
    printf("Instantiate History1\n");
    History tHistory1;
 
-   tHistory1.show("History1 first");
+   tHistory1.show(0,"History1 first");
 
    // Signal history generator.
    HistoryGenerator tGen(gParms.mHistoryGenParms);
@@ -51,7 +51,7 @@ void TestOne::doMem1()
    // Generate the history.
    tGen.generateHistory(tHistory1);
 
-   tHistory1.show("History1 second");
+   tHistory1.show(0,"History1 second");
 
 
    printf("Instantiate History2\n");
@@ -67,10 +67,10 @@ void TestOne::doMem1()
    printf("Call my_test_function\n");
    my_test_function(tHistory4);
 
-   tHistory1.show("History1");
-   tHistory2.show("History2");
-   tHistory3.show("History3");
-   tHistory4.show("History3");
+   tHistory1.show(0,"History1");
+   tHistory2.show(0,"History2");
+   tHistory3.show(0,"History3");
+   tHistory4.show(0,"History3");
 
    //***************************************************************************
    //***************************************************************************

@@ -223,22 +223,17 @@ History& History::operator= (const History& aRhs)
 //******************************************************************************
 // Show
 
-void History::show(char* aLabel)
+void History::show(int aPF,char* aLabel)
 {
-   if (aLabel)
-   {
-   Prn::print(Prn::DspRun1,"History             %10s",  aLabel);
-   }
-
-   Prn::print(Prn::DspRun1,"Valid               %10s",  my_string_from_bool(isValid()));
-   Prn::print(Prn::DspRun1,"ResourceCount       %10d",  getResourceCount());
-   Prn::print(Prn::DspRun1,"mMaxSamples         %10d",  mMaxSamples);
-   Prn::print(Prn::DspRun1,"mNumSamples         %10d",  mNumSamples);
-
-   if (aLabel)
-   {
-   Prn::print(Prn::DspRun1,"");
-   }
+   Prn::print(aPF," ");
+   Prn::print(aPF,"History               %10s",    aLabel);
+   Prn::print(aPF,"Valid                 %10s",    my_string_from_bool(isValid()));
+   Prn::print(aPF,"ResourceCount         %10d",    getResourceCount());
+   Prn::print(aPF,"MaxSamples            %10d",    mMaxSamples);
+   Prn::print(aPF,"NumSamples            %10d",    mNumSamples);
+   Prn::print(aPF,"BeginTime             %10.4f",  mBeginTime);
+   Prn::print(aPF,"EndTime               %10.4f",  mEndTime);
+   Prn::print(aPF,"Duration              %10.4f",  mDuration);
 }
 
 //******************************************************************************
