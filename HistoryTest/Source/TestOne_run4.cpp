@@ -58,8 +58,8 @@ void TestOne::doRun4()
       gParms.mHistoryGenParms.mFs,
       tHistoryY);
 
-   tHistoryX.show(Prn::DspRun1,"X");
-   tHistoryY.show(Prn::DspRun1,"Y");
+   tHistoryX.show2(Prn::DspRun1,"X");
+   tHistoryY.show2(Prn::DspRun1,"Y");
    Prn::print(Prn::DspRun1," ");
 
    //***************************************************************************

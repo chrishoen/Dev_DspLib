@@ -178,7 +178,8 @@ public:
    //***************************************************************************
    // More.
 
-   void show(int aPrintFilter,char* aLabel);
+   void show1(int aPrintFilter,char* aLabel);
+   void show2(int aPrintFilter,char* aLabel);
 };
 
 //******************************************************************************
