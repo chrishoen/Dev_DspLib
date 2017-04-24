@@ -45,6 +45,7 @@
     <ClCompile Include="Source\dspHistoryLoopClock.cpp" />
     <ClCompile Include="Source\dspHistoryStatistics.cpp" />
     <ClCompile Include="Source\dspHistoryTextFile.cpp" />
+    <ClCompile Include="Source\dspHistory_init.cpp" />
     <ClCompile Include="Source\dspHistory_read.cpp" />
     <ClCompile Include="Source\dspHistory_write.cpp" />
     <ClCompile Include="Source\dspLut.cpp" />

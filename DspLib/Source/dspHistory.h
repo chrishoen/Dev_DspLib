@@ -67,6 +67,8 @@ public:
 
    // Initialize varaibles. Do not allocate memory.
    History();
+   void reset();
+
    // Decrement the resource counter. If it is zero then deallocate memory.
   ~History();
   void resetVariables();
