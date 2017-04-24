@@ -248,7 +248,7 @@ void History::show1(int aPF,char* aLabel)
 
 void History::show2(int aPF,char* aLabel)
 {
-   Prn::print(aPF," ");
+   Prn::print(aPF,"History               %10s",    aLabel);
    Prn::print(aPF,"MaxSamples            %10d",    mMaxSamples);
    Prn::print(aPF,"NumSamples            %10d",    mNumSamples);
    Prn::print(aPF,"BeginTime             %10.4f",  mBeginTime);
