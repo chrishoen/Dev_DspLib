@@ -150,7 +150,7 @@ void TrialStatistics::finishTrial()
 
 void TrialStatistics::show(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Prn::print(aPF,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       mEX,
@@ -163,7 +163,7 @@ void TrialStatistics::show(int aPF,char* aLabel)
 
 void TrialStatistics::showDeg(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Prn::print(aPF,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       deg(mEX),
@@ -255,7 +255,7 @@ void TrialStatistics::showDegEMM(int aPF,char* aLabel)
 
 void TrialStatistics::log(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLogNum,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       mEX,
@@ -268,7 +268,7 @@ void TrialStatistics::log(int aLogNum,char* aLabel)
 
 void TrialStatistics::logDeg(int aLogNum,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s %5llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLogNum,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       deg(mEX),
