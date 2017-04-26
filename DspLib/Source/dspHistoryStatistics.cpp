@@ -32,7 +32,7 @@ void HistoryStatistics::collectValue(History& aHistory)
    for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Put history value to statistics.
-      BaseClass::put(aHistory.mValue[k]);
+      BaseClass::put(aHistory.mValue[k],aHistory.mTime[k]);
    }
 
    // Finish the statistics.
