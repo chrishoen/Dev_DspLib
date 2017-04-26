@@ -48,6 +48,9 @@ void TrialStatistics::startTrial(double aXLimit)
    mMaxX = 0.0;
    mExtX = 0.0;
    mVariance = 0.0;
+   mTimeMinX = 0.0;
+   mTimeMaxX = 0.0;
+   mTimeExtX = 0.0;
 
    mOLMean = 0.0;
    mOLM2 = 0.0;
@@ -60,11 +63,25 @@ void TrialStatistics::startTrial(double aXLimit)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Put input value and calculate intermediate variables.
 
 void TrialStatistics::put(double aX)
 {
-   //--------------------------------------------------------------------------- 
-   // Store current input
+   put(aX,0.0);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put input value with the time that it occured and calculate
+// intermediate variables
+
+void TrialStatistics::put(double aX,double aTime)
+{
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Store current input. Ignore outliers.
 
    if (mXLimitFlag)
    {
@@ -75,26 +92,49 @@ void TrialStatistics::put(double aX)
    mX = aX;
    mCount++;
 
-   //--------------------------------------------------------------------------- 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Update min and max
 
-   // If first in period, set to current input  
+   // If first then set to current input  
    if (mCount==1)
    {
       mMinX = mX;
+      mTimeMinX = aTime;
+
       mMaxX = mX;
+      mTimeMaxX = aTime;
+
       mExtX = mX;
+      mTimeExtX = aTime;
    }
    // Else, calculate min and max
    else
    {
-      if (mX < mMinX) mMinX = mX;
-      if (mX > mMaxX) mMaxX = mX;
-      if (fabs(mX) > fabs(mExtX)) mExtX = mX;
+      if (mX < mMinX)
+      {
+         mMinX = mX;
+         mTimeMinX = aTime;
+      }
+
+      if (mX > mMaxX)
+      {
+         mMaxX = mX;
+         mTimeMaxX = aTime;
+      }
+
+      if (fabs(mX) > fabs(mExtX))
+      {
+         mExtX = mX;
+         mTimeExtX = aTime;
+      }
    }
 
-   //--------------------------------------------------------------------------- 
-   // Calculate sums
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Calculate sums for the online algorithm
 
       mOLDelta =  mX - mOLMean;
       mOLMean  += mOLDelta/mCount;

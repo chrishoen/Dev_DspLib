@@ -19,6 +19,8 @@ namespace Dsp
 // signal. The input is the values of the signal. The outputs are expectation,
 // uncertainty (the mean and the standard deviation) and minimum and maximum.
 // The calculations are single pass. Not history buffers are required.
+//
+// google "standard deviation online algorithm".
 
 class TrialStatistics
 {
@@ -29,7 +31,7 @@ public:
    // Members.
 
    // 
-   unsigned long long mCount;    // Number of samples
+   unsigned long long mCount;    // Number of samples.
 
    // Input values
    double   mX;            // Input value
@@ -45,7 +47,11 @@ public:
    double   mMean;         // Expectation (mean)
    double   mStdDev;       // Uncertainty (standard deviation)
    double   mVariance;     // Variance
-   double   mSX;           // EX - ExtX
+   double   mSX;           // Mean - Extremum
+
+   double   mTimeMinX;     // Time that minimum  was encountered 
+   double   mTimeMaxX;     // Time that maximum  was encountered 
+   double   mTimeExtX;     // Time that extremum was encountered 
 
    // Intermediate variables.
    double   mOLMean;       // Online algorithm
@@ -67,12 +73,16 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Initialize
+   // Initialize variables for trials
    void startTrial(double aXLimit=0.0);
    void finishTrial();
 
-   // Put input value.
+   // Put input value and calculate intermediate variables.
    void put(double aX);
+
+   // Put input value with the time that it occured and calculate
+   // intermediate variables
+   void put(double aX,double aTime);
 
    //***************************************************************************
    //***************************************************************************
@@ -103,6 +113,8 @@ public:
    void showCEUS      (int aPrintFilter,char* aLabel);
    void showDegCEUS   (int aPrintFilter,char* aLabel);
 
+   void showTimeExt   (int aPrintFilter,char* aLabel);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -131,6 +143,8 @@ public:
    void logDegEUS    (int aLogNum,char* aLabel);
    void logCEUS      (int aLogNum,char* aLabel);
    void logDegCEUS   (int aLogNum,char* aLabel);
+
+   void logTimeExt   (int aLogNum,char* aLabel);
 };
 
 //******************************************************************************
