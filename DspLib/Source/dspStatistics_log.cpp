@@ -28,9 +28,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 
-void TrialStatistics::log(int aLogNum,char* aLabel)
+void TrialStatistics::log(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       mEX,
@@ -41,9 +41,9 @@ void TrialStatistics::log(int aLogNum,char* aLabel)
 
 //******************************************************************************
 
-void TrialStatistics::logDeg(int aLogNum,char* aLabel)
+void TrialStatistics::logDeg(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f  %12.6f",
       aLabel,
       mCount,
       deg(mEX),
@@ -55,10 +55,13 @@ void TrialStatistics::logDeg(int aLogNum,char* aLabel)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-void TrialStatistics::logEUMM(int aLogNum,char* aLabel)
+void TrialStatistics::logEUMM(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -68,10 +71,36 @@ void TrialStatistics::logEUMM(int aLogNum,char* aLabel)
 
 //******************************************************************************
 
-void TrialStatistics::logDegEUMM(int aLogNum,char* aLabel)
+void TrialStatistics::logDegEUMM(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f %12.6f",
       aLabel,
+      deg(mEX),
+      deg(mUX),
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+
+void TrialStatistics::logCEUMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
+      mEX,
+      mUX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegCEUMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
       deg(mEX),
       deg(mUX),
       deg(mMinX),
@@ -81,10 +110,13 @@ void TrialStatistics::logDegEUMM(int aLogNum,char* aLabel)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
-void TrialStatistics::logEUX(int aLogNum,char* aLabel)
+void TrialStatistics::logEUX(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f",
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       mEX,
       mUX,
@@ -93,9 +125,9 @@ void TrialStatistics::logEUX(int aLogNum,char* aLabel)
 
 //******************************************************************************
 
-void TrialStatistics::logDegEUX(int aLogNum,char* aLabel)
+void TrialStatistics::logDegEUX(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%-10s $$ %12.6f %12.6f %12.6f",
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f",
       aLabel,
       deg(mEX),
       deg(mUX),
@@ -104,20 +136,77 @@ void TrialStatistics::logDegEUX(int aLogNum,char* aLabel)
 
 //******************************************************************************
 
-void TrialStatistics::logUX(int aLogNum)
+void TrialStatistics::logCEUX(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%12.6f,%12.6f,",
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
+      mEX,
       mUX,
       mExtX);
 }
 
 //******************************************************************************
 
-void TrialStatistics::logDegUX(int aLogNum)
+void TrialStatistics::logDegCEUX(int aLN,char* aLabel)
 {
-   Log::write(aLogNum,"%12.6f,%12.6f,",
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
+      deg(mEX),
       deg(mUX),
       deg(mExtX));
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void TrialStatistics::logEMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mEX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegEMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      deg(mEX),
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+
+void TrialStatistics::logCEMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
+      mEX,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegCEMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s %6llu $$ %12.6f %12.6f %12.6f",
+      aLabel,
+      mCount,
+      deg(mEX),
+      deg(mMinX),
+      deg(mMaxX));
 }
 
 //******************************************************************************
