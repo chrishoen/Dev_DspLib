@@ -19,9 +19,6 @@
     <ClCompile Include="Source\dspSignal.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspStatistics.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\dspPdwFreeList.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -137,6 +134,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\dspHistory_init.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspStatistics_calc.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspStatistics_log.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dspStatistics_show.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

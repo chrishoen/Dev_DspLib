@@ -56,8 +56,10 @@
     <ClCompile Include="Source\dspRVector.cpp" />
     <ClCompile Include="Source\dspSample.cpp" />
     <ClCompile Include="Source\dspSignal.cpp" />
-    <ClCompile Include="Source\dspStatistics.cpp" />
     <ClCompile Include="Source\dspStatistics2.cpp" />
+    <ClCompile Include="Source\dspStatistics_calc.cpp" />
+    <ClCompile Include="Source\dspStatistics_log.cpp" />
+    <ClCompile Include="Source\dspStatistics_show.cpp" />
     <ClCompile Include="Source\dspTextFile.cpp" />
     <ClCompile Include="Source\dspThreeAxisAngle.cpp" />
     <ClCompile Include="Source\dspThreeMatrix.cpp" />
