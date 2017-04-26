@@ -37,14 +37,15 @@ public:
    bool     mXLimitFlag;   // Input limit, for ignoring outliers
 
    // Output values
-   double   mEX;           // expectation (mean)
-   double   mUX;           // uncertainty (standard deviation)
-   double   mMinX;         // minimum 
-   double   mMaxX;         // maximum
-   double   mExtX;         // extremum
-   double   mMean;         // expectation (mean)
-   double   mStdDev;       // uncertainty (standard deviation)
-   double   mVariance;     // variance
+   double   mEX;           // Expectation (mean)
+   double   mUX;           // Uncertainty (standard deviation)
+   double   mMinX;         // Minimum 
+   double   mMaxX;         // Maximum
+   double   mExtX;         // Extremum
+   double   mMean;         // Expectation (mean)
+   double   mStdDev;       // Uncertainty (standard deviation)
+   double   mVariance;     // Variance
+   double   mSX;           // EX - ExtX
 
    // Intermediate variables.
    double   mOLMean;       // Online algorithm
@@ -97,6 +98,11 @@ public:
    void showCEMM      (int aPrintFilter,char* aLabel);
    void showDegCEMM   (int aPrintFilter,char* aLabel);
 
+   void showEUS       (int aPrintFilter,char* aLabel);
+   void showDegEUS    (int aPrintFilter,char* aLabel);
+   void showCEUS      (int aPrintFilter,char* aLabel);
+   void showDegCEUS   (int aPrintFilter,char* aLabel);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -120,6 +126,11 @@ public:
    void logDegEMM    (int aLogNum,char* aLabel);
    void logCEMM      (int aLogNum,char* aLabel);
    void logDegCEMM   (int aLogNum,char* aLabel);
+
+   void logEUS       (int aLogNum,char* aLabel);
+   void logDegEUS    (int aLogNum,char* aLabel);
+   void logCEUS      (int aLogNum,char* aLabel);
+   void logDegCEUS   (int aLogNum,char* aLabel);
 };
 
 //******************************************************************************

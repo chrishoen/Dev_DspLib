@@ -139,6 +139,9 @@ void TrialStatistics::finishTrial()
    mStdDev = mUX;
 
    mXMean = mXSum/mCount;
+
+   // More
+   mSX = mEX - mExtX;
 }
 
 //******************************************************************************
