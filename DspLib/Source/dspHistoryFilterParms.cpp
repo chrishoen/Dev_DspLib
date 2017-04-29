@@ -64,7 +64,7 @@ void HistoryFilterParms::show(char* aLabel)
 {
    printf("HistoryFilterParms ************* BEGIN %s\n", aLabel);
 
-   printf("FilterType         %10s\n",   asStringFilterType(mFilterType));
+   printf("FilterType            %10s\n",   asStringFilterType(mFilterType));
 
    switch (mFilterType)
    {
@@ -73,42 +73,42 @@ void HistoryFilterParms::show(char* aLabel)
    case cFilterFirstDeriv:
    case cFilterSecondDeriv:
    {
-      printf("FilterMethod       %10s\n", asStringFilterMethod(mFilterMethod));
-      printf("FilterOrder        %10d\n", mFilterOrder);
-      printf("Fs                 %10.4f\n", mFs);
-      printf("H                  %10.6f\n", mH);
+      printf("FilterMethod          %10s\n", asStringFilterMethod(mFilterMethod));
+      printf("FilterOrder           %10d\n", mFilterOrder);
+      printf("Fs                    %10.4f\n", mFs);
+      printf("H                     %10.6f\n", mH);
    }
    break;
    case cFilterCausal:
    case cFilterNoncausal:
    {
-      printf("CausalType      %13s\n", asStringCausalType(mCausalType));
+      printf("CausalType         %13s\n", asStringCausalType(mCausalType));
       if (mCausalType == cCausalButterworthLP)
       {
-         printf("FilterOrder        %10d\n", mFilterOrder);
-         printf("Fs                 %10.4f\n", mFs);
-         printf("Fc                 %10.4f\n", mFc);
+         printf("FilterOrder           %10d\n", mFilterOrder);
+         printf("Fs                    %10.4f\n", mFs);
+         printf("Fc                    %10.4f\n", mFc);
       }
       else
       {
-         printf("AlphaDT            %10.4f\n", mAlphaDT);
-         printf("AlphaLambda        %10.8f\n", mAlphaLambda);
-         printf("AlphaSelect        %10s\n", asStringAlphaSelect(mAlphaSelect));
+         printf("AlphaDT               %10.4f\n", mAlphaDT);
+         printf("AlphaLambda           %10.8f\n", mAlphaLambda);
+         printf("AlphaSelect          %10s\n", asStringAlphaSelect(mAlphaSelect));
       }
    }
    break;
    }
    return;
-   printf("FilterMethod       %10s\n",   asStringFilterMethod(mFilterMethod));
-   printf("FilterOrder        %10d\n",   mFilterOrder);
-   printf("H                  %10.6f\n", mH);
-   printf("Select             %10d\n",   mSelect);
-   printf("CausalType      %13s\n",   asStringCausalType(mCausalType));
-   printf("Fs                 %10.4f\n", mFs);
-   printf("Fc                 %10.4f\n", mFc);
-   printf("AlphaDT            %10.4f\n", mAlphaDT);
-   printf("AlphaLambda        %10.4f\n", mAlphaLambda);
-   printf("AlphaSelect        %10s\n",   asStringAlphaSelect(mAlphaSelect));
+   printf("FilterMethod          %10s\n",   asStringFilterMethod(mFilterMethod));
+   printf("FilterOrder           %10d\n",   mFilterOrder);
+   printf("H                     %10.6f\n", mH);
+   printf("Select                %10d\n",   mSelect);
+   printf("CausalType         %13s\n",   asStringCausalType(mCausalType));
+   printf("Fs                    %10.4f\n", mFs);
+   printf("Fc                    %10.4f\n", mFc);
+   printf("AlphaDT               %10.4f\n", mAlphaDT);
+   printf("AlphaLambda           %10.4f\n", mAlphaLambda);
+   printf("AlphaSelect           %10s\n",   asStringAlphaSelect(mAlphaSelect));
 
    printf("\n");
 }
