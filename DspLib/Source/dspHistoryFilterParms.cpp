@@ -93,7 +93,7 @@ void HistoryFilterParms::show(char* aLabel)
       {
          printf("AlphaDT               %10.4f\n", mAlphaDT);
          printf("AlphaLambda           %10.8f\n", mAlphaLambda);
-         printf("AlphaSelect          %10s\n", asStringAlphaSelect(mAlphaSelect));
+         printf("AlphaSelect           %10s\n", asStringAlphaSelect(mAlphaSelect));
       }
    }
    break;
