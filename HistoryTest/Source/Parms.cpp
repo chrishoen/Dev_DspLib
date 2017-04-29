@@ -29,7 +29,7 @@ Parms::Parms()
 void Parms::reset()
 {
    BaseClass::reset();
-   strcpy(BaseClass::mFileName,"History_Parms.txt");
+   strcpy(BaseClass::mDefaultFileName,"History_Parms.txt");
 
    mCode1 = 0;
    mCode2 = 0;
