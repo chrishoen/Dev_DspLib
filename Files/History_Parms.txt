@@ -204,7 +204,7 @@ SectionBegin Demo1
    HistoryGenParms
    {
       GenType                  SinWave
-      Sigma                    0.5
+      Sigma                    0.0
    }
 
    HistoryFilterParms1
@@ -240,24 +240,15 @@ SectionBegin Demo2
       Sigma                    0.0
    }
 
-
    HistoryFilterParms1
-   {
-      FilterType               SecondDeriv
-      FilterMethod             SavGol
-      FilterOrder              21
-      H                        0.01
-      Select                   1
-   }
-
-   HistoryFilterParms2
    {
       FilterType               Noncausal
       CausalType               AlphaThree
 
       AlphaDT                  0.01
+      AlphaLambda              0.000001
       AlphaLambda              0.0279155
-      AlphaSelect              XA
+      AlphaSelect              XV
    }
 
 SectionEnd

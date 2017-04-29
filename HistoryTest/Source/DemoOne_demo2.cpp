@@ -50,27 +50,13 @@ void DemoOne::doDemo2()
    // Filter the signal history. Differentiator.
 
    // Signal history.
-   History tHistoryDX1;
+   History tHistoryY;
 
    // Signal history filter.
-   HistoryFilterOperator tDifferentiator1(gParms.mHistoryFilterParms1);
+   HistoryFilterOperator tDifferentiator(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator1.operate(tHistoryX,tHistoryDX1);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Filter the signal history. Differentiator.
-
-   // Signal history.
-   History tHistoryDX2;
-
-   // Signal history filter.
-   HistoryFilterOperator tDifferentiator2(gParms.mHistoryFilterParms2);
-
-   // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator2.operate(tHistoryX,tHistoryDX2);
+   tDifferentiator.operate(tHistoryX,tHistoryY);
 
    //***************************************************************************
    //***************************************************************************
@@ -82,11 +68,8 @@ void DemoOne::doDemo2()
    tStatistics.collectValue(tHistoryX);
    tStatistics.show(0,"X  ");
 
-   tStatistics.collectValue(tHistoryDX1);
-   tStatistics.show(0,"DX1");
-
-   tStatistics.collectValue(tHistoryDX2);
-   tStatistics.show(0,"DX2");
+   tStatistics.collectValue(tHistoryY);
+   tStatistics.show(0,"Y");
 
    //***************************************************************************
    //***************************************************************************
@@ -96,7 +79,7 @@ void DemoOne::doDemo2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryDX1,tHistoryDX2);
+   tSampleWriter.writeHistory(tHistoryX,tHistoryY);
    tSampleWriter.close();
 
    //***************************************************************************
