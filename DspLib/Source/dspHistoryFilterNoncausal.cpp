@@ -211,8 +211,8 @@ void HistoryFilterNoncausal::putToFilterBackward(double aInput, double* aOutput1
    case HistoryFilterParms::cCausalAlphaThree:
    {
       mAlphaThree.put(aInput);
-      *aOutput1 = mAlphaThree.mXX;
-      *aOutput2 = mAlphaThree.mXV;
+      *aOutput1 = -mAlphaThree.mXV;
+      *aOutput2 =  mAlphaThree.mXA;
    }
    break;
    }

@@ -50,13 +50,14 @@ void TestOne::doRun5()
    // Generate a signal history.
 
    // Signal history.
-   History tHistoryY;
+   History tHistoryXV;
+   History tHistoryXA;
 
    // Signal history generator.
    HistoryFilterOperator tFilter(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:X->Y.
-   tFilter.operate(tHistoryX,tHistoryY);
+   tFilter.operate(tHistoryX,tHistoryXV,tHistoryXA);
 
    //***************************************************************************
    //***************************************************************************
@@ -66,10 +67,13 @@ void TestOne::doRun5()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show(0,"X   ");
+   tStatistics.show(0,"X");
 
-   tStatistics.collectValue(tHistoryY);
-   tStatistics.show(0,"Y   ");
+   tStatistics.collectValue(tHistoryXV);
+   tStatistics.show(0,"XV");
+
+   tStatistics.collectValue(tHistoryXA);
+   tStatistics.show(0,"XA");
 
    //***************************************************************************
    //***************************************************************************
@@ -81,7 +85,8 @@ void TestOne::doRun5()
    tSampleWriter.open(gParms.mOutputFile);
    tSampleWriter.writeHistory(
       tHistoryX,
-      tHistoryY);
+      tHistoryXV,
+      tHistoryXA);
    tSampleWriter.close();
 
    //***************************************************************************
