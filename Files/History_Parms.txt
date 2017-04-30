@@ -63,26 +63,23 @@ SectionEnd
 
 SectionBegin Run5
 
-   //-----------------------------------------------------------------
-   // Signal History Generator Parms.
-
    HistoryGenParms
    {
       GenType                  SinWave
-      TimeType                 Type1
+      Sigma                    0.0
+   }
 
-      Duration                 100.0
-      Fs                       100.0
-      Fc                       0.10
+   HistoryFilterParms1
+   {
+      FilterType               Noncausal
+      CausalType               AlphaThree
       FilterOrder              4
+      Fs                       100.0
+      Fc                       0.25
 
-      AngleFlag                true
-      EX                       0.0
-      UX                       1.0
-      A                        180.0
-      Phi                      0.0
-      Tp                       10.0
-      Sigma                    0.00
+      AlphaDT                  0.01
+      AlphaLambda              0.0279155
+      AlphaSelect              XV
    }
 
 SectionEnd
@@ -305,15 +302,13 @@ SectionBegin Run4
 
    HistoryGenParms
    {
-      GenType                  SinWave
+      GenType                  Zero
       TimeType                 Type2
 
-      Duration                 100.0
-      Fs                       100.0
-      A                        1.0
-      Fc                       0.10
-      Phi                      0.0
-      Sigma                    0.00
+      EX                       5.0
+      UX                       0.0
+      Sigma                    0.0
+
    }
 
 SectionEnd

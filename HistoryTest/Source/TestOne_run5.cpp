@@ -14,6 +14,7 @@ Description:
 #include "dspHistoryStatistics.h"
 #include "dspHistoryTextFile.h"
 #include "dspHistoryGenerator.h"
+#include "dspHistoryFilterOperator.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -35,13 +36,27 @@ void TestOne::doRun5()
    // Generate a signal history.
 
    // Signal history.
-   History tHistory;
+   History tHistoryX;
 
    // Signal history generator.
    HistoryGenerator tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistory(tHistory);
+   tGen.generateHistory(tHistoryX);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Generate a signal history.
+
+   // Signal history.
+   History tHistoryY;
+
+   // Signal history generator.
+   HistoryFilterOperator tFilter(gParms.mHistoryFilterParms1);
+
+   // Apply the operator on the history to produce a new history. F:X->Y.
+   tFilter.operate(tHistoryX,tHistoryY);
 
    //***************************************************************************
    //***************************************************************************
@@ -50,8 +65,11 @@ void TestOne::doRun5()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistory);
+   tStatistics.collectValue(tHistoryX);
    tStatistics.show(0,"X   ");
+
+   tStatistics.collectValue(tHistoryY);
+   tStatistics.show(0,"Y   ");
 
    //***************************************************************************
    //***************************************************************************
@@ -61,14 +79,16 @@ void TestOne::doRun5()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistory);
-   tStatistics.show(0,"X   ");
+   tSampleWriter.writeHistory(
+      tHistoryX,
+      tHistoryY);
+   tSampleWriter.close();
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doRun5 %d",tHistory.mMaxSamples);
+   Prn::print(0, "TestOne::doRun5 %d",tHistoryX.mMaxSamples);
 }
 
