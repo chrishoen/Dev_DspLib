@@ -21,9 +21,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Collect trial statistics on the value array of a signal history.
+// Collect trial statistics on the time array of a signal history.
 
-void HistoryStatistics::collectValue(History& aHistory)
+void HistoryStatistics::collectTime(History& aHistory)
 {
    // Start the statistics.
    BaseClass::startTrial();
@@ -32,8 +32,26 @@ void HistoryStatistics::collectValue(History& aHistory)
    for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Put history value to statistics.
-      BaseClass::put(aHistory.mValue[k],aHistory.mTime[k]);
+      BaseClass::put(aHistory.mTime[k]);
    }
+
+   // Finish the statistics.
+   BaseClass::finishTrial();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Collect trial statistics on the value array of a signal history.
+
+void HistoryStatistics::collectValue(History& aHistory)
+{
+   // Start the statistics.
+   BaseClass::startTrial();
+
+
+   // Add the value array to the statistics.
+   addValue(aHistory);
 
    // Finish the statistics.
    BaseClass::finishTrial();
@@ -51,6 +69,38 @@ void HistoryStatistics::collectValue(History& aHistory, double aTimeExclusion,do
    // Start the statistics.
    BaseClass::startTrial();
 
+   // Add the value array to the statistics.
+   addValue(aHistory,aTimeExclusion,aTs);
+
+   // Finish the statistics.
+   BaseClass::finishTrial();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Collect trial statistics on the value array of a signal history.
+
+void HistoryStatistics::addValue(History& aHistory)
+{
+
+   // Loop through all of the samples in the history.
+   for (int k = 0; k < aHistory.mNumSamples; k++)
+   {
+      // Put history value to statistics.
+      BaseClass::put(aHistory.mValue[k],aHistory.mTime[k]);
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Collect trial statistics on the value array of a signal history.
+// Exclude values that are not within a region of interest defined
+// from begin time + exclusion to end time - exclusion.
+
+void HistoryStatistics::addValue(History& aHistory, double aTimeExclusion,double aTs)
+{
    // Loop through all of the samples in the history.
    for (int k = 0; k < aHistory.mNumSamples; k++)
    {
@@ -67,30 +117,6 @@ void HistoryStatistics::collectValue(History& aHistory, double aTimeExclusion,do
          BaseClass::put(aHistory.mValue[k], aHistory.mTime[k]);
       }
    }
-
-   // Finish the statistics.
-   BaseClass::finishTrial();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Collect trial statistics on the time array of a signal history.
-
-void HistoryStatistics::collectTime(History& aHistory)
-{
-   // Start the statistics.
-   BaseClass::startTrial();
-
-   // Loop through all of the samples in the history.
-   for (int k = 0; k < aHistory.mNumSamples; k++)
-   {
-      // Put history value to statistics.
-      BaseClass::put(aHistory.mTime[k]);
-   }
-
-   // Finish the statistics.
-   BaseClass::finishTrial();
 }
 
 }//namespace
