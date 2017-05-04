@@ -46,12 +46,6 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   char tFilePath[200];
-
-   strcpy(tFilePath, Ris::portableGetCurrentWorkingDir());
-   strcat(tFilePath, "..\\..\\Files\\RandomMotionSettings.txt");
-   Prn::print(0, "%s",tFilePath);
-   
 }
 
 //******************************************************************************
