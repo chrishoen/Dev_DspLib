@@ -64,13 +64,13 @@ void HistoryStatistics::collectValue(History& aHistory)
 // Exclude values that are not within a region of interest defined
 // from begin time + exclusion to end time - exclusion.
 
-void HistoryStatistics::collectValue(History& aHistory, double aTimeExclusion,double aTs)
+void HistoryStatistics::collectValue(History& aHistory, double aTimeExclusion)
 {
    // Start the statistics.
    BaseClass::startTrial();
 
    // Add the value array to the statistics.
-   addValue(aHistory,aTimeExclusion,aTs);
+   addValue(aHistory,aTimeExclusion);
 
    // Finish the statistics.
    BaseClass::finishTrial();
@@ -99,14 +99,14 @@ void HistoryStatistics::addValue(History& aHistory)
 // Exclude values that are not within a region of interest defined
 // from begin time + exclusion to end time - exclusion.
 
-void HistoryStatistics::addValue(History& aHistory, double aTimeExclusion,double aTs)
+void HistoryStatistics::addValue(History& aHistory, double aTimeExclusion)
 {
    // Loop through all of the samples in the history.
    for (int k = 0; k < aHistory.mNumSamples; k++)
    {
       // Calculate if the time is within the region of interest.
       double tBeginTime  = aHistory.mBeginTime + aTimeExclusion;
-      double tEndTime    = aHistory.mEndTime   - aTimeExclusion + aTs;
+      double tEndTime    = aHistory.mEndTime   - aTimeExclusion;
       double tTime       = aHistory.mTime[k];
       bool   tGoingTime  = tTime >= tBeginTime && tTime <= tEndTime;
 

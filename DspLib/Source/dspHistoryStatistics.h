@@ -39,13 +39,13 @@ public:
    // Collect trial statistics on the value array of a signal history.
    // Exclude values that are not within a region of interest defined
    // from begin time + exclusion to end time - exclusion.
-   void addValue(History& aHistory, double aTimeExclusion, double aTs);
+   void addValue(History& aHistory, double aTimeExclusion);
 
    // Same as add value, but does a start and finish.
    void collectValue(History& aHistory);
 
    // Same as add value, but does a start and finish.
-   void collectValue(History& aHistory, double aTimeExclusion, double aTs);
+   void collectValue(History& aHistory, double aTimeExclusion);
 
    // Collect trial statistics on the time array of a signal history.
    void collectTime(History& aHistory);
