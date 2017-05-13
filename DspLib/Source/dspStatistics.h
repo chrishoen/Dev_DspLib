@@ -30,8 +30,9 @@ public:
    //***************************************************************************
    // Members.
 
-   // 
-   unsigned long long mCount;    // Number of samples.
+   // Counters.
+   unsigned long long mCount;     // Number of samples.
+   unsigned long long mDropCount; // Number of samples that were dropped.
 
    // Input values
    double   mX;            // Input value
@@ -84,6 +85,9 @@ public:
    // intermediate variables
    void put(double aX,double aTime);
 
+   // Indicate that a sample was dropped.
+   void drop();
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -114,6 +118,8 @@ public:
    void showDegCEUS   (int aPrintFilter,char* aLabel);
 
    void showTimeExt   (int aPrintFilter,char* aLabel);
+
+   void showCount     (int aPrintFilter,char* aLabel);
 
    //***************************************************************************
    //***************************************************************************

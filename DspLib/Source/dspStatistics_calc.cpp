@@ -36,6 +36,7 @@ TrialStatistics::TrialStatistics()
 void TrialStatistics::startTrial(double aXLimit)
 {
    mCount = 0;
+   mDropCount = 0;
    mXLimit = aXLimit;
    mXLimitFlag = aXLimit!=0.0;
    mX = 0.0;
@@ -68,6 +69,11 @@ void TrialStatistics::startTrial(double aXLimit)
 void TrialStatistics::put(double aX)
 {
    put(aX,0.0);
+}
+
+void TrialStatistics::drop()
+{
+   mDropCount++;
 }
 
 //******************************************************************************
