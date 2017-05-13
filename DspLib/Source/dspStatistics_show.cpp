@@ -30,7 +30,7 @@ namespace Dsp
 
 void TrialStatistics::showCount(int aPF,char* aLabel)
 {
-   Prn::print(aPF,"%-10s %6llu $$ %6llu",
+   Prn::print(aPF,"%-10s $$ %6llu $$ %6llu",
       aLabel,
       mCount,
       mDropCount);
