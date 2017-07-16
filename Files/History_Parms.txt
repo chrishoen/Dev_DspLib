@@ -104,6 +104,33 @@ SectionEnd
 //********************************************************************
 //********************************************************************
 
+SectionBegin Run6
+
+   HistoryGenParms
+   {
+      GenType                  SinWave
+      Sigma                    0.0
+   }
+
+   HistoryFilterParms1
+   {
+      FilterType               Noncausal
+      CausalType               AlphaThree
+      FilterOrder              4
+      Fs                       100.0
+      Fc                       0.25
+
+      AlphaDT                  0.01
+      AlphaLambda              0.0279155
+      AlphaSelect              XX
+   }
+
+SectionEnd
+
+//********************************************************************
+//********************************************************************
+//********************************************************************
+
 SectionBegin run2
 
    HistoryGenParms
