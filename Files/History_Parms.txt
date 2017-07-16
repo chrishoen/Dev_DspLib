@@ -114,6 +114,7 @@ SectionBegin Run6
 
    HistoryFilterParms1
    {
+      FilterType               Causal
       FilterType               Noncausal
       CausalType               AlphaThree
       FilterOrder              4
