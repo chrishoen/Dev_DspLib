@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{058D0B03
 		Files\Delay_Parms.txt = Files\Delay_Parms.txt
 		Files\FilterCo.txt = Files\FilterCo.txt
 		Files\History_Parms.txt = Files\History_Parms.txt
+		Files\Special_Parms.txt = Files\Special_Parms.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Butterworth", "Butterworth\Butterworth.vcxproj", "{646835A9-405E-4D4E-A5B5-155B780211C1}"
