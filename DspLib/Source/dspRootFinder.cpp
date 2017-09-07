@@ -49,6 +49,9 @@ namespace Dsp
       // Temp jacobian matrix.
       Eigen::MatrixXd tJ(tDim, tDim);
 
+	  // Temp jacobian inverse matrix.
+	  Eigen::MatrixXd tJinv(tDim, tDim);
+
       //***************************************************************************
       //***************************************************************************
       //***************************************************************************
@@ -68,7 +71,8 @@ namespace Dsp
 
          // Calculate the newton raphson algorithm.
          // change to psuedo inverse
-         tXs = aX - tJ.inverse()*tY;
+		 tJinv = tJ.completeOrthogonalDecomposition().pseudoInverse();
+         tXs = aX - tJinv*tY;
 
          // Caclulate the difference between the current and previous
          // iterations.
