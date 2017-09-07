@@ -53,6 +53,7 @@
     <ClCompile Include="Source\dspPdwFreeList.cpp" />
     <ClCompile Include="Source\dspPdwSequence.cpp" />
     <ClCompile Include="Source\dspPdwTextFile.cpp" />
+    <ClCompile Include="Source\dspRootFinder.cpp" />
     <ClCompile Include="Source\dspRVector.cpp" />
     <ClCompile Include="Source\dspSample.cpp" />
     <ClCompile Include="Source\dspSignal.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Source\dspFilterStatistics.h" />
     <ClInclude Include="Source\dspFilterAlpha.h" />
     <ClInclude Include="Source\dspFilterFilters.h" />
+    <ClInclude Include="Source\dspFunctionObject.h" />
     <ClInclude Include="Source\dspHistory.h" />
     <ClInclude Include="Source\dspHistoryConverters.h" />
     <ClInclude Include="Source\dspHistoryFilterCausal.h" />
@@ -98,6 +100,7 @@
     <ClInclude Include="Source\dspPdwFreeList.h" />
     <ClInclude Include="Source\dspPdwSequence.h" />
     <ClInclude Include="Source\dspPdwTextFile.h" />
+    <ClInclude Include="Source\dspRootFinder.h" />
     <ClInclude Include="Source\dspRVector.h" />
     <ClInclude Include="Source\dspSample.h" />
     <ClInclude Include="Source\dspSignal.h" />
@@ -180,7 +183,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include;C:\MyTools\Eigen</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -215,7 +218,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include;C:\MyTools\Eigen</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>

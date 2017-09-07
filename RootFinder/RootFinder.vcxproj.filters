@@ -25,12 +25,6 @@
     <ClCompile Include="Source\TestFunctionObject.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dspFunctionObject.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\dspRootFinder.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -46,12 +40,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\TestFunctionObject.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspFunctionObject.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\dspRootFinder.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

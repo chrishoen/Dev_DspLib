@@ -145,6 +145,9 @@
     <ClCompile Include="Source\dspStatistics_show.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspRootFinder.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -274,6 +277,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspStatistics2.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspFunctionObject.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspRootFinder.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

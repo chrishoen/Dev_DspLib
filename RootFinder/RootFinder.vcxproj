@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\CmdLineExec.cpp" />
-    <ClCompile Include="Source\dspFunctionObject.cpp" />
-    <ClCompile Include="Source\dspRootFinder.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Special_Parms.cpp" />
@@ -30,12 +28,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
-    <ClInclude Include="Source\dspFunctionObject.h" />
-    <ClInclude Include="Source\dspRootFinder.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Special_Parms.h" />
     <ClInclude Include="Source\SysEquations.h" />
     <ClInclude Include="Source\TestFunctionObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DspLib\DspLib.vcxproj">
+      <Project>{3c982fd1-5abe-4c1f-b7e6-114f3a7617f2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{b1042993-2290-4a6a-8172-c8c7824c1ec1}</ProjectGuid>
@@ -120,7 +121,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\MyTools\Eigen;C:\Alpha\Lib\RisLib\include;C:\Alpha\Lib\DspLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DspLib\Source;C:\MyTools\Eigen;C:\Alpha\Lib\RisLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -155,7 +156,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\MyTools\Eigen;C:\Alpha\Lib\RisLib\include;C:\Alpha\Lib\DspLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DspLib\Source;C:\MyTools\Eigen;C:\Alpha\Lib\RisLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>None</DebugInformationFormat>
