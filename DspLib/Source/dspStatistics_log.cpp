@@ -165,6 +165,26 @@ void TrialStatistics::logDegCEUX(int aLN,char* aLabel)
 //******************************************************************************
 //******************************************************************************
 
+void TrialStatistics::logMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f",
+      aLabel,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::logDegMM(int aLN,char* aLabel)
+{
+   Log::write(aLN,"%-10s $$ %12.6f %12.6f",
+      aLabel,
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+
 void TrialStatistics::logEMM(int aLN,char* aLabel)
 {
    Log::write(aLN,"%-10s $$ %12.6f %12.6f %12.6f",

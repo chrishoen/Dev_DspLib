@@ -107,6 +107,8 @@ public:
    void showCEUX      (int aPrintFilter,char* aLabel);
    void showDegCEUX   (int aPrintFilter,char* aLabel);
 
+   void showMM        (int aPrintFilter,char* aLabel);
+   void showDegMM     (int aPrintFilter,char* aLabel);
    void showEMM       (int aPrintFilter,char* aLabel);
    void showDegEMM    (int aPrintFilter,char* aLabel);
    void showCEMM      (int aPrintFilter,char* aLabel);
@@ -140,6 +142,8 @@ public:
    void logCEUX      (int aLogNum,char* aLabel);
    void logDegCEUX   (int aLogNum,char* aLabel);
 
+   void logMM        (int aLogNum,char* aLabel);
+   void logDegMM     (int aLogNum,char* aLabel);
    void logEMM       (int aLogNum,char* aLabel);
    void logDegEMM    (int aLogNum,char* aLabel);
    void logCEMM      (int aLogNum,char* aLabel);

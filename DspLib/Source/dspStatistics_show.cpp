@@ -177,6 +177,26 @@ void TrialStatistics::showDegCEUX(int aPF,char* aLabel)
 //******************************************************************************
 //******************************************************************************
 
+void TrialStatistics::showMM(int aPF,char* aLabel)
+{
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f",
+      aLabel,
+      mMinX,
+      mMaxX);
+}
+
+//******************************************************************************
+
+void TrialStatistics::showDegMM(int aPF,char* aLabel)
+{
+   Prn::print(aPF,"%-10s $$ %12.6f %12.6f",
+      aLabel,
+      deg(mMinX),
+      deg(mMaxX));
+}
+
+//******************************************************************************
+
 void TrialStatistics::showEMM(int aPF,char* aLabel)
 {
    Prn::print(aPF,"%-10s $$ %12.6f %12.6f %12.6f",
