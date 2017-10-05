@@ -92,16 +92,15 @@ void CmdLineExec::executeGo11(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::RootFinder tRootFinder;
-
    Prn::print(0,"Start");
    Ris::ProgramTimeMarker tMarker;
    tMarker.doStart();
 
-   SysEquations  tFunction(gSpecial_Parms);
-
    for (int i = 0; i < 10*1000; i++)
    {
+      Dsp::RootFinder tRootFinder;
+      SysEquations  tFunction(gSpecial_Parms);
+
       //Set the dimension of tXInitial, tX and tWeight, then intialize them
       Eigen::VectorXd    tXInitial = Eigen::VectorXd(2);
       Eigen::VectorXd    tWeight = Eigen::VectorXd(2);
@@ -136,16 +135,16 @@ void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo21(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::RootFinderTwo tRootFinder;
+   Dsp::RootFinderTwo<2> tRootFinder;
 
    SysEquationsTwo  tFunction(gSpecial_Parms);
 
-   //Set the dimension of tXInitial, tX and tWeight, then intialize them
-   Eigen::VectorXd    tXInitial = Eigen::VectorXd(2);
-   Eigen::VectorXd    tWeight = Eigen::VectorXd(2);
-   double             tAccuracy = 0.001;
-   int                tMaxSteps = 100;
-   Eigen::VectorXd    tX = Eigen::VectorXd(2);
+   //Set the dimension of tXInitial, tX and tWeight, then intialize them.
+   Eigen::Matrix<double,2,1>   tXInitial;
+   Eigen::Matrix<double,2,1>   tWeight;
+   double                      tAccuracy = 0.001;
+   int                         tMaxSteps = 100;
+   Eigen::Matrix<double,2,1>   tX;
 
    tXInitial(0) = gSpecial_Parms.mX0;
    tXInitial(1) = gSpecial_Parms.mY0;
@@ -169,8 +168,6 @@ void CmdLineExec::executeGo21(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo22(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::RootFinderTwo tRootFinder;
-
    Prn::print(0,"Start");
    Ris::ProgramTimeMarker tMarker;
    tMarker.doStart();
@@ -179,12 +176,15 @@ void CmdLineExec::executeGo22(Ris::CmdLineCmd* aCmd)
 
    for (int i = 0; i < 10*1000; i++)
    {
-      //Set the dimension of tXInitial, tX and tWeight, then intialize them
-      Eigen::VectorXd    tXInitial = Eigen::VectorXd(2);
-      Eigen::VectorXd    tWeight = Eigen::VectorXd(2);
-      double             tAccuracy = 0.001;
-      int                tMaxSteps = 100;
-      Eigen::VectorXd    tX = Eigen::VectorXd(2);
+      Dsp::RootFinderTwo<2> tRootFinder;
+      SysEquationsTwo       tFunction(gSpecial_Parms);
+
+      //Set the dimension of tXInitial, tX and tWeight, then intialize them.
+      Eigen::Matrix<double,2,1>   tXInitial;
+      Eigen::Matrix<double,2,1>   tWeight;
+      double                      tAccuracy = 0.001;
+      int                         tMaxSteps = 100;
+      Eigen::Matrix<double,2,1>   tX;
 
       tXInitial(0) = gSpecial_Parms.mX0;
       tXInitial(1) = gSpecial_Parms.mY0;

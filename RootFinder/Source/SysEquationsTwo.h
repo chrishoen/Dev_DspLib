@@ -17,7 +17,7 @@
 //******************************************************************************
 // This is a base class for classes that encapsualte function objects. 
 
-class SysEquationsTwo : public Dsp::BaseRootFinderFunctionObjectTwo
+class SysEquationsTwo : public Dsp::BaseRootFinderFunctionObjectTwo<2>
 {
 public:
 
@@ -86,8 +86,8 @@ public:
 
    // This evaluates the function at the input value array.
    void evaluateFunction(
-      Eigen::VectorXd& aX,                    // Input
-      Eigen::VectorXd& aY) override           // Output
+      Eigen::Matrix<double,2,1>&   aX,                // Input
+      Eigen::Matrix<double,2,1>&   aY) override       // Output
    {
       aY(0) = (1 - aX(1))*(mA120 + mA121*aX(0) + mA122*aX(0)*aX(0)) + aX(1)*(mA340 + mA341*aX(0) + mA342*aX(0)*aX(0)) - mX0;
       aY(1) = (1 - aX(0))*(mB120 + mB121*aX(1) + mB122*aX(1)*aX(1)) + aX(0)*(mB340 + mB341*aX(1) + mB342*aX(1)*aX(1)) - mY0;
@@ -95,17 +95,14 @@ public:
 
    // This evaluates the jacobian of the function at the input value array.
    void evaluateJacobian(
-      Eigen::VectorXd& aX,                    // Input
-      Eigen::MatrixXd& aJacobian) override    // Output
+      Eigen::Matrix<double,2,1>&   aX,                 // Input
+      Eigen::Matrix<double,2,2>& aJacobian) override // Output
    {
       aJacobian(0, 0) = (1 - aX(1))*mA121 + 2 * (1 - aX(1))*mA122*aX(0) + aX(1)*mA341 + 2 * aX(1)*mA342*aX(0);
       aJacobian(0, 1) = mA120 + mA121*aX(0) + mA122*aX(0)*aX(0) + mA340 + mA341*aX(0) + mA342*aX(0)*aX(0);
       aJacobian(1, 0) = mB120 + mB121*aX(1) + mB122*aX(1)*aX(1) + mB340 + mB341*aX(1) + mB342*aX(1)*aX(1);
       aJacobian(1, 1) = (1 - aX(0))*mB121 + 2 * (1 - aX(0))*mB122*aX(1) + aX(0)*mB341 + 2 * aX(0)*mB342*aX(1);
    }
-
-   // This returns the dimension of the function input vector.
-   int dimension() override { return 2; }
 };
 
 //******************************************************************************

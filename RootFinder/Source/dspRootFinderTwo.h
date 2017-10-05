@@ -17,6 +17,7 @@ namespace Dsp
 //******************************************************************************
 // This is a base class for classes that encapsualte function objects. 
 
+template<int Dim>
 class BaseRootFinderFunctionObjectTwo
 {
 public:
@@ -33,16 +34,13 @@ public:
 
    // This evaluates the function at the input value array.
    virtual void evaluateFunction(
-      Eigen::VectorXd& aX,                  // Input
-      Eigen::VectorXd& aY)=0;               // Output
+      Eigen::Matrix<double,Dim,1>&   aX,                // Input
+      Eigen::Matrix<double,Dim,1>&   aY)=0;             // Output
 
    // This evaluates the jacobian of the function at the input value array.
    virtual void evaluateJacobian(
-      Eigen::VectorXd& aX,                  // Input
-      Eigen::MatrixXd& aJacobian)=0;        // Output
-
-   // This returns the dimension of the function input vector.
-   virtual int dimension()=0;
+      Eigen::Matrix<double,Dim,1>&   aX,                // Input
+      Eigen::Matrix<double,Dim,Dim>& aJacobian)=0;      // Output
 };
 
 //******************************************************************************
@@ -51,6 +49,7 @@ public:
 // This class provides the functionality to find roots of equations using
 // the Newton rapheson method.
 
+template<int Dim>
 class RootFinderTwo
 {
 public:
@@ -65,7 +64,7 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Infastrucure:
+   // Infrastrucure:
 
    //***************************************************************************
    //***************************************************************************
@@ -74,33 +73,29 @@ public:
 
    // This finds the roots of a given function, starting at an initial guess.
    bool findRoot(
-      BaseRootFinderFunctionObjectTwo* aFunctionObject,  // Input
-      Eigen::VectorXd&    aXInitial,            // Input
-      Eigen::VectorXd&    aWeight,              // Input
-      double              aAccuracy,            // input        
-      int                 aMaxSteps,            // input        
-      Eigen::VectorXd&    aX)                   // Output
+      BaseRootFinderFunctionObjectTwo<Dim>* aFunctionObject,  // Input
+      Eigen::Matrix<double,Dim,1>&    aXInitial,              // Input
+      Eigen::Matrix<double,Dim,1>&    aWeight,                // Input
+      double                          aAccuracy,              // Input        
+      int                             aMaxSteps,              // Input        
+      Eigen::Matrix<double,Dim,1>&    aX)                     // Output
    {
       //***************************************************************************
       //***************************************************************************
       //***************************************************************************
       // Initialize.
 
-      // Initialize the output matrix.
-      int tDim = aFunctionObject->dimension();
-      aX = Eigen::VectorXd(tDim);
-
       // Temp independent variable matrix.
-      Eigen::VectorXd tXs(tDim);
+      Eigen::Matrix<double,Dim,1> tXs;
 
       // Temp dependent variable matrix.
-      Eigen::VectorXd tY(tDim);
+      Eigen::Matrix<double,Dim,1> tY;
 
       // Temp jacobian matrix.
-      Eigen::MatrixXd tJ(tDim, tDim);
+      Eigen::Matrix<double,Dim,Dim> tJ;
 
 	   // Temp jacobian inverse matrix.
-	   Eigen::MatrixXd tJinv(tDim, tDim);
+      Eigen::Matrix<double,Dim,Dim> tJinv;
 
       //***************************************************************************
       //***************************************************************************
