@@ -101,6 +101,7 @@
     <ClInclude Include="Source\dspPdwSequence.h" />
     <ClInclude Include="Source\dspPdwTextFile.h" />
     <ClInclude Include="Source\dspRootFinder.h" />
+    <ClInclude Include="Source\dspRootFinderTwo.h" />
     <ClInclude Include="Source\dspRVector.h" />
     <ClInclude Include="Source\dspSample.h" />
     <ClInclude Include="Source\dspSignal.h" />

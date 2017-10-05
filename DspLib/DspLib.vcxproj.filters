@@ -285,5 +285,8 @@
     <ClInclude Include="Source\dspRootFinder.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\dspRootFinderTwo.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

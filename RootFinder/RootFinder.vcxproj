@@ -27,7 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
-    <ClInclude Include="Source\dspRootFinderTwo.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Special_Parms.h" />
     <ClInclude Include="Source\SysEquations.h" />
