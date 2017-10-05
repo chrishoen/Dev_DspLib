@@ -3,7 +3,7 @@
 /*==============================================================================
 ==============================================================================*/
 #include "Special_Parms.h"
-#include "dspFunctionObject.h"
+#include "dspRootFinderTwo.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -17,7 +17,7 @@
 //******************************************************************************
 // This is a base class for classes that encapsualte function objects. 
 
-class SysEquations : public Dsp::BaseFunctionObject
+class SysEquationsTwo : public Dsp::BaseRootFinderFunctionObjectTwo
 {
 public:
 
@@ -37,7 +37,6 @@ public:
    double mX0;
    double mY0;
 
-
    double mA120;
    double mA121;
    double mA122;
@@ -55,10 +54,30 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Infastrucure:
+   // Infrastrucure:
 
    // Constructor.
-   SysEquations(Special_Parms& aP);
+   SysEquationsTwo(Special_Parms& aP)
+   {
+      mP = aP;
+
+      mX0 = aP.mX0;
+      mY0 = aP.mY0;
+
+      mA120 = aP.mA120;
+      mA121 = aP.mA121;
+      mA122 = aP.mA122;
+      mA340 = aP.mA340;
+      mA341 = aP.mA341;
+      mA342 = aP.mA342;
+
+      mB120 = aP.mB120;
+      mB121 = aP.mB121;
+      mB122 = aP.mB122;
+      mB340 = aP.mB340;
+      mB341 = aP.mB341;
+      mB342 = aP.mB342;
+   }
 
    //***************************************************************************
    //***************************************************************************
@@ -68,12 +87,22 @@ public:
    // This evaluates the function at the input value array.
    void evaluateFunction(
       Eigen::VectorXd& aX,                    // Input
-      Eigen::VectorXd& aY) override;          // Output
+      Eigen::VectorXd& aY) override           // Output
+   {
+      aY(0) = (1 - aX(1))*(mA120 + mA121*aX(0) + mA122*aX(0)*aX(0)) + aX(1)*(mA340 + mA341*aX(0) + mA342*aX(0)*aX(0)) - mX0;
+      aY(1) = (1 - aX(0))*(mB120 + mB121*aX(1) + mB122*aX(1)*aX(1)) + aX(0)*(mB340 + mB341*aX(1) + mB342*aX(1)*aX(1)) - mY0;
+   }
 
    // This evaluates the jacobian of the function at the input value array.
    void evaluateJacobian(
       Eigen::VectorXd& aX,                    // Input
-      Eigen::MatrixXd& aJacobian) override;   // Output
+      Eigen::MatrixXd& aJacobian) override    // Output
+   {
+      aJacobian(0, 0) = (1 - aX(1))*mA121 + 2 * (1 - aX(1))*mA122*aX(0) + aX(1)*mA341 + 2 * aX(1)*mA342*aX(0);
+      aJacobian(0, 1) = mA120 + mA121*aX(0) + mA122*aX(0)*aX(0) + mA340 + mA341*aX(0) + mA342*aX(0)*aX(0);
+      aJacobian(1, 0) = mB120 + mB121*aX(1) + mB122*aX(1)*aX(1) + mB340 + mB341*aX(1) + mB342*aX(1)*aX(1);
+      aJacobian(1, 1) = (1 - aX(0))*mB121 + 2 * (1 - aX(0))*mB122*aX(1) + aX(0)*mB341 + 2 * aX(0)*mB342*aX(1);
+   }
 
    // This returns the dimension of the function input vector.
    int dimension() override { return 2; }

@@ -47,7 +47,6 @@ void SysEquations::evaluateFunction(
 {
    aY(0) = (1 - aX(1))*(mA120 + mA121*aX(0) + mA122*aX(0)*aX(0)) + aX(1)*(mA340 + mA341*aX(0) + mA342*aX(0)*aX(0)) - mX0;
    aY(1) = (1 - aX(0))*(mB120 + mB121*aX(1) + mB122*aX(1)*aX(1)) + aX(0)*(mB340 + mB341*aX(1) + mB342*aX(1)*aX(1)) - mY0;
-
 }
 
 // This evaluates the jacobian of the function at the input value array.
