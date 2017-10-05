@@ -116,7 +116,8 @@ public:
 
          // Calculate the newton raphson algorithm.
          // change to psuedo inverse
-         tJinv = tJ.completeOrthogonalDecomposition().pseudoInverse();
+//       tJinv = tJ.completeOrthogonalDecomposition().pseudoInverse();
+         tJinv = tJ.inverse();
          tXs = aX - tJinv*tY;
 
          // Caclulate the difference between the current and previous
