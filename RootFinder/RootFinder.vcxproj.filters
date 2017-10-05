@@ -22,9 +22,6 @@
     <ClCompile Include="Source\SysEquations.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestFunctionObject.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -37,9 +34,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\SysEquations.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestFunctionObject.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,41 +15,26 @@ Description:
 //******************************************************************************
 // Constructor.
 
-SysEquations::SysEquations()
-{
-   reset();
-}
-
 SysEquations::SysEquations(Special_Parms& aP)
 {
    mP = aP;
-   reset();
-}
 
-void SysEquations::initialize(Special_Parms& aP)
-{
-   mP = aP;
-   reset();
-}
+   mX0 = aP.mX0;
+   mY0 = aP.mY0;
 
-void SysEquations::reset()
-{
-   mX0 = 0;
-   mY0 = 0;
+   mA120 = aP.mA120;
+   mA121 = aP.mA121;
+   mA122 = aP.mA122;
+   mA340 = aP.mA340;
+   mA341 = aP.mA341;
+   mA342 = aP.mA342;
 
-   mA120= 0;
-   mA121= 0;
-   mA122= 0;
-   mA340= 0;
-   mA341= 0;
-   mA342= 0;
-
-   mB120= 0;
-   mB121= 0;
-   mB122= 0;
-   mB340= 0;
-   mB341= 0;
-   mB342= 0;
+   mB120 = aP.mB120;
+   mB121 = aP.mB121;
+   mB122 = aP.mB122;
+   mB340 = aP.mB340;
+   mB341 = aP.mB341;
+   mB342 = aP.mB342;
 }
 
 //******************************************************************************

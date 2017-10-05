@@ -58,11 +58,7 @@ public:
    // Infastrucure:
 
    // Constructor.
-   SysEquations();
    SysEquations(Special_Parms& aP);
-   void initialize(Special_Parms& aP);
-   void reset();
-
 
    //***************************************************************************
    //***************************************************************************

@@ -24,14 +24,12 @@
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Special_Parms.cpp" />
     <ClCompile Include="Source\SysEquations.cpp" />
-    <ClCompile Include="Source\TestFunctionObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Special_Parms.h" />
     <ClInclude Include="Source\SysEquations.h" />
-    <ClInclude Include="Source\TestFunctionObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DspLib\DspLib.vcxproj">
