@@ -49,6 +49,7 @@ public:
    double   mStdDev;       // Uncertainty (standard deviation)
    double   mVariance;     // Variance
    double   mSX;           // Mean - Extremum
+   double   mRms;          // Root Mean Square
 
    double   mTimeMinX;     // Time that minimum  was encountered 
    double   mTimeMaxX;     // Time that maximum  was encountered 
@@ -61,6 +62,8 @@ public:
 
    double   mXSum;         // Sum of X
    double   mXMean;        // expectation (mean)
+
+   double   mXsqSum;       // Sum of X squared
 
    //***************************************************************************
    //***************************************************************************
@@ -102,6 +105,11 @@ public:
    void showCEUMM     (int aPrintFilter,char* aLabel);
    void showDegCEUMM  (int aPrintFilter,char* aLabel);
 
+   void showERMM      (int aPrintFilter,char* aLabel);
+   void showDegERMM   (int aPrintFilter,char* aLabel);
+   void showCERMM     (int aPrintFilter,char* aLabel);
+   void showDegCERMM  (int aPrintFilter,char* aLabel);
+
    void showEUX       (int aPrintFilter,char* aLabel);
    void showDegEUX    (int aPrintFilter,char* aLabel);
    void showCEUX      (int aPrintFilter,char* aLabel);
@@ -136,6 +144,11 @@ public:
    void logDegEUMM   (int aLogNum,char* aLabel);
    void logCEUMM     (int aLogNum,char* aLabel);
    void logDegCEUMM  (int aLogNum,char* aLabel);
+
+   void logERMM      (int aLogNum,char* aLabel);
+   void logDegERMM   (int aLogNum,char* aLabel);
+   void logCERMM     (int aLogNum,char* aLabel);
+   void logDegCERMM  (int aLogNum,char* aLabel);
 
    void logEUX       (int aLogNum,char* aLabel);
    void logDegEUX    (int aLogNum,char* aLabel);

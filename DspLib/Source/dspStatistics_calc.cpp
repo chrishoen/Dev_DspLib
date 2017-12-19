@@ -52,6 +52,8 @@ void TrialStatistics::startTrial(double aXLimit)
    mTimeMinX = 0.0;
    mTimeMaxX = 0.0;
    mTimeExtX = 0.0;
+   mSX = 0.0;
+   mRms = 0.0;
 
    mOLMean = 0.0;
    mOLM2 = 0.0;
@@ -59,6 +61,7 @@ void TrialStatistics::startTrial(double aXLimit)
 
    mXSum = 0.0;
    mXMean = 0.0;
+   mXsqSum = 0.0;
 }
    
 //******************************************************************************
@@ -142,11 +145,12 @@ void TrialStatistics::put(double aX,double aTime)
    //***************************************************************************
    // Calculate sums for the online algorithm
 
-      mOLDelta =  mX - mOLMean;
-      mOLMean  += mOLDelta/mCount;
-      mOLM2    += mOLDelta*(mX - mOLMean);
+   mOLDelta =  mX - mOLMean;
+   mOLMean  += mOLDelta/mCount;
+   mOLM2    += mOLDelta*(mX - mOLMean);
 
-      mXSum += mX;
+   mXSum += mX;
+   mXsqSum += mX*mX;
 }
 
 //******************************************************************************
@@ -188,6 +192,12 @@ void TrialStatistics::finishTrial()
 
    // More
    mSX = mEX - mExtX;
+
+   // More
+   if (mCount > 0)
+   {
+      mRms = sqrt(mXsqSum/mCount);
+   }
 }
 
 //******************************************************************************
