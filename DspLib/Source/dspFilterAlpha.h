@@ -44,6 +44,9 @@ public:
 
    // Filter parameters
    double mAlpha;
+
+   // True for first sample.
+   bool mFirstFlag;
 };
 
 //******************************************************************************

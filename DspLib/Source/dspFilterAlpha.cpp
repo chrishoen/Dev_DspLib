@@ -38,6 +38,7 @@ void AlphaOne::initialize(double aLambda)
    // Initialize filter variables.
    mY   = 0.0;
    mXX  = 0.0;
+   mFirstFlag = true;
 }
 
 //******************************************************************************
@@ -47,12 +48,19 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
    mAlpha = aAlpha;
    mY   = 0.0;
    mXX  = 0.0;
+   mFirstFlag = true;
 }
 
 //******************************************************************************
 
 double AlphaOne::put(double aY)
 {
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+   }
+
    mY  = aY;
 
    double a = mAlpha;
