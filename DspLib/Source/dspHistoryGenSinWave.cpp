@@ -70,7 +70,9 @@ void HistoryGenSinWave::generateHistoryType1(History& aHistory)
    {
       double tTime = aHistory.mTime[k];
       double tValue = mParms.mA*sin(DSP_2PI*mParms.mFc*tTime + mParms.mPhi);
-      tValue += mParms.mEX;
+
+      if (mParms.mAngleFlag) tValue += rad(mParms.mEX);
+      else                   tValue += mParms.mEX;
       aHistory.mValue[k] = tValue;
    }
 
