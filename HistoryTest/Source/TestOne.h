@@ -21,6 +21,7 @@ public:
    void doRun4();
    void doRun5();
    void doRun6();
+   void doRun7();
 
    void doCausal1();
    void doCausal12();

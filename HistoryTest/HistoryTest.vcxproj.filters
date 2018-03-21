@@ -55,6 +55,9 @@
     <ClCompile Include="Source\TestOne_run6.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestOne_run7.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">

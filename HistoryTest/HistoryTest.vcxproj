@@ -182,6 +182,7 @@
     <ClCompile Include="Source\TestOne_run5.cpp" />
     <ClCompile Include="Source\TestOne_mem1.cpp" />
     <ClCompile Include="Source\TestOne_run6.cpp" />
+    <ClCompile Include="Source\TestOne_run7.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />

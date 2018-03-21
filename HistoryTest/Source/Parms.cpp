@@ -45,6 +45,8 @@ void Parms::reset()
    mHistoryMaxSamples=0;
    mHistoryDeltaT=0.0;
 
+   mAlpha1 = 0.0;
+   mAlpha2 = 0.0;
 }
 
 //******************************************************************************
@@ -62,7 +64,7 @@ void Parms::show()
    printf("OutputFile         %10s\n",  mOutputFile);
    if (mOutputFile2[0] != 0)
    {
-   printf("OutputFile2        %10s\n", mOutputFile2);
+      printf("OutputFile2        %10s\n", mOutputFile2);
    }
    if (mOutputFile3[0] != 0)
    {
@@ -71,6 +73,11 @@ void Parms::show()
    printf("HistoryMaxSamples  %10d\n",  mHistoryMaxSamples);
    printf("HistoryDeltaT      %10.4f\n",mHistoryDeltaT);
    printf("\n");
+
+   printf("\n");
+   printf("Alpha1             %10.4f\n",mAlpha1);
+   printf("Alpha2             %10.4f\n",mAlpha2);
+
 
    mHistoryGenParms.show("Gen");
    printf("\n");
@@ -105,6 +112,9 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("HistoryMaxSamples" )) mHistoryMaxSamples  = aCmd->argInt(1);
    if(aCmd->isCmd("HistoryDeltaT"     )) mHistoryDeltaT      = aCmd->argDouble(1);
+
+   if(aCmd->isCmd("Alpha1"     )) mAlpha1 = aCmd->argDouble(1);
+   if(aCmd->isCmd("Alpha2"     )) mAlpha2 = aCmd->argDouble(1);
 }
 
 //******************************************************************************

@@ -4,12 +4,7 @@
 
 SectionBegin Default
 
-   //-----------------------------------------------------------------
-   // Integrity check
-
-   Code1 101
-
-   //-----------------------------------------------------------------
+   //*****************************************************************
    // Parms.
 
    Outputfile  C:\Alpha\Data\SignalHistory.csv
@@ -18,7 +13,13 @@ SectionBegin Default
    HistoryMaxSamples           10000
    HistoryDeltaT               1.0
 
-   //-----------------------------------------------------------------
+   //*****************************************************************
+   // Signal History Generator Parms.
+
+   Alpha1                      0.1
+   Alpha2                      0.1
+
+   //*****************************************************************
    // Signal History Generator Parms.
 
    HistoryGenParms
@@ -39,7 +40,7 @@ SectionBegin Default
       Sigma                    0.00
    }
 
-   //-----------------------------------------------------------------
+   //*****************************************************************
    // Signal Filter Parms.
 
    HistoryFilterParms1
@@ -49,11 +50,6 @@ SectionBegin Default
    HistoryFilterParms2
    {
    }
-
-   //-----------------------------------------------------------------
-   // Integrity check
-
-   Code2 102
 
 SectionEnd
 
