@@ -66,6 +66,9 @@ void HistoryAlphaFilter::operate(History& aX, History& aY)
    // Execute a forward loop to calculate the causally filtered values of the
    // input array into the output array.
 
+   // Restart the alpha filter for first sample.
+   mAlphaOne.setFirst();
+
    // For all of the samples in the source and destination arrays, loop
    // forward in time.
    for (int i = 0; i < tP; i++)
