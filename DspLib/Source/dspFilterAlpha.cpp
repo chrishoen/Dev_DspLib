@@ -53,6 +53,15 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 
 //******************************************************************************
 
+void AlphaOne::setFirst()
+{
+   mY   = 0.0;
+   mXX  = 0.0;
+   mFirstFlag = true;
+}
+
+//******************************************************************************
+
 double AlphaOne::put(double aY)
 {
    if (mFirstFlag)

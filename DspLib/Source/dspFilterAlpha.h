@@ -32,6 +32,8 @@ public:
    void initialize (double aLambda); 
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
+   // Set the first lag true.
+   void setFirst(); 
 
    // Put input value, return filtered output.
    double put(double aY);
