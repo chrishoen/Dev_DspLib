@@ -148,6 +148,9 @@
     <ClCompile Include="Source\dspRootFinder.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\dspHistoryAlphaFilter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dspPdw.h">
@@ -286,6 +289,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\dspRootFinderTwo.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dspHistoryAlphaFilter.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
