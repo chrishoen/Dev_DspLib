@@ -33,12 +33,12 @@ HistoryAlphaFilter::HistoryAlphaFilter()
 
 HistoryAlphaFilter::HistoryAlphaFilter(double aAlpha)
 {
-
+   mAlphaOne.initializeFromAlpha(aAlpha);
 }
 
 void HistoryAlphaFilter::initialize(double aAlpha)
 {
-
+   mAlphaOne.initializeFromAlpha(aAlpha);
 }
 
 //******************************************************************************
@@ -64,33 +64,31 @@ void HistoryAlphaFilter::operate(History& aX, History& aY)
    //***************************************************************************
    //***************************************************************************
    // Execute a forward loop to calculate the causally filtered values of the
-   // input array.Store the filtered values in the temp array.
+   // input array into the output array.
 
-   // For all of the samples in the source and destination arrays.
+   // For all of the samples in the source and destination arrays, loop
+   // forward in time.
    for (int i = 0; i < tP; i++)
    {
-      // Read the sample value from the source.
-      double tX = aX.mValue[i];
-      double tY = 0.0;
-      // Write the filtered value to the temp forward array.
-      aY.mValue[i] = tY;
+      // Write the filtered value to the output array.
+      aY.mValue[i] = mAlphaOne.put(aX.mValue[i]);
    }
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Execute a backward loop to calculate the causally filtered values of the
-   // previously filtered forward array.Store the filtered values in the
-   // destination array.
+   // previously filtered output array back into the output array.
 
+   // Restart the alpha filter for first sample.
+   mAlphaOne.setFirst();
+
+   // For all of the samples in the destination array, loop backward in time.
    // Backward loop. Progress backward in time. Time reversal.
    for (int i = tP-1; i >= 0; i--)
    {
-      // Read the sample value from the source.
-      double tX = aX.mValue[i];
-      double tY = 0.0;
-      // Write the filtered value to the temp forward array.
-      aY.mValue[i] = tY;
+      // Write the filtered value to the output array.
+      aY.mValue[i] = mAlphaOne.put(aY.mValue[i]);
    }
 }
 
