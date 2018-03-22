@@ -33,12 +33,12 @@ HistoryAlphaFilter::HistoryAlphaFilter()
 
 HistoryAlphaFilter::HistoryAlphaFilter(double aAlpha)
 {
-   mAlphaOne.initializeFromAlpha(aAlpha);
+   mAlphaOne.initializeFromLambda(aAlpha);
 }
 
 void HistoryAlphaFilter::initialize(double aAlpha)
 {
-   mAlphaOne.initializeFromAlpha(aAlpha);
+   mAlphaOne.initializeFromLambda(aAlpha);
 }
 
 //******************************************************************************

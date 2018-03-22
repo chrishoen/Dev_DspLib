@@ -74,7 +74,7 @@ void TestOne::doRun7()
    History tY;
 
    // Signal history generator.
-   HistoryAlphaFilter tFilter(gParms.mAlpha1);
+   HistoryAlphaFilter tFilter(gParms.mLambda1);
 
    // Filter the history.
    tFilter.operate(tX,tY);

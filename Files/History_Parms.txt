@@ -95,7 +95,7 @@ SectionBegin Run7
 
    Alpha1                      0.002
    Alpha2                      0.1
-   Lambda1                     0.05
+   Lambda1                     0.005
    Lambda2                     0.06
 
 SectionEnd
