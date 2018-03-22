@@ -32,6 +32,8 @@ public:
    void initialize (double aLambda); 
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
+   // Initialize with lambda (tracking index).
+   void initializeFromLambda (double aLambda); 
    // Set the first lag true.
    void setFirst(); 
 

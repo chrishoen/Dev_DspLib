@@ -53,6 +53,13 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 
 //******************************************************************************
 
+void AlphaOne::initializeFromLambda(double aLambda)
+{
+   initialize(aLambda);
+}
+
+//******************************************************************************
+
 void AlphaOne::setFirst()
 {
    mY   = 0.0;
