@@ -47,6 +47,8 @@ void Parms::reset()
 
    mAlpha1 = 0.0;
    mAlpha2 = 0.0;
+   mLambda1 = 0.0;
+   mLambda2 = 0.0;
 }
 
 //******************************************************************************
@@ -77,6 +79,8 @@ void Parms::show()
    printf("\n");
    printf("Alpha1             %10.4f\n",mAlpha1);
    printf("Alpha2             %10.4f\n",mAlpha2);
+   printf("Lambda1            %10.4f\n",mLambda1);
+   printf("Lambda2            %10.4f\n",mLambda2);
 
 
    mHistoryGenParms.show("Gen");
@@ -115,6 +119,8 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("Alpha1"     )) mAlpha1 = aCmd->argDouble(1);
    if(aCmd->isCmd("Alpha2"     )) mAlpha2 = aCmd->argDouble(1);
+   if(aCmd->isCmd("Lambda1"    )) mLambda1 = aCmd->argDouble(1);
+   if(aCmd->isCmd("Lambda2"    )) mLambda2 = aCmd->argDouble(1);
 }
 
 //******************************************************************************

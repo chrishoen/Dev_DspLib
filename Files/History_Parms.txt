@@ -93,9 +93,10 @@ SectionBegin Run7
       Sigma                    0.00
    }
 
-   Alpha1                      0.001
    Alpha1                      0.002
    Alpha2                      0.1
+   Lambda1                     0.05
+   Lambda2                     0.06
 
 SectionEnd
 
