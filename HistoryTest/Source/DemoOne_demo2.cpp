@@ -36,13 +36,13 @@ void DemoOne::doDemo2()
    // Generate a signal history.
 
    // Signal history.
-   History tHistoryX;
+   History tHistoryXX;
 
    // Signal history generator.
    HistoryGenerator tGen(gParms.mHistoryGenParms);
 
    // Generate the history.
-   tGen.generateHistory(tHistoryX);
+   tGen.generateHistory(tHistoryXX);
 
    //***************************************************************************
    //***************************************************************************
@@ -50,13 +50,13 @@ void DemoOne::doDemo2()
    // Filter the signal history. Differentiator.
 
    // Signal history.
-   History tHistoryY;
+   History tHistoryXV;
 
    // Signal history filter.
    HistoryFilterOperator tDifferentiator(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:XS->Y,DY.
-   tDifferentiator.operate(tHistoryX,tHistoryY);
+   tDifferentiator.operate(tHistoryXX,tHistoryXV);
 
    //***************************************************************************
    //***************************************************************************
@@ -65,11 +65,11 @@ void DemoOne::doDemo2()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistoryX);
-   tStatistics.show(0,"X  ");
+   tStatistics.collectValue(tHistoryXX);
+   tStatistics.show(0,"XX");
 
-   tStatistics.collectValue(tHistoryY);
-   tStatistics.show(0,"Y");
+   tStatistics.collectValue(tHistoryXV);
+   tStatistics.show(0,"XV");
 
    //***************************************************************************
    //***************************************************************************
@@ -79,7 +79,7 @@ void DemoOne::doDemo2()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryY);
+   tSampleWriter.writeHistory(tHistoryXX,tHistoryXV);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -87,6 +87,6 @@ void DemoOne::doDemo2()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "DemoOne::doDemo2 %d",tHistoryX.mMaxSamples);
+   Prn::print(0, "DemoOne::doDemo2 %d",tHistoryXX.mMaxSamples);
 }
 
