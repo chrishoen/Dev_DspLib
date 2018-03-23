@@ -214,13 +214,14 @@ void History::createClone(History& aY)
 //******************************************************************************
 // Clone this history into a new one that has the same size and time array
 // and value array. This is a deep copy. This is undersampled according to
-// a modulo. For example, if the modulo is two then it clones into a buffer
-// that has half the number of samples and has every other time and value.
+// a frequency divisor. For example, if the frequency is two then it clones
+// into a buffer that has half the number of samples and has every other
+// time and value.
 
-void History::createUnderSampledClone(History& aY,int aModulo)
+void History::createUnderSampledClone(History& aY,int aFsDivisor)
 {
    // Calculate undersampled destination max samples.
-   int tMaxSamples = this->mMaxSamples/aModulo;
+   int tMaxSamples = this->mMaxSamples/aFsDivisor;
 
    // Initialize the destination to be the undersampled size.
    aY.initialize(tMaxSamples);
@@ -231,8 +232,8 @@ void History::createUnderSampledClone(History& aY,int aModulo)
    for (int k = 0; k < tMaxSamples; k++)
    {
       // Read the sample time and value from the source.
-      double tTime  = this->mTime[k*aModulo];
-      double tValue = this->mValue[k*aModulo];
+      double tTime  = this->mTime[k*aFsDivisor];
+      double tValue = this->mValue[k*aFsDivisor];
       // Write the sample to the destination.
       aY.writeSample(tTime,tValue);
    }

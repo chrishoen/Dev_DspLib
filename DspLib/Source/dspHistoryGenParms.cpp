@@ -54,6 +54,8 @@ void HistoryGenParms::reset()
    mTp  = 1.0;
    mSigma = 0.0;
 
+   mFsDivisor = 1;
+
    mTs = 1.0 / mFs;
    mMaxSamples = (int)(mDuration * mFs);
 }
@@ -105,6 +107,7 @@ void HistoryGenParms::show(char* aLabel)
    }
 
    printf("\n");
+   printf("FsDivisor          %10d\n", mFsDivisor);
 }
 
 //******************************************************************************
@@ -143,6 +146,8 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringTimeType(cTimeType1)))     mTimeType = cTimeType1;
       if (aCmd->isArgString(1,asStringTimeType(cTimeType2)))     mTimeType = cTimeType2;
    }
+
+   if (aCmd->isCmd("FsDivisor"))    mFsDivisor = aCmd->argInt(1);
 
    // Pop back out at the end.
    if(aCmd->isCmd("}"    ))  nestedPop(aCmd);
