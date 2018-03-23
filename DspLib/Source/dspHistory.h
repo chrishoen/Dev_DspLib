@@ -175,6 +175,12 @@ public:
    // and value array. This is a deep copy.
    void createClone(History& aY);
 
+   // Clone this history into a new one that has the same size and time array
+   // and value array. This is a deep copy. This is undersampled according to
+   // a modulo. For example, if the modulo is two then it clones into a buffer
+   // that has half the number of samples and has every other time and value.
+   void createUnderSampledClone(History& aY,int aModulo);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
