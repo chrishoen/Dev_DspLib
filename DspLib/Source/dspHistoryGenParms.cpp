@@ -76,6 +76,7 @@ void HistoryGenParms::show(char* aLabel)
 
    if (mGenType == cGenZero)
    {
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    printf("EX                 %10.4f\n", (mAngleFlag ? deg(mEX) : mEX));
    printf("UX                 %10.4f\n", (mAngleFlag ? deg(mUX) : mUX));
    printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
@@ -83,27 +84,29 @@ void HistoryGenParms::show(char* aLabel)
 
    if (mGenType == cGenStep)
    {
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    printf("Tp                 %10.4f\n", mTp);
    printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
    }
 
    if (mGenType == cGenSinWave)
    {
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    printf("A                  %10.4f\n", (mAngleFlag ? deg(mA) : mA));
+   printf("A2                 %10.4f\n", mA);
    printf("Fc                 %10.4f\n", mFc);
    printf("Phi                %10.4f\n", deg(mPhi));
    printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
-   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    }
 
    if (mGenType == cGenRandWave)
    {
+   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    printf("Fc                 %10.4f\n", mFc);
    printf("FilterOrder        %10d\n",   mFilterOrder);
    printf("EX                 %10.4f\n", (mAngleFlag ? deg(mEX) : mEX));
    printf("UX                 %10.4f\n", (mAngleFlag ? deg(mUX) : mUX));
    printf("Sigma              %10.4f\n", (mAngleFlag ? deg(mSigma) : mSigma));
-   printf("AngleFlag          %10s\n",   my_string_from_bool(mAngleFlag));
    }
 
    printf("\n");
@@ -119,16 +122,17 @@ void HistoryGenParms::show(char* aLabel)
 
 void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
 {
+   if (aCmd->isCmd("AngleFlag"))   mAngleFlag   = aCmd->argBool(1);
+
    if (aCmd->isCmd("Duration"))    mDuration    = aCmd->argDouble(1);
    if (aCmd->isCmd("Fs"))          mFs          = aCmd->argDouble(1);
    if (aCmd->isCmd("Fc"))          mFc          = aCmd->argDouble(1);
    if (aCmd->isCmd("FilterOrder")) mFilterOrder = aCmd->argInt(1);
 
-   if (aCmd->isCmd("AngleFlag"))   mAngleFlag   = aCmd->argBool(1);
-
    if (aCmd->isCmd("EX"))          mEX          = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
    if (aCmd->isCmd("UX"))          mUX          = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
    if (aCmd->isCmd("A"))           mA           = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
+   if (aCmd->isCmd("A")) printf("LINE101 mA %10.2f %d\n",mA,mAngleFlag);
 
    if (aCmd->isCmd("Phi"))         mPhi         = aCmd->argAngle(1);
    if (aCmd->isCmd("Sigma"))       mSigma       = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);

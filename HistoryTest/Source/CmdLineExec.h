@@ -21,14 +21,15 @@ public:
    void executeGo4(Ris::CmdLineCmd* aCmd);
    void executeGo5(Ris::CmdLineCmd* aCmd);
 
-   void executeRun1 (Ris::CmdLineCmd* aCmd);
-   void executeRun2 (Ris::CmdLineCmd* aCmd);
-   void executeRun3 (Ris::CmdLineCmd* aCmd);
-   void executeRun4 (Ris::CmdLineCmd* aCmd);
-   void executeRun5 (Ris::CmdLineCmd* aCmd);
-   void executeRun6 (Ris::CmdLineCmd* aCmd);
-   void executeRun7 (Ris::CmdLineCmd* aCmd);
-   void executeMem1 (Ris::CmdLineCmd* aCmd);
+   void executeRun1    (Ris::CmdLineCmd* aCmd);
+   void executeRun1Deg (Ris::CmdLineCmd* aCmd);
+   void executeRun2    (Ris::CmdLineCmd* aCmd);
+   void executeRun3    (Ris::CmdLineCmd* aCmd);
+   void executeRun4    (Ris::CmdLineCmd* aCmd);
+   void executeRun5    (Ris::CmdLineCmd* aCmd);
+   void executeRun6    (Ris::CmdLineCmd* aCmd);
+   void executeRun7    (Ris::CmdLineCmd* aCmd);
+   void executeMem1    (Ris::CmdLineCmd* aCmd);
 
    void executeCausal1     (Ris::CmdLineCmd* aCmd);
    void executeCausal12    (Ris::CmdLineCmd* aCmd);

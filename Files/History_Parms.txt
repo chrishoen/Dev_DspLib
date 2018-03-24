@@ -32,12 +32,12 @@ SectionBegin Default
       Fc                       0.10
       FilterOrder              4
       EX                       0.0
-      UX                       1.0
+      UX                       0.0
 
       A                        1.0
       Phi                      0.0
       Tp                       10.0
-      Sigma                    1.00
+      Sigma                    0.00
 
       FsDivisor                1
    }
@@ -63,10 +63,28 @@ SectionBegin run1
 
    HistoryGenParms
    {
+      GenType                  SinWave
       GenType                  RandWave
-      Duration                 200.0
-      Fc                       0.2
-      Sigma                    1.0
+      Duration                 100.0
+      Fc                       0.5
+      Sigma                    0.0
+   }
+
+SectionEnd
+
+SectionBegin run1deg
+
+   HistoryGenParms
+   {
+      AngleFlag                true
+      GenType                  RandWave
+//      GenType                  SinWave
+      Duration                 100.0
+      Fc                       0.5
+      
+      A                        1.0
+      Phi                      0.0
+      Sigma                    0.00
    }
 
 SectionEnd

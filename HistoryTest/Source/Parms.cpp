@@ -110,7 +110,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("OutputFile2" )) aCmd->copyArgString(1,mOutputFile2,cMaxStringSize);
    if(aCmd->isCmd("OutputFile3" )) aCmd->copyArgString(1,mOutputFile3,cMaxStringSize);
 
-   if(aCmd->isCmd("HistoryGenParms"))    nestedPush(aCmd, &mHistoryGenParms);
+   if(aCmd->isCmd("HistoryGenParms"))      nestedPush(aCmd, &mHistoryGenParms);
    if(aCmd->isCmd("HistoryFilterParms1"))  nestedPush(aCmd, &mHistoryFilterParms1);
    if(aCmd->isCmd("HistoryFilterParms2"))  nestedPush(aCmd, &mHistoryFilterParms2);
 

@@ -16,6 +16,7 @@ class TestOne
 public:
    // Tests
    void doRun1();
+   void doRun1Deg();
    void doRun2();
    void doRun3();
    void doRun4();

@@ -33,14 +33,15 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("GO5"))   executeGo5(aCmd);
    if (aCmd->isCmd("Parms")) executeParms(aCmd);
 
-   if (aCmd->isCmd("RUN1"))  executeRun1(aCmd);
-   if (aCmd->isCmd("RUN2"))  executeRun2(aCmd);
-   if (aCmd->isCmd("RUN3"))  executeRun3(aCmd);
-   if (aCmd->isCmd("RUN4"))  executeRun4(aCmd);
-   if (aCmd->isCmd("RUN5"))  executeRun5(aCmd);
-   if (aCmd->isCmd("RUN6"))  executeRun6(aCmd);
-   if (aCmd->isCmd("RUN7"))  executeRun7(aCmd);
-   if (aCmd->isCmd("MEM1"))  executeMem1(aCmd);
+   if (aCmd->isCmd("RUN1"))     executeRun1(aCmd);
+   if (aCmd->isCmd("RUN1DEG"))  executeRun1Deg(aCmd);
+   if (aCmd->isCmd("RUN2"))     executeRun2(aCmd);
+   if (aCmd->isCmd("RUN3"))     executeRun3(aCmd);
+   if (aCmd->isCmd("RUN4"))     executeRun4(aCmd);
+   if (aCmd->isCmd("RUN5"))     executeRun5(aCmd);
+   if (aCmd->isCmd("RUN6"))     executeRun6(aCmd);
+   if (aCmd->isCmd("RUN7"))     executeRun7(aCmd);
+   if (aCmd->isCmd("MEM1"))     executeMem1(aCmd);
 
    if (aCmd->isCmd("Cas1"))   executeCausal1(aCmd);
    if (aCmd->isCmd("Cas12"))  executeCausal12(aCmd);
@@ -183,6 +184,20 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doRun1();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeRun1Deg(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("run1deg");
+
+   TestOne tTestOne;
+   tTestOne.doRun1Deg();
 }
 
 //******************************************************************************
