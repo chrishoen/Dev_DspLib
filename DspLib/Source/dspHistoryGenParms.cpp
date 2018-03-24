@@ -132,8 +132,6 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("EX"))          mEX          = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
    if (aCmd->isCmd("UX"))          mUX          = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
    if (aCmd->isCmd("A"))           mA           = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
-   if (aCmd->isCmd("A")) printf("LINE101 mA %10.2f %d\n",mA,mAngleFlag);
-
    if (aCmd->isCmd("Phi"))         mPhi         = aCmd->argAngle(1);
    if (aCmd->isCmd("Sigma"))       mSigma       = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
 
