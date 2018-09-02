@@ -12,7 +12,7 @@ SectionBegin default
    //-----------------------------------------------------------------
    // Parms.
 
-   Outputfile C:\Alpha\Data\SignalHistory.csv
+   Outputfile SignalHistory.csv
 
    XAInitial                    -4.0
    XBInitial                     4.0

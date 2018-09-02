@@ -30,7 +30,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
    Dsp::LogFileWriter tWriter;
-   tWriter.open("C:\\Alpha\\Data\\log_file_101.txt");
+   tWriter.open("log_file_101.txt");
    tWriter.write("%d %d",101,102);
    tWriter.write("%d %d",201,202);
    tWriter.close();
@@ -41,7 +41,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CsvFileWriter tWriter;
-   tWriter.open("C:\\Alpha\\Data\\file_101.csv");
+   tWriter.open("file_101.csv");
    tWriter.writeRowN(101,2,101.1,102.2);
    tWriter.writeRowN(103,2,201.1,202.2);
    tWriter.writeRow (103,301.1,302.2);
@@ -54,7 +54,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CsvFileReader tReader;
-   tReader.open("C:\\Alpha\\Data\\file_101.csv");
+   tReader.open("file_101.csv");
 
    while(true)
    {

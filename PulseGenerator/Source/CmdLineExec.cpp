@@ -81,8 +81,8 @@ void CmdLineExec::executeP11(Ris::CmdLineCmd* aCmd)
    tPS->mFs       = 10000.0;
    tPS->mFm       =   100.0;
    tPS->mDuration =    10.0;
-   tPS->setPdwFileName ("C:\\Alpha\\Data\\PulsePdw11.csv");
-   tPS->setPlotFileName("C:\\Alpha\\Data\\PulsePlot11.csv");
+   tPS->setPdwFileName ("PulsePdw11.csv");
+   tPS->setPlotFileName("PulsePlot11.csv");
    tPS->initialize();
    tPS->show();
    PulseGen::gen11(tPS);
@@ -98,8 +98,8 @@ void CmdLineExec::executeP21(Ris::CmdLineCmd* aCmd)
    tPS->mFs       = 10000.0;
    tPS->mFm       =   100.0;
    tPS->mDuration =    10.0;
-   tPS->setPdwFileName ("C:\\Alpha\\Data\\PulsePdw21.csv");
-   tPS->setPlotFileName("C:\\Alpha\\Data\\PulsePlo21.csv");
+   tPS->setPdwFileName ("PulsePdw21.csv");
+   tPS->setPlotFileName("PulsePlo21.csv");
    tPS->initialize();
    tPS->show();
    PulseGen::gen21(tPS);
@@ -125,7 +125,7 @@ void CmdLineExec::executeS11(Ris::CmdLineCmd* aCmd)
    tSS->show();
    PulseSignalGen::gen11(tSS);
    tSS->normalize();
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample11.csv");
+   tSS->writeToTextFile("Sample11.csv");
    delete tSS;
 }
 
@@ -141,7 +141,7 @@ void CmdLineExec::executeS21(Ris::CmdLineCmd* aCmd)
    tSS->show();
    PulseSignalGen::gen21(tSS);
    tSS->normalize();
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample21.csv");
+   tSS->writeToTextFile("Sample21.csv");
    delete tSS;
 }
 
@@ -155,7 +155,7 @@ void CmdLineExec::executeS22(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen22(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample22.csv");
+   tSS->writeToTextFile("Sample22.csv");
    delete tSS;
 }
 
@@ -172,7 +172,7 @@ void CmdLineExec::executeS31(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen31(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample31.csv");
+   tSS->writeToTextFile("Sample31.csv");
    delete tSS;
 }
 
@@ -187,7 +187,7 @@ void CmdLineExec::executeS32(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen32(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample32.csv");
+   tSS->writeToTextFile("Sample32.csv");
    delete tSS;
 }
 
@@ -202,7 +202,7 @@ void CmdLineExec::executeS33(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen33(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample33.csv");
+   tSS->writeToTextFile("Sample33.csv");
    delete tSS;
 }
 
@@ -217,7 +217,7 @@ void CmdLineExec::executeS34(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen34(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample34.csv");
+   tSS->writeToTextFile("Sample34.csv");
    delete tSS;
 }
 
@@ -234,7 +234,7 @@ void CmdLineExec::executeS41(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen41(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\PulseSample41.csv");
+   tSS->writeToTextFile("PulseSample41.csv");
    delete tSS;
 }
 
@@ -255,7 +255,7 @@ void CmdLineExec::executeF51(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen51(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample51.csv");
+   tSS->writeToTextFile("Sample51.csv");
    delete tSS;
 }
 
@@ -272,7 +272,7 @@ void CmdLineExec::executeF52(Ris::CmdLineCmd* aCmd)
    tSS->initialize();
    tSS->show();
    PulseSignalGen::gen52(tSS);
-   tSS->writeToTextFile("C:\\Alpha\\Data\\Sample52.csv");
+   tSS->writeToTextFile("Sample52.csv");
    delete tSS;
 }
 

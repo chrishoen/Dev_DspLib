@@ -7,8 +7,8 @@ SectionBegin Default
    //*****************************************************************
    // Parms.
 
-   Outputfile  C:\Alpha\Data\SignalHistory.csv
-   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
+   Outputfile  SignalHistory.csv
+   Outputfile2 SignalHistory2.csv
 
    HistoryMaxSamples           10000
    HistoryDeltaT               1.0
@@ -361,8 +361,8 @@ SectionEnd
 
 SectionBegin Demo3
 
-   Outputfile  C:\Alpha\Data\SignalHistory.csv
-   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
+   Outputfile  SignalHistory.csv
+   Outputfile2 SignalHistory2.csv
 
    HistoryGenParms
    {
@@ -402,8 +402,8 @@ SectionBegin Run4
    //-----------------------------------------------------------------
    // Signal History Generator Parms.
 
-   Outputfile  C:\Alpha\Data\SignalHistory.csv
-   Outputfile2 C:\Alpha\Data\SignalHistory2.csv
+   Outputfile  SignalHistory.csv
+   Outputfile2 SignalHistory2.csv
 
    HistoryGenParms
    {
