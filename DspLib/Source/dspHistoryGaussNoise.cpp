@@ -45,13 +45,16 @@ void HistoryGaussNoise::initialize(double aSigma)
    // Seed generator.
    std::random_device tRandomDevice;
    mRandomGenerator.seed(tRandomDevice());
-
+#if 0
    // Set distribution parameters.
    std::normal_distribution<double>::param_type parm;
    if (mNoiseFlag) parm._Init(0.0, mNoiseSigma);
    else            parm._Init(0.0, 1.0);
-
    mRandomDistribution.param(parm);
+#endif
+
+   if (mNoiseFlag) mRandomDistribution = std::normal_distribution<double>(0.0, mNoiseSigma);
+   else            mRandomDistribution = std::normal_distribution<double>(0.0, 1.0);
 }
 
 //******************************************************************************
