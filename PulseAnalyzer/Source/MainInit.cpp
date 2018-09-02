@@ -1,8 +1,8 @@
-#include <windows.h>
+#include "stdafx.h"
 
-#include "prnPrint.h"
 #include "logFiles.h"
 #include "risThreadsProcess.h"
+
 #include "dspPdwFreeList.h"
 
 //******************************************************************************
@@ -80,8 +80,10 @@ void main_finalize()
    // Close print
    Prn::finalizePrint();
 
-
    // Exit process
    Ris::Threads::exitProcess();
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************

@@ -1,9 +1,4 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-#include "prnPrint.h"
+#include "stdafx.h"
 
 #include "someDetector.h"
 

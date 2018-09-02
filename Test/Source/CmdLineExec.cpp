@@ -1,18 +1,9 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <atomic>
-#include <stdarg.h>
+#include "stdafx.h"
 
 #include "risContainers2.h"
 #include "risPortableCalls.h"
-#include "dsp_functions.h"
 
-#include "prnPrint.h"
 #include "CmdLineExec.h"
-
-#include "dsp_math.h"
 
 using namespace std;
 

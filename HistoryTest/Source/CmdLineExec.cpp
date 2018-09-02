@@ -1,15 +1,11 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <random>
+#include "stdafx.h"
 
-#include "prnPrint.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
-#include "dsp_functions.h"
 #include "TestOne.h"
 #include "DemoOne.h"
+
+#include "CmdLineExec.h"
 
 using namespace Dsp;
 

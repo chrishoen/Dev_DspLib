@@ -1,17 +1,13 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <random>
+#include "stdafx.h"
 
-#include "prnPrint.h"
 #include "risProgramTime.h"
-#include "CmdLineExec.h"
 #include "Special_Parms.h"
 #include "SysEquations.h"
 #include "SysEquationsTwo.h"
 #include "dspRootFinder.h"
 #include "dspRootFinderTwo.h"
+
+#include "CmdLineExec.h"
 
 using namespace std;
 

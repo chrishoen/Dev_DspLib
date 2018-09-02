@@ -1,7 +1,5 @@
-#include <windows.h>
+#include "stdafx.h"
 
-#include "prnPrint.h"
-#include "logFiles.h"
 #include "risThreadsProcess.h"
 #include "Parms.h"
 
@@ -53,18 +51,11 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
-   Prn::print(0,"SignalHistoryTest***************************************PROGRAM BEGIN");
+   Prn::print(0,"DelayTest***************************************PROGRAM BEGIN");
 
    // Open settings file.
    gParms.readSection("default");
-// gParms.show();
 
-   // Open log files
-   Log::reset();
-// Log::openFile(1,"C:\\Alpha\\Data\\LogFile_FrontEnd.txt");
-// Log::openFile(2,"C:\\Alpha\\Data\\LogFile_PulseList_Put.txt");
-// Log::openFile(3,"C:\\Alpha\\Data\\LogFile_PulseList_Time.txt");
-      
 }
 
 //******************************************************************************
@@ -74,10 +65,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"SignalHistoryTest***************************************PROGRAM END");
-
-   // Close log files
-   Log::closeAllFiles();
+   Prn::print(0,"DelayTest***************************************PROGRAM END");
 
    // Close print
    Prn::finalizePrint();

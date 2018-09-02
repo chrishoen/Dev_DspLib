@@ -1,9 +1,8 @@
 #include "stdafx.h"
 
-#include "CmdLineExec.h"
-
-#include "dsp_math.h"
 #include "dspButterworthCo.h"
+
+#include "CmdLineExec.h"
 
 using namespace Dsp;
 

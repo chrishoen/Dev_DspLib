@@ -1,8 +1,8 @@
-#include <windows.h>
+#include "stdafx.h"
 
-#include "prnPrint.h"
 #include "logFiles.h"
 #include "risThreadsProcess.h"
+
 #include "Parms.h"
 
 //******************************************************************************
@@ -58,7 +58,7 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::DspRun3,    false);
    Prn::setFilter(Prn::DspRun4,    false);
 
-   Prn::print(0,"SignalHistoryTest***************************************PROGRAM BEGIN");
+   Prn::print(0,"HistoryTest***************************************PROGRAM BEGIN");
 
    // Open settings file.
    gParms.readSection("default");
@@ -79,7 +79,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"SignalHistoryTest***************************************PROGRAM END");
+   Prn::print(0,"HistoryTest***************************************PROGRAM END");
 
    // Close log files
    Log::closeAllFiles();

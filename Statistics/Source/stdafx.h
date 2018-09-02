@@ -8,6 +8,7 @@
 #include "my_functions.h"
 
 #include "dsp_math.h"
+#include "dsp_functions.h"
 #include "dspStatistics.h"
 
 

@@ -1,4 +1,4 @@
-#include <windows.h>
+#include "stdafx.h"
 
 #include "prnPrint.h"
 #include "risThreadsProcess.h"
@@ -51,8 +51,7 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
-   Prn::print(0,"Test*******************************************BEGIN");
-
+   Prn::print(0,"LutTest*******************************************BEGIN");
 }
 
 //******************************************************************************
@@ -62,7 +61,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"Test*******************************************END");
+   Prn::print(0,"LutTest*******************************************END");
 
    // Close print
    Prn::finalizePrint();

@@ -1,7 +1,4 @@
-#include <windows.h>
-
-#include "prnPrint.h"
-#include "logFiles.h"
+#include "stdafx.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -45,9 +42,6 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun4,  false);
 
    Prn::print(0,"FileTest*******************************************BEGIN");
-
-   Log::reset();
-   Log::openFile(1,"C:\\Alpha\\Data\\logfile_101.txt");
 }
 
 //******************************************************************************
@@ -61,6 +55,5 @@ void main_finalize()
 
    // Close print
    Prn::finalizePrint();
-
 }
 

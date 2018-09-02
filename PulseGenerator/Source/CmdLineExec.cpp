@@ -1,18 +1,13 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <atomic>
-#include <random>
+#include "stdafx.h"
 
-#include "prnPrint.h"
-#include "CmdLineExec.h"
+#include <random>
 
 #include "dspPulseSignalGen.h"
 #include "dspSignal.h"
 #include "dspPulseGen.h"
 #include "dspPdwSequence.h"
 
+#include "CmdLineExec.h"
 
 using namespace Dsp;
 

@@ -1,11 +1,5 @@
-#include <stdarg.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "stdafx.h"
 
-#include "my_functions.h"
-#include "prnPrint.h"
 #include "dspTextFile.h"
 
 #include "CmdLineExec.h"
