@@ -228,6 +228,7 @@
       <AdditionalIncludeDirectories>C:\Alpha\Lib\RisLib\include;C:\MyTools\Eigen</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
