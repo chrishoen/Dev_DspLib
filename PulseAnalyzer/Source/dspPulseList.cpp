@@ -6,10 +6,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include "my_functions.h"
-#include "prnPrint.h"
-#include "logFiles.h"
+#include "stdafx.h"
 
 #include "dspPdwFreeList.h"
 #include "dspPulseList.h"

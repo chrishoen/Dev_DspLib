@@ -6,8 +6,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <math.h>
-#include "prnPrint.h"
+#include "stdafx.h"
 
 #define  _SOMEDETECTOR_CPP_
 #include "someDetector.h"

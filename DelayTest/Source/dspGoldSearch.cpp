@@ -6,12 +6,8 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
+#include "stdafx.h"
 
-#include "dsp_math.h"
-#include "dspStatistics.h"
 #include "dspGoldSearch.h"
 
 namespace Dsp

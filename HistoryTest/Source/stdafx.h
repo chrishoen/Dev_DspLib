@@ -6,6 +6,7 @@
 #include <random>
 
 #include "prnPrint.h"
+#include "logFiles.h"
 #include "my_functions.h"
 
 #include "dsp_math.h"

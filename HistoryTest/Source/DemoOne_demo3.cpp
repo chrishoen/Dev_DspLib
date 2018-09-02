@@ -5,10 +5,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-#include <math.h>
-#include "my_functions.h"
-#include "prnPrint.h"
-#include "logFiles.h"
+#include "stdafx.h"
 
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"

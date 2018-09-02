@@ -6,10 +6,8 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include <math.h>
-#include "my_functions.h"
-#include "prnPrint.h"
+#include "stdafx.h"
+
 #include "dspPdwFreeList.h"
 #include "dspPulseStatistics.h"
 
