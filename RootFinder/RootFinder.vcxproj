@@ -23,12 +23,14 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\Special_Parms.cpp" />
+    <ClCompile Include="Source\stdafx.cpp" />
     <ClCompile Include="Source\SysEquations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\Special_Parms.h" />
+    <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\SysEquations.h" />
     <ClInclude Include="Source\SysEquationsTwo.h" />
   </ItemGroup>

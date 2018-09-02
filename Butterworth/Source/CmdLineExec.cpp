@@ -1,13 +1,5 @@
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <atomic>
+#include "stdafx.h"
 
-#include "risContainers2.h"
-#include "risPortableCalls.h"
-
-#include "prnPrint.h"
 #include "CmdLineExec.h"
 
 #include "dsp_math.h"

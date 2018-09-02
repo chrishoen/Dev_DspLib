@@ -171,11 +171,13 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
     <ClCompile Include="Source\someDetector.cpp" />
+    <ClCompile Include="Source\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
     <ClInclude Include="Source\someDetector.h" />
+    <ClInclude Include="Source\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DspLib\DspLib.vcxproj">
