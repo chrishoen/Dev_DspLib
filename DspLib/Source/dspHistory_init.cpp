@@ -6,12 +6,11 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
+#include "stdafx.h"
 
 #include "prnPrint.h"
 #include "my_functions.h"
+
 #include "dsp_math.h"
 #include "dspStatistics.h"
 #include "dspHistoryGaussNoise.h"

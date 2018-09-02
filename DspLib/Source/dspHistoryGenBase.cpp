@@ -6,10 +6,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <random>
+#include "stdafx.h"
 
 #include "dsp_math.h"
 #include "dspStatistics.h"

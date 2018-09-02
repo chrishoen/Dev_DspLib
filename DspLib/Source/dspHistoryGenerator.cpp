@@ -6,9 +6,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
+#include "stdafx.h"
 
 #include "dspHistoryGenZero.h"
 #include "dspHistoryGenStep.h"

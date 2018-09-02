@@ -6,10 +6,7 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include <string.h>
+#include "stdafx.h"
 
 #include "dsp_math.h"
 #include "dspThreeVector.h"

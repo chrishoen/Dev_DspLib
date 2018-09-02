@@ -6,8 +6,8 @@ Description:
 //******************************************************************************
 //******************************************************************************
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "stdafx.h"
+
 #include "dsp_functions.h"
 #include "dsp_math.h"
 
