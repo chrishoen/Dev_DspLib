@@ -1,7 +1,6 @@
-#ifndef _DSPTHREEMATRIX_H_
-#define _DSPTHREEMATRIX_H_
-/*==============================================================================
+#pragma once
 
+/*==============================================================================
 Matrixs and matrices on R3.
 ==============================================================================*/
 
@@ -20,10 +19,20 @@ namespace Dsp
 class ThreeMatrix
 {
 public:
-   // Matrix components
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
+
+   // Matrix components.
    double mValues[3][3];
 
-   // Constructor
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
    ThreeMatrix();
    ThreeMatrix(
       double aA11,double aA12,double aA13,
@@ -31,7 +40,7 @@ public:
       double aA31,double aA32,double aA33);
    ThreeMatrix(double aValues[3][3]);
 
-   // Assign values
+   // Assign values.
    void set(
       double aA11,double aA12,double aA13,
       double aA21,double aA22,double aA23,
@@ -41,23 +50,23 @@ public:
    void setIdentity();
    void setDiagonal(double aA11,double aA22, double aA33);
 
-   // Access components
+   // Access components.
    double& e(int aRow,int aCol);
    double& operator()(int aRow,int aCol);
    double get(int aRow,int aCol) const;
    void show(char* aLabel=0);
 
-   // Get rows and columns
+   // Get rows and columns.
    ThreeVector getRow(int aRow);
    ThreeVector getCol(int aCol);
 
    // Transpose
    ThreeMatrix transpose();
 
-   // Trace
+   // Trace.
    double trace();
 
-   // Set to a rotation matrix
+   // Set to a rotation matrix.
    void setRotateX   (double aAngle);
    void setRotateY   (double aAngle);
    void setRotateZ   (double aAngle);
@@ -68,28 +77,28 @@ public:
 //******************************************************************************
 // Operators
 
-// Scalar multilply, divide
+// Scalar multilply, divide.
 ThreeMatrix operator*(double aLeft, ThreeMatrix& aRight);
 ThreeMatrix operator*(ThreeMatrix& aLeft,double aRight);
 ThreeMatrix operator/(ThreeMatrix& aLeft,double aRight);
 
-// Matrix sum, difference
+// Matrix sum, difference.
 ThreeMatrix operator+(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 ThreeMatrix operator-(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Operators
+// Operators.
 
-// Matrix multiply
+// Matrix multiply.
 ThreeVector operator*(ThreeMatrix& aLeft,ThreeVector& aRight);
 ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Operators
+// Operators.
 
 ThreeMatrix transpose(ThreeMatrix& aA);
 ThreeMatrix identity();
@@ -98,17 +107,17 @@ ThreeMatrix diagonal(double aA11,double aA22,double aA33);
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Rotation matrices
+// Rotation matrices.
 
-// Rotation matrices
+// Rotation matrices.
 ThreeMatrix rotateX(double aAngle);
 ThreeMatrix rotateY(double aAngle);
 ThreeMatrix rotateZ(double aAngle);
 
 //******************************************************************************
-
+//******************************************************************************
+//******************************************************************************
 }//namespace
-#endif
 
 
 

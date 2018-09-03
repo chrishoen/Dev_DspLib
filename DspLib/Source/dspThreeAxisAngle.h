@@ -16,22 +16,32 @@ namespace Dsp
 class ThreeAxisAngle
 {
 public:
-   // Vector components
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
+
+   // Vector components.
    double mAxisX;
    double mAxisY;
    double mAxisZ;
    double mAngle;
 
-   // Constructor
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
    ThreeAxisAngle();
    ThreeAxisAngle(double aAxisX,double aAxisY,double aAxisZ,double aAngle);
 
-   // Assign values
+   // Assign values.
    void set(double aAxisX,double aAxisY,double aAxisZ,double aAngle);
    void setToZero();
    void setIdentity();
 
-   //show
+   // Show.
    void show(char* aLabel);
 };
 

@@ -1,7 +1,6 @@
-#ifndef _DSPTHREEVECTOR_H_
-#define _DSPTHREEVECTOR_H_
-/*==============================================================================
+#pragma once
 
+/*==============================================================================
 Vectors and matrices on R3.
 ==============================================================================*/
 
@@ -18,22 +17,32 @@ namespace Dsp
 class ThreeVector
 {
 public:
-   // Vector components
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
+
+   // Vector components.
    double mValues[3];
 
-   // Constructor
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
    ThreeVector();
    ThreeVector(double aV1,double aV2,double aV3);
    ThreeVector(double aValues[3]);
    ThreeVector(int aBasisCoordinate);
 
-   // Assign values
+   // Assign values.
    void set(double aV1,double aV2,double aV3);
    void set(double aValues[3]);
    void setToZero();
    void setToBasisVector(int aBasisCoordinate);
 
-   // Access components
+   // Access components.
    double& e(int aRow);
    double& operator()(int aRow);
    double get(int aRow) const;
@@ -44,13 +53,13 @@ public:
    void show2(char* aLabel=0);
    void show3(char* aLabel=0);
 
-   // Length of a vector
+   // Length of a vector.
    double length();
 
-   // Return a normalized vector
+   // Return a normalized vector.
    ThreeVector normalize();
 
-   // Set
+   // Set.
    void setNormalize();
 };
 
@@ -59,26 +68,26 @@ public:
 //******************************************************************************
 // Operators
 
-// Scalar multilply, divide
+// Scalar multilply, divide.
 ThreeVector operator*(double aLeft, ThreeVector& aRight);
 ThreeVector operator*(ThreeVector& aLeft,double aRight);
 ThreeVector operator/(ThreeVector& aLeft,double aRight);
 
-// Vector sum, difference
+// Vector sum, difference.
 ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight);
 ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight);
 
-// Inner product
+// Inner product.
 double operator*(ThreeVector& aLeft,ThreeVector& aRight);
 
-// Cross product
+// Cross product.
 ThreeVector cross(ThreeVector& aLeft, ThreeVector& aRight);
 ThreeVector operator&(ThreeVector& aLeft, ThreeVector& aRight);
 
 //******************************************************************************
-
+//******************************************************************************
+//******************************************************************************
 }//namespace
-#endif
 
 
 

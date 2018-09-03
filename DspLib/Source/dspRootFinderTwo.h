@@ -46,8 +46,9 @@ public:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This class provides the functionality to find roots of equations using
-// the Newton rapheson method.
+// This is a class template that finds roots of systems of equations using the
+// Newton Rafeson method.  Instances are passed pointers to function 
+// objects that evaluate the systems of equations. 
 
 template<int Dim>
 class RootFinderTwo
@@ -60,11 +61,6 @@ public:
    // Members:
 
    int mNumSteps;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Infrastrucure:
 
    //***************************************************************************
    //***************************************************************************

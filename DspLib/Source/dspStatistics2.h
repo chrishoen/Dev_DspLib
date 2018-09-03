@@ -22,18 +22,12 @@ namespace Dsp
 class SumStatistics
 {
 public:
-   // Constructor
-   SumStatistics();
-   void reset();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   // Add/Subtract sample to/from sums
-   void add      (double aX);
-   void subtract (double aX);
-
-   // Calculate statistics on sums
-   void calculate();
-
-   // Calculate output values
+   // Calculate output values.
    double  mX;            // Input value
    double  mEX;           // Expectation (mean)
    double  mUX;           // Uncertainty (standard deviation)
@@ -47,6 +41,22 @@ public:
    double  mXSum;         // Sum of X
    double  mXSquareSum;   // Sum of X squared
    int     mCount;        // Count of samples in sums
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
+   SumStatistics();
+   void reset();
+
+   // Add/Subtract sample to/from sums.
+   void add      (double aX);
+   void subtract (double aX);
+
+   // Calculate statistics on sums.
+   void calculate();
 
    // Support
    void show();
@@ -63,12 +73,10 @@ public:
 class PeriodicStatistics
 {
 public:
-   // Initialize
-   void initialize(int aSize);
-   void show();
-
-   // Put input value
-   void put(double aX);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
    // Members
    int mSize;
@@ -99,6 +107,18 @@ public:
 
    // Members
    int mK;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Initialize
+   void initialize(int aSize);
+   void show();
+
+   // Put input value
+   void put(double aX);
 };
 
 //******************************************************************************

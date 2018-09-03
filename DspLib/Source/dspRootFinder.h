@@ -15,7 +15,9 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This is a base class for classes that encapsualte function objects. 
+// This is a class that finds roots of systems of equations using the
+// Newton Rafeson method.  Instances are passed pointers to function 
+// objects that evaluate the systems of equations. 
 
 class RootFinder
 {
@@ -31,11 +33,6 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Infastrucure:
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
    // Methods:
 
    // This finds the roots of a given function, starting at an initial guess.
@@ -46,7 +43,6 @@ public:
       double              aAccuracy,            // input        
       int                 aMaxSteps,            // input        
       Eigen::VectorXd&    aX);                  // Output
-
 };
 
 //******************************************************************************

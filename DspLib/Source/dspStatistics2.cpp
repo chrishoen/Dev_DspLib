@@ -50,9 +50,7 @@ void SumStatistics::reset()
 
 void SumStatistics::add(double aX)
 {
-   //--------------------------------------------------------------------------- 
-   // Update sums
-
+   // Update sums.
    mXSum       += aX;
    mXSquareSum += aX*aX;
    mCount++;
@@ -64,12 +62,10 @@ void SumStatistics::add(double aX)
 
 void SumStatistics::subtract(double aX)
 {
-   // Guard
+   // Guard.
    if (mCount==0)return;
 
-   //--------------------------------------------------------------------------- 
-   // Update sums
-
+   // Update sums/
    mXSum       -= aX;
    mXSquareSum -= aX*aX;
    mCount--;
@@ -82,18 +78,18 @@ void SumStatistics::subtract(double aX)
 
 void SumStatistics::calculate()
 {
-   // Guard
+   // Guard.
    if (mCount==0)return;
 
-   // Expectation (mean) of X
+   // Expectation (mean) of X.
    mEX = mXSum / mCount;
-   // Expectation of X squared
+   // Expectation of X squared.
    mEXSquare = mXSquareSum / mCount;
 
-   // Variance of X
+   // Variance of X.
    mVariance = mEXSquare - mEX*mEX;
 
-   // Uncertainty (stddev) of X
+   // Uncertainty (stddev) of X.
    if (mVariance > 0.0f)
    {
       mUX = sqrt(mVariance);
@@ -103,7 +99,7 @@ void SumStatistics::calculate()
       mUX = 0.0;
    }
 
-   // Store nicknames
+   // Store nicknames.
    mMean   = mEX;
    mStdDev = mUX;
 }
@@ -148,52 +144,63 @@ void PeriodicStatistics::initialize(int aSize)
 }
    
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void PeriodicStatistics::put(double aX)
 {
-   //--------------------------------------------------------------------------- 
-   // Store current input
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Store current input.
+
    mX = aX;
 
-   //--------------------------------------------------------------------------- 
-   // Update min and max
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Update min and max.
 
-   // If first in period, set to current input  
+   // If first in period, set to current input.
    if (mFirstFlag)
    {
       mFirstFlag = false;
       mCurrentMinX = mX;
       mCurrentMaxX = mX;
    }
-   // Else, calculate min and max
+   // Else, calculate min and max.
    else
    {
       if (mX < mCurrentMinX) mCurrentMinX = mX;
       if (mX > mCurrentMaxX) mCurrentMaxX = mX;
    }
 
-   //--------------------------------------------------------------------------- 
-   // Update sums
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Update sums.
 
    mXSum += aX;
    mXSquareSum += aX*aX;
 
-   //--------------------------------------------------------------------------- 
-   // If at the end of the period
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // If at the end of the period.
 
    if (++mPutCount == mSize)
    {
-      // Calculate results for mean and standard deviation
+      // Calculate results for mean and standard deviation.
 
-      // Expectation (mean) of X
+      // Expectation (mean) of X.
       mEX = mXSum / mPutCount;
-      // Expectation of X squared
+      // Expectation of X squared.
       mEXSquare = mXSquareSum / mPutCount;
 
-      // Variance of X
+      // Variance of X.
       mVariance = mEXSquare - mEX*mEX;
 
-      // Uncertainty (stddev) of X
+      // Uncertainty (stddev) of X.
       if (mVariance > 0.0f)
       {
          mUX = sqrt(mVariance);
@@ -203,34 +210,39 @@ void PeriodicStatistics::put(double aX)
          mUX = 0.0f;
       }
 
-      // Store
+      // Store.
       mMean   = mEX;
       mStdDev = mUX;
 
-      // Latch minimum and maximum
+      // Latch minimum and maximum.
       mMinX = mCurrentMinX;
       mMaxX = mCurrentMaxX;
 
-      // Reset sums and counts
+      // Reset sums and counts.
       mXSum = 0.0;;
       mXSquareSum = 0.0;
       mPutCount = 0;
 
-      // Indicate end of period
+      // Indicate end of period.
       mEndOfPeriod = true;
       mFirstFlag = true;
    }
    else
    {
-      // Indicate not end of period
+      // Indicate not end of period.
     	mEndOfPeriod = false;
    }
 
-   //--------------------------------------------------------------------------- 
-   // Done
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Done.
+
    mK++;
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 void PeriodicStatistics::show()
 {
@@ -251,7 +263,6 @@ void PeriodicStatistics::show()
          mX);
    }
 }
-
 
 //******************************************************************************
 //******************************************************************************

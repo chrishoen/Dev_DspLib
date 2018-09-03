@@ -1,5 +1,4 @@
-#ifndef _DSPPDWSEQUENCE_H_
-#define _DSPPDWSEQUENCE_H_
+#pragma once
 
 /*==============================================================================
 ==============================================================================*/
@@ -21,20 +20,12 @@ class PdwSequence
 {
 public:
 
-   //--------------------------------------------------------------------------
-   // Constructor
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   PdwSequence();
-  ~PdwSequence();
-
-   //--------------------------------------------------------------------------
-   // Reset paramters to defaults.
-
-   void reset();
-
-   //--------------------------------------------------------------------------
-   // Parameters
-
+   // Parameters.
    double  mFs;
    double  mTs;
    double  mFm;
@@ -47,44 +38,45 @@ public:
    int     mNm2;
    double  mDCm;
 
-   static const int cMaxStringSize=400;
+   static const int cMaxStringSize = 400;
 
-   char mPdwFileName  [cMaxStringSize];
-   char mPlotFileName [cMaxStringSize];
+   char mPdwFileName[cMaxStringSize];
+   char mPlotFileName[cMaxStringSize];
 
-   void setPdwFileName  (char* aFileName);
-   void setPlotFileName (char* aFileName);
-   
-   //--------------------------------------------------------------------------
-   // Initialize, using parameters.
+   void setPdwFileName(char* aFileName);
+   void setPlotFileName(char* aFileName);
 
-   void initialize();
-
-   //--------------------------------------------------------------------------
-   // Members
-
-   static const int cMaxNumOfPdws=10000;
+   static const int cMaxNumOfPdws = 10000;
    Pdw* mPdwArray;
    int mPdwCount;
 
-   //--------------------------------------------------------------------------
-   // Put a Pdw to the PdwArray.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
 
+   // Constructor
+   PdwSequence();
+  ~PdwSequence();
+
+   // Reset paramters to defaults.
+   void reset();
+
+   // Initialize, using parameters.
+   void initialize();
+
+   // Put a Pdw to the PdwArray.
    void putPdw(Pdw* aPdw);
 
-   //--------------------------------------------------------------------------
    // Write signal to a csv file.
-
    void writeToTextFile();
 
-   //--------------------------------------------------------------------------
    // Support.
-
    void show();
 };
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace
-
-#endif
 
