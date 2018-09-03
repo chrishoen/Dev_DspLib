@@ -209,6 +209,8 @@ void HistoryFilterCDiffSavGol::calculateCoefficientsSecondDerivative1()
 void HistoryFilterCDiffSavGol::operate(History& aX, History& aY)
 {
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Calculate the central difference filter coefficents, based on the parms.
    switch (mParms.mFilterType)
    {
@@ -238,10 +240,14 @@ void HistoryFilterCDiffSavGol::operate(History& aX, History& aY)
    }
 
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
    BaseClass::createTimeClone(aX,aY);
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Execute a loop to calculate the central difference sum to implement
    // the algorithm.
@@ -278,4 +284,8 @@ void HistoryFilterCDiffSavGol::operate(History& aX, History& aY)
       aY.mValue[i] = tSum;
    }
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace

@@ -65,7 +65,7 @@ public:
    //***************************************************************************
    // Constructor and initialization.
 
-   // Initialize varaibles. Do not allocate memory.
+   // Initialize variables. Do not allocate memory.
    History();
    void reset();
 
@@ -96,7 +96,6 @@ public:
    // that points to the same allocated memory
    History(const History& aRhs); 
    History& operator= (const History& aRhs); 
-
 
    //***************************************************************************
    //***************************************************************************
@@ -191,6 +190,8 @@ public:
    void show2(int aPrintFilter,char* aLabel);
 };
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 }//namespace
 

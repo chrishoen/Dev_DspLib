@@ -41,6 +41,8 @@ void HistoryFilterOperator::operate(History& aX, History& aY1,History& aY2)
    switch (mParms.mFilterType)
    {
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    case HistoryFilterParms::cFilterCausal:
    {
       Prn::print(Prn::DspRun2,"OPERATOR CAUSAL XY1Y2 %s",mParms.asStringCausalType()); 
@@ -52,6 +54,8 @@ void HistoryFilterOperator::operate(History& aX, History& aY1,History& aY2)
    }
    break;
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    case HistoryFilterParms::cFilterNoncausal:
    {
       Prn::print(Prn::DspRun2,"OPERATOR NONCAUSAL XY1Y2 %s",mParms.asStringCausalType()); 
@@ -62,6 +66,10 @@ void HistoryFilterOperator::operate(History& aX, History& aY1,History& aY2)
       return;
    }
    break;
+   }
 }
-}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace

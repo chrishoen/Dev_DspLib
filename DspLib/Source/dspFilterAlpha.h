@@ -28,17 +28,10 @@ namespace Filter
 class AlphaOne
 {
 public:
-   // Initialize with lambda (tracking index).
-   void initialize (double aLambda); 
-   // Initialize with alpha.
-   void initializeFromAlpha (double aP1); 
-   // Initialize with lambda (tracking index).
-   void initializeFromLambda (double aLambda); 
-   // Set the first lag true.
-   void setFirst(); 
-
-   // Put input value, return filtered output.
-   double put(double aY);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
    // Input variable.
    double mY;
@@ -51,6 +44,23 @@ public:
 
    // True for first sample.
    bool mFirstFlag;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Initialize with lambda (tracking index).
+   void initialize (double aLambda); 
+   // Initialize with alpha.
+   void initializeFromAlpha (double aP1); 
+   // Initialize with lambda (tracking index).
+   void initializeFromLambda (double aLambda); 
+   // Set the first lag true.
+   void setFirst(); 
+
+   // Put input value, return filtered output.
+   double put(double aY);
 };
 
 //******************************************************************************
@@ -68,11 +78,10 @@ public:
 class AlphaTwo
 {
 public:
-   // Initialize with lambda,DT (tracking index, time increment).
-   void initialize(double aLambda,double aDT); 
-
-   // Put input value, return filtered output.
-   double put(double aY);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
    // Input variable.
    double mY;
@@ -85,6 +94,17 @@ public:
    double mAlpha;
    double mBeta;
    double mDT;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Initialize with lambda,DT (tracking index, time increment).
+   void initialize(double aLambda,double aDT); 
+
+   // Put input value, return filtered output.
+   double put(double aY);
 };
 
 //******************************************************************************
@@ -102,11 +122,11 @@ public:
 class AlphaThree
 {
 public:
-   // Initialize with lambda,DT (tracking index, time increment).
-   void initialize(double aLambda,double aDT); 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   // Put input value, return filtered output.
-   double put(double aY);
 
    // Input variable.
    double mY;
@@ -121,6 +141,17 @@ public:
    double mBeta;
    double mGamma;
    double mDT;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Initialize with lambda,DT (tracking index, time increment).
+   void initialize(double aLambda,double aDT); 
+
+   // Put input value, return filtered output.
+   double put(double aY);
 };
 
 //******************************************************************************

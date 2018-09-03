@@ -48,11 +48,15 @@ void HistoryAlphaFilter::initialize(double aAlpha)
 void HistoryAlphaFilter::operate(History& aX, History& aY)
 {
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
 
    aX.createTimeClone(aY);
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Locals
 

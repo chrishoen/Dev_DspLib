@@ -77,7 +77,6 @@ void HistoryFilterCausal::initializeCausalFilter()
    }
    break;
    }
-
 }
 
 //******************************************************************************
@@ -195,16 +194,22 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
 void HistoryFilterCausal::operate(History& aX, History& aY)
 {
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Initialize the filter, based on the parms.
 
    initializeCausalFilter();
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
 
    aX.createTimeClone(aY);
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Execute a loop to filter the input to the output.
    
@@ -234,10 +239,14 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
 void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2)
 {
    //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Initialize the filter, based on the parms.
 
    initializeCausalFilter();
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Create the destination history as clone of the source history that has
    // the same size and time array, but has a zero value array.
@@ -245,6 +254,8 @@ void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2)
    aX.createTimeClone(aY1);
    aX.createTimeClone(aY2);
 
+   //***************************************************************************
+   //***************************************************************************
    //***************************************************************************
    // Execute a loop to filter the input to the output.
    
@@ -265,4 +276,8 @@ void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2)
       aY2.mValue[i] = tY2;
    }
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace

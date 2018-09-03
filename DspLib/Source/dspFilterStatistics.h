@@ -26,16 +26,12 @@ namespace Filter
 class AlphaStatistics
 {
 public:
-   // Constructor
-   AlphaStatistics();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   // Initialize
-   void initialize(double aAlpha);
-
-   // Put input value
-   void put(double aX);
-
-   // Output values
+   // Output values.
    double mX;          // Input value
    double mEX;         // Expectation (mean)
    double mUX;         // Uncertainty (standard deviation)
@@ -43,12 +39,28 @@ public:
    double mMean;       // Expectation (mean)
    double mStdDev;     // Uncertainty (standard deviation)
 
-   // Alpha filters for expectation and uncertainty
+   // Alpha filters for expectation and uncertainty.
    AlphaOne    mXAlpha;        // Alpha filter for input X
    AlphaOne    mXSquareAlpha;  // Alpha filter for input X squared
 
-   // Helpers
+   // Counter.
    int  mK;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Constructor.
+   AlphaStatistics();
+
+   // Initialize.
+   void initialize(double aAlpha);
+
+   // Put input value
+   void put(double aX);
+
+   // Helpers.
    void show();
 };
 
@@ -63,18 +75,16 @@ public:
 class PeriodicStatistics
 {
 public:
-   // Initialize
-   void initialize(int aSize);
-   void show();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
-   // Put input value
-   void put(float aX);
-
-   // Members
+   // Members.
    int mSize;
    bool mFirstFlag;
 
-   // Output values
+   // Output values.
    bool   mEndOfPeriod;  // True at the end of a period
    float  mX;            // Input value
    float  mEX;           // expectation (mean)
@@ -87,18 +97,29 @@ public:
    float  mEXSquare;     // expectation of X squared
    float  mVariance;     // variance
 
-   // Sums for expectation and uncertainty
+   // Sums for expectation and uncertainty.
    float  mXSum;         // Sum of X
    float  mXSquareSum;   // Sum of X squared
    int    mPutCount;     // Put count
 
-   // Current min and max
+   // Current min and max.
    float  mCurrentMinX;  // minimum
    float  mCurrentMaxX;  // maximum
 
-
-   // Members
+   // Counter.
    int mK;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Initialize.
+   void initialize(int aSize);
+   void show();
+
+   // Put input value.
+   void put(float aX);
 };
 
 //******************************************************************************
@@ -106,6 +127,3 @@ public:
 //******************************************************************************
 }//namespace
 }//namespace
-
-
-
