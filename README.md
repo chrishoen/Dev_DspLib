@@ -68,7 +68,7 @@ stdafx.h                          -- used for precompiled header files
 ``` markdown
 Butterworth     -- unit test for butterworth lowass filter coefficients
 DelayTest       -- experiment for loop delay measurements
-DspLib          -- digital signall processing library -- this is the library
+DspLib          -- digital signal processing library -- this is the library
 Files           -- parameters files
 FileTest        -- unit test for text file writers
 FreqDetector    -- a frequency detector that uses a bandpass filter
