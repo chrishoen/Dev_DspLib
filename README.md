@@ -2,7 +2,7 @@
 ### digital signal processng library, C++, vstudio, windows
 
 This is a library of C++ classes that provides some realtime functionality. Features include:
-   1. butteworth and alpha beta gamma causal recursive filters.
+   1. butterworth and alpha beta gamma causal recursive filters.
    2. signal history buffers with noncausal filtering for smoothing and differentiating
    3. signal generators for history buffers
    4. pulse analysis and generation
