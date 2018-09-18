@@ -5,7 +5,7 @@ This is a library of C++ classes that provides some realtime functionality. Feat
    1. Thread base classes.
    8. Miscellaneous utility functions.
 
-This library is written for Windows in Visual Studio. The classes are based on Win32 realtime functions for threads and sockets and such. The library is portable. The details of the provided functionality that are specific to Win32 are contained in a small set of `*_win.cpp` files. There is a corresponding library for Linux, RisLibLx, with a corresponding small set of `*_linux.cpp` files that are specific to Linux. It is the intention of the library that programs built under Windows can be rebuilt seamlessly under Linux.
+This library is written for Windows in Visual Studio. All of the code is portable to Linux, with the exception of ccSynchLock_win.cpp. Dev_CCLibLx is the Linux version of the library and uses ccSynchlock_linux.cpp.
 
 ## Classes
 ``` markdown
