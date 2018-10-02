@@ -1,7 +1,7 @@
 #ifndef _CMDLINEEXEC_H_
 #define _CMDLINEEXEC_H_
 
-#include "risCmdLineCmd.h"
+#include "risCmdLineExec.h"
 
 //******************************************************************************
 // specific command line executive
