@@ -1,0 +1,16 @@
+﻿if (MSVC)
+   add_library(DspLib STATIC IMPORTED)
+   set_target_properties(DspLib PROPERTIES IMPORTED_LOCATION "C:\\MyTools\\MyLib\\lib\\DspLib.lib")
+   target_include_directories(DspLib INTERFACE "C:\\MyTools\\MyLib\\include\\DspLib")
+
+   target_link_libraries(DspLib INTERFACE ws2_32)
+   target_link_libraries(DspLib INTERFACE winmm)
+else()
+   add_library(DspLib STATIC IMPORTED)
+   set_target_properties(DspLib PROPERTIES IMPORTED_LOCATION "/usr/local/lib/libDspLib.a")
+   target_include_directories(DspLib INTERFACE "/usr/local/include/DspLib")
+
+   set(THREADS_PREFER_PTHREAD_FLAG ON)
+   find_package(Threads REQUIRED)
+   target_link_libraries(DspLib INTERFACE Threads::Threads)
+endif()
