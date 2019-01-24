@@ -5,7 +5,7 @@ include(MyCMake.cmake)
 project ("Dev_DspLib")
 my_init_variables()
 
-add_subdirectory ("Test")
+add_subdirectory ("DspLib")
 return()
 
 #add_subdirectory ("Butterworth")
