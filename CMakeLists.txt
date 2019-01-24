@@ -6,6 +6,7 @@ project ("Dev_DspLib")
 my_init_variables()
 
 add_subdirectory ("DspLib")
+add_subdirectory ("HistoryTest")
 return()
 
 #add_subdirectory ("Butterworth")
