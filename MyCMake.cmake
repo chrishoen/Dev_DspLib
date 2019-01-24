@@ -9,7 +9,7 @@ function(my_init_variables)
       set (MyEigenIncludePath "C:\\MyTools\\Eigen" PARENT_SCOPE)
    else()
       set (MyRisLibConfigPath "/usr/local/lib/cmake/RisLib" PARENT_SCOPE)
-      set (MyEigenIncludePath "/usr/local/lib/include/Eigen" PARENT_SCOPE)
+      set (MyEigenIncludePath "/usr/local/include/Eigen" PARENT_SCOPE)
    endif()
 
 endfunction()
