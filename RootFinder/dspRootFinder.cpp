@@ -8,9 +8,6 @@ Description:
 
 #include "stdafx.h"
 
-#include "prnPrint.h"
-#include "dsp_math.h"
-
 #include "dspRootFinder.h"
 
 //******************************************************************************

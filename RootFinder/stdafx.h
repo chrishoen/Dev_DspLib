@@ -13,4 +13,5 @@
 #include "dsp_functions.h"
 #include "dspStatistics.h"
 
+#include <Eigen/Dense>
 

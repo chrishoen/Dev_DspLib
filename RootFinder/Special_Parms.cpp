@@ -4,7 +4,6 @@
 
 #include "stdafx.h"
 
-#include "my_functions.h"
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
 
