@@ -1,0 +1,17 @@
+﻿{
+  "configurations": [
+   {
+      "name": "Dev_DspLib",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [
+         "msvc_x64_x64"
+      ],
+      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}",
+      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}\\install",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+   }
+  ]
+}

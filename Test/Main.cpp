@@ -1,8 +1,7 @@
 #include "stdafx.h"
 
-#include "risCmdLineConsole.h"
-
 #include "MainInit.h"
+#include "risCmdLineConsole.h"
 #include "CmdLineExec.h"
 
 //******************************************************************************

@@ -1,22 +1,29 @@
 #include "stdafx.h"
 
-#include "risContainers2.h"
-#include "risPortableCalls.h"
-
 #include "CmdLineExec.h"
 
-using namespace std;
-
 //******************************************************************************
-// change101
+//******************************************************************************
+//******************************************************************************
+
 CmdLineExec::CmdLineExec()
 {
 }
-//******************************************************************************
+
 void CmdLineExec::reset()
 {
 }
+
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This class is the program command line executive. It processes user
+// command line inputs and executes them. It inherits from the command line
+// command executive base class, which provides an interface for executing
+// command line commands. It provides an override execute function that is
+// called by a console executive when it receives a console command line input.
+// The execute function then executes the command.
+
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if(aCmd->isCmd("RESET"  ))  reset();
@@ -37,6 +44,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   Prn::print(0, "IsNumber %s", my_string_from_bool(aCmd->isArgNumber(1)));
 }
 
 //******************************************************************************
@@ -45,13 +53,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,45.0);
-
-   double tAdeg = aCmd->argDouble(1);
-   double tArad = dsp_rad(tAdeg);
-
-
-   Prn::print(0, "%8.7f %8.7f",tAdeg,tArad);
 }
 
 //******************************************************************************
@@ -60,26 +61,27 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(0, "dsp_imin  %d",dsp_imin_n(3, 1,2,3));
-   Prn::print(0, "dsp_imax  %d",dsp_imax_n(3, 1,2,3));
+   char tString[200];
 
-   double tX1 = 1.1;
-   double tX2 = 2.2;
-   double tX3 = 3.3;
+   while (true)
+   {
+      fgets(tString, 200, stdin);
+      printf("CMD %d %s", (int)strlen(tString), tString);
+      if (strcmp(tString, "e\n") == 0) break;
+   }
 
-   Prn::print(0, "dsp_fmin  %10.2f",dsp_fmin_n(3, tX1,tX2,tX3));
-   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmax_n(3, tX1,tX2,tX3));
-
-   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmin_n(3, 1.11,2.22,3.33));
-   Prn::print(0, "dsp_fmax  %10.2f",dsp_fmax_n(3, 1.11,2.22,3.33));
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
 }
 
+//******************************************************************************
+//******************************************************************************
 //******************************************************************************
 
 void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
