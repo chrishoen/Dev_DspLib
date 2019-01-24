@@ -5,10 +5,11 @@
 function(my_init_variables)
 
    if(MSVC)
-#     set (MyRisLibConfigPath "C:\\MyTools\\MyLib\\lib\\cmake\\RisLib  NO_DEFAULT_PATH" PARENT_SCOPE)
       set (MyRisLibConfigPath "C:\\MyTools\\MyLib\\lib\\cmake\\RisLib" PARENT_SCOPE)
+      set (MyEigenIncludePath "C:\\MyTools\\Eigen" PARENT_SCOPE)
    else()
       set (MyRisLibConfigPath "/usr/local/lib/cmake/RisLib" PARENT_SCOPE)
+      set (MyEigenIncludePath "/usr/local/lib/include/Eigen" PARENT_SCOPE)
    endif()
 
 endfunction()

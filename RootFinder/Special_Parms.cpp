@@ -31,8 +31,8 @@ Special_Parms::Special_Parms()
 void Special_Parms::reset()
 {
    BaseClass::reset();
-   strcpy(BaseClass::mDefaultFileName,  "Special_Parms.txt");
-   strcpy(BaseClass::mOverrideFileName, "Special_Parms.txt");
+   BaseClass::setFileName_RelAlphaFiles("/DspLib/Special_Parms.txt");
+
 
    
    mC0 = 0.0;

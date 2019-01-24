@@ -7,6 +7,7 @@ my_init_variables()
 
 add_subdirectory ("DspLib")
 add_subdirectory ("HistoryTest")
+add_subdirectory ("RootFinder")
 return()
 
 #add_subdirectory ("Butterworth")
