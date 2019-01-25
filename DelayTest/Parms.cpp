@@ -26,7 +26,7 @@ Parms::Parms()
 void Parms::reset()
 {
    BaseClass::reset();
-   BaseClass::setFileName_RelAlphaFiles("/DspLib/Delay_Parms.txt");
+   BaseClass::setFileName_RelAlphaFiles("DspLib/Delay_Parms.txt");
 
    mCode1 = 0;
    mCode2 = 0;

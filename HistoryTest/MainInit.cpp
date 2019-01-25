@@ -43,6 +43,7 @@ void main_initialize(int argc,char** argv)
    Prn::print(0,"HistoryTest***************************************PROGRAM BEGIN");
 
    // Open settings file.
+   gParms.reset();
    gParms.readSection("default");
 
    // Open log files.

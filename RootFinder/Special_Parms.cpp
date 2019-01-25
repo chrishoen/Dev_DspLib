@@ -30,7 +30,7 @@ Special_Parms::Special_Parms()
 void Special_Parms::reset()
 {
    BaseClass::reset();
-   BaseClass::setFileName_RelAlphaFiles("/DspLib/Special_Parms.txt");
+   BaseClass::setFileName_RelAlphaFiles("DspLib/Special_Parms.txt");
 
 
    
