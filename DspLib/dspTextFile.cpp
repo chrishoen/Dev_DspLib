@@ -142,7 +142,7 @@ void CsvFileWriter::close()
 //******************************************************************************
 // Write to the file
 
-void CsvFileWriter::writeRow(int aRowIndex,const char* aFormat, ...)
+void CsvFileWriter::writeRow(const char* aFormat, ...)
 {
    //***************************************************************************
    //***************************************************************************
@@ -163,7 +163,7 @@ void CsvFileWriter::writeRow(int aRowIndex,const char* aFormat, ...)
    //***************************************************************************
    // Print the string.
 
-   fprintf(mFile,"%d,%s\n",aRowIndex,mString);
+   fprintf(mFile,"%s\n",mString);
 }
 
 //******************************************************************************
@@ -171,15 +171,21 @@ void CsvFileWriter::writeRow(int aRowIndex,const char* aFormat, ...)
 //******************************************************************************
 // Write to the file
 
-void CsvFileWriter::writeRowN(int aRowIndex,int aNumArgs, ...)
+void CsvFileWriter::writeRowN(int aNumArgs, ...)
 {
-   fprintf(mFile,"%d,",aRowIndex);
    va_list valist;
    va_start(valist,aNumArgs);
    for (int i=0;i<aNumArgs;i++)
    {
       double tValue = va_arg(valist,double);
-      fprintf(mFile, "%f,",tValue);
+      if (i != aNumArgs)
+      {
+         fprintf(mFile, "%f,", tValue);
+      }
+      else
+      {
+         fprintf(mFile, "%f", tValue);
+      }
    }
    va_end(valist);
 
@@ -191,54 +197,54 @@ void CsvFileWriter::writeRowN(int aRowIndex,int aNumArgs, ...)
 //******************************************************************************
 // Write to the file
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1)
+void CsvFileWriter::writeRow(double aX1)
 {
-   fprintf(mFile, "%d,%f,\n",aRowIndex,aX1);
+   fprintf(mFile, "%f\n",aX1);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2)
+void CsvFileWriter::writeRow(double aX1,double aX2)
 {
-   fprintf(mFile, "%d,%f,%f,\n",aRowIndex,aX1,aX2);
+   fprintf(mFile, "%f,%f\n",aX1,aX2);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3)
 {
-   fprintf(mFile, "%d,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3);
+   fprintf(mFile, "%f,%f,%f\n",aX1,aX2,aX3);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4);
+   fprintf(mFile, "%f,%f,%f,%f\n",aX1,aX2,aX3,aX4);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5);
+   fprintf(mFile, "%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5,aX6);
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5,aX6,aX7);
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8);
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9);
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9);
 }
 
-void CsvFileWriter::writeRow(int aRowIndex,double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10)
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10)
 {
-   fprintf(mFile, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,\n",aRowIndex,aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10);
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10);
 }
 
 //******************************************************************************

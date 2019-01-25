@@ -28,7 +28,6 @@ void HistoryCsvFileWriter::writeHistory(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory.mTime[k],
          aHistory.mValue[k]);
    }
@@ -42,7 +41,6 @@ void HistoryCsvFileWriter::writeHistoryDeg(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory.mTime[k],
          deg(aHistory.mValue[k]));
    }
@@ -66,7 +64,6 @@ void HistoryCsvFileWriter::writeHistory(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory1.mTime[k],
          aHistory1.mValue[k],
          aHistory2.mValue[k]);
@@ -86,7 +83,6 @@ void HistoryCsvFileWriter::writeHistoryDeg(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory1.mTime[k],
          deg(aHistory1.mValue[k]),
          deg(aHistory2.mValue[k]));
@@ -116,7 +112,6 @@ void HistoryCsvFileWriter::writeHistory(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory1.mTime[k],
          aHistory1.mValue[k],
          aHistory2.mValue[k],
@@ -142,7 +137,6 @@ void HistoryCsvFileWriter::writeHistoryDeg(
    {
       // Write the sample to the csv file
       writeRow(
-         k,
          aHistory1.mTime[k],
          deg(aHistory1.mValue[k]),
          deg(aHistory2.mValue[k]),

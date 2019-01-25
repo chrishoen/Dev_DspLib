@@ -42,10 +42,10 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CsvFileWriter tWriter;
    tWriter.open("file_101.csv");
-   tWriter.writeRowN(101,2,101.1,102.2);
-   tWriter.writeRowN(103,2,201.1,202.2);
-   tWriter.writeRow (103,301.1,302.2);
-   tWriter.writeRow (104,401.1,302.2);
+   tWriter.writeRowN(2,101.1,102.2);
+   tWriter.writeRowN(2,201.1,202.2);
+   tWriter.writeRow (301.1,302.2);
+   tWriter.writeRow (401.1,302.2);
    tWriter.close();
 }
 
