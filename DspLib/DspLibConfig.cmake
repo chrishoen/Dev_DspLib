@@ -3,8 +3,10 @@
    set_target_properties(DspLib PROPERTIES IMPORTED_LOCATION "C:\\MyTools\\MyLib\\lib\\DspLib.lib")
    target_include_directories(DspLib INTERFACE "C:\\MyTools\\MyLib\\include\\DspLib")
 
-   target_link_libraries(DspLib INTERFACE ws2_32)
-   target_link_libraries(DspLib INTERFACE winmm)
+   find_package(RisLib CONFIG REQUIRED PATHS ${MyRisLibConfigPath} NO_DEFAULT_PATH)
+   get_target_property(_RisLib_interface_include RisLib INTERFACE_INCLUDE_DIRECTORIES)
+   target_include_directories(DspLib INTERFACE ${_RisLib_interface_include})
+   target_link_libraries(DspLib INTERFACE RisLib)
 else()
    add_library(DspLib STATIC IMPORTED)
    set_target_properties(DspLib PROPERTIES IMPORTED_LOCATION "/usr/local/lib/libDspLib.a")
