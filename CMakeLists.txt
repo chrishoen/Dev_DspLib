@@ -1,14 +1,11 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
 include(MyCMake.cmake)
+include(MyLocalImports.cmake)
+include(MyGlobalImports.cmake)
 
 project ("Dev_DspLib")
-my_init_variables()
-
-add_subdirectory ("DspLib")
-add_subdirectory ("FileTest")
-add_subdirectory ("HistoryTest")
-return()
+my_init_global_import_variables()
 
 add_subdirectory ("Butterworth")
 add_subdirectory ("DelayTest")
@@ -26,3 +23,8 @@ add_subdirectory ("Test")
 add_subdirectory ("ThreeVector")
 
 return()
+
+add_subdirectory ("DspLib")
+add_subdirectory ("HistoryTest")
+return()
+

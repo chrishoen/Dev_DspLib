@@ -2,22 +2,6 @@
 #*******************************************************************************
 #*******************************************************************************
 
-function(my_init_variables)
-
-   if(MSVC)
-      set (MyRisLibConfigPath "C:\\MyTools\\MyLib\\lib\\cmake\\RisLib" PARENT_SCOPE)
-      set (MyEigenIncludePath "C:\\MyTools\\Eigen" PARENT_SCOPE)
-   else()
-      set (MyRisLibConfigPath "/usr/local/lib/cmake/RisLib" PARENT_SCOPE)
-      set (MyEigenIncludePath "/usr/include/eigen3" PARENT_SCOPE)
-   endif()
-
-endfunction()
-
-#*******************************************************************************
-#*******************************************************************************
-#*******************************************************************************
-
 function(my_find_src_files _a_src_files _target)
 
    file(GLOB _src_files RELATIVE ${PROJECT_SOURCE_DIR} *.cpp)
