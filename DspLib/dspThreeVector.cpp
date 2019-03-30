@@ -219,37 +219,37 @@ void ThreeVector::setNormalize()
 //******************************************************************************
 // Scalar multiply, divide
 
-ThreeVector operator*(double aLeft, ThreeVector& aRight)
+ThreeVector operator*(double aLeft, const ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector(i) = aLeft*aRight(i);
+      tVector(i) = aLeft*aRight.get(i);
    }
 
    return tVector;
 }
 
-ThreeVector operator*(ThreeVector& aLeft,double aRight)
+ThreeVector operator*(const ThreeVector& aLeft,double aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector(i) = aLeft(i)*aRight;
+      tVector(i) = aLeft.get(i)*aRight;
    }
 
    return tVector;
 }
 
-ThreeVector operator/(ThreeVector& aLeft,double aRight)
+ThreeVector operator/(const ThreeVector& aLeft,double aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector(i) = aLeft(i)/aRight;
+      tVector(i) = aLeft.get(i)/aRight;
    }
 
    return tVector;
@@ -261,26 +261,26 @@ ThreeVector operator/(ThreeVector& aLeft,double aRight)
 // Vector sum, difference
 
 // Add two vectors
-ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight)
+ThreeVector operator+(const ThreeVector& aLeft, const ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector(i) = aLeft(i) + aRight(i);
+      tVector(i) = aLeft.get(i) + aRight.get(i);
    }
 
    return tVector;
 }
 
 // Subtract two vectors
-ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight)
+ThreeVector operator-(const ThreeVector& aLeft, const ThreeVector& aRight)
 {
    ThreeVector tVector;
 
    for (int i=1; i<=3; i++)
    {
-      tVector(i) = aLeft(i) - aRight(i);
+      tVector(i) = aLeft.get(i) - aRight.get(i);
    }
 
    return tVector;
@@ -291,13 +291,13 @@ ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight)
 //******************************************************************************
 // Inner product
 
-double operator*(ThreeVector& aLeft,ThreeVector& aRight)
+double operator*(const ThreeVector& aLeft, const ThreeVector& aRight)
 {
    double tSum=0.0;
 
    for (int i=1; i<=3; i++)
    {
-      tSum += aLeft(i) * aRight(i);
+      tSum += aLeft.get(i) * aRight.get(i);
    }
 
    return tSum;
@@ -308,22 +308,22 @@ double operator*(ThreeVector& aLeft,ThreeVector& aRight)
 //******************************************************************************
 // Cross product
 
-ThreeVector cross(ThreeVector& aLeft,ThreeVector& aRight)
+ThreeVector cross(const ThreeVector& aLeft, const ThreeVector& aRight)
 {
    ThreeVector tVector(
-      (aLeft(2)*aRight(3) - aRight(2)*aLeft(3)),
-     -(aLeft(1)*aRight(3) - aRight(1)*aLeft(3)),
-      (aLeft(1)*aRight(2) - aRight(1)*aLeft(2)));
+      (aLeft.get(2)*aRight.get(3) - aRight.get(2)*aLeft.get(3)),
+     -(aLeft.get(1)*aRight.get(3) - aRight.get(1)*aLeft.get(3)),
+      (aLeft.get(1)*aRight.get(2) - aRight.get(1)*aLeft.get(2)));
 
    return tVector;
 }
 
-ThreeVector operator&(ThreeVector& aLeft,ThreeVector& aRight)
+ThreeVector operator&(const ThreeVector& aLeft, const ThreeVector& aRight)
 {
    ThreeVector tVector(
-      (aLeft(2)*aRight(3) - aRight(2)*aLeft(3)),
-     -(aLeft(1)*aRight(3) - aRight(1)*aLeft(3)),
-      (aLeft(1)*aRight(2) - aRight(1)*aLeft(2)));
+      (aLeft.get(2)*aRight.get(3) - aRight.get(2)*aLeft.get(3)),
+     -(aLeft.get(1)*aRight.get(3) - aRight.get(1)*aLeft.get(3)),
+      (aLeft.get(1)*aRight.get(2) - aRight.get(1)*aLeft.get(2)));
 
    return tVector;
 }

@@ -1,7 +1,7 @@
 
 #include "stdafx.h"
 
-#include "dspLUT.h"
+#include "dspLut.h"
 
 #include "CmdLineExec.h"
 

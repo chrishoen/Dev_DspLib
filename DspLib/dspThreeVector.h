@@ -69,20 +69,20 @@ public:
 // Operators
 
 // Scalar multilply, divide.
-ThreeVector operator*(double aLeft, ThreeVector& aRight);
-ThreeVector operator*(ThreeVector& aLeft,double aRight);
-ThreeVector operator/(ThreeVector& aLeft,double aRight);
+ThreeVector operator*(double aLeft, const ThreeVector& aRight);
+ThreeVector operator*(const ThreeVector& aLeft,double aRight);
+ThreeVector operator/(const ThreeVector& aLeft,double aRight);
 
 // Vector sum, difference.
-ThreeVector operator+(ThreeVector& aLeft,ThreeVector& aRight);
-ThreeVector operator-(ThreeVector& aLeft,ThreeVector& aRight);
+ThreeVector operator+(const ThreeVector& aLeft, const ThreeVector& aRight);
+ThreeVector operator-(const ThreeVector& aLeft, const ThreeVector& aRight);
 
 // Inner product.
-double operator*(ThreeVector& aLeft,ThreeVector& aRight);
+double operator*(const ThreeVector& aLeft, const ThreeVector& aRight);
 
 // Cross product.
-ThreeVector cross(ThreeVector& aLeft, ThreeVector& aRight);
-ThreeVector operator&(ThreeVector& aLeft, ThreeVector& aRight);
+ThreeVector cross(const ThreeVector& aLeft, const ThreeVector& aRight);
+ThreeVector operator&(const ThreeVector& aLeft, const ThreeVector& aRight);
 
 //******************************************************************************
 //******************************************************************************

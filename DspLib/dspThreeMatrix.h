@@ -78,13 +78,13 @@ public:
 // Operators
 
 // Scalar multilply, divide.
-ThreeMatrix operator*(double aLeft, ThreeMatrix& aRight);
-ThreeMatrix operator*(ThreeMatrix& aLeft,double aRight);
-ThreeMatrix operator/(ThreeMatrix& aLeft,double aRight);
+ThreeMatrix operator*(const double aLeft, const ThreeMatrix& aRight);
+ThreeMatrix operator*(const ThreeMatrix& aLeft, const double aRight);
+ThreeMatrix operator/(const ThreeMatrix& aLeft, const double aRight);
 
 // Matrix sum, difference.
-ThreeMatrix operator+(ThreeMatrix& aLeft,ThreeMatrix& aRight);
-ThreeMatrix operator-(ThreeMatrix& aLeft,ThreeMatrix& aRight);
+ThreeMatrix operator+(const ThreeMatrix& aLeft, const ThreeMatrix& aRight);
+ThreeMatrix operator-(const ThreeMatrix& aLeft, const ThreeMatrix& aRight);
 
 //******************************************************************************
 //******************************************************************************
@@ -92,8 +92,8 @@ ThreeMatrix operator-(ThreeMatrix& aLeft,ThreeMatrix& aRight);
 // Operators.
 
 // Matrix multiply.
-ThreeVector operator*(ThreeMatrix& aLeft,ThreeVector& aRight);
-ThreeMatrix operator*(ThreeMatrix& aLeft,ThreeMatrix& aRight);
+ThreeVector operator*(const ThreeMatrix& aLeft, const ThreeVector& aRight);
+ThreeMatrix operator*(const ThreeMatrix& aLeft, const ThreeMatrix& aRight);
 
 //******************************************************************************
 //******************************************************************************
