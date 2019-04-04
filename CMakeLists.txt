@@ -1,6 +1,7 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
-include(MyCMake.cmake)
+include(MyPrecompiledHeader.cmake)
+include(MyCodeMacros.cmake)
 include(MyLocalImports.cmake)
 include(MyGlobalImports.cmake)
 
