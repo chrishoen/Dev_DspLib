@@ -91,7 +91,7 @@ function(add_precompiled_header _target _input)
     set(_pch_c_pch "${CMAKE_CFG_INTDIR}/c_${_input_we}.pch")
 
     get_target_property(_tgt_binary_dir ${_target} BINARY_DIR)
-    set(_pch_cxx_pch "${_tgt_binary_dir}/${_input_we}.pch")
+    set(_pch_cxx_pch "${_tgt_binary_dir}/cxx_${_input_we}.pch")
     set(_pch_c_pch "${_tgt_binary_dir}/c_${_input_we}.pch")
 
     get_target_property(sources ${_target} SOURCES)
@@ -221,7 +221,47 @@ endfunction()
 #*******************************************************************************
 #*******************************************************************************
 
-function(my_add_pch _target)
+function(my_add_precompiled_header _target)
+   if (NOT MSVC)
+      return()
+   endif()
+
    message(STATUS "my_add_pch************************************ " ${_target})
-   add_precompiled_header (${_target} stdafx.h SOURCE_CXX stdafx.cpp)
+
+   get_target_property(_src_files      ${_target} SOURCES)
+   get_target_property(_tgt_binary_dir ${_target} BINARY_DIR)
+   get_target_property(_tgt_name       ${_target} NAME)
+
+   #message(STATUS "my_add_pch PROJECT_SOURCE_DIR***********" ${PROJECT_SOURCE_DIR})
+   #message(STATUS "my_add_pch PROJECT_BINARY_DIR***********" ${PROJECT_BINARY_DIR})
+   #message(STATUS "my_add_pch _src_files*******************" ${_src_files})
+   #message(STATUS "my_add_pch _tgt_binary_dir**************" ${_tgt_binary_dir})
+   #message(STATUS "my_add_pch _tgt_name********************" ${_tgt_name})
+
+   foreach(_src_file ${_src_files})
+      if(${_src_file} MATCHES "stdafx.cpp") 
+         #message(STATUS "_src_fileEQ*******************" ${_src_file})
+         set_source_files_properties(${_src_file} PROPERTIES
+         COMPILE_FLAGS "/Yc\"stdafx.h\" /Fp\"${_tgt_binary_dir}\\${_tgt_name}.pch\""
+         OBJECT_OUTPUTS "${_tgt_binary_dir}\\${_tgt_name}.pch")
+      else()
+         #message(STATUS "_src_fileNE*******************" ${_src_file})
+         set_source_files_properties(${_src_file} PROPERTIES
+         COMPILE_FLAGS "/Yu\"stdafx.h\" /Fp\"${_tgt_binary_dir}\\${_tgt_name}.pch\""
+         OBJECT_DEPENDS "${_tgt_binary_dir}\\${_tgt_name}.pch")
+      endif()
+   endforeach()
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_add_pch _target)
+   if (MSVC)
+      my_add_precompiled_header (${_target})
+   else()
+      message(STATUS "my_add_pch************************************ " ${_target})
+      add_precompiled_header (${_target} stdafx.h SOURCE_CXX stdafx.cpp)
+   endif()
 endfunction()
