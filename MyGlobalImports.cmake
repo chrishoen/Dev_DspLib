@@ -10,7 +10,7 @@ function(my_init_global_import_variables)
       set (MyEigenIncludePath  "C:\\MyTools\\Eigen" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
-      set (MyRisLibImportPath  "/usr/local/lib/libRisLib.so" PARENT_SCOPE)
+      set (MyRisLibImportPath  "/usr/local/lib/libRisLib.a" PARENT_SCOPE)
       set (MyEigenIncludePath "/usr/include/eigen3" PARENT_SCOPE)
    endif()
 endfunction()
@@ -21,11 +21,7 @@ endfunction()
 
 function(my_lib_import_RisLib _target)
 
-   if (MSVC)
-      add_library(RisLib STATIC IMPORTED)
-   else()
-      add_library(RisLib SHARED IMPORTED)
-   endif()
+   add_library(RisLib STATIC IMPORTED)
 
    set_target_properties(RisLib PROPERTIES IMPORTED_LOCATION ${MyRisLibImportPath})
 

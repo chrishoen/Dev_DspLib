@@ -41,7 +41,9 @@ endfunction()
 
 function(my_add_compile_options _target)
    message(STATUS "my_add_compile_options************************ " ${_target})
-   
+   #message(STATUS "CMAKE_CXX_FLAGS************************ " ${CMAKE_CXX_FLAGS})
+   #message(STATUS "CMAKE_CXX_FLAGS_RELEASE**************** " ${CMAKE_CXX_FLAGS_RELEASE})
+
    if(MSVC)
       target_compile_options(${_target} PRIVATE "/WX")
       target_compile_options(${_target} PRIVATE "/wd4996")
@@ -50,11 +52,12 @@ function(my_add_compile_options _target)
       target_compile_options(${_target} PRIVATE "/Ot")
       target_compile_options(${_target} PRIVATE "/Oi")
 
+      target_compile_options(${_target} PRIVATE "/MT")
       target_compile_options(${_target} PRIVATE "/GS-")
       target_compile_options(${_target} PRIVATE "/Gd")
 
       target_compile_options(${_target} PRIVATE "/EHsc")
-      target_compile_options(${_target} PRIVATE "/MD")
+      target_compile_options(${_target} PRIVATE "/MT")
       target_compile_options(${_target} PRIVATE "/Zc:wchar_t")
       target_compile_options(${_target} PRIVATE "/Zc:inline")
 
@@ -80,6 +83,7 @@ function(my_add_compile_options _target)
       target_compile_options(${_target} PRIVATE "-Wunused-function")
       target_compile_options(${_target} PRIVATE "-Wunused-value")
       target_compile_options(${_target} PRIVATE "-Wunused-variable")
+      target_compile_options(${_target} PRIVATE "-Wno-psabi")
 
       target_compile_definitions(${_target} PRIVATE "-DNDEBUG")
    endif()
