@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "risProgramTime.h"
+#include "risTimeMarker.h"
 #include "Special_Parms.h"
 #include "SysEquations.h"
 #include "SysEquationsTwo.h"
@@ -88,8 +89,9 @@ void CmdLineExec::executeGo11(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
 {
+#if 0
    Prn::print(0,"Start");
-   Ris::ProgramTimeMarker tMarker;
+   Ris::TrialTimeMarker tMarker;
    tMarker.doStart();
 
    for (int i = 0; i < 10*1000; i++)
@@ -123,6 +125,7 @@ void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
 
    tMarker.doStop();
    Prn::print(0,"Elapsed %10.2f",tMarker.mElapsed);
+#endif
 }
 
 //******************************************************************************
@@ -164,6 +167,7 @@ void CmdLineExec::executeGo21(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo22(Ris::CmdLineCmd* aCmd)
 {
+#if 0
    Prn::print(0,"Start");
    Ris::ProgramTimeMarker tMarker;
    tMarker.doStart();
@@ -201,6 +205,7 @@ void CmdLineExec::executeGo22(Ris::CmdLineCmd* aCmd)
 
    tMarker.doStop();
    Prn::print(0,"Elapsed %10.2f",tMarker.mElapsed);
+#endif
 }
 
 //******************************************************************************
