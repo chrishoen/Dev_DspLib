@@ -44,7 +44,8 @@ public:
    LogFileWriter();
 
    // Open the text file for write.
-   bool open (char* aFileName);
+   bool open(char* aFileName);
+   bool openWithPath(char* aFilePath);
 
    // Write to the text file.
    void write (const char* aFormat, ...);
@@ -84,6 +85,7 @@ public:
 
    // Open the text file for write.
    bool open (char* aFilename);
+   bool openWithPath(char* aFilePath);
 
    // Close the file.
    void close ();

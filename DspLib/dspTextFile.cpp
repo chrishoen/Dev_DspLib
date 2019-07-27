@@ -53,6 +53,24 @@ bool LogFileWriter::open(char* aFileName)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Open the file
+
+bool LogFileWriter::openWithPath(char* aFilePath)
+{
+   mFile = fopen(aFilePath, "w");
+
+   if (mFile == 0)
+   {
+      printf("LogFileWriter::open FAIL");
+      return false;
+   }
+
+   return true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Close the file
 
 void LogFileWriter::close()
@@ -118,6 +136,24 @@ bool CsvFileWriter::open(char* aFileName)
    if (mFile==0)
    {
       printf("CsvFileWriter::::open FAIL");
+      return false;
+   }
+
+   return true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Open the file
+
+bool CsvFileWriter::openWithPath(char* aFilePath)
+{
+   mFile = fopen(aFilePath, "w");
+
+   if (mFile == 0)
+   {
+      printf("CsvFileWriter::open FAIL");
       return false;
    }
 
