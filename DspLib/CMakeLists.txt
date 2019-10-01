@@ -12,7 +12,7 @@ target_include_directories(DspLib PUBLIC ${PROJECT_SOURCE_DIR})
 
 my_inc_import_RisLib(DspLib)
 
-if (MSVC)
+if (MSVC OR CMAKE_SYSTEM_VERSION EQUAL 101)
    install(FILES ${inc_files} DESTINATION "C:\\MyTools\\MyLib\\include\\DspLib")
    install(TARGETS DspLib DESTINATION "C:\\MyTools\\MyLib\\lib")
 else()
