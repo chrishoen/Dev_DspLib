@@ -109,8 +109,8 @@ double AlphaOne::put(double aY)
 
 double AlphaOne::put(bool aCondition)
 {
-   if (aCondition) put(1.0);
-   else            put(0.0);
+   if (aCondition) return put(1.0);
+   else            return put(0.0);
 }
 
 //******************************************************************************
