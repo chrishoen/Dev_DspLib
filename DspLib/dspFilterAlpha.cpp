@@ -8,6 +8,7 @@ Description:
 
 #include "stdafx.h"
 
+#include "dsp_math.h"
 #include "dspFilterAlpha.h"
 
 namespace Dsp
@@ -61,6 +62,22 @@ void AlphaOne::initializeFromLambda(double aLambda)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Initialize with time constants.
+
+void AlphaOne::initializeFromTc(double aTs, double aTc)
+{
+   double tNumer = cDsp_TwoPi * (aTs / aTc);
+   double tDenom = cDsp_TwoPi * (aTs / aTc) + 1.0;
+   mAlpha = tNumer / tDenom;
+
+   mY = 0.0;
+   mXX = 0.0;
+   mFirstFlag = true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 
 void AlphaOne::setFirst()
 {
@@ -88,6 +105,12 @@ double AlphaOne::put(double aY)
    mXX = (1-a)*mXX + a*mY;
 
    return mXX;
+}
+
+double AlphaOne::put(bool aCondition)
+{
+   if (aCondition) put(1.0);
+   else            put(0.0);
 }
 
 //******************************************************************************

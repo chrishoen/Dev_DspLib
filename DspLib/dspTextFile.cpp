@@ -38,6 +38,12 @@ LogFileWriter::LogFileWriter()
 
 bool LogFileWriter::open(char* aFileName)
 {
+   if (mFile)
+   {
+      fclose(mFile);
+      mFile = 0;
+   }
+
    char tBuf[400];
    mFile = fopen(Ris::getAlphaFilePath_Data(tBuf, aFileName), "w");
 
@@ -57,6 +63,12 @@ bool LogFileWriter::open(char* aFileName)
 
 bool LogFileWriter::openWithPath(char* aFilePath)
 {
+   if (mFile)
+   {
+      fclose(mFile);
+      mFile = 0;
+   }
+
    mFile = fopen(aFilePath, "w");
 
    if (mFile == 0)
@@ -78,6 +90,7 @@ void LogFileWriter::close()
    if (mFile)
    {
       fclose(mFile);
+      mFile = 0;
    }
 }
 
@@ -88,6 +101,9 @@ void LogFileWriter::close()
 
 void LogFileWriter::write(const char* aFormat, ...)
 {
+   // Guard.
+   if (!mFile) return;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -130,6 +146,12 @@ CsvFileWriter::CsvFileWriter()
 
 bool CsvFileWriter::open(char* aFileName)
 {            
+   if (mFile)
+   {
+      fclose(mFile);
+      mFile = 0;
+   }
+
    char tBuf[400];
    mFile = fopen(Ris::getAlphaFilePath_Data(tBuf, aFileName), "w");
 
@@ -149,6 +171,12 @@ bool CsvFileWriter::open(char* aFileName)
 
 bool CsvFileWriter::openWithPath(char* aFilePath)
 {
+   if (mFile)
+   {
+      fclose(mFile);
+      mFile = 0;
+   }
+
    mFile = fopen(aFilePath, "w");
 
    if (mFile == 0)
@@ -170,6 +198,7 @@ void CsvFileWriter::close()
    if (mFile)
    {
       fclose(mFile);
+      mFile = 0;
    }
 }
 
@@ -180,6 +209,9 @@ void CsvFileWriter::close()
 
 void CsvFileWriter::writeRow(const char* aFormat, ...)
 {
+   // Guard.
+   if (!mFile) return;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -209,6 +241,9 @@ void CsvFileWriter::writeRow(const char* aFormat, ...)
 
 void CsvFileWriter::writeRowN(int aNumArgs, ...)
 {
+   // Guard.
+   if (!mFile) return;
+
    va_list valist;
    va_start(valist,aNumArgs);
    for (int i=0;i<aNumArgs;i++)
@@ -235,51 +270,61 @@ void CsvFileWriter::writeRowN(int aNumArgs, ...)
 
 void CsvFileWriter::writeRow(double aX1)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f\n",aX1);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f\n",aX1,aX2);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f\n",aX1,aX2,aX3);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f\n",aX1,aX2,aX3,aX4);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9);
 }
 
 void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10)
 {
+   if (!mFile) return;
    fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10);
 }
 
@@ -327,6 +372,7 @@ void CsvFileReader::close()
    if (mFile)
    {
       fclose(mFile);
+      mFile = 0;
    }
 }
 

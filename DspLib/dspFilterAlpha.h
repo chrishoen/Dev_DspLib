@@ -56,11 +56,16 @@ public:
    void initializeFromAlpha (double aP1); 
    // Initialize with lambda (tracking index).
    void initializeFromLambda (double aLambda); 
-   // Set the first lag true.
+   // Initialize with time constants.
+   void initializeFromTc(double aTs, double aTc);
+   // Set the first flag true.
    void setFirst(); 
 
    // Put input value, return filtered output.
    double put(double aY);
+
+   // Put input value, return filtered output.
+   double put(bool aCondition);
 };
 
 //******************************************************************************
