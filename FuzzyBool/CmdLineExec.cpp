@@ -65,23 +65,23 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1, 0.45);
+   aCmd->setArgDefault(2, 0.55);
+
+   Dsp::FuzzyBool tX1(aCmd->argDouble(1));
+   Dsp::FuzzyBool tX2(aCmd->argDouble(2));
+
+   Dsp::FuzzyBool tY1 = tX1 %= tX2;
+
+   Prn::print(0, "X1 %5.3f", tX1.mX);
+   Prn::print(0, "X2 %5.3f", tX2.mX);
+   Prn::print(0, "Y1 %5.3f", tY1.mX);
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,0.45);
-   aCmd->setArgDefault(2,0.55);
-
-   Dsp::FuzzyBool tX1(aCmd->argInt(1));
-   Dsp::FuzzyBool tX2(aCmd->argInt(2));
-
-   Dsp::FuzzyBool tY1 = tX1 %= tX2;
-
-   Prn::print(0,"X1 %5.3f", tX1.mX);
-   Prn::print(0,"X2 %5.3f", tX2.mX);
-   Prn::print(0,"Y1 %5.3f", tY1.mX);
 }
 
 //******************************************************************************
