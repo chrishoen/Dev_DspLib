@@ -133,7 +133,6 @@ public:
 
    // Constructor.
    SlowThresholder();
-  ~SlowThresholder();
    SlowThresholder(SlowThresholderParms* aParms);
    void initialize(SlowThresholderParms* aParms);
 

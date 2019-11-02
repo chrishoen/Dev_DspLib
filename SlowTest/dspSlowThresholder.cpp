@@ -26,10 +26,6 @@ SlowThresholder::SlowThresholder()
    mP = 0;
 }
 
-SlowThresholder::~SlowThresholder()
-{
-}
-
 SlowThresholder::SlowThresholder(SlowThresholderParms* aParms)
 {
    initialize(aParms);
