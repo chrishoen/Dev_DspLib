@@ -60,6 +60,7 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
    mAboveHiFlag = false;
    mLastAboveHiFlag = false;
    mChangeFlag = false;
+   mErrorCount = 0;
 }
 
 //******************************************************************************
@@ -76,6 +77,9 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    //***************************************************************************
    // Manage arguments.
+
+   // Do this first.
+   mCount++;
 
    // Store the input.
    mValue = aValue;
@@ -121,19 +125,28 @@ void SlowThresholder::doUpdate(
    mValueAboveHi = aValue >= tSignalThreshHi;
 
    // Put the threshold comparison results to the fuzzy alpha filters
-   // and get the fuzzy variables from the resulting filtered values.
+   // and set the fuzzy variables according to the resulting filtered values.
    mFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mValueBelowLo);
    mFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mValueAboveHi);
 
+   // Obtain crisp values from the fuzzy variables by thresholding them.
    mCrispBelowLo = (mFuzzyBelowLo & ~mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThresh);
    mCrispAboveHi = (mFuzzyAboveHi & ~mFuzzyBelowLo).crisp(mP->mFuzzyToCrispThresh);
+
+   // Guard. This condition should not happen.
+   if (mCrispBelowLo && mCrispAboveHi)
+   {
+      
+      mErrorCount++;
+      Prn::print(Prn::View11, "ERROR101 %4d", mErrorCount);
+      return;
+   }
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Set outputs.
 
-   mCount++;
 }
      
 
