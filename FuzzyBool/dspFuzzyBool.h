@@ -71,29 +71,35 @@ public:
       return FuzzyBool(1.0 - this->mX);
    }
 
-   //---------------------------------------------------------------------------
    // Operator AND
-
    friend FuzzyBool operator &(const FuzzyBool& lhs, const FuzzyBool& rhs)
    {
       return FuzzyBool(fMin(lhs.mX, rhs.mX));
    }
 
-   //---------------------------------------------------------------------------
    // Operator OR
-
    friend FuzzyBool operator |(const FuzzyBool& lhs, const FuzzyBool& rhs)
    {
       return FuzzyBool(fMax(lhs.mX, rhs.mX));
    }
 
-   //---------------------------------------------------------------------------
    // Operator EQUIVALENCE
-
    friend FuzzyBool operator %=(const FuzzyBool& lhs, const FuzzyBool& rhs)
    {
       return FuzzyBool(1.0 - fAbs(lhs.mX - rhs.mX));
    }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods.
+
+   // Compare with a threshold to return a crisp boolean.
+   bool crisp(double aThreshold)
+   {
+      return this->mX <= aThreshold;
+   }
+
 };
 
 //******************************************************************************

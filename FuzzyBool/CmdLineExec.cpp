@@ -44,8 +44,8 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    Dsp::FuzzyBool tY2 = tX1 & tX2;
    Dsp::FuzzyBool tY3 = tX1 | tX2;;
 
-   Prn::print(0,"%5.3df %5.3df",      tX1.mX,tX2.mX);
-   Prn::print(0,"%5.3df %5.3df %5.3df",tY1.mX,tY2.mX,tY3.mX);
+   Prn::print(0,"%5.3f %5.3f",      tX1.mX,tX2.mX);
+   Prn::print(0,"%5.3f %5.3f %5.3f",tY1.mX,tY2.mX,tY3.mX);
 }
 
 //******************************************************************************
@@ -54,6 +54,11 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
+   Dsp::FuzzyBool tX1(0.50);
+
+   Prn::print(0, "%s %s",
+      my_string_from_bool(tX1.crisp(0.51)),
+      my_string_from_bool(tX1.crisp(0.49)));
 }
 
 //******************************************************************************
