@@ -21,7 +21,8 @@ namespace Dsp
 
 HistoryGaussNoise::HistoryGaussNoise()
 {
-   mNoiseSigma=0.0;
+   mNoiseFlag = false;
+   mNoiseSigma = 0.0;
    mNoiseSigma=false;
 }
 
