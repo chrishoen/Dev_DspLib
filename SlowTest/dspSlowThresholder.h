@@ -51,6 +51,12 @@ namespace Dsp
 //    the fuzzy logic variables to determine an output declaration of either
 //    below threshold low, above threshold high, or no declaration. Also 
 //    provide a change flag to signify if the output has changed.
+// 4) For the first update after initialization: calculate an initial
+//    threshold as the average of the low theshold and the high threshold.
+//    Compare the first input value with the initial threshold and declare
+//    either below threshold or above threshold and set all variables 
+//    accordingly.
+//
 
 class SlowThresholder
 {
@@ -69,17 +75,14 @@ public:
    //***************************************************************************
    // Members.
 
-   // Update counter.
-   int mCount;
-
    // Input value.
    double mValue;
 
    // Threshold comparison variables. The low variable is true if the input
    // value is below the low threshold. The high variable is true if the
    // input value is above the high threshold.
-   bool   mValueBelowLo;
-   bool   mValueAboveHi;
+   bool mValueBelowLo;
+   bool mValueAboveHi;
 
    // Alpha filters. These are input the threshold comparison variables.
    // They output values bewteen 0.0 and 1.0.
@@ -87,18 +90,19 @@ public:
    Dsp::Filter::AlphaOne mAlphaFilterAboveHi;
 
    // Fuzzy boolean variables. These are set from the outputs of the alpha
-   // filters. The low one maintains a fuzzy logic value that inidcates
-   // if the input value is below the low threshold. The high one maintains
-   // a fuzzy logic value that indicates if the input value is above the
-   // high threshold.
+   // filters. The low one has a fuzzy logic value that indicates if the
+   // input value is below the low threshold. The high one has a fuzzy
+   // logic value that indicates if the input value is above the high 
+   // threshold.
    FuzzyBool mFuzzyBelowLo;
    FuzzyBool mFuzzyAboveHi;
 
    // Crisp boolean variables. These are set by thresholding the fuzzy
-   // boolean variables. The low variable is true if it is declared that
-   // the input value is below the low threshold. The high variable is
-   // true if it is declared that the input value is above the high
-   // threshold. 
+   // boolean variables. The threshold that is used is the fuzzy logic
+   // threshold, not the signal low and high thresholds. It is usually at
+   // 0.90. The low variable is true if it is declared that the input value
+   // is below the low threshold. The high variable is true if it is declared
+   // that the input value is above the high threshold. 
    bool mCrispBelowLo;
    bool mCrispAboveHi;
 
@@ -107,7 +111,7 @@ public:
    // condition is declared.
    bool mAboveFlag;
 
-   // Previous value of the above.
+   // Previous value of the above flag.
    bool mLastAboveFlag;
 
    // True if the above flag has changed after an update.
@@ -115,6 +119,9 @@ public:
 
    // True if first update after initialization.
    bool mFirstFlag;
+
+   // Update counter.
+   int mCount;
 
    // Error counter.
    int mErrorCount;
@@ -135,7 +142,11 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Update the state.
+   // Update the state. The input is the value that is to be thresholded.
+   // The output above flag is true if the input has been declared to be
+   // above threshold and it is false if it has been declared to be below
+   // threshold. The change flag is true if the output above flag is different
+   // from its previous value.
    void doUpdate(
       double aValue,           // Input
       bool&  aAboveFlag,       // Output

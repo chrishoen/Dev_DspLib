@@ -66,7 +66,11 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Update the state.
+// Update the state. The input is the value that is to be thresholded.
+// The output above flag is true if the input has been declared to be
+// above threshold and it is false if it has been declared to be below
+// threshold. The change flag is true if the output above flag is different
+// from its previous value.
 
 void SlowThresholder::doUpdate(
    double aValue,           // Input
@@ -97,9 +101,11 @@ void SlowThresholder::doUpdate(
    double tSignalThreshLo = 0.0;
    double tSignalThreshHi = 0.0;
 
-   // Test if first update.
+   // Test the first update flag.
    if (mFirstFlag)
    {
+      // This is the first update.
+
       // Do this first.
       mFirstFlag = false;
 
@@ -110,6 +116,8 @@ void SlowThresholder::doUpdate(
    }
    else
    {
+      // This is not the first update.
+
       // Use thresholds from the parms.
       tSignalThreshLo = mP->mSignalThreshLo;
       tSignalThreshHi = mP->mSignalThreshHi;
@@ -136,7 +144,6 @@ void SlowThresholder::doUpdate(
    // Guard. This condition should not happen.
    if (mCrispBelowLo && mCrispAboveHi)
    {
-      
       mErrorCount++;
       Prn::print(Prn::View11, "ERROR101 %4d", mErrorCount);
       return;
@@ -170,6 +177,9 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    // Write to the output variables.
 
+   // Done.
+   aAboveFlag = mAboveFlag;
+   aChangeFlag = mChangeFlag;
 }
      
 
