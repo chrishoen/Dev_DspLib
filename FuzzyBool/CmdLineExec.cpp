@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "CmdLineExec.h"
-#include "LBool.h"
+#include "dspFuzzyBool.h"
 
 using namespace std;
 
@@ -37,19 +37,15 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   char tString1[10];
-   char tString2[10];
-   char tString3[10];
+   Dsp::FuzzyBool tX1(0.50);
+   Dsp::FuzzyBool tX2(0.75);
 
-   LBool tX1(50);
-   LBool tX2(75);
+   Dsp::FuzzyBool tY1 = ~tX2;
+   Dsp::FuzzyBool tY2 = tX1 & tX2;
+   Dsp::FuzzyBool tY3 = tX1 | tX2;;
 
-   LBool tY1 = ~tX2;
-   LBool tY2 = tX1 & tX2;
-   LBool tY3 = tX1 | tX2;;
-
-   Prn::print(0,"%s %s",      tX1.str(tString1),tX2.str(tString2));
-   Prn::print(0,"%s %s %s",tY1.str(tString1),tY2.str(tString2),tY3.str(tString3));
+   Prn::print(0,"%5.3df %5.3df",      tX1.mX,tX2.mX);
+   Prn::print(0,"%5.3df %5.3df %5.3df",tY1.mX,tY2.mX,tY3.mX);
 }
 
 //******************************************************************************
@@ -58,71 +54,35 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   char tString1[10];
-   char tString2[10];
-
-   LBool tX1(25);
-   LBool tX2(75);
-   LBool tY1 = LBool::cNull;
-
-   Prn::print(0,"%s %s", tX1.str(tString1),tX2.str(tString2));
-   Prn::print(0,"%s",tY1.str(tString1));
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   char tString1[10];
-   char tString2[10];
-
-   LBool tX1(25);
-   LBool tX2(75);
-   LBool tY1 = tX1 >> tX2;
-
-   Prn::print(0,"%s %s", tX1.str(tString1),tX2.str(tString2));
-   Prn::print(0,"%s",tY1.str(tString1));
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,45);
-   aCmd->setArgDefault(2,55);
+   aCmd->setArgDefault(1,0.45);
+   aCmd->setArgDefault(2,0.55);
 
-   char tString1[10];
+   Dsp::FuzzyBool tX1(aCmd->argInt(1));
+   Dsp::FuzzyBool tX2(aCmd->argInt(2));
 
-   LBool tX1(aCmd->argInt(1));
-   LBool tX2(aCmd->argInt(2));
+   Dsp::FuzzyBool tY1 = tX1 %= tX2;
 
-   LBool tY1 = tX1 %= tX2;
-   LBool tY2 = (tX1 >> tX2) & (tX2 >> tX1);
-
-   Prn::print(0,"X1 %s", tX1.str(tString1));
-   Prn::print(0,"X2 %s", tX2.str(tString1));
-   Prn::print(0,"Y1 %s", tY1.str(tString1));
-   Prn::print(0,"Y2 %s", tY2.str(tString1));
+   Prn::print(0,"X1 %5.3f", tX1.mX);
+   Prn::print(0,"X2 %5.3f", tX2.mX);
+   Prn::print(0,"Y1 %5.3f", tY1.mX);
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,45);
-   aCmd->setArgDefault(2,55);
-
-   char tString1[10];
-
-   LBool tX1(aCmd->argInt(1));
-   LBool tX2(aCmd->argInt(2));
-   LBool tY1 = tX1 >> tX2;
-
-   Prn::print(0,"X1 %s", tX1.str(tString1));
-   Prn::print(0,"X2 %s", tX2.str(tString1));
-   Prn::print(0,"");
-   Prn::print(0,"Y1 %s", tY1.str(tString1));
-   Prn::print(0,"");
 }
 
 //******************************************************************************
