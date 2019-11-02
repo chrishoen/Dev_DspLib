@@ -45,24 +45,24 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
    mP = aParms;
 
    // Initialize filters.
-   mFAFilter1AboveHi.initializeFromTc(mP->mFAFTs, mP->mFAFTc);
-   mFAFilter1BelowLo.initializeFromTc(mP->mFAFTs, mP->mFAFTc);
+   mAlphaFilterAboveHi.initializeFromTc(mP->mAlphaFilterTs, mP->mAlphaFilterTc);
+   mAlphaFilterBelowLo.initializeFromTc(mP->mAlphaFilterTs, mP->mAlphaFilterTc);
 
    // Initialize variables.
    mCount = 0;
    mValue = 0.0;
    mFirstFlag = true;
 
-   mFastCrisp1BelowLo = false;
-   mFastCrisp1AboveHi = false;
+   mFastCrispBelowLo = false;
+   mFastCrispAboveHi = false;
 
-   mLastFastCrisp1BelowLo = false;
-   mLastFastCrisp1AboveHi = false;
+   mLastFastCrispBelowLo = false;
+   mLastFastCrispAboveHi = false;
 
-   mSlowFuzzy1BelowLo = 0.0;
-   mSlowFuzzy1AboveHi = 0.0;
+   mSlowFuzzyBelowLo = 0.0;
+   mSlowFuzzyAboveHi = 0.0;
 
-   mSlowCrisp1AboveHi = false;
+   mSlowCrispAboveHi = false;
 }
 
 //******************************************************************************
@@ -93,8 +93,8 @@ void SlowThresholder::doUpdate(
    // Obtain thresholds.
 
    // Local threshold variables.
-   double tSignalThresh1Lo = 0.0;
-   double tSignalThresh1Hi = 0.0;
+   double tSignalThreshLo = 0.0;
+   double tSignalThreshHi = 0.0;
 
    // Test if first update.
    if (mFirstFlag)
@@ -104,14 +104,14 @@ void SlowThresholder::doUpdate(
 
       // Calculate thresholds for first compare as the average of the
       // low and high signal thresholds.
-      tSignalThresh1Lo = (mP->mSignalThresh1Hi + mP->mSignalThresh1Lo) / 2.0;
-      tSignalThresh1Hi = tSignalThresh1Lo;
+      tSignalThreshLo = (mP->mSignalThreshHi + mP->mSignalThreshLo) / 2.0;
+      tSignalThreshHi = tSignalThreshLo;
    }
    else
    {
       // Use thresholds from the parms.
-      tSignalThresh1Lo = mP->mSignalThresh1Lo;
-      tSignalThresh1Hi = mP->mSignalThresh1Hi;
+      tSignalThreshLo = mP->mSignalThreshLo;
+      tSignalThreshHi = mP->mSignalThreshHi;
    }
 
    //***************************************************************************
@@ -120,13 +120,13 @@ void SlowThresholder::doUpdate(
    // Calculate.
 
    // Set the fast crisp variables according to the thresholds.
-   mFastCrisp1BelowLo = aValue < tSignalThresh1Lo;
-   mFastCrisp1AboveHi = aValue >= tSignalThresh1Hi;
+   mFastCrispBelowLo = aValue < tSignalThreshLo;
+   mFastCrispAboveHi = aValue >= tSignalThreshHi;
 
    // Put the fast crisp variables to the fuzzy alpha filters and get
    // the slow fuzzy variables from the resulting filtered values.
-   mSlowFuzzy1BelowLo = mFAFilter1BelowLo.put(mFastCrisp1BelowLo);
-   mSlowFuzzy1AboveHi = mFAFilter1AboveHi.put(mFastCrisp1AboveHi);
+   mSlowFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mFastCrispBelowLo);
+   mSlowFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mFastCrispAboveHi);
 
    //***************************************************************************
    //***************************************************************************
@@ -147,10 +147,10 @@ void SlowThresholder::show()
    Prn::print(Prn::View11, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f",
       mCount,
       mValue,
-      mFastCrisp1BelowLo,
-      mFastCrisp1AboveHi,
-      mSlowFuzzy1BelowLo,
-      mSlowFuzzy1AboveHi);
+      mFastCrispBelowLo,
+      mFastCrispAboveHi,
+      mSlowFuzzyBelowLo.mX,
+      mSlowFuzzyAboveHi.mX);
 }
 
 //******************************************************************************

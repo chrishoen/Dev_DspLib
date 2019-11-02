@@ -27,14 +27,12 @@ void SlowThresholderParms::reset()
 {
    mMode = 0;
 
-   mFAFTs = 0.0;
-   mFAFTc = 0.0;
-   mFAFThreshHi = 0.0;
-   mFAFThreshLo = 0.0;
-   mSignalThresh1Lo = 0.0;
-   mSignalThresh1Hi = 0.0;
-   mSignalThresh2Lo = 0.0;
-   mSignalThresh2Hi = 0.0;
+   mAlphaFilterTs = 0.0;
+   mAlphaFilterTc = 0.0;
+   mFuzzyToCrispThreshHi = 0.0;
+   mFuzzyToCrispThreshLo = 0.0;
+   mSignalThreshLo = 0.0;
+   mSignalThreshHi = 0.0;
 }
 
 //******************************************************************************
@@ -62,16 +60,14 @@ void SlowThresholderParms::show()
    printf("\n");
 
    printf("\n");
-   printf("FAFTs                     %10.4f\n", mFAFTs);
-   printf("FAFTc                     %10.4f\n", mFAFTc);
+   printf("AlphaFilterTs             %10.4f\n", mAlphaFilterTs);
+   printf("AlphaFilterTc             %10.4f\n", mAlphaFilterTc);
    printf("\n");
 
-   printf("FAFThreshLo               %10.4f\n", mFAFThreshLo);
-   printf("FAFThreshHi               %10.4f\n", mFAFThreshHi);
-   printf("SignalThresh1Lo           %10.4f\n", mSignalThresh1Lo);
-   printf("SignalThresh1Hi           %10.4f\n", mSignalThresh1Hi);
-   printf("SignalThresh2Lo           %10.4f\n", mSignalThresh2Lo);
-   printf("SignalThresh2Hi           %10.4f\n", mSignalThresh2Hi);
+   printf("FuzzyToCrispThreshLo      %10.4f\n", mFuzzyToCrispThreshLo);
+   printf("FuzzyToCrispThreshHi      %10.4f\n", mFuzzyToCrispThreshHi);
+   printf("SignalThreshLo            %10.4f\n", mSignalThreshLo);
+   printf("SignalThreshHi            %10.4f\n", mSignalThreshHi);
 
    printf("\n");
    printf("SlowThresholderParms*************************************END\n");
@@ -88,15 +84,13 @@ void SlowThresholderParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("Mode"))              mMode = aCmd->argInt(1);
 
-   if (aCmd->isCmd("FAFTs"))             mFAFTs = aCmd->argDouble(1);
-   if (aCmd->isCmd("FAFTc"))             mFAFTc = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaFilterTs"))     mAlphaFilterTs = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaFilterTc"))     mAlphaFilterTc = aCmd->argDouble(1);
 
-   if (aCmd->isCmd("FAFThreshLo"))       mFAFThreshLo = aCmd->argDouble(1);
-   if (aCmd->isCmd("FAFThreshHi"))       mFAFThreshHi = aCmd->argDouble(1);
-   if (aCmd->isCmd("SignalThresh1Lo"))   mSignalThresh1Lo = aCmd->argDouble(1);
-   if (aCmd->isCmd("SignalThresh1Hi"))   mSignalThresh1Hi = aCmd->argDouble(1);
-   if (aCmd->isCmd("SignalThresh2Lo"))   mSignalThresh2Lo = aCmd->argDouble(1);
-   if (aCmd->isCmd("SignalThresh2Hi"))   mSignalThresh2Hi = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mFuzzyToCrispThreshHi = aCmd->argDouble(1);
+   if (aCmd->isCmd("SignalThreshLo"))        mSignalThreshLo = aCmd->argDouble(1);
+   if (aCmd->isCmd("SignalThreshHi"))        mSignalThreshHi = aCmd->argDouble(1);
 }
 
 //******************************************************************************

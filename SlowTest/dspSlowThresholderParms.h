@@ -64,18 +64,16 @@ public:
    int mMode;
 
    // Fuzzy alpha filter sampling period and time constant, seconds.
-   double mFAFTs;
-   double mFAFTc;
+   double mAlphaFilterTs;
+   double mAlphaFilterTc;
 
-   // Fuzzy alpha filter thresholds.
-   double mFAFThreshLo;
-   double mFAFThreshHi;
+   // Fuzzy to crisp threshold.
+   double mFuzzyToCrispThreshHi;
+   double mFuzzyToCrispThreshLo;
 
    // Signal thresholds.
-   double mSignalThresh1Lo;
-   double mSignalThresh1Hi;
-   double mSignalThresh2Lo;
-   double mSignalThresh2Hi;
+   double mSignalThreshLo;
+   double mSignalThreshHi;
 
    //***************************************************************************
    //***************************************************************************

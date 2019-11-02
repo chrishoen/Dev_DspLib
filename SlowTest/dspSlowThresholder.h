@@ -1,8 +1,7 @@
 #pragma once
 
 /*==============================================================================
-Dsp namespace: sixdofs that are measured by a computer vision based system.
-Simulator synthetic image generator.
+Dsp library: slow thresholder.
 ==============================================================================*/
 
 //******************************************************************************
@@ -11,6 +10,7 @@ Simulator synthetic image generator.
 
 #include "dspFilterAlpha.h"
 
+#include "dspFuzzyBool.h"
 #include "dspSlowThresholderParms.h"
 
 namespace Dsp
@@ -42,8 +42,8 @@ public:
    // Members.
 
    // Fuzzy alpha filters.
-   Dsp::Filter::AlphaOne mFAFilter1BelowLo;
-   Dsp::Filter::AlphaOne mFAFilter1AboveHi;
+   Dsp::Filter::AlphaOne mAlphaFilterBelowLo;
+   Dsp::Filter::AlphaOne mAlphaFilterAboveHi;
 
    // Update counter.
    int mCount;
@@ -53,21 +53,21 @@ public:
 
    // Crisp boolean values updated at a fast rate.
    // True if the signal threshold comparion test is pass.
-   bool   mFastCrisp1BelowLo;
-   bool   mFastCrisp1AboveHi;
+   bool   mFastCrispBelowLo;
+   bool   mFastCrispAboveHi;
 
    // Previous values for the above.
-   bool   mLastFastCrisp1BelowLo;
-   bool   mLastFastCrisp1AboveHi;
+   bool   mLastFastCrispBelowLo;
+   bool   mLastFastCrispAboveHi;
 
-   // Slow fuzzy boolean values slowed by alpha filters. These are based on 
+   // Fuzzy boolean values slowed by alpha filters that are input  
    // the fast crisp boolean values 
-   double mSlowFuzzy1BelowLo;
-   double mSlowFuzzy1AboveHi;
+   FuzzyBool mSlowFuzzyBelowLo;
+   FuzzyBool mSlowFuzzyAboveHi;
 
    // Slow crisp boolean value obtained by thresholding the slow fuzzy 
    // boolean values.
-   bool   mSlowCrisp1AboveHi;
+   bool   mSlowCrispAboveHi;
 
    // If true then first update.
    bool mFirstFlag;
