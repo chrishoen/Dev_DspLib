@@ -53,23 +53,31 @@ public:
 
    // Crisp boolean values updated at a fast rate.
    // True if the signal threshold comparion test is pass.
-   bool   mFastCrispBelowLo;
-   bool   mFastCrispAboveHi;
-
-   // Previous values for the above.
-   bool   mLastFastCrispBelowLo;
-   bool   mLastFastCrispAboveHi;
+   bool   mValueBelowLo;
+   bool   mValueAboveHi;
 
    // Fuzzy boolean values slowed by alpha filters that are input  
    // the fast crisp boolean values 
-   FuzzyBool mSlowFuzzyBelowLo;
-   FuzzyBool mSlowFuzzyAboveHi;
+   FuzzyBool mFuzzyBelowLo;
+   FuzzyBool mFuzzyAboveHi;
 
-   // Slow crisp boolean value obtained by thresholding the slow fuzzy 
-   // boolean values.
-   bool   mSlowCrispAboveHi;
+   // Crisp boolean values updated at a fast rate.
+   // True if the fuzzy boolean values are above a fuzzy threshold.
+   bool   mCrispBelowLo;
+   bool   mCrispAboveHi;
 
-   // If true then first update.
+   // True if the input value is declared to be above thrshold. False if 
+   // it is declared to be below threshold. This does not change if neither
+   // condition is declared.
+   bool   mAboveHiFlag;
+
+   // Previous value of the above.
+   bool   mLastAboveHiFlag;
+
+   // True if the above flag has changed after an update.
+   bool mChangeFlag;
+
+   // True if first update after initialization.
    bool mFirstFlag;
 
    //***************************************************************************

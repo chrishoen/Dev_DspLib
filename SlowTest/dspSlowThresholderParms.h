@@ -68,8 +68,7 @@ public:
    double mAlphaFilterTc;
 
    // Fuzzy to crisp threshold.
-   double mFuzzyToCrispThreshHi;
-   double mFuzzyToCrispThreshLo;
+   double mFuzzyToCrispThresh;
 
    // Signal thresholds.
    double mSignalThreshLo;
