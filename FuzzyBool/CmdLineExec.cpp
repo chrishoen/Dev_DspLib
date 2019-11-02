@@ -57,8 +57,8 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    Dsp::FuzzyBool tX1(0.50);
 
    Prn::print(0, "%s %s",
-      my_string_from_bool(tX1.crisp(0.51)),
-      my_string_from_bool(tX1.crisp(0.49)));
+      my_string_from_bool(tX1.crisp(0.49)),
+      my_string_from_bool(tX1.crisp(0.51)));
 }
 
 //******************************************************************************

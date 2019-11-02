@@ -97,7 +97,7 @@ public:
    // Compare with a threshold to return a crisp boolean.
    bool crisp(double aThreshold)
    {
-      return this->mX <= aThreshold;
+      return this->mX >= aThreshold;
    }
 
 };
