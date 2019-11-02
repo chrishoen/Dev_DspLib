@@ -57,8 +57,8 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
    mValueAboveHi = false;
    mCrispBelowLo = false;
    mCrispAboveHi = false;
-   mAboveHiFlag = false;
-   mLastAboveHiFlag = false;
+   mAboveFlag = false;
+   mLastAboveFlag = false;
    mChangeFlag = false;
    mErrorCount = 0;
 }
@@ -70,7 +70,7 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
 
 void SlowThresholder::doUpdate(
    double aValue,           // Input
-   bool&  aPass,            // Output
+   bool&  aAboveFlag,       // Output
    bool&  aChangeFlag)      // Output
 {
    //***************************************************************************
@@ -85,7 +85,7 @@ void SlowThresholder::doUpdate(
    mValue = aValue;
 
    // Set default outputs.
-   aPass = false;
+   aAboveFlag = false;
    aChangeFlag = false;
 
    //***************************************************************************
@@ -118,10 +118,10 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Calculate.
+   // Calculate the logic variables.
 
-   // Compare the input value with the thresholds.
-   mValueBelowLo = aValue < tSignalThreshLo;
+   // Threshold the input value.
+   mValueBelowLo = aValue <  tSignalThreshLo;
    mValueAboveHi = aValue >= tSignalThreshHi;
 
    // Put the threshold comparison results to the fuzzy alpha filters
@@ -145,7 +145,30 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Set outputs.
+   // Calculate the output variables.
+
+   // Set the previous value of the above flag.
+   mLastAboveFlag = mAboveFlag;
+
+   // If the value is below then set the above flag false.
+   if (mCrispBelowLo)
+   {
+      mAboveFlag = false;
+   }
+
+   // If the value is above then set the above flag true.
+   if (mCrispAboveHi)
+   {
+      mAboveFlag = true;
+   }
+
+   // Set the change flag.
+   mChangeFlag = mLastAboveFlag != mAboveFlag;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Write to the output variables.
 
 }
      
@@ -157,7 +180,12 @@ void SlowThresholder::doUpdate(
 
 void SlowThresholder::show()
 {
-   Prn::print(Prn::View11, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d",
+   char tResult[20];
+   if (mAboveFlag) strcpy(tResult, "above");
+   else            strcpy(tResult, "below");
+
+   char tString[200];
+   sprintf(tString, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d $ %s",
       mCount,
       mValue,
       mValueBelowLo,
@@ -165,7 +193,15 @@ void SlowThresholder::show()
       mFuzzyBelowLo.mX,
       mFuzzyAboveHi.mX,
       mCrispBelowLo,
-      mCrispAboveHi);
+      mCrispAboveHi,
+      tResult);
+
+   if (mChangeFlag)
+   {
+      strcat(tString, " CHANGE");
+   }
+   
+   Prn::print(Prn::View11, "%s", tString);
 }
 
 //******************************************************************************

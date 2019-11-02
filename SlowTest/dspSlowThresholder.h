@@ -69,10 +69,10 @@ public:
    // True if the input value is declared to be above thrshold. False if 
    // it is declared to be below threshold. This does not change if neither
    // condition is declared.
-   bool mAboveHiFlag;
+   bool mAboveFlag;
 
    // Previous value of the above.
-   bool mLastAboveHiFlag;
+   bool mLastAboveFlag;
 
    // True if the above flag has changed after an update.
    bool mChangeFlag;
@@ -101,9 +101,9 @@ public:
 
    // Update the state.
    void doUpdate(
-      double   aValue,           // Input
-      bool&    aPass,            // Output
-      bool&    aChangeFlag);     // Output
+      double aValue,           // Input
+      bool&  aAboveFlag,       // Output
+      bool&  aChangeFlag);     // Output
 
    //***************************************************************************
    //***************************************************************************
