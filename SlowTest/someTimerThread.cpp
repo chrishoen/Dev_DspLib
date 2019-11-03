@@ -65,7 +65,7 @@ void TimerThread::executeOnTimer(int aTimeCount)
    // Update the thresholder.
    bool tPass = false;
    bool tChangeFlag = false;
-   mThresholder.doUpdate(mValue,tPass,tChangeFlag);
+   mThresholder.doUpdate(mValue + mNoise,tPass,tChangeFlag);
    mThresholder.show();
 }
 
@@ -89,7 +89,6 @@ void TimerThread::doUpdateValue()
 
    // Update the input value.
    mValue += mDelta;
-   mValue += mNoise;
 }
 //******************************************************************************
 //******************************************************************************
