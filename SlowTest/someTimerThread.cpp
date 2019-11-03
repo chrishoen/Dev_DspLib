@@ -29,7 +29,7 @@ TimerThread::TimerThread()
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mTimerTest);
 
    // Set timer period.
-   BaseClass::mTimerPeriod = 200;
+   BaseClass::mTimerPeriod = Dsp::gSlowTestParms.mTimerPeriod;
 
    // Initialize variables.
    mSuspendFlag = false;

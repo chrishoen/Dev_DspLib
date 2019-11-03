@@ -29,7 +29,7 @@ void SlowTestParms::reset()
    BaseClass::reset();
    BaseClass::setFilePath_RelativeToBaseDir("files/SlowTest_Parms.txt");
 
-   mCode1 = 0;
+   mTimerPeriod = 0;
 }
 
 //******************************************************************************
@@ -51,7 +51,7 @@ void SlowTestParms::show()
 {
    printf("\n");
    printf("SlowTestParms************************************************ %s\n", mTargetSection);
-   printf("Code1                    %10d\n", mCode1);
+   printf("TimerPeriod            %10d\n", mTimerPeriod);
 
    printf("\n");
    mThresholderParms.show();
@@ -68,7 +68,7 @@ void SlowTestParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
-   if (aCmd->isCmd("Code1"))         mCode1 = aCmd->argInt(1);
+   if (aCmd->isCmd("TimerPeriod"))   mTimerPeriod = aCmd->argInt(1);
 
    if (aCmd->isCmd("Thresholder"))   readSection(aCmd->argString(1), &mThresholderParms);
 }
