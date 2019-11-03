@@ -74,8 +74,27 @@ public:
    //***************************************************************************
    // Members.
 
-   // Slow threshold parameters.
+   // Slow thresholder parameters.
    SlowThresholderParms  mTestThresholderParms;
+
+   // Slow classifier thresholder parameters.
+   SlowThresholderParms  mThresholderParmsM2;
+   SlowThresholderParms  mThresholderParmsM1;
+   SlowThresholderParms  mThresholderParmsP1;
+   SlowThresholderParms  mThresholderParmsP2;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members. These are used int expand.
+
+   // Fuzzy alpha filter sampling period and time constant, seconds.
+   double mAlphaFilterTs;
+   double mAlphaFilterTc;
+
+   // Fuzzy to crisp threshold.
+   double mFuzzyToCrispThreshLo;
+   double mFuzzyToCrispThreshHi;
 
    //***************************************************************************
    //***************************************************************************

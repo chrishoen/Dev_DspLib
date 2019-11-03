@@ -56,13 +56,6 @@ public:
    //***************************************************************************
    // Members.
 
-   // Signal comparison modes.
-   //
-   // Mode == 1  threshold1 < x
-   // Mode == 2  threshold1 < x and x < threshold2
-   //
-   int mMode;
-
    // Fuzzy alpha filter sampling period and time constant, seconds.
    double mAlphaFilterTs;
    double mAlphaFilterTc;
@@ -84,7 +77,7 @@ public:
    typedef Ris::BaseCmdLineParms BaseClass;
    SlowThresholderParms();
    void reset();
-   void show();
+   void show(const char* aLabel);
 
    // Base class override: Execute a command from the command file to set a 
    // member variable. This is called by the associated command file object
