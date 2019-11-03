@@ -94,8 +94,8 @@ void SlowThresholder::doUpdate(
    // Obtain thresholds.
 
    // Local threshold variables.
-   double tSignalThreshLo = 0.0;
-   double tSignalThreshHi = 0.0;
+   double tValueThreshLo = 0.0;
+   double tValueThreshHi = 0.0;
 
    // Test the first update flag.
    if (mFirstFlag)
@@ -107,16 +107,16 @@ void SlowThresholder::doUpdate(
 
       // Calculate thresholds for first compare as the average of the
       // low and high signal thresholds.
-      tSignalThreshLo = (mP->mSignalThreshHi + mP->mSignalThreshLo) / 2.0;
-      tSignalThreshHi = tSignalThreshLo;
+      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0;
+      tValueThreshHi = tValueThreshLo;
    }
    else
    {
       // This is not the first update.
 
       // Use thresholds from the parms.
-      tSignalThreshLo = mP->mSignalThreshLo;
-      tSignalThreshHi = mP->mSignalThreshHi;
+      tValueThreshLo = mP->mValueThreshLo;
+      tValueThreshHi = mP->mValueThreshHi;
    }
 
    //***************************************************************************
@@ -125,8 +125,8 @@ void SlowThresholder::doUpdate(
    // Calculate the logic variables.
 
    // Threshold the input value.
-   mValueBelowLo = aValue <  tSignalThreshLo;
-   mValueAboveHi = aValue >= tSignalThreshHi;
+   mValueBelowLo = aValue <  tValueThreshLo;
+   mValueAboveHi = aValue >= tValueThreshHi;
 
    // Put the threshold comparison results to the fuzzy alpha filters
    // and set the fuzzy variables according to the resulting filtered values.

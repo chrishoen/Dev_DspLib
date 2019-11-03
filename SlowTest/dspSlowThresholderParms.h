@@ -71,8 +71,8 @@ public:
    double mFuzzyToCrispThresh;
 
    // Signal thresholds.
-   double mSignalThreshLo;
-   double mSignalThreshHi;
+   double mValueThreshLo;
+   double mValueThreshHi;
 
    //***************************************************************************
    //***************************************************************************
