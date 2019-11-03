@@ -102,9 +102,6 @@ void SlowThresholder::doUpdate(
    {
       // This is the first update.
 
-      // Do this first.
-      mFirstFlag = false;
-
       // Calculate thresholds for first compare as the average of the
       // low and high signal thresholds.
       tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0;
@@ -166,12 +163,15 @@ void SlowThresholder::doUpdate(
    }
 
    // Set the change flag.
-   mChangeFlag = mLastAboveFlag != mAboveFlag;
+   mChangeFlag = (mLastAboveFlag != mAboveFlag) || mFirstFlag;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Write to the output variables.
+
+   // Do this last.
+   mFirstFlag = false;
 
    // Done.
    aAboveFlag = mAboveFlag;
