@@ -33,6 +33,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("R"))     gTimerThread->mSuspendFlag = false;
    if (aCmd->isCmd("VAL"))   executeValue(aCmd);
    if (aCmd->isCmd("DEL"))   executeDelta(aCmd);
+   if (aCmd->isCmd("Noise")) executeNoise(aCmd);
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
    if (aCmd->isCmd("GO3"))   executeGo3(aCmd);
@@ -59,6 +60,15 @@ void CmdLineExec::executeDelta(Ris::CmdLineCmd* aCmd)
    gTimerThread->mDelta = aCmd->argDouble(1);
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeNoise(Ris::CmdLineCmd* aCmd)
+{
+   gTimerThread->mNoiseSigma = aCmd->argDouble(1);
+   gTimerThread->mNoiseRequestFlag = true;
+}
 
 //******************************************************************************
 //******************************************************************************

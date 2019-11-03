@@ -9,6 +9,7 @@ Timer test thread.
 //******************************************************************************
 #include "risThreadsTimerThread.h"
 #include "dspSlowThresholder.h"
+#include "dspHistoryGaussNoise.h"
 
 namespace Some
 {
@@ -33,6 +34,14 @@ public:
    double mValue;
    double mDelta;
 
+   // Noise request and sigma. These are set by the user.
+   bool   mNoiseRequestFlag;
+   double mNoiseSigma;
+   double mNoise;
+
+   // Gaussian noise generator.
+   Dsp::HistoryGaussNoise mGaussNoise;
+
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
@@ -52,8 +61,13 @@ public:
    void threadInitFunction() override;
    void executeOnTimer(int aTimeCount) override;
 
-   void executeTest1 (int aTimeCount);
-   void executeTest2 (int aTimeCount);
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Methods.
+
+   // Update the simulated input value.
+   void doUpdateValue ();
 };
 
 //******************************************************************************

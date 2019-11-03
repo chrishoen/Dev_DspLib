@@ -35,6 +35,9 @@ TimerThread::TimerThread()
    mSuspendFlag = false;
    mValue = 0.0;
    mDelta = 0.0;
+   mNoiseRequestFlag = false;
+   mNoiseSigma = 0.0;
+   mNoise = 0.0;
 
    mThresholder.initialize(&Dsp::gSlowTestParms.mThresholderParms);
 }
@@ -56,16 +59,38 @@ void TimerThread::executeOnTimer(int aTimeCount)
    // Guard.
    if (mSuspendFlag) return;
 
+   // Update the simulated input value.
+   doUpdateValue();
+
    // Update the thresholder.
    bool tPass = false;
    bool tChangeFlag = false;
    mThresholder.doUpdate(mValue,tPass,tChangeFlag);
    mThresholder.show();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Update the simulated input value.
+
+void TimerThread::doUpdateValue()
+{
+   // If there is a request for gaussian noise then initialize the gaussian
+   // noise generator.
+   if (mNoiseRequestFlag)
+   {
+      mNoiseRequestFlag = false;
+      mGaussNoise.initialize(mNoiseSigma);
+   }
+      
+   // Get from the noise generator.
+   mNoise = mGaussNoise.getNoise();
 
    // Update the input value.
    mValue += mDelta;
+   mValue += mNoise;
 }
-
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
