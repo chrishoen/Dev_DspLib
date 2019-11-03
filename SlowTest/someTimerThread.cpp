@@ -39,7 +39,7 @@ TimerThread::TimerThread()
    mNoiseSigma = 0.0;
    mNoise = 0.0;
 
-   mThresholder.initialize(&Dsp::gSlowTestParms.mThresholderParms);
+   mThresholder.initialize(&Dsp::gSlowTestParms.mTestThresholderParms);
 }
 
 //******************************************************************************

@@ -54,7 +54,7 @@ void SlowTestParms::show()
    printf("TimerPeriod            %10d\n", mTimerPeriod);
 
    printf("\n");
-   mThresholderParms.show();
+   mTestThresholderParms.show();
 }
    
 //******************************************************************************
@@ -68,9 +68,9 @@ void SlowTestParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
-   if (aCmd->isCmd("TimerPeriod"))   mTimerPeriod = aCmd->argInt(1);
+   if (aCmd->isCmd("TimerPeriod"))       mTimerPeriod = aCmd->argInt(1);
 
-   if (aCmd->isCmd("Thresholder"))   readSection(aCmd->argString(1), &mThresholderParms);
+   if (aCmd->isCmd("TestThresholder"))   nestedPush(aCmd, &mTestThresholderParms);
 }
 
 //******************************************************************************

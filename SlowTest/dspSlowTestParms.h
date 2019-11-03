@@ -75,7 +75,7 @@ public:
    // Members.
 
    // Slow threshold parameters.
-   SlowThresholderParms  mThresholderParms;
+   SlowThresholderParms  mTestThresholderParms;
 
    //***************************************************************************
    //***************************************************************************
