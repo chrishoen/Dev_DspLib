@@ -29,7 +29,8 @@ void SlowThresholderParms::reset()
 
    mAlphaFilterTs = 0.0;
    mAlphaFilterTc = 0.0;
-   mFuzzyToCrispThresh = 0.0;
+   mFuzzyToCrispThreshLo = 0.0;
+   mFuzzyToCrispThreshHi = 0.0;
    mValueThreshLo = 0.0;
    mValueThreshHi = 0.0;
 }
@@ -63,7 +64,8 @@ void SlowThresholderParms::show()
    printf("AlphaFilterTc             %10.4f\n", mAlphaFilterTc);
    printf("\n");
 
-   printf("FuzzyToCrispThresh        %10.4f\n", mFuzzyToCrispThresh);
+   printf("FuzzyToCrispThreshLo      %10.4f\n", mFuzzyToCrispThreshLo);
+   printf("FuzzyToCrispThreshHi      %10.4f\n", mFuzzyToCrispThreshHi);
    printf("ValueThreshLo             %10.4f\n", mValueThreshLo);
    printf("ValueThreshHi             %10.4f\n", mValueThreshHi);
 
@@ -85,7 +87,8 @@ void SlowThresholderParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("AlphaFilterTs"))     mAlphaFilterTs = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaFilterTc"))     mAlphaFilterTc = aCmd->argDouble(1);
 
-   if (aCmd->isCmd("FuzzyToCrispThresh"))    mFuzzyToCrispThresh = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mFuzzyToCrispThreshHi = aCmd->argDouble(1);
    if (aCmd->isCmd("ValueThreshLo"))         mValueThreshLo = aCmd->argDouble(1);
    if (aCmd->isCmd("ValueThreshHi"))         mValueThreshHi = aCmd->argDouble(1);
 }

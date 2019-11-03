@@ -134,8 +134,8 @@ void SlowThresholder::doUpdate(
    mFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mValueAboveHi);
 
    // Obtain crisp values from the fuzzy variables by thresholding them.
-   mCrispBelowLo = (mFuzzyBelowLo & ~mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThresh);
-   mCrispAboveHi = (mFuzzyAboveHi & ~mFuzzyBelowLo).crisp(mP->mFuzzyToCrispThresh);
+   mCrispBelowLo = (mFuzzyBelowLo & ~mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThreshLo);
+   mCrispAboveHi = (mFuzzyAboveHi & ~mFuzzyBelowLo).crisp(mP->mFuzzyToCrispThreshHi);
 
    // Guard. This condition should not happen.
    if (mCrispBelowLo && mCrispAboveHi)
