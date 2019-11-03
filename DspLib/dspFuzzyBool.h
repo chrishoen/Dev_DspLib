@@ -66,19 +66,19 @@ public:
    // Methods.
 
    // Operator NOT
-   FuzzyBool operator~()
+   FuzzyBool operator !()
    {
       return FuzzyBool(1.0 - this->mX);
    }
 
    // Operator AND
-   friend FuzzyBool operator &(const FuzzyBool& lhs, const FuzzyBool& rhs)
+   friend FuzzyBool operator &&(const FuzzyBool& lhs, const FuzzyBool& rhs)
    {
       return FuzzyBool(fMin(lhs.mX, rhs.mX));
    }
 
    // Operator OR
-   friend FuzzyBool operator |(const FuzzyBool& lhs, const FuzzyBool& rhs)
+   friend FuzzyBool operator ||(const FuzzyBool& lhs, const FuzzyBool& rhs)
    {
       return FuzzyBool(fMax(lhs.mX, rhs.mX));
    }
