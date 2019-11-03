@@ -129,6 +129,9 @@ void SlowThresholder::doUpdate(
    // and set the fuzzy variables according to the resulting filtered values.
    mFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mValueBelowLo);
    mFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mValueAboveHi);
+   
+   // Obtain the threshold comparison certainty.
+   mFuzzyCertainty = mFuzzyBelowLo || mFuzzyAboveHi;
 
    // Obtain crisp values from the fuzzy variables by thresholding them.
    mCrispBelowLo = (mFuzzyBelowLo && !mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThreshLo);
@@ -177,7 +180,6 @@ void SlowThresholder::doUpdate(
    aAboveFlag = mAboveFlag;
    aChangeFlag = mChangeFlag;
 }
-     
 
 //******************************************************************************
 //******************************************************************************

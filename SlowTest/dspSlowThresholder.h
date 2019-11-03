@@ -97,6 +97,11 @@ public:
    FuzzyBool mFuzzyBelowLo;
    FuzzyBool mFuzzyAboveHi;
 
+   // Fuzzy boolean variable. this is the OR of the fuzzy below low and
+   // above high variables. It gives an indication of the certainty of
+   // the measurements.
+   FuzzyBool mFuzzyCertainty;
+
    // Crisp boolean variables. These are set by thresholding the fuzzy
    // boolean variables. The threshold that is used is the fuzzy logic
    // threshold, not the signal low and high thresholds. It is usually at
