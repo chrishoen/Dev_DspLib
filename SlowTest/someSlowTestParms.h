@@ -16,7 +16,7 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 //******************************************************************************
 
-namespace Dsp
+namespace Some
 {
 
 //******************************************************************************
@@ -69,19 +69,22 @@ public:
    // Timer thread period, ms.
    int  mTimerPeriod;
 
+   // Test mode, 1 for thresholder, 2 for classifier.
+   int  mTestMode;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members.
 
    // Slow thresholder parameters.
-   SlowThresholderParms  mTestThresholderParms;
+   Dsp::SlowThresholderParms  mTestThresholderParms;
 
    // Slow classifier thresholder parameters.
-   SlowThresholderParms  mThresholderParmsM2;
-   SlowThresholderParms  mThresholderParmsM1;
-   SlowThresholderParms  mThresholderParmsP1;
-   SlowThresholderParms  mThresholderParmsP2;
+   Dsp::SlowThresholderParms  mThresholderParmsM2;
+   Dsp::SlowThresholderParms  mThresholderParmsM1;
+   Dsp::SlowThresholderParms  mThresholderParmsP1;
+   Dsp::SlowThresholderParms  mThresholderParmsP2;
 
    //***************************************************************************
    //***************************************************************************
@@ -129,7 +132,7 @@ public:
 //******************************************************************************
 // Global instance.
 
-#ifdef _SlowTESTPARMS_CPP_
+#ifdef _SOMESLOWTESTPARMS_CPP_
    SlowTestParms gSlowTestParms;
 #else
    extern SlowTestParms gSlowTestParms;

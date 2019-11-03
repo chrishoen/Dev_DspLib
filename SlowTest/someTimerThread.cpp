@@ -7,7 +7,7 @@ Description:
 //******************************************************************************
 #include "stdafx.h"
 
-#include "dspSlowTestParms.h"
+#include "someSlowTestParms.h"
 
 #define  _SOMETIMERTHREAD_CPP_
 #include "someTimerThread.h"
@@ -29,7 +29,7 @@ TimerThread::TimerThread()
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mTimerTest);
 
    // Set timer period.
-   BaseClass::mTimerPeriod = Dsp::gSlowTestParms.mTimerPeriod;
+   BaseClass::mTimerPeriod = Some::gSlowTestParms.mTimerPeriod;
 
    // Initialize variables.
    mSuspendFlag = false;
@@ -39,7 +39,8 @@ TimerThread::TimerThread()
    mNoiseSigma = 0.0;
    mNoise = 0.0;
 
-   mThresholder.initialize(&Dsp::gSlowTestParms.mTestThresholderParms);
+   mThresholder.initialize(&Some::gSlowTestParms.mTestThresholderParms);
+   mClassifier.initialize();
 }
 
 //******************************************************************************
@@ -62,11 +63,23 @@ void TimerThread::executeOnTimer(int aTimeCount)
    // Update the simulated input value.
    doUpdateValue();
 
-   // Update the thresholder.
-   bool tPass = false;
-   bool tChangeFlag = false;
-   mThresholder.doUpdate(mValue + mNoise,tPass,tChangeFlag);
-   mThresholder.show();
+   // Test something.
+   if (gSlowTestParms.mTestMode == 1)
+   {
+      // Update the thresholder.
+      bool tPass = false;
+      bool tChangeFlag = false;
+      mThresholder.doUpdate(mValue + mNoise, tPass, tChangeFlag);
+      mThresholder.show();
+   }
+   else
+   {
+      // Update the classifier.
+      int  tClass = -99;
+      bool tChangeFlag = false;
+      mClassifier.doClassify(mValue + mNoise, tClass, tChangeFlag);
+      mClassifier.show();
+   }
 }
 
 //******************************************************************************

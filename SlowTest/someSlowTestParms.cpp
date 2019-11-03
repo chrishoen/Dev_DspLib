@@ -4,14 +4,14 @@
 
 #include "stdafx.h"
 
-#define  _SlowTESTPARMS_CPP_
-#include "dspSlowTestParms.h"
+#define  _SOMESLOWTESTPARMS_CPP_
+#include "someSlowTestParms.h"
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 
-namespace Dsp
+namespace Some
 {
 
 //******************************************************************************
@@ -30,6 +30,7 @@ void SlowTestParms::reset()
    BaseClass::setFilePath_RelativeToBaseDir("files/SlowTest_Parms.txt");
 
    mTimerPeriod = 0;
+   mTestMode = 0;
    mAlphaFilterTs = 0.0;
    mAlphaFilterTc = 0.0;
    mFuzzyToCrispThreshLo = 0.0;
@@ -78,6 +79,7 @@ void SlowTestParms::show()
    printf("\n");
    printf("SlowTestParms************************************************ %s\n", mTargetSection);
    printf("TimerPeriod            %10d\n", mTimerPeriod);
+   printf("TestMode               %10d\n", mTestMode);
 
    printf("\n");
    mTestThresholderParms.show("Test");
@@ -101,6 +103,8 @@ void SlowTestParms::execute(Ris::CmdLineCmd* aCmd)
    if (!isTargetSection(aCmd)) return;
 
    if (aCmd->isCmd("TimerPeriod"))           mTimerPeriod = aCmd->argInt(1);
+   if (aCmd->isCmd("TestMode"))              mTestMode = aCmd->argInt(1);
+
    if (aCmd->isCmd("AlphaFilterTs"))         mAlphaFilterTs = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaFilterTc"))         mAlphaFilterTc = aCmd->argDouble(1);
    if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argDouble(1);

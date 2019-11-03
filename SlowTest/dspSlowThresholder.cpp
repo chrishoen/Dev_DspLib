@@ -16,10 +16,7 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Infastruccture.
+// Constructor.
 
 SlowThresholder::SlowThresholder()
 {
@@ -34,6 +31,7 @@ SlowThresholder::SlowThresholder(SlowThresholderParms* aParms)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Initialize.
 
 void SlowThresholder::initialize(SlowThresholderParms* aParms)
 {
@@ -130,8 +128,8 @@ void SlowThresholder::doUpdate(
    mFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mValueBelowLo);
    mFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mValueAboveHi);
    
-   // Obtain the threshold comparison certainty.
-   mFuzzyCertainty = mFuzzyBelowLo || mFuzzyAboveHi;
+   // Obtain the threshold comparison confidence.
+   mFuzzyConfidence = mFuzzyBelowLo || mFuzzyAboveHi;
 
    // Obtain crisp values from the fuzzy variables by thresholding them.
    mCrispBelowLo = (mFuzzyBelowLo && !mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThreshLo);

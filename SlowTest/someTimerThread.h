@@ -8,8 +8,9 @@ Timer test thread.
 //******************************************************************************
 //******************************************************************************
 #include "risThreadsTimerThread.h"
-#include "dspSlowThresholder.h"
 #include "dspHistoryGaussNoise.h"
+#include "dspSlowThresholder.h"
+#include "someSlowClassifier.h"
 
 namespace Some
 {
@@ -47,7 +48,8 @@ public:
    //******************************************************************************
    // Members.
 
-   Dsp::SlowThresholder mThresholder;
+   Dsp::SlowThresholder  mThresholder;
+   Some::SlowClassifier  mClassifier;
 
    //******************************************************************************
    //******************************************************************************

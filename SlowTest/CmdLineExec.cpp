@@ -6,7 +6,7 @@
 #include "risThreadsThreads.h"
 #include "risTimeMarker.h"
 
-#include "dspSlowTestParms.h"
+#include "someSlowTestParms.h"
 
 #include "someTimerThread.h"
 using namespace Some;
@@ -101,9 +101,9 @@ void CmdLineExec::executeGo3 (Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
    // Read parameters files.
-   Dsp::gSlowTestParms.reset();
-   Dsp::gSlowTestParms.readSection("default");
-   Dsp::gSlowTestParms.show();
+   Some::gSlowTestParms.reset();
+   Some::gSlowTestParms.readSection("default");
+   Some::gSlowTestParms.show();
 }
 
 
