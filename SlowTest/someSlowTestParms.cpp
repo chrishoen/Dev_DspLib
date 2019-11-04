@@ -31,6 +31,7 @@ void SlowTestParms::reset()
 
    mTimerPeriod = 0;
    mTestMode = 0;
+   mInitialValue = 0.0;
    mAlphaFilterTs = 0.0;
    mAlphaFilterTc = 0.0;
    mFuzzyToCrispThreshLo = 0.0;
@@ -80,6 +81,7 @@ void SlowTestParms::show()
    printf("SlowTestParms************************************************ %s\n", mTargetSection);
    printf("TimerPeriod            %10d\n", mTimerPeriod);
    printf("TestMode               %10d\n", mTestMode);
+   printf("InitialValue           %10.4f\n", mInitialValue);
 
    printf("\n");
    mTestThresholderParms.show("Test");
@@ -104,6 +106,7 @@ void SlowTestParms::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("TimerPeriod"))           mTimerPeriod = aCmd->argInt(1);
    if (aCmd->isCmd("TestMode"))              mTestMode = aCmd->argInt(1);
+   if (aCmd->isCmd("InitialValue"))          mInitialValue = aCmd->argDouble(1);
 
    if (aCmd->isCmd("AlphaFilterTs"))         mAlphaFilterTs = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaFilterTc"))         mAlphaFilterTc = aCmd->argDouble(1);

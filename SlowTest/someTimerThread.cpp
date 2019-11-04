@@ -33,7 +33,7 @@ TimerThread::TimerThread()
 
    // Initialize variables.
    mSuspendFlag = false;
-   mValue = 0.0;
+   mValue = Some::gSlowTestParms.mInitialValue;
    mDelta = 0.0;
    mNoiseRequestFlag = false;
    mNoiseSigma = 0.0;
