@@ -63,6 +63,11 @@ public:
    bool mChangeFlagP2;
    bool mChangeFlag;
 
+   // Fuzzy boolean variable. this is the AND of the fuzzy confidence
+   // vararables for all of the thresholders.
+   // the measurements.
+   Dsp::FuzzyBool mFuzzyConfidence;
+
    // True if first update after initialization.
    bool mFirstFlag;
 

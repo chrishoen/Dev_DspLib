@@ -98,6 +98,13 @@ void SlowClassifier::doClassify(
    // Update the change flag.
    mChangeFlag = mChangeFlagM2 || mChangeFlagM1 || mChangeFlagP1 || mChangeFlagP2;
 
+   // Update the fuzzy confidence.
+   mFuzzyConfidence = (
+      mThresholderM2.mFuzzyConfidence &&
+      mThresholderM1.mFuzzyConfidence &&
+      mThresholderP1.mFuzzyConfidence &&
+      mThresholderP2.mFuzzyConfidence);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -144,13 +151,14 @@ void SlowClassifier::doClassify(
 void SlowClassifier::show()
 {
    char tString[200];
-   sprintf(tString, "%4d $ %8.4f $ %6.4f %6.4f %6.4f %6.4f $ %1d %1d %1d %1d $ %1d" ,
+   sprintf(tString, "%4d $ %8.4f $ %6.4f %6.4f %6.4f %6.4f A %6.4f $ %1d %1d %1d %1d $ %1d" ,
       mCount,
       mValue,
       mThresholderM2.mFuzzyConfidence.mX,
       mThresholderM1.mFuzzyConfidence.mX,
       mThresholderP1.mFuzzyConfidence.mX,
       mThresholderP2.mFuzzyConfidence.mX,
+      mFuzzyConfidence.mX,
       mAboveFlagM2,
       mAboveFlagM1,
       mAboveFlagP1,
