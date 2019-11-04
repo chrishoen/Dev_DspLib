@@ -48,8 +48,8 @@ void SlowTestParms::expand()
 {
    mTestThresholderParms.mAlphaFilterTs = mAlphaFilterTs;
    mTestThresholderParms.mAlphaFilterTc = mAlphaFilterTc;
-   mTestThresholderParms.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   mTestThresholderParms.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   if (mTestThresholderParms.mFuzzyToCrispThreshLo == 0.0) mTestThresholderParms.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
+   if (mTestThresholderParms.mFuzzyToCrispThreshHi == 0.0) mTestThresholderParms.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
 
    mThresholderParmsM2.mAlphaFilterTs = mAlphaFilterTs;
    mThresholderParmsM2.mAlphaFilterTc = mAlphaFilterTc;
@@ -60,14 +60,14 @@ void SlowTestParms::expand()
    mThresholderParmsP2.mAlphaFilterTs = mAlphaFilterTs;
    mThresholderParmsP2.mAlphaFilterTc = mAlphaFilterTc;
 
-   mThresholderParmsM2.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   mThresholderParmsM2.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
-   mThresholderParmsM1.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   mThresholderParmsM1.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
-   mThresholderParmsP1.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   mThresholderParmsP1.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
-   mThresholderParmsP2.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   mThresholderParmsP2.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   if (mThresholderParmsM2.mFuzzyToCrispThreshLo == 0.0) mThresholderParmsM2.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
+   if (mThresholderParmsM2.mFuzzyToCrispThreshHi == 0.0) mThresholderParmsM2.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   if (mThresholderParmsM1.mFuzzyToCrispThreshLo == 0.0) mThresholderParmsM1.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
+   if (mThresholderParmsM1.mFuzzyToCrispThreshHi == 0.0) mThresholderParmsM1.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   if (mThresholderParmsP1.mFuzzyToCrispThreshLo == 0.0) mThresholderParmsP1.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
+   if (mThresholderParmsP1.mFuzzyToCrispThreshHi == 0.0) mThresholderParmsP1.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   if (mThresholderParmsP2.mFuzzyToCrispThreshLo == 0.0) mThresholderParmsP2.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
+   if (mThresholderParmsP2.mFuzzyToCrispThreshHi == 0.0) mThresholderParmsP2.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
 }
 
 //******************************************************************************
