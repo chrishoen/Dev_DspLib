@@ -9,14 +9,6 @@ include(MyLocalImports.cmake)
 project ("Dev_DspLib")
 my_init_global_import_variables()
 
-add_subdirectory ("DspLib")
-return()
-
-add_subdirectory ("DspLib")
-add_subdirectory ("SlowTest")
-add_subdirectory ("FuzzyBool")
-return()
-
 add_subdirectory ("DelayTest")
 add_subdirectory ("DspLib")
 add_subdirectory ("FileTest")
@@ -32,6 +24,15 @@ add_subdirectory ("Test")
 add_subdirectory ("ThreeVector")
 
 return()
+
+add_subdirectory ("DspLib")
+return()
+
+add_subdirectory ("DspLib")
+add_subdirectory ("SlowTest")
+add_subdirectory ("FuzzyBool")
+return()
+
 
 add_subdirectory ("DspLib")
 add_subdirectory ("HistoryTest")
