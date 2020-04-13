@@ -4,7 +4,7 @@ project (DspLib CXX)
 
 my_find_src_files (src_files DspLib)
 my_find_inc_files (inc_files)
-add_library (DspLib STATIC ${src_files})
+add_library (DspLib SHARED ${src_files})
 my_add_compile_options (DspLib)
 my_add_pch (DspLib)
 
