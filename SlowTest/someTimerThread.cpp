@@ -23,7 +23,7 @@ TimerThread::TimerThread()
 {
    // Set base class variables.
    BaseClass::setThreadName("Timer");
-   BaseClass::setThreadPrintLevel(TS::PrintLevel(0, 3));
+   BaseClass::setThreadPrintLevel(0);
 
    // Set base class variables.
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mTimerTest);
