@@ -28,7 +28,7 @@ elseif(CMAKE_SYSTEM_VERSION EQUAL 101)
    add_custom_command(
       TARGET  DspLib
       POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx libdspLib.so rsync://debian@bby1/prime/stage
+      COMMAND rsync -azv --chmod=ugo=rwx libDspLib.so rsync://debian@bbacm/prime/stage
       WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_DspLib/DspLib)
 else()
    install(FILES ${inc_files} DESTINATION "/usr/local/include/DspLib")
