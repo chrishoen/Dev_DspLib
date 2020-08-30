@@ -78,7 +78,7 @@ public:
 // Global instance
 
 #ifdef _SOMETIMERTHREAD_CPP_
-          TimerThread* gTimerThread;
+          TimerThread* gTimerThread = 0;
 #else
    extern TimerThread* gTimerThread;
 #endif

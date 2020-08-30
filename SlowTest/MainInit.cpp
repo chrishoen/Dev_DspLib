@@ -22,10 +22,10 @@ void main_initialize(int argc,char** argv)
    //***************************************************************************
    // Set program directory.
 
-   // Set the base directory global variable to the cproc directory path.
+   // Set the base directory global variable to the directory path.
    if (Ris::portableIsWindows())
    {
-      Ris::setBaseDirectory("c:/aaa_prime");
+      Ris::setBaseDirectory("c:/aaa_prime/SlowTest");
    }
    else
    {
