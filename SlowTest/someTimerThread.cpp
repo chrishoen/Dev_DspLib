@@ -7,6 +7,7 @@ Description:
 //******************************************************************************
 #include "stdafx.h"
 
+#include "someSlowTestParmsFile.h"
 #include "someSlowTestParms.h"
 
 #define  _SOMETIMERTHREAD_CPP_
@@ -29,11 +30,11 @@ TimerThread::TimerThread()
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mTimerTest);
 
    // Set timer period.
-   BaseClass::mTimerPeriod = Some::gSlowTestParms.mTimerPeriod;
+   BaseClass::mTimerPeriod = Some::gSlowTestParmsFile.mTimerPeriod;
 
    // Initialize variables.
    mSuspendFlag = false;
-   mValue = Some::gSlowTestParms.mInitialValue;
+   mValue = Some::gSlowTestParmsFile.mInitialValue;
    mDelta = 0.0;
    mNoiseRequestFlag = false;
    mNoiseSigma = 0.0;
@@ -64,7 +65,7 @@ void TimerThread::executeOnTimer(int aTimeCount)
    doUpdateValue();
 
    // Test something.
-   if (gSlowTestParms.mTestMode == 1)
+   if (gSlowTestParmsFile.mTestMode == 1)
    {
       // Update the thresholder.
       bool tPass = false;

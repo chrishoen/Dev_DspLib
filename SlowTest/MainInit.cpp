@@ -4,7 +4,7 @@
 
 #include "risBaseDir.h"
 #include "risPortableCalls.h"
-#include "someSlowTestParms.h"
+#include "someSlowTestParmsFile.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -81,8 +81,8 @@ void main_initialize(int argc,char** argv)
    //***************************************************************************
 
    // Read parameters files.
-   Some::gSlowTestParms.reset();
-   Some::gSlowTestParms.readSection("default");
+   Some::gSlowTestParmsFile.reset();
+   Some::gSlowTestParmsFile.readSection("default");
 
    //***************************************************************************
    //***************************************************************************
