@@ -25,11 +25,11 @@ void main_initialize(int argc,char** argv)
    // Set the base directory global variable to the cproc directory path.
    if (Ris::portableIsWindows())
    {
-      Ris::setBaseDirectory("c:/aaa_cproc");
+      Ris::setBaseDirectory("c:/aaa_prime");
    }
    else
    {
-      Ris::setBaseDirectory("/opt/cproc");
+      Ris::setBaseDirectory("/opt/prime");
    }
 
    // Set the program working directory to the cproc directory path.
@@ -49,7 +49,7 @@ void main_initialize(int argc,char** argv)
    // Initialize thread services.
 
    TS::reset();
-   TS::setProgramName("Thresholder");
+   TS::setProgramName("SlowTest");
    TS::setProgramPrintLevel(0);
    TS::initialize();
 

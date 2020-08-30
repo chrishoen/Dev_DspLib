@@ -29,7 +29,16 @@ SlowTestParmsFile::SlowTestParmsFile()
 void SlowTestParmsFile::reset()
 {
    BaseClass::reset();
-   BaseClass::setFilePath_RelativeToBaseDir("files/SlowTest_Parms.txt");
+
+   BaseClass::reset();
+   if (Ris::portableIsWindows())
+   {
+      BaseClass::setFilePath("C:/aaa_prime/SlowTest/SlowTest_Parms.txt");
+   }
+   else
+   {
+      BaseClass::setFilePath_RelativeToBaseDir("files/SlowTest_Parms.txt");
+   }
 
    mTestThresholderParmsWrapper.initialize(&gSlowTestParms.mTestThresholderParms);
    mThresholderParmsM2Wrapper.initialize(&gSlowTestParms.mThresholderParmsM2);
