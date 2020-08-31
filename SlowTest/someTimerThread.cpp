@@ -71,7 +71,9 @@ void TimerThread::executeOnTimer(int aTimeCount)
       bool tPass = false;
       bool tChangeFlag = false;
       mThresholder.doUpdate(mValue + mNoise, tPass, tChangeFlag);
-      mThresholder.show();
+      char tBuffer[200];
+      mThresholder.asShowString(tBuffer);
+      Prn::print(Prn::View11, "%s", tBuffer);
    }
    else
    {

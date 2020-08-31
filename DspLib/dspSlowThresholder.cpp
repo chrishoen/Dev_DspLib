@@ -139,7 +139,7 @@ void SlowThresholder::doUpdate(
    if (mCrispBelowLo && mCrispAboveHi)
    {
       mErrorCount++;
-      Prn::print(Prn::View11, "ERROR101 %4d", mErrorCount);
+      printf("ERROR101 %4d\n", mErrorCount);
       return;
    }
 
@@ -182,16 +182,15 @@ void SlowThresholder::doUpdate(
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Show.
+// Return a string that can be used for a show.
 
-void SlowThresholder::show()
+char* SlowThresholder::asShowString(char* aBuffer)
 {
    char tResult[20];
    if (mAboveFlag) strcpy(tResult, "above");
    else            strcpy(tResult, "below");
 
-   char tString[200];
-   sprintf(tString, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d $ %s",
+   sprintf(aBuffer, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d $ %s",
       mCount,
       mValue,
       mValueBelowLo,
@@ -204,10 +203,10 @@ void SlowThresholder::show()
 
    if (mChangeFlag)
    {
-      strcat(tString, " CHANGE");
+      strcat(aBuffer, " CHANGE");
    }
-   
-   Prn::print(Prn::View11, "%s", tString);
+  
+   return aBuffer;
 }
 
 //******************************************************************************

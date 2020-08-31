@@ -161,8 +161,8 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Show.
-   void show();
+   // Return a string that can be used for a show.
+   char* asShowString(char* aBuffer);
 };
 
 //******************************************************************************
