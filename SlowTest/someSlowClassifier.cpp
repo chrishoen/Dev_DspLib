@@ -146,12 +146,11 @@ void SlowClassifier::doClassify(
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Show.
+// Return a string that can be used for a show.
 
-void SlowClassifier::show()
+char* SlowClassifier::asShowString(char* aBuffer)
 {
-   char tString[200];
-   sprintf(tString, "%4d $ %8.4f $ %6.4f %6.4f %6.4f %6.4f A %6.4f $ %1d %1d %1d %1d $ %1d" ,
+   sprintf(aBuffer, "%4d $ %8.4f $ %6.4f %6.4f %6.4f %6.4f A %6.4f $ %1d %1d %1d %1d $ %1d" ,
       mCount,
       mValue,
       mThresholderM2.mFuzzyConfidence.mX,
@@ -167,10 +166,10 @@ void SlowClassifier::show()
 
    if (mChangeFlag)
    {
-      strcat(tString, " CHANGE");
+      strcat(aBuffer, " CHANGE");
    }
    
-   Prn::print(Prn::View11, "%s", tString);
+   return aBuffer;
 }
 
 //******************************************************************************

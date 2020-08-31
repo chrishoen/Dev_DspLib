@@ -72,8 +72,7 @@ void TimerThread::executeOnTimer(int aTimeCount)
       bool tChangeFlag = false;
       mThresholder.doUpdate(mValue + mNoise, tPass, tChangeFlag);
       char tBuffer[200];
-      mThresholder.asShowString(tBuffer);
-      Prn::print(Prn::View11, "%s", tBuffer);
+      Prn::print(Prn::View11, "%s", mThresholder.asShowString(tBuffer));
    }
    else
    {
@@ -81,7 +80,8 @@ void TimerThread::executeOnTimer(int aTimeCount)
       int  tClass = -99;
       bool tChangeFlag = false;
       mClassifier.doClassify(mValue + mNoise, tClass, tChangeFlag);
-      mClassifier.show();
+      char tBuffer[200];
+      Prn::print(Prn::View11, "%s", mClassifier.asShowString(tBuffer));
    }
 }
 
