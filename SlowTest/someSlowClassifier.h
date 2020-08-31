@@ -34,7 +34,7 @@ public:
    // Members.
 
    // Input value.
-   double mValue;
+   float mValue;
 
    // Output value. Class. This is one of -2,-1,0,1,2.
    int mClass;
@@ -66,7 +66,7 @@ public:
    // Fuzzy boolean variable. this is the AND of the fuzzy confidence
    // vararables for all of the thresholders.
    // the measurements.
-   Dsp::FuzzyBool mFuzzyConfidence;
+   Dsp::FuzzyBoolFloat mFuzzyConfidence;
 
    // True if first update after initialization.
    bool mFirstFlag;
@@ -92,7 +92,7 @@ public:
    // The change flag is true if the output above flag is different
    // from its previous value.
    void doClassify(
-      double aValue,           // Input
+      float aValue,           // Input
       int&   aClass,           // Output
       bool&  aChangeFlag);     // Output
 

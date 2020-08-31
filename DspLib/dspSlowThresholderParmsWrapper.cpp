@@ -77,13 +77,13 @@ void SlowThresholderParmsWrapper::show(const char* aLabel)
 
 void SlowThresholderParmsWrapper::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("AlphaFilterTs"))     mP->mAlphaFilterTs = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaFilterTc"))     mP->mAlphaFilterTc = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaFilterTs"))     mP->mAlphaFilterTs = aCmd->argFloat(1);
+   if (aCmd->isCmd("AlphaFilterTc"))     mP->mAlphaFilterTc = aCmd->argFloat(1);
 
-   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mP->mFuzzyToCrispThreshLo = aCmd->argDouble(1);
-   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mP->mFuzzyToCrispThreshHi = aCmd->argDouble(1);
-   if (aCmd->isCmd("ValueThreshLo"))         mP->mValueThreshLo = aCmd->argDouble(1);
-   if (aCmd->isCmd("ValueThreshHi"))         mP->mValueThreshHi = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mP->mFuzzyToCrispThreshLo = aCmd->argFloat(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mP->mFuzzyToCrispThreshHi = aCmd->argFloat(1);
+   if (aCmd->isCmd("ValueThreshLo"))         mP->mValueThreshLo = aCmd->argFloat(1);
+   if (aCmd->isCmd("ValueThreshHi"))         mP->mValueThreshHi = aCmd->argFloat(1);
 
    // Pop back out at the end.
    if (aCmd->isCmd("}"))  nestedPop(aCmd);

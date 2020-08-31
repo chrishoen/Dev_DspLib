@@ -101,7 +101,7 @@ void TimerThread::doUpdateValue()
    }
       
    // Get from the noise generator.
-   mNoise = mGaussNoise.getNoise();
+   mNoise = (float)mGaussNoise.getNoise();
 
    // Update the input value.
    mValue += mDelta;

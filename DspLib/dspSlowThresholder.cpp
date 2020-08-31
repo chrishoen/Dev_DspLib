@@ -67,7 +67,7 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
 // from its previous value.
 
 void SlowThresholder::doUpdate(
-   double aValue,           // Input
+   float aValue,           // Input
    bool&  aAboveFlag,       // Output
    bool&  aChangeFlag)      // Output
 {
@@ -92,8 +92,8 @@ void SlowThresholder::doUpdate(
    // Obtain thresholds.
 
    // Local threshold variables.
-   double tValueThreshLo = 0.0;
-   double tValueThreshHi = 0.0;
+   float tValueThreshLo = 0.0;
+   float tValueThreshHi = 0.0;
 
    // Test the first update flag.
    if (mFirstFlag)
@@ -102,7 +102,7 @@ void SlowThresholder::doUpdate(
 
       // Calculate thresholds for first compare as the average of the
       // low and high signal thresholds.
-      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0;
+      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0f;
       tValueThreshHi = tValueThreshLo;
    }
    else

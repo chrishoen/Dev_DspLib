@@ -73,7 +73,7 @@ void SlowClassifier::initialize()
 // from its previous value.
 
 void SlowClassifier::doClassify(
-   double aValue,          // Input
+   float aValue,          // Input
    int&   aClass,          // Output
    bool&  aChangeFlag)     // Output
 {

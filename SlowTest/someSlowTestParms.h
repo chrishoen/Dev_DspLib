@@ -58,12 +58,12 @@ public:
    // Members. These are used int expand.
 
    // Fuzzy alpha filter sampling period and time constant, seconds.
-   double mAlphaFilterTs;
-   double mAlphaFilterTc;
+   float mAlphaFilterTs;
+   float mAlphaFilterTc;
 
    // Fuzzy to crisp threshold.
-   double mFuzzyToCrispThreshLo;
-   double mFuzzyToCrispThreshHi;
+   float mFuzzyToCrispThreshLo;
+   float mFuzzyToCrispThreshHi;
 
    //***************************************************************************
    //***************************************************************************

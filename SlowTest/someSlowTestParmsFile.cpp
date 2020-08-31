@@ -109,12 +109,12 @@ void SlowTestParmsFile::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("TimerPeriod"))           mTimerPeriod = aCmd->argInt(1);
    if (aCmd->isCmd("TestMode"))              mTestMode = aCmd->argInt(1);
-   if (aCmd->isCmd("InitialValue"))          mInitialValue = aCmd->argDouble(1);
+   if (aCmd->isCmd("InitialValue"))          mInitialValue = aCmd->argFloat(1);
 
-   if (aCmd->isCmd("AlphaFilterTs"))         mAlphaFilterTs = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaFilterTc"))         mAlphaFilterTc = aCmd->argDouble(1);
-   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argDouble(1);
-   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mFuzzyToCrispThreshHi = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaFilterTs"))         mAlphaFilterTs = aCmd->argFloat(1);
+   if (aCmd->isCmd("AlphaFilterTc"))         mAlphaFilterTc = aCmd->argFloat(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argFloat(1);
+   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mFuzzyToCrispThreshHi = aCmd->argFloat(1);
 
    if (aCmd->isCmd("TestThresholder"))   nestedPush(aCmd, &mTestThresholderParmsWrapper);
 

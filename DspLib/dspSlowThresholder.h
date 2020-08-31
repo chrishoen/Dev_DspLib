@@ -8,9 +8,9 @@ Dsp library: slow thresholder.
 //******************************************************************************
 //******************************************************************************
 
-#include "dspFilterAlpha.h"
+#include "dspFilterAlphaFloat.h"
 
-#include "dspFuzzyBool.h"
+#include "dspFuzzyBoolFloat.h"
 #include "dspSlowThresholderParms.h"
 
 namespace Dsp
@@ -76,7 +76,7 @@ public:
    // Members.
 
    // Input value.
-   double mValue;
+   float mValue;
 
    // Threshold comparison variables. The low variable is true if the input
    // value is below the low threshold. The high variable is true if the
@@ -86,21 +86,21 @@ public:
 
    // Alpha filters. These are input the threshold comparison variables.
    // They output values bewteen 0.0 and 1.0.
-   Dsp::Filter::AlphaOne mAlphaFilterBelowLo;
-   Dsp::Filter::AlphaOne mAlphaFilterAboveHi;
+   Dsp::Filter::AlphaOneFloat mAlphaFilterBelowLo;
+   Dsp::Filter::AlphaOneFloat mAlphaFilterAboveHi;
 
    // Fuzzy boolean variables. These are set from the outputs of the alpha
    // filters. The low one has a fuzzy logic value that indicates if the
    // input value is below the low threshold. The high one has a fuzzy
    // logic value that indicates if the input value is above the high 
    // threshold.
-   FuzzyBool mFuzzyBelowLo;
-   FuzzyBool mFuzzyAboveHi;
+   FuzzyBoolFloat mFuzzyBelowLo;
+   FuzzyBoolFloat mFuzzyAboveHi;
 
    // Fuzzy boolean variable. this is the OR of the fuzzy below low and
    // above high variables. It gives an indication of the confidence of
    // the measurements.
-   FuzzyBool mFuzzyConfidence;
+   FuzzyBoolFloat mFuzzyConfidence;
 
    // Crisp boolean variables. These are set by thresholding the fuzzy
    // boolean variables. The threshold that is used is the fuzzy logic
@@ -152,7 +152,7 @@ public:
    // threshold. The change flag is true if the output above flag is different
    // from its previous value.
    void doUpdate(
-      double aValue,           // Input
+      float aValue,           // Input
       bool&  aAboveFlag,       // Output
       bool&  aChangeFlag);     // Output
 

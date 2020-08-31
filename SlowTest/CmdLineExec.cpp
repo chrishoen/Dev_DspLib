@@ -47,8 +47,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeValue(Ris::CmdLineCmd* aCmd)
 {
-   gTimerThread->mValue = aCmd->argDouble(1);
-   gTimerThread->mDelta = aCmd->argDouble(2);
+   gTimerThread->mValue = aCmd->argFloat(1);
+   gTimerThread->mDelta = aCmd->argFloat(2);
 }
 
 //******************************************************************************
@@ -57,7 +57,7 @@ void CmdLineExec::executeValue(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeDelta(Ris::CmdLineCmd* aCmd)
 {
-   gTimerThread->mDelta = aCmd->argDouble(1);
+   gTimerThread->mDelta = aCmd->argFloat(1);
 }
 
 //******************************************************************************
@@ -66,7 +66,7 @@ void CmdLineExec::executeDelta(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeNoise(Ris::CmdLineCmd* aCmd)
 {
-   gTimerThread->mNoiseSigma = aCmd->argDouble(1);
+   gTimerThread->mNoiseSigma = aCmd->argFloat(1);
    gTimerThread->mNoiseRequestFlag = true;
 }
 
