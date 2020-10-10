@@ -99,8 +99,7 @@ public:
    float mAlphaFilterTc;
 
    // Fuzzy to crisp threshold.
-   float mFuzzyToCrispThreshLo;
-   float mFuzzyToCrispThreshHi;
+   float mFuzzyToCrispThresh;
 
    //***************************************************************************
    //***************************************************************************

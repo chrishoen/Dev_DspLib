@@ -51,8 +51,7 @@ void SlowTestParmsFile::reset()
    mInitialValue = 0.0;
    mAlphaFilterTs = 0.0;
    mAlphaFilterTc = 0.0;
-   mFuzzyToCrispThreshLo = 0.0;
-   mFuzzyToCrispThreshHi = 0.0;
+   mFuzzyToCrispThresh = 0.0;
 }
 
 //******************************************************************************
@@ -66,8 +65,7 @@ void SlowTestParmsFile::expand()
    // Copy file parms to parms.
    gSlowTestParms.mAlphaFilterTs = mAlphaFilterTs;
    gSlowTestParms.mAlphaFilterTc = mAlphaFilterTc;
-   gSlowTestParms.mFuzzyToCrispThreshLo = mFuzzyToCrispThreshLo;
-   gSlowTestParms.mFuzzyToCrispThreshHi = mFuzzyToCrispThreshHi;
+   gSlowTestParms.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
 
    // Expand.
    gSlowTestParms.expand();
@@ -113,8 +111,7 @@ void SlowTestParmsFile::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("AlphaFilterTs"))         mAlphaFilterTs = aCmd->argFloat(1);
    if (aCmd->isCmd("AlphaFilterTc"))         mAlphaFilterTc = aCmd->argFloat(1);
-   if (aCmd->isCmd("FuzzyToCrispThreshLo"))  mFuzzyToCrispThreshLo = aCmd->argFloat(1);
-   if (aCmd->isCmd("FuzzyToCrispThreshHi"))  mFuzzyToCrispThreshHi = aCmd->argFloat(1);
+   if (aCmd->isCmd("FuzzyToCrispThresh"))    mFuzzyToCrispThresh = aCmd->argFloat(1);
 
    if (aCmd->isCmd("TestThresholder"))   nestedPush(aCmd, &mTestThresholderParmsWrapper);
 
