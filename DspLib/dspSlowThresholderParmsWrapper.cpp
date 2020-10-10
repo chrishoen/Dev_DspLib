@@ -63,8 +63,8 @@ void SlowThresholderParmsWrapper::show(const char* aLabel)
    printf("AlphaFilterTs             %10.4f\n", mP->mAlphaFilterTs);
    printf("AlphaFilterTc             %10.4f\n", mP->mAlphaFilterTc);
    printf("FuzzyToCrispThresh        %10.4f\n", mP->mFuzzyToCrispThresh);
-   printf("ValueThreshLo             %10.4f\n", mP->mValueThreshLo);
    printf("ValueThreshHi             %10.4f\n", mP->mValueThreshHi);
+   printf("ValueThreshLo             %10.4f\n", mP->mValueThreshLo);
 }
 
 //******************************************************************************
@@ -80,8 +80,8 @@ void SlowThresholderParmsWrapper::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("AlphaFilterTc"))     mP->mAlphaFilterTc = aCmd->argFloat(1);
 
    if (aCmd->isCmd("FuzzyToCrispThresh"))    mP->mFuzzyToCrispThresh = aCmd->argFloat(1);
-   if (aCmd->isCmd("ValueThreshLo"))         mP->mValueThreshLo = aCmd->argFloat(1);
    if (aCmd->isCmd("ValueThreshHi"))         mP->mValueThreshHi = aCmd->argFloat(1);
+   if (aCmd->isCmd("ValueThreshLo"))         mP->mValueThreshLo = aCmd->argFloat(1);
 
    // Pop back out at the end.
    if (aCmd->isCmd("}"))  nestedPop(aCmd);

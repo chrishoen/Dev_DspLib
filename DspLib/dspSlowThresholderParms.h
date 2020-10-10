@@ -41,8 +41,8 @@ public:
    float mFuzzyToCrispThresh;
 
    // Signal thresholds.
-   float mValueThreshLo;
    float mValueThreshHi;
+   float mValueThreshLo;
 
    //***************************************************************************
    //***************************************************************************

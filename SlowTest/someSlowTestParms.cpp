@@ -43,19 +43,19 @@ void SlowTestParms::expand()
    mTestThresholderParms.mAlphaFilterTc = mAlphaFilterTc;
    mTestThresholderParms.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
 
-   mThresholderParmsM2.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsM2.mAlphaFilterTc = mAlphaFilterTc;
-   mThresholderParmsM1.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsM1.mAlphaFilterTc = mAlphaFilterTc;
-   mThresholderParmsP1.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsP1.mAlphaFilterTc = mAlphaFilterTc;
    mThresholderParmsP2.mAlphaFilterTs = mAlphaFilterTs;
    mThresholderParmsP2.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsP1.mAlphaFilterTs = mAlphaFilterTs;
+   mThresholderParmsP1.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsM1.mAlphaFilterTs = mAlphaFilterTs;
+   mThresholderParmsM1.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsM2.mAlphaFilterTs = mAlphaFilterTs;
+   mThresholderParmsM2.mAlphaFilterTc = mAlphaFilterTc;
 
-   mThresholderParmsM2.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
-   mThresholderParmsM1.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
-   mThresholderParmsP1.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
    mThresholderParmsP2.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
+   mThresholderParmsP1.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
+   mThresholderParmsM1.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
+   mThresholderParmsM2.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
 }
 
 //******************************************************************************

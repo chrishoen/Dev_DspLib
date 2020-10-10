@@ -26,14 +26,14 @@ SlowClassifier::SlowClassifier()
 {
    mValue = 0.0;
    mClass = -99;
-   mAboveFlagM2 = false;
-   mAboveFlagM1 = false;
-   mAboveFlagP1 = false;
    mAboveFlagP2 = false;
-   mChangeFlagM2 = false;
-   mChangeFlagM1 = false;
-   mChangeFlagP1 = false;
+   mAboveFlagP1 = false;
+   mAboveFlagM1 = false;
+   mAboveFlagM2 = false;
    mChangeFlagP2 = false;
+   mChangeFlagP1 = false;
+   mChangeFlagM1 = false;
+   mChangeFlagM2 = false;
    mChangeFlag = false;
    mFirstFlag = true;
    mCount = 0;
@@ -48,21 +48,21 @@ void SlowClassifier::initialize()
    mValue = 0.0;
    mClass = -99;
    mLastClass = 0;
-   mAboveFlagM2 = false;
-   mAboveFlagM1 = false;
-   mAboveFlagP1 = false;
    mAboveFlagP2 = false;
-   mChangeFlagM2 = false;
-   mChangeFlagM1 = false;
-   mChangeFlagP1 = false;
+   mAboveFlagP1 = false;
+   mAboveFlagM1 = false;
+   mAboveFlagM2 = false;
    mChangeFlagP2 = false;
+   mChangeFlagP1 = false;
+   mChangeFlagM1 = false;
+   mChangeFlagM2 = false;
    mFirstFlag = true;
    mCount = 0;
 
-   mThresholderM2.initialize(&Some::gSlowTestParms.mThresholderParmsM2);
-   mThresholderM1.initialize(&Some::gSlowTestParms.mThresholderParmsM1);
-   mThresholderP1.initialize(&Some::gSlowTestParms.mThresholderParmsP1);
    mThresholderP2.initialize(&Some::gSlowTestParms.mThresholderParmsP2);
+   mThresholderP1.initialize(&Some::gSlowTestParms.mThresholderParmsP1);
+   mThresholderM1.initialize(&Some::gSlowTestParms.mThresholderParmsM1);
+   mThresholderM2.initialize(&Some::gSlowTestParms.mThresholderParmsM2);
 }
 
 //******************************************************************************
@@ -90,20 +90,20 @@ void SlowClassifier::doClassify(
    // Thresholder tests.
 
    // Update the thresholder bank with the input value.
-   mThresholderM2.doUpdate(mValue, mAboveFlagM2, mChangeFlagM2);
-   mThresholderM1.doUpdate(mValue, mAboveFlagM1, mChangeFlagM1);
-   mThresholderP1.doUpdate(mValue, mAboveFlagP1, mChangeFlagP1);
    mThresholderP2.doUpdate(mValue, mAboveFlagP2, mChangeFlagP2);
+   mThresholderP1.doUpdate(mValue, mAboveFlagP1, mChangeFlagP1);
+   mThresholderM1.doUpdate(mValue, mAboveFlagM1, mChangeFlagM1);
+   mThresholderM2.doUpdate(mValue, mAboveFlagM2, mChangeFlagM2);
 
    // Update the change flag.
    mChangeFlag = mChangeFlagM2 || mChangeFlagM1 || mChangeFlagP1 || mChangeFlagP2;
 
    // Update the fuzzy confidence.
    mFuzzyConfidence = (
-      mThresholderM2.mFuzzyConfidence &&
-      mThresholderM1.mFuzzyConfidence &&
+      mThresholderP2.mFuzzyConfidence &&
       mThresholderP1.mFuzzyConfidence &&
-      mThresholderP2.mFuzzyConfidence);
+      mThresholderM1.mFuzzyConfidence &&
+      mThresholderM2.mFuzzyConfidence);
 
    //***************************************************************************
    //***************************************************************************
@@ -153,15 +153,15 @@ char* SlowClassifier::asShowString(char* aBuffer)
    sprintf(aBuffer, "%4d $ %8.4f $ %6.4f %6.4f %6.4f %6.4f A %6.4f $ %1d %1d %1d %1d $ %1d" ,
       mCount,
       mValue,
-      mThresholderM2.mFuzzyConfidence.mX,
-      mThresholderM1.mFuzzyConfidence.mX,
-      mThresholderP1.mFuzzyConfidence.mX,
       mThresholderP2.mFuzzyConfidence.mX,
+      mThresholderP1.mFuzzyConfidence.mX,
+      mThresholderM1.mFuzzyConfidence.mX,
+      mThresholderM2.mFuzzyConfidence.mX,
       mFuzzyConfidence.mX,
-      mAboveFlagM2,
-      mAboveFlagM1,
       mAboveFlagP1,
       mAboveFlagP2,
+      mAboveFlagM1,
+      mAboveFlagM2,
       mClass);
 
    if (mChangeFlag)

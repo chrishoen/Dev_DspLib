@@ -81,21 +81,21 @@ public:
    // Threshold comparison variables. The low variable is true if the input
    // value is below the low threshold. The high variable is true if the
    // input value is above the high threshold.
-   bool mValueBelowLo;
    bool mValueAboveHi;
+   bool mValueBelowLo;
 
    // Alpha filters. These are input the threshold comparison variables.
    // They output values bewteen 0.0 and 1.0.
-   Dsp::Filter::AlphaOneFloat mAlphaFilterBelowLo;
    Dsp::Filter::AlphaOneFloat mAlphaFilterAboveHi;
+   Dsp::Filter::AlphaOneFloat mAlphaFilterBelowLo;
 
    // Fuzzy boolean variables. These are set from the outputs of the alpha
    // filters. The low one has a fuzzy logic value that indicates if the
    // input value is below the low threshold. The high one has a fuzzy
    // logic value that indicates if the input value is above the high 
    // threshold.
-   FuzzyBoolFloat mFuzzyBelowLo;
    FuzzyBoolFloat mFuzzyAboveHi;
+   FuzzyBoolFloat mFuzzyBelowLo;
 
    // Fuzzy boolean variable. this is the OR of the fuzzy below low and
    // above high variables. It gives an indication of the confidence of
@@ -108,8 +108,8 @@ public:
    // 0.90. The low variable is true if it is declared that the input value
    // is below the low threshold. The high variable is true if it is declared
    // that the input value is above the high threshold. 
-   bool mCrispBelowLo;
    bool mCrispAboveHi;
+   bool mCrispBelowLo;
 
    // True if the input value is declared to be above thrshold. False if 
    // it is declared to be below threshold. This does not change if neither

@@ -47,10 +47,10 @@ public:
    Dsp::SlowThresholderParms  mTestThresholderParms;
 
    // Slow classifier thresholder parameters.
-   Dsp::SlowThresholderParms  mThresholderParmsM2;
-   Dsp::SlowThresholderParms  mThresholderParmsM1;
-   Dsp::SlowThresholderParms  mThresholderParmsP1;
    Dsp::SlowThresholderParms  mThresholderParmsP2;
+   Dsp::SlowThresholderParms  mThresholderParmsP1;
+   Dsp::SlowThresholderParms  mThresholderParmsM1;
+   Dsp::SlowThresholderParms  mThresholderParmsM2;
 
    //***************************************************************************
    //***************************************************************************

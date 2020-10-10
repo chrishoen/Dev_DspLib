@@ -43,24 +43,24 @@ public:
    int mLastClass;
 
    // Slow thresholders.
-   Dsp::SlowThresholder mThresholderM2;
-   Dsp::SlowThresholder mThresholderM1;
-   Dsp::SlowThresholder mThresholderP1;
    Dsp::SlowThresholder mThresholderP2;
+   Dsp::SlowThresholder mThresholderP1;
+   Dsp::SlowThresholder mThresholderM1;
+   Dsp::SlowThresholder mThresholderM2;
 
    // True if the input value is declared to be above thrshold. False if 
    // it is declared to be below threshold. This does not change if neither
    // condition is declared.
-   bool mAboveFlagM2;
-   bool mAboveFlagM1;
-   bool mAboveFlagP1;
    bool mAboveFlagP2;
+   bool mAboveFlagP1;
+   bool mAboveFlagM1;
+   bool mAboveFlagM2;
 
    // True if the above flag has changed after an update.
-   bool mChangeFlagM2;
-   bool mChangeFlagM1;
-   bool mChangeFlagP1;
    bool mChangeFlagP2;
+   bool mChangeFlagP1;
+   bool mChangeFlagM1;
+   bool mChangeFlagM2;
    bool mChangeFlag;
 
    // Fuzzy boolean variable. this is the AND of the fuzzy confidence

@@ -47,10 +47,10 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
    mValue = 0.0;
    mFirstFlag = true;
 
-   mValueBelowLo = false;
    mValueAboveHi = false;
-   mCrispBelowLo = false;
+   mValueBelowLo = false;
    mCrispAboveHi = false;
+   mCrispBelowLo = false;
    mAboveFlag = false;
    mLastAboveFlag = false;
    mChangeFlag = false;
@@ -67,7 +67,7 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
 // from its previous value.
 
 void SlowThresholder::doUpdate(
-   float aValue,           // Input
+   float  aValue,           // Input
    bool&  aAboveFlag,       // Output
    bool&  aChangeFlag)      // Output
 {
@@ -92,8 +92,8 @@ void SlowThresholder::doUpdate(
    // Obtain thresholds.
 
    // Local threshold variables.
-   float tValueThreshLo = 0.0;
    float tValueThreshHi = 0.0;
+   float tValueThreshLo = 0.0;
 
    // Test the first update flag.
    if (mFirstFlag)
@@ -102,16 +102,16 @@ void SlowThresholder::doUpdate(
 
       // Calculate thresholds for first compare as the average of the
       // low and high signal thresholds.
-      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0f;
       tValueThreshHi = tValueThreshLo;
+      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0f;
    }
    else
    {
       // This is not the first update.
 
       // Use thresholds from the parms.
-      tValueThreshLo = mP->mValueThreshLo;
       tValueThreshHi = mP->mValueThreshHi;
+      tValueThreshLo = mP->mValueThreshLo;
    }
 
    //***************************************************************************
@@ -120,20 +120,20 @@ void SlowThresholder::doUpdate(
    // Calculate the logic variables.
 
    // Threshold the input value.
-   mValueBelowLo = aValue <  tValueThreshLo;
    mValueAboveHi = aValue >= tValueThreshHi;
+   mValueBelowLo = aValue < tValueThreshLo;
 
    // Put the threshold comparison results to the fuzzy alpha filters
    // and set the fuzzy variables according to the resulting filtered values.
-   mFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mValueBelowLo);
    mFuzzyAboveHi.mX = mAlphaFilterAboveHi.put(mValueAboveHi);
-   
+   mFuzzyBelowLo.mX = mAlphaFilterBelowLo.put(mValueBelowLo);
+
    // Obtain the threshold comparison confidence.
    mFuzzyConfidence = mFuzzyBelowLo || mFuzzyAboveHi;
 
    // Obtain crisp values from the fuzzy variables by thresholding them.
-   mCrispBelowLo = (mFuzzyBelowLo && !mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThresh);
    mCrispAboveHi = (mFuzzyAboveHi && !mFuzzyBelowLo).crisp(mP->mFuzzyToCrispThresh);
+   mCrispBelowLo = (mFuzzyBelowLo && !mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThresh);
 
    // Guard. This condition should not happen.
    if (mCrispBelowLo && mCrispAboveHi)
@@ -193,8 +193,8 @@ char* SlowThresholder::asShowString(char* aBuffer)
    sprintf(aBuffer, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d $ %s",
       mCount,
       mValue,
-      mValueBelowLo,
       mValueAboveHi,
+      mValueBelowLo,
       mFuzzyBelowLo.mX,
       mFuzzyAboveHi.mX,
       mCrispBelowLo,
