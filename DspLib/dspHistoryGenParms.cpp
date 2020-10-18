@@ -132,6 +132,7 @@ void HistoryGenParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("A"))           mA           = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
    if (aCmd->isCmd("Phi"))         mPhi         = aCmd->argAngle(1);
    if (aCmd->isCmd("Sigma"))       mSigma       = mAngleFlag ? aCmd->argAngle(1) : aCmd->argDouble(1);
+   if (aCmd->isCmd("Tp"))          mTp          = aCmd->argDouble(1);
 
    if (aCmd->isCmd("GenType"))
    {
