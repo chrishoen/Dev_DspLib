@@ -56,8 +56,8 @@ public:
    void initializeFromAlpha (float aP1); 
    // Initialize with lambda (tracking index).
    void initializeFromLambda (float aLambda); 
-   // Initialize with time constants.
-   void initializeFromTc(float aTs, float aTc);
+   // Initialize from step response time and threshold.
+   void initializeFromStep(float aTs, float aStepTime, float aStepThresh);
    // Set the first flag true.
    void setFirst(); 
 

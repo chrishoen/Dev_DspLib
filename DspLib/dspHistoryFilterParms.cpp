@@ -49,6 +49,8 @@ void HistoryFilterParms::reset()
 
    mAlphaDT = 0.0;
    mAlphaLambda = 0.0;
+   mAlphaStepTime = 0.0;
+   mAlphaStepThresh = 0.0;
 
    mAlphaSelect = cNone;
 }
@@ -92,6 +94,8 @@ void HistoryFilterParms::show(char* aLabel)
          printf("AlphaDT               %10.4f\n", mAlphaDT);
          printf("AlphaLambda           %10.8f\n", mAlphaLambda);
          printf("AlphaSelect           %10s\n", asStringAlphaSelect(mAlphaSelect));
+         printf("AlphaStepTime         %10.4f\n", mAlphaStepTime);
+         printf("AlphaStepThresh       %10.4f\n", mAlphaStepThresh);
       }
    }
    break;
@@ -120,13 +124,15 @@ void HistoryFilterParms::show(char* aLabel)
 
 void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("FilterOrder"))     mFilterOrder = aCmd->argInt(1);
-   if (aCmd->isCmd("H"))               mH           = aCmd->argDouble(1);
-   if (aCmd->isCmd("Select"))          mSelect      = aCmd->argInt(1);
-   if (aCmd->isCmd("Fs"))              mFs          = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fc"))              mFc          = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaDT"))         mAlphaDT     = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaLambda"))     mAlphaLambda = aCmd->argDouble(1);
+   if (aCmd->isCmd("FilterOrder"))     mFilterOrder     = aCmd->argInt(1);
+   if (aCmd->isCmd("H"))               mH               = aCmd->argDouble(1);
+   if (aCmd->isCmd("Select"))          mSelect          = aCmd->argInt(1);
+   if (aCmd->isCmd("Fs"))              mFs              = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fc"))              mFc              = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaDT"))         mAlphaDT         = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaLambda"))     mAlphaLambda     = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaStepTime"))   mAlphaStepTime   = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaStepThresh")) mAlphaStepThresh = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {

@@ -27,7 +27,7 @@ SlowTestParms::SlowTestParms()
 void SlowTestParms::reset()
 {
    mAlphaFilterTs = 0.0;
-   mAlphaFilterTc = 0.0;
+   mAlphaFilterStepTime = 0.0;
    mFuzzyToCrispThresh = 0.9f;
 }
 
@@ -40,17 +40,17 @@ void SlowTestParms::reset()
 void SlowTestParms::expand()
 {
    mTestThresholderParms.mAlphaFilterTs = mAlphaFilterTs;
-   mTestThresholderParms.mAlphaFilterTc = mAlphaFilterTc;
+   mTestThresholderParms.mAlphaFilterStepTime = mAlphaFilterStepTime;
    mTestThresholderParms.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
 
    mThresholderParmsP2.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsP2.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsP2.mAlphaFilterStepTime = mAlphaFilterStepTime;
    mThresholderParmsP1.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsP1.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsP1.mAlphaFilterStepTime = mAlphaFilterStepTime;
    mThresholderParmsM1.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsM1.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsM1.mAlphaFilterStepTime = mAlphaFilterStepTime;
    mThresholderParmsM2.mAlphaFilterTs = mAlphaFilterTs;
-   mThresholderParmsM2.mAlphaFilterTc = mAlphaFilterTc;
+   mThresholderParmsM2.mAlphaFilterStepTime = mAlphaFilterStepTime;
 
    mThresholderParmsP2.mFuzzyToCrispThresh = mFuzzyToCrispThresh;
    mThresholderParmsP1.mFuzzyToCrispThresh = mFuzzyToCrispThresh;

@@ -39,8 +39,15 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
    mP = aParms;
 
    // Initialize filters.
-   mAlphaFilterAboveHi.initializeFromTc(mP->mAlphaFilterTs, mP->mAlphaFilterTc);
-   mAlphaFilterBelowLo.initializeFromTc(mP->mAlphaFilterTs, mP->mAlphaFilterTc);
+   mAlphaFilterAboveHi.initializeFromStep(
+      mP->mAlphaFilterTs, 
+      mP->mAlphaFilterStepTime,
+      mP->mFuzzyToCrispThresh);
+   mAlphaFilterBelowLo.initializeFromStep(
+      mP->mAlphaFilterTs,
+      mP->mAlphaFilterStepTime,
+      mP->mFuzzyToCrispThresh);
+
 
    // Initialize variables.
    mCount = 0;

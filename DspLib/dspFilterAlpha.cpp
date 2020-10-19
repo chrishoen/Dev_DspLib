@@ -62,14 +62,20 @@ void AlphaOne::initializeFromLambda(double aLambda)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with time constants.
+// Initialize from step response time and threshold.
 
-void AlphaOne::initializeFromTc(double aTs, double aTc)
+void AlphaOne::initializeFromStep(double aTs, double aStepTime, double aStepThresh)
 {
-   double tNumer = cDsp_TwoPi * (aTs / aTc);
-   double tDenom = cDsp_TwoPi * (aTs / aTc) + 1.0;
-   mAlpha = tNumer / tDenom;
+   if (aStepTime < aTs) aStepTime = aTs;
+   if (aStepThresh > 1) aStepThresh = 1;
+   if (aStepThresh < 0) aStepThresh = 0;
 
+   double n = aStepTime / aTs;
+   double c = 1 - aStepThresh;
+   double b = exp(log(c) / n);
+   double a = 1 - b;
+
+   mAlpha = a;
    mY = 0.0;
    mXX = 0.0;
    mFirstFlag = true;

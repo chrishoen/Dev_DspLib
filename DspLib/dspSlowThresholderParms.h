@@ -33,9 +33,9 @@ public:
    //***************************************************************************
    // Members.
 
-   // Fuzzy alpha filter sampling period and time constant, seconds.
+   // Fuzzy alpha filter sampling period and step response time, seconds.
    float mAlphaFilterTs;
-   float mAlphaFilterTc;
+   float mAlphaFilterStepTime;
 
    // Fuzzy to crisp threshold.
    float mFuzzyToCrispThresh;

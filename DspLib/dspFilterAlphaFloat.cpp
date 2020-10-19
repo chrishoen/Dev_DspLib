@@ -61,14 +61,20 @@ void AlphaOneFloat::initializeFromLambda(float aLambda)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with time constants.
+// Initialize from step response time and threshold.
 
-void AlphaOneFloat::initializeFromTc(float aTs, float aTc)
+void AlphaOneFloat::initializeFromStep(float aTs, float aStepTime, float aStepThresh)
 {
-   float tNumer = (float)cDsp_TwoPi * (aTs / aTc);
-   float tDenom = (float)cDsp_TwoPi * (aTs / aTc) + 1;
-   mAlpha = tNumer / tDenom;
+   if (aStepTime < aTs) aStepTime = aTs;
+   if (aStepThresh > 1) aStepThresh = 1;
+   if (aStepThresh < 0) aStepThresh = 0;
 
+   float n = aStepTime / aTs;
+   float c = 1 - aStepThresh;
+   float b = (float)exp(log(c) / n);
+   float a = 1 - b;
+
+   mAlpha = a;
    mY = 0.0;
    mXX = 0.0;
    mFirstFlag = true;

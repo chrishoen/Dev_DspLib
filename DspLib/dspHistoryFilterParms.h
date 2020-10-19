@@ -88,22 +88,24 @@ public:
    //***************************************************************************
    // Members that are read from the parms file.
 
-   int     mFilterType;     // Filter type.
-   int     mFilterMethod;   // Filter structure type.
+   int     mFilterType;       // Filter type.
+   int     mFilterMethod;     // Filter structure type.
 
-   int     mFilterOrder;    // Central difference filter order. Must be odd.
-   double  mH;              // Central difference time delta. 
+   int     mFilterOrder;      // Central difference filter order. Must be odd.
+   double  mH;                // Central difference time delta. 
 
-   int     mSelect;         // Selector, general purpose.
+   int     mSelect;           // Selector, general purpose.
 
-   int     mCausalType;     // Causal filter type.
-   double  mFs;             // Causal filter Sampling frequency.
-   double  mFc;             // Causal filter cutoff frequency. 
+   int     mCausalType;       // Causal filter type.
+   double  mFs;               // Causal filter Sampling frequency.
+   double  mFc;               // Causal filter cutoff frequency. 
 
-   double  mAlphaDT;        // Alpha filter parameter.
-   double  mAlphaLambda;    // Alpha filter parameter.
+   double  mAlphaDT;          // Alpha filter parameter.
+   double  mAlphaLambda;      // Alpha filter parameter.
+   double  mAlphaStepTime;    // Alpha filter parameter.
+   double  mAlphaStepThresh;  // Alpha filter parameter.
 
-   int     mAlphaSelect;    // Alpha filter output state selector.
+   int     mAlphaSelect;      // Alpha filter output state selector.
 
    //***************************************************************************
    //***************************************************************************

@@ -4,6 +4,7 @@
 #include "Parms.h"
 #include "TestOne.h"
 #include "DemoOne.h"
+#include "dspFilterAlpha.h"
 
 #include "CmdLineExec.h"
 
@@ -48,6 +49,24 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("Demo1"))  executeDemo1(aCmd);
    if (aCmd->isCmd("Demo2"))  executeDemo2(aCmd);
    if (aCmd->isCmd("Demo3"))  executeDemo3(aCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1, 10);
+   aCmd->setArgDefault(2, 0.9);
+   double tTs = 1.0;
+   double tStepTime = aCmd->argDouble(1);
+   double tStepThresh = aCmd->argDouble(2);
+
+   Dsp::Filter::AlphaOne tFilter;
+   tFilter.initializeFromStep(tTs, tStepTime, tStepThresh);
+
+   Prn::print(0, "alpha %6.4f", tFilter.mAlpha);
 }
 
 //******************************************************************************
@@ -278,34 +297,6 @@ void CmdLineExec::executeRun7(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doRun7();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
-{
-   aCmd->setArgDefault(1,10);
-   aCmd->setArgDefault(2,7);
-   int tP = aCmd->argInt(1);
-   int tN = aCmd->argInt(2);
-   int tM = (tN-1)/2;
-
-   printf("P,N,M %3d %3d %3d\n\n",tP,tN,tN);
-
-   for (int i = 0; i < tP; i++)
-   {
-      printf("%3d  $$ ", i);
-      for (int k = 1; k <= tM; k++)
-      {
-         int iB = dsp_imax(i - k,0);
-         int iF = dsp_imin(i + k,tP-1);
-         printf("[%3d](%3d,%3d) ", k,iB,iF);
-      }
-      printf("\n");
-   }
-
 }
 
 //******************************************************************************

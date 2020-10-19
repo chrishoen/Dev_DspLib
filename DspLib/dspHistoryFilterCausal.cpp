@@ -58,8 +58,18 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaOne:
    {
-      mAlphaOne.initialize(
-         mParms.mAlphaLambda);
+      if (mParms.mAlphaStepTime > 0)
+      {
+         mAlphaOne.initializeFromStep(
+            1/mParms.mFs,
+            mParms.mAlphaStepTime,
+            mParms.mAlphaStepThresh);
+      }
+      else if (mParms.mAlphaLambda > 0)
+      {
+         mAlphaOne.initialize(
+            mParms.mAlphaLambda);
+      }
    }
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
