@@ -127,7 +127,7 @@ void SlowThresholder::doUpdate(
    if (mFirstFlag)
    {
       // This is the first update.
-      aAboveFlag = aValue >= mP->mThresh;
+      mAboveFlag = aValue >= mP->mThresh;
 
       // Calculate thresholds.
       switch (mMode)
@@ -235,12 +235,12 @@ char* SlowThresholder::asShowString(char* aBuffer)
    else            strcpy(tResult, "below");
 
    sprintf(aBuffer, "\
-%4d \
-V %8.4f \
-T %6.4f %6.4f \
-A %1d %1d \
-F %6.4f %6.4f \
-C %1d %1d \
+%4d  \
+V %8.3f  \
+T %6.3f %6.3f  \
+A %1d %1d  \
+F %6.3f %6.3f  \
+C %1d %1d  \
 R %s",
       mCount,
       mValue,
