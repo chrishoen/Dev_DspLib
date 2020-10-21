@@ -234,15 +234,24 @@ char* SlowThresholder::asShowString(char* aBuffer)
    if (mAboveFlag) strcpy(tResult, "above");
    else            strcpy(tResult, "below");
 
-   sprintf(aBuffer, "%4d $ %8.4f $ %1d %1d $ %6.4f %6.4f $ %1d %1d $ %s",
+   sprintf(aBuffer, "\
+%4d \
+V %8.4f \
+T %6.4f %6.4f \
+A %1d %1d \
+F %6.4f %6.4f \
+C %1d %1d \
+R %s",
       mCount,
       mValue,
+      mThreshHi,
+      mThreshLo,
       mValueAboveHi,
       mValueBelowLo,
-      mFuzzyBelowLo.mX,
       mFuzzyAboveHi.mX,
-      mCrispBelowLo,
+      mFuzzyBelowLo.mX,
       mCrispAboveHi,
+      mCrispBelowLo,
       tResult);
 
    if (mChangeFlag)
