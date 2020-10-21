@@ -28,8 +28,8 @@ void SlowThresholderParms::reset()
    mAlphaFilterTs = 0.0;
    mAlphaFilterStepTime = 0.0;
    mFuzzyToCrispThresh = 0.9f;
-   mValueThreshHi = 0.0;
-   mValueThreshLo = 0.0;
+   mThresh = 0.0;
+   mThreshDelta = 0.0;
 }
 
 //******************************************************************************

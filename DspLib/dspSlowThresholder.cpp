@@ -20,11 +20,36 @@ namespace Dsp
 
 SlowThresholder::SlowThresholder()
 {
+   mMode = 0;
    mP = 0;
 }
 
 SlowThresholder::SlowThresholder(SlowThresholderParms* aParms)
 {
+   mMode = 0;
+   initialize(aParms);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Initialize.
+
+void SlowThresholder::initializeForSym(SlowThresholderParms* aParms)
+{
+   mMode = cMode_Sym;
+   initialize(aParms);
+}
+
+void SlowThresholder::initializeForASymHi(SlowThresholderParms* aParms)
+{
+   mMode = cMode_ASymHi;
+   initialize(aParms);
+}
+
+void SlowThresholder::initializeForASymLo(SlowThresholderParms* aParms)
+{
+   mMode = cMode_ASymLo;
    initialize(aParms);
 }
 
@@ -98,27 +123,39 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    // Obtain thresholds.
 
-   // Local threshold variables.
-   float tValueThreshHi = 0.0;
-   float tValueThreshLo = 0.0;
-
    // Test the first update flag.
    if (mFirstFlag)
    {
       // This is the first update.
+      aAboveFlag = aValue >= mP->mThresh;
 
-      // Calculate thresholds for first compare as the average of the
-      // low and high signal thresholds.
-      tValueThreshHi = tValueThreshLo;
-      tValueThreshLo = (mP->mValueThreshHi + mP->mValueThreshLo) / 2.0f;
+      // Calculate thresholds.
+      switch (mMode)
+      {
+      case cMode_Sym:
+         if (mAboveFlag)
+         {
+            mThreshHi = mP->mThresh;
+            mThreshLo = mP->mThresh - mP->mThreshDelta;
+         }
+         else
+         {
+            mThreshHi = mP->mThresh + mP->mThreshDelta;
+            mThreshLo = mP->mThresh;
+         }
+         break;
+      case cMode_ASymHi:
+         mThreshHi = mP->mThresh;
+         mThreshLo = mP->mThresh - mP->mThreshDelta;
+         break;
+      case cMode_ASymLo:
+         mThreshHi = mP->mThresh + mP->mThreshDelta;
+         mThreshLo = mP->mThresh;
+         break;
+      }
    }
    else
    {
-      // This is not the first update.
-
-      // Use thresholds from the parms.
-      tValueThreshHi = mP->mValueThreshHi;
-      tValueThreshLo = mP->mValueThreshLo;
    }
 
    //***************************************************************************
@@ -127,8 +164,8 @@ void SlowThresholder::doUpdate(
    // Calculate the logic variables.
 
    // Threshold the input value.
-   mValueAboveHi = aValue >= tValueThreshHi;
-   mValueBelowLo = aValue < tValueThreshLo;
+   mValueAboveHi = aValue >= mThreshHi;
+   mValueBelowLo = aValue <  mThreshLo;
 
    // Put the threshold comparison results to the fuzzy alpha filters
    // and set the fuzzy variables according to the resulting filtered values.

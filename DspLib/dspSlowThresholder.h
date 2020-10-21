@@ -65,6 +65,16 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Constants.
+
+   // Modes.
+   static const int cMode_Sym    = 0;   // symmetrical 
+   static const int cMode_ASymHi = 2;   // asymmetrical high
+   static const int cMode_ASymLo = 1;   // asymmetrical low
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members.
 
    // Parameters.
@@ -75,8 +85,15 @@ public:
    //***************************************************************************
    // Members.
 
+   // Mode.
+   int mMode;
+
    // Input value.
    float mValue;
+
+   // Threshold variables.
+   float mThreshHi;
+   float mThreshLo;
 
    // Threshold comparison variables. The low variable is true if the input
    // value is below the low threshold. The high variable is true if the
@@ -139,6 +156,10 @@ public:
    // Constructor.
    SlowThresholder();
    SlowThresholder(SlowThresholderParms* aParms);
+   void initializeForSym(SlowThresholderParms* aParms);
+   void initializeForASymHi(SlowThresholderParms* aParms);
+   void initializeForASymLo(SlowThresholderParms* aParms);
+
    void initialize(SlowThresholderParms* aParms);
 
    //***************************************************************************

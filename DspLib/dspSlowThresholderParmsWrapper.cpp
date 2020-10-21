@@ -63,8 +63,8 @@ void SlowThresholderParmsWrapper::show(const char* aLabel)
    printf("AlphaFilterTs             %10.4f\n", mP->mAlphaFilterTs);
    printf("AlphaFilterStepTime       %10.4f\n", mP->mAlphaFilterStepTime);
    printf("FuzzyToCrispThresh        %10.4f\n", mP->mFuzzyToCrispThresh);
-   printf("ValueThreshHi             %10.4f\n", mP->mValueThreshHi);
-   printf("ValueThreshLo             %10.4f\n", mP->mValueThreshLo);
+   printf("Thresh                    %10.4f\n", mP->mThresh);
+   printf("ThreshDelta               %10.4f\n", mP->mThreshDelta);
 }
 
 //******************************************************************************
@@ -80,8 +80,8 @@ void SlowThresholderParmsWrapper::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("AlphaFilterStepTime"))   mP->mAlphaFilterStepTime = aCmd->argFloat(1);
 
    if (aCmd->isCmd("FuzzyToCrispThresh"))    mP->mFuzzyToCrispThresh = aCmd->argFloat(1);
-   if (aCmd->isCmd("ValueThreshHi"))         mP->mValueThreshHi = aCmd->argFloat(1);
-   if (aCmd->isCmd("ValueThreshLo"))         mP->mValueThreshLo = aCmd->argFloat(1);
+   if (aCmd->isCmd("Thresh"))                mP->mThresh = aCmd->argFloat(1);
+   if (aCmd->isCmd("ThreshDelta"))           mP->mThreshDelta = aCmd->argFloat(1);
 
    // Pop back out at the end.
    if (aCmd->isCmd("}"))  nestedPop(aCmd);

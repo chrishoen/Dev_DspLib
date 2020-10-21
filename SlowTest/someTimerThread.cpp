@@ -40,7 +40,19 @@ TimerThread::TimerThread()
    mNoiseSigma = 0.0;
    mNoise = 0.0;
 
-   mThresholder.initialize(&Some::gSlowTestParms.mTestThresholderParms);
+
+   switch (gSlowTestParmsFile.mTestMode)
+   {
+   case 0:
+      mThresholder.initializeForSym(&Some::gSlowTestParms.mTestThresholderParms);
+      break;
+   case 2:
+      mThresholder.initializeForASymHi(&Some::gSlowTestParms.mTestThresholderParms);
+      break;
+   case 1:
+      mThresholder.initializeForASymLo(&Some::gSlowTestParms.mTestThresholderParms);
+      break;
+   }
 }
 
 //******************************************************************************
@@ -64,18 +76,12 @@ void TimerThread::executeOnTimer(int aTimeCount)
    doUpdateValue();
 
    // Test something.
-   if (gSlowTestParmsFile.mTestMode == 1)
-   {
-      // Update the thresholder.
-      bool tPass = false;
-      bool tChangeFlag = false;
-      mThresholder.doUpdate(mValue + mNoise, tPass, tChangeFlag);
-      char tBuffer[200];
-      Prn::print(Prn::View11, "%s", mThresholder.asShowString(tBuffer));
-   }
-   else
-   {
-   }
+   // Update the thresholder.
+   bool tPass = false;
+   bool tChangeFlag = false;
+   mThresholder.doUpdate(mValue + mNoise, tPass, tChangeFlag);
+   char tBuffer[200];
+   Prn::print(Prn::View11, "%s", mThresholder.asShowString(tBuffer));
 }
 
 //******************************************************************************
