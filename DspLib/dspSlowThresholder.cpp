@@ -126,36 +126,33 @@ void SlowThresholder::doUpdate(
    // Test the first update flag.
    if (mFirstFlag)
    {
-      // This is the first update.
+      mFirstFlag = false;
       mAboveFlag = aValue >= mP->mThresh;
+   }
 
-      // Calculate thresholds.
-      switch (mMode)
+   // Calculate thresholds.
+   switch (mMode)
+   {
+   case cMode_Sym:
+      if (mAboveFlag)
       {
-      case cMode_Sym:
-         if (mAboveFlag)
-         {
-            mThreshHi = mP->mThresh;
-            mThreshLo = mP->mThresh - mP->mThreshDelta;
-         }
-         else
-         {
-            mThreshHi = mP->mThresh + mP->mThreshDelta;
-            mThreshLo = mP->mThresh;
-         }
-         break;
-      case cMode_ASymHi:
          mThreshHi = mP->mThresh;
          mThreshLo = mP->mThresh - mP->mThreshDelta;
-         break;
-      case cMode_ASymLo:
+      }
+      else
+      {
          mThreshHi = mP->mThresh + mP->mThreshDelta;
          mThreshLo = mP->mThresh;
-         break;
       }
-   }
-   else
-   {
+      break;
+   case cMode_ASymHi:
+      mThreshHi = mP->mThresh;
+      mThreshLo = mP->mThresh - mP->mThreshDelta;
+      break;
+   case cMode_ASymLo:
+      mThreshHi = mP->mThresh + mP->mThreshDelta;
+      mThreshLo = mP->mThresh;
+      break;
    }
 
    //***************************************************************************
@@ -178,14 +175,6 @@ void SlowThresholder::doUpdate(
    // Obtain crisp values from the fuzzy variables by thresholding them.
    mCrispAboveHi = (mFuzzyAboveHi && !mFuzzyBelowLo).crisp(mP->mFuzzyToCrispThresh);
    mCrispBelowLo = (mFuzzyBelowLo && !mFuzzyAboveHi).crisp(mP->mFuzzyToCrispThresh);
-
-   // Guard. This condition should not happen.
-   if (mCrispBelowLo && mCrispAboveHi)
-   {
-      mErrorCount++;
-      printf("ERROR101 %4d\n", mErrorCount);
-      return;
-   }
 
    //***************************************************************************
    //***************************************************************************
@@ -214,9 +203,6 @@ void SlowThresholder::doUpdate(
    //***************************************************************************
    //***************************************************************************
    // Write to the output variables.
-
-   // Do this last.
-   mFirstFlag = false;
 
    // Done.
    aAboveFlag = mAboveFlag;
