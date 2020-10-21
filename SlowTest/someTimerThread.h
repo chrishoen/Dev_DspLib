@@ -10,7 +10,6 @@ Timer test thread.
 #include "risThreadsTimerThread.h"
 #include "dspHistoryGaussNoise.h"
 #include "dspSlowThresholder.h"
-#include "someSlowClassifier.h"
 
 namespace Some
 {
@@ -49,7 +48,6 @@ public:
    // Members.
 
    Dsp::SlowThresholder  mThresholder;
-   Some::SlowClassifier  mClassifier;
 
    //******************************************************************************
    //******************************************************************************

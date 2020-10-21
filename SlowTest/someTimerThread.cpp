@@ -41,7 +41,6 @@ TimerThread::TimerThread()
    mNoise = 0.0;
 
    mThresholder.initialize(&Some::gSlowTestParms.mTestThresholderParms);
-   mClassifier.initialize();
 }
 
 //******************************************************************************
@@ -76,12 +75,6 @@ void TimerThread::executeOnTimer(int aTimeCount)
    }
    else
    {
-      // Update the classifier.
-      int  tClass = -99;
-      bool tChangeFlag = false;
-      mClassifier.doClassify(mValue + mNoise, tClass, tChangeFlag);
-      char tBuffer[200];
-      Prn::print(Prn::View11, "%s", mClassifier.asShowString(tBuffer));
    }
 }
 
