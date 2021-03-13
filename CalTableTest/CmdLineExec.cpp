@@ -53,7 +53,16 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CalTable tCalTable;
    tCalTable.initialize();
-   tCalTable.show();
+
+   if (aCmd->numArg() == 0)
+   {
+      tCalTable.show();
+      return;
+   }
+
+   double tX = aCmd->argDouble(1);
+   double tY = tCalTable.getYfromX(tX);
+   Prn::print(0, "XY %.2f  %.2f", tX, tY);
 }
 
 //******************************************************************************
@@ -62,12 +71,9 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   double tX = aCmd->argDouble(1);
-
    Dsp::CalTable tCalTable;
    tCalTable.initialize();
-   double tY = tCalTable.getYfromX(tX);
-   Prn::print(0, "XY %.2f  %.2f", tX, tY);
+   tCalTable.show();
 }
 
 //******************************************************************************

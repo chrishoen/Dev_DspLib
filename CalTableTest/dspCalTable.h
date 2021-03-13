@@ -26,6 +26,9 @@ public:
    //***************************************************************************
    // Members.
 
+   // True if the calibration table is valid.
+   bool mValidFlag;
+
    // Table of calibration x,y pairs.
    std::vector<std::pair<double,double>> mTable;
 
