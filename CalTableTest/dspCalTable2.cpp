@@ -14,7 +14,7 @@ Description:
 #include "json.h"
 #include "risFileFunctions.h"
 
-#include "dspCalTable.h"
+#include "dspCalTable2.h"
 
 namespace Dsp
 {
@@ -24,7 +24,7 @@ namespace Dsp
 //******************************************************************************
 // Consructor.
 
-CalTable::CalTable()
+CalTable2::CalTable2()
 {
 }
 
@@ -33,10 +33,10 @@ CalTable::CalTable()
 //******************************************************************************
 // Initialize from a json file.
 
-void CalTable::initialize()
+void CalTable2::initialize()
 {
    // Read from the json file into a json value.
-   const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
+   const char* tFilePath = "c:\\aaa_prime\\CalTable2\\TestCalTable2.json";
    Json::Value tRoot;
    Ris::doReadJsonFromFile(tRoot, tFilePath);
    
@@ -60,7 +60,7 @@ void CalTable::initialize()
 // Helpers.
 
 // Show.
-void CalTable::show()
+void CalTable2::show()
 {
    for (int i = 0; i < mXArray.size(); i++)
    {
@@ -74,7 +74,7 @@ void CalTable::show()
 //******************************************************************************
 // Get an interpolated y value from an input x value.
 
-double CalTable::getYfromX(double aX)
+double CalTable2::getYfromX(double aX)
 {
    //******************************************************************************
    //******************************************************************************
