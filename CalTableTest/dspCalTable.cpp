@@ -28,14 +28,55 @@ CalTable::CalTable()
 {
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Initialize from a json file.
+
 void CalTable::initialize()
 {
+   // Read from the json file into a json value.
    const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
    Json::Value tRoot;
    Ris::doReadJsonFromFile(tRoot, tFilePath);
    
-   std::cout << tRoot << std::endl;
+   // Extract the two arrays into two json array values.
+   Json::Value tXArray = tRoot["XArray"];
+   Json::Value tYArray = tRoot["YArray"];
+
+   // Extract the two json array values into the two array vectors.
+   mXArray.clear();
+   mYArray.clear();
+   for (unsigned i = 0; i < tXArray.size(); i++)
+   {
+      mXArray.push_back(tXArray[i].asDouble());
+      mYArray.push_back(tYArray[i].asDouble());
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Helpers.
+
+// Show.
+void CalTable::show()
+{
+   for (int i = 0; i < mXArray.size(); i++)
+   {
+      Prn::print(0, "%2d %.2f %.2f", i, mXArray[i], mYArray[i]);
+   }
+
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Get an interpolated y value from an input x value.
+
+double CalTable::getYfromX(double aX)
+{
+   return 0;
 }
 
 //******************************************************************************

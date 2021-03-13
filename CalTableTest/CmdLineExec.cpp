@@ -53,6 +53,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CalTable tCalTable;
    tCalTable.initialize();
+   tCalTable.show();
 }
 
 //******************************************************************************
