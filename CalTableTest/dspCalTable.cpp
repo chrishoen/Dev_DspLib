@@ -82,8 +82,7 @@ void CalTable::initialize()
       //************************************************************************
       //************************************************************************
       //************************************************************************
-      // Test that the table is monotonically increasing in X and is
-      // monotonic in Y.
+      // Test that the table is monotonically increasing in X.
 
       // Test for monotonically increasing X.
       for (unsigned i = 0; i < mTable.size() - 1; i++)
@@ -92,36 +91,6 @@ void CalTable::initialize()
          {
             throw "NOT MONOTONIC INCREASE X";
          }
-      }
-
-      // Test for monotonically increasing Y.
-      if (mTable[0].second < mTable[1].second)
-      {
-         for (unsigned i = 0; i < mTable.size() - 1; i++)
-         {
-            if (mTable[i].second >= mTable[i + 1].second)
-            {
-               throw "NOT MONOTONIC Y 101";
-            }
-         }
-      }
-
-      // Test for monotonically decreasing Y.
-      else if (mTable[0].second > mTable[1].second)
-      {
-         for (unsigned i = 0; i < mTable.size() - 1; i++)
-         {
-            if (mTable[i].second <= mTable[i + 1].second)
-            {
-               throw "NOT MONOTONIC Y 102";
-            }
-         }
-      }
-
-      // Test for neither monotonic Y.
-      else
-      {
-         throw "NOT MONOTONIC Y 103";
       }
    }
    catch (const char*& tString)
