@@ -46,16 +46,6 @@ void main_initialize(int argc,char** argv)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize thread services.
-
-   TS::reset();
-   TS::setProgramName("SlowTest");
-   TS::setProgramPrintLevel(0);
-   TS::initialize();
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
    // Initialize print facility.
 
    // Initialize print.
@@ -104,9 +94,6 @@ void main_finalize()
 
    // Exit process.
    Ris::Threads::exitProcess();
-
-   // Finalize thread services.
-   TS::finalize();
 
    // Done.
    printf("\n");

@@ -1,5 +1,3 @@
-#pragma once
-
 #include <stdio.h>
 #include <string.h>
 #include <stdio.h>
@@ -15,4 +13,6 @@
 
 #include "my_functions.h"
 #include "prnPrint.h"
+#include "logFiles.h"
 #include "risPortableCalls.h"
+
