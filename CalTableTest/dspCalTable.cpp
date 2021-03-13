@@ -33,18 +33,29 @@ CalTable::CalTable()
 //******************************************************************************
 // Initialize from a json file.
 
+// Compare two pairs according to first values.
+bool comparePairs(std::pair<double,double> p1, std::pair<double, double> p2)
+{
+   return (p1.first < p2.first);
+} 
+
 void CalTable::initialize()
 {
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Read from the json file into a table vector.
+
    // Read from the json file into a root json value.
    const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
    Json::Value tRoot;
    Ris::doReadJsonFromFile(tRoot, tFilePath);
 
-   std::cout << tRoot << std::endl;
+   //std::cout << tRoot << std::endl;
 
    // Extract the table json value from the root json value.
    Json::Value tTable = tRoot["Table"];
-   std::cout << tTable << std::endl;
+   //std::cout << tTable << std::endl;
 
    // Extract the table vector from the table json value.
    mTable.clear();
@@ -55,6 +66,13 @@ void CalTable::initialize()
       tPair.second = tTable[i]["Y"].asDouble();
       mTable.push_back(tPair);
    }
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Sort the table vector so that it is always monotonicaly increasing.
+   
+   std::sort(mTable.begin(), mTable.end(), comparePairs);
 }
 
 //******************************************************************************
@@ -69,6 +87,7 @@ void CalTable::show()
    {
       Prn::print(0, "%2d %.2f %.2f", i, mTable[i].first, mTable[i].second);
    }
+   Prn::print(0, "");
 }
 
 //******************************************************************************
