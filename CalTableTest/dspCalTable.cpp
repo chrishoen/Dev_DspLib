@@ -97,7 +97,6 @@ void CalTable::show()
 
 double CalTable::getYfromX(double aX)
 {
-#if 0
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
@@ -105,13 +104,13 @@ double CalTable::getYfromX(double aX)
    
    // Locals.
    int tBeginIndex = 0;
-   int tEndIndex = (int)mXArray.size() - 1;
+   int tEndIndex = (int)mTable.size() - 1;
 
    // If X is less than the begin X then return the begin Y.
-   if (aX <= mXArray[tBeginIndex]) return mYArray[tBeginIndex];
+   if (aX <= mTable[tBeginIndex].first) return mTable[tBeginIndex].second;
 
    // If X is greater than the end X then return the end Y.
-   if (aX >= mXArray[tEndIndex]) return mYArray[tEndIndex];
+   if (aX >= mTable[tEndIndex].first) return mTable[tEndIndex].second;
 
    // Loop to find the index that X is at.
    int tIndex = 0;
@@ -121,7 +120,7 @@ double CalTable::getYfromX(double aX)
       if (tIndex == tEndIndex) break;
 
       // If X is contained in the current bin then exit.
-      if (aX >= mXArray[tIndex] && aX <= mXArray[tIndex + 1]) break;
+      if (aX >= mTable[tIndex].first && aX <= mTable[tIndex + 1].first) break;
 
       // Advance.
       tIndex++;
@@ -135,17 +134,15 @@ double CalTable::getYfromX(double aX)
    // Interpolate the Y from the X.
 
    // Locals.
-   double tX0 = mXArray[tIndex];
-   double tX1 = mXArray[tIndex + 1];
-   double tY0 = mYArray[tIndex];
-   double tY1 = mYArray[tIndex + 1];
+   double tX0 = mTable[tIndex].first;
+   double tX1 = mTable[tIndex + 1].first;
+   double tY0 = mTable[tIndex].second;
+   double tY1 = mTable[tIndex + 1].second;
 
    // Calculate the linear interpolation.
    double tY = tY0 + (aX - tX0) * (tY1 - tY0) / (tX1 - tX0);
 
    return tY;
-#endif
-   return 0;
 }
 
 //******************************************************************************
