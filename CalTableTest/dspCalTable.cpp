@@ -41,7 +41,7 @@ bool comparePairs(std::pair<double,double> p1, std::pair<double, double> p2)
    return (p1.first < p2.first);
 } 
 
-void CalTable::initialize()
+void CalTable::initialize(const char* aFilePath)
 {
    //***************************************************************************
    //***************************************************************************
@@ -53,9 +53,8 @@ void CalTable::initialize()
    try
    {
       // Read from the json file into a root json value.
-      const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
       Json::Value tRoot;
-      Ris::doReadJsonFromFile(tRoot, tFilePath);
+      Ris::doReadJsonFromFile(tRoot, aFilePath);
 
       //std::cout << tRoot << std::endl;
 

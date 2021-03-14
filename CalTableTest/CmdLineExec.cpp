@@ -52,7 +52,16 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
    Dsp::CalTable tCalTable;
-   tCalTable.initialize();
+   const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
+   if (Ris::portableIsWindows())
+   {
+      tCalTable.initialize("c:\\aaa_prime\\CalTable\\TestCalTable.json");
+   }
+   else
+   {
+      tCalTable.initialize("/opt/files/hlc_caltable.json");
+   }
+
 
    if (aCmd->numArg() == 0)
    {
@@ -71,9 +80,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::CalTable tCalTable;
-   tCalTable.initialize();
-   tCalTable.show();
 }
 
 //******************************************************************************

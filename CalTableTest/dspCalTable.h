@@ -41,7 +41,7 @@ public:
    CalTable();
 
    // Initialize from a json file.
-   void initialize();
+   void initialize(const char* aFilePath);
 
    // Get an interpolated y value from an input x value.
    double getYfromX(double aX);
