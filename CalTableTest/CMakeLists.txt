@@ -7,7 +7,10 @@ add_executable (CalTableTest ${src_files})
 my_add_compile_options (CalTableTest)
 my_add_pch (CalTableTest)
 
+my_inc_import_DspLib(CalTableTest)
 my_inc_import_RisLib(CalTableTest)
+
+my_lib_import_DspLib(CalTableTest)
 my_lib_import_RisLib(CalTableTest)
 
 if(MSVC)

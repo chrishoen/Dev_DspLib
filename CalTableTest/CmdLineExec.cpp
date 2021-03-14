@@ -59,7 +59,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    }
    else
    {
-      tCalTable.initialize("/opt/files/hlc_caltable.json");
+      tCalTable.initialize("/opt/files/hlccal.json");
    }
 
 
