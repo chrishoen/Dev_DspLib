@@ -1,17 +1,18 @@
 ﻿{
-  "configurations": [
-   {
-      "name": "Dev_DspLib",
-      "generator": "Ninja",
-      "configurationType": "Release",
-      "inheritEnvironments": [
-         "msvc_x64_x64"
-      ],
-      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}",
-      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}\\install",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v",
-      "ctestCommandArgs": ""
-   }
-  ]
+   "configurations": [
+      {
+         "name": "Dev_DspLib",
+         "inheritEnvironments": [ "linux_arm" ],
+         "environments": [ { "INCLUDE": "c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8\\backward;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include-fixed;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\arm-linux-gnueabihf\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include\\arm-linux-gnueabihf;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include;" } ],
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}",
+         "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}\\install",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "-v -j8",
+         "ctestCommandArgs": "",
+         "cmakeToolchain": "MyBeagleToolchain.cmake",
+         "variables": []
+      }
+   ]
 }
