@@ -10,7 +10,6 @@ if (MSVC)
 else()
    add_library (DspLib SHARED ${src_files})
 endif()
-
 my_add_compile_options (DspLib)
 my_add_pch (DspLib)
 
@@ -22,26 +21,18 @@ if (MSVC)
    my_lib_import_RisLib(DspLib)
 endif()
 
-if (MSVC OR CMAKE_SYSTEM_VERSION EQUAL 101)
-   install(FILES ${inc_files} DESTINATION "C:\\MyTools\\MyLib\\include\\DspLib")
-   install(TARGETS DspLib DESTINATION "C:\\MyTools\\MyLib\\lib")
-else()
-   install(FILES ${inc_files} DESTINATION "/usr/local/include/DspLib")
-   install(TARGETS DspLib DESTINATION "/usr/local/lib")
-endif()
-
-
 if (MSVC)
    install(FILES ${inc_files} DESTINATION "C:/MyTools/MyLib/include/DspLib")
    install(TARGETS DspLib DESTINATION "C:/MyTools/MyLib/lib")
-elseif(CMAKE_SYSTEM_VERSION EQUAL 101)
+elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
+   install(FILES ${inc_files} DESTINATION "/opt/prime/include/DspLib")
+   install(TARGETS DspLib DESTINATION "/opt/prime/lib")
+else()
+   install(FILES ${inc_files} DESTINATION "C:/MyTools/MyLib/include/DspLib")
+   install(TARGETS DspLib DESTINATION "C:/MyTools/MyLib/lib")
    add_custom_command(
       TARGET  DspLib
       POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx libDspLib.so rsync://debian@bbacm/prime/stage
+      COMMAND rsync -azv --chmod=ugo=rwx libDspLib.so rsync://debian@devtgt/prime/lib
       WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_DspLib/DspLib)
-else()
-   install(FILES ${inc_files} DESTINATION "/usr/local/include/DspLib")
-   install(TARGETS DspLib DESTINATION "/usr/local/lib")
 endif()
-

@@ -10,6 +10,10 @@ project ("Dev_DspLib")
 my_init_global_import_variables()
 
 add_subdirectory ("DspLib")
+add_subdirectory ("CalTableTest")
+return()
+
+add_subdirectory ("DspLib")
 add_subdirectory ("HistoryTest")
 add_subdirectory ("SlowTest")
 add_subdirectory ("CalTableTest")

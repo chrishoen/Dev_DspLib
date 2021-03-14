@@ -10,6 +10,7 @@ Description:
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #include "json.h"
 #include "risFileFunctions.h"
