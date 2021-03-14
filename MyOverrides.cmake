@@ -1,5 +1,5 @@
 # log all *_INIT variables
-if (true)
+if (false)
 get_cmake_property(_varNames VARIABLES)
 list (REMOVE_DUPLICATES _varNames)
 list (SORT _varNames)
