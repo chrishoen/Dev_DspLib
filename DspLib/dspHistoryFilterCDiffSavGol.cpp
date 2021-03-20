@@ -10,7 +10,6 @@ Description:
 
 #include "dsp_math.h"
 #include "dsp_functions.h"
-#include "dspStatistics.h"
 #include "dspHistoryFilterCDiffSavGol.h"
 
 namespace Dsp

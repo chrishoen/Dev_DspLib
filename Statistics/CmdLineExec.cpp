@@ -1,8 +1,7 @@
 
 #include "stdafx.h"
 
-#include "dspStatistics.h"
-#include "dspStatistics2.h"
+#include "dspTrialStatistics.h"
 
 #include "CmdLineExec.h"
 
@@ -57,9 +56,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
    Prn::print(0,"");
    tF.show(0,"1234567890");
-
-
-
 }
 
 //******************************************************************************
@@ -78,15 +74,12 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    tF.finishTrial();
    tF.show(0,"X1  ");
    Prn::print(0,"");
-
-
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-
    Dsp::TrialStatistics tF;
    tF.startTrial();
 
@@ -147,123 +140,17 @@ void CmdLineExec::executeGo10(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo11(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::PeriodicStatistics tF;
-   tF.initialize(40);
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo12(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::PeriodicStatistics tF;
-   tF.initialize(40);
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(1.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0);
-      tF.show();
-   }
-   Prn::print(0,"");
 }
 
 //******************************************************************************
 
 void CmdLineExec::executeGo13(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::PeriodicStatistics tF;
-   tF.initialize(40);
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(2.0 + 10.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-   for (int i = 0; i<20; i++)
-   {
-      tF.put(-2.0 + 10.0);
-      tF.show();
-   }
-   Prn::print(0,"");
-
-
 }
 

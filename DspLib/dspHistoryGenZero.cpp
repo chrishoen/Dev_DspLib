@@ -11,7 +11,6 @@ Description:
 #include <random>
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
 #include "dspHistoryGenZero.h"
 
 namespace Dsp

@@ -9,7 +9,7 @@ Signal history statistics.
 //******************************************************************************
 
 #include "dspHistory.h"
-#include "dspStatistics.h"
+#include "dspTrialStatistics.h"
 
 namespace Dsp
 {

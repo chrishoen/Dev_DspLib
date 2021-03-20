@@ -12,7 +12,7 @@ Description:
 #include "logFiles.h"
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
+#include "dspTrialStatistics.h"
 
 namespace Dsp
 {
@@ -23,6 +23,7 @@ namespace Dsp
 
 TrialStatistics::TrialStatistics()
 {
+   mMaxMaxX = -1E9;
    startTrial();
 }
 
@@ -47,6 +48,7 @@ void TrialStatistics::startTrial(double aXLimit)
    mTimeExtX = 0.0;
    mSX = 0.0;
    mRms = 0.0;
+   mRange = 0.0;
 
    mOLMean = 0.0;
    mOLM2 = 0.0;
@@ -76,7 +78,7 @@ void TrialStatistics::drop()
 //******************************************************************************
 //******************************************************************************
 // Put input value with the time that it occured and calculate
-// intermediate variables
+// intermediate variables.
 
 void TrialStatistics::put(double aX,double aTime)
 {
@@ -97,9 +99,9 @@ void TrialStatistics::put(double aX,double aTime)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Update min and max
+   // Update min and max.
 
-   // If first then set to current input  
+   // If first then set to current input.
    if (mCount==1)
    {
       mMinX = mX;
@@ -111,7 +113,7 @@ void TrialStatistics::put(double aX,double aTime)
       mExtX = mX;
       mTimeExtX = aTime;
    }
-   // Else, calculate min and max
+   // Else, calculate min and max.
    else
    {
       if (mX < mMinX)
@@ -126,6 +128,8 @@ void TrialStatistics::put(double aX,double aTime)
          mTimeMaxX = aTime;
       }
 
+      if (mX > mMaxMaxX) mMaxMaxX = mX;
+
       if (fabs(mX) > fabs(mExtX))
       {
          mExtX = mX;
@@ -136,7 +140,7 @@ void TrialStatistics::put(double aX,double aTime)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Calculate sums for the online algorithm
+   // Calculate sums for the online algorithm.
 
    mOLDelta =  mX - mOLMean;
    mOLMean  += mOLDelta/mCount;
@@ -152,12 +156,12 @@ void TrialStatistics::put(double aX,double aTime)
 
 void TrialStatistics::finishTrial()
 {
-   // Calculate results for mean and standard deviation
+   // Calculate results for mean and standard deviation.
 
-   // Expectation (mean) of X
+   // Expectation (mean) of X.
    mEX = mOLMean;
 
-   // Variance of X
+   // Variance of X.
    if (mCount < 2)
    {
       mVariance = 0.0;
@@ -167,7 +171,7 @@ void TrialStatistics::finishTrial()
       mVariance = mOLM2/(mCount);
    }
 
-   // Uncertainty (stddev) of X
+   // Uncertainty (stddev) of X.
    if (mVariance > 0.0f)
    {
       mUX = sqrt(mVariance);
@@ -177,20 +181,24 @@ void TrialStatistics::finishTrial()
       mUX = 0.0f;
    }
 
-   // Store
+   // Store.
    mMean   = mEX;
    mStdDev = mUX;
 
    mXMean = mXSum/mCount;
 
-   // More
+   // More.
    mSX = mEX - mExtX;
 
-   // More
+   // More.
    if (mCount > 0)
    {
       mRms = sqrt(mXsqSum/mCount);
    }
+
+   // More.
+   mRange = mMaxX - mMinX;
+
 }
 
 //******************************************************************************

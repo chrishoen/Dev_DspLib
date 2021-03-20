@@ -12,7 +12,7 @@ Description:
 #include "logFiles.h"
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
+#include "dspTrialStatistics.h"
 
 namespace Dsp
 {

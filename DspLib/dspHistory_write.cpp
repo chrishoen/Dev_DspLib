@@ -12,7 +12,6 @@ Description:
 #include "my_functions.h"
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
 #include "dspHistoryGaussNoise.h"
 #include "dspHistory.h"
 

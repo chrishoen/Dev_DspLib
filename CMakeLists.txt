@@ -11,6 +11,7 @@ my_init_global_import_variables()
 
 add_subdirectory ("DspLib")
 add_subdirectory ("CalTableTest")
+add_subdirectory ("Statistics")
 return()
 
 add_subdirectory ("DspLib")

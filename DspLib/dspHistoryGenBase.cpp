@@ -9,7 +9,7 @@ Description:
 #include "stdafx.h"
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
+#include "dspTrialStatistics.h"
 #include "dspHistoryGaussNoise.h"
 #include "dspHistoryGenBase.h"
 

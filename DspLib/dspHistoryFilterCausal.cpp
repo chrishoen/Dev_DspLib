@@ -9,7 +9,6 @@ Description:
 #include "stdafx.h"
 
 #include "dsp_math.h"
-#include "dspStatistics.h"
 #include "dspHistoryFilterCausal.h"
 
 namespace Dsp
