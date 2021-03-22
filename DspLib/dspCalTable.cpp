@@ -41,42 +41,21 @@ bool comparePairs(std::pair<double,double> p1, std::pair<double, double> p2)
    return (p1.first < p2.first);
 } 
 
-void CalTable::initialize(const char* aFilePath)
+void CalTable::initialize(const std::vector<std::pair<double, double>>& aTableData)
 {
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Read from the json file into a table vector.
+   // Copy the input table vector into the atable and validate the table.
 
    mValidFlag = false;
 
    try
    {
-      // Read from the json file into a root json value.
-      Json::Value tRoot;
-      Ris::doReadJsonFromFile(tRoot, aFilePath);
+      // Copy the input table vector.
+      mTable = aTableData;
 
-      //std::cout << tRoot << std::endl;
-
-      // Extract the table json value from the root json value.
-      Json::Value tTable = tRoot["Table"];
-      //std::cout << tTable << std::endl;
-
-      // Extract the table vector from the table json value.
-      mTable.clear();
-      for (unsigned i = 0; i < tTable.size(); i++)
-      {
-         std::pair<double, double> tPair;
-         tPair.first = tTable[i]["X"].asDouble();
-         tPair.second = tTable[i]["Y"].asDouble();
-         mTable.push_back(tPair);
-      }
-
-      //************************************************************************
-      //************************************************************************
-      //************************************************************************
       // Sort the table vector so that it is always monotonicaly increasing.
-
       std::sort(mTable.begin(), mTable.end(), comparePairs);
 
       //************************************************************************
@@ -118,13 +97,13 @@ void CalTable::initialize(const char* aFilePath)
 // Helpers.
 
 // Show.
-void CalTable::show()
+void CalTable::show(int aPF)
 {
    for (int i = 0; i < mTable.size(); i++)
    {
-      Prn::print(0, "%2d %.2f %.2f", i, mTable[i].first, mTable[i].second);
+      Prn::print(aPF, "%2d %.2f %.2f", i, mTable[i].first, mTable[i].second);
    }
-   Prn::print(0, "");
+   Prn::print(aPF, "");
 }
 
 //******************************************************************************

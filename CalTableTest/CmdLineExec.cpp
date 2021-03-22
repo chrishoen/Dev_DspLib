@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string>
 
-#include "dspCalTable.h"
+#include "MyCalTable.h"
 
 #include "CmdLineExec.h"
 
@@ -51,17 +51,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Dsp::CalTable tCalTable;
-   const char* tFilePath = "c:\\aaa_prime\\CalTable\\TestCalTable.json";
-   if (Ris::portableIsWindows())
-   {
-      tCalTable.initialize("c:\\aaa_prime\\CalTable\\TestCalTable.json");
-   }
-   else
-   {
-      tCalTable.initialize("/opt/files/hlccal.json");
-   }
-
+   MyCalTable tCalTable;
+   tCalTable.initialize();
 
    if (aCmd->numArg() == 0)
    {
