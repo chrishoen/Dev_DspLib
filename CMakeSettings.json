@@ -1,32 +1,18 @@
 ﻿{
-  "configurations": [
-    {
-      "name": "Dev_DspLib",
-      "generator": "Unix Makefiles",
-      "remoteMachineName": "${defaultRemoteMachineName}",
-      "configurationType": "Release",
-      "remoteCMakeListsRoot": "/var/tmp/${name}/src",
-      "cmakeExecutable": "/usr/bin/cmake",
-      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\build",
-      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\install",
-      "remoteBuildRoot": "/var/tmp/${name}/build",
-      "remoteInstallRoot": "/var/tmp/install",
-      "remoteCopySources": true,
-      "remoteCopySourcesOutputVerbosity": "Normal",
-      "remoteCopySourcesConcurrentCopies": "10",
-      "remoteCopySourcesMethod": "rsync",
-      "remoteCopySourcesExclusionList": [
-        ".vs",
-        ".git"
-      ],
-      "rsyncCommandArgs": "-t --delete --delete-excluded",
-      "remoteCopyBuildOutput": false,
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-j8",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [
-        "linux_arm"
-      ]
-    }
-  ]
+   "configurations": [
+      {
+         "name": "Dev_DspLib",
+         "inheritEnvironments": [ "linux_arm" ],
+         "environments": [ { "INCLUDE": "c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8\\backward;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include-fixed;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\arm-linux-gnueabihf\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include\\arm-linux-gnueabihf;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include;C:\\MyTools\\Eigen;" } ],
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}",
+         "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}\\install",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "-v -j8",
+         "ctestCommandArgs": "",
+         "cmakeToolchain": "MyBeagleToolchain.cmake",
+         "variables": []
+      }
+   ]
 }
