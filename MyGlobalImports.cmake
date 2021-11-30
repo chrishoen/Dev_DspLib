@@ -35,6 +35,8 @@ function(my_lib_import_RisLib _target)
       add_library(RisLib SHARED IMPORTED)
       set_target_properties(RisLib PROPERTIES IMPORTED_LOCATION ${MyRisLibImportPath})
       target_link_libraries(${_target} RisLib)
+      target_link_libraries(${_target} pthread)
+      target_link_libraries(${_target} rt)
    endif()
 
 endfunction()

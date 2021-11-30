@@ -11,6 +11,6 @@
 
 #include "dsp_math.h"
 #include "dsp_functions.h"
-#include "dspStatistics.h"
+#include "dspTrialStatistics.h"
 
 
