@@ -28,8 +28,11 @@ add_subdirectory ("ThreeVector")
 return()
 
 add_subdirectory ("DspLib")
+add_subdirectory ("RootFinder")
 return()
 
+add_subdirectory ("DspLib")
+return()
 
 add_subdirectory ("DspLib")
 add_subdirectory ("HistoryTest")

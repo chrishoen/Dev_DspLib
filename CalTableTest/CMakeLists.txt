@@ -18,9 +18,5 @@ if(MSVC)
 elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
    install(TARGETS CalTableTest DESTINATION "/opt/prime/bin")
 else()
-   add_custom_command(
-      TARGET  CalTableTest
-      POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx CalTableTest rsync://debian@devtgt/prime/bin
-      WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_DspLib/CalTableTest)
+   my_post_build_lib(CalTableTest)
 endif()
