@@ -11,6 +11,10 @@ project ("Dev_DspLib")
 my_init_global_import_variables()
 my_init_post_build_variables()
 
+add_subdirectory ("DspLib")
+add_subdirectory ("RootFinder")
+return()
+
 add_subdirectory ("Butterworth")
 add_subdirectory ("CalTableTest")
 add_subdirectory ("DelayTest")
@@ -24,10 +28,6 @@ add_subdirectory ("SlowTest")
 add_subdirectory ("Statistics")
 add_subdirectory ("Test")
 add_subdirectory ("ThreeVector")
-return()
-
-add_subdirectory ("DspLib")
-add_subdirectory ("RootFinder")
 return()
 
 add_subdirectory ("DspLib")
