@@ -38,9 +38,6 @@ endfunction()
 #*******************************************************************************
 
 function(my_add_compile_options _target)
-   message(STATUS "my_add_compile_options************************ " ${_target})
-   #message(STATUS "CMAKE_CXX_FLAGS************************ " ${CMAKE_CXX_FLAGS})
-   #message(STATUS "CMAKE_CXX_FLAGS_RELEASE**************** " ${CMAKE_CXX_FLAGS_RELEASE})
 
    if(MSVC)
       target_compile_options(${_target} PRIVATE "/WX")
@@ -63,7 +60,7 @@ function(my_add_compile_options _target)
 
       target_compile_options(${_target} PRIVATE "/D_MBCS")
    else()
-      target_compile_options(${_target} PRIVATE "-std=c++11")
+      target_compile_options(${_target} PRIVATE "-std=c++17")
       target_compile_options(${_target} PRIVATE "-fexceptions")
       target_compile_options(${_target} PRIVATE "-O3")
       target_compile_options(${_target} PRIVATE "-fthreadsafe-statics")
@@ -80,6 +77,9 @@ function(my_add_compile_options _target)
       target_compile_options(${_target} PRIVATE "-Wno-format")
       target_compile_options(${_target} PRIVATE "-Wno-write-strings")
       target_compile_options(${_target} PRIVATE "-Wno-psabi")
+      target_compile_options(${_target} PRIVATE "-Wno-unused-local-typedefs")
+      target_compile_options(${_target} PRIVATE "-Wno-cast-function-type")
+      target_compile_options(${_target} PRIVATE "-Wno-reorder")
 #     target_compile_options(${_target} PRIVATE "-Wno-pragma-once-outside-header")
 
       target_compile_definitions(${_target} PRIVATE "-DNDEBUG")

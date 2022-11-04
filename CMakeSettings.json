@@ -1,18 +1,129 @@
 ﻿{
    "configurations": [
       {
-         "name": "Dev_DspLib",
-         "inheritEnvironments": [ "linux_arm" ],
-         "environments": [ { "INCLUDE": "c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\c++\\8\\backward;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include;c:\\beagle\\toolchain\\lib\\gcc\\arm-linux-gnueabihf\\8\\include-fixed;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\include\\arm-linux-gnueabihf\\c++\\8;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include\\arm-linux-gnueabihf;c:\\beagle\\toolchain\\arm-linux-gnueabihf\\sysroot\\usr\\include;C:\\MyTools\\Eigen;" } ],
+         "name": "windows",
          "generator": "Ninja",
          "configurationType": "Release",
-         "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}",
-         "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${name}\\install",
+         "buildRoot": "${projectDir}\\out\\build\\${name}",
+         "installRoot": "${projectDir}\\out\\install\\${name}",
          "cmakeCommandArgs": "",
-         "buildCommandArgs": "-v -j8",
+         "buildCommandArgs": "",
          "ctestCommandArgs": "",
-         "cmakeToolchain": "MyBeagleToolchain.cmake",
-         "variables": []
+         "inheritEnvironments": [ "msvc_x64_x64" ],
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "windows",
+               "type": "STRING"
+            }
+         ]
+      },
+      {
+         "name": "beagle",
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${projectDir}\\out\\build\\${name}",
+         "installRoot": "${projectDir}\\out\\install\\${name}",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "",
+         "ctestCommandArgs": "",
+         "inheritEnvironments": [ "linux-arm" ],
+         "intelliSenseMode": "linux-gcc-arm",
+         "cmakeToolchain": "${projectDir}\\MyBeagleToolchain.cmake",
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "beagle",
+               "type": "STRING"
+            }
+         ]
+      },
+      {
+         "name": "cpdev1",
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "cmakeExecutable": "cmake",
+         "remoteCopySourcesExclusionList": [ ".vs", ".git", "out" ],
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "",
+         "ctestCommandArgs": "",
+         "inheritEnvironments": [ "linux_x64" ],
+         "remoteMachineName": "${defaultRemoteMachineName}",
+         "remoteCMakeListsRoot": "$HOME/.vs/${projectDirName}/src",
+         "remoteBuildRoot": "$HOME/.vs/${projectDirName}/out/build/${name}",
+         "remoteInstallRoot": "$HOME/.vs/${projectDirName}/out/build/${name}",
+         "remoteCopySources": true,
+         "rsyncCommandArgs": "-t --delete --delete-excluded",
+         "remoteCopyBuildOutput": false,
+         "remoteCopySourcesMethod": "rsync",
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "cpdev1",
+               "type": "STRING"
+            }
+         ]
+      },
+      {
+         "name": "wsl",
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${projectDir}\\out\\build\\${name}",
+         "installRoot": "${projectDir}\\out\\install\\${name}",
+         "cmakeExecutable": "cmake",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "",
+         "ctestCommandArgs": "",
+         "inheritEnvironments": [ "linux_x64" ],
+         "wslPath": "${defaultWSLPath}",
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "wsl",
+               "type": "STRING"
+            }
+         ]
+      },
+      {
+         "name": "wsl-cpdev1",
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${projectDir}\\out\\build\\${name}",
+         "installRoot": "${projectDir}\\out\\install\\${name}",
+         "cmakeExecutable": "cmake",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "",
+         "ctestCommandArgs": "",
+         "inheritEnvironments": [ "linux_x64" ],
+         "wslPath": "${defaultWSLPath}",
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "wsl-cpdev1",
+               "type": "STRING"
+            }
+         ]
+      },
+      {
+         "name": "steno-arm",
+         "generator": "Ninja",
+         "configurationType": "Release",
+         "buildRoot": "${projectDir}\\out\\build\\${name}",
+         "installRoot": "${projectDir}\\out\\install\\${name}",
+         "cmakeExecutable": "cmake",
+         "cmakeCommandArgs": "",
+         "buildCommandArgs": "",
+         "ctestCommandArgs": "",
+         "inheritEnvironments": [ "linux_arm" ],
+         "wslPath": "${defaultWSLPath}",
+         "cmakeToolchain": "${projectDir}\\imx8mm-toolchain.cmake",
+         "variables": [
+            {
+               "name": "MYMODE",
+               "value": "steno-arm",
+               "type": "STRING"
+            }
+         ]
       }
    ]
 }

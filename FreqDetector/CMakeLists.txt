@@ -1,13 +1,14 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
-project (FreqDetector CXX)
-my_find_src_files (src_files FreqDetector)
-add_executable (FreqDetector ${src_files})
-my_add_compile_options (FreqDetector)
-my_add_pch (FreqDetector)
+project (SlowTest CXX)
+my_find_src_files (src_files SlowTest)
+add_executable (SlowTest ${src_files})
+my_add_compile_options (SlowTest)
+my_add_pch (SlowTest)
 
-my_inc_import_DspLib(FreqDetector)
-my_inc_import_RisLib(FreqDetector)
+my_inc_import_DspLib(SlowTest)
+my_inc_import_RisLib(SlowTest)
 
-my_lib_import_DspLib(FreqDetector)
-my_lib_import_RisLib(FreqDetector)
+my_lib_import_DspLib(SlowTest)
+my_lib_import_RisLib(SlowTest)
+
