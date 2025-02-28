@@ -6,6 +6,7 @@
 
 #include "risCmdLineFile.h"
 #include "risPortableCalls.h"
+#include "dspPaths.h"
 
 #define  _PARMS_CPP_
 #include "Parms.h"
@@ -20,13 +21,13 @@
 
 Parms::Parms()
 {
-   reset();
 }
 
 void Parms::reset()
 {
    BaseClass::reset();
-   BaseClass::setFileName_RelAlphaFiles("DspLib/History_Parms.txt");
+// BaseClass::setFileName_RelAlphaFiles("DspLib/History_Parms.txt");
+   BaseClass::setFilePath(Dsp::get_files_filepath("History_Parms.txt"));
 
    mCode1 = 0;
    mCode2 = 0;

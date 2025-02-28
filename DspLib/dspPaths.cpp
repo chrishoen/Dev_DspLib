@@ -68,7 +68,7 @@ void guard_paths_init()
 {
    if (!rPathsInitFlag)
    {
-      printf("Cmn::Paths NOT INITIALIZED exiting program\n");
+      printf("Dsp::Paths NOT INITIALIZED exiting program\n");
       exit(-1);
    }
 }
