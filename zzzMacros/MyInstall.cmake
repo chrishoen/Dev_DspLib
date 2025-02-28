@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.10)
 
 if (MSVC)
-   install(TARGETS ${project} DESTINATION "C:/aaa_prime/RisLib")
+   install(TARGETS ${project} DESTINATION "C:/aaa_prime/bin")
 elseif (MYMODE STREQUAL "prime-beagle-win")
    install(CODE "execute_process(COMMAND_ECHO STDOUT
       COMMAND c:/windows/system32/openssh/scp ${CMAKE_CURRENT_BINARY_DIR}/${project} debian@bbx:/opt/prime/bin)")

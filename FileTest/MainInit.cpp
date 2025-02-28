@@ -1,46 +1,65 @@
 #include "stdafx.h"
 
+#include "risThreadsProcess.h"
+#include "risBaseDir.h"
+#include "dspPaths.h"
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize.
+// Initialize program resources.
 
 void main_initialize(int argc,char** argv)
 {
+   printf("FileTest Program****************************************BEGIN\n");
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Program.
+
+   // Enter process.
+   Ris::Threads::enterProcessHigh();
+
+   // Set the program current working directory and the base 
+   // directory to the program bin directory.
+   Ris::chdirBaseDirectoryToBin();
+
+   // Initialize file paths.
+   Dsp::initialize_paths();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Initialize print facility.
+
+   // Initialize print.
    Prn::resetPrint();
    Prn::initializePrint();
 
    // Initialize print filters.
-   Prn::setFilter(Prn::ThreadRun1,  true);
-   Prn::setFilter(Prn::ThreadRun2,  false);
-   Prn::setFilter(Prn::ThreadRun3,  true);
-   Prn::setFilter(Prn::ThreadRun4,  true);
-
-   Prn::setFilter(Prn::ProcRun1,    true);
-   Prn::setFilter(Prn::ProcRun2,    true);
-   Prn::setFilter(Prn::ProcRun3,    false);
-   Prn::setFilter(Prn::ProcRun4,    true);
-
-   Prn::setFilter(Prn::ViewRun1,    true, 1);
-   Prn::setFilter(Prn::ViewRun2,    true, 1);
-   Prn::setFilter(Prn::ViewRun3,    false,1);
-   Prn::setFilter(Prn::ViewRun4,    true, 1);
-
-   Prn::print(0,"FileTest*******************************************BEGIN");
+   Prn::setFilter(Prn::Show1, true);
+   Prn::setFilter(Prn::Show2, false);
+   Prn::setFilter(Prn::Show3, false);
+   Prn::setFilter(Prn::Show4, false);
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Finalize.
+// Finalize program resources.
 
 void main_finalize()
 {
-   Prn::print(0,"FileTest*******************************************END");
-
-   // Close print.
+   // Finalize print facility.
    Prn::finalizePrint();
+
+   // Exit process.
+   Ris::Threads::exitProcess();
+
+   // Done.
+   printf("\n");
+   printf("FileTest Program****************************************END\n");
 }
 
 //******************************************************************************

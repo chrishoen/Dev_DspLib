@@ -14,6 +14,14 @@ project ("Dev_DspLib")
 my_append_compile_flags()
 my_show_cmake_vars()
 
+
+add_subdirectory ("DspLib")
+add_subdirectory ("FileTest")
+return()
+
+add_subdirectory ("DspLib")
+return()
+
 add_subdirectory ("Butterworth")
 add_subdirectory ("CalTableTest")
 add_subdirectory ("DelayTest")

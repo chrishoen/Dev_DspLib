@@ -10,7 +10,8 @@
 #include <stdarg.h>
 #include <ctype.h>
 
-#include "risAlphaDir.h"
+#include "risPortableCalls.h"
+#include "dspPaths.h"
 
 #include "dspTextFile.h"
 
@@ -36,7 +37,7 @@ LogFileWriter::LogFileWriter()
 //******************************************************************************
 // Open the file
 
-bool LogFileWriter::open(char* aFileName)
+bool LogFileWriter::open(const char* aFileName)
 {
    if (mFile)
    {
@@ -44,8 +45,7 @@ bool LogFileWriter::open(char* aFileName)
       mFile = 0;
    }
 
-   char tBuf[400];
-   mFile = fopen(Ris::getAlphaFilePath_Data(tBuf, aFileName), "w");
+   mFile = fopen(get_log_filepath(aFileName)->c_str(), "w");
 
    if (mFile==0)
    {
@@ -61,7 +61,7 @@ bool LogFileWriter::open(char* aFileName)
 //******************************************************************************
 // Open the file
 
-bool LogFileWriter::openWithPath(char* aFilePath)
+bool LogFileWriter::openWithPath(const char* aFilePath)
 {
    if (mFile)
    {
@@ -152,8 +152,7 @@ bool CsvFileWriter::open(char* aFileName)
       mFile = 0;
    }
 
-   char tBuf[400];
-   mFile = fopen(Ris::getAlphaFilePath_Data(tBuf, aFileName), "w");
+   mFile = fopen(get_log_filepath(aFileName)->c_str(), "w");
 
    if (mFile==0)
    {
@@ -351,8 +350,7 @@ bool CsvFileReader::open(char* aFileName)
    strcpy(mDelimiters," ,\t");
    mRowIndex=0;
    
-   char tBuf[400];
-   mFile = fopen(Ris::getAlphaFilePath_Data(tBuf, aFileName), "w");
+   mFile = fopen(get_log_filepath(aFileName)->c_str(), "r");
 
    if (mFile==0)
    {
