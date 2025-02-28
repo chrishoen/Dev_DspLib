@@ -1,0 +1,184 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base-defaults",
+      "description": "Base defaults - build type.",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "base-win",
+      "description": "Windows host with the Visual Studio development environment.",
+      "hidden": true,
+      "inherits": "base-defaults",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "prime-windows",
+      "displayName": "prime-windows",
+      "description": "Target Windows, install to c:/aaa_prime/RisLib.",
+      "inherits": "base-win",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-windows"
+        }
+      }
+    },
+    {
+      "name": "prime-beagle-win",
+      "displayName": "prime-beagle-win",
+      "description": "Target debian arm7 for beaglebone, install to /opt/prime",
+      "inherits": "base-win",
+      "toolchainFile": "${sourceDir}\\toolchain-beagle-win.cmake",
+      "cacheVariables": {
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-beagle-win"
+        }
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      }
+    },
+    {
+      "name": "prime-rpi-win",
+      "displayName": "prime-rpi-win",
+      "description": "Target the raspberrypi4, install to /opt/prime",
+      "inherits": "base-win",
+      "toolchainFile": "${sourceDir}\\toolchain-rpi-win.cmake",
+      "cacheVariables": {
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-rpi-win"
+        }
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      }
+    },
+    {
+      "name": "prime-writer-win",
+      "displayName": "prime-writer-win",
+      "description": "Target the varisite dev kit, install to writer:/opt/prime",
+      "inherits": "base-win",
+      "toolchainFile": "${sourceDir}\\toolchain-mx93-win.cmake",
+      "cacheVariables": {
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-writer-win"
+        }
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      }
+    },
+    {
+      "name": "prime-ubu",
+      "displayName": "prime-ubu",
+      "description": "Target ubuntu, with gcc, install to wsl:/opt/prime.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-ubu"
+        }
+
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+        }
+      }
+    },
+    {
+      "name": "prime-rpi-ubu",
+      "displayName": "prime-rpi-ubu",
+      "description": "Target the raspberrypi4, install to rpx1:/opt/prime.",
+      "generator": "Ninja",
+      "toolchainFile": "${sourceDir}\\toolchain-rpi-ubu.cmake",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-rpi-ubu"
+        }
+
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+        }
+      }
+    },
+    {
+      "name": "prime-writer-ubu",
+      "displayName": "prime-writer-ubu",
+      "description": "Target the varisite mx93, install to writer:/opt/prime.",
+      "generator": "Ninja",
+      "toolchainFile": "${sourceDir}\\toolchain-mx93-ubu.cmake",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "MYMODE": {
+          "type": "STRING",
+          "value": "prime-writer-ubu"
+        }
+
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+        }
+      }
+    }
+  ]
+}
