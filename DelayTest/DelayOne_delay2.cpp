@@ -10,7 +10,7 @@ Description:
 
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
-#include "dspHistoryTextFile.h"
+#include "dspHistoryCsvFileWriter.h"
 #include "dspHistoryGenerator.h"
 #include "dspHistoryFilterOperator.h"
 #include "dspHistoryDelayEstimator.h"

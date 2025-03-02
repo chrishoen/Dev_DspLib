@@ -10,7 +10,7 @@ Description:
 
 #include "dsp_math.h"
 #include "dsp_functions.h"
-#include "dspHistoryTextFile.h"
+#include "dspHistoryCsvFileWriter.h"
 
 namespace Dsp
 {
