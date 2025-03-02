@@ -154,6 +154,7 @@ public:
 
    // Read from the file.
    bool readRow ();
+   bool readRow22 ();
 
    // Access column values from the last row that was read.
    double& e(int aCol);

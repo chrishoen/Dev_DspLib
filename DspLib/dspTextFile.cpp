@@ -379,7 +379,7 @@ void CsvFileReader::close()
 //******************************************************************************
 // Read from the file.
 
-bool CsvFileReader::readRow()
+bool CsvFileReader::readRow22()
 {            
    mCols=0;
    // Read the row
@@ -404,6 +404,40 @@ bool CsvFileReader::readRow()
       e(mCols++) = atof(tPtr);
    }
 
+   return true;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Read from the file.
+
+bool CsvFileReader::readRow()
+{            
+   mCols=0;
+   // Read the row
+   if (fgets(mString, cMaxStringSize, mFile) == NULL)
+   {
+      return false;
+   }
+
+   // Trim the end of the string
+   trimString(mString);
+
+   // Extract row index for the row
+   char* tPtr = strtok (mString,mDelimiters);
+   if (tPtr==NULL) return false;
+   e(mCols++) = atof(tPtr);
+
+   // Extract column values for the row
+   while (tPtr != NULL)
+   {
+      tPtr = strtok (NULL,mDelimiters);
+      if (tPtr==NULL) break;;
+      e(mCols++) = atof(tPtr);
+   }
+
+   mRowIndex++;
    return true;
 }
 
