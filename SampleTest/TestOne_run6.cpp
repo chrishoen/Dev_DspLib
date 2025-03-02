@@ -10,7 +10,7 @@ Description:
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
 #include "dspHistoryCsvFileWriter.h"
-#include "dspHistoryGenerator.h"
+#include "dspHistoryCsvFileReader.h"
 #include "dspHistoryFilterOperator.h"
 
 #include "Parms.h"
@@ -35,11 +35,13 @@ void TestOne::doRun6()
    // Signal history.
    History tHistoryX;
 
-   // Signal history generator.
-   HistoryGenerator tGen(gParms.mHistoryGenParms);
+   // Signal history reader.
+   HistoryCsvFileReader tReader;
+   tReader.openFromFilepath(gParms.mInputFile);
 
    // Generate the history.
-   tGen.generateHistory(tHistoryX);
+   tReader.readHistory(0.002, 2, tHistoryX);
+
 
    //***************************************************************************
    //***************************************************************************
