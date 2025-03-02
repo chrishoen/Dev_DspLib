@@ -26,12 +26,25 @@ public:
    //***************************************************************************
    // Methods.
 
+   // Read history from a csv file column, auto generate the time.
+   void readHistory(
+      double aDT,
+      int aSampleColIndex,
+      History& aHistory);
+
+   // Read history from a csv file time column and a sample column.
+   void readHistory2(
+      int aTimeColIndex,
+      int aSampleColIndex,
+      History& aHistory);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Helpers.
+
    // Read a csv file to get the number of rows in the file.
    int getNumRows();
-
-      // Read history from a csv file.
-   void readHistory(
-      History& aHistory);
 };
 
 //******************************************************************************
