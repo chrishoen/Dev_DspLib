@@ -146,8 +146,9 @@ public:
    // Constructor.
    CsvFileReader();
 
-   // Open the text file for read/
+   // Open the text file for read.
    bool open (char* aFilename);
+   bool openFromFilepath (char* aFilepath);
 
    // Close the text file.
    void close ();

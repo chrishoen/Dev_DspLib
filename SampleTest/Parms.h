@@ -61,6 +61,7 @@ public:
    // Members that are read from the parms file.
 
    static const int cMaxStringSize=400;
+   char mInputFile  [cMaxStringSize];
    char mOutputFile  [cMaxStringSize];
    char mOutputFile2 [cMaxStringSize];
    char mOutputFile3 [cMaxStringSize];

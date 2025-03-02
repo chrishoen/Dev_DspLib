@@ -27,7 +27,7 @@ void Parms::reset()
 {
    BaseClass::reset();
 // BaseClass::setFileName_RelAlphaFiles("DspLib/History_Parms.txt");
-   BaseClass::setFilePath(Dsp::get_files_filepath("History_Parms.txt"));
+   BaseClass::setFilePath(Dsp::get_files_filepath("SampleHistory_Parms.txt"));
 
    mCode1 = 0;
    mCode2 = 0;
@@ -36,6 +36,7 @@ void Parms::reset()
    mHistoryFilterParms1.reset();
    mHistoryFilterParms2.reset();
 
+   mInputFile[0]=0;
    mOutputFile[0]=0;
    mOutputFile2[0]=0;
    mOutputFile3[0]=0;
@@ -61,6 +62,7 @@ void Parms::show()
    printf("Code1              %10d\n",mCode1);
    printf("Code2              %10d\n",mCode2);
 
+   printf("InputFile          %10s\n",  mInputFile);
    printf("OutputFile         %10s\n",  mOutputFile);
    if (mOutputFile2[0] != 0)
    {
@@ -103,6 +105,8 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
    if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
+
+   if(aCmd->isCmd("InputFile"  )) aCmd->copyArgString(1,mInputFile,cMaxStringSize);
 
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
    if(aCmd->isCmd("OutputFile2" )) aCmd->copyArgString(1,mOutputFile2,cMaxStringSize);
