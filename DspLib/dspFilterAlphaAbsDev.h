@@ -22,13 +22,16 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This filter characterizes an input signal by calculating expectations and
-// uncertainties of the signal. It does this with a set of alpha filters.
-// The expectation and uncertainty calculated are mean and mean absolute
-// deviation.
+// This nonlinear filter characterizes an input signal by calculating
+// expectations and uncertainties of the signal. It does this with a set of
+// alpha filters. The expectation and uncertainty calculated are mean and 
+// mean absolute deviation.
 //
-// mean E[X] 
-// mean absolute deviation E[|X - E[X]|] is E[|X - mean|]
+// Expectation (mean) of X is E[X]
+// Uncertainty (absolute deviation) is E[|X - E[X]|] is E[|X - mean|]
+//
+// where |X| is fabs(X)
+//
 
 class AlphaAbsDev
 {
