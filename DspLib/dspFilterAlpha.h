@@ -50,11 +50,11 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Initialize with lambda (tracking index).
+   // Initialize from lambda (tracking index).
    void initialize (double aLambda); 
-   // Initialize with alpha.
+   // Initialize from alpha.
    void initializeFromAlpha (double aP1); 
-   // Initialize with lambda (tracking index).
+   // Initialize from lambda (tracking index).
    void initializeFromLambda (double aLambda); 
    // Initialize from step response time and threshold.
    void initializeFromStep(double aTs, double aStepTime, double aStepThresh);

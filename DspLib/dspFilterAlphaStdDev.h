@@ -20,11 +20,19 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // This filter characterizes an input signal by calculating expectations and
 // uncertainties of the signal. It does this with a set of alpha filters.
 // The expectation and uncertainty calculated are mean and standard deviation.
+//
+// Expectation (mean) of X is E[X]
+// Variance of X is E[X^2] - E[X]^2
+// Standard deviation is sqrt(Variance)
+//
 
-class StdDevAlpha
+class AlphaStdDev
 {
 public:
    //***************************************************************************
@@ -53,7 +61,7 @@ public:
    // Methods.
 
    // Constructor.
-   StdDevAlpha();
+   AlphaStdDev();
    void resetVars();
 
    // Initialize with lambda (tracking index).
@@ -67,7 +75,7 @@ public:
    // Set the first flag true.
    void setFirst(); 
 
-   // Put input value to calculate output variable results.
+   // Put input value to calculate results in the output variables.
    void put(double aX);
 
    // Helpers.

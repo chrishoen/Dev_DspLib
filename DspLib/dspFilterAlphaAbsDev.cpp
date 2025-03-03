@@ -8,7 +8,7 @@ Description:
 
 #include "stdafx.h"
 
-#include "dspFilterDevAlpha.h"
+#include "dspFilterAlphaAbsDev.h"
 
 namespace Dsp
 {
@@ -18,91 +18,79 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 
-StdDevAlpha::StdDevAlpha()
+AlphaAbsDev::AlphaAbsDev()
 {
    resetVars();
 }
 
-void StdDevAlpha::resetVars()
+void AlphaAbsDev::resetVars()
 {
    mX = 0.0;
    mEX = 0.0;
    mUX = 0.0;
-   mVariance = 0.0;
    mMean   = 0.0;
-   mStdDev = 0.0;
+   mAbsDev = 0.0;
    mK = 0;
 }
 
 // Initialize from alpha.
-void StdDevAlpha::initializeFromAlpha (double aAlpha)
+void AlphaAbsDev::initializeFromAlpha (double aAlpha)
 {
-   mXAlpha.initializeFromAlpha(aAlpha);
-   mXSquareAlpha.initializeFromAlpha(aAlpha);
+   mAlphaX.initializeFromAlpha(aAlpha);
+   mAlphaAbsDev.initializeFromAlpha(aAlpha);
    resetVars();
 }
 
 // Initialize from lambda (tracking index).
-void StdDevAlpha::initializeFromLambda (double aLambda)
+void AlphaAbsDev::initializeFromLambda (double aLambda)
 {
-   mXAlpha.initializeFromLambda(aLambda);
-   mXSquareAlpha.initializeFromLambda(aLambda);
+   mAlphaX.initializeFromLambda(aLambda);
+   mAlphaAbsDev.initializeFromLambda(aLambda);
    resetVars();
 
 }
 
 // Initialize from step response time and threshold.
-void StdDevAlpha::initializeFromStep(double aTs, double aStepTime, double aStepThresh)
+void AlphaAbsDev::initializeFromStep(double aTs, double aStepTime, double aStepThresh)
 {
-   mXAlpha.initializeFromStep(aTs, aStepTime, aStepThresh);
-   mXSquareAlpha.initializeFromStep(aTs, aStepTime, aStepThresh);
+   mAlphaX.initializeFromStep(aTs, aStepTime, aStepThresh);
+   mAlphaAbsDev.initializeFromStep(aTs, aStepTime, aStepThresh);
    resetVars();
 
 }
 // Set the first flag true.
-void StdDevAlpha::setFirst()
+void AlphaAbsDev::setFirst()
 {
-   mXAlpha.setFirst();
-   mXSquareAlpha.setFirst();
+   mAlphaX.setFirst();
+   mAlphaAbsDev.setFirst();
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Put input value to calculate results in the output variables.
 
-void StdDevAlpha::put(double aX)
+void AlphaAbsDev::put(double aX)
 {
-   // These give moving averages (moving expectatons) of X and X squared.
-   // E[X] and E[X^2].
-   mXAlpha.put(aX);
-   mXSquareAlpha.put(aX*aX);
+   // These give moving averages (moving expectatons) of X and X the
+   // absolute deviation of X 
+   // E[X] and E[|X - E[X]|].
+   mAlphaX.put(aX);
+   mAlphaAbsDev.put(fabs(aX - mAlphaX.mXX));
 
    // X
    mX = aX;
 
    // Expectation (mean) of X is E[X]
-   mEX = mXAlpha.mXX;
+   mEX = mAlphaX.mXX;
 
-   // Variance of X is E[X^2] - E[X]^2
-   mVariance = mXSquareAlpha.mXX - mEX*mEX;
-
-   // Uncertainty (stddev) of X
-   if (mVariance > 0.0f)
-   {
-      mUX = sqrt(mVariance);
-   }
-   else
-   {
-      mUX = 0.0f;
-   }
+   // Absolute deviation of X is E[|X - E[X]|]
+   mUX = mAlphaAbsDev.mXX;
 
    // Nicknames
    mMean   = mEX;
-   mStdDev = mUX;
+   mAbsDev = mUX;
 
    // Update
    mK++;
@@ -112,7 +100,7 @@ void StdDevAlpha::put(double aX)
 //******************************************************************************
 //******************************************************************************
 
-void StdDevAlpha::show()
+void AlphaAbsDev::show()
 {
    printf("%3d %8.3f %8.3f %8.3f\n",
       mK,
