@@ -77,11 +77,15 @@ public:
    static const int cCausalAlphaOne        = 2;
    static const int cCausalAlphaTwo        = 3;
    static const int cCausalAlphaThree      = 4;
+   static const int cCausalAlphaStdDev     = 5;
+   static const int cCausalAlphaAbsDev     = 6;
 
    // Alpha filter states.
    static const int cAlphaSelectXX         = 1;
    static const int cAlphaSelectXV         = 2;
    static const int cAlphaSelectXA         = 3;
+   static const int cAlphaSelectEX         = 4;
+   static const int cAlphaSelectUX         = 5;
 
    //***************************************************************************
    //***************************************************************************

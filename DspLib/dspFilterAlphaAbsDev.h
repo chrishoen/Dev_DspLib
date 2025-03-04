@@ -64,8 +64,6 @@ public:
    AlphaAbsDev();
    void resetVars();
 
-   // Initialize with lambda (tracking index).
-   void initialize (double aLambda); 
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
    // Initialize with lambda (tracking index).

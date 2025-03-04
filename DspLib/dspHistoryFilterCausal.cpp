@@ -66,7 +66,7 @@ void HistoryFilterCausal::initializeCausalFilter()
       }
       else if (mParms.mAlphaLambda > 0)
       {
-         mAlphaOne.initialize(
+         mAlphaOne.initializeFromLambda(
             mParms.mAlphaLambda);
       }
    }
@@ -83,6 +83,38 @@ void HistoryFilterCausal::initializeCausalFilter()
       mAlphaThree.initialize(
          mParms.mAlphaLambda,
          mParms.mAlphaDT);
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaStdDev:
+   {
+      if (mParms.mAlphaStepTime > 0)
+      {
+         mAlphaStdDev.initializeFromStep(
+            1/mParms.mFs,
+            mParms.mAlphaStepTime,
+            mParms.mAlphaStepThresh);
+      }
+      else if (mParms.mAlphaLambda > 0)
+      {
+         mAlphaStdDev.initializeFromLambda(
+            mParms.mAlphaLambda);
+      }
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaAbsDev:
+   {
+      if (mParms.mAlphaStepTime > 0)
+      {
+         mAlphaAbsDev.initializeFromStep(
+            1/mParms.mFs,
+            mParms.mAlphaStepTime,
+            mParms.mAlphaStepThresh);
+      }
+      else if (mParms.mAlphaLambda > 0)
+      {
+         mAlphaAbsDev.initializeFromLambda(
+            mParms.mAlphaLambda);
+      }
    }
    break;
    }
@@ -150,6 +182,44 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
       }
    }
    break;
+   case HistoryFilterParms::cCausalAlphaStdDev:
+   {
+      *aOutput = 0.0;
+      mAlphaStdDev.put(aInput);
+      switch (mParms.mAlphaSelect)
+      {
+      case HistoryFilterParms::cAlphaSelectEX:
+      {
+         *aOutput = mAlphaStdDev.mEX;
+      }
+      break;
+      case HistoryFilterParms::cAlphaSelectUX:
+      {
+         *aOutput = mAlphaStdDev.mUX;
+      }
+      break;
+      }
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaAbsDev:
+   {
+      *aOutput = 0.0;
+      mAlphaAbsDev.put(aInput);
+      switch (mParms.mAlphaSelect)
+      {
+      case HistoryFilterParms::cAlphaSelectEX:
+      {
+         *aOutput = mAlphaAbsDev.mEX;
+      }
+      break;
+      case HistoryFilterParms::cAlphaSelectUX:
+      {
+         *aOutput = mAlphaAbsDev.mUX;
+      }
+      break;
+      }
+   }
+   break;
    }
 }
 
@@ -186,6 +256,20 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
       mAlphaThree.put(aInput);
       *aOutput1 = mAlphaThree.mXX;
       *aOutput2 = mAlphaThree.mXV;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaStdDev:
+   {
+      mAlphaStdDev.put(aInput);
+      *aOutput1 = mAlphaStdDev.mEX;
+      *aOutput2 = mAlphaStdDev.mUX;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaAbsDev:
+   {
+      mAlphaAbsDev.put(aInput);
+      *aOutput1 = mAlphaAbsDev.mEX;
+      *aOutput2 = mAlphaAbsDev.mUX;
    }
    break;
    }

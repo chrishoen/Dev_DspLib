@@ -156,6 +156,8 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaOne)))       mCausalType = cCausalAlphaOne;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaTwo)))       mCausalType = cCausalAlphaTwo;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaThree)))     mCausalType = cCausalAlphaThree;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaStdDev)))    mCausalType = cCausalAlphaStdDev;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaAbsDev)))    mCausalType = cCausalAlphaAbsDev;
    }
 
    if (aCmd->isCmd("AlphaSelect"))
@@ -163,6 +165,8 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXX)))       mAlphaSelect = cAlphaSelectXX;
       if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXV)))       mAlphaSelect = cAlphaSelectXV;
       if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectXA)))       mAlphaSelect = cAlphaSelectXA;
+      if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectEX)))       mAlphaSelect = cAlphaSelectEX;
+      if (aCmd->isArgString(1,asStringAlphaSelect(cAlphaSelectUX)))       mAlphaSelect = cAlphaSelectUX;
    }
 
    // Pop back out at the end.
@@ -218,6 +222,8 @@ char* HistoryFilterParms::asStringCausalType(int aX)
    case cCausalAlphaOne         : return "AlphaOne";
    case cCausalAlphaTwo         : return "AlphaTwo";
    case cCausalAlphaThree       : return "AlphaThree";
+   case cCausalAlphaStdDev      : return "AlphaStdDev";
+   case cCausalAlphaAbsDev      : return "AlphaAbsDev";
    default : return "UNKNOWN";
    }
 }
@@ -230,6 +236,8 @@ char* HistoryFilterParms::asStringAlphaSelect(int aX)
    case cAlphaSelectXX           : return "XX";
    case cAlphaSelectXV           : return "XV";
    case cAlphaSelectXA           : return "XA";
+   case cAlphaSelectEX           : return "EX";
+   case cAlphaSelectUX           : return "UX";
    default : return "UNKNOWN";
    }
 }
