@@ -20,9 +20,6 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // This nonlinear filter characterizes an input signal by calculating
 // realtime expectations and uncertainties of the signal. Realtime 
 // expectations are calculated with alpha filters. This is similar to
@@ -51,7 +48,7 @@ public:
    double mMean;       // Expectation (mean)
    double mStdDev;     // Uncertainty (standard deviation)
 
-   // Alpha filters for expectation and uncertainty.
+   // Alpha filters for realtime expectation and uncertainty.
    AlphaOne mXAlpha;        // Alpha filter for input X
    AlphaOne mXSquareAlpha;  // Alpha filter for input X squared
 
