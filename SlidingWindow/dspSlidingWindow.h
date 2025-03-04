@@ -69,15 +69,15 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // This writes an element to the head of the queue.
+   // This writes an element to the head of the array.
 
    bool doPut (T& aValue)
    {
       // Copy the value into the element at the queue put index.
-      mElement[mPutIndex % WinSize] = aValue;
+      mElement[mPutIndex] = aValue;
 
       // Advance the put index.
-      ++mPutIndex;
+      if (++mPutIndex == WinSize) mPutIndex = 0;
 
       // Advance the size.
       if (++mSize > WinSize) mSize = WinSize;
@@ -92,7 +92,8 @@ public:
    //***************************************************************************
    //***************************************************************************
    // This returns a pointer to an element that is relative
-   // to the first gettable element.
+   // to the first gettable element. Index 0 is the most recent.
+   // Index WinSize-1 is the least recent.
 
    T& elementAt(int aIndex)
    {
@@ -117,19 +118,29 @@ public:
 SlidingWindow<int, 4>
 
 PutIndex
-0
-1
-2   put 101  
-3   put 102
-4   put 103
-5   put 104     
-6   put 105   get = 102
-7             get = 103
-8             get = 104
-9             get = 105
-7
-8
+0  0  put 101
+1  1  put 102
+2  2  put 103  
+3  3  put 104
+4  0  put 105
+6  2  put 106    get 0 = 106
+7  3             get 1 = 105
+8  0             get 2 = 104
+9  1             get 3 = 103
+7  2
+8  3
 
 
 
+#endif
+
+#if 0
+void show()
+{
+   printf("PutIndex %d %d\n", mPutIndex, mSize);
+   for (int i=0;i<WinSize;i++)
+   {
+      printf("element %d $ %d\n", i, mElement[i]);
+   }
+}
 #endif

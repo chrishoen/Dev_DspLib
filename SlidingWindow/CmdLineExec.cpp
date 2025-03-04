@@ -22,6 +22,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("Put"    ))  executePut(aCmd);
    if(aCmd->isCmd("Get"    ))  executeGet(aCmd);
+   if(aCmd->isCmd("Show"   ))  executeShow(aCmd);
 
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
    if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
@@ -56,6 +57,15 @@ void CmdLineExec::executeGet(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   int tN = aCmd->argInt(1);
+   Prn::print(0, "MOD %d $ %d", tN, tN % 4);
+}
+
+//******************************************************************************
+
+void CmdLineExec::executeShow(Ris::CmdLineCmd* aCmd)
+{
+   //mWindow.show();
 }
 
 //******************************************************************************
