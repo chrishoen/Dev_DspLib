@@ -16,6 +16,10 @@ my_show_cmake_vars()
 
 
 add_subdirectory ("DspLib")
+add_subdirectory ("SlidingWindow")
+return()
+
+add_subdirectory ("DspLib")
 add_subdirectory ("HistoryTest")
 return()
 
