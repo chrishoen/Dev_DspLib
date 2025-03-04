@@ -24,9 +24,11 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 // This nonlinear filter characterizes an input signal by calculating
-// expectations and uncertainties of the signal. It does this with a set of
-// alpha filters. The expectation and uncertainty calculated are mean and
-// standard deviation.
+// realtime expectations and uncertainties of the signal. Realtime 
+// expectations are calculated with alpha filters. This is similar to
+// using sliding window moving averages. The expectation and uncertainty
+// calculated are: 
+// mean and standard deviation.
 //
 // Expectation (mean) of X is E[X]
 // Variance of X is E[X^2] - E[X]^2
