@@ -18,8 +18,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This template implements an N element memory structure of type T that
-// provides a fixed delay. It can be used for digital filters.
+// This template implements an WinSize element memory structure of type T
+// that provides a sliding window. It can be used for digital filters.
 
 template <class T,int WinSize>
 class SlidingWindow 
@@ -31,8 +31,7 @@ public:
    //***************************************************************************
    // Members.
 
-   // Index of the next element to put to. This increments indefinitely 
-   // with every put operation. 
+   // Index of the next element to put to. [0..WinSize-1]
    int mPutIndex;
 
    // If true then the array is full.
@@ -69,11 +68,12 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // This writes an element to the head of the array.
+   // Write an element to the array at the put index and advance
+   // the put index. Return true if full.
 
    bool doPut (T& aValue)
    {
-      // Copy the value into the element at the queue put index.
+      // Copy the value into the element at the put index.
       mElement[mPutIndex] = aValue;
 
       // Advance the put index.
@@ -91,9 +91,10 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // This returns a pointer to an element that is relative
-   // to the first gettable element. Index 0 is the most recent.
-   // Index WinSize-1 is the least recent.
+   // Return a reference to an element that is relative to the first
+   // gettable element. The first gettable element is the last element
+   // that was put. Index 0 is the most recent. Index WinSize-1 is the
+   // least recent.
 
    T& elementAt(int aIndex)
    {
@@ -134,13 +135,3 @@ PutIndex
 
 #endif
 
-#if 0
-void show()
-{
-   printf("PutIndex %d %d\n", mPutIndex, mSize);
-   for (int i=0;i<WinSize;i++)
-   {
-      printf("element %d $ %d\n", i, mElement[i]);
-   }
-}
-#endif
