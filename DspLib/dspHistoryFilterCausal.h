@@ -15,6 +15,7 @@ Signal history linear operator: the identity operator.
 #include "dspFilterAlphaStdDev.h"
 #include "dspFilterAlphaAbsDev.h"
 
+#include "dspFilterAlphaTwo.h"
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -22,9 +23,6 @@ Signal history linear operator: the identity operator.
 namespace Dsp
 {
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -48,7 +46,8 @@ public:
    // Members.
 
    Dsp::Filter::ButterworthLP mButterworth;
-   Dsp::Filter::AlphaOne      mAlphaOne;
+   Dsp::Filter::AlphaOne  mAlphaOne;
+// Dsp::Filter::AlphaTwoT<float>  mAlphaTwo;
    Dsp::Filter::AlphaTwo      mAlphaTwo;
    Dsp::Filter::AlphaThree    mAlphaThree;
    Dsp::Filter::AlphaStdDev   mAlphaStdDev;

@@ -26,7 +26,7 @@ namespace Filter
 // "Alpha beta filter"
 
 template <typename real_t>
-class AlphaTwo
+class AlphaTwoT
 {
 public:
    //***************************************************************************
@@ -46,6 +46,10 @@ public:
    real_t mBeta;
    real_t mDT;
 
+   // Filter coefficients.
+   real_t mA1,mA2,mA3;
+   real_t mB1,mB2,mB3;
+   
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -54,19 +58,27 @@ public:
    void initialize(real_t aLambda,real_t aDT)
    {
       // Calculate filter parameters.
-      real_t L  = aLambda;
-      real_t L2 = L*L;
+      double L  = aLambda;
+      double L2 = L*L;
 
-      real_t r  = (4 + L-sqrt(8*L + L2))/4;
-      real_t r2 = r*r;
+      double R  = (4 + L-sqrt(8*L + L2))/4;
+      double R2 = R*R;
 
-      real_t A  = 1-r2;
-      real_t B  = 2*(2-A) - 4*sqrt(1-A);
+      double A  = 1-R2;
+      double B  = 2*(2-A) - 4*sqrt(1-A);
 
       // Store parameter variables.
-      mAlpha = A;
-      mBeta  = B;
-      mDT    = aDT;
+      mAlpha = (real_t)(A);
+      mBeta  = (real_t)(B);
+      mDT    = (real_t)(aDT);
+
+      // Calculate filter coefficients.
+      mA1 = (real_t)(1-A);
+      mA2 = (real_t)((1-A)*aDT);
+      mA3 = (real_t)(A);
+      mB1 = (real_t)(-B/aDT);
+      mB2 = (real_t)(1-B);
+      mB3 = (real_t)(B/aDT);
 
       // Initialize output variables.
       mY=0.0;
@@ -79,6 +91,28 @@ public:
    //***************************************************************************
    // Put input value, return filtered output.
 
+   real_t put(real_t aY)
+   {
+      // Store input
+      mY = aY;
+
+      // Implement the filter from the coefficients.
+      mXX = mA1*mXX + mA2*mXV + mA3*aY;
+      mXV = mB1*mXX + mB2*mXV + mB3*aY;
+      
+      // Return output.
+      return mXX;
+   }
+};
+
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+}//namespace
+}//namespace
+
+#if 0
    real_t put(real_t aY)
    {
       // Store input
@@ -99,12 +133,4 @@ public:
       // Return output.
       return mXX;
    }
-};
-
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-}//namespace
-}//namespace
-
+#endif
