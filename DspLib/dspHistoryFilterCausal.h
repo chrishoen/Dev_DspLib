@@ -68,6 +68,9 @@ public:
    // Apply the linear operator from the input to two outputs. F:X->Y1,Y2
    void operate(History& aX,History& aY1,History& aY2);
 
+   // Apply the linear operator from the input to two outputs. F:X->Y1,Y2
+   void operate(History& aX,History& aY1,History& aY2,History& aY3);
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -79,6 +82,7 @@ public:
    // Put an input to the filter, return the output.
    void putToFilter(double aInput,double* aOutput);
    void putToFilter(double aInput,double* aOutput1,double* aOutput2);
+   void putToFilter(double aInput,double* aOutput1,double* aOutput2,double* aOutput3);
 };
 
 //******************************************************************************

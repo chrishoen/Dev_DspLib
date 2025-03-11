@@ -55,6 +55,20 @@ public:
       History& aHistory1,
       History& aHistory2,
       History& aHistory3);
+
+      // Write history to a csv file.
+   void writeHistory(
+      History& aHistory1,
+      History& aHistory2,
+      History& aHistory3,
+      History& aHistory4);
+
+   // Write history to a csv file.
+   void writeHistoryDeg(
+      History& aHistory1,
+      History& aHistory2,
+      History& aHistory3,
+      History& aHistory4);
 };
 
 //******************************************************************************

@@ -47,27 +47,15 @@ void TestOne::doRun3()
    // Generate a signal history.
 
    // Signal history.
-   History tHistoryY;
+   History tHistoryXX;
+   History tHistoryXV;
+   History tHistoryXA;
 
-   // Signal history generator.
-   HistoryFilterOperator tFilterXY(gParms.mHistoryFilterParms1);
+   // Filter operator.
+   HistoryFilterOperator tFilter(gParms.mHistoryFilterParms1);
 
    // Apply the operator on the history to produce a new history. F:X->Y.
-   tFilterXY.operate(tHistoryX,tHistoryY);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a signal history.
-
-   // Signal history.
-   History tHistoryZ;
-
-   // Signal history generator.
-   HistoryFilterOperator tFilterYZ(gParms.mHistoryFilterParms2);
-
-   // Apply the operator on the history to produce a new history. F:Y->Z.
-   tFilterYZ.operate(tHistoryY,tHistoryZ);
+   tFilter.operate(tHistoryX,tHistoryXX,tHistoryXV,tHistoryXA);
 
    //***************************************************************************
    //***************************************************************************
@@ -77,26 +65,30 @@ void TestOne::doRun3()
    // Statistics
    HistoryStatistics  tStatistics;
    tStatistics.collectValue(tHistoryX);
-   tStatistics.show(0,"X   ");
+   tStatistics.show(0,"X");
 
-   tStatistics.collectValue(tHistoryY);
-   tStatistics.show(0,"Y   ");
+   tStatistics.collectValue(tHistoryXX);
+   tStatistics.show(0,"XX");
 
-   tStatistics.collectValue(tHistoryZ);
-   tStatistics.show(0,"Z   ");
+   tStatistics.collectValue(tHistoryXV);
+   tStatistics.show(0,"XV");
+
+   tStatistics.collectValue(tHistoryXA);
+   tStatistics.show(0,"XA");
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Loop to transfer the signal history to an output file.
+   // Transfer the signal history to an output file.
 
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
    tSampleWriter.writeHistory(
       tHistoryX,
-      tHistoryY,
-      tHistoryZ);
+      tHistoryXX,
+      tHistoryXV,
+      tHistoryXA);
    tSampleWriter.close();
 
    //***************************************************************************

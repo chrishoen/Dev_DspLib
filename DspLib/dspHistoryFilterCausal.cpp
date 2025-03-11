@@ -277,6 +277,62 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Put an input to the filter, return the output.
+
+void HistoryFilterCausal::putToFilter(
+   double aInput, double* aOutput1, double* aOutput2, double* aOutput3)
+{
+   switch (mParms.mCausalType)
+   {
+   case HistoryFilterParms::cCausalButterworthLP:
+   {
+      *aOutput1 = mButterworth.put(aInput);
+      *aOutput2 = 0.0;
+      *aOutput3 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaOne:
+   {
+      *aOutput1 = mAlphaOne.put(aInput);
+      *aOutput2 = 0.0;
+      *aOutput3 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaTwo:
+   {
+      mAlphaTwo.put(aInput);
+      *aOutput1 = mAlphaTwo.mXX;
+      *aOutput2 = mAlphaTwo.mXV;
+      *aOutput3 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaThree:
+   {
+      mAlphaThree.put(aInput);
+      *aOutput1 = mAlphaThree.mXX;
+      *aOutput2 = mAlphaThree.mXV;
+      *aOutput3 = mAlphaThree.mXA;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaStdDev:
+   {
+      mAlphaStdDev.put(aInput);
+      *aOutput1 = mAlphaStdDev.mEX;
+      *aOutput2 = mAlphaStdDev.mUX;
+      *aOutput3 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaAbsDev:
+   {
+      mAlphaAbsDev.put(aInput);
+      *aOutput1 = mAlphaAbsDev.mEX;
+      *aOutput2 = mAlphaAbsDev.mUX;
+      *aOutput3 = 0.0;
+   }
+   break;
+   }
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -320,9 +376,7 @@ void HistoryFilterCausal::operate(History& aX, History& aY)
       aY.mValue[i] = tY;
    }
 }
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -369,6 +423,54 @@ void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2)
    }
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Apply the linear operator from the input to the output. F:X->Y1,,Y2
+
+void HistoryFilterCausal::operate(History& aX, History& aY1,History& aY2,History& aY3)
+{
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Initialize the filter, based on the parms.
+
+   initializeCausalFilter();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Create the destination history as clone of the source history that has
+   // the same size and time array, but has a zero value array.
+
+   aX.createTimeClone(aY1);
+   aX.createTimeClone(aY2);
+   aX.createTimeClone(aY3);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Execute a loop to filter the input to the output.
+   
+   // Locals
+   int tP = aX.mNumSamples;
+
+   // For all of the samples in the source and destination arrays.
+   for (int i = 0; i < tP; i++)
+   {
+      // Read the sample value from the source.
+      double tX = aX.mValue[i];
+      double tY1 = 0.0;
+      double tY2 = 0.0;
+      double tY3 = 0.0;
+      // Filter the value.
+      putToFilter(tX,&tY1,&tY2,&tY3);
+      // Write the filtered value to the destination.
+      aY1.mValue[i] = tY1;
+      aY2.mValue[i] = tY2;
+      aY3.mValue[i] = tY3;
+   }
+}
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

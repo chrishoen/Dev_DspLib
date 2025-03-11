@@ -62,6 +62,7 @@ public:
    // Apply the linear operator from the input to the output. F:X->Y
    void operate(History& aX,History& aY);
    void operate(History& aX,History& aY1,History& aY2);
+   void operate(History& aX,History& aY1,History& aY2,History& aY3);
 
    //***************************************************************************
    //***************************************************************************
@@ -75,6 +76,7 @@ public:
    void putToFilterForward (double aInput,double* aOutput);
    void putToFilterBackward(double aInput,double* aOutput);
    void putToFilterBackward(double aInput,double* aOutput1,double* aOutput2);
+   void putToFilterBackward(double aInput,double* aOutput1,double* aOutput2,double* aOutput3);
 };
 
 //******************************************************************************

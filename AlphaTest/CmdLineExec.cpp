@@ -135,10 +135,6 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
    Prn::print(0,"PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS PARMS ");
-   aCmd->setArgDefault(1,"demo1");
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection(aCmd->argString(1));
    gParms.show();
 }
 
