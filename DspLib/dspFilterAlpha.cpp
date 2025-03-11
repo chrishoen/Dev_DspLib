@@ -31,6 +31,7 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
    mY   = 0.0;
    mXX  = 0.0;
    mFirstFlag = true;
+   printf("AlphaOne::initializeFromAlpha %8.8f\n", mAlpha);
 }
 
 //******************************************************************************
@@ -50,7 +51,8 @@ void AlphaOne::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
    mY   = 0.0;
    mXX  = 0.0;
    mFirstFlag = true;
-   printf("AlphaOne::initializeFromSigmaRatio %8.8f  %8.8f\n", mAlpha, L);
+   printf("AlphaOne::initializeFromSigmaRatio %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+       mAlpha, aSigmaRatio, aDT, L);
 }
 
 //******************************************************************************
@@ -73,6 +75,8 @@ void AlphaOne::initializeFromStep(double aTs, double aStepTime, double aStepThre
    mY = 0.0;
    mXX = 0.0;
    mFirstFlag = true;
+   printf("AlphaOne::initializeFromStep %8.8f  $ %8.8f  %8.8f %8.8f\n", 
+      mAlpha, aTs, aStepTime, aStepThresh);
 }
 
 //******************************************************************************
