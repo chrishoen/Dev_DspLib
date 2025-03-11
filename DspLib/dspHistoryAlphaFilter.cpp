@@ -28,14 +28,9 @@ HistoryAlphaFilter::HistoryAlphaFilter()
 
 }
 
-HistoryAlphaFilter::HistoryAlphaFilter(double aAlpha)
-{
-   mAlphaOne.initializeFromLambda(aAlpha);
-}
-
 void HistoryAlphaFilter::initialize(double aAlpha)
 {
-   mAlphaOne.initializeFromLambda(aAlpha);
+   mAlphaOne.initializeFromAlpha(aAlpha);
 }
 
 //******************************************************************************

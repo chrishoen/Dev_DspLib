@@ -40,9 +40,19 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1,"1");
+   int tSelect = aCmd->argInt(1);
+
    gParms.reset();
    gParms.readSection("default");
-   gParms.readSection("run1");
+   switch(tSelect)
+   {
+      case 1: gParms.readSection("run11"); break;
+      case 2: gParms.readSection("run12"); break;
+      default:
+         printf("SECTION NOT FOUND\n");
+   }
+      
 
    TestOne tTestOne;
    tTestOne.doRun1();

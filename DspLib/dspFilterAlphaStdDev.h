@@ -66,8 +66,8 @@ public:
 
    // Initialize from alpha.
    void initializeFromAlpha (double aP1); 
-   // Initialize from lambda (tracking index).
-   void initializeFromLambda (double aLambda); 
+   // Initialize from sigma ratio, process sigma over noise sigma.
+   void initializeFromSigmaRatio (double aSigmaRatio, double aDT); 
    // Initialize from step response time and threshold.
    void initializeFromStep(double aTs, double aStepTime, double aStepThresh);
    // Set the first flag true.

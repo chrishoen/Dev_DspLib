@@ -48,7 +48,6 @@ public:
 
    // Constructor.
    HistoryAlphaFilter();
-   HistoryAlphaFilter(double aAlpha);
    void initialize(double aAlpha);
 
    // Apply the linear operator from the input to the output. F:X->Y.

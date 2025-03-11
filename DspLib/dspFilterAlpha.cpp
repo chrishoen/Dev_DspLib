@@ -23,26 +23,7 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with lambda (tracking index).
-
-void AlphaOne::initialize(double aLambda)
-{
-   // Calculate filter parameters.
-   double L  = aLambda;
-   double L2 = L*L;
-   double A = (-L2 + L*sqrt(16 + L2))/8;
-   mAlpha = A;
-
-   // Initialize filter variables.
-   mY   = 0.0;
-   mXX  = 0.0;
-   mFirstFlag = true;
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Initialize with alpha.
+// Initialize from alpha.
 
 void AlphaOne::initializeFromAlpha(double aAlpha)
 {
@@ -55,11 +36,20 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with lambda (tracking index).
+// Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaOne::initializeFromLambda(double aLambda)
+void AlphaOne::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
 {
-   initialize(aLambda);
+   // Calculate filter parameters.
+   double L  = aSigmaRatio*aDT*aDT;
+   double L2 = L*L;
+   double A = (-L2 + L*sqrt(16 + L2))/8;
+   mAlpha = A;
+
+   // Initialize filter variables.
+   mY   = 0.0;
+   mXX  = 0.0;
+   mFirstFlag = true;
 }
 
 //******************************************************************************
@@ -130,12 +120,12 @@ double AlphaOne::put(bool aCondition)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with lambda,DT (tracking index, time increment).
+// Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaTwo::initialize(double aLambda,double aDT)
+void AlphaTwo::initialize(double aSigmaRatio,double aDT)
 {
    // Calculate filter parameters.
-   double L  = aLambda;
+   double L  = aSigmaRatio*aDT*aDT;
    double L2 = L*L;
 
    double r  = (4 + L-sqrt(8*L + L2))/4;
@@ -187,12 +177,12 @@ double AlphaTwo::put(double aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize with lambda,DT (tracking index, time increment).
+// Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaThree::initialize(double aLambda,double aDT)
+void AlphaThree::initialize(double aSigmaRatio,double aDT)
 {
    // Calculate filter parameters.
-   double L  = aLambda;
+   double L  = aSigmaRatio*aDT*aDT;
    double L2 = L*L;
 
    double b  = L/2 - 3;
@@ -267,39 +257,3 @@ double AlphaThree::put(double aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-#if 0
-void AlphaTwo::initialize(double aLambda,double aDT)
-{
-   // Calculate filter parameters.
-   double L  = aLambda;
-   double L2 = L*L;
-
-   double r  = (4 + L-sqrt(8*L + L2))/4;
-   double r2 = r*r;
-
-   double A  = 1-r2;
-   double B  = 2*(2-A) - 4*sqrt(1-A);
-
-   // Initialize output variables.
-   mAlpha = A;
-   mBeta = B;
-
-   mY=0.0;
-   mXX=0.0;
-   mXV=0.0;
-
-   // Initialize filter variables.
-   dt = aDT;
-   xk_1 = 0.0;
-   vk_1 = 0.0;
-   a = A;
-   b = B;
-   xk = 0.0;
-   vk = 0.0;
-   rk = 0.0;
-   xm = 0.0;
-}
-
-#endif

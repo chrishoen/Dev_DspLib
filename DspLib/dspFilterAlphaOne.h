@@ -48,25 +48,6 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods. Initialize from lambda (tracking index).
-
-   void initialize(real_t aLambda)
-   {
-      // Calculate filter parameters.
-      real_t L  = aLambda;
-      real_t L2 = L*L;
-      real_t A = (-L2 + L*sqrt(16 + L2))/8;
-      mAlpha = A;
-
-      // Initialize filter variables.
-      mY   = 0.0;
-      mXX  = 0.0;
-      mFirstFlag = true;
-   }
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
    //  Methods. Initialize from alpha.
 
    void initializeFromAlpha(real_t aAlpha)
@@ -80,11 +61,20 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   //  Methods. Initialize from lambda (tracking index).
-
-   void initializeFromLambda(real_t aLambda)
+   // Methods. Initialize from sigma ratio, process sigma over noise sigma.
+   
+   void initializeFromSigmaRatio (double aSigmaRatio, double aDT)
    {
-      initialize(aLambda);
+      // Calculate filter parameters.
+      real_t L = aSigmaRatio*aDT*aDT;
+      real_t L2 = L*L;
+      real_t A = (-L2 + L*sqrt(16 + L2))/8;
+      mAlpha = A;
+
+      // Initialize filter variables.
+      mY   = 0.0;
+      mXX  = 0.0;
+      mFirstFlag = true;
    }
 
    //***************************************************************************

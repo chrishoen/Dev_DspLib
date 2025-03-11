@@ -56,63 +56,71 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaOne:
    {
-      if (mParms.mAlphaStepTime > 0)
+      if (mParms.mAlphaAlpha > 0)
+      {
+         mAlphaOne.initializeFromAlpha(
+            mParms.mAlphaAlpha);
+      }
+      else if (mParms.mAlphaSigmaRatio > 0)
+      {
+         mAlphaOne.initializeFromSigmaRatio(
+            mParms.mAlphaSigmaRatio,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaStepTime > 0)
       {
          mAlphaOne.initializeFromStep(
-            1/mParms.mFs,
+            mParms.mAlphaDT,
             mParms.mAlphaStepTime,
             mParms.mAlphaStepThresh);
-      }
-      else if (mParms.mAlphaLambda > 0)
-      {
-         mAlphaOne.initializeFromLambda(
-            mParms.mAlphaLambda);
       }
    }
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
    {
       mAlphaTwo.initialize(
-         mParms.mAlphaLambda,
+         mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }
    break;
    case HistoryFilterParms::cCausalAlphaThree:
    {
       mAlphaThree.initialize(
-         mParms.mAlphaLambda,
+         mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }
    break;
    case HistoryFilterParms::cCausalAlphaStdDev:
    {
-      if (mParms.mAlphaStepTime > 0)
+      if (mParms.mAlphaSigmaRatio > 0)
+      {
+         mAlphaStdDev.initializeFromSigmaRatio(
+            mParms.mAlphaSigmaRatio,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaStepTime > 0)
       {
          mAlphaStdDev.initializeFromStep(
             1/mParms.mFs,
             mParms.mAlphaStepTime,
             mParms.mAlphaStepThresh);
       }
-      else if (mParms.mAlphaLambda > 0)
-      {
-         mAlphaStdDev.initializeFromLambda(
-            mParms.mAlphaLambda);
-      }
    }
    break;
    case HistoryFilterParms::cCausalAlphaAbsDev:
    {
-      if (mParms.mAlphaStepTime > 0)
+      if (mParms.mAlphaSigmaRatio > 0)
+      {
+         mAlphaAbsDev.initializeFromSigmaRatio(
+            mParms.mAlphaSigmaRatio,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaStepTime > 0)
       {
          mAlphaAbsDev.initializeFromStep(
             1/mParms.mFs,
             mParms.mAlphaStepTime,
             mParms.mAlphaStepThresh);
-      }
-      else if (mParms.mAlphaLambda > 0)
-      {
-         mAlphaAbsDev.initializeFromLambda(
-            mParms.mAlphaLambda);
       }
    }
    break;

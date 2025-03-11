@@ -42,13 +42,12 @@ void AlphaAbsDev::initializeFromAlpha (double aAlpha)
    resetVars();
 }
 
-// Initialize from lambda (tracking index).
-void AlphaAbsDev::initializeFromLambda (double aLambda)
+// Initialize from sigma ratio, process sigma over noise sigma.
+void AlphaAbsDev::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
 {
-   mAlphaX.initializeFromLambda(aLambda);
-   mAlphaAbsDev.initializeFromLambda(aLambda);
+   mAlphaX.initializeFromSigmaRatio(aSigmaRatio, aDT);
+   mAlphaAbsDev.initializeFromSigmaRatio(aSigmaRatio, aDT);
    resetVars();
-
 }
 
 // Initialize from step response time and threshold.

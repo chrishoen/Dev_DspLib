@@ -57,21 +57,37 @@ void HistoryFilterNoncausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaOne:
    {
-      mAlphaOne.initialize(
-         mParms.mAlphaLambda);
+      if (mParms.mAlphaAlpha > 0)
+      {
+         mAlphaOne.initializeFromAlpha(
+            mParms.mAlphaAlpha);
+      }
+      else if (mParms.mAlphaSigmaRatio > 0)
+      {
+         mAlphaOne.initializeFromSigmaRatio(
+            mParms.mAlphaSigmaRatio,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaStepTime > 0)
+      {
+         mAlphaOne.initializeFromStep(
+            mParms.mAlphaDT,
+            mParms.mAlphaStepTime,
+            mParms.mAlphaStepThresh);
+      }
    }
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
    {
       mAlphaTwo.initialize(
-         mParms.mAlphaLambda,
+         mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }
    break;
    case HistoryFilterParms::cCausalAlphaThree:
    {
       mAlphaThree.initialize(
-         mParms.mAlphaLambda,
+         mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }
    break;
