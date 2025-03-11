@@ -50,6 +50,7 @@ void AlphaOne::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
    mY   = 0.0;
    mXX  = 0.0;
    mFirstFlag = true;
+   printf("AlphaOne::initializeFromSigmaRatio %8.8f  %8.8f\n", mAlpha, L);
 }
 
 //******************************************************************************
