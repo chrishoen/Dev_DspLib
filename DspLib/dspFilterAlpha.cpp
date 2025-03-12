@@ -107,7 +107,7 @@ double AlphaOne::put22(double aY)
    mY  = aY;
 
    double a = mAlpha;
-
+ 
    mXX = (1-a)*mXX + a*mY;
 
    return mXX;
@@ -192,7 +192,7 @@ double AlphaTwo::put22(double aY)
    double xm = aY;
    double xk = mXX;
    double vk = mXV;
-
+   // 6 mul, 4 add
    mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
    mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
 
@@ -211,16 +211,19 @@ double AlphaTwo::put(double aY)
    double dt  = mDT;
 
    double xm = aY;
-   double xk = mXX;
-   double vk = mXV;
+   double xs = mXX;
+   double vs = mXV;
    double rk;
+   double xp;
+   double vp;
 
-   xk = xk + dt*vk;
-   vk = vk;
-   rk = xm - xk;
+   // 3 mul, 4 add
+   xp = xs + dt*vs;
+   vp = vs;
+   rk = xm - xp;
 
-   mXX = xk + a*rk;
-   mXV = vk + (b/dt)*rk;
+   mXX = xp + a*rk;
+   mXV = vp + (b/dt)*rk;
 
    // Return output.
    return mXX;
@@ -283,7 +286,7 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 //******************************************************************************
 // Put input value, return filtered output.
 
-double AlphaThree::put22(double aY)
+double AlphaThree::put(double aY)
 {
    // Store input
    mY = aY;
@@ -300,6 +303,7 @@ double AlphaThree::put22(double aY)
    double vk = mXV;
    double ak = mXA;
 
+   // 9 mul, 9 add
    mXX = xk*(1-a)    + vk*(1-a)*dt + ak*(1-a)*dt2/2  + xm*a;
    mXV = xk*(-b/dt)  + vk*(1-b)    + ak*(1-b/2)*dt   + xm*b/dt;
    mXA = xk*(-g/dt2) + vk*(-g/dt)  + ak*(1-g/2)      + xm*g/dt2;
@@ -308,7 +312,7 @@ double AlphaThree::put22(double aY)
    return mXX;
 }
 
-double AlphaThree::put(double aY)
+double AlphaThree::put22(double aY)
 {
    // Store input
    mY = aY;
@@ -325,18 +329,19 @@ double AlphaThree::put(double aY)
    double vs = mXV;
    double as = mXA;
    double rk;
-
    double xp;
    double vp;
+
+   // 6 mul, 7 add
    xp = xs + dt*vs + (dt2/2)*as;
    vp = vs + dt*as;
    rk = xm - xp;
 
    mXX = xp + a*rk;
    mXV = vp + (b/dt)*rk;
-// mXA = as + (2*g/dt2)*rk;
+   mXA = as + (2*g/dt2)*rk;
 // mXA = as + (g/(2*dt2))*rk;
-   mXA = as + (g/(dt2))*rk;
+// mXA = as + (g/(dt2))*rk;
 
    // Return output.
    return mXX;
