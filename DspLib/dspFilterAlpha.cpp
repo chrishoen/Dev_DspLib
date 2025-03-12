@@ -226,6 +226,8 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    mXV=0.0;
    mXA=0.0;
 
+   printf("AlphaThree::initializeFromSigmaRatio %8.8f %8.8f  %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+      mAlpha, mBeta, mGamma, aSigmaRatio, aDT, L);
 }
 
 //******************************************************************************
