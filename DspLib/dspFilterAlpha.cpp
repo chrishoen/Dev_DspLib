@@ -284,6 +284,7 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    mXX=0.0;
    mXV=0.0;
    mXA=0.0;
+   mFirstFlag = true;
 
    printf("AlphaThree::initializeFromSigmaRatio %8.8f %8.8f  %8.8f $ %8.8f  %8.8f $  %8.8f\n",
       mAlpha, mBeta, mGamma, aSigmaRatio, aDT, L);
@@ -294,8 +295,16 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 //******************************************************************************
 // Put input value, return filtered output.
 
-double AlphaThree::put(double aY)
+double AlphaThree::put22(double aY)
 {
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+      mXA = 0;
+   }
    // Store input
    mY = aY;
 
@@ -320,8 +329,16 @@ double AlphaThree::put(double aY)
    return mXX;
 }
 
-double AlphaThree::put22(double aY)
+double AlphaThree::put(double aY)
 {
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+      mXA = 0;
+   }
    // Store input
    mY = aY;
 
@@ -347,9 +364,9 @@ double AlphaThree::put22(double aY)
 
    mXX = xp + a*rk;
    mXV = vp + (b/dt)*rk;
-   mXA = as + (2*g/dt2)*rk;
 // mXA = as + (g/(2*dt2))*rk;
 // mXA = as + (g/(dt2))*rk;
+   mXA = as + (2*g/dt2)*rk;
 
    // Return output.
    return mXX;
