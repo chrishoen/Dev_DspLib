@@ -165,11 +165,13 @@ void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    mAlpha = A;
    mBeta  = B;
    mDT    = aDT;
+   if(mDT != 0) mBetaDivDT = mBeta/mDT;
 
    // Initialize output variables.
    mY=0.0;
    mXX=0.0;
    mXV=0.0;
+   mFirstFlag = true;
    printf("AlphaTwo::initializeFromSigmaRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
       mAlpha, mBeta, aSigmaRatio, aDT, L);
 }
@@ -181,6 +183,13 @@ void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 
 double AlphaTwo::put22(double aY)
 {
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+   }
    // Store input
    mY = aY;
 
@@ -202,28 +211,27 @@ double AlphaTwo::put22(double aY)
 
 double AlphaTwo::put(double aY)
 {
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+   }
    // Store input
    mY = aY;
 
    // Implement the filter.
-   double a   = mAlpha;
-   double b   = mBeta;
-   double dt  = mDT;
-
    double xm = aY;
    double xs = mXX;
    double vs = mXV;
-   double rk;
-   double xp;
-   double vp;
-
    // 3 mul, 4 add
-   xp = xs + dt*vs;
-   vp = vs;
-   rk = xm - xp;
+   double xp = xs + mDT*vs;
+   double vp = vs;
+   double rk = xm - xp;
 
-   mXX = xp + a*rk;
-   mXV = vp + (b/dt)*rk;
+   mXX = xp + mAlpha*rk;
+   mXV = vp + mBetaDivDT*rk;
 
    // Return output.
    return mXX;
