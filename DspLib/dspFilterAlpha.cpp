@@ -350,6 +350,52 @@ double AlphaThree::put(double aY)
    double dt2 = dt*dt;
 
    double xm = aY;
+   double xk = mXX;
+   double vk = mXV;
+   double ak = mXA;
+
+   // 9 mul, 9 add
+// mXX = xk*(1-a)    + vk*(1-a)*dt + ak*(1-a)*dt2/2  + xm*a;
+// mXV = xk*(-b/dt)  + vk*(1-b)    + ak*(1-b/2)*dt   + xm*b/dt;
+// mXA = xk*(-g/dt2) + vk*(-g/dt)  + ak*(1-g/2)      + xm*g/dt2;
+
+   double mK11,mK12,mK13,mK14;
+   double mK21,mK22,mK23,mK24;
+   double mK31,mK32,mK33,mK34;
+
+   mK11 = (1-a);     mK12 = (1-a)*dt;  mK13 = (1-a)*dt2/2;  mK14 = a;
+   mK21 = (-b/dt);   mK22 = (1-b);     mK23 = (1-b/2)*dt;   mK24 = b/dt;
+   mK31 = (-g/dt2);  mK32 = (-g/dt);   mK33 = (1-g/2);      mK34 = g/dt2;
+   
+   mXX = mK11*xk + mK12*vk + mK13*ak + mK14*xm;
+   mXV = mK21*xk + mK22*vk + mK23*ak + mK24*xm;
+   mXA = mK31*xk + mK32*vk + mK33*ak + mK34*xm;
+
+   // Return output.
+   return mXX;
+}
+
+double AlphaThree::put23(double aY)
+{
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+      mXA = 0;
+   }
+   // Store input
+   mY = aY;
+
+   // Implement the filter.
+   double a   = mAlpha;
+   double b   = mBeta;
+   double g   = mGamma;
+   double dt  = mDT;
+   double dt2 = dt*dt;
+
+   double xm = aY;
    double xs = mXX;
    double vs = mXV;
    double as = mXA;
