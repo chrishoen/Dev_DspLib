@@ -328,6 +328,40 @@ double AlphaThree::put(double aY)
    return mXX;
 }
 
+double AlphaThree::put22(double aY)
+{
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+      mXA = 0;
+   }
+   // Store input
+   mY = aY;
+
+   // Implement the filter.
+   double a   = mAlpha;
+   double b   = mBeta;
+   double g   = mGamma;
+   double dt  = mDT;
+   double dt2 = dt*dt;
+
+   double xm = aY;
+   double xk = mXX;
+   double vk = mXV;
+   double ak = mXA;
+
+   // 9 mul, 9 add
+   mXX = xk*(1-a)    + vk*(1-a)*dt + ak*(1-a)*dt2/2  + xm*a;
+   mXV = xk*(-b/dt)  + vk*(1-b)    + ak*(1-b/2)*dt   + xm*b/dt;
+   mXA = xk*(-g/dt2) + vk*(-g/dt)  + ak*(1-g/2)      + xm*g/dt2;
+
+   // Return output.
+   return mXX;
+}
+
 double AlphaThree::put23(double aY)
 {
    // Initial value.
