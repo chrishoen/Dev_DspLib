@@ -364,9 +364,9 @@ double AlphaThree::put(double aY)
 
    mXX = xp + a*rk;
    mXV = vp + (b/dt)*rk;
-// mXA = as + (g/(2*dt2))*rk;
+   mXA = as + (g/(2*dt2))*rk;
 // mXA = as + (g/(dt2))*rk;
-   mXA = as + (2*g/dt2)*rk;
+// mXA = as + (2*g/dt2)*rk;
 
    // Return output.
    return mXX;
