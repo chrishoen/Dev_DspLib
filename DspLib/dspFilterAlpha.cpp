@@ -127,7 +127,7 @@ double AlphaOne::put(bool aCondition)
 //******************************************************************************
 // Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaTwo::initialize(double aSigmaRatio,double aDT)
+void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 {
    // Calculate filter parameters.
    double L  = aSigmaRatio*aDT*aDT;
@@ -148,6 +148,8 @@ void AlphaTwo::initialize(double aSigmaRatio,double aDT)
    mY=0.0;
    mXX=0.0;
    mXV=0.0;
+   printf("AlphaTwo::initializeFromSigmaRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+      mAlpha, mBeta, aSigmaRatio, aDT, L);
 }
 
 //******************************************************************************
@@ -184,7 +186,7 @@ double AlphaTwo::put(double aY)
 //******************************************************************************
 // Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaThree::initialize(double aSigmaRatio,double aDT)
+void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 {
    // Calculate filter parameters.
    double L  = aSigmaRatio*aDT*aDT;

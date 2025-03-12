@@ -78,14 +78,14 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
    {
-      mAlphaTwo.initialize(
+      mAlphaTwo.initializeFromSigmaRatio(
          mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }
    break;
    case HistoryFilterParms::cCausalAlphaThree:
    {
-      mAlphaThree.initialize(
+      mAlphaThree.initializeFromSigmaRatio(
          mParms.mAlphaSigmaRatio,
          mParms.mAlphaDT);
    }

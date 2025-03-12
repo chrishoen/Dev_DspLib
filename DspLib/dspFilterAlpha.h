@@ -104,7 +104,7 @@ public:
    // Methods.
 
    // Initialize from sigma ratio, process sigma over noise sigma.
-   void initialize(double aSigmaRatio,double aDT); 
+   void initializeFromSigmaRatio(double aSigmaRatio,double aDT); 
 
    // Put input value, return filtered output.
    double put(double aY);
@@ -151,7 +151,7 @@ public:
    // Methods.
 
    // Initialize from sigma ratio, process sigma over noise sigma.
-   void initialize(double aSigmaRatio,double aDT); 
+   void initializeFromSigmaRatio(double aSigmaRatio,double aDT); 
 
    // Put input value, return filtered output.
    double put(double aY);
