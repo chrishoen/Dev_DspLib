@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include "risSystemCalls.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
 #include "TestOne.h"
@@ -10,28 +11,34 @@
 using namespace Dsp;
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
 CmdLineExec::CmdLineExec()
 {
 }
-//******************************************************************************
 void CmdLineExec::reset()
 {
 }
 
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("RESET")) reset();
+
+   if (aCmd->isCmd("RUN1"))     executeRun1(aCmd);
+   if (aCmd->isCmd("RUN2"))     executeRun2(aCmd);
+   if (aCmd->isCmd("RUN3"))     executeRun3(aCmd);
+   if (aCmd->isCmd("PLOT"))     executePlot(aCmd);
+
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
    if (aCmd->isCmd("GO3"))   executeGo3(aCmd);
    if (aCmd->isCmd("GO4"))   executeGo4(aCmd);
    if (aCmd->isCmd("GO5"))   executeGo5(aCmd);
    if (aCmd->isCmd("Parms")) executeParms(aCmd);
-
-   if (aCmd->isCmd("RUN1"))     executeRun1(aCmd);
-   if (aCmd->isCmd("RUN2"))     executeRun2(aCmd);
-   if (aCmd->isCmd("RUN3"))     executeRun3(aCmd);
 }
 
 //******************************************************************************
@@ -114,6 +121,32 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
+{
+   char* tPlotRun1 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run1.py";
+   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run2.py";
+   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run3.py";
+
+   aCmd->setArgDefault(1,"2");
+   int tPlotSelect = aCmd->argInt(1);
+
+   char* tPlotCmd = 0;
+   switch(tPlotSelect)
+   {
+      case 1: tPlotCmd = tPlotRun1 ; break;
+      case 2: tPlotCmd = tPlotRun2 ; break;
+      case 3: tPlotCmd = tPlotRun3 ; break;
+      default: printf("PLOT NOT FOUND\n");
+   }
+
+   int tRet = Ris::doSystemCommand(tPlotCmd);
+   Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
 }
 
 //******************************************************************************

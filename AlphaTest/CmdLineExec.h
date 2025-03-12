@@ -25,6 +25,7 @@ public:
    void executeRun2    (Ris::CmdLineCmd* aCmd);
    void executeRun3    (Ris::CmdLineCmd* aCmd);
 
+   void executePlot    (Ris::CmdLineCmd* aCmd);
    void executeParms (Ris::CmdLineCmd* aCmd);
 };
 
