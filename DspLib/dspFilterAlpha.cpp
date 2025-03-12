@@ -91,28 +91,6 @@ void AlphaOne::setFirst()
    mFirstFlag = true;
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Put input value, return filtered output.
-
-double AlphaOne::put22(double aY)
-{
-   if (mFirstFlag)
-   {
-      mFirstFlag = false;
-      mXX = aY;
-   }
-
-   mY  = aY;
-
-   double a = mAlpha;
- 
-   mXX = (1-a)*mXX + a*mY;
-
-   return mXX;
-}
-
 double AlphaOne::put(bool aCondition)
 {
    if (aCondition) return put(1.0);
@@ -134,9 +112,30 @@ double AlphaOne::put(double aY)
 
    mY  = aY;
 
+   // Implement the filter. 1 mul, 2 add.
+   double rk = mY - mXX;
+   mXX = mXX + mAlpha*rk;
+
+   return mXX;
+}
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Put input value, return filtered output.
+
+double AlphaOne::put22(double aY)
+{
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+   }
+
+   mY  = aY;
+
+   // Implement the filter. 2 mul, 1 add.
    double a = mAlpha;
-   double r = mY - mXX;
-   mXX = mXX + a*r;
+    mXX = (1-a)*mXX + a*mY;
 
    return mXX;
 }
@@ -181,34 +180,6 @@ void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
 //******************************************************************************
 // Put input value, return filtered output.
 
-double AlphaTwo::put22(double aY)
-{
-   // Initial value.
-   if (mFirstFlag)
-   {
-      mFirstFlag = false;
-      mXX = aY;
-      mXV = 0;
-   }
-   // Store input
-   mY = aY;
-
-   // Implement the filter.
-   double a   = mAlpha;
-   double b   = mBeta;
-   double dt  = mDT;
-
-   double xm = aY;
-   double xk = mXX;
-   double vk = mXV;
-   // 6 mul, 4 add
-   mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
-   mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
-
-   // Return output.
-   return mXX;
-}
-
 double AlphaTwo::put(double aY)
 {
    // Initial value.
@@ -221,17 +192,45 @@ double AlphaTwo::put(double aY)
    // Store input
    mY = aY;
 
-   // Implement the filter.
+   // Implement the filter. 3 mul, 4 add.
    double xm = aY;
    double xs = mXX;
    double vs = mXV;
-   // 3 mul, 4 add
+
    double xp = xs + mDT*vs;
    double vp = vs;
    double rk = xm - xp;
 
    mXX = xp + mAlpha*rk;
    mXV = vp + mBetaDivDT*rk;
+
+   // Return output.
+   return mXX;
+}
+
+double AlphaTwo::put22(double aY)
+{
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+   }
+   // Store input
+   mY = aY;
+
+   // Implement the filter. 6 mul, 4 add.
+   double a   = mAlpha;
+   double b   = mBeta;
+   double dt  = mDT;
+
+   double xm = aY;
+   double xk = mXX;
+   double vk = mXV;
+   // 6 mul, 4 add
+   mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
+   mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
 
    // Return output.
    return mXX;
@@ -275,9 +274,17 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    double DT = aDT;
    double DT2 = DT*DT;
 
+   // Filter coefficients.
    mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
    mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
    mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
+
+   // Filter coefficients.
+   mKK1 = (DT2/2);
+   mKK2 = (B/DT);
+   mKK3 = (G/(2*DT2));
+// mKK3 = (G/(DT2));
+// mKK3 = (2*G/DT2);
 
    // Store parameter variables.
    mAlpha = A;
@@ -314,7 +321,7 @@ double AlphaThree::put(double aY)
    // Store input
    mY = aY;
 
-   // Implement the filter.
+   // Implement the filter. 12mul,9add
    double xm = aY;
    double xk = mXX;
    double vk = mXV;
@@ -328,7 +335,7 @@ double AlphaThree::put(double aY)
    return mXX;
 }
 
-double AlphaThree::put23(double aY)
+double AlphaThree::put22(double aY)
 {
    // Initial value.
    if (mFirstFlag)
@@ -341,39 +348,27 @@ double AlphaThree::put23(double aY)
    // Store input
    mY = aY;
 
-   // Implement the filter.
-   double a   = mAlpha;
-   double b   = mBeta;
-   double g   = mGamma;
-   double dt  = mDT;
-   double dt2 = dt*dt;
-
+   // Implement the filter. 6 mul,7 add
    double xm = aY;
    double xs = mXX;
    double vs = mXV;
    double as = mXA;
-   double rk;
-   double xp;
-   double vp;
+   
+   double xp = xs + mDT*vs + mKK1*as;
+   double vp = vs + mDT*as;
+   double rk = xm - xp;
 
-   // 6 mul, 7 add
-   xp = xs + dt*vs + (dt2/2)*as;
-   vp = vs + dt*as;
-   rk = xm - xp;
-
-   mXX = xp + a*rk;
-   mXV = vp + (b/dt)*rk;
-   mXA = as + (g/(2*dt2))*rk;
-// mXA = as + (g/(dt2))*rk;
-// mXA = as + (2*g/dt2)*rk;
+   mXX = xp + mAlpha*rk;
+   mXV = vp + mKK2*rk;
+   mXA = as + mKK3*rk;
 
    // Return output.
    return mXX;
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace
 }//namespace
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************

@@ -158,6 +158,9 @@ public:
    double mK21,mK22,mK23,mK24;
    double mK31,mK32,mK33,mK34;
 
+   // Filter parameters.
+   double mKK1,mKK2,mKK3;
+
    // True for first sample.
    bool mFirstFlag;
 
