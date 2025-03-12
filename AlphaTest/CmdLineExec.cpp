@@ -40,17 +40,27 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"1");
-   int tSelect = aCmd->argInt(1);
+   aCmd->setArgDefault(1,"2");
+   aCmd->setArgDefault(2,"1");
+   int tGenSelect = aCmd->argInt(1);
+   int tFilterSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
-   switch(tSelect)
+   switch(tGenSelect)
    {
-      case 1: gParms.readSection("run11"); break;
-      case 2: gParms.readSection("run12"); break;
-      default:
-         printf("SECTION NOT FOUND\n");
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+   switch(tFilterSelect)
+   {
+      case 1: gParms.readSection("AlphaOne1"); break;
+      case 2: gParms.readSection("AlphaOne2"); break;
+      case 3: gParms.readSection("AlphaOne3"); break;
+      default: printf("SECTION NOT FOUND\n");
    }
       
 
@@ -64,9 +74,29 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1,"2");
+   aCmd->setArgDefault(2,"1");
+   int tGenSelect = aCmd->argInt(1);
+   int tFilterSelect = aCmd->argInt(2);
+
    gParms.reset();
    gParms.readSection("default");
-   gParms.readSection("run2");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+   switch(tFilterSelect)
+   {
+      case 1: gParms.readSection("AlphaTwo1"); break;
+      case 2: gParms.readSection("AlphaTwo2"); break;
+      case 3: gParms.readSection("AlphaTwo3"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+      
 
    TestOne tTestOne;
    tTestOne.doRun2();
