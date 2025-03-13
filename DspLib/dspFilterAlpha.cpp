@@ -37,7 +37,9 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize from sigma ratio, process sigma over noise sigma.
+// Initialize from noise ratio, process sigma over sensor sigma.
+// Calculate the tracking index from the noise ratio and calculate
+// alpha, beta, gamma from the tracking index.
 
 void AlphaOne::initializeFromNoiseRatio (double aNoiseRatio, double aDT)
 {
@@ -91,12 +93,6 @@ void AlphaOne::setFirst()
    mFirstFlag = true;
 }
 
-double AlphaOne::put(bool aCondition)
-{
-   if (aCondition) return put(1.0);
-   else            return put(0.0);
-}
-
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -109,35 +105,24 @@ double AlphaOne::put(double aY)
       mFirstFlag = false;
       mXX = aY;
    }
-
+   // Store input.
    mY  = aY;
 
-   // Implement the filter. 1 mul, 2 add.
-   double rk = mY - mXX;
-   mXX = mXX + mAlpha*rk;
+   // Implement the filter.
+   mXX = mXX + mAlpha*(mY - mXX);
 
    return mXX;
 }
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 // Put input value, return filtered output.
 
-double AlphaOne::put22(double aY)
+double AlphaOne::put(bool aCondition)
 {
-   if (mFirstFlag)
-   {
-      mFirstFlag = false;
-      mXX = aY;
-   }
-
-   mY  = aY;
-
-   // Implement the filter. 2 mul, 1 add.
-   double a = mAlpha;
-    mXX = (1-a)*mXX + a*mY;
-
-   return mXX;
+   if (aCondition) return put(1.0);
+   else            return put(0.0);
 }
 
 //******************************************************************************
@@ -158,7 +143,7 @@ void AlphaTwo::initializeFromAlpha(double aAlpha, double aDT)
    mAlpha = A;
    mBeta  = B;
    mDT    = aDT;
-   if(mDT != 0) mBetaDivDT = mBeta/mDT;
+   mBetaDivDT = mBeta/mDT;
 
    // Initialize output variables.
    mY=0.0;
@@ -172,7 +157,9 @@ void AlphaTwo::initializeFromAlpha(double aAlpha, double aDT)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize from sigma ratio, process sigma over noise sigma.
+// Initialize from noise ratio, process sigma over sensor sigma.
+// Calculate the tracking index from the noise ratio and calculate
+// alpha, beta, gamma from the tracking index.
 
 void AlphaTwo::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
 {
@@ -190,7 +177,7 @@ void AlphaTwo::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
    mAlpha = A;
    mBeta  = B;
    mDT    = aDT;
-   if(mDT != 0) mBetaDivDT = mBeta/mDT;
+   mBetaDivDT = mBeta/mDT;
 
    // Initialize output variables.
    mY=0.0;
@@ -234,34 +221,6 @@ double AlphaTwo::put(double aY)
    return mXX;
 }
 
-double AlphaTwo::put22(double aY)
-{
-   // Initial value.
-   if (mFirstFlag)
-   {
-      mFirstFlag = false;
-      mXX = aY;
-      mXV = 0;
-   }
-   // Store input
-   mY = aY;
-
-   // Implement the filter. 6 mul, 4 add.
-   double a   = mAlpha;
-   double b   = mBeta;
-   double dt  = mDT;
-
-   double xm = aY;
-   double xk = mXX;
-   double vk = mXV;
-   // 6 mul, 4 add
-   mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
-   mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
-
-   // Return output.
-   return mXX;
-}
-
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -282,16 +241,16 @@ void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
    double DT2 = DT*DT;
 
    // Filter coefficients.
-   mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
-   mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
-   mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
-
-   // Filter coefficients.
    mKK1 = (DT2/2);
    mKK2 = (B/DT);
    mKK3 = (G/(DT2));    // same as kalman
 // mKK3 = (G/(2*DT2));  // same as matlab
 // mKK3 = (2*G/DT2);    // same as wikipedia
+
+   // Other Filter coefficients.
+   mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
+   mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
+   mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
 
    // Store parameter variables.
    mAlpha = A;
@@ -313,7 +272,9 @@ void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize from sigma ratio, process sigma over noise sigma.
+// Initialize from noise ratio, process sigma over sensor sigma.
+// Calculate the tracking index from the noise ratio and calculate
+// alpha, beta, gamma from the tracking index.
 
 void AlphaThree::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
 {
@@ -346,16 +307,16 @@ void AlphaThree::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
    double DT2 = DT*DT;
 
    // Filter coefficients.
-   mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
-   mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
-   mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
-
-   // Filter coefficients.
    mKK1 = (DT2/2);
    mKK2 = (B/DT);
    mKK3 = (G/(DT2));    // same as kalman
 // mKK3 = (G/(2*DT2));  // same as matlab
 // mKK3 = (2*G/DT2);    // same as wikipedia
+
+   // Other Filter coefficients.
+   mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
+   mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
+   mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
 
    // Store parameter variables.
    mAlpha = A;
@@ -379,34 +340,8 @@ void AlphaThree::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
 //******************************************************************************
 // Put input value, return filtered output.
 
+
 double AlphaThree::put(double aY)
-{
-   // Initial value.
-   if (mFirstFlag)
-   {
-      mFirstFlag = false;
-      mXX = aY;
-      mXV = 0;
-      mXA = 0;
-   }
-   // Store input
-   mY = aY;
-
-   // Implement the filter. 12mul,9add
-   double xm = aY;
-   double xk = mXX;
-   double vk = mXV;
-   double ak = mXA;
-
-   mXX = mK11*xk + mK12*vk + mK13*ak + mK14*xm;
-   mXV = mK21*xk + mK22*vk + mK23*ak + mK24*xm;
-   mXA = mK31*xk + mK32*vk + mK33*ak + mK34*xm;
-
-   // Return output.
-   return mXX;
-}
-
-double AlphaThree::put22(double aY)
 {
    // Initial value.
    if (mFirstFlag)
@@ -432,6 +367,33 @@ double AlphaThree::put22(double aY)
    mXX = xp + mAlpha*rk;
    mXV = vp + mKK2*rk;
    mXA = as + mKK3*rk;
+
+   // Return output.
+   return mXX;
+}
+
+double AlphaThree::put22(double aY)
+{
+   // Initial value.
+   if (mFirstFlag)
+   {
+      mFirstFlag = false;
+      mXX = aY;
+      mXV = 0;
+      mXA = 0;
+   }
+   // Store input
+   mY = aY;
+
+   // Implement the filter. 12 mul,9 add
+   double xm = aY;
+   double xk = mXX;
+   double vk = mXV;
+   double ak = mXA;
+
+   mXX = mK11*xk + mK12*vk + mK13*ak + mK14*xm;
+   mXV = mK21*xk + mK22*vk + mK23*ak + mK24*xm;
+   mXA = mK31*xk + mK32*vk + mK33*ak + mK34*xm;
 
    // Return output.
    return mXX;

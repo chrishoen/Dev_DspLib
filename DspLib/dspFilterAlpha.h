@@ -66,7 +66,6 @@ public:
 
    // Put input value, return filtered output.
    double put(bool aCondition);
-   double put22(double aY);
 };
 
 //******************************************************************************
@@ -120,7 +119,6 @@ public:
    void initializeFromNoiseRatio(double aNoiseRatio,double aDT); 
 
    // Put input value, return filtered output.
-   double put22(double aY);
    double put(double aY);
 };
 
@@ -183,9 +181,8 @@ public:
    void initializeFromNoiseRatio(double aNoiseRatio,double aDT); 
 
    // Put input value, return filtered output.
-   double put22(double aY);
-   double put23(double aY);
    double put(double aY);
+   double put22(double aY);
 };
 
 //******************************************************************************

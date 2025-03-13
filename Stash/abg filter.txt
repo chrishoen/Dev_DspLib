@@ -10,3 +10,10 @@ rk = xm - xp;
 xs = xp + a*rk;
 vs = vp + (b/dt)*rk;
 as = as + (g/(dt2))*rk;
+
+
+
+xk = mXX
+vk = mXV
+mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
+mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
