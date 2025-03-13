@@ -282,9 +282,9 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    // Filter coefficients.
    mKK1 = (DT2/2);
    mKK2 = (B/DT);
-   mKK3 = (G/(2*DT2));
-// mKK3 = (G/(DT2));
-// mKK3 = (2*G/DT2);
+   mKK3 = (G/(DT2));    // same as kalman
+// mKK3 = (G/(2*DT2));  // same as matlab
+// mKK3 = (2*G/DT2);    // same as wikipedia
 
    // Store parameter variables.
    mAlpha = A;
