@@ -49,8 +49,8 @@ public:
    Dsp::Filter::ButterworthLP mButterworth;
 // Dsp::Filter::AlphaOne  mAlphaOne;
    Dsp::Filter::AlphaOneT<float>  mAlphaOne;
-// Dsp::Filter::AlphaTwoT<float>  mAlphaTwo;
-   Dsp::Filter::AlphaTwo      mAlphaTwo;
+// Dsp::Filter::AlphaTwo      mAlphaTwo;
+   Dsp::Filter::AlphaTwoT<float>  mAlphaTwo;
    Dsp::Filter::AlphaThree    mAlphaThree;
    Dsp::Filter::AlphaStdDev   mAlphaStdDev;
    Dsp::Filter::AlphaAbsDev   mAlphaAbsDev;

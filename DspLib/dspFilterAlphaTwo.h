@@ -46,91 +46,110 @@ public:
    real_t mBeta;
    real_t mDT;
 
-   // Filter coefficients.
-   real_t mA1,mA2,mA3;
-   real_t mB1,mB2,mB3;
+   // Filter parameters.
+   real_t mBetaDivDT;
+
+   // If true then first sample.
+   bool mFirstFlag;
    
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Initialize with lambda,DT (tracking index, time increment).
+   // Initialize from alpha.
 
-   void initialize(real_t aLambda,real_t aDT)
+   void initializeFromAlpha(double aAlpha, double aDT)
    {
       // Calculate filter parameters.
-      double L  = aLambda;
-      double L2 = L*L;
-
-      double R  = (4 + L-sqrt(8*L + L2))/4;
-      double R2 = R*R;
-
-      double A  = 1-R2;
+      double A  = aAlpha;
       double B  = 2*(2-A) - 4*sqrt(1-A);
-
+      double DT = aDT;
       // Store parameter variables.
-      mAlpha = (real_t)(A);
-      mBeta  = (real_t)(B);
-      mDT    = (real_t)(aDT);
-
-      // Calculate filter coefficients.
-      mA1 = (real_t)(1-A);
-      mA2 = (real_t)((1-A)*aDT);
-      mA3 = (real_t)(A);
-      mB1 = (real_t)(-B/aDT);
-      mB2 = (real_t)(1-B);
-      mB3 = (real_t)(B/aDT);
+      mAlpha = (real_t)A;
+      mBeta  = (real_t)B;
+      mDT    = (real_t)DT;
+      mBetaDivDT = (real_t)(B/DT);
 
       // Initialize output variables.
       mY=0.0;
       mXX=0.0;
       mXV=0.0;
+      mFirstFlag = true;
+      printf("AlphaTwo::initializeFromAlpha %8.8f %8.8f $ %8.8f\n",
+         mAlpha, mBeta, aDT);
    }
 
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
+   // Initialize from noise ratio, process sigma over sensor sigma.
+   // Calculate the tracking index from the noise ratio and calculate
+   // alpha, beta, gamma from the tracking index.
+
+   void initializeFromNoiseRatio(double aNoiseRatio,double aDT)
+   {
+      // Calculate filter parameters.
+      double L  = aNoiseRatio*aDT*aDT;
+      double L2 = L*L;
+
+      double r  = (4 + L-sqrt(8*L + L2))/4;
+      double r2 = r*r;
+
+      double A  = 1-r2;
+      double B  = 2*(2-A) - 4*sqrt(1-A);
+      double DT = aDT;
+
+      // Store parameter variables.
+      mAlpha = (real_t)A;
+      mBeta  = (real_t)B;
+      mDT    = (real_t)DT;
+      mBetaDivDT = (real_t)(B/DT);
+
+      // Initialize output variables.
+      mY=0.0;
+      mXX=0.0;
+      mXV=0.0;
+      mFirstFlag = true;
+      printf("AlphaTwo::initializeFromNoiseRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+         mAlpha, mBeta, aNoiseRatio, aDT, L);
+   }
+
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
    // Put input value, return filtered output.
 
    real_t put(real_t aY)
    {
+      // Initial value.
+      if (mFirstFlag)
+      {
+         mFirstFlag = false;
+         mXX = aY;
+         mXV = 0;
+      }
       // Store input
       mY = aY;
 
-      // Implement the filter from the coefficients.
-      mXX = mA1*mXX + mA2*mXV + mA3*aY;
-      mXV = mB1*mXX + mB2*mXV + mB3*aY;
-      
+      // Implement the filter. 3 mul, 4 add.
+      real_t xm = aY;
+      real_t xs = mXX;
+      real_t vs = mXV;
+
+      real_t xp = xs + mDT*vs;
+      real_t vp = vs;
+      real_t rk = xm - xp;
+
+      mXX = xp + mAlpha*rk;
+      mXV = vp + mBetaDivDT*rk;
+
       // Return output.
       return mXX;
    }
 };
 
-
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 }//namespace
 }//namespace
 
-#if 0
-   real_t put(real_t aY)
-   {
-      // Store input
-      mY = aY;
-
-      // Implement the filter.
-      real_t a   = mAlpha;
-      real_t b   = mBeta;
-      real_t dt  = mDT;
-
-      real_t xm = aY;
-      real_t xk = mXX;
-      real_t vk = mXV;
-
-      mXX = xk*(1-a)    + vk*(1-a)*dt + xm*a;
-      mXV = xk*(-b/dt)  + vk*(1-b)    + xm*b/dt;
-
-      // Return output.
-      return mXX;
-   }
-#endif
