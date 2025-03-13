@@ -173,7 +173,7 @@ void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
       default: printf("SECTION NOT FOUND\n");
    }
 
-   gParms.readSection("AlphaOne1");
+   gParms.readSection("AlphaOne11");
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
 
    TestOne tTestOne;
