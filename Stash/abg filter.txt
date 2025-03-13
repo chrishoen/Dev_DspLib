@@ -1,0 +1,12 @@
+b = 2*(2 - a) - 4*sqrt(1-a)  // kalata
+b = a*a/(2-a)                // benedict bordner
+g = b*b/(2*a)
+
+// from kalman filter
+xp = xs + dt*vs + (dt2/2)*as;
+vp = vs + dt*as;
+rk = xm - xp;
+
+xs = xp + a*rk;
+vs = vp + (b/dt)*rk;
+as = as + (g/(dt2))*rk;
