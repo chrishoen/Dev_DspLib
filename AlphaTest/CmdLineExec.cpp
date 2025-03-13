@@ -106,7 +106,6 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
       case 23: gParms.readSection("AlphaTwo23"); break;
       default: printf("SECTION NOT FOUND\n");
    }
-      
 
    TestOne tTestOne;
    tTestOne.doRun2();
@@ -118,10 +117,10 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"2");
-   aCmd->setArgDefault(2,"3");
-   int tGenSelect = aCmd->argInt(1);
-   int tFilterSelect = aCmd->argInt(2);
+   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(2,"2");
+   int tFilterSelect = aCmd->argInt(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
@@ -135,12 +134,14 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
    }
    switch(tFilterSelect)
    {
-      case 1: gParms.readSection("AlphaThree1"); break;
-      case 2: gParms.readSection("AlphaThree2"); break;
-      case 3: gParms.readSection("AlphaThree3"); break;
+      case 11: gParms.readSection("AlphaThree11"); break;
+      case 12: gParms.readSection("AlphaThree12"); break;
+      case 13: gParms.readSection("AlphaThree13"); break;
+      case 21: gParms.readSection("AlphaThree21"); break;
+      case 22: gParms.readSection("AlphaThree22"); break;
+      case 23: gParms.readSection("AlphaThree23"); break;
       default: printf("SECTION NOT FOUND\n");
    }
-      
 
    TestOne tTestOne;
    tTestOne.doRun3();

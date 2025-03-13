@@ -158,6 +158,7 @@ void AlphaTwo::initializeFromAlpha(double aAlpha, double aDT)
    mAlpha = A;
    mBeta  = B;
    mDT    = aDT;
+   if(mDT != 0) mBetaDivDT = mBeta/mDT;
 
    // Initialize output variables.
    mY=0.0;
@@ -273,7 +274,8 @@ void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
 {
    // Calculate filter parameters.
    double A  = aAlpha;
-   double B  = 2*(2-A) - 4*sqrt(1-A);
+   double A2  = A*A;
+   double B  = A2/(2-A);
    double B2 = B*B;
    double G  = B2/(2*A);
    double DT = aDT;
@@ -291,7 +293,7 @@ void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
 // mKK3 = (G/(2*DT2));  // same as matlab
 // mKK3 = (2*G/DT2);    // same as wikipedia
 
-// Store parameter variables.
+   // Store parameter variables.
    mAlpha = A;
    mBeta  = B;
    mGamma = G;
@@ -301,9 +303,11 @@ void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
    mY=0.0;
    mXX=0.0;
    mXV=0.0;
+   mXA=0.0;
    mFirstFlag = true;
-   printf("AlphaTwo::initializeFromAlpha %8.8f %8.8f $ %8.8f\n",
-      mAlpha, mBeta, aDT);
+
+   printf("AlphaThree::initializeFromAlpha %8.8f %8.8f  %8.8f $ %8.8f\n",
+      mAlpha, mBeta, mGamma, aDT);
 }
 
 //******************************************************************************
@@ -366,7 +370,7 @@ void AlphaThree::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
    mXA=0.0;
    mFirstFlag = true;
 
-   printf("AlphaThree::initializeFromNoiseRatio %8.8f %8.8f  %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+   printf("AlphaThree::initializeFromNoiseRatio %8.8f %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
       mAlpha, mBeta, mGamma, aNoiseRatio, aDT, L);
 }
 
