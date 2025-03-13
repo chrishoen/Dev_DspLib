@@ -9,9 +9,9 @@ Description:
 
 #include "dspHistory.h"
 #include "dspHistoryStatistics.h"
+#include "dspHistoryCsvFileReader.h"
 #include "dspHistoryCsvFileWriter.h"
 #include "dspHistoryGenerator.h"
-#include "dspHistoryFilterOperator.h"
 
 #include "Parms.h"
 #include "TestOne.h"
@@ -25,7 +25,7 @@ using namespace Dsp;
 //******************************************************************************
 //******************************************************************************
 
-void TestOne::doCausal12()
+void TestOne::doRun1()
 {
    //***************************************************************************
    //***************************************************************************
@@ -33,28 +33,14 @@ void TestOne::doCausal12()
    // Generate a signal history.
 
    // Signal history.
-   History tHistoryX;
+   History tHistory;
 
-   // Signal history generator.
-   HistoryGenerator tGen(gParms.mHistoryGenParms);
+   // Signal history reader.
+   HistoryCsvFileReader tReader;
+   tReader.openFromFilepath(gParms.mInputFile);
 
    // Generate the history.
-   tGen.generateHistory(tHistoryX);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Generate a signal history.
-
-   // Signal history.
-   History tHistoryY;
-   History tHistoryDY;
-
-   // Signal history generator.
-   HistoryFilterOperator tFilterXY(gParms.mHistoryFilterParms1);
-
-   // Apply the operator on the history to produce a new history. F:X->Y.
-   tFilterXY.operate(tHistoryX,tHistoryY,tHistoryDY);
+   tReader.readHistory(0.002, 2, tHistory);
 
    //***************************************************************************
    //***************************************************************************
@@ -63,14 +49,8 @@ void TestOne::doCausal12()
 
    // Statistics
    HistoryStatistics  tStatistics;
-   tStatistics.collectValue(tHistoryX);
-   tStatistics.show(0,"X   ");
-
-   tStatistics.collectValue(tHistoryY);
-   tStatistics.show(0,"Y   ");
-
-   tStatistics.collectValue(tHistoryDY);
-   tStatistics.show(0,"DY   ");
+   tStatistics.collectValue(tHistory);
+   tStatistics.show(0,"H   ");
 
    //***************************************************************************
    //***************************************************************************
@@ -80,7 +60,7 @@ void TestOne::doCausal12()
    // Output file.
    HistoryCsvFileWriter  tSampleWriter;
    tSampleWriter.open(gParms.mOutputFile);
-   tSampleWriter.writeHistory(tHistoryX,tHistoryY,tHistoryDY);
+   tSampleWriter.writeHistory(tHistory);
    tSampleWriter.close();
 
    //***************************************************************************
@@ -88,6 +68,6 @@ void TestOne::doCausal12()
    //***************************************************************************
    // Done.
 
-   Prn::print(0, "TestOne::doCausal12 %d",tHistoryX.mMaxSamples);
+   Prn::print(0, "TestOne::doRun1 %d",tHistory.mMaxSamples);
 }
 

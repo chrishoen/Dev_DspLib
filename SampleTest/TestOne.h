@@ -16,18 +16,7 @@ class TestOne
 public:
    // Tests
    void doRun1();
-   void doRun1Deg();
    void doRun2();
    void doRun3();
-   void doRun4();
-   void doRun5();
-   void doRun6();
-   void doRun7();
-   void doRun8();
-
-   void doCausal1();
-   void doCausal12();
-
-   void doMem1();
  };
 

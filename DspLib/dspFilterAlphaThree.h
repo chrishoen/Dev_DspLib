@@ -48,13 +48,13 @@ public:
    real_t mGamma;
    real_t mDT;
 
-   // Filter parameters.
+   // Filter coefficients.
+   real_t mKK1,mKK2,mKK3;
+
+   // Other filter coefficients.
    real_t mK11,mK12,mK13,mK14;
    real_t mK21,mK22,mK23,mK24;
    real_t mK31,mK32,mK33,mK34;
-
-   // Filter parameters.
-   real_t mKK1,mKK2,mKK3;
 
    // If true then first sample.
    bool mFirstFlag;
@@ -148,7 +148,7 @@ public:
    // mKK3 = (real_t)(G/(2*DT2));  // same as matlab
    // mKK3 = (real_t)(2*G/DT2);    // same as wikipedia
 
-      // Other Filter coefficients.
+      // Other filter coefficients.
       mK11 = (real_t)(1-A);     mK12 = (real_t)((1-A)*DT);mK13 = (real_t)((1-A)*DT2/2);  mK14 = (real_t)(A);
       mK21 = (real_t)(-B/DT);   mK22 = (real_t)(1-B);     mK23 = (real_t)((1-B/2)*DT);   mK24 = (real_t)(B/DT);
       mK31 = (real_t)(-G/DT2);  mK32 = (real_t)(-G/DT);   mK33 = (real_t)(1-G/2);        mK34 = (real_t)(G/DT2);
@@ -174,7 +174,6 @@ public:
    //***************************************************************************
    //***************************************************************************
    // Put input value, return filtered output.
-
 
    real_t put(real_t aY)
    {
@@ -240,4 +239,5 @@ public:
 //******************************************************************************
 }//namespace
 }//namespace
+
 

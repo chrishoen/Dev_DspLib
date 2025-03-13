@@ -14,9 +14,6 @@
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // Constructor.
 
 Parms::Parms()
@@ -26,8 +23,7 @@ Parms::Parms()
 void Parms::reset()
 {
    BaseClass::reset();
-// BaseClass::setFileName_RelAlphaFiles("DspLib/History_Parms.txt");
-   BaseClass::setFilePath(Dsp::get_files_filepath("SampleHistory_Parms.txt"));
+   BaseClass::setFilePath(Dsp::get_files_filepath("SampleTest_Parms.txt"));
 
    mCode1 = 0;
    mCode2 = 0;
@@ -106,8 +102,7 @@ void Parms::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Code1"))  mCode1 = aCmd->argInt (1);
    if(aCmd->isCmd("Code2"))  mCode2 = aCmd->argInt (1);
 
-   if(aCmd->isCmd("InputFile"  )) aCmd->copyArgString(1,mInputFile,cMaxStringSize);
-
+   if(aCmd->isCmd("InputFile"   )) aCmd->copyArgString(1,mInputFile,cMaxStringSize);
    if(aCmd->isCmd("OutputFile"  )) aCmd->copyArgString(1,mOutputFile,cMaxStringSize);
    if(aCmd->isCmd("OutputFile2" )) aCmd->copyArgString(1,mOutputFile2,cMaxStringSize);
    if(aCmd->isCmd("OutputFile3" )) aCmd->copyArgString(1,mOutputFile3,cMaxStringSize);
