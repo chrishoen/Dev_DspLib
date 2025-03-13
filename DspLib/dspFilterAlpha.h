@@ -52,8 +52,10 @@ public:
 
    // Initialize from alpha.
    void initializeFromAlpha (double aP1); 
-   // Initialize from sigma ratio, process sigma over noise sigma.
-   void initializeFromSigmaRatio (double aSigmaRatio, double aDT); 
+   // Initialize from noise ratio, process sigma over sensor sigma.
+   // Calculate the tracking index from the noise ratio and calculate
+   // alpha from the tracking index.
+   void initializeFromNoiseRatio (double aNoiseRatio, double aDT); 
    // Initialize from step response time and threshold.
    void initializeFromStep(double aTs, double aStepTime, double aStepThresh);
    // Set the first flag true.
@@ -110,8 +112,12 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Initialize from sigma ratio, process sigma over noise sigma.
-   void initializeFromSigmaRatio(double aSigmaRatio,double aDT); 
+   // Initialize from alpha.
+   void initializeFromAlpha (double aAlpha, double aDT); 
+   // Initialize from noise ratio, process sigma over sensor sigma.
+   // Calculate the tracking index from the noise ratio and calculate
+   // alpha, beta, from the tracking index.
+   void initializeFromNoiseRatio(double aNoiseRatio,double aDT); 
 
    // Put input value, return filtered output.
    double put22(double aY);
@@ -169,8 +175,12 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Initialize from sigma ratio, process sigma over noise sigma.
-   void initializeFromSigmaRatio(double aSigmaRatio,double aDT); 
+   // Initialize from alpha.
+   void initializeFromAlpha (double aAlpha, double aDT); 
+   // Initialize from noise ratio, process sigma over sensor sigma.
+   // Calculate the tracking index from the noise ratio and calculate
+   // alpha, beta, gamma from the tracking index.
+   void initializeFromNoiseRatio(double aNoiseRatio,double aDT); 
 
    // Put input value, return filtered output.
    double put22(double aY);

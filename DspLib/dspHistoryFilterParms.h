@@ -106,7 +106,7 @@ public:
 
    double  mAlphaAlpha;  // Alpha filter parameter.
    double  mAlphaDT;          // Alpha filter parameter.
-   double  mAlphaSigmaRatio;  // Alpha filter parameter.
+   double  mAlphaNoiseRatio;  // Alpha filter parameter.
    double  mAlphaStepTime;    // Alpha filter parameter.
    double  mAlphaStepThresh;  // Alpha filter parameter.
 

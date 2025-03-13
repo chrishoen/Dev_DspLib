@@ -47,10 +47,10 @@ void AlphaStdDev::initializeFromAlpha (double aAlpha)
 }
 
 // Initialize from sigma ratio, process sigma over noise sigma.
-void AlphaStdDev::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
+void AlphaStdDev::initializeFromNoiseRatio (double aNoiseRatio, double aDT)
 {
-   mXAlpha.initializeFromSigmaRatio(aSigmaRatio, aDT);
-   mXSquareAlpha.initializeFromSigmaRatio(aSigmaRatio, aDT);
+   mXAlpha.initializeFromNoiseRatio(aNoiseRatio, aDT);
+   mXSquareAlpha.initializeFromNoiseRatio(aNoiseRatio, aDT);
    resetVars();
 }
 

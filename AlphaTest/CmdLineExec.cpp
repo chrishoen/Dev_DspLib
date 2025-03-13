@@ -81,10 +81,10 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"2");
-   aCmd->setArgDefault(2,"3");
-   int tGenSelect = aCmd->argInt(1);
-   int tFilterSelect = aCmd->argInt(2);
+   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(2,"2");
+   int tFilterSelect = aCmd->argInt(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
@@ -98,9 +98,12 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
    }
    switch(tFilterSelect)
    {
-      case 1: gParms.readSection("AlphaTwo1"); break;
-      case 2: gParms.readSection("AlphaTwo2"); break;
-      case 3: gParms.readSection("AlphaTwo3"); break;
+      case 11: gParms.readSection("AlphaTwo11"); break;
+      case 12: gParms.readSection("AlphaTwo12"); break;
+      case 13: gParms.readSection("AlphaTwo13"); break;
+      case 21: gParms.readSection("AlphaTwo21"); break;
+      case 22: gParms.readSection("AlphaTwo22"); break;
+      case 23: gParms.readSection("AlphaTwo23"); break;
       default: printf("SECTION NOT FOUND\n");
    }
       

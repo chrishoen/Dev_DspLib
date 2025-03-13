@@ -43,10 +43,10 @@ void AlphaAbsDev::initializeFromAlpha (double aAlpha)
 }
 
 // Initialize from sigma ratio, process sigma over noise sigma.
-void AlphaAbsDev::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
+void AlphaAbsDev::initializeFromNoiseRatio (double aNoiseRatio, double aDT)
 {
-   mAlphaX.initializeFromSigmaRatio(aSigmaRatio, aDT);
-   mAlphaAbsDev.initializeFromSigmaRatio(aSigmaRatio, aDT);
+   mAlphaX.initializeFromNoiseRatio(aNoiseRatio, aDT);
+   mAlphaAbsDev.initializeFromNoiseRatio(aNoiseRatio, aDT);
    resetVars();
 }
 

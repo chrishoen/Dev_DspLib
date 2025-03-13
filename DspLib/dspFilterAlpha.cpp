@@ -39,10 +39,10 @@ void AlphaOne::initializeFromAlpha(double aAlpha)
 //******************************************************************************
 // Initialize from sigma ratio, process sigma over noise sigma.
 
-void AlphaOne::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
+void AlphaOne::initializeFromNoiseRatio (double aNoiseRatio, double aDT)
 {
    // Calculate filter parameters.
-   double L  = aSigmaRatio*aDT*aDT;
+   double L  = aNoiseRatio*aDT*aDT;
    double L2 = L*L;
    double A = (-L2 + L*sqrt(16 + L2))/8;
    mAlpha = A;
@@ -51,8 +51,8 @@ void AlphaOne::initializeFromSigmaRatio (double aSigmaRatio, double aDT)
    mY   = 0.0;
    mXX  = 0.0;
    mFirstFlag = true;
-   printf("AlphaOne::initializeFromSigmaRatio %8.8f $ %8.8f  %8.8f $  %8.8f\n",
-       mAlpha, aSigmaRatio, aDT, L);
+   printf("AlphaOne::initializeFromNoiseRatio %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+       mAlpha, aNoiseRatio, aDT, L);
 }
 
 //******************************************************************************
@@ -146,12 +146,37 @@ double AlphaOne::put22(double aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize from sigma ratio, process sigma over noise sigma.
+// Initialize from alpha.
 
-void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
+void AlphaTwo::initializeFromAlpha(double aAlpha, double aDT)
 {
    // Calculate filter parameters.
-   double L  = aSigmaRatio*aDT*aDT;
+   double A  = aAlpha;
+   double B  = 2*(2-A) - 4*sqrt(1-A);
+
+   // Store parameter variables.
+   mAlpha = A;
+   mBeta  = B;
+   mDT    = aDT;
+
+   // Initialize output variables.
+   mY=0.0;
+   mXX=0.0;
+   mXV=0.0;
+   mFirstFlag = true;
+   printf("AlphaTwo::initializeFromAlpha %8.8f %8.8f $ %8.8f\n",
+      mAlpha, mBeta, aDT);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Initialize from sigma ratio, process sigma over noise sigma.
+
+void AlphaTwo::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
+{
+   // Calculate filter parameters.
+   double L  = aNoiseRatio*aDT*aDT;
    double L2 = L*L;
 
    double r  = (4 + L-sqrt(8*L + L2))/4;
@@ -171,8 +196,8 @@ void AlphaTwo::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    mXX=0.0;
    mXV=0.0;
    mFirstFlag = true;
-   printf("AlphaTwo::initializeFromSigmaRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
-      mAlpha, mBeta, aSigmaRatio, aDT, L);
+   printf("AlphaTwo::initializeFromNoiseRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+      mAlpha, mBeta, aNoiseRatio, aDT, L);
 }
 
 //******************************************************************************
@@ -242,12 +267,54 @@ double AlphaTwo::put22(double aY)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Initialize from sigma ratio, process sigma over noise sigma.
+// Initialize from alpha.
 
-void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
+void AlphaThree::initializeFromAlpha(double aAlpha, double aDT)
 {
    // Calculate filter parameters.
-   double L  = aSigmaRatio*aDT*aDT;
+   double A  = aAlpha;
+   double B  = 2*(2-A) - 4*sqrt(1-A);
+   double B2 = B*B;
+   double G  = B2/(2*A);
+   double DT = aDT;
+   double DT2 = DT*DT;
+
+   // Filter coefficients.
+   mK11 = (1-A);     mK12 = (1-A)*DT;  mK13 = (1-A)*DT2/2;  mK14 = A;
+   mK21 = (-B/DT);   mK22 = (1-B);     mK23 = (1-B/2)*DT;   mK24 = B/DT;
+   mK31 = (-G/DT2);  mK32 = (-G/DT);   mK33 = (1-G/2);      mK34 = G/DT2;
+
+   // Filter coefficients.
+   mKK1 = (DT2/2);
+   mKK2 = (B/DT);
+   mKK3 = (G/(DT2));    // same as kalman
+// mKK3 = (G/(2*DT2));  // same as matlab
+// mKK3 = (2*G/DT2);    // same as wikipedia
+
+// Store parameter variables.
+   mAlpha = A;
+   mBeta  = B;
+   mGamma = G;
+   mDT    = aDT;
+
+   // Initialize output variables.
+   mY=0.0;
+   mXX=0.0;
+   mXV=0.0;
+   mFirstFlag = true;
+   printf("AlphaTwo::initializeFromAlpha %8.8f %8.8f $ %8.8f\n",
+      mAlpha, mBeta, aDT);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Initialize from sigma ratio, process sigma over noise sigma.
+
+void AlphaThree::initializeFromNoiseRatio(double aNoiseRatio,double aDT)
+{
+   // Calculate filter parameters.
+   double L  = aNoiseRatio*aDT*aDT;
    double L2 = L*L;
 
    double b  = L/2 - 3;
@@ -299,8 +366,8 @@ void AlphaThree::initializeFromSigmaRatio(double aSigmaRatio,double aDT)
    mXA=0.0;
    mFirstFlag = true;
 
-   printf("AlphaThree::initializeFromSigmaRatio %8.8f %8.8f  %8.8f $ %8.8f  %8.8f $  %8.8f\n",
-      mAlpha, mBeta, mGamma, aSigmaRatio, aDT, L);
+   printf("AlphaThree::initializeFromNoiseRatio %8.8f %8.8f  %8.8f $ %8.8f  %8.8f $  %8.8f\n",
+      mAlpha, mBeta, mGamma, aNoiseRatio, aDT, L);
 }
 
 //******************************************************************************

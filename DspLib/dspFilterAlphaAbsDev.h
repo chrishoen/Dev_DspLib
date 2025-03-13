@@ -67,7 +67,7 @@ public:
    // Initialize with alpha.
    void initializeFromAlpha (double aP1); 
    // Initialize from sigma ratio, process sigma over noise sigma.
-   void initializeFromSigmaRatio (double aSigmaRatio, double aDT); 
+   void initializeFromNoiseRatio (double aNoiseRatio, double aDT); 
    // Initialize from step response time and threshold.
    void initializeFromStep(double aTs, double aStepTime, double aStepThresh);
    // Set the first flag true.

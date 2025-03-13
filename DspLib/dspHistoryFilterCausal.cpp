@@ -61,10 +61,10 @@ void HistoryFilterCausal::initializeCausalFilter()
          mAlphaOne.initializeFromAlpha(
             mParms.mAlphaAlpha);
       }
-      else if (mParms.mAlphaSigmaRatio > 0)
+      else if (mParms.mAlphaNoiseRatio > 0)
       {
-         mAlphaOne.initializeFromSigmaRatio(
-            mParms.mAlphaSigmaRatio,
+         mAlphaOne.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
             mParms.mAlphaDT);
       }
       else if (mParms.mAlphaStepTime > 0)
@@ -78,24 +78,47 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaTwo:
    {
-      mAlphaTwo.initializeFromSigmaRatio(
-         mParms.mAlphaSigmaRatio,
-         mParms.mAlphaDT);
+      if (mParms.mAlphaAlpha > 0)
+      {
+         mAlphaTwo.initializeFromAlpha(
+            mParms.mAlphaAlpha,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaNoiseRatio > 0)
+      {
+         mAlphaTwo.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
+            mParms.mAlphaDT);
+      }
    }
    break;
    case HistoryFilterParms::cCausalAlphaThree:
    {
-      mAlphaThree.initializeFromSigmaRatio(
-         mParms.mAlphaSigmaRatio,
-         mParms.mAlphaDT);
+      if (mParms.mAlphaAlpha > 0)
+      {
+         mAlphaThree.initializeFromAlpha(
+            mParms.mAlphaAlpha,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaNoiseRatio > 0)
+      {
+         mAlphaThree.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
+            mParms.mAlphaDT);
+      }
    }
    break;
    case HistoryFilterParms::cCausalAlphaStdDev:
    {
-      if (mParms.mAlphaSigmaRatio > 0)
+      if (mParms.mAlphaAlpha > 0)
       {
-         mAlphaStdDev.initializeFromSigmaRatio(
-            mParms.mAlphaSigmaRatio,
+         mAlphaStdDev.initializeFromAlpha(
+            mParms.mAlphaAlpha);
+      }
+      else if (mParms.mAlphaNoiseRatio > 0)
+      {
+         mAlphaStdDev.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
             mParms.mAlphaDT);
       }
       else if (mParms.mAlphaStepTime > 0)
@@ -109,10 +132,15 @@ void HistoryFilterCausal::initializeCausalFilter()
    break;
    case HistoryFilterParms::cCausalAlphaAbsDev:
    {
-      if (mParms.mAlphaSigmaRatio > 0)
+      if (mParms.mAlphaAlpha > 0)
       {
-         mAlphaAbsDev.initializeFromSigmaRatio(
-            mParms.mAlphaSigmaRatio,
+         mAlphaAbsDev.initializeFromAlpha(
+            mParms.mAlphaAlpha);
+      }
+      else if (mParms.mAlphaNoiseRatio > 0)
+      {
+         mAlphaAbsDev.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
             mParms.mAlphaDT);
       }
       else if (mParms.mAlphaStepTime > 0)

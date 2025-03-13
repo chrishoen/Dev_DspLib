@@ -63,10 +63,10 @@ public:
    //***************************************************************************
    // Methods. Initialize from sigma ratio, process sigma over noise sigma.
    
-   void initializeFromSigmaRatio (double aSigmaRatio, double aDT)
+   void initializeFromNoiseRatio (double aNoiseRatio, double aDT)
    {
       // Calculate filter parameters.
-      real_t L = aSigmaRatio*aDT*aDT;
+      real_t L = aNoiseRatio*aDT*aDT;
       real_t L2 = L*L;
       real_t A = (-L2 + L*sqrt(16 + L2))/8;
       mAlpha = A;
