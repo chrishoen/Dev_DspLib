@@ -51,10 +51,10 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"2");
-   aCmd->setArgDefault(2,"3");
-   int tGenSelect = aCmd->argInt(1);
-   int tFilterSelect = aCmd->argInt(2);
+   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(2,"2");
+   int tFilterSelect = aCmd->argInt(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
@@ -68,12 +68,14 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
    }
    switch(tFilterSelect)
    {
-      case 1: gParms.readSection("AlphaOne1"); break;
-      case 2: gParms.readSection("AlphaOne2"); break;
-      case 3: gParms.readSection("AlphaOne3"); break;
+      case 11: gParms.readSection("AlphaOne11"); break;
+      case 12: gParms.readSection("AlphaOne12"); break;
+      case 13: gParms.readSection("AlphaOne13"); break;
+      case 21: gParms.readSection("AlphaOne21"); break;
+      case 22: gParms.readSection("AlphaOne22"); break;
+      case 23: gParms.readSection("AlphaOne23"); break;
       default: printf("SECTION NOT FOUND\n");
    }
-      
 
    TestOne tTestOne;
    tTestOne.doRun1();
@@ -276,7 +278,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tStepTime = aCmd->argDouble(1);
    double tStepThresh = aCmd->argDouble(2);
 
-   Dsp::Filter::AlphaOne<double> tFilter;
+   Dsp::Filter::AlphaOneT<float> tFilter;
    tFilter.initializeFromStep(tTs, tStepTime, tStepThresh);
 
    Prn::print(0, "alpha %6.4f", tFilter.mAlpha);
