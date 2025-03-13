@@ -237,7 +237,7 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
 
    TestOne tTestOne;
-   tTestOne.doRun1();
+   tTestOne.doRun3();
 }
 
 //******************************************************************************

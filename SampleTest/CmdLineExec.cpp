@@ -51,7 +51,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
 
    gParms.reset();
@@ -77,7 +77,7 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
 
    gParms.reset();
@@ -103,7 +103,7 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"12");
+   aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
 
    gParms.reset();
@@ -177,7 +177,7 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
 
    TestOne tTestOne;
-   tTestOne.doRun1();
+   tTestOne.doRun3();
 }
 
 //******************************************************************************
