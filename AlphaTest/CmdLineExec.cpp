@@ -31,6 +31,10 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RUN1"))     executeRun1(aCmd);
    if (aCmd->isCmd("RUN2"))     executeRun2(aCmd);
    if (aCmd->isCmd("RUN3"))     executeRun3(aCmd);
+
+   if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
+   if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
+   if (aCmd->isCmd("TEST3"))    executeTest3(aCmd);
    if (aCmd->isCmd("PLOT"))     executePlot(aCmd);
 
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
@@ -145,6 +149,93 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
+   double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
+
+   gParms.reset();
+   gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+
+   gParms.readSection("AlphaOne1");
+   gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
+
+   TestOne tTestOne;
+   tTestOne.doRun1();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeTest2(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
+   double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
+
+   gParms.reset();
+   gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+
+   gParms.readSection("AlphaTwo11");
+   gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
+
+   TestOne tTestOne;
+   tTestOne.doRun2();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
+   double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
+
+   gParms.reset();
+   gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+
+   gParms.readSection("AlphaThree11");
+   gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
+
+   TestOne tTestOne;
+   tTestOne.doRun1();
 }
 
 //******************************************************************************
