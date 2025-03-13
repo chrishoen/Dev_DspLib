@@ -131,5 +131,7 @@ void Parms::expand()
    mHistoryGenParms.expand();
    mHistoryFilterParms1.expand();
    mHistoryFilterParms2.expand();
+   mHistoryFilterParms1.mAlphaDT = mHistoryDeltaT;
+   mHistoryFilterParms2.mAlphaDT = mHistoryDeltaT;
 }
 
