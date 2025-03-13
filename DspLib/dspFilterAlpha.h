@@ -142,7 +142,6 @@ public:
    //***************************************************************************
    // Members.
 
-
    // Input variable.
    double mY;
 
@@ -165,7 +164,7 @@ public:
    // Filter parameters.
    double mKK1,mKK2,mKK3;
 
-   // True for first sample.
+   // If true then first sample.
    bool mFirstFlag;
 
    //***************************************************************************
