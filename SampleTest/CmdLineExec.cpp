@@ -188,9 +188,10 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun1 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run1.py";
-   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run2.py";
-   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run3.py";
+   char* tPlotRun1  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run1.py";
+   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run2.py";
+   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run22.py";
+   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run3.py";
 
    aCmd->setArgDefault(1,"2");
    int tPlotSelect = aCmd->argInt(1);
@@ -200,6 +201,7 @@ void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
    {
       case 1: tPlotCmd = tPlotRun1 ; break;
       case 2: tPlotCmd = tPlotRun2 ; break;
+      case 22: tPlotCmd = tPlotRun22 ; break;
       case 3: tPlotCmd = tPlotRun3 ; break;
       default: printf("PLOT NOT FOUND\n");
    }
