@@ -25,7 +25,7 @@ namespace Dsp
 // that provides a sliding window that maintains minimums and maximumss.
 
 template <class T,int WinSize>
-class SlidingMinMax : public SlidingWindow<T, WinSize>
+class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
 {
 public:
    typedef SlidingWindow<T, WinSize> BaseClass;
@@ -45,7 +45,7 @@ public:
    // Methods.
 
    // Constructor.
-   SlidingMinMax()
+   SlidingMinMaxMean()
    {
       reset();
    }

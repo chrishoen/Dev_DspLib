@@ -1,7 +1,7 @@
 #pragma once
 
 #include "dspSlidingWindow.h"
-#include "dspSlidingMinMax.h"
+#include "dspSlidingMinMaxMean.h"
 #include "risCmdLineExec.h"
 
 //******************************************************************************
@@ -13,7 +13,7 @@ class CmdLineExec : public Ris::BaseCmdLineExec
 public:
 
   Dsp::SlidingWindow<int, 4> mWindow;
-  Dsp::SlidingMinMax<int, 4> mMinMax;
+  Dsp::SlidingMinMaxMean<int, 4> mMinMaxMean;
 
   CmdLineExec();
 
@@ -22,6 +22,7 @@ public:
 
   void executePut(Ris::CmdLineCmd* aCmd);
   void executeGet(Ris::CmdLineCmd* aCmd);
+  void executeTail(Ris::CmdLineCmd* aCmd);
   void executePutM(Ris::CmdLineCmd* aCmd);
   void executeShow(Ris::CmdLineCmd* aCmd);
   

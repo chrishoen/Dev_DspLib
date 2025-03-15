@@ -13,7 +13,7 @@ CmdLineExec::CmdLineExec()
 void CmdLineExec::reset()
 {
    mWindow.reset();
-   mMinMax.reset();
+   mMinMaxMean.reset();
 }
 
 //******************************************************************************
@@ -23,6 +23,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if(aCmd->isCmd("Put"    ))  executePut(aCmd);
    if(aCmd->isCmd("Get"    ))  executeGet(aCmd);
+   if(aCmd->isCmd("Tail"   ))  executeTail(aCmd);
    if(aCmd->isCmd("PutM"   ))  executePutM(aCmd);
    if(aCmd->isCmd("Show"   ))  executeShow(aCmd);
 
@@ -63,13 +64,23 @@ void CmdLineExec::executeGet(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
+void CmdLineExec::executeTail(Ris::CmdLineCmd* aCmd)
+{
+      int tValue = mWindow.elementAtTail();
+      Prn::print(0, "TAIL %d", tValue);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void CmdLineExec::executePutM(Ris::CmdLineCmd* aCmd)
 {
    int tValue = aCmd->argInt(1);
-   mMinMax.doPut(tValue);
+   mMinMaxMean.doPut(tValue);
 
    Prn::print(0, "PUTM %d $ min = %d max = %d",
-       tValue, mMinMax.mMin, mMinMax.mMax);
+       tValue, mMinMaxMean.mMin, mMinMaxMean.mMax);
 }
 
 //******************************************************************************
