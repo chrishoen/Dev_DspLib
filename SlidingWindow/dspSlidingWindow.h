@@ -74,7 +74,7 @@ public:
       if (++mSize > WinSize) mSize = WinSize;
 
       // Set the flags.
-      mFullFlag = mPutIndex >= WinSize;
+      mFullFlag = mSize == WinSize;
       return mFullFlag;
    }
 

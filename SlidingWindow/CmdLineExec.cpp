@@ -81,7 +81,7 @@ void CmdLineExec::executePutMMM(Ris::CmdLineCmd* aCmd)
 
    Prn::print(0, "MinMax %5.2f $ min = %5.2f max = %5.2f mean = %5.2f",
        tValue, mMinMaxMean.mMin, mMinMaxMean.mMax, mMinMaxMean.mMean);
-}
+}       
 
 //******************************************************************************
 //******************************************************************************

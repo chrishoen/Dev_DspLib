@@ -81,8 +81,45 @@ public:
 
    bool doPut (T& aInput)
    {
-      // Copy the input value into the element at the put index.
+      //************************************************************************
+      //************************************************************************
+      //************************************************************************
+      // Calculate the mean and related variables.
+
+      // If full.
+      if (BaseClass:: mFullFlag)
+      {
+         // Subtract the tail value from the sum.
+         mMeanSum -= elementAtTail();
+      }
+
+      // Add the input value to the sum.
+      mMeanSum += aInput;
+
+      // Put the input value into the element at the put index.
       BaseClass::doPut(aInput);
+
+      // If not full yet.
+      if (!BaseClass:: mFullFlag)
+      {
+         // Initialize.
+         mPrevMean = aInput;
+         mMean = aInput;
+         mDelta = 0;
+         mDev = 0;
+      }
+      // If full.
+      else
+      {
+         // Store previous mean.
+         mPrevMean = mMean;
+         // Calculate the mean as sum divided by the window size.
+         mMean = mMeanSum * cSumMultiplier;
+         // Calculate the delta.
+         mDelta = mMean - mPrevMean;
+         // Calculate the instantaneous deviation.
+         mDev = aInput - mMean;
+      }
 
       //************************************************************************
       //************************************************************************
@@ -104,38 +141,6 @@ public:
             if (tValue < mMin) mMin = tValue;
             if (tValue > mMax) mMax = tValue;
          }
-      }
-
-      //************************************************************************
-      //************************************************************************
-      //************************************************************************
-      // Calculate the mean and related variables.
-
-      // Add the input value to the sum.
-      mMeanSum += aInput;
-
-      // If not full yet.
-      if (!BaseClass:: mFullFlag)
-      {
-         // Initialize.
-         mPrevMean = aInput;
-         mMean = aInput;
-         mDelta = 0;
-         mDev = 0;
-      }
-      // If full.
-      else
-      {
-         // Store previous mean.
-         mPrevMean = mMean;
-         // Subtract the tail value from the sum.
-         mMeanSum -= elementAtTail();
-         // Calculate the mean, sum divided by the window size.
-         mMean = mMeanSum * cSumMultiplier;
-         // Calculate the delta.
-         mDelta = mMean - mPrevMean;
-         // Calculate the instantaneous deviation.
-         mDev = aInput - mMean;
       }
 
       // Done.
