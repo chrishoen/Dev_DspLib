@@ -1,12 +1,6 @@
 #pragma once
 
 /*==============================================================================
-
-Sliding window memory min max structure class template. 
-
-It is not thread safe.
-It is not shared memory safe.
-
 ==============================================================================*/
 
 #include "dspSlidingWindow.h"
@@ -21,8 +15,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This template implements an WinSize element memory structure of type T
-// that provides a sliding window that maintains minimums and maximumss.
+// This template implements a sliding window that maintains a history
+// of input values and calculates minimum, maximum, and mean on it.
 
 template <typename T,int WinSize>
 class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
@@ -35,6 +29,7 @@ public:
    //***************************************************************************
    // Constants.
 
+   // Used to divide by the window size.
    static constexpr T cSumMultiplier =  1.0/WinSize;
 
    //***************************************************************************
