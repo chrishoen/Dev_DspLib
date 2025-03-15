@@ -97,6 +97,7 @@ public:
       doAfterPut();
 
       // Done. 
+      mFirstFlag = false;
       return mFullFlag;
    }
 
