@@ -24,7 +24,7 @@ namespace Dsp
 // This template implements an WinSize element memory structure of type T
 // that provides a sliding window that maintains minimums and maximumss.
 
-template <class T,int WinSize>
+template <typename T,int WinSize>
 class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
 {
 public:
@@ -35,7 +35,7 @@ public:
    //***************************************************************************
    // Constants.
 
-   static const T cSumMultiplier =  ((T)(1))/WinSize;
+   static constexpr T cSumMultiplier =  1.0/WinSize;
 
    //***************************************************************************
    //***************************************************************************
