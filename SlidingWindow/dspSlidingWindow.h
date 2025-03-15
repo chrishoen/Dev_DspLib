@@ -1,12 +1,6 @@
 #pragma once
 
 /*==============================================================================
-
-Sliding window memory structure class template. 
-
-It is not thread safe.
-It is not shared memory safe.
-
 ==============================================================================*/
 //******************************************************************************
 //******************************************************************************
@@ -18,8 +12,8 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This template implements an WinSize element memory structure of type T
-// that provides a sliding window. It can be used for digital filters.
+// This template implements a sliding window that maintains a history
+// of input values.
 
 template <class T,int WinSize>
 class SlidingWindow 
@@ -105,11 +99,13 @@ public:
       return mElement[tGetIndex];
    }
 
+   // Return a reference to the head element.
    T& elementAtHead()
    {
       return elementAt(0);
    }
 
+   // Return a reference to the tail element.
    T& elementAtTail()
    {
       int tTailIndex = mSize > 0 ? mSize - 1 : 0; 
@@ -132,10 +128,10 @@ PutIndex
 2  2  put 103  
 3  3  put 104
 4  0  put 105
-6  2  put 106    get 0 = 106
+6  2  put 106    get 0 = 106   most recent, youngest
 7  3             get 1 = 105
 8  0             get 2 = 104
-9  1             get 3 = 103
+9  1             get 3 = 103   least recent, oldest
 7  2
 8  3
 
