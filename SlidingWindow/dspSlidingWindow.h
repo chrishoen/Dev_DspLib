@@ -68,8 +68,11 @@ public:
    // Methods. Put.
 
    // This is called by the put operation before the actual put.
+   // It is supplied by inheritors.
    virtual void doBeforePut() {}
+
    // This is called by the put operation after the actual put.
+   // It is supplied by inheritors.
    virtual void doAfterPut() {}
 
    // Write an element to the array at the put index and advance
@@ -78,16 +81,17 @@ public:
    {
       // Store the input.
       mInput = aInput;
+
       // Call inheritor method.
       doBeforePut();
 
-      // Copy the value into the element at the put index.
+      // Copy the input value into the element at the put index.
       mElement[mPutIndex] = aInput;
 
-      // Advance the put index.
+      // Advance the put index, wrap around.
       if (++mPutIndex == WinSize) mPutIndex = 0;
 
-      // Advance the size.
+      // Advance the size up to the window size.
       if (++mSize > WinSize) mSize = WinSize;
 
       // Set the flags.
@@ -107,7 +111,7 @@ public:
    // Methods. Get.
 
    // Return an element that is relative to the first gettable element,
-   // which is the last element that was put. Index 0 is the most recent. 
+   // which is the last element that was put to. Index 0 is the most recent. 
    // Index WinSize-1 is the least recent.
    T elementAt(int aIndex)
    {
