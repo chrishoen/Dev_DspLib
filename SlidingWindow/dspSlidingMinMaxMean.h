@@ -44,15 +44,15 @@ public:
 
    // Output variables. Minimum, maximum, mean of the current occupied
    // element values.
-   T mMin;
-   T mMax;
-   T mMean;
+   T mMin;          // Minimum of window values.
+   T mMax;          // Maximum of window values.
+   T mMean;         // Mean    of window values.
+   T mDelta;        // Difference between mean and previous mean.
+   T mDev;          // Deviation  of input from mean.
 
    // Calculation variables.
-   T mMeanSum;
-
-   // If true then this is the first put.
-   bool mFirstFlag;
+   T mMeanSum;      // Sum     of window values.  
+   T mPrevMean;     // Mean    of window values, previous. 
 
    //***************************************************************************
    //***************************************************************************
@@ -72,21 +72,22 @@ public:
       mMax = 0;
       mMean = 0;
       mMeanSum = 0;
-      mFirstFlag = true;
+      mDelta = 0;
+      mDev = 0;
+      mMeanSum = 0;
+      mPrevMean = 0;
    }
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods.
-   
-   // Write an element to the array at the put index and advance
-   // the put index. Calculate the minimum and maximum for all of
-   // the occupied elements. Return true if full.
-   bool doPut (T& aValue)
+   // Methods. Write an element to the array at the put index and advance
+   // the put index. Calculate the output variables. Return true if full.
+
+   bool doPut (T& aInput)
    {
-      // Copy the value into the element at the put index.
-      BaseClass::doPut(aValue);
+      // Copy the input value into the element at the put index.
+      BaseClass::doPut(aInput);
 
       //************************************************************************
       //************************************************************************
@@ -113,23 +114,33 @@ public:
       //************************************************************************
       //************************************************************************
       //************************************************************************
-      // Calculate the mean.
+      // Calculate the mean and related variables.
 
-      // Add the current value to the sum.
-      mMeanSum += aValue;
+      // Add the input value to the sum.
+      mMeanSum += aInput;
 
       // If not full yet.
       if (!BaseClass:: mFullFlag)
       {
-         mMean = aValue;
+         // Initialize.
+         mPrevMean = aInput;
+         mMean = aInput;
+         mDelta = 0;
+         mDev = 0;
       }
       // If full.
       else
       {
+         // Store previous mean.
+         mPrevMean = mMean;
          // Subtract the tail value from the sum.
          mMeanSum -= elementAtTail();
          // Calculate the mean, sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
+         // Calculate the delta.
+         mDelta = mMean - mPrevMean;
+         // Calculate the instantaneous deviation.
+         mDev = aInput - mMean;
       }
 
       // Done.
