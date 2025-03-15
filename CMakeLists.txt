@@ -16,7 +16,6 @@ my_show_cmake_vars()
 
 
 add_subdirectory ("DspLib")
-add_subdirectory ("AlphaTest")
 add_subdirectory ("SampleTest")
 return()
 

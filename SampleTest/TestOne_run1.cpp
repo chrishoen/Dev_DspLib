@@ -41,7 +41,7 @@ void TestOne::doRun1()
    tReader.openFromFilepath(gParms.mInputFile);
 
    // Read the history.
-   tReader.readHistory(0.002, 2, tHistoryX);
+   tReader.readHistory(gParms.mHistoryDeltaT, 5, tHistoryX);
 
    //***************************************************************************
    //***************************************************************************

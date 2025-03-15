@@ -207,7 +207,7 @@ void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
    }
 
    int tRet = Ris::doSystemCommand(tPlotCmd);
-   Sleep(2000);
+   Sleep(1000);
    SetForegroundWindow(GetConsoleWindow());
    
    Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
