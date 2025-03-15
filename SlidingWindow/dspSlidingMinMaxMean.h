@@ -60,7 +60,7 @@ public:
       reset();
    }
 
-   void reset()
+   void reset() override
    {
       BaseClass::reset();
       mMin = 0;
@@ -76,35 +76,39 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods. Write an element to the array at the put index and advance
-   // the put index. Calculate the output variables. Return true if full.
+   // This is called by the base class put operation before the actual put.
 
-   bool doPut (T& aInput)
+   void doBeforePut() override
    {
-      //************************************************************************
-      //************************************************************************
-      //************************************************************************
-      // Calculate the mean and related variables.
-
       // If full.
-      if (BaseClass:: mFullFlag)
+      if (BaseClass::mFullFlag)
       {
          // Subtract the tail value from the sum.
          mMeanSum -= elementAtTail();
       }
 
       // Add the input value to the sum.
-      mMeanSum += aInput;
+      mMeanSum += mInput;
+   }
 
-      // Put the input value into the element at the put index.
-      BaseClass::doPut(aInput);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // This is called by the base class put operation after the actual put.
+
+   void doAfterPut() override
+   {
+      //************************************************************************
+      //************************************************************************
+      //************************************************************************
+      // Calculate the mean and related variables.
 
       // If not full yet.
-      if (!BaseClass:: mFullFlag)
+      if (!BaseClass::mFullFlag)
       {
          // Initialize.
-         mPrevMean = aInput;
-         mMean = aInput;
+         mPrevMean = mInput;
+         mMean = mInput;
          mDelta = 0;
          mDev = 0;
       }
@@ -118,7 +122,7 @@ public:
          // Calculate the delta.
          mDelta = mMean - mPrevMean;
          // Calculate the instantaneous deviation.
-         mDev = aInput - mMean;
+         mDev = mInput - mMean;
       }
 
       //************************************************************************
@@ -142,9 +146,6 @@ public:
             if (tValue > mMax) mMax = tValue;
          }
       }
-
-      // Done.
-      return BaseClass::mFullFlag;
    }
 };
 

@@ -25,6 +25,9 @@ public:
    //***************************************************************************
    // Members.
 
+   // Input variable.
+   T mInput;
+
    // Index of the next element to put to. [0..WinSize-1]
    int mPutIndex;
 
@@ -33,6 +36,9 @@ public:
 
    // Number of array occupied elements.
    int mSize;
+
+   // True if first put.
+   bool mFirstFlag;
 
    // Array of elements.
    T mElement[WinSize];
@@ -48,11 +54,12 @@ public:
       reset();
    }
 
-   void reset()
+   virtual void reset()
    {
       mPutIndex = 0;
       mFullFlag = false;
       mSize = 0;
+      mFirstFlag = true;
    }
 
    //***************************************************************************
@@ -60,12 +67,22 @@ public:
    //***************************************************************************
    // Methods. Put.
 
+   // This is called by the put operation before the actual put.
+   virtual void doBeforePut() {}
+   // This is called by the put operation after the actual put.
+   virtual void doAfterPut() {}
+
    // Write an element to the array at the put index and advance
    // the put index. Return true if full.
-   bool doPut (T& aValue)
+   bool doPut (T aInput)
    {
+      // Store the input.
+      mInput = aInput;
+      // Call inheritor method.
+      doBeforePut();
+
       // Copy the value into the element at the put index.
-      mElement[mPutIndex] = aValue;
+      mElement[mPutIndex] = aInput;
 
       // Advance the put index.
       if (++mPutIndex == WinSize) mPutIndex = 0;
@@ -75,6 +92,11 @@ public:
 
       // Set the flags.
       mFullFlag = mSize == WinSize;
+
+      // Call inheritor method.
+      doAfterPut();
+
+      // Done. 
       return mFullFlag;
    }
 
@@ -83,11 +105,10 @@ public:
    //***************************************************************************
    // Methods. Get.
 
-   // Return a reference to an element that is relative to the first
-   // gettable element. The first gettable element is the last element
-   // that was put. Index 0 is the most recent. Index WinSize-1 is the
-   // least recent.
-   T& elementAt(int aIndex)
+   // Return an element that is relative to the first gettable element,
+   // which is the last element that was put. Index 0 is the most recent. 
+   // Index WinSize-1 is the least recent.
+   T elementAt(int aIndex)
    {
       // If try to access past the last element then return the last element.
       if (aIndex > mSize - 1) aIndex = mSize - 1;
@@ -99,14 +120,14 @@ public:
       return mElement[tGetIndex];
    }
 
-   // Return a reference to the head element.
-   T& elementAtHead()
+   // Return the head element.
+   T elementAtHead()
    {
       return elementAt(0);
    }
 
-   // Return a reference to the tail element.
-   T& elementAtTail()
+   // Return the tail element.
+   T elementAtTail()
    {
       int tTailIndex = mSize > 0 ? mSize - 1 : 0; 
       return elementAt(tTailIndex);
