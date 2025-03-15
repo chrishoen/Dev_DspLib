@@ -37,9 +37,6 @@ public:
    // If true then the array is full.
    bool mFullFlag;
 
-   // If true then the array is empty.
-   bool mEmptyFlag;
-
    // Number of array occupied elements.
    int mSize;
 
@@ -61,7 +58,6 @@ public:
    {
       mPutIndex = 0;
       mFullFlag = false;
-      mEmptyFlag = true;
       mSize = 0;
    }
 
@@ -84,7 +80,6 @@ public:
       if (++mSize > WinSize) mSize = WinSize;
 
       // Set the flags.
-      mEmptyFlag = false;
       mFullFlag = mPutIndex >= WinSize;
       return mFullFlag;
    }
@@ -109,6 +104,17 @@ public:
       // Return the element at the get index.
       return mElement[tGetIndex];
    }
+
+   T& elementAtHead()
+   {
+      return elementAt(0);
+   }
+
+   T& elementAtTail()
+   {
+      int tTailIndex = mSize > 0 ? mSize - 1 : 0; 
+      return elementAt(tTailIndex);
+   } 
 };
 
 //******************************************************************************
