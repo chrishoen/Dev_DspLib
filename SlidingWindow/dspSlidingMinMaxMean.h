@@ -33,11 +33,26 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Constants.
+
+   static const T cSumMultiplier =  ((T)(1))/WinSize;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members.
 
-   // Minimum and maximum of the current occupied element values.
+   // Output variables. Minimum, maximum, mean of the current occupied
+   // element values.
    T mMin;
    T mMax;
+   T mMean;
+
+   // Calculation variables.
+   T mMeanSum;
+
+   // If true then this is the first put.
+   bool mFirstFlag;
 
    //***************************************************************************
    //***************************************************************************
@@ -55,6 +70,9 @@ public:
       BaseClass::reset();
       mMin = 0;
       mMax = 0;
+      mMean = 0;
+      mMeanSum = 0;
+      mFirstFlag = true;
    }
 
    //***************************************************************************
@@ -69,6 +87,11 @@ public:
    {
       // Copy the value into the element at the put index.
       BaseClass::doPut(aValue);
+
+      //************************************************************************
+      //************************************************************************
+      //************************************************************************
+      // Calculate the min and max.
 
       // Loop through all of the occupied elements to obtain
       // the minimums and maximums.
@@ -85,6 +108,28 @@ public:
             if (tValue < mMin) mMin = tValue;
             if (tValue > mMax) mMax = tValue;
          }
+      }
+
+      //************************************************************************
+      //************************************************************************
+      //************************************************************************
+      // Calculate the mean.
+
+      // Add the current value to the sum.
+      mMeanSum += aValue;
+
+      // If not full yet.
+      if (!BaseClass:: mFullFlag)
+      {
+         mMean = aValue;
+      }
+      // If full.
+      else
+      {
+         // Subtract the tail value from the sum.
+         mMeanSum -= elementAtTail();
+         // Calculate the mean, sum divided by the window size.
+         mMean = mMeanSum * cSumMultiplier;
       }
 
       // Done.
