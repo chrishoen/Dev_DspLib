@@ -296,9 +296,9 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executePlotA
 (Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun1 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run1.py";
-   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run2.py";
-   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_run3.py";
+   char* tPlotRun1 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_alpha1.py";
+   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_alpha2.py";
+   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_alpha3.py";
 
    aCmd->setArgDefault(1,"2");
    int tPlotSelect = aCmd->argInt(1);
@@ -322,8 +322,8 @@ void CmdLineExec::executePlotA
 
 void CmdLineExec::executePlotSM(Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sliding_run2.py";
-   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sliding_run3.py";
+   char* tPlotRun2 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_sliding2.py";
+   char* tPlotRun3 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_alpha_sliding3.py";
 
    aCmd->setArgDefault(1,"2");
    int tPlotSelect = aCmd->argInt(1);

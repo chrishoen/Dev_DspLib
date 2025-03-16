@@ -30,14 +30,17 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("RESET")) reset();
 
-   if (aCmd->isCmd("RUN1"))     executeRun1(aCmd);
-   if (aCmd->isCmd("RUN2"))     executeRun2(aCmd);
-   if (aCmd->isCmd("RUN3"))     executeRun3(aCmd);
+   if (aCmd->isCmd("A1"))       executeAlpha1(aCmd);
+   if (aCmd->isCmd("A2"))       executeAlpha2(aCmd);
+   if (aCmd->isCmd("A3"))       executeAlpha3(aCmd);
+   if (aCmd->isCmd("SM2"))      executeSliding2(aCmd);
+   if (aCmd->isCmd("SM3"))      executeSliding3(aCmd);
 
    if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
    if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
    if (aCmd->isCmd("TEST3"))    executeTest3(aCmd);
-   if (aCmd->isCmd("PLOT"))     executePlot(aCmd);
+   if (aCmd->isCmd("PLOTA"))    executePlotA(aCmd);
+   if (aCmd->isCmd("PLOTSM"))   executePlotSM(aCmd);
 
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
@@ -51,7 +54,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeAlpha1(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
@@ -77,7 +80,7 @@ void CmdLineExec::executeRun1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeAlpha2(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
@@ -103,7 +106,7 @@ void CmdLineExec::executeRun2(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeAlpha3(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"11");
    int tFilterSelect = aCmd->argInt(1);
@@ -120,6 +123,34 @@ void CmdLineExec::executeRun3(Ris::CmdLineCmd* aCmd)
       case 23: gParms.readSection("AlphaThree23"); break;
       default: printf("SECTION NOT FOUND\n");
    }
+
+   TestOne tTestOne;
+   tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeSliding2(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("SlidingMean");
+
+   TestOne tTestOne;
+   tTestOne.doRun2();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeSliding3(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("SlidingMean");
 
    TestOne tTestOne;
    tTestOne.doRun3();
@@ -186,12 +217,12 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executePlotA(Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun1  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run1.py";
-   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run2.py";
-   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run22.py";
-   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_run3.py";
+   char* tPlotRun1  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha1.py";
+   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha2.py";
+   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha22.py";
+   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha3.py";
 
    aCmd->setArgDefault(1,"2");
    int tPlotSelect = aCmd->argInt(1);
@@ -200,6 +231,35 @@ void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
    switch(tPlotSelect)
    {
       case 1: tPlotCmd = tPlotRun1 ; break;
+      case 2: tPlotCmd = tPlotRun2 ; break;
+      case 22: tPlotCmd = tPlotRun22 ; break;
+      case 3: tPlotCmd = tPlotRun3 ; break;
+      default: printf("PLOT NOT FOUND\n");
+   }
+
+   int tRet = Ris::doSystemCommand(tPlotCmd);
+   Sleep(1000);
+   SetForegroundWindow(GetConsoleWindow());
+   
+   Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executePlotSM(Ris::CmdLineCmd* aCmd)
+{
+   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding2.py";
+   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding22.py";
+   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding3.py";
+
+   aCmd->setArgDefault(1,"2");
+   int tPlotSelect = aCmd->argInt(1);
+
+   char* tPlotCmd = 0;
+   switch(tPlotSelect)
+   {
       case 2: tPlotCmd = tPlotRun2 ; break;
       case 22: tPlotCmd = tPlotRun22 ; break;
       case 3: tPlotCmd = tPlotRun3 ; break;
