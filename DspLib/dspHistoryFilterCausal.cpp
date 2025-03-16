@@ -390,7 +390,7 @@ void HistoryFilterCausal::putToFilter(
       mSlidingMean.doPut(aInput);
       *aOutput1 = mSlidingMean.mMean;
       *aOutput2 = mSlidingMean.mDelta;
-      *aOutput2 = mSlidingMean.mDev;
+      *aOutput3 = mSlidingMean.mDev;
    }
    break;
    }

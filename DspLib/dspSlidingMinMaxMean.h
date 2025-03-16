@@ -71,6 +71,7 @@ public:
       mDev = 0;
       mMeanSum = 0;
       mPrevMean = 0;
+      printf("SlidingMinMaxMean::reset\n");
    }
 
    //***************************************************************************
