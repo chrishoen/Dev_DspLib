@@ -152,6 +152,11 @@ void HistoryFilterCausal::initializeCausalFilter()
       }
    }
    break;
+   case HistoryFilterParms::cCausalSlidingMean:
+   {
+      mSlidingMean.reset();
+   }
+   break;
    }
 }
 
@@ -255,6 +260,13 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
       }
    }
    break;
+   case HistoryFilterParms::cCausalSlidingMean:
+   {
+      *aOutput = 0.0;
+      mSlidingMean.doPut(aInput);
+      *aOutput = mSlidingMean.mMean;
+   }
+   break;
    }
 }
 
@@ -305,6 +317,13 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
       mAlphaAbsDev.put(aInput);
       *aOutput1 = mAlphaAbsDev.mEX;
       *aOutput2 = mAlphaAbsDev.mUX;
+   }
+   break;
+   case HistoryFilterParms::cCausalSlidingMean:
+   {
+      mSlidingMean.doPut(aInput);
+      *aOutput1 = mSlidingMean.mMean;
+      *aOutput2 = mSlidingMean.mDelta;
    }
    break;
    }
@@ -364,6 +383,14 @@ void HistoryFilterCausal::putToFilter(
       *aOutput1 = mAlphaAbsDev.mEX;
       *aOutput2 = mAlphaAbsDev.mUX;
       *aOutput3 = 0.0;
+   }
+   break;
+   case HistoryFilterParms::cCausalSlidingMean:
+   {
+      mSlidingMean.doPut(aInput);
+      *aOutput1 = mSlidingMean.mMean;
+      *aOutput2 = mSlidingMean.mDelta;
+      *aOutput2 = mSlidingMean.mDev;
    }
    break;
    }

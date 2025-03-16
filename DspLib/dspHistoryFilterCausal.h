@@ -14,6 +14,7 @@ Signal history linear operator: the identity operator.
 #include "dspFilterAlpha.h"
 #include "dspFilterAlphaStdDev.h"
 #include "dspFilterAlphaAbsDev.h"
+#include "dspSlidingMinMaxMean.h"
 
 #include "dspFilterAlphaOne.h"
 #include "dspFilterAlphaTwo.h"
@@ -48,15 +49,16 @@ public:
    //***************************************************************************
    // Members.
 
-   Dsp::Filter::ButterworthLP      mButterworth;
-// Dsp::Filter::AlphaOne           mAlphaOne;
-   Dsp::Filter::AlphaOneT<float>   mAlphaOne;
-// Dsp::Filter::AlphaTwo           mAlphaTwo;
-   Dsp::Filter::AlphaTwoT<float>   mAlphaTwo;
-// Dsp::Filter::AlphaThree         mAlphaThree;
-   Dsp::Filter::AlphaThreeT<float> mAlphaThree;
-   Dsp::Filter::AlphaStdDev        mAlphaStdDev;
-   Dsp::Filter::AlphaAbsDev        mAlphaAbsDev;
+   Dsp::Filter::ButterworthLP        mButterworth;
+// Dsp::Filter::AlphaOne             mAlphaOne;
+   Dsp::Filter::AlphaOneT<float>     mAlphaOne;
+// Dsp::Filter::AlphaTwo             mAlphaTwo;
+   Dsp::Filter::AlphaTwoT<float>     mAlphaTwo;
+// Dsp::Filter::AlphaThree           mAlphaThree;
+   Dsp::Filter::AlphaThreeT<float>   mAlphaThree;
+   Dsp::Filter::AlphaStdDev          mAlphaStdDev;
+   Dsp::Filter::AlphaAbsDev          mAlphaAbsDev;
+   Dsp::SlidingMinMaxMean<float, 32> mSlidingMean;
 
    //***************************************************************************
    //***************************************************************************
