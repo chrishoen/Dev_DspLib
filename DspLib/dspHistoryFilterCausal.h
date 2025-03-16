@@ -58,7 +58,7 @@ public:
    Dsp::Filter::AlphaThreeT<float>   mAlphaThree;
    Dsp::Filter::AlphaStdDev          mAlphaStdDev;
    Dsp::Filter::AlphaAbsDev          mAlphaAbsDev;
-   Dsp::SlidingMinMaxMean<float, 32> mSlidingMean;
+   Dsp::SlidingMinMaxMean<float, 16> mSlidingMean;
 
    //***************************************************************************
    //***************************************************************************
