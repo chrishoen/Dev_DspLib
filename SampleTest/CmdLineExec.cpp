@@ -181,7 +181,7 @@ void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeTest2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(1,"0.4");
    double tAlpha = aCmd->argDouble(1);
 
    gParms.reset();
