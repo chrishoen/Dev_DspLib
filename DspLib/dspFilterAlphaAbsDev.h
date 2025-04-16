@@ -21,10 +21,12 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 // This nonlinear filter characterizes an input signal by calculating
-// realtime expectations and uncertainties of the signal. Realtime 
-// expectations are calculated with alpha filters. This is similar to
-// using sliding window moving averages. The expectation and uncertainty
-// calculated are: 
+// short term local expectations and uncertainties of the signal. Short
+// term local expectations are calculated by alpha filters. This is
+// similar to using sliding window moving averages to calculate short
+// term averages.
+//
+// The expectation and uncertainty calculated are: 
 // mean and absolute deviation.
 //
 // Expectation (mean) of X is E[X]
