@@ -51,7 +51,7 @@ void HistoryFilterParms::reset()
    mAlphaDT = 0.0;
    mAlphaNoiseRatio = 0.0;
    mAlphaStepTime = 0.0;
-   mAlphaStepThresh = 0.0;
+   mAlphaStepThresh = 0.90;
 
    mAlphaSelect = cNone;
 }

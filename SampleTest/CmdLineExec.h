@@ -26,6 +26,7 @@ public:
    void executeAlpha3    (Ris::CmdLineCmd* aCmd);
    void executeSliding2  (Ris::CmdLineCmd* aCmd);
    void executeSliding3  (Ris::CmdLineCmd* aCmd);
+   void executeAbsDev    (Ris::CmdLineCmd* aCmd);
 
    void executeTest1   (Ris::CmdLineCmd* aCmd);
    void executeTest2   (Ris::CmdLineCmd* aCmd);

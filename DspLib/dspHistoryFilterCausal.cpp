@@ -124,7 +124,7 @@ void HistoryFilterCausal::initializeCausalFilter()
       else if (mParms.mAlphaStepTime > 0)
       {
          mAlphaStdDev.initializeFromStep(
-            1/mParms.mFs,
+            mParms.mAlphaDT,
             mParms.mAlphaStepTime,
             mParms.mAlphaStepThresh);
       }
@@ -146,7 +146,7 @@ void HistoryFilterCausal::initializeCausalFilter()
       else if (mParms.mAlphaStepTime > 0)
       {
          mAlphaAbsDev.initializeFromStep(
-            1/mParms.mFs,
+            mParms.mAlphaDT,
             mParms.mAlphaStepTime,
             mParms.mAlphaStepThresh);
       }

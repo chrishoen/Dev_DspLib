@@ -35,6 +35,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("A3"))       executeAlpha3(aCmd);
    if (aCmd->isCmd("SM2"))      executeSliding2(aCmd);
    if (aCmd->isCmd("SM3"))      executeSliding3(aCmd);
+   if (aCmd->isCmd("DEV"))      executeAbsDev(aCmd);
 
    if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
    if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
@@ -154,6 +155,20 @@ void CmdLineExec::executeSliding3(Ris::CmdLineCmd* aCmd)
 
    TestOne tTestOne;
    tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeAbsDev(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("AbsDev");
+
+   TestOne tTestOne;
+   tTestOne.doRun2();
 }
 
 //******************************************************************************
