@@ -80,6 +80,7 @@ public:
    static const int cCausalAlphaStdDev     = 5;
    static const int cCausalAlphaAbsDev     = 6;
    static const int cCausalSlidingMean     = 7;
+   static const int cCausalBiasEstimator   = 8;
 
    // Alpha filter states.
    static const int cAlphaSelectXX         = 1;
@@ -113,6 +114,10 @@ public:
 
    int     mAlphaSelect;      // Alpha filter output state selector.
 
+   double  mLimitHi;          // Signal limit.
+   double  mLimitLo;          // Signal limit.
+   double  mThreshDev;        // Deviation threshold.
+   
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************

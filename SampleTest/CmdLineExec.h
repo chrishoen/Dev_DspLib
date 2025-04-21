@@ -27,6 +27,7 @@ public:
    void executeSliding2  (Ris::CmdLineCmd* aCmd);
    void executeSliding3  (Ris::CmdLineCmd* aCmd);
    void executeAbsDev    (Ris::CmdLineCmd* aCmd);
+   void executeBias      (Ris::CmdLineCmd* aCmd);
 
    void executeTest1   (Ris::CmdLineCmd* aCmd);
    void executeTest2   (Ris::CmdLineCmd* aCmd);
@@ -34,6 +35,7 @@ public:
 
    void executePlotA   (Ris::CmdLineCmd* aCmd);
    void executePlotSM  (Ris::CmdLineCmd* aCmd);
+   void executePlotB   (Ris::CmdLineCmd* aCmd);
    void executeParms   (Ris::CmdLineCmd* aCmd);
 };
 

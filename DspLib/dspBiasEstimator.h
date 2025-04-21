@@ -71,11 +71,11 @@ public:
    // Constructor.
    BiasEstimator()
    {
-      resetVars();
+      reset();
    }
 
    // Reset. 
-   void resetVars()
+   void reset()
    {
       mLimitHi = (real_t)100000;
       mLimitLo = (real_t)0;
@@ -98,7 +98,8 @@ public:
    {
       mAlphaX.initializeFromAlpha(aAlpha);
       mAlphaBias.initializeFromAlpha(aAlpha);
-      resetVars();
+      reset();
+      printf("BiasEstimator::initializeFromAlpha\n");
    }
    
    // Initialize from sigma ratio, process sigma over noise sigma.
@@ -106,7 +107,8 @@ public:
    {
       mAlphaX.initializeFromNoiseRatio(aNoiseRatio, aDT);
       mAlphaBias.initializeFromNoiseRatio(aNoiseRatio, aDT);
-      resetVars();
+      reset();
+      printf("BiasEstimator::initializeFromNoiseRatio\n");
    }
    
    // Initialize from step response time and threshold.
@@ -114,8 +116,8 @@ public:
    {
       mAlphaX.initializeFromStep(aTs, aStepTime, aStepThresh);
       mAlphaBias.initializeFromStep(aTs, aStepTime, aStepThresh);
-      resetVars();
-   
+      reset();
+      printf("BiasEstimator::initializeFromStep\n");
    }
    // Set the first flag true.
    void setFirst()
@@ -176,8 +178,8 @@ public:
       printf("%3d %8.3f %8.3f %8.3f\n",
          mK,
          mX,
-         mEX,
-         mUX);
+         mMean,
+         mBias);
    }
    };
 

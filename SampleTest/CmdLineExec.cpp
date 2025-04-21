@@ -36,12 +36,14 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("SM2"))      executeSliding2(aCmd);
    if (aCmd->isCmd("SM3"))      executeSliding3(aCmd);
    if (aCmd->isCmd("DEV"))      executeAbsDev(aCmd);
+   if (aCmd->isCmd("BIAS"))     executeBias(aCmd);
 
    if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
    if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
    if (aCmd->isCmd("TEST3"))    executeTest3(aCmd);
    if (aCmd->isCmd("PLOTA"))    executePlotA(aCmd);
    if (aCmd->isCmd("PLOTSM"))   executePlotSM(aCmd);
+   if (aCmd->isCmd("PLOTB"))    executePlotB(aCmd);
 
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
@@ -175,6 +177,20 @@ void CmdLineExec::executeAbsDev(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
+void CmdLineExec::executeBias(Ris::CmdLineCmd* aCmd)
+{
+   gParms.reset();
+   gParms.readSection("default");
+   gParms.readSection("BiasEstimator");
+
+   TestOne tTestOne;
+   tTestOne.doRun3();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"0.1");
@@ -280,6 +296,21 @@ void CmdLineExec::executePlotSM(Ris::CmdLineCmd* aCmd)
       case 3: tPlotCmd = tPlotRun3 ; break;
       default: printf("PLOT NOT FOUND\n");
    }
+
+   int tRet = Ris::doSystemCommand(tPlotCmd);
+   Sleep(1000);
+   SetForegroundWindow(GetConsoleWindow());
+   
+   Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executePlotB(Ris::CmdLineCmd* aCmd)
+{
+   char* tPlotCmd  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_bias3.py";
 
    int tRet = Ris::doSystemCommand(tPlotCmd);
    Sleep(1000);

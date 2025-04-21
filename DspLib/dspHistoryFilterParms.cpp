@@ -52,8 +52,11 @@ void HistoryFilterParms::reset()
    mAlphaNoiseRatio = 0.0;
    mAlphaStepTime = 0.0;
    mAlphaStepThresh = 0.90;
-
    mAlphaSelect = cNone;
+
+   mLimitHi = 0;
+   mLimitLo = 0;
+   mThreshDev = 0;
 }
 
 //******************************************************************************
@@ -99,6 +102,9 @@ void HistoryFilterParms::show(char* aLabel)
          printf("AlphaStepTime         %10.4f\n", mAlphaStepTime);
          printf("AlphaStepThresh       %10.4f\n", mAlphaStepThresh);
       }
+      printf("LimitHi            %10.4f\n",   mLimitHi);
+      printf("LimitLo            %10.4f\n",   mLimitLo);
+      printf("ThreshDev          %10.4f\n",   mThreshDev);
    }
    break;
    }
@@ -136,6 +142,9 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("AlphaNoiseRatio")) mAlphaNoiseRatio = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaStepTime"))   mAlphaStepTime   = aCmd->argDouble(1);
    if (aCmd->isCmd("AlphaStepThresh")) mAlphaStepThresh = aCmd->argDouble(1);
+   if (aCmd->isCmd("LimitHi"))         mLimitHi = aCmd->argDouble(1);
+   if (aCmd->isCmd("LimitLo"))         mLimitLo = aCmd->argDouble(1);
+   if (aCmd->isCmd("ThreshDev"))       mThreshDev = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {
@@ -162,6 +171,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaStdDev)))    mCausalType = cCausalAlphaStdDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaAbsDev)))    mCausalType = cCausalAlphaAbsDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalSlidingMean)))    mCausalType = cCausalSlidingMean;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalBiasEstimator)))  mCausalType = cCausalBiasEstimator;
    }
 
    if (aCmd->isCmd("AlphaSelect"))
@@ -229,6 +239,7 @@ char* HistoryFilterParms::asStringCausalType(int aX)
    case cCausalAlphaStdDev      : return "AlphaStdDev";
    case cCausalAlphaAbsDev      : return "AlphaAbsDev";
    case cCausalSlidingMean      : return "SlidingMean";
+   case cCausalBiasEstimator    : return "BiasEstimator";
    default : return "UNKNOWN";
    }
 }

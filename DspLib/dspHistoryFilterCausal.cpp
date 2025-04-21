@@ -157,6 +157,32 @@ void HistoryFilterCausal::initializeCausalFilter()
       mSlidingMean.reset();
    }
    break;
+   case HistoryFilterParms::cCausalBiasEstimator:
+   {
+      mBiasEstimator.reset();
+      if (mParms.mAlphaAlpha > 0)
+      {
+         mBiasEstimator.initializeFromAlpha(
+            mParms.mAlphaAlpha);
+      }
+      else if (mParms.mAlphaNoiseRatio > 0)
+      {
+         mBiasEstimator.initializeFromNoiseRatio(
+            mParms.mAlphaNoiseRatio,
+            mParms.mAlphaDT);
+      }
+      else if (mParms.mAlphaStepTime > 0)
+      {
+         mBiasEstimator.initializeFromStep(
+            mParms.mAlphaDT,
+            mParms.mAlphaStepTime,
+            mParms.mAlphaStepThresh);
+      }
+      mBiasEstimator.mLimitHi = mParms.mLimitHi;
+      mBiasEstimator.mLimitLo = mParms.mLimitLo;
+      mBiasEstimator.mThreshDev= mParms.mThreshDev;
+   }
+   break;
    }
 }
 
@@ -267,6 +293,13 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
       *aOutput = mSlidingMean.mMean;
    }
    break;
+   case HistoryFilterParms::cCausalBiasEstimator:
+   {
+      *aOutput = 0.0;
+      mBiasEstimator.put(aInput);
+      *aOutput = mBiasEstimator.mBias;
+   }
+   break;
    }
 }
 
@@ -324,6 +357,13 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
       mSlidingMean.doPut(aInput);
       *aOutput1 = mSlidingMean.mMean;
       *aOutput2 = mSlidingMean.mDelta;
+   }
+   break;
+   case HistoryFilterParms::cCausalBiasEstimator:
+   {
+      mBiasEstimator.put(aInput);
+      *aOutput1 = mBiasEstimator.mMean;
+      *aOutput2 = mBiasEstimator.mBias;
    }
    break;
    }
@@ -391,6 +431,14 @@ void HistoryFilterCausal::putToFilter(
       *aOutput1 = mSlidingMean.mMean;
       *aOutput2 = mSlidingMean.mDelta;
       *aOutput3 = mSlidingMean.mDev;
+   }
+   break;
+   case HistoryFilterParms::cCausalBiasEstimator:
+   {
+      mBiasEstimator.put(aInput);
+      *aOutput1 = mBiasEstimator.mMean;
+      *aOutput2 = mBiasEstimator.mAbsDev;
+      *aOutput3 = mBiasEstimator.mBias;
    }
    break;
    }
