@@ -57,6 +57,7 @@ void HistoryFilterParms::reset()
    mLimitHi = 0;
    mLimitLo = 0;
    mThreshDev = 0;
+   mAlphaStepTimeDev = 0.0;
 }
 
 //******************************************************************************
@@ -101,10 +102,11 @@ void HistoryFilterParms::show(char* aLabel)
          printf("AlphaSelect           %10s\n", asStringAlphaSelect(mAlphaSelect));
          printf("AlphaStepTime         %10.4f\n", mAlphaStepTime);
          printf("AlphaStepThresh       %10.4f\n", mAlphaStepThresh);
+         printf("LimitHi               %10.4f\n",   mLimitHi);
+         printf("LimitLo               %10.4f\n",   mLimitLo);
+         printf("ThreshDev             %10.4f\n",   mThreshDev);
+         printf("AlphaStepTimeDev      %10.4f\n", mAlphaStepTimeDev);
       }
-      printf("LimitHi            %10.4f\n",   mLimitHi);
-      printf("LimitLo            %10.4f\n",   mLimitLo);
-      printf("ThreshDev          %10.4f\n",   mThreshDev);
    }
    break;
    }
@@ -132,19 +134,20 @@ void HistoryFilterParms::show(char* aLabel)
 
 void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("FilterOrder"))     mFilterOrder     = aCmd->argInt(1);
-   if (aCmd->isCmd("H"))               mH               = aCmd->argDouble(1);
-   if (aCmd->isCmd("Select"))          mSelect          = aCmd->argInt(1);
-   if (aCmd->isCmd("Fs"))              mFs              = aCmd->argDouble(1);
-   if (aCmd->isCmd("Fc"))              mFc              = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaAlpha"))      mAlphaAlpha      = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaDT"))         mAlphaDT         = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaNoiseRatio")) mAlphaNoiseRatio = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaStepTime"))   mAlphaStepTime   = aCmd->argDouble(1);
-   if (aCmd->isCmd("AlphaStepThresh")) mAlphaStepThresh = aCmd->argDouble(1);
-   if (aCmd->isCmd("LimitHi"))         mLimitHi = aCmd->argDouble(1);
-   if (aCmd->isCmd("LimitLo"))         mLimitLo = aCmd->argDouble(1);
-   if (aCmd->isCmd("ThreshDev"))       mThreshDev = aCmd->argDouble(1);
+   if (aCmd->isCmd("FilterOrder"))       mFilterOrder     = aCmd->argInt(1);
+   if (aCmd->isCmd("H"))                 mH               = aCmd->argDouble(1);
+   if (aCmd->isCmd("Select"))            mSelect          = aCmd->argInt(1);
+   if (aCmd->isCmd("Fs"))                mFs              = aCmd->argDouble(1);
+   if (aCmd->isCmd("Fc"))                mFc              = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaAlpha"))        mAlphaAlpha      = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaDT"))           mAlphaDT         = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaNoiseRatio"))   mAlphaNoiseRatio = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaStepTime"))     mAlphaStepTime   = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaStepThresh"))   mAlphaStepThresh = aCmd->argDouble(1);
+   if (aCmd->isCmd("LimitHi"))           mLimitHi = aCmd->argDouble(1);
+   if (aCmd->isCmd("LimitLo"))           mLimitLo = aCmd->argDouble(1);
+   if (aCmd->isCmd("ThreshDev"))         mThreshDev = aCmd->argDouble(1);
+   if (aCmd->isCmd("AlphaStepTimeDev"))  mAlphaStepTimeDev = aCmd->argDouble(1);
 
    if (aCmd->isCmd("FilterType"))
    {

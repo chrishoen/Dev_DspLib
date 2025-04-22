@@ -94,36 +94,9 @@ public:
    // Methods.
 
    // Initialize from alpha.
-   void initializeFromAlpha (real_t aAlpha)
+   void initialize()
    {
-      mAlphaX.initializeFromAlpha(aAlpha);
-      mAlphaBias.initializeFromAlpha(aAlpha);
-      reset();
-      printf("BiasEstimator::initializeFromAlpha\n");
-   }
-   
-   // Initialize from sigma ratio, process sigma over noise sigma.
-   void initializeFromNoiseRatio (real_t aNoiseRatio, real_t aDT)
-   {
-      mAlphaX.initializeFromNoiseRatio(aNoiseRatio, aDT);
-      mAlphaBias.initializeFromNoiseRatio(aNoiseRatio, aDT);
-      reset();
-      printf("BiasEstimator::initializeFromNoiseRatio\n");
-   }
-   
-   // Initialize from step response time and threshold.
-   void initializeFromStep(real_t aTs, real_t aStepTime, real_t aStepThresh)
-   {
-      mAlphaX.initializeFromStep(aTs, aStepTime, aStepThresh);
-      mAlphaBias.initializeFromStep(aTs, aStepTime, aStepThresh);
-      reset();
-      printf("BiasEstimator::initializeFromStep\n");
-   }
-   // Set the first flag true.
-   void setFirst()
-   {
-      mAlphaX.setFirst();
-      mAlphaBias.setFirst();
+      printf("BiasEstimator::initialize\n");
    }
    
    //***************************************************************************

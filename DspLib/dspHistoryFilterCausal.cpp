@@ -160,28 +160,19 @@ void HistoryFilterCausal::initializeCausalFilter()
    case HistoryFilterParms::cCausalBiasEstimator:
    {
       mBiasEstimator.reset();
-      if (mParms.mAlphaAlpha > 0)
-      {
-         mBiasEstimator.initializeFromAlpha(
-            mParms.mAlphaAlpha);
-      }
-      else if (mParms.mAlphaNoiseRatio > 0)
-      {
-         mBiasEstimator.initializeFromNoiseRatio(
-            mParms.mAlphaNoiseRatio,
-            mParms.mAlphaDT);
-      }
-      else if (mParms.mAlphaStepTime > 0)
-      {
-         mBiasEstimator.initializeFromStep(
-            mParms.mAlphaDT,
-            mParms.mAlphaStepTime,
-            mParms.mAlphaStepThresh);
-      }
       mBiasEstimator.mLimitHi = mParms.mLimitHi;
       mBiasEstimator.mLimitLo = mParms.mLimitLo;
       mBiasEstimator.mThreshDev= mParms.mThreshDev;
-   }
+      mBiasEstimator.mAlphaBias.initializeFromStep(
+         mParms.mAlphaDT,
+         mParms.mAlphaStepTime,
+         mParms.mAlphaStepThresh);
+      mBiasEstimator.mAlphaX.initializeFromStep(
+         mParms.mAlphaDT,
+         mParms.mAlphaStepTimeDev,
+         mParms.mAlphaStepThresh);
+      mBiasEstimator.initialize();
+      }
    break;
    }
 }

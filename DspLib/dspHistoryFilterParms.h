@@ -117,6 +117,7 @@ public:
    double  mLimitHi;          // Signal limit.
    double  mLimitLo;          // Signal limit.
    double  mThreshDev;        // Deviation threshold.
+   double  mAlphaStepTimeDev; // Alpha filter parameter.
    
    //***************************************************************************
    //***************************************************************************
