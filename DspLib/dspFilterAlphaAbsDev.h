@@ -51,8 +51,8 @@ public:
    real_t mAbsDev;     // Uncertainty (mean absolute deviation)
 
    // Alpha filters for realtime expectation and uncertainty.
-   AlphaOneT<real_t> mAlphaX;        // Alpha filter for input X
-   AlphaOneT<real_t> mAlphaAbsDev;   // Alpha filter for absolute deviation.
+   AlphaOne<real_t> mAlphaX;        // Alpha filter for input X
+   AlphaOne<real_t> mAlphaAbsDev;   // Alpha filter for absolute deviation.
 
    // Counter.
    int  mK;

@@ -24,7 +24,7 @@ namespace Filter
 // "Alpha beta filter"
 //
 template <typename real_t>
-class AlphaOneT
+class AlphaOne
 {
 public:
    //***************************************************************************

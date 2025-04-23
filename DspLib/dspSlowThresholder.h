@@ -99,8 +99,8 @@ public:
 
    // Alpha filters. These are input the threshold comparison variables.
    // They output values bewteen 0.0 and 1.0.
-   Dsp::Filter::AlphaOneT<float> mAlphaFilterAboveHi;
-   Dsp::Filter::AlphaOneT<float> mAlphaFilterBelowLo;
+   Dsp::Filter::AlphaOne<float> mAlphaFilterAboveHi;
+   Dsp::Filter::AlphaOne<float> mAlphaFilterBelowLo;
 
    // Fuzzy boolean variables. These are set from the outputs of the alpha
    // filters. The low one has a fuzzy logic value that indicates if the

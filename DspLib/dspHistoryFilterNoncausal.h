@@ -48,9 +48,9 @@ public:
    // Members.
 
    Dsp::Filter::ButterworthLP mButterworth;
-   Dsp::Filter::AlphaOneT<double>      mAlphaOne;
-   Dsp::Filter::AlphaTwoT<double>      mAlphaTwo;
-   Dsp::Filter::AlphaThreeT<double>    mAlphaThree;
+   Dsp::Filter::AlphaOne<double>      mAlphaOne;
+   Dsp::Filter::AlphaTwo<double>      mAlphaTwo;
+   Dsp::Filter::AlphaThree<double>    mAlphaThree;
 
    //***************************************************************************
    //***************************************************************************

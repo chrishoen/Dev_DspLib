@@ -50,8 +50,8 @@ public:
    real_t mStdDev;     // Uncertainty (standard deviation)
 
    // Alpha filters for realtime expectation and uncertainty.
-   AlphaOneT<real_t> mXAlpha;        // Alpha filter for input X
-   AlphaOneT<real_t> mXSquareAlpha;  // Alpha filter for input X squared
+   AlphaOne<real_t> mXAlpha;        // Alpha filter for input X
+   AlphaOne<real_t> mXSquareAlpha;  // Alpha filter for input X squared
 
    // Counter.
    int  mK;

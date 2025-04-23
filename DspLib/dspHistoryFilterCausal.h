@@ -51,9 +51,9 @@ public:
    // Members.
 
    Dsp::Filter::ButterworthLP        mButterworth;
-   Dsp::Filter::AlphaOneT<float>     mAlphaOne;
-   Dsp::Filter::AlphaTwoT<float>     mAlphaTwo;
-   Dsp::Filter::AlphaThreeT<float>   mAlphaThree;
+   Dsp::Filter::AlphaOne<float>     mAlphaOne;
+   Dsp::Filter::AlphaTwo<float>     mAlphaTwo;
+   Dsp::Filter::AlphaThree<float>   mAlphaThree;
    Dsp::Filter::AlphaStdDev<float>   mAlphaStdDev;
    Dsp::Filter::AlphaAbsDev<float>   mAlphaAbsDev;
    Dsp::SlidingMinMaxMean<float, 16> mSlidingMean;

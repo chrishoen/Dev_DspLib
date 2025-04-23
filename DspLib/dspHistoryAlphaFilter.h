@@ -39,7 +39,7 @@ public:
    // Members.
 
    // Alpha filter.
-   Dsp::Filter::AlphaOneT<double> mAlphaOne;
+   Dsp::Filter::AlphaOne<double> mAlphaOne;
 
    //***************************************************************************
    //***************************************************************************

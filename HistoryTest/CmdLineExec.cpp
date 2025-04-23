@@ -64,7 +64,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    double tStepTime = aCmd->argDouble(1);
    double tStepThresh = aCmd->argDouble(2);
 
-   Dsp::Filter::AlphaOneT<double> tFilter;
+   Dsp::Filter::AlphaOne<double> tFilter;
    tFilter.initializeFromStep(tTs, tStepTime, tStepThresh);
 
    Prn::print(0, "alpha %6.4f", tFilter.mAlpha);

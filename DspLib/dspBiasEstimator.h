@@ -57,8 +57,8 @@ public:
    bool mValidFlag;
 
    // Alpha filters for short term local averages.
-   Filter::AlphaOneT<real_t> mAlphaX;        // Alpha filter for input X
-   Filter::AlphaOneT<real_t> mAlphaBias;     // Alpha filter for bias.
+   Filter::AlphaOne<real_t> mAlphaX;        // Alpha filter for input X
+   Filter::AlphaOne<real_t> mAlphaBias;     // Alpha filter for bias.
 
    // Counter.
    int  mK;
