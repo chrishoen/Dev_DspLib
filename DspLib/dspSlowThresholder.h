@@ -8,7 +8,7 @@ Dsp library: slow thresholder.
 //******************************************************************************
 //******************************************************************************
 
-#include "dspFilterAlphaFloat.h"
+#include "dspFilterAlphaOne.h"
 
 #include "dspFuzzyBoolFloat.h"
 #include "dspSlowThresholderParms.h"
@@ -103,8 +103,8 @@ public:
 
    // Alpha filters. These are input the threshold comparison variables.
    // They output values bewteen 0.0 and 1.0.
-   Dsp::Filter::AlphaOneFloat mAlphaFilterAboveHi;
-   Dsp::Filter::AlphaOneFloat mAlphaFilterBelowLo;
+   Dsp::Filter::AlphaOneT<float> mAlphaFilterAboveHi;
+   Dsp::Filter::AlphaOneT<float> mAlphaFilterBelowLo;
 
    // Fuzzy boolean variables. These are set from the outputs of the alpha
    // filters. The low one has a fuzzy logic value that indicates if the
