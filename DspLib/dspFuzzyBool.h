@@ -9,7 +9,6 @@ Fuzzy boolean class.
 //******************************************************************************
 //******************************************************************************
 
-
 namespace Dsp
 {
 
@@ -20,6 +19,7 @@ namespace Dsp
 // It has a value 0 <= x <=1. Zero corresponds to false, one corresponds to
 // true, 0.5 corresponds to half true. And, Or, Not operations are provided.
 
+template <typename real_t>
 class FuzzyBool
 {
 public:
@@ -29,9 +29,9 @@ public:
    //***************************************************************************
    // Constants.
 
-   static double fMin(double lhs, double rhs) { return lhs < rhs ? lhs : rhs; }
-   static double fMax(double lhs, double rhs) { return lhs > rhs ? lhs : rhs; }
-   static double fAbs(double x) { return x >= 0 ? x : -x; }
+   static real_t fMin(real_t lhs, real_t rhs) { return lhs < rhs ? lhs : rhs; }
+   static real_t fMax(real_t lhs, real_t rhs) { return lhs > rhs ? lhs : rhs; }
+   static real_t fAbs(real_t x) { return x >= 0 ? x : -x; }
 
    //***************************************************************************
    //***************************************************************************
@@ -41,7 +41,7 @@ public:
    // Fuzzy Lucasiewicz boolean value. It has a value 0 <= x <=1
    // Zero corresponds to false, one corresponds to true, 0.5 corresponds
    // to half true.
-   double mX;
+   real_t mX;
 
    //***************************************************************************
    //***************************************************************************
@@ -55,7 +55,7 @@ public:
    }
 
    // Constructor.
-   FuzzyBool(double aX)
+   FuzzyBool(real_t aX)
    {
       mX = aX;
    }
@@ -68,7 +68,7 @@ public:
    // Operator NOT
    FuzzyBool operator !()
    {
-      return FuzzyBool(1.0 - this->mX);
+      return FuzzyBool((real_t)1.0 - this->mX);
    }
 
    // Operator AND
@@ -95,7 +95,7 @@ public:
    // Methods.
 
    // Compare with a threshold to return a crisp boolean.
-   bool crisp(double aThreshold)
+   bool crisp(real_t aThreshold)
    {
       return this->mX >= aThreshold;
    }

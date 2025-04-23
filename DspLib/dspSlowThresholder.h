@@ -9,16 +9,12 @@ Dsp library: slow thresholder.
 //******************************************************************************
 
 #include "dspFilterAlphaOne.h"
-
-#include "dspFuzzyBoolFloat.h"
+#include "dspFuzzyBool.h"
 #include "dspSlowThresholderParms.h"
 
 namespace Dsp
 {
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -111,13 +107,13 @@ public:
    // input value is below the low threshold. The high one has a fuzzy
    // logic value that indicates if the input value is above the high 
    // threshold.
-   FuzzyBoolFloat mFuzzyAboveHi;
-   FuzzyBoolFloat mFuzzyBelowLo;
+   FuzzyBool<float> mFuzzyAboveHi;
+   FuzzyBool<float> mFuzzyBelowLo;
 
    // Fuzzy boolean variable. this is the OR of the fuzzy below low and
    // above high variables. It gives an indication of the confidence of
    // the measurements.
-   FuzzyBoolFloat mFuzzyConfidence;
+   FuzzyBool<float> mFuzzyConfidence;
 
    // Crisp boolean variables. These are set by thresholding the fuzzy
    // boolean variables. The threshold that is used is the fuzzy logic
