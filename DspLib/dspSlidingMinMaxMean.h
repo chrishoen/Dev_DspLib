@@ -48,6 +48,7 @@ public:
    // Calculation variables.
    T mMeanSum;      // Sum     of window values.  
    T mPrevMean;     // Mean    of window values, previous. 
+   T mPrevPrevMean; // Mean    of window values, previous previous. 
 
    //***************************************************************************
    //***************************************************************************
@@ -71,6 +72,7 @@ public:
       mDev = 0;
       mMeanSum = 0;
       mPrevMean = 0;
+      mPrevPrevMean = 0;
    }
 
    //***************************************************************************
@@ -107,6 +109,7 @@ public:
       if (!BaseClass::mFullFlag)
       {
          // Initialize.
+         mPrevPrevMean = mInput;
          mPrevMean = mInput;
          mMean = mInput;
          mDelta = 0;
@@ -116,11 +119,12 @@ public:
       else
       {
          // Store previous mean.
+         mPrevPrevMean = mPrevMean;
          mPrevMean = mMean;
          // Calculate the mean as sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
          // Calculate the delta.
-         mDelta = mMean - mPrevMean;
+         mDelta = mMean - mPrevPrevMean;
          // Calculate the instantaneous deviation.
          mDev = mInput - mMean;
       }
