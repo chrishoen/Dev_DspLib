@@ -50,14 +50,14 @@ public:
    //***************************************************************************
    // Members.
 
-   Dsp::Filter::ButterworthLP        mButterworth;
-   Dsp::Filter::AlphaOne<float>     mAlphaOne;
-   Dsp::Filter::AlphaTwo<float>     mAlphaTwo;
-   Dsp::Filter::AlphaThree<float>   mAlphaThree;
-   Dsp::Filter::AlphaStdDev<float>   mAlphaStdDev;
-   Dsp::Filter::AlphaAbsDev<float>   mAlphaAbsDev;
-   Dsp::SlidingMinMaxMean<float, 16> mSlidingMean;
-   Dsp::BiasEstimator<float>         mBiasEstimator;
+   Dsp::Filter::ButterworthLP          mButterworth;
+   Dsp::Filter::AlphaOne<float>        mAlphaOne;
+   Dsp::Filter::AlphaTwo<float>        mAlphaTwo;
+   Dsp::Filter::AlphaThree<float>      mAlphaThree;
+   Dsp::Filter::AlphaStdDev<float>     mAlphaStdDev;
+   Dsp::Filter::AlphaAbsDev<float>     mAlphaAbsDev;
+   Dsp::SlidingMinMaxMean<float, 16>   mSlidingMean;
+   Dsp::BiasEstimator<float>           mBiasEstimator;
 
    //***************************************************************************
    //***************************************************************************
