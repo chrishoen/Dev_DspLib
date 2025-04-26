@@ -84,8 +84,8 @@ public:
    CsvFileWriter();
 
    // Open the text file for write.
-   bool open (char* aFilename);
-   bool openWithPath(char* aFilePath);
+   bool open (const char* aFilename);
+   bool openWithPath(const char* aFilePath);
 
    // Close the file.
    void close ();
@@ -147,8 +147,8 @@ public:
    CsvFileReader();
 
    // Open the text file for read.
-   bool open (char* aFilename);
-   bool openFromFilepath (char* aFilepath);
+   bool open (const char* aFilename);
+   bool openFromFilepath (const char* aFilepath);
 
    // Close the text file.
    void close ();

@@ -144,7 +144,7 @@ CsvFileWriter::CsvFileWriter()
 //******************************************************************************
 // Open the file
 
-bool CsvFileWriter::open(char* aFileName)
+bool CsvFileWriter::open(const char* aFileName)
 {            
    if (mFile)
    {
@@ -168,7 +168,7 @@ bool CsvFileWriter::open(char* aFileName)
 //******************************************************************************
 // Open the file
 
-bool CsvFileWriter::openWithPath(char* aFilePath)
+bool CsvFileWriter::openWithPath(const char* aFilePath)
 {
    if (mFile)
    {
@@ -345,7 +345,7 @@ CsvFileReader::CsvFileReader()
 //******************************************************************************
 // Open the file.
 
-bool CsvFileReader::open(char* aFileName)
+bool CsvFileReader::open(const char* aFileName)
 {            
    strcpy(mDelimiters," ,\t");
    mRowIndex=0;
@@ -365,7 +365,7 @@ bool CsvFileReader::open(char* aFileName)
 //******************************************************************************
 // Open the file.
 
-bool CsvFileReader::openFromFilepath(char* aFilepath)
+bool CsvFileReader::openFromFilepath(const char* aFilepath)
 {            
    strcpy(mDelimiters," ,\t");
    mRowIndex=0;
