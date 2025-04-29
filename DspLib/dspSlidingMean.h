@@ -38,14 +38,13 @@ public:
    //***************************************************************************
    // Members.
 
-   // Output variables. Minimum, maximum, mean of the current occupied
-   // element values.
-   T mMean;         // Mean    of window values.
-   T mDelta;        // Difference between input and previous input.
+   // Output variables.
+   T mMean;         // Mean of window values.
+   T mDelta;        // Difference between mean and previous mean.
 
    // Calculation variables.
-   T mMeanSum;      // Sum     of window values.  
-   T mPrevInput;    // Previos input.
+   T mMeanSum;      // Sum of window values.  
+   T mPrevMean;     // Previos mean.
 
    //***************************************************************************
    //***************************************************************************
@@ -64,7 +63,7 @@ public:
       mMean = 0;
       mMeanSum = 0;
       mDelta = 0;
-      mPrevInput = 0;
+      mPrevMean = 0;
    }
 
    //***************************************************************************
@@ -103,17 +102,17 @@ public:
          // Initialize.
          mMean = mInput;
          mDelta = 0;
-         mPrevInput = mInput;
+         mPrevMean = mInput;
       }
       // If full.
       else
       {
+         // Store previous.
+         mPrevMean = mMean;
          // Calculate the mean as sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
          // Calculate the delta.
-         mDelta = mInput - mPrevInput;
-         // Store previos.
-         mPrevInput = mInput;
+         mDelta = mMean - mPrevMean;
       }
    }
 };
