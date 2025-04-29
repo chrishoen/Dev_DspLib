@@ -16,10 +16,11 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 // This template implements a sliding window that maintains a history
-// of input values and calculates minimum, maximum, and mean on it.
+// of input values and calculates the mean on it. It also calculates
+// a delta 
 
 template <typename T,int WinSize>
-class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
+class SlidingMean : public SlidingWindow<T, WinSize>
 {
 public:
    typedef SlidingWindow<T, WinSize> BaseClass;
@@ -39,16 +40,12 @@ public:
 
    // Output variables. Minimum, maximum, mean of the current occupied
    // element values.
-   T mMin;          // Minimum of window values.
-   T mMax;          // Maximum of window values.
    T mMean;         // Mean    of window values.
-   T mDelta;        // Difference between mean and previous mean.
-   T mDev;          // Deviation  of input from mean.
+   T mDelta;        // Difference between input and previous input.
 
    // Calculation variables.
    T mMeanSum;      // Sum     of window values.  
-   T mPrevMean;     // Mean    of window values, previous. 
-   T mPrevPrevMean; // Mean    of window values, previous previous. 
+   T mPrevInput;    // Previos input.
 
    //***************************************************************************
    //***************************************************************************
@@ -56,7 +53,7 @@ public:
    // Methods.
 
    // Constructor.
-   SlidingMinMaxMean()
+   SlidingMean()
    {
       reset();
    }
@@ -64,15 +61,10 @@ public:
    void reset() override
    {
       BaseClass::reset();
-      mMin = 0;
-      mMax = 0;
       mMean = 0;
       mMeanSum = 0;
       mDelta = 0;
-      mDev = 0;
-      mMeanSum = 0;
-      mPrevMean = 0;
-      mPrevPrevMean = 0;
+      mPrevInput = 0;
    }
 
    //***************************************************************************
@@ -109,46 +101,19 @@ public:
       if (!BaseClass::mFullFlag)
       {
          // Initialize.
-         mPrevPrevMean = mInput;
-         mPrevMean = mInput;
          mMean = mInput;
          mDelta = 0;
-         mDev = 0;
+         mPrevInput = mInput;
       }
       // If full.
       else
       {
-         // Store previous mean.
-         mPrevPrevMean = mPrevMean;
-         mPrevMean = mMean;
          // Calculate the mean as sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
          // Calculate the delta.
-         mDelta = mMean - mPrevPrevMean;
-         // Calculate the instantaneous deviation.
-         mDev = mInput - mMean;
-      }
-
-      //************************************************************************
-      //************************************************************************
-      //************************************************************************
-      // Calculate the min and max.
-
-      // Loop through all of the occupied elements to obtain
-      // the minimums and maximums.
-      for (int i = 0; i < mSize; i++)
-      {
-         T tValue = BaseClass::elementAt(i);
-         if (i==0)
-         {
-            mMin = tValue;
-            mMax = tValue;
-         }
-         else
-         {
-            if (tValue < mMin) mMin = tValue;
-            if (tValue > mMax) mMax = tValue;
-         }
+         mDelta = mInput - mPrevInput;
+         // Store previos.
+         mPrevInput = mInput;
       }
    }
 };

@@ -421,7 +421,7 @@ void HistoryFilterCausal::putToFilter(
       mSlidingMean.doPut(aInput);
       *aOutput1 = mSlidingMean.mMean;
       *aOutput2 = mSlidingMean.mDelta;
-      *aOutput3 = mSlidingMean.mDev;
+      *aOutput3 = 0.0;
    }
    break;
    case HistoryFilterParms::cCausalBiasEstimator:

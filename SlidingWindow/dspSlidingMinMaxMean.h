@@ -19,7 +19,7 @@ namespace Dsp
 // of input values and calculates minimum, maximum, and mean on it.
 
 template <typename T,int WinSize>
-class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
+class SlidingMean : public SlidingWindow<T, WinSize>
 {
 public:
    typedef SlidingWindow<T, WinSize> BaseClass;
@@ -55,7 +55,7 @@ public:
    // Methods.
 
    // Constructor.
-   SlidingMinMaxMean()
+   SlidingMean()
    {
       reset();
    }

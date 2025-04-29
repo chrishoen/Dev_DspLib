@@ -371,3 +371,33 @@ void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
    gParms.show();
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeHelp(Ris::CmdLineCmd* aCmd)
+{
+   Prn::print(0, "help ***********************************");
+   Prn::print(0, "");
+   Prn::print(0, "A1           -- run alpha one filter");
+   Prn::print(0, "A2           -- run alpha two filter");
+   Prn::print(0, "A3           -- run alpha three filter");
+   Prn::print(0, "");
+   Prn::print(0, "SM2          -- run sliding mean filter");
+   Prn::print(0, "SM3          -- run sliding mean filter");
+   Prn::print(0, "");
+   Prn::print(0, "DEV          -- run absolute deviation filer");
+   Prn::print(0, "BIAS         -- run bias estimator");
+   Prn::print(0, "");
+   Prn::print(0, "TEST1 alpha  -- test alpha one filter");
+   Prn::print(0, "TEST2 alpha  -- test alpha two filter");
+   Prn::print(0, "TEST3 alpha  -- test alpha three filter");
+   Prn::print(0, "");
+   Prn::print(0, "PLOTA   1,2,22,3     -- plots alpha filter");
+   Prn::print(0, "PLOTSM  2,22,3       -- plots sliding mean filter");
+   Prn::print(0, "PLOTB                -- plots bias estimator");
+   Prn::print(0, "");
+   Prn::print(0, "parms        -- show program parms");
+   Prn::print(0, "");
+   Prn::print(0, "trc help -- show trace help");
+}
