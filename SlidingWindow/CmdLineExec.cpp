@@ -13,7 +13,7 @@ CmdLineExec::CmdLineExec()
 void CmdLineExec::reset()
 {
    mWindow.reset();
-   mMinMaxMean.reset();
+   mMean.reset();
 }
 
 //******************************************************************************
@@ -24,7 +24,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if(aCmd->isCmd("Put"    ))  executePut(aCmd);
    if(aCmd->isCmd("Get"    ))  executeGet(aCmd);
    if(aCmd->isCmd("Tail"   ))  executeTail(aCmd);
-   if(aCmd->isCmd("PutM"   ))  executePutMMM(aCmd);
+   if(aCmd->isCmd("PutM"   ))  executePutM(aCmd);
    if(aCmd->isCmd("Show"   ))  executeShow(aCmd);
 
    if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
@@ -74,13 +74,13 @@ void CmdLineExec::executeTail(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executePutMMM(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executePutM(Ris::CmdLineCmd* aCmd)
 {
    float tValue = aCmd->argFloat(1);
-   mMinMaxMean.doPut(tValue);
+   mMean.doPut(tValue);
 
-   Prn::print(0, "MinMax %5.2f $ min = %5.2f max = %5.2f mean = %5.2f",
-       tValue, mMinMaxMean.mMin, mMinMaxMean.mMax, mMinMaxMean.mMean);
+   Prn::print(0, "value = %5.2f mean = %5.2f",
+       tValue, mMean.mMean);
 }       
 
 //******************************************************************************
