@@ -112,7 +112,8 @@ public:
          // Calculate the mean as sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
          // Calculate the delta.
-         mDelta = mMean - mPrevMean;
+         //mDelta = mMean - mPrevMean;
+         mDelta = elementAtHead() - elementAtTail();
       }
    }
 };
