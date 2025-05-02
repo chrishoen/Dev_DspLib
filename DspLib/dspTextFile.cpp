@@ -49,7 +49,7 @@ bool LogFileWriter::open(const char* aFileName)
 
    if (mFile==0)
    {
-      printf("LogFileWriter::open FAIL");
+      printf("LogFileWriter::open FAIL\n");
       return false;
    }
 
@@ -73,7 +73,7 @@ bool LogFileWriter::openWithPath(const char* aFilePath)
 
    if (mFile == 0)
    {
-      printf("LogFileWriter::open FAIL");
+      printf("LogFileWriter::open FAIL\n");
       return false;
    }
 
