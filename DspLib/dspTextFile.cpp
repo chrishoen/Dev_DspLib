@@ -168,7 +168,7 @@ bool CsvFileWriter::open(const char* aFileName)
 //******************************************************************************
 // Open the file
 
-bool CsvFileWriter::openWithPath(const char* aFilePath)
+bool CsvFileWriter::openFromFilepath(const char* aFilePath)
 {
    if (mFile)
    {

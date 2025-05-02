@@ -85,7 +85,7 @@ public:
 
    // Open the text file for write.
    bool open (const char* aFilename);
-   bool openWithPath(const char* aFilePath);
+   bool openFromFilepath (const char* aFilepath);
 
    // Close the file.
    void close ();
