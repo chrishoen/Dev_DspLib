@@ -55,6 +55,7 @@ public:
       mY   = 0.0;
       mXX  = 0.0;
       mFirstFlag = true;
+      return;
       printf("AlphaOne::initializeFromAlpha %8.8f\n", mAlpha);
    }
 
@@ -77,6 +78,7 @@ public:
       mY   = 0.0;
       mXX  = 0.0;
       mFirstFlag = true;
+      return;
       printf("AlphaOne::initializeFromNoiseRatio %8.8f $ %8.8f  %8.8f $  %8.8f\n",
          mAlpha, aNoiseRatio, aDT, L);
    }
@@ -101,6 +103,7 @@ public:
       mY = 0.0;
       mXX = 0.0;
       mFirstFlag = true;
+      return;
       printf("AlphaOne::initializeFromStep %8.8f  $ %8.8f  %8.8f %8.8f\n", 
          mAlpha, aTs, aStepTime, aStepThresh);
    }

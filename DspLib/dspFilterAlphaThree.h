@@ -99,7 +99,7 @@ public:
       mXV=0.0;
       mXA=0.0;
       mFirstFlag = true;
-
+      return;
       printf("AlphaThree::initializeFromAlpha %8.8f %8.8f  %8.8f $ %8.8f\n",
          mAlpha, mBeta, mGamma, aDT);
    }
@@ -165,7 +165,7 @@ public:
       mXV=0.0;
       mXA=0.0;
       mFirstFlag = true;
-
+      return;
       printf("AlphaThree::initializeFromNoiseRatio %8.8f %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
          mAlpha, mBeta, mGamma, aNoiseRatio, aDT, L);
    }

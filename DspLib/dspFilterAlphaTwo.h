@@ -74,6 +74,7 @@ public:
       mXX=0.0;
       mXV=0.0;
       mFirstFlag = true;
+      return;
       printf("AlphaTwo::initializeFromAlpha %8.8f %8.8f $ %8.8f\n",
          mAlpha, mBeta, aDT);
    }
@@ -109,6 +110,7 @@ public:
       mXX=0.0;
       mXV=0.0;
       mFirstFlag = true;
+      return;
       printf("AlphaTwo::initializeFromNoiseRatio %8.8f %8.8f $ %8.8f  %8.8f $  %8.8f\n",
          mAlpha, mBeta, aNoiseRatio, aDT, L);
    }
