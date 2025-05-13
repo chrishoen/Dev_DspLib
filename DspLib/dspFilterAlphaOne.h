@@ -88,7 +88,7 @@ public:
    //***************************************************************************
    // Initialize from step response time and threshold.
 
-   void initializeFromStep(double aTs, double aStepTime, double aStepThresh)
+   void initializeFromStep(double aTs, double aStepTime, double aStepThresh = 0.9)
    {
       if (aStepTime < aTs) aStepTime = aTs;
       if (aStepThresh > 1) aStepThresh = 1;

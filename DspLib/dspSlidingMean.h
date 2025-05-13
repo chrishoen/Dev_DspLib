@@ -33,7 +33,7 @@ public:
    // Constants.
 
    // Used to divide by the window size.
-   static constexpr T cSumMultiplier =  1.0/WinSize;
+   static constexpr T cSumMultiplier =  ((T)1)/((T)WinSize);
 
    //***************************************************************************
    //***************************************************************************
