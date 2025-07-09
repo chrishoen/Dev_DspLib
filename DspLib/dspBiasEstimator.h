@@ -96,7 +96,7 @@ public:
    // Initialize from alpha.
    void initialize()
    {
-      printf("BiasEstimator::initialize\n");
+      //printf("BiasEstimator::initialize\n");
    }
    
    //***************************************************************************
