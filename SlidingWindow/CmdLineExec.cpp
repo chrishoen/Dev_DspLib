@@ -8,12 +8,16 @@ using namespace std;
 //******************************************************************************
 CmdLineExec::CmdLineExec()
 {
+   mWindow.reset();
+   mMean.reset();
+   mMinMaxMean.reset();
 }
 //******************************************************************************
 void CmdLineExec::reset()
 {
    mWindow.reset();
    mMean.reset();
+   mMinMaxMean.reset();
 }
 
 //******************************************************************************
@@ -89,6 +93,7 @@ void CmdLineExec::executePutM(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   mMean.reset();
    int tN = aCmd->argInt(1);
    Prn::print(0, "MOD %d $ %d", tN, tN % 4);
 }

@@ -2,6 +2,7 @@
 
 #include "dspSlidingWindow.h"
 #include "dspSlidingMean.h"
+#include "dspSlidingMinMaxMean.h"
 #include "risCmdLineExec.h"
 
 //******************************************************************************
@@ -14,6 +15,7 @@ public:
 
   Dsp::SlidingWindow<int, 4> mWindow;
   Dsp::SlidingMean<float, 4> mMean;
+  Dsp::SlidingMinMaxMean<float, 4> mMinMaxMean;
 
   CmdLineExec();
 
