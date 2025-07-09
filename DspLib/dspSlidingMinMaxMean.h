@@ -52,7 +52,7 @@ public:
    // Methods.
 
    // Constructor.
-   SlidingMean()
+   SlidingMinMaxMean()
    {
       reset();
    }
