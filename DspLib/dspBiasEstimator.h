@@ -131,7 +131,7 @@ public:
 
       // At this point the input is within the limits and it is
       // not changing. Add it to the short term bias average.
-      mAlphaBias.put(aX);
+      mAlphaBias.put(mAlphaX.mXX);
    
       // Short term local bias average.
       mBias = mAlphaBias.mXX;

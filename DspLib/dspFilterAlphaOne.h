@@ -136,7 +136,8 @@ public:
       mY  = aY;
 
       // Implement the filter.
-      mXX = mXX + mAlpha*(mY - mXX);
+      // x = (1-a)*x + a*y
+      mXX += mAlpha*(mY - mXX);
 
       return mXX;
    }
