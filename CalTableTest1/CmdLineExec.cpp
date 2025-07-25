@@ -54,14 +54,9 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
    MyCalTable tCalTable;
    tCalTable.initialize();
 
-   if (aCmd->numArg() == 0)
-   {
-      tCalTable.show();
-      return;
-   }
 
-   double tX = aCmd->argDouble(1);
-   double tY = tCalTable.getYfromX(tX);
+   float tX = aCmd->argFloat(1);
+   float tY = tCalTable.getYfromX(tX);
    Prn::print(0, "XY %.2f  %.2f", tX, tY);
 }
 
