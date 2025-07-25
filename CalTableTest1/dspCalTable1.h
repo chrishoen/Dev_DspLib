@@ -34,6 +34,9 @@ public:
    // True if the calibration table is valid.
    bool mValidFlag;
 
+   // Multiplier used in interpolation calculation.
+   real_t mMultiplier[NumElements];
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -51,12 +54,22 @@ public:
       {
          mTableX[i] = 0;
          mTableY[i] = 0;
+         mMultiplier[i] = 0;
       }
       mValidFlag = false;
    }
    // Initialize, call after table values are manually set.
    void initialize()
    {
+      // Pre calculate the multipliers.  
+      for (int i = 0; i < NumElements - 1; i++)
+      {
+         real_t tX0 = mTableX[i];
+         real_t tX1 = mTableX[i + 1];
+         real_t tY0 = mTableY[i];
+         real_t tY1 = mTableY[i + 1];
+         mMultiplier[i] = (tY1 - tY0) / (tX1 - tX0);
+      }
       mValidFlag = true;
    }
 
@@ -83,6 +96,7 @@ public:
       real_t tY0 = 0;
       real_t tY1 = 0;
       real_t tY = 0;
+      
       int tBeginIndex = 0;
       int tEndIndex = NumElements - 1;
       int tIndex = 0;
@@ -144,7 +158,10 @@ public:
       tY1 = mTableY[tIndex + 1];
 
       // Calculate the linear interpolation.
-      tY = tY0 + (aX - tX0) * (tY1 - tY0) / (tX1 - tX0);
+      ///tY = tY0 + (aX - tX0) * (tY1 - tY0) / (tX1 - tX0);
+
+      // Calculate the linear interpolation using precalculated multiplier.
+      tY = tY0 + (aX - tX0) * mMultiplier[tIndex];
 
       return tY;
    }
