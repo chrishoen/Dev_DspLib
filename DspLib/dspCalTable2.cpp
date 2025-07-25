@@ -15,7 +15,7 @@ Description:
 #include "json.h"
 #include "risFileFunctions.h"
 
-#include "dspCalTable.h"
+#include "dspCalTable2.h"
 
 namespace Dsp
 {
@@ -25,7 +25,7 @@ namespace Dsp
 //******************************************************************************
 // Consructor.
 
-CalTable::CalTable()
+CalTable2::CalTable2()
 {
    mValidFlag = false;
 }
@@ -41,7 +41,7 @@ bool comparePairs(std::pair<double,double> p1, std::pair<double, double> p2)
    return (p1.first < p2.first);
 } 
 
-void CalTable::initialize(const std::vector<std::pair<double, double>>& aTableData)
+void CalTable2::initialize(const std::vector<std::pair<double, double>>& aTableData)
 {
    //***************************************************************************
    //***************************************************************************
@@ -97,7 +97,7 @@ void CalTable::initialize(const std::vector<std::pair<double, double>>& aTableDa
 // Helpers.
 
 // Show.
-void CalTable::show(int aPF)
+void CalTable2::show(int aPF)
 {
    for (int i = 0; i < mTable.size(); i++)
    {
@@ -111,7 +111,7 @@ void CalTable::show(int aPF)
 //******************************************************************************
 // Get an interpolated y value from an input x value.
 
-double CalTable::getYfromX(double aX)
+double CalTable2::getYfromX(double aX)
 {
    //***************************************************************************
    //***************************************************************************

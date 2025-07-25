@@ -8,7 +8,7 @@ System information.
 
 #include <string>
 #include "json.h"
-#include "dspCalTable.h"
+#include "dspCalTable2.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -46,7 +46,7 @@ public:
    bool mValidFlag;
 
    // Calibration table.
-   Dsp::CalTable mTable;
+   Dsp::CalTable2 mTable;
 
    // Table of calibration x,y pairs. Read from json file.
    std::vector<std::pair<double, double>> mTableData;

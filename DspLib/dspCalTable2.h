@@ -20,7 +20,7 @@ namespace Dsp
 // list of x,y pairs and provides a function that uses it to interpolate
 // from x to y.
 
-class  CalTable
+class  CalTable2
 {
 public:
    //***************************************************************************
@@ -40,7 +40,7 @@ public:
    // Methods.
 
    // Consructor.
-   CalTable();
+   CalTable2();
 
    // Initialize from vector of pairs.
    void initialize(const std::vector<std::pair<double, double>>& aTableData);
