@@ -44,7 +44,7 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::QCallRun3,  false);
    Prn::setFilter(Prn::QCallRun4,  false);
 
-   Prn::print(0,"CalTableTest2******************************************BEGIN");
+   Prn::print(0,"CalTableTest1******************************************BEGIN");
 
 }
 
@@ -55,7 +55,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"CalTableTest2******************************************END");
+   Prn::print(0,"CalTableTest1******************************************END");
 
    // Close print
    Prn::finalizePrint();
