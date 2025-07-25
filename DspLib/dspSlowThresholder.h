@@ -74,6 +74,7 @@ public:
    // Members.
 
    // Parameters.
+   SlowThresholderParms mParms;
    SlowThresholderParms* mP;
 
    //***************************************************************************
@@ -170,8 +171,8 @@ public:
    // from its previous value.
    void doUpdate(
       float aValue,           // Input
-      bool&  aAboveFlag,       // Output
-      bool&  aChangeFlag);     // Output
+      bool* aAboveFlag,       // Output
+      bool* aChangeFlag);     // Output
 
    //***************************************************************************
    //***************************************************************************

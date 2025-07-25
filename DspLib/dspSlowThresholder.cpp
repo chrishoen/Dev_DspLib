@@ -61,7 +61,8 @@ void SlowThresholder::initializeForASymLo(SlowThresholderParms* aParms)
 void SlowThresholder::initialize(SlowThresholderParms* aParms)
 {
    // Store parms.
-   mP = aParms;
+   mParms = *aParms;
+   mP = &mParms;
 
    // Initialize filters.
    mAlphaFilterAboveHi.initializeFromStep(
@@ -100,8 +101,8 @@ void SlowThresholder::initialize(SlowThresholderParms* aParms)
 
 void SlowThresholder::doUpdate(
    float  aValue,           // Input
-   bool&  aAboveFlag,       // Output
-   bool&  aChangeFlag)      // Output
+   bool*  aAboveFlag,       // Output
+   bool*  aChangeFlag)      // Output
 {
    //***************************************************************************
    //***************************************************************************
@@ -115,8 +116,8 @@ void SlowThresholder::doUpdate(
    mValue = aValue;
 
    // Set default outputs.
-   aAboveFlag = false;
-   aChangeFlag = false;
+   *aAboveFlag = false;
+   *aChangeFlag = false;
 
    //***************************************************************************
    //***************************************************************************
@@ -205,8 +206,8 @@ void SlowThresholder::doUpdate(
    // Write to the output variables.
 
    // Done.
-   aAboveFlag = mAboveFlag;
-   aChangeFlag = mChangeFlag;
+   *aAboveFlag = mAboveFlag;
+   *aChangeFlag = mChangeFlag;
 }
 
 //******************************************************************************

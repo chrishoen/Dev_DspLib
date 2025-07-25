@@ -149,8 +149,8 @@ public:
 
    real_t putBool(bool aCondition)
    {
-      if (aCondition) return put(1.0);
-      else            return put(0.0);
+      if (aCondition) return put((real_t)1.0);
+      else            return put((real_t)0.0);
    }
 };
 
