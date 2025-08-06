@@ -45,7 +45,7 @@ bool LogFileWriter::open(const char* aFileName)
       mFile = 0;
    }
 
-   mFile = fopen(get_log_filepath(aFileName)->c_str(), "w");
+   mFile = fopen(aFileName, "w");
 
    if (mFile==0)
    {
@@ -61,7 +61,7 @@ bool LogFileWriter::open(const char* aFileName)
 //******************************************************************************
 // Open the file
 
-bool LogFileWriter::openWithPath(const char* aFilePath)
+bool LogFileWriter::open(std::unique_ptr<std::string> aFilePath)
 {
    if (mFile)
    {
@@ -69,7 +69,7 @@ bool LogFileWriter::openWithPath(const char* aFilePath)
       mFile = 0;
    }
 
-   mFile = fopen(aFilePath, "w");
+   mFile = fopen(aFilePath->c_str(), "w");
 
    if (mFile == 0)
    {
@@ -152,7 +152,7 @@ bool CsvFileWriter::open(const char* aFileName)
       mFile = 0;
    }
 
-   mFile = fopen(get_log_filepath(aFileName)->c_str(), "w");
+   mFile = fopen(aFileName, "w");
 
    if (mFile==0)
    {
@@ -168,7 +168,7 @@ bool CsvFileWriter::open(const char* aFileName)
 //******************************************************************************
 // Open the file
 
-bool CsvFileWriter::openFromFilepath(const char* aFilePath)
+bool CsvFileWriter::open(std::unique_ptr<std::string> aFilePath)
 {
    if (mFile)
    {
@@ -176,7 +176,7 @@ bool CsvFileWriter::openFromFilepath(const char* aFilePath)
       mFile = 0;
    }
 
-   mFile = fopen(aFilePath, "w");
+   mFile = fopen(aFilePath->c_str(), "w");
 
    if (mFile == 0)
    {

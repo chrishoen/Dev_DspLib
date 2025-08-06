@@ -9,7 +9,10 @@ text files
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+
 #include <stdio.h>
+#include <string>
+#include <memory>
 
 //******************************************************************************
 //******************************************************************************
@@ -45,7 +48,7 @@ public:
 
    // Open the text file for write.
    bool open(const char* aFileName);
-   bool openWithPath(const char* aFilePath);
+   bool open(std::unique_ptr<std::string> aFilePath);
 
    // Write to the text file.
    void write (const char* aFormat, ...);
@@ -85,7 +88,7 @@ public:
 
    // Open the text file for write.
    bool open (const char* aFilename);
-   bool openFromFilepath (const char* aFilepath);
+   bool open(std::unique_ptr<std::string> aFilePath);
 
    // Close the file.
    void close ();
