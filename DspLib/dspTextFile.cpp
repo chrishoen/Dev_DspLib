@@ -11,7 +11,6 @@
 #include <ctype.h>
 
 #include "risPortableCalls.h"
-#include "dspPaths.h"
 
 #include "dspTextFile.h"
 
@@ -387,7 +386,7 @@ bool CsvFileReader::open(const char* aFileName)
    strcpy(mDelimiters," ,\t");
    mRowIndex=0;
    
-   mFile = fopen(get_log_filepath(aFileName)->c_str(), "r");
+   mFile = fopen(aFileName, "r");
 
    if (mFile==0)
    {
