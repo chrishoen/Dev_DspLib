@@ -89,9 +89,7 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun41  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Samples3/plot_stroke_detector41.py";
-   char* tPlotRun51  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Samples3/plot_stroke_detector51.py";
-   char* tPlotRun52  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Samples3/plot_stroke_detector52.py";
+   char* tPlotRun41  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse41.py";
 
    aCmd->setArgDefault(1,"41");
    int tPlotSelect = aCmd->argInt(1);
@@ -100,8 +98,6 @@ void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
    switch(tPlotSelect)
    {
       case 41: tPlotCmd = tPlotRun41; break;
-      case 51: tPlotCmd = tPlotRun51; break;
-      case 52: tPlotCmd = tPlotRun52; break;
       default: printf("PYTHON NOT FOUND\n");
       return;
    }

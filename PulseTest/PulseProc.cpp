@@ -50,6 +50,13 @@ void PulseProc::finalize()
 
 void PulseProc::processPulse(bool aPulseFlag)
 {
+   gPlotWriter.resetVars();
+   gPulseWriter.resetVars();
+
    gPlotWriter.mPulseFlag = aPulseFlag;
+   gPulseWriter.mPulseFlag = aPulseFlag;
+
+   gPlotWriter.doWrite();
+   gPulseWriter.doWrite();
 }
 

@@ -17,12 +17,12 @@
 
 PlotWriter::PlotWriter()
 {
+   mTime = 0;
    resetVars();
 }
 
 void PlotWriter::resetVars()
 {
-   mTime = 0;
    mPulseFlag = false;
    mDetectFlag1 = false;
    mDetectFlag2 = false;
@@ -73,6 +73,7 @@ void PlotWriter::doWrite1()
 {
    mCsvFileWriter.writeRow(
       mTime,
+      mPulseFlag  ? 1.0 : 0.0,
       mDetectFlag1  ? 1.0 : 0.0,
       mDetectFlag2  ? 1.0 : 0.0,
       mDetectFlag3  ? 1.0 : 0.0
