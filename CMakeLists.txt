@@ -16,6 +16,10 @@ my_show_cmake_vars()
 
 
 add_subdirectory ("DspLib")
+add_subdirectory ("PulseTest")
+return()
+
+add_subdirectory ("DspLib")
 add_subdirectory ("CalTableTest1")
 return()
 
