@@ -30,8 +30,14 @@ public:
    //***************************************************************************
    // Members.
 
+   // Control variables.
+   SumT mSumHigh;
+   SumT mSumLow;
+
    // Output variables.
    SumT mSum;         // Sum of window values.
+   bool mHighFlag;    // True if sum is high.
+   bool mLowFlag;     // True if sum is low.
 
    //***************************************************************************
    //***************************************************************************
@@ -48,6 +54,8 @@ public:
    {
       BaseClass::reset();
       mSum = 0;
+      mSumHigh = 0;
+      mSumLow = 0;
    }
 
    //***************************************************************************
@@ -66,6 +74,10 @@ public:
 
       // Add the input value to the sum.
       mSum += (SumT)mInput;
+
+      // Compare the sum.
+      mHighFlag = mSum >= mSumHigh;
+      mLowFlag = mSum <= mSumLow;
    }
 };
 

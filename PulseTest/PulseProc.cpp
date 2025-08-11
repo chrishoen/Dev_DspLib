@@ -32,6 +32,13 @@ void PulseProc::resetVars()
    mPulseRise = false;
    mPulseFall = false;
    mLastPulseFlag = false;
+
+   mDetectFlag = false;
+   mDetectRise = false;
+   mDetectFall = false;
+   mLastDetectFlag = false;
+
+   mCount = 0;
 }
 
 void PulseProc::initialize()
@@ -44,6 +51,8 @@ void PulseProc::initialize()
    mBoundCount.mMax = gPulseParms.mBoundCountMax;
 
    mSlidingSum.reset();
+   mSlidingSum.mSumHigh = gPulseParms.mSlidingSumHigh;
+   mSlidingSum.mSumLow = gPulseParms.mSlidingSumLow;
 
    mFuzzyAlpha.initialize(
       gPulseParms.mFilterDT, gPulseParms.mFuzzyStepTime, gPulseParms.mFuzzyCrisp);
@@ -88,6 +97,18 @@ void PulseProc::processPulse(bool aPulseFlag)
       case 3: processPulse3(aPulseFlag); break;
    }
 
+   // Detection flags.
+   mDetectRise = !mLastDetectFlag && mDetectFlag;
+   mDetectFall = mLastDetectFlag && !mDetectFlag;
+   mLastDetectFlag = mDetectFlag;
+
+   // Set some writer variables.
+   gPlotWriter.mDetectFlag1 = mDetectFlag;
+   gPulseWriter.mDetectFlag = mDetectFlag;
+   gPulseWriter.mDetectRise = mDetectRise;
+   gPulseWriter.mDetectFall = mDetectFall;
+   gPulseWriter.mCount = mCount;
+
    // Write the writers.
    gPlotWriter.doWrite();
    gPulseWriter.doWrite();
@@ -103,16 +124,20 @@ void PulseProc::processPulse1(bool aPulseFlag)
    // Update the components.
    mBoundCount.update(aPulseFlag);
 
-   // Set some writer variables.
-   gPlotWriter.mDetectFlag1 = mBoundCount.mDetectFlag;
-   gPulseWriter.mCount = mBoundCount.mCount;
-   gPulseWriter.mDetectFlag = mBoundCount.mDetectFlag;
-   gPulseWriter.mDetectRise = mBoundCount.mDetectRise;
-   gPulseWriter.mDetectFall = mBoundCount.mDetectFall;
+   // Set some pulse variables.
+   mDetectFlag = mBoundCount.mDetectFlag;
+   mCount = mBoundCount.mCount;
 }
 
 void PulseProc::processPulse2(bool aPulseFlag)
 {
+   // Update the components.
+   mSlidingSum.doPut(aPulseFlag);
+
+   // Set some pulse variables.
+   mCount = mSlidingSum.mSum;
+   if (mSlidingSum.mHighFlag)  mDetectFlag = true;
+   if (mSlidingSum.mLowFlag)   mDetectFlag = false;
 }
 
 void PulseProc::processPulse3(bool aPulseFlag)

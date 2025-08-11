@@ -33,6 +33,15 @@ public:
    bool mPulseFall;
    bool mLastPulseFlag;
 
+   // Detection variables.
+   bool mDetectFlag;
+   bool mDetectRise;
+   bool mDetectFall;
+   bool mLastDetectFlag;
+
+   // Count variables.
+   int mCount;
+   
    // Components.
    Dsp::BoundCount mBoundCount;
    Dsp::SlidingSum<int,char,20> mSlidingSum;
