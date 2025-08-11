@@ -28,11 +28,12 @@ void PulseParms::reset()
 
 void PulseParms::resetVars()
 {
+   mMode = 0;
+
    mFilterDT = 0;
    mFuzzyStepTime = 0;
    mFuzzyCrisp = 0;
 
-   // Sliding sum parameters.
    mBoundCountMax = 0;
    mBoundCountMin = 0;
    mSlidingSumHigh = 0;
@@ -49,15 +50,18 @@ void PulseParms::show()
    printf("\n");
    printf("PulseParms************************************************ %s\n", mTargetSection);
 
+   printf("Mode                         %-10d\n",    mMode);
    printf("\n");
-
+   printf("BoundCountMax                %-10d\n",    mBoundCountMax);
+   printf("BoundCountMin                %-10d\n",    mBoundCountMin);
+   printf("\n");
+   printf("SlidingSumHigh               %-10d\n",    mSlidingSumHigh);
+   printf("SlidingSumLow                %-10d\n",    mSlidingSumLow);
+   printf("\n");
    printf("FilterDT                     %-10.4f\n",  mFilterDT);
    printf("FuzzyStepTime                %-10.4f\n",  mFuzzyStepTime);
    printf("FuzzyCrisp                   %-10.4f\n",  mFuzzyCrisp);
-   printf("BoundCountMax                %-10d\n",    mBoundCountMax);
-   printf("BoundCountMin                %-10d\n",    mBoundCountMin);
-   printf("SlidingSumHigh               %-10d\n",    mSlidingSumHigh);
-   printf("SlidingSumLow                %-10d\n",    mSlidingSumLow);
+
    printf("\n");
 }
 
@@ -70,14 +74,17 @@ void PulseParms::show()
 
 void PulseParms::execute(Ris::CmdLineCmd* aCmd)
 {
-   if (aCmd->isCmd("FilterDT"))             mFilterDT = aCmd->argDouble(1);
-   if (aCmd->isCmd("FuzzyStepTime"))        mFuzzyStepTime = aCmd->argDouble(1);
-   if (aCmd->isCmd("FuzzyCrisp"))           mFuzzyCrisp = aCmd->argDouble(1);
+   if (aCmd->isCmd("Mode"))                 mMode = aCmd->argInt(1);
 
    if (aCmd->isCmd("BoundCountMax"))        mBoundCountMax = aCmd->argInt(1);
    if (aCmd->isCmd("BoundCountMin"))        mBoundCountMin = aCmd->argInt(1);
+
    if (aCmd->isCmd("SlidingSumHigh"))       mSlidingSumHigh = aCmd->argInt(1);
    if (aCmd->isCmd("SlidingSumLow"))        mSlidingSumLow = aCmd->argInt(1);
+
+   if (aCmd->isCmd("FilterDT"))             mFilterDT = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyStepTime"))        mFuzzyStepTime = aCmd->argDouble(1);
+   if (aCmd->isCmd("FuzzyCrisp"))           mFuzzyCrisp = aCmd->argDouble(1);
 }
 
 //******************************************************************************

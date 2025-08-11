@@ -24,12 +24,14 @@ PulseWriter::PulseWriter()
 void PulseWriter::resetVars()
 {
    mPulseFlag = false;
-   mDetectFlag1 = false;
-   mDetectFlag2 = false;
-   mDetectFlag3 = false;
-   mCount1 = 0;
-   mCount2 = 0;
-   mCount3 = 0;
+   mPulseRise = false;
+   mPulseFall = false;
+
+   mDetectFlag = false;
+   mDetectRise = false;
+   mDetectFall = false;
+
+   mCount = 0;
 }
 
 bool PulseWriter::initialize()
@@ -79,17 +81,23 @@ void PulseWriter::doWrite1()
    char tString4[40]; tString4[0] = 0;
    char tString5[40]; tString5[0] = 0;
    char tString6[40]; tString6[0] = 0;
-   char tString7[40]; tString7[0] = 0;
-   char tString8[40]; tString8[0] = 0;
 
    if (mPulseFlag)                strcpy(tString1, "pulse");
    else                           strcpy(tString1, ".....");  
-   if (mDetectFlag1)              strcpy(tString2, "detect1");
-   else                           strcpy(tString2, ".......");  
-   sprintf(tString3, "%5d", mCount1);
+   if (mDetectFlag)               strcpy(tString2, "detect");
+   else                           strcpy(tString2, "..... ");  
+   if (mPulseRise)                strcpy(tString3, "prise");
+   else if (mPulseFall)           strcpy(tString3, "pfall");  
+   else                           strcpy(tString3, "     ");  
+   if (mDetectRise)               strcpy(tString4, "drise");
+   else if (mDetectFall)          strcpy(tString4, "dfall");  
+   else                           strcpy(tString4, "     ");  
+   sprintf(tString5, "%5d", mCount);
+   if (mPulseRise)                strcpy(tString6, "here ");
+   else                           strcpy(tString6, "     ");
 
-   mFileWriter.write("%s %s %s %s %s %s %s %s", 
-      tString1,tString2,tString3,tString4,tString5,tString6,tString7,tString8);
+   mFileWriter.write("%s %s %s %s %s %s", 
+      tString1,tString2,tString3,tString4,tString5,tString6);
 }
 
 //******************************************************************************

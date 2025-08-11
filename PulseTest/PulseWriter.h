@@ -27,13 +27,19 @@ public:
 
    // Input variables. 
    bool mPulseFlag;
-   
-   bool mDetectFlag1;
-   bool mDetectFlag2;
-   bool mDetectFlag3;
-   int mCount1;
-   int mCount2;
-   int mCount3;
+   bool mPulseRise;
+   bool mPulseFall;
+
+   bool mDetectFlag;
+   bool mDetectRise;
+   bool mDetectFall;
+
+   int mCount;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Members.
 
    // Writer.
    Dsp::LogFileWriter mFileWriter;

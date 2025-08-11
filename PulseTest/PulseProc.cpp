@@ -28,9 +28,10 @@ PulseProc::PulseProc()
 
 void PulseProc::resetVars()
 {
-   mDetectFlag1 = false;
-   mDetectFlag2 = false;
-   mDetectFlag3 = false;
+   mPulseFlag = false;
+   mPulseRise = false;
+   mPulseFall = false;
+   mLastPulseFlag = false;
 }
 
 void PulseProc::initialize()
@@ -65,25 +66,56 @@ void PulseProc::finalize()
 
 void PulseProc::processPulse(bool aPulseFlag)
 {
+   // Pulse rising and falling edges.
+   mPulseFlag = aPulseFlag;
+   mPulseRise = !mLastPulseFlag && mPulseFlag;
+   mPulseFall = mLastPulseFlag && !mPulseFlag;
+   mLastPulseFlag = mPulseFlag;
+
+   // Set some writer variables.
+   gPlotWriter.resetVars();
+   gPulseWriter.resetVars();
+   gPlotWriter.mPulseFlag = mPulseFlag;
+   gPulseWriter.mPulseFlag = mPulseFlag;
+   gPulseWriter.mPulseRise = mPulseRise;
+   gPulseWriter.mPulseFall = mPulseFall;
+
+   // Select
+   switch(gPulseParms.mMode)
+   {
+      case 1: processPulse1(aPulseFlag); break;
+      case 2: processPulse2(aPulseFlag); break;
+      case 3: processPulse3(aPulseFlag); break;
+   }
+
+   // Write the writers.
+   gPlotWriter.doWrite();
+   gPulseWriter.doWrite();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Process a pulse.
+
+void PulseProc::processPulse1(bool aPulseFlag)
+{
    // Update the components.
    mBoundCount.update(aPulseFlag);
-   mDetectFlag1 = mBoundCount.mDetectFlag;
 
-   // Update the writers.
-   gPlotWriter.resetVars();
-   gPlotWriter.mPulseFlag = aPulseFlag;
-   gPlotWriter.mDetectFlag1 = mDetectFlag1;
-   gPlotWriter.mDetectFlag2 = mDetectFlag2;
-   gPlotWriter.mDetectFlag3 = mDetectFlag3;
-   gPlotWriter.doWrite();
-   
-   gPulseWriter.resetVars();
-   gPulseWriter.mPulseFlag = aPulseFlag;
-   gPulseWriter.mDetectFlag1 = mDetectFlag1;
-   gPulseWriter.mDetectFlag2 = mDetectFlag2;
-   gPulseWriter.mDetectFlag3 = mDetectFlag3;
+   // Set some writer variables.
+   gPlotWriter.mDetectFlag1 = mBoundCount.mDetectFlag;
+   gPulseWriter.mCount = mBoundCount.mCount;
+   gPulseWriter.mDetectFlag = mBoundCount.mDetectFlag;
+   gPulseWriter.mDetectRise = mBoundCount.mDetectRise;
+   gPulseWriter.mDetectFall = mBoundCount.mDetectFall;
+}
 
-   gPulseWriter.mCount1 = mBoundCount.mCount;
-   gPulseWriter.doWrite();
+void PulseProc::processPulse2(bool aPulseFlag)
+{
+}
+
+void PulseProc::processPulse3(bool aPulseFlag)
+{
 }
 

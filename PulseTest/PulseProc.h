@@ -27,13 +27,16 @@ public:
    //***************************************************************************
    // Members.
 
+   // Pulse variables.
+   bool mPulseFlag;
+   bool mPulseRise;
+   bool mPulseFall;
+   bool mLastPulseFlag;
+
+   // Components.
    Dsp::BoundCount mBoundCount;
    Dsp::SlidingSum<int,char,20> mSlidingSum;
    Dsp::FuzzyAlpha mFuzzyAlpha;
-
-   bool mDetectFlag1;
-   bool mDetectFlag2;
-   bool mDetectFlag3;
 
    //***************************************************************************
    //***************************************************************************
@@ -53,6 +56,10 @@ public:
 
    // Process a pulse.
    void processPulse(bool aPulseFlag);
+   // Process a pulse.
+   void processPulse1(bool aPulseFlag);
+   void processPulse2(bool aPulseFlag);
+   void processPulse3(bool aPulseFlag);
 };
 
 //******************************************************************************

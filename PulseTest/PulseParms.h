@@ -60,10 +60,8 @@ public:
    //***************************************************************************
    // Members.
 
-   // Filter parameters.
-   double mFilterDT;
-   double mFuzzyStepTime;
-   double mFuzzyCrisp;
+   // Control.
+   int mMode;
 
    // Bound count parameters.
    int mBoundCountMax;
@@ -72,6 +70,11 @@ public:
    // Sliding sum parameters.
    int mSlidingSumHigh;
    int mSlidingSumLow;
+
+   // Filter parameters.
+   double mFilterDT;
+   double mFuzzyStepTime;
+   double mFuzzyCrisp;
 
    //***************************************************************************
    //***************************************************************************

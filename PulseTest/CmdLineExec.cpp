@@ -89,14 +89,16 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
 {
+   char* tPlotRun21  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse21.py";
    char* tPlotRun41  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse41.py";
 
-   aCmd->setArgDefault(1,"41");
+   aCmd->setArgDefault(1,"21");
    int tPlotSelect = aCmd->argInt(1);
 
    char* tPlotCmd = 0;
    switch(tPlotSelect)
    {
+      case 21: tPlotCmd = tPlotRun21; break;
       case 41: tPlotCmd = tPlotRun41; break;
       default: printf("PYTHON NOT FOUND\n");
       return;
