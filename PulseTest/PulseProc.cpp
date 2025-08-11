@@ -103,11 +103,13 @@ void PulseProc::processPulse(bool aPulseFlag)
    mLastDetectFlag = mDetectFlag;
 
    // Set some writer variables.
-   gPlotWriter.mDetectFlag1 = mDetectFlag;
+   gPlotWriter.mDetectFlag = mDetectFlag;
+   gPlotWriter.mY = mY;
    gPulseWriter.mDetectFlag = mDetectFlag;
    gPulseWriter.mDetectRise = mDetectRise;
    gPulseWriter.mDetectFall = mDetectFall;
    gPulseWriter.mCount = mCount;
+   gPulseWriter.mY = mY;
 
    // Write the writers.
    gPlotWriter.doWrite();
@@ -142,5 +144,15 @@ void PulseProc::processPulse2(bool aPulseFlag)
 
 void PulseProc::processPulse3(bool aPulseFlag)
 {
+   // Update the components.
+   mFuzzyAlpha.doUpdate(aPulseFlag);
+
+   // Set some pulse variables.
+   mY = mFuzzyAlpha.mFuzzy.mX;
+
+   if (mPulseRise) mCount = 0;
+   if (mPulseFlag) mCount++;
+
+   mDetectFlag = mFuzzyAlpha.mConditionFlag;
 }
 

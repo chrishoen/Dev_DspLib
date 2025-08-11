@@ -48,6 +48,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executePulseGen (Ris::CmdLineCmd* aCmd)
 {
+   gPulseParms.reset();
+   gPulseParms.readSection("default");
    gPulseGen.doGenerate();
 }
 
@@ -90,7 +92,7 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
 {
    char* tPlotRun21  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse21.py";
-   char* tPlotRun41  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse41.py";
+   char* tPlotRun31  = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Pulses3/plot_pulse31.py";
 
    aCmd->setArgDefault(1,"21");
    int tPlotSelect = aCmd->argInt(1);
@@ -99,7 +101,7 @@ void CmdLineExec::executePlot(Ris::CmdLineCmd* aCmd)
    switch(tPlotSelect)
    {
       case 21: tPlotCmd = tPlotRun21; break;
-      case 41: tPlotCmd = tPlotRun41; break;
+      case 31: tPlotCmd = tPlotRun31; break;
       default: printf("PYTHON NOT FOUND\n");
       return;
    }

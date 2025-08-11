@@ -41,6 +41,9 @@ public:
 
    // Count variables.
    int mCount;
+
+   // Analog variables.
+   float mY;
    
    // Components.
    Dsp::BoundCount mBoundCount;

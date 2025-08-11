@@ -81,6 +81,7 @@ void PulseWriter::doWrite1()
    char tString4[40]; tString4[0] = 0;
    char tString5[40]; tString5[0] = 0;
    char tString6[40]; tString6[0] = 0;
+   char tString7[40]; tString7[0] = 0;
 
    if (mPulseFlag)                strcpy(tString1, "pulse");
    else                           strcpy(tString1, ".....");  
@@ -95,9 +96,10 @@ void PulseWriter::doWrite1()
    sprintf(tString5, "%5d", mCount);
    if (mPulseRise)                strcpy(tString6, "here ");
    else                           strcpy(tString6, "     ");
+   sprintf(tString7, "%.4f", mY);
 
-   mFileWriter.write("%s %s %s %s %s %s", 
-      tString1,tString2,tString3,tString4,tString5,tString6);
+   mFileWriter.write("%s %s %s %s %s %s %s", 
+      tString1,tString2,tString3,tString4,tString5,tString6,tString7);
 }
 
 //******************************************************************************

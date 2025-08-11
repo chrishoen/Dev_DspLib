@@ -28,10 +28,9 @@ public:
    // Input variables. 
    float mTime;
    bool mPulseFlag;
-   bool mDetectFlag1;
-   bool mDetectFlag2;
-   bool mDetectFlag3;
-
+   bool mDetectFlag;
+   float mY;
+   
    // Writer.
    Dsp::CsvFileWriter mCsvFileWriter;
 
