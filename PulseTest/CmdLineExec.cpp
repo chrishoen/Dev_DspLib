@@ -123,7 +123,9 @@ void CmdLineExec::executeShow(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
-   Samp::gPulseParms.show();
+   gPulseParms.reset();
+   gPulseParms.readSection("default");
+   gPulseParms.show();
 }
 
 //******************************************************************************

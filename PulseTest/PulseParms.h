@@ -13,13 +13,6 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-
-namespace Samp
-{
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 // This is a class that contains parameter member variables. The values of
 // the parameters are set by reading a text file that contains command lines.
 // Each command line is of the form "command argument1 argument2 ...".
@@ -69,11 +62,16 @@ public:
 
    // Filter parameters.
    double mFilterDT;
-   double mFilterStepTime;
+   double mFuzzyStepTime;
+   double mFuzzyCrisp;
 
-   // Count parameters.
-   int mCountMax;
-   int mCountMin;
+   // Bound count parameters.
+   int mBoundCountMax;
+   int mBoundCountMin;
+
+   // Sliding sum parameters.
+   int mSlidingSumHigh;
+   int mSlidingSumLow;
 
    //***************************************************************************
    //***************************************************************************
@@ -116,4 +114,3 @@ public:
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-}//namespace

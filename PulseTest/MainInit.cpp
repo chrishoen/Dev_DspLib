@@ -36,8 +36,8 @@ void main_initialize()
    // Read parameters files.
 
    // Read parameters files.
-   Samp::gPulseParms.reset();
-   Samp::gPulseParms.readSection("default");
+   gPulseParms.reset();
+   gPulseParms.readSection("default");
    
    //***************************************************************************
    //***************************************************************************

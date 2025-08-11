@@ -122,7 +122,7 @@ void PulseGen::executeInit(Ris::CmdLineCmd* aCmd)
 void PulseGen::doSetOutputValue(bool aPulseFlag)
 {
    gPulseProc.processPulse(aPulseFlag);
-   mSampleTime += (float)Samp::gPulseParms.mFilterDT;
+   mSampleTime += (float)gPulseParms.mFilterDT;
    mSampleCount++;
 }
 

@@ -64,10 +64,8 @@ public:
 
    // Update the state. The input is a boolean. It is input to the alpha 
    // filter. The fuzzy variable is set from the output of the alpha filter.
-   // The output is the crisp value of the fuzzy variable.
-   void doUpdate(
-      bool  aValue,           // Input
-      bool* aConditionFlag);  // Output
+   // Return the crisp value of the fuzzy variable.
+   bool doUpdate(bool aValue);
 };
 
 //******************************************************************************

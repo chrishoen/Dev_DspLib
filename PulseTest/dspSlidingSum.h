@@ -19,8 +19,8 @@ namespace Dsp
 // This template implements a sliding window that maintains a sum of
 // input values.
 
-template <typename SumT,typename ElementT, int WinSize>
-class BoundCount : public SlidingWindow<T, WinSize>
+template <typename SumT, typename ElementT, int WinSize>
+class SlidingSum : public SlidingWindow<ElementT, WinSize>
 {
 public:
    typedef SlidingWindow<ElementT, WinSize> BaseClass;
@@ -39,7 +39,7 @@ public:
    // Methods.
 
    // Constructor.
-   BoundCount()
+   SlidingSum()
    {
       reset();
    }
