@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include <windows.h>
 #include "risSystemCalls.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
@@ -188,6 +189,8 @@ void CmdLineExec::executePlotA
    }
 
    int tRet = Ris::doSystemCommand(tPlotCmd);
+   Sleep(1000);
+   SetForegroundWindow(GetConsoleWindow());
    Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
 }
 
