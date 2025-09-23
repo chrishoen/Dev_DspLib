@@ -15,7 +15,7 @@ namespace Dsp
 // This template implements a sliding window that maintains a history
 // of input values.
 
-template <class T,int WinSize>
+template <class value_t,int WinSize>
 class SlidingWindow 
 {
 public:
@@ -26,7 +26,7 @@ public:
    // Members.
 
    // Input variable.
-   T mInput;
+   value_t mInput;
 
    // Index of the next element to put to. [0..WinSize-1]
    int mPutIndex;
@@ -41,7 +41,7 @@ public:
    bool mFirstFlag;
 
    // Array of elements.
-   T mElement[WinSize];
+   value_t mElement[WinSize];
 
    //***************************************************************************
    //***************************************************************************
@@ -77,7 +77,7 @@ public:
 
    // Write an element to the array at the put index and advance
    // the put index. Return true if full.
-   bool doPut (T aInput)
+   bool doPut (value_t aInput)
    {
       // Store the input.
       mInput = aInput;
@@ -113,7 +113,7 @@ public:
    // Return an element that is relative to the first gettable element,
    // which is the last element that was put to. Index 0 is the most recent. 
    // Index WinSize-1 is the least recent.
-   T elementAt(int aIndex)
+   value_t elementAt(int aIndex)
    {
       // If try to access past the last element then return the last element.
       if (aIndex > mSize - 1) aIndex = mSize - 1;
@@ -126,13 +126,13 @@ public:
    }
 
    // Return the head element.
-   T elementAtHead()
+   value_t elementAtHead()
    {
       return elementAt(0);
    }
 
    // Return the tail element.
-   T elementAtTail()
+   value_t elementAtTail()
    {
       int tTailIndex = mSize > 0 ? mSize - 1 : 0; 
       return elementAt(tTailIndex);
