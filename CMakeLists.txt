@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.27)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 set(MY_MACRO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/zzzMacros")
@@ -14,6 +14,10 @@ project ("Dev_DspLib")
 my_append_compile_flags()
 my_show_cmake_vars()
 
+
+add_subdirectory ("DspLib")
+add_subdirectory ("AlphaTest")
+return()
 
 add_subdirectory ("DspLib")
 add_subdirectory ("PulseTest")

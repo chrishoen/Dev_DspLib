@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.10)
+﻿cmake_minimum_required(VERSION 3.27)
 set (project "CalTableTest2")
 project(${project} CXX)
 my_find_src_files (src_files ${project})
