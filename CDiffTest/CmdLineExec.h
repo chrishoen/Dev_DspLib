@@ -1,6 +1,7 @@
 #pragma once
 
 #include "risCmdLineExec.h"
+#include "dspFIRFilterBase.h"
 
 //******************************************************************************
 // specific command line executive
@@ -9,6 +10,8 @@
 class CmdLineExec : public Ris::BaseCmdLineExec
 {
 public:
+
+   Dsp::FIRFilter<float, 10> mFilter;
 
    CmdLineExec();
 
