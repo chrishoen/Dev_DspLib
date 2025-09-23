@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-#include <windows.h>
-
 #include "risSystemCalls.h"
 #include "CmdLineExec.h"
 #include "Parms.h"
@@ -30,20 +28,12 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("RESET")) reset();
 
-   if (aCmd->isCmd("A1"))       executeAlpha1(aCmd);
-   if (aCmd->isCmd("A2"))       executeAlpha2(aCmd);
-   if (aCmd->isCmd("A3"))       executeAlpha3(aCmd);
-   if (aCmd->isCmd("SM2"))      executeSliding2(aCmd);
-   if (aCmd->isCmd("SM3"))      executeSliding3(aCmd);
-   if (aCmd->isCmd("DEV"))      executeAbsDev(aCmd);
-   if (aCmd->isCmd("BIAS"))     executeBias(aCmd);
+   if (aCmd->isCmd("ALPHA"))    executeAlpha(aCmd);
 
    if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
    if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
    if (aCmd->isCmd("TEST3"))    executeTest3(aCmd);
-   if (aCmd->isCmd("PLOTA"))    executePlotA(aCmd);
-   if (aCmd->isCmd("PLOTSM"))   executePlotSM(aCmd);
-   if (aCmd->isCmd("PLOTB"))    executePlotB(aCmd);
+   if (aCmd->isCmd("PLOT"))     executePlotA(aCmd);
 
    if (aCmd->isCmd("GO1"))   executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))   executeGo2(aCmd);
@@ -57,21 +47,28 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeAlpha1(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"11");
+   aCmd->setArgDefault(1,"1");
+   aCmd->setArgDefault(2,"3");
    int tFilterSelect = aCmd->argInt(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
    switch(tFilterSelect)
    {
-      case 11: gParms.readSection("AlphaOne11"); break;
-      case 12: gParms.readSection("AlphaOne12"); break;
-      case 13: gParms.readSection("AlphaOne13"); break;
-      case 21: gParms.readSection("AlphaOne21"); break;
-      case 22: gParms.readSection("AlphaOne22"); break;
-      case 23: gParms.readSection("AlphaOne23"); break;
+      case 1: gParms.readSection("AlphaOne1"); break;
+      case 2: gParms.readSection("AlphaTwo1"); break;
+      case 3: gParms.readSection("AlphaThree1"); break;
       default: printf("SECTION NOT FOUND\n");
    }
 
@@ -83,123 +80,25 @@ void CmdLineExec::executeAlpha1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executeAlpha2(Ris::CmdLineCmd* aCmd)
-{
-   aCmd->setArgDefault(1,"11");
-   int tFilterSelect = aCmd->argInt(1);
-
-   gParms.reset();
-   gParms.readSection("default");
-   switch(tFilterSelect)
-   {
-      case 11: gParms.readSection("AlphaTwo11"); break;
-      case 12: gParms.readSection("AlphaTwo12"); break;
-      case 13: gParms.readSection("AlphaTwo13"); break;
-      case 21: gParms.readSection("AlphaTwo21"); break;
-      case 22: gParms.readSection("AlphaTwo22"); break;
-      case 23: gParms.readSection("AlphaTwo23"); break;
-      default: printf("SECTION NOT FOUND\n");
-   }
-
-   TestOne tTestOne;
-   tTestOne.doRun2();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeAlpha3(Ris::CmdLineCmd* aCmd)
-{
-   aCmd->setArgDefault(1,"11");
-   int tFilterSelect = aCmd->argInt(1);
-
-   gParms.reset();
-   gParms.readSection("default");
-   switch(tFilterSelect)
-   {
-      case 11: gParms.readSection("AlphaThree11"); break;
-      case 12: gParms.readSection("AlphaThree12"); break;
-      case 13: gParms.readSection("AlphaThree13"); break;
-      case 21: gParms.readSection("AlphaThree21"); break;
-      case 22: gParms.readSection("AlphaThree22"); break;
-      case 23: gParms.readSection("AlphaThree23"); break;
-      default: printf("SECTION NOT FOUND\n");
-   }
-
-   TestOne tTestOne;
-   tTestOne.doRun3();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeSliding2(Ris::CmdLineCmd* aCmd)
-{
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("SlidingMean");
-
-   TestOne tTestOne;
-   tTestOne.doRun2();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeSliding3(Ris::CmdLineCmd* aCmd)
-{
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("SlidingMean");
-
-   TestOne tTestOne;
-   tTestOne.doRun3();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeAbsDev(Ris::CmdLineCmd* aCmd)
-{
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("AbsDev");
-
-   TestOne tTestOne;
-   tTestOne.doRun2();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeBias(Ris::CmdLineCmd* aCmd)
-{
-   gParms.reset();
-   gParms.readSection("default");
-   gParms.readSection("BiasEstimator");
-
-   TestOne tTestOne;
-   tTestOne.doRun3();
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
 void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
    double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
 
-   gParms.readSection("AlphaOne11");
+   gParms.readSection("AlphaOne1");
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
 
    TestOne tTestOne;
@@ -212,11 +111,21 @@ void CmdLineExec::executeTest1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeTest2(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"0.4");
+   aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
    double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
 
    gParms.readSection("AlphaTwo11");
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
@@ -232,10 +141,20 @@ void CmdLineExec::executeTest2(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
 {
    aCmd->setArgDefault(1,"0.1");
+   aCmd->setArgDefault(2,"2");
    double tAlpha = aCmd->argDouble(1);
+   int tGenSelect = aCmd->argInt(2);
 
    gParms.reset();
    gParms.readSection("default");
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
 
    gParms.readSection("AlphaThree11");
    gParms.mHistoryFilterParms1.mAlphaAlpha = tAlpha;
@@ -248,14 +167,14 @@ void CmdLineExec::executeTest3(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CmdLineExec::executePlotA(Ris::CmdLineCmd* aCmd)
+void CmdLineExec::executePlotA
+(Ris::CmdLineCmd* aCmd)
 {
-   char* tPlotRun1  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha1.py";
-   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha2.py";
-   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha22.py";
-   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_alpha3.py";
+   char* tPlotRun1 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha1.py";
+   char* tPlotRun2 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha2.py";
+   char* tPlotRun3 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha3.py";
 
-   aCmd->setArgDefault(1,"2");
+   aCmd->setArgDefault(1,"1");
    int tPlotSelect = aCmd->argInt(1);
 
    char* tPlotCmd = 0;
@@ -263,59 +182,11 @@ void CmdLineExec::executePlotA(Ris::CmdLineCmd* aCmd)
    {
       case 1: tPlotCmd = tPlotRun1 ; break;
       case 2: tPlotCmd = tPlotRun2 ; break;
-      case 22: tPlotCmd = tPlotRun22 ; break;
       case 3: tPlotCmd = tPlotRun3 ; break;
       default: printf("PLOT NOT FOUND\n");
    }
 
    int tRet = Ris::doSystemCommand(tPlotCmd);
-   Sleep(1000);
-   SetForegroundWindow(GetConsoleWindow());
-   
-   Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executePlotSM(Ris::CmdLineCmd* aCmd)
-{
-   char* tPlotRun2  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding2.py";
-   char* tPlotRun22 = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding22.py";
-   char* tPlotRun3  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_sliding3.py";
-
-   aCmd->setArgDefault(1,"2");
-   int tPlotSelect = aCmd->argInt(1);
-
-   char* tPlotCmd = 0;
-   switch(tPlotSelect)
-   {
-      case 2: tPlotCmd = tPlotRun2 ; break;
-      case 22: tPlotCmd = tPlotRun22 ; break;
-      case 3: tPlotCmd = tPlotRun3 ; break;
-      default: printf("PLOT NOT FOUND\n");
-   }
-
-   int tRet = Ris::doSystemCommand(tPlotCmd);
-   Sleep(1000);
-   SetForegroundWindow(GetConsoleWindow());
-   
-   Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executePlotB(Ris::CmdLineCmd* aCmd)
-{
-   char* tPlotCmd  = "python C:/Prime/AAA_NexGen2/Python_Plots/Dsp/plot_sample_bias3.py";
-
-   int tRet = Ris::doSystemCommand(tPlotCmd);
-   Sleep(1000);
-   SetForegroundWindow(GetConsoleWindow());
-   
    Prn::print(0, "PLOT %d %s", tRet, tPlotCmd);
 }
 
@@ -325,6 +196,16 @@ void CmdLineExec::executePlotB(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefault(1, 10);
+   aCmd->setArgDefault(2, 0.9);
+   double tTs = 1.0;
+   double tStepTime = aCmd->argDouble(1);
+   double tStepThresh = aCmd->argDouble(2);
+
+   Dsp::Filter::AlphaOne<float> tFilter;
+   tFilter.initializeFromStep(tTs, tStepTime, tStepThresh);
+
+   Prn::print(0, "alpha %6.4f", tFilter.mAlpha);
 }
 
 //******************************************************************************
@@ -371,33 +252,3 @@ void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
    gParms.show();
 }
 
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-void CmdLineExec::executeHelp(Ris::CmdLineCmd* aCmd)
-{
-   Prn::print(0, "help ***********************************");
-   Prn::print(0, "");
-   Prn::print(0, "A1           -- run alpha one filter");
-   Prn::print(0, "A2           -- run alpha two filter");
-   Prn::print(0, "A3           -- run alpha three filter");
-   Prn::print(0, "");
-   Prn::print(0, "SM2          -- run sliding mean filter");
-   Prn::print(0, "SM3          -- run sliding mean filter");
-   Prn::print(0, "");
-   Prn::print(0, "DEV          -- run absolute deviation filer");
-   Prn::print(0, "BIAS         -- run bias estimator");
-   Prn::print(0, "");
-   Prn::print(0, "TEST1 alpha  -- test alpha one filter");
-   Prn::print(0, "TEST2 alpha  -- test alpha two filter");
-   Prn::print(0, "TEST3 alpha  -- test alpha three filter");
-   Prn::print(0, "");
-   Prn::print(0, "PLOTA   1,2,22,3     -- plots alpha filter");
-   Prn::print(0, "PLOTSM  2,22,3       -- plots sliding mean filter");
-   Prn::print(0, "PLOTB                -- plots bias estimator");
-   Prn::print(0, "");
-   Prn::print(0, "parms        -- show program parms");
-   Prn::print(0, "");
-   Prn::print(0, "trc help -- show trace help");
-}
