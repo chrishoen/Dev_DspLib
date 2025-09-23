@@ -20,18 +20,10 @@ namespace Dsp
 // input values and calculates the minimum, maximum, and mean on it.
 
 template <typename T,int WinSize>
-class SlidingMinMaxMean : public SlidingWindow<T, WinSize>
+class SlidingMinMax : public SlidingWindow<T, WinSize>
 {
 public:
    typedef SlidingWindow<T, WinSize> BaseClass;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Constants.
-
-   // Used to divide by the window size.
-   static constexpr T cSumMultiplier =  ((T)1)/((T)WinSize);
 
    //***************************************************************************
    //***************************************************************************
@@ -41,10 +33,6 @@ public:
    // Output variables.
    T mMin;          // Minimum of window values.
    T mMax;          // Maximum of window values.
-   T mMean;         // Mean of window values.
-
-   // Calculation variables.
-   T mMeanSum;      // Sum of window values.  
 
    //***************************************************************************
    //***************************************************************************
@@ -52,7 +40,7 @@ public:
    // Methods.
 
    // Constructor.
-   SlidingMinMaxMean()
+   SlidingMinMax()
    {
       reset();
    }
@@ -62,26 +50,6 @@ public:
       BaseClass::reset();
       mMin = 0;
       mMax = 0;
-      mMean = 0;
-      mMeanSum = 0;
-   }
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // This is called by the base class put operation before the actual put.
-
-   void doBeforePut() override
-   {
-      // If full.
-      if (BaseClass::mFullFlag)
-      {
-         // Subtract the tail value from the sum.
-         mMeanSum -= BaseClass::elementAtTail();
-      }
-
-      // Add the input value to the sum.
-      mMeanSum += BaseClass::mInput;
    }
 
    //***************************************************************************
@@ -91,24 +59,6 @@ public:
 
    void doAfterPut() override
    {
-      //************************************************************************
-      //************************************************************************
-      //************************************************************************
-      // Calculate the mean and related variables.
-
-      // If not full yet.
-      if (!BaseClass::mFullFlag)
-      {
-         // Initialize.
-         mMean = BaseClass::mInput;
-      }
-      // If full.
-      else
-      {
-         // Calculate the mean as sum divided by the window size.
-         mMean = mMeanSum * cSumMultiplier;
-      }
-
       //************************************************************************
       //************************************************************************
       //************************************************************************

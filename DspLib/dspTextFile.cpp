@@ -363,6 +363,18 @@ void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double 
    fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10,aX11,aX12,aX13,aX14,aX15,aX16);
 }
 
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15,double aX16,double aX17)
+{
+   if (!mFile) return;
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10,aX11,aX12,aX13,aX14,aX15,aX16,aX17);
+}
+
+void CsvFileWriter::writeRow(double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15,double aX16,double aX17,double aX18)
+{
+   if (!mFile) return;
+   fprintf(mFile, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",aX1,aX2,aX3,aX4,aX5,aX6,aX7,aX8,aX9,aX10,aX11,aX12,aX13,aX14,aX15,aX16,aX17,aX18);
+}
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************

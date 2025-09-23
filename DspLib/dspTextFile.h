@@ -117,6 +117,8 @@ public:
    void writeRow  (double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14);
    void writeRow  (double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15);
    void writeRow  (double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15,double aX16);
+   void writeRow  (double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15,double aX16,double aX17);
+   void writeRow  (double aX1,double aX2,double aX3,double aX4,double aX5,double aX6,double aX7,double aX8,double aX9,double aX10,double aX11,double aX12,double aX13,double aX14,double aX15,double aX16,double aX17,double aX18);
 };
 
 //******************************************************************************
