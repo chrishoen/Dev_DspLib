@@ -49,7 +49,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"1");
+   aCmd->setArgDefault(1,"4");
    aCmd->setArgDefault(2,"3");
    int tFilterSelect = aCmd->argInt(1);
    int tGenSelect = aCmd->argInt(2);
@@ -69,6 +69,7 @@ void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
       case 1: gParms.readSection("AlphaOne1"); break;
       case 2: gParms.readSection("AlphaTwo1"); break;
       case 3: gParms.readSection("AlphaThree1"); break;
+      case 4: gParms.readSection("AlphaAlpha1"); break;
       default: printf("SECTION NOT FOUND\n");
    }
 

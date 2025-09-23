@@ -108,6 +108,12 @@ void HistoryFilterCausal::initializeCausalFilter()
       }
    }
    break;
+   case HistoryFilterParms::cCausalAlphaAlpha:
+   {
+      mAlphaAlpha.initializeFromAlpha(
+         mParms.mAlphaAlpha);
+   }
+   break;
    case HistoryFilterParms::cCausalAlphaStdDev:
    {
       if (mParms.mAlphaAlpha > 0)
@@ -239,6 +245,11 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
       }
    }
    break;
+   case HistoryFilterParms::cCausalAlphaAlpha:
+   {
+      *aOutput = mAlphaAlpha.put(aInput);
+   }
+   break;
    case HistoryFilterParms::cCausalAlphaStdDev:
    {
       *aOutput = 0.0;
@@ -329,6 +340,12 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
       *aOutput2 = mAlphaThree.mXV;
    }
    break;
+   case HistoryFilterParms::cCausalAlphaAlpha:
+   {
+      *aOutput1 = mAlphaAlpha.put(aInput);
+      *aOutput2 = 0.0;
+   }
+   break;
    case HistoryFilterParms::cCausalAlphaStdDev:
    {
       mAlphaStdDev.put(aInput);
@@ -398,6 +415,13 @@ void HistoryFilterCausal::putToFilter(
       *aOutput1 = mAlphaThree.mXX;
       *aOutput2 = mAlphaThree.mXV;
       *aOutput3 = mAlphaThree.mXA;
+   }
+   break;
+   case HistoryFilterParms::cCausalAlphaAlpha:
+   {
+      *aOutput1 = mAlphaAlpha.put(aInput);
+      *aOutput2 = 0.0;
+      *aOutput3 = 0.0;
    }
    break;
    case HistoryFilterParms::cCausalAlphaStdDev:

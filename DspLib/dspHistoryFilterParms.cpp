@@ -171,6 +171,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaOne)))       mCausalType = cCausalAlphaOne;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaTwo)))       mCausalType = cCausalAlphaTwo;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaThree)))     mCausalType = cCausalAlphaThree;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaAlpha)))     mCausalType = cCausalAlphaAlpha;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaStdDev)))    mCausalType = cCausalAlphaStdDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaAbsDev)))    mCausalType = cCausalAlphaAbsDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalSlidingMean)))    mCausalType = cCausalSlidingMean;
@@ -239,6 +240,7 @@ char* HistoryFilterParms::asStringCausalType(int aX)
    case cCausalAlphaOne         : return "AlphaOne";
    case cCausalAlphaTwo         : return "AlphaTwo";
    case cCausalAlphaThree       : return "AlphaThree";
+   case cCausalAlphaAlpha       : return "AlphaAlpha";
    case cCausalAlphaStdDev      : return "AlphaStdDev";
    case cCausalAlphaAbsDev      : return "AlphaAbsDev";
    case cCausalSlidingMean      : return "SlidingMean";
