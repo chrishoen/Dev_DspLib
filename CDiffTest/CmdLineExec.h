@@ -1,7 +1,8 @@
 #pragma once
 
 #include "risCmdLineExec.h"
-#include "dspFIRFilterBase.h"
+#include "dspFIRFilter.h"
+#include "dspFIRCDiff.h"
 
 //******************************************************************************
 // specific command line executive
@@ -12,6 +13,7 @@ class CmdLineExec : public Ris::BaseCmdLineExec
 public:
 
    Dsp::FIRFilter<float, 10> mFilter;
+   Dsp::FIRCDiff<float, 9> mCDiff;
 
    CmdLineExec();
 
@@ -25,6 +27,7 @@ public:
    void executeGo5(Ris::CmdLineCmd* aCmd);
 
    void executeAlpha   (Ris::CmdLineCmd* aCmd);
+   void executeCDiff   (Ris::CmdLineCmd* aCmd);
 
    void executeTest1   (Ris::CmdLineCmd* aCmd);
    void executeTest2   (Ris::CmdLineCmd* aCmd);

@@ -31,6 +31,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("RESET")) reset();
 
    if (aCmd->isCmd("ALPHA"))    executeAlpha(aCmd);
+   if (aCmd->isCmd("CDIFF"))    executeCDiff(aCmd);
 
    if (aCmd->isCmd("TEST1"))    executeTest1(aCmd);
    if (aCmd->isCmd("TEST2"))    executeTest2(aCmd);
@@ -58,6 +59,14 @@ void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
 
    gParms.reset();
    gParms.readSection("default");
+   switch(tFilterSelect)
+   {
+      case 1: gParms.readSection("AlphaOne1"); break;
+      case 2: gParms.readSection("AlphaTwo1"); break;
+      case 3: gParms.readSection("AlphaThree1"); break;
+      case 4: gParms.readSection("AlphaAlpha1"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
    switch(tGenSelect)
    {
       case 1: gParms.readSection("GenSin1"); break;
@@ -66,12 +75,35 @@ void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
       case 4: gParms.readSection("GenStep2"); break;
       default: printf("SECTION NOT FOUND\n");
    }
+
+   TestOne tTestOne;
+   tTestOne.doRun1();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeCDiff(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1,"1");
+   aCmd->setArgDefault(2,"3");
+   int tFilterSelect = aCmd->argInt(1);
+   int tGenSelect = aCmd->argInt(2);
+
+   gParms.reset();
+   gParms.readSection("default");
    switch(tFilterSelect)
    {
-      case 1: gParms.readSection("AlphaOne1"); break;
-      case 2: gParms.readSection("AlphaTwo1"); break;
-      case 3: gParms.readSection("AlphaThree1"); break;
-      case 4: gParms.readSection("AlphaAlpha1"); break;
+      case 1: gParms.readSection("FIRCDiff1"); break;
+      default: printf("SECTION NOT FOUND\n");
+   }
+   switch(tGenSelect)
+   {
+      case 1: gParms.readSection("GenSin1"); break;
+      case 2: gParms.readSection("GenSin2"); break;
+      case 3: gParms.readSection("GenStep1"); break;
+      case 4: gParms.readSection("GenStep2"); break;
       default: printf("SECTION NOT FOUND\n");
    }
 
@@ -234,6 +266,21 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
+   mCDiff.initialize(1);
+   int tN = mCDiff.cN;
+   int tM = mCDiff.cM;
+   
+   Prn::print(0, "C");
+   for (int i = 0; i <= tM; i++)
+   {
+      Prn::print(0, "%2d %6.4f", i, mCDiff.mCArray[i]);
+   }
+
+   Prn::print(0, "B");
+   for (int i = 0; i < tN; i++)
+   {
+      Prn::print(0, "%2d %6.4f", i, mCDiff.mB[i]);
+   }
 }
 
 
@@ -243,6 +290,11 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
+   mCDiff.initialize(1);
+   for (int i = 0; i < aCmd->argInt(1); i++) 
+   {
+      mCDiff.put(1.2f);
+   }
 }
 
 //******************************************************************************

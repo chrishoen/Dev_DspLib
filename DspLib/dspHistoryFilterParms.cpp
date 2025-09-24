@@ -115,7 +115,7 @@ void HistoryFilterParms::show(char* aLabel)
    printf("FilterOrder           %10d\n",   mFilterOrder);
    printf("H                     %10.6f\n", mH);
    printf("Select                %10d\n",   mSelect);
-   printf("CausalType         %13s\n",   asStringCausalType(mCausalType));
+   printf("CausalType            %13s\n",   asStringCausalType(mCausalType));
    printf("Fs                    %10.4f\n", mFs);
    printf("Fc                    %10.4f\n", mFc);
    printf("AlphaDT               %10.4f\n", mAlphaDT);
@@ -175,7 +175,7 @@ void HistoryFilterParms::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaStdDev)))    mCausalType = cCausalAlphaStdDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalAlphaAbsDev)))    mCausalType = cCausalAlphaAbsDev;
       if (aCmd->isArgString(1,asStringCausalType(cCausalSlidingMean)))    mCausalType = cCausalSlidingMean;
-      if (aCmd->isArgString(1,asStringCausalType(cCausalBiasEstimator)))  mCausalType = cCausalBiasEstimator;
+      if (aCmd->isArgString(1,asStringCausalType(cCausalFIRCDiff)))       mCausalType = cCausalFIRCDiff;
    }
 
    if (aCmd->isCmd("AlphaSelect"))
@@ -244,7 +244,7 @@ char* HistoryFilterParms::asStringCausalType(int aX)
    case cCausalAlphaStdDev      : return "AlphaStdDev";
    case cCausalAlphaAbsDev      : return "AlphaAbsDev";
    case cCausalSlidingMean      : return "SlidingMean";
-   case cCausalBiasEstimator    : return "BiasEstimator";
+   case cCausalFIRCDiff    : return "FIRCDiff";
    default : return "UNKNOWN";
    }
 }

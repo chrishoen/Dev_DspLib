@@ -3,7 +3,8 @@
 Finite impulse response filters.
 ==============================================================================*/
 
-#include "dspSlidingWindow.h"
+#include "dspFIRCDiffCoeff.h"
+#include "dspFIRFilter.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -20,67 +21,39 @@ namespace Dsp
 // Y[n] = B[0]*X[n] + B[1]*X[n-1] + B[2]*X[n-2] + ... + B[N]*X[n-N] 
 
 template <class real_t,int Size>
-class FIRFilter : public SlidingWindow<real_t, Size>
+class FIRCDiff : public FIRFilter<real_t, Size>
 {
 public:
-   typedef SlidingWindow<real_t, Size> BaseClass;
+   typedef FIRFilter<real_t, Size> BaseClass;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Constants.
+
+   static const int cN = Size;
+   static const int cM = (Size - 1)/2;
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members.
 
-   real_t mX;             // Input value.
-   real_t mY;             // Output value.
-   real_t mBArray[Size];  // B coefficient array.
+   double mCArray[cM + 1];
+   double mBArray[cN];
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Members.
+   // Methods.
 
-   // Constructor.
-   FIRFilter()
+   // Initialize filter coefficients. 
+   void initialize(double aH)
    {
-      reset();
-   }
-
-   void reset()
-   {
-      mX = 0;
-      mY = 0;
-   }
-
-   // Called by base class after the input value was put to window. 
-   void doAfterPut() override
-   {
-      // Guard
-      if (!BaseClass::mFullFlag)
-      {
-         mX = 0;
-         mY = 0;
-         return;
-      }
-
-      // Store.
-      mX = BaseClass::mInput;
-
-      // Calculate sum. Loop from most recent to least recent.
-      real_t tXSum = 0;
-      for (int i = 0; i < Size; i++)
-      {
-         tXSum += BaseClass::elementAt(i) * mBArray[i];
-      }
-      mY = tXSum;
-   }
-
-   // Apply the filter.
-   real_t put(real_t aInput)
-   {
-      // Put to the sliding window. This will call the after function,
-      // which implements the filter. 
-      BaseClass::doPut(aInput);
-      return mY;
+      resetVars();
+      for (int i = 0; i < cN; i++) mB[i] = 0;
+      doCalcCoeffFirstDerivative_Holob(cN, aH, mCArray, mBArray);
+      for (int i = 0; i < cN; i++) mB[i] = (real_t)mBArray[i];
    }
 };
 

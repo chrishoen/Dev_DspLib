@@ -19,7 +19,7 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Constructor.
+// Calculate coefficients.
 
 void doCalcCoeffFirstDerivative_Holob(
    int aN,
@@ -29,31 +29,56 @@ void doCalcCoeffFirstDerivative_Holob(
 {
    // Locals.
    double tH = aH;
+   switch (aN)
+   {
+      case 3:
+      {
+         double tD = 2*aH;
+         aC[0] = 0;
+         aC[1] = 1/tD;
+      }
+      break;
+      case 5:
+      {
+         double tD = 12*aH;
+         aC[0] = 0;
+         aC[1] = 8/tD;
+         aC[2] = -1/tD;
+      }
+      break;
+      case 7:
+      {
+         double tD = 60*aH;
+         aC[0] = 0;
+         aC[1] = 45/tD;
+         aC[2] = -9/tD;
+         aC[3] = 1/tD;
+      }
+      break;
+      case 9:
+      {
+         double tD = 840*aH;
+         aC[0] = 0;
+         aC[1] = 672/tD;
+         aC[2] = -168/tD;
+         aC[3] = 32/tD;
+         aC[4] = -3/tD;
+      }
+      break;
+      default:
+      {
+         printf("doCalcCoeffFirstDerivative_Holob FAIL\n");
+      }
+   }
 
    int N = aN;
    int M = (N-1)/2;
-   int m = (N-3)/2;
 
-   double tTerm1 = 1.0/pow(2.0,double(2*m+1));
-   double tTerm2 = 1.0/tH;
-
-   // Calculate the coefficients.
-   aC[0] = 0.0;
-
-   for (int k = 1; k <= M; k++)
-   {
-      aC[k] = tTerm1*tTerm2*(double(dsp_binomial(2*m,m-k+1) - dsp_binomial(2*m,m-k-1)));
-   }
-   
    for (int k = 0; k <= M; k++)
    {
-      aB[M + k] = -k;
-      aB[M - k] = k;
-
       aB[M + k] = -aC[k];
       aB[M - k] = aC[k];
    }
-
 }
 
 //******************************************************************************

@@ -163,22 +163,11 @@ void HistoryFilterCausal::initializeCausalFilter()
       mSlidingMean.reset();
    }
    break;
-   case HistoryFilterParms::cCausalBiasEstimator:
+   case HistoryFilterParms::cCausalFIRCDiff:
    {
-      mBiasEstimator.reset();
-      mBiasEstimator.mLimitHi = mParms.mLimitHi;
-      mBiasEstimator.mLimitLo = mParms.mLimitLo;
-      mBiasEstimator.mThreshDev= mParms.mThreshDev;
-      mBiasEstimator.mAlphaBias.initializeFromStep(
-         mParms.mAlphaDT,
-         mParms.mAlphaStepTime,
-         mParms.mAlphaStepThresh);
-      mBiasEstimator.mAlphaX.initializeFromStep(
-         mParms.mAlphaDT,
-         mParms.mAlphaStepTimeDev,
-         mParms.mAlphaStepThresh);
-      mBiasEstimator.initialize();
-      }
+      mFIRCDiff.initialize(mParms.mAlphaDT);
+      printf("mFIRCDiff.initialize\n");
+   }
    break;
    }
 }
@@ -295,11 +284,11 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
       *aOutput = mSlidingMean.mMean;
    }
    break;
-   case HistoryFilterParms::cCausalBiasEstimator:
+   case HistoryFilterParms::cCausalFIRCDiff:
    {
       *aOutput = 0.0;
-      mBiasEstimator.put(aInput);
-      *aOutput = mBiasEstimator.mBias;
+      mFIRCDiff.put(aInput);
+      *aOutput = mFIRCDiff.mY;
    }
    break;
    }
@@ -367,11 +356,11 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
       *aOutput2 = mSlidingMean.mDelta;
    }
    break;
-   case HistoryFilterParms::cCausalBiasEstimator:
+   case HistoryFilterParms::cCausalFIRCDiff:
    {
-      mBiasEstimator.put(aInput);
-      *aOutput1 = mBiasEstimator.mMean;
-      *aOutput2 = mBiasEstimator.mBias;
+      mFIRCDiff.put(aInput);
+      *aOutput1 = mFIRCDiff.mY;
+      *aOutput2 = 0;
    }
    break;
    }
@@ -448,12 +437,12 @@ void HistoryFilterCausal::putToFilter(
       *aOutput3 = 0.0;
    }
    break;
-   case HistoryFilterParms::cCausalBiasEstimator:
+   case HistoryFilterParms::cCausalFIRCDiff:
    {
-      mBiasEstimator.put(aInput);
-      *aOutput1 = mBiasEstimator.mMean;
-      *aOutput2 = mBiasEstimator.mAbsDev;
-      *aOutput3 = mBiasEstimator.mBias;
+      mFIRCDiff.put(aInput);
+      *aOutput1 = mFIRCDiff.mY;
+      *aOutput2 = 0;
+      *aOutput3 = 0;
    }
    break;
    }
