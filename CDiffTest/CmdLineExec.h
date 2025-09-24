@@ -13,7 +13,7 @@ class CmdLineExec : public Ris::BaseCmdLineExec
 public:
 
    Dsp::FIRFilter<float, 10> mFilter;
-   Dsp::FIRCDiff<float, 9> mCDiff;
+   Dsp::FIRCDiff<float, 5> mCDiff;
 
    CmdLineExec();
 

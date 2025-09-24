@@ -18,7 +18,9 @@ namespace Dsp
 //******************************************************************************
 // FIRFilter, see wikipedia or matlab for definition
 // H(z)=B(z)
+//
 // Y[n] = B[0]*X[n] + B[1]*X[n-1] + B[2]*X[n-2] + ... + B[N]*X[n-N] 
+// where Size = N + 1
 
 template <class real_t,int Size>
 class FIRCDiff : public FIRFilter<real_t, Size>
@@ -30,7 +32,10 @@ public:
    //***************************************************************************
    //***************************************************************************
    // Constants.
-
+   
+   // Y[n] =  B[0]*X[n] + B[1]*X[n-1] + B[2]*X[n-2] + ... + B[N-1]*X[n-N-1] 
+   // Y[n] =  C[2]*X[n-2] + C[1]*X[n-1] + C[1]*X[n+1] + C[2]*X[n+2]
+   // Y[n] = -C[2]*X[n-2] - C[1]*X[n-1] + C[1]*X[n+1] + C[2]*X[n+2]
    static const int cN = Size;
    static const int cM = (Size - 1)/2;
 
@@ -52,7 +57,17 @@ public:
    {
       resetVars();
       for (int i = 0; i < cN; i++) BaseClass::mB[i] = 0;
-      doCalcCoeffFirstDerivative_Holob(cN, aH, mCArray, mBArray);
+      
+      if (false)
+      {
+         doCalcCoeffFirstDerivative_SavGol12(cN, aH, mCArray, mBArray);
+      }
+      else
+      {
+         doCalcCoeffFirstDerivative_SavGol34(cN, aH, mCArray, mBArray);
+      }
+
+
       for (int i = 0; i < cN; i++) BaseClass::mB[i] = (real_t)mBArray[i];
    }
 };

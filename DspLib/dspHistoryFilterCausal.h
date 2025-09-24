@@ -58,7 +58,7 @@ public:
    Dsp::Filter::AlphaStdDev<float>     mAlphaStdDev;
    Dsp::Filter::AlphaAbsDev<float>     mAlphaAbsDev;
    Dsp::SlidingMean<float, 16>         mSlidingMean;
-   Dsp::FIRCDiff<float, 9>             mFIRCDiff;
+   Dsp::FIRCDiff<float, 5>             mFIRCDiff;
 
    //***************************************************************************
    //***************************************************************************

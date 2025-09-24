@@ -166,7 +166,7 @@ void HistoryFilterCausal::initializeCausalFilter()
    case HistoryFilterParms::cCausalFIRCDiff:
    {
       mFIRCDiff.initialize(mParms.mAlphaDT);
-      printf("mFIRCDiff.initialize\n");
+      printf("mFIRCDiff.initialize %6.2f\n", mParms.mAlphaDT);
    }
    break;
    }

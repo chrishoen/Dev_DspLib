@@ -86,19 +86,14 @@ void CmdLineExec::executeAlpha(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeCDiff(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1,"1");
-   aCmd->setArgDefault(2,"3");
-   int tFilterSelect = aCmd->argInt(1);
-   int tGenSelect = aCmd->argInt(2);
+   aCmd->setArgDefault(1,"3");
+   int tGenSelect = aCmd->argInt(1);
 
    gParms.reset();
    gParms.readSection("default");
-   switch(tFilterSelect)
-   {
-      case 1: gParms.readSection("FIRCDiff1"); break;
-      default: printf("SECTION NOT FOUND\n");
-   }
-   switch(tGenSelect)
+   gParms.readSection("FIRCDiff1");
+
+      switch(tGenSelect)
    {
       case 1: gParms.readSection("GenSin1"); break;
       case 2: gParms.readSection("GenSin2"); break;

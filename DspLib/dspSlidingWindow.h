@@ -111,7 +111,9 @@ public:
    // Methods. Get.
 
    // Return an element that is relative to the first gettable element,
-   // which is the last element that was put to. Index 0 is the most recent. 
+   // which is the last element that was put to. 
+   // 
+   // Index 0 is the most recent. 
    // Index WinSize-1 is the least recent.
    value_t elementAt(int aIndex)
    {
