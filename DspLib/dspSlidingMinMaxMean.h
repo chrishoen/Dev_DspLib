@@ -76,8 +76,8 @@ public:
       // If full.
       if (BaseClass::mFullFlag)
       {
-         // Subtract the tail value from the sum.
-         mMeanSum -= BaseClass::elementAtTail();
+         // Subtract the oldest value from the sum.
+         mMeanSum -= BaseClass::elementAtHead();
       }
 
       // Add the input value to the sum.

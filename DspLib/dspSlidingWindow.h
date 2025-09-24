@@ -127,14 +127,14 @@ public:
       return mElement[tGetIndex];
    }
 
-   // Return the head element.
-   value_t elementAtHead()
+   // Return the most recent element, newest.
+   value_t elementAtTail()
    {
       return elementAt(0);
    }
 
-   // Return the tail element.
-   value_t elementAtTail()
+   // Return the least recent element, oldest.
+   value_t elementAtHead()
    {
       int tTailIndex = mSize > 0 ? mSize - 1 : 0; 
       return elementAt(tTailIndex);

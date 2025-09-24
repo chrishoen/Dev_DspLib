@@ -103,7 +103,7 @@ void CmdLineExec::executeCDiff(Ris::CmdLineCmd* aCmd)
    }
 
    TestOne tTestOne;
-   tTestOne.doRun1();
+   tTestOne.doRun2();
 }
 
 //******************************************************************************
@@ -204,7 +204,7 @@ void CmdLineExec::executePlotA
    char* tPlotRun2 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha2.py";
    char* tPlotRun3 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha3.py";
 
-   aCmd->setArgDefault(1,"1");
+   aCmd->setArgDefault(1,"2");
    int tPlotSelect = aCmd->argInt(1);
 
    char* tPlotCmd = 0;
@@ -274,7 +274,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    Prn::print(0, "B");
    for (int i = 0; i < tN; i++)
    {
-      Prn::print(0, "%2d %6.4f", i, mCDiff.mB[i]);
+      Prn::print(0, "%2d %6.4f", i, mCDiff.mFilter.mB[i]);
    }
 }
 
@@ -285,11 +285,6 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   mCDiff.initialize(1);
-   for (int i = 0; i < aCmd->argInt(1); i++) 
-   {
-      mCDiff.put(1.2f);
-   }
 }
 
 //******************************************************************************

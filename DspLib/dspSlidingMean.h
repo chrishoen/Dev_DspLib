@@ -42,7 +42,6 @@ public:
 
    // Output variables.
    T mMean;         // Mean of window values.
-   T mDelta;        // Difference between head and tail window values.
 
    // Calculation variables.
    T mMeanSum;      // Sum of window values.  
@@ -62,7 +61,6 @@ public:
    {
       BaseClass::reset();
       mMean = 0;
-      mDelta = 0;
       mMeanSum = 0;
    }
 
@@ -76,8 +74,8 @@ public:
       // If full.
       if (BaseClass::mFullFlag)
       {
-         // Subtract the tail value from the sum.
-         mMeanSum -= elementAtTail();
+         // Subtract the oldest value from the sum.
+         mMeanSum -= elementAtHead();
       }
 
       // Add the input value to the sum.
@@ -101,15 +99,12 @@ public:
       {
          // Initialize.
          mMean = mInput;
-         mDelta = 0;
       }
       // If full.
       else
       {
          // Calculate the mean as sum divided by the window size.
          mMean = mMeanSum * cSumMultiplier;
-         // Calculate the delta.
-         mDelta = elementAtHead() - elementAtTail();
       }
    }
 };

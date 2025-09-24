@@ -286,9 +286,8 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput)
    break;
    case HistoryFilterParms::cCausalFIRCDiff:
    {
-      *aOutput = 0.0;
-      mFIRCDiff.put(aInput);
-      *aOutput = mFIRCDiff.mY;
+      mFIRCDiff.doPut(aInput);
+      *aOutput = mFIRCDiff.mXX;
    }
    break;
    }
@@ -353,14 +352,14 @@ void HistoryFilterCausal::putToFilter(double aInput, double* aOutput1, double* a
    {
       mSlidingMean.doPut(aInput);
       *aOutput1 = mSlidingMean.mMean;
-      *aOutput2 = mSlidingMean.mDelta;
+      *aOutput2 = 0;
    }
    break;
    case HistoryFilterParms::cCausalFIRCDiff:
    {
-      mFIRCDiff.put(aInput);
-      *aOutput1 = mFIRCDiff.mY;
-      *aOutput2 = 0;
+      mFIRCDiff.doPut(aInput);
+      *aOutput1 = mFIRCDiff.mXX;
+      *aOutput2 = mFIRCDiff.mXV;
    }
    break;
    }
@@ -433,15 +432,15 @@ void HistoryFilterCausal::putToFilter(
    {
       mSlidingMean.doPut(aInput);
       *aOutput1 = mSlidingMean.mMean;
-      *aOutput2 = mSlidingMean.mDelta;
+      *aOutput2 = 0.0;
       *aOutput3 = 0.0;
    }
    break;
    case HistoryFilterParms::cCausalFIRCDiff:
    {
-      mFIRCDiff.put(aInput);
-      *aOutput1 = mFIRCDiff.mY;
-      *aOutput2 = 0;
+      mFIRCDiff.doPut(aInput);
+      *aOutput1 = mFIRCDiff.mXX;
+      *aOutput2 = mFIRCDiff.mXV;
       *aOutput3 = 0;
    }
    break;

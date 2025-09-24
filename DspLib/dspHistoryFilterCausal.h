@@ -14,7 +14,7 @@ Signal history linear operator: the identity operator.
 #include "dspFilterAlphaStdDev.h"
 #include "dspFilterAlphaAbsDev.h"
 #include "dspSlidingMean.h"
-#include "dspFIRCDiff.h"
+#include "dspFIRSavGol.h"
 
 #include "dspFilterAlphaOne.h"
 #include "dspFilterAlphaTwo.h"
@@ -58,7 +58,7 @@ public:
    Dsp::Filter::AlphaStdDev<float>     mAlphaStdDev;
    Dsp::Filter::AlphaAbsDev<float>     mAlphaAbsDev;
    Dsp::SlidingMean<float, 16>         mSlidingMean;
-   Dsp::FIRCDiff<float, 5>             mFIRCDiff;
+   Dsp::FIRSavGol<float, 9, 34>        mFIRCDiff;
 
    //***************************************************************************
    //***************************************************************************
