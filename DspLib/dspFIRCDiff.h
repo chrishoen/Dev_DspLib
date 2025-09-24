@@ -51,9 +51,9 @@ public:
    void initialize(double aH)
    {
       resetVars();
-      for (int i = 0; i < cN; i++) mB[i] = 0;
+      for (int i = 0; i < cN; i++) BaseClass::mB[i] = 0;
       doCalcCoeffFirstDerivative_Holob(cN, aH, mCArray, mBArray);
-      for (int i = 0; i < cN; i++) mB[i] = (real_t)mBArray[i];
+      for (int i = 0; i < cN; i++) BaseClass::mB[i] = (real_t)mBArray[i];
    }
 };
 
