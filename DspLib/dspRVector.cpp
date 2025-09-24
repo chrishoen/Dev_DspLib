@@ -53,7 +53,7 @@ RVector& RVector::operator=(const RVector& aOther)
 
 RVector::~RVector()
 {
-   if (mValues) delete mValues;
+   if (mValues) delete[] mValues;
 }
 
 //******************************************************************************

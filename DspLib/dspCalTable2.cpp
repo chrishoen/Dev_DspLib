@@ -99,7 +99,7 @@ void CalTable2::initialize(const std::vector<std::pair<double, double>>& aTableD
 // Show.
 void CalTable2::show(int aPF)
 {
-   for (int i = 0; i < mTable.size(); i++)
+   for (int i = 0; i < (int)mTable.size(); i++)
    {
       Prn::print(aPF, "%2d %.2f %.2f", i, mTable[i].first, mTable[i].second);
    }

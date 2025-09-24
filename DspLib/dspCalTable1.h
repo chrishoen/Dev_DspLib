@@ -92,9 +92,7 @@ public:
 
       // Locals.
       real_t tX0 = 0;
-      real_t tX1 = 0;
       real_t tY0 = 0;
-      real_t tY1 = 0;
       real_t tY = 0;
       
       int tBeginIndex = 0;
@@ -153,9 +151,7 @@ public:
 
       // Table bin values.
       tX0 = mTableX[tIndex];
-      tX1 = mTableX[tIndex + 1];
       tY0 = mTableY[tIndex];
-      tY1 = mTableY[tIndex + 1];
 
       // Calculate the linear interpolation.
       ///tY = tY0 + (aX - tX0) * (tY1 - tY0) / (tX1 - tX0);
