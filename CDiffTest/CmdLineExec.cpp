@@ -202,6 +202,7 @@ void CmdLineExec::executePlotA
 {
    char* tPlotRun1 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha1.py";
    char* tPlotRun2 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha2.py";
+   char* tPlotRun22 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha22.py";
    char* tPlotRun3 = "python C:/Prime/AAA_LinuxWriter/Python_Plots/Dsp/plot_alpha_alpha3.py";
 
    aCmd->setArgDefault(1,"2");
@@ -212,6 +213,7 @@ void CmdLineExec::executePlotA
    {
       case 1: tPlotCmd = tPlotRun1 ; break;
       case 2: tPlotCmd = tPlotRun2 ; break;
+      case 22: tPlotCmd = tPlotRun22 ; break;
       case 3: tPlotCmd = tPlotRun3 ; break;
       default: printf("PLOT NOT FOUND\n");
    }

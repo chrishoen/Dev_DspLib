@@ -19,7 +19,7 @@ namespace Dsp
 // H(z)=B(z)
 // 
 // Y[n] = B[0]*X[n] + B[1]*X[n-1] + B[2]*X[n-2] + ... + B[N]*X[n-N] 
-// where Size = N + 1
+// where Size = N + 1, filter order is N-1.
 
 template <class real_t,int Size>
 class FIRFilter : public SlidingWindow<real_t, Size>

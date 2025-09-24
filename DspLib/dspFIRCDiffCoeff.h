@@ -6,14 +6,13 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Central difference algorithms of Pavel Holobordko.
 // Calculate FIR filter coefficients: Holob first derivative.
 // H(z) = B(z)/A(z)
 //
-// N        Filter order 1,2,3..
+// N        Filter Size 3,5,7,9
 // H        Time increment.
 //
-// BArray   B coefficients -N .. N <==> 0 .. 2N+1 
+// BArray   B coefficients 0 .. N-1 
 
 void doCalcCoeffFirstDerivative_Holob(
    int aN,
@@ -24,7 +23,6 @@ void doCalcCoeffFirstDerivative_Holob(
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Central difference algorithms of Pavel Holobordko.
 // Calculate FIR filter coefficients: Savitzky-Golay first derivative.
 // H(z) = B(z)/A(z)
 //
