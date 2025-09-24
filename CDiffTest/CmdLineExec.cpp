@@ -5,6 +5,7 @@
 #include "CmdLineExec.h"
 #include "Parms.h"
 #include "TestOne.h"
+#include "dspFIRCDiffCoeff.h"
 #include "dspFilterAlphaOne.h"
 
 #include "CmdLineExec.h"
@@ -200,16 +201,31 @@ void CmdLineExec::executePlotA
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   aCmd->setArgDefault(1, 10);
-   aCmd->setArgDefault(2, 0.9);
-   double tTs = 1.0;
-   double tStepTime = aCmd->argDouble(1);
-   double tStepThresh = aCmd->argDouble(2);
+   aCmd->setArgDefault(1, 3);
+   int tN = aCmd->argInt(1);
+   int tM = (tN-1)/2;
+   double tH = 1;
+   double tC[100];
+   double tB[100];
+   for (int i = 0; i < 100; i++)
+   {
+      tC[i] = 99;
+      tB[i] = 99;
+   }
 
-   Dsp::Filter::AlphaOne<float> tFilter;
-   tFilter.initializeFromStep(tTs, tStepTime, tStepThresh);
+   Dsp::doCalcCoeffFirstDerivative_Holob(tN, tH, tC, tB);
 
-   Prn::print(0, "alpha %6.4f", tFilter.mAlpha);
+   Prn::print(0, "C");
+   for (int i = 0; i <= tM; i++)
+   {
+      Prn::print(0, "%2d %6.4f", i, tC[i]);
+   }
+
+   Prn::print(0, "B");
+   for (int i = 0; i < tN; i++)
+   {
+      Prn::print(0, "%2d %6.4f", i, tB[i]);
+   }
 }
 
 //******************************************************************************

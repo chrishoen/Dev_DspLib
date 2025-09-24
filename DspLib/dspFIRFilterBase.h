@@ -17,6 +17,7 @@ namespace Dsp
 //******************************************************************************
 // FIRFilter, see wikipedia or matlab for definition
 // H(z)=B(z)
+// Y[n] = B[0]*X[n] + B[1]*X[n-1] + B[2]*X[n-2] + ... + B[N]*X[n-N] 
 
 template <class real_t,int Size>
 class FIRFilter : public SlidingWindow<real_t, Size>
@@ -29,16 +30,16 @@ public:
    //***************************************************************************
    // Members.
 
-   real_t mX;                             // Input value
-   real_t mY;                             // Output value
-   real_t mBArray[Size];                  // B coefficient array
+   real_t mX;             // Input value.
+   real_t mY;             // Output value.
+   real_t mBArray[Size];  // B coefficient array.
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Members.
 
-   // Constructors and initialization.
+   // Constructor.
    FIRFilter()
    {
       reset();
@@ -64,7 +65,7 @@ public:
       // Store.
       mX = BaseClass::mInput;
 
-      // Calculate sum.
+      // Calculate sum. Loop from most recent to least recent.
       real_t tXSum = 0;
       for (int i = 0; i < Size; i++)
       {
