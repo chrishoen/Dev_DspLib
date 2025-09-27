@@ -31,6 +31,7 @@ namespace Dsp
 // the first derivative, this also provides an output which is the input
 // delayed by the same number of samples as the filter.
 // 
+
 template <class real_t,int Size, int Mode>
 class FIRSavGol
 {
@@ -93,17 +94,23 @@ public:
       mDelay.reset();
 
       // Calculate the filter coefficients according to the mode.
-      if (Mode == 12)
+      switch(Mode)
       {
-         doCalcCoeffFirstDerivative_SavGol12(cN, aH, mCArray, mBArray);
-      }
-      else if (Mode == 34)
-      {
-         doCalcCoeffFirstDerivative_SavGol34(cN, aH, mCArray, mBArray);
-      }
-      else
-      {
-         for (int i = 0; i < cN; i++) mBArray[i] = 0;
+         case 12:
+            doCalcCoeff_Smoother_SavGol12(cN, mCArray, mBArray);
+            break;
+         case 34:
+            doCalcCoeff_Smoother_SavGol34(cN, mCArray, mBArray);
+            break;
+         case 112:
+            doCalcCoeff_FirstDerivative_SavGol12(cN, aH, mCArray, mBArray);
+            break;
+         case 134:
+            doCalcCoeff_FirstDerivative_SavGol34(cN, aH, mCArray, mBArray);
+            break;
+         default:
+            for (int i = 0; i < cN; i++) mBArray[i] = 0;
+            break;
       }
 
       // Set the filter coefficients..

@@ -15,7 +15,7 @@ namespace Filter
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Alpha filter, second order low pass filter with critical damping.
+// Second order low pass filter with critical damping.
 // This is a cascade of two alpha filters.
 //
 template <typename real_t>

@@ -19,64 +19,61 @@ namespace Dsp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Calculate coefficients.
+// Calculate the central difference filter coefficents.
+// Polynomial degree 1 or 2.
 
-void doCalcCoeffFirstDerivative_Holob(
+void doCalcCoeff_Smoother_SavGol12(
    int aN,
-   double aH,
    double* aC,
    double* aB)
 {
    // Locals.
-   double tH = aH;
-   switch (aN)
-   {
-      case 3:
-      {
-         double tD = 2*aH;
-         aC[0] = 0;
-         aC[1] = 1/tD;
-      }
-      break;
-      case 5:
-      {
-         double tD = 12*aH;
-         aC[0] = 0;
-         aC[1] = 8/tD;
-         aC[2] = -1/tD;
-      }
-      break;
-      case 7:
-      {
-         double tD = 60*aH;
-         aC[0] = 0;
-         aC[1] = 45/tD;
-         aC[2] = -9/tD;
-         aC[3] = 1/tD;
-      }
-      break;
-      case 9:
-      {
-         double tD = 840*aH;
-         aC[0] = 0;
-         aC[1] = 672/tD;
-         aC[2] = -168/tD;
-         aC[3] = 32/tD;
-         aC[4] = -3/tD;
-      }
-      break;
-      default:
-      {
-         printf("doCalcCoeffFirstDerivative_Holob FAIL\n");
-      }
-   }
-
    int N = aN;
    int M = (N-1)/2;
 
+   // Calculate coefficents.
    for (int k = 0; k <= M; k++)
    {
-      aB[M + k] = -aC[k];
+      double m1 = double(N);
+      aC[k] = 1.0/m1;
+   }
+
+   for (int k = 0; k <= M; k++)
+   {
+      aB[M + k] = aC[k];
+      aB[M - k] = aC[k];
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Calculate the central difference filter coefficents.
+// Polynomial degree 3 or 4.
+
+void doCalcCoeff_Smoother_SavGol34(
+   int aN,
+   double* aC,
+   double* aB)
+{
+   int N = aN;
+   int M = (N-1)/2;
+
+   // Calculate the coefficients.
+   for (int k = 0; k <= M; k++)
+   {
+      double m1 = double(N);
+      double m2 = double(N*N);
+      double k2 = double(k*k);
+      double tTerm1 = (3*m2-7-20*k2)/4.0;
+      double tTerm2 = m1*(m2-4)/3.0;
+
+      aC[k] = tTerm1/tTerm2;
+   }
+
+   for (int k = 0; k <= M; k++)
+   {
+      aB[M + k] = aC[k];
       aB[M - k] = aC[k];
    }
 }
@@ -87,7 +84,7 @@ void doCalcCoeffFirstDerivative_Holob(
 // Calculate the central difference filter coefficents.
 // Polynomial degree 1 or 2.
 
-void doCalcCoeffFirstDerivative_SavGol12(
+void doCalcCoeff_FirstDerivative_SavGol12(
    int aN,
    double aH,
    double* aC,
@@ -127,7 +124,7 @@ void doCalcCoeffFirstDerivative_SavGol12(
 // Calculate the central difference filter coefficents.
 // Polynomial degree 3 or 4.
 
-void doCalcCoeffFirstDerivative_SavGol34(
+void doCalcCoeff_FirstDerivative_SavGol34(
    int aN,
    double aH,
    double* aC,
