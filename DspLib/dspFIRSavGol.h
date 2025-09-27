@@ -32,6 +32,11 @@ namespace Dsp
 // delayed by the same number of samples as the filter.
 // 
 
+// Mode  12: savitzky golay smoother polynomial degree 1,2
+// Mode  34: savitzky golay smoother polynomial degree 3,4
+// Mode 112: savitzky golay first derivative polynomial degree 1,2
+// Mode 134: savitzky golay first derivative polynomial degree 3,4
+
 template <class real_t,int Size, int Mode>
 class FIRSavGol
 {
